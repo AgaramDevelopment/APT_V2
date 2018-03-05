@@ -188,6 +188,12 @@
     objPlayersVC.teamname = [[self.teamslist valueForKey:@"Teamname"] objectAtIndex:indexPath.row];
     objPlayersVC.view.frame = CGRectMake(0, 70, self.view.bounds.size.width, self.view.bounds.size.height);
     [self.view addSubview:objPlayersVC.view];
+    
+//    TeamMembersVC* VC = [TeamMembersVC new];
+//    VC.teamCode = [[self.teamslist valueForKey:@"Teamcode"] objectAtIndex:indexPath.row];
+//    VC.teamname = [[self.teamslist valueForKey:@"Teamname"] objectAtIndex:indexPath.row];
+//    [self.navigationController pushViewController:VC animated:YES];
+//    [appDel.frontNavigationController pushViewController:VC animated:YES];
 }
 
 

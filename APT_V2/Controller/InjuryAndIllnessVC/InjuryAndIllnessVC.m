@@ -293,6 +293,14 @@
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (tableView == _injuryTableView) {
+        
+        InjuryVC *injuryObj = [InjuryVC new];
+        injuryObj.InjuryListArray = [injuryArray objectAtIndex:indexPath.row];
+        [self.navigationController pushViewController:injuryObj animated:YES];
+
+        
+    }
     
 }
 

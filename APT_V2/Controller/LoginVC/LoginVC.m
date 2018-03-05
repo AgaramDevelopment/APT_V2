@@ -154,8 +154,9 @@
             {
                 VC = [TeamsVC new];
             }
-            
+            appDel.frontNavigationController = self.navigationController;
             [self.navigationController pushViewController:VC animated:YES];
+            
             
            
             

@@ -118,7 +118,7 @@
         return;
     }
     // Grab a handle to the reveal controller, as if you'd do with a navigtion controller via self.navigationController.
-    SWRevealViewController *revealController = appDel.viewController;
+    SWRevealViewController *revealController = appDel.revealViewController;
     UIViewController* newFrontController;
     
     
@@ -237,11 +237,26 @@
     if (newFrontController == nil) {
         return;
     }
+    
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
     [navigationController setNavigationBarHidden:YES];
+    appDel.frontNavigationController = navigationController;
     [revealController pushFrontViewController:navigationController animated:YES];
     PreviouslySelectedIndex = indexPath;
     
+}
+
+-(void)pushView:(UIViewController*)VC
+{
+    for (UIViewController* VC in appDel.frontNavigationController) {
+        
+    }
+    
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:VC];
+    [navigationController setNavigationBarHidden:YES];
+    [appDel.revealViewController pushFrontViewController:navigationController animated:YES];
+
 }
 
 -(void)actionLogOut
@@ -253,19 +268,12 @@
         arrItems=[NSArray new];
         NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
         [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-//        UIViewController* newFrontController= (LoginVC *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"LoginVC"];
+        
         UIViewController* newFrontController= [LoginVC new];
 
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
         [navigationController setNavigationBarHidden:YES];
-        [appDel.viewController pushFrontViewController:navigationController animated:YES];
-        
-        //        if ([appDel.window.rootViewController isKindOfClass: [LoginVC class]]) {
-        //            [appDel.window popToRootViewControllerAnimated:YES];
-        //        }else{
-        //            [self redirectSelectview:@"LoginVC"];
-        //        }
-        
+        [appDel.revealViewController pushFrontViewController:navigationController animated:YES];
         
     }];
     

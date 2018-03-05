@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "HomeScreenStandingsVC.h"
 #import "MatchCenterTBC.h"
-#import "Header.h"
 #import "TeamsVC.h"
 #import "TabHomeVC.h"
 @interface AppDelegate ()
@@ -17,7 +16,6 @@
     BOOL IsTimer;
     BOOL isBackGroundTaskRunning;
     NSTimer* _timer;
-    
     BOOL isCoach;
     
 }
@@ -25,10 +23,12 @@
 @end
 
 @implementation AppDelegate
-@synthesize window,viewController;
-@synthesize frontNavigationController;
 
-@synthesize storyBoard;
+@synthesize window,revealViewController;
+
+@synthesize frontNavigationController,rearNavigationController;
+
+@synthesize storyBoard,rearViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -41,29 +41,9 @@
     NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
     NSString *plyRolecode = @"ROL0000002";
     
-//    if([rolecode isEqualToString:plyRolecode])
-//    {
-//        isCoach=NO;
-//    }
-//    else
-//    {
-//        isCoach=YES;
-//    }
-    
-    
-//    UIViewController *frontViewController = (isLogin ? (isCoach ? [TeamsVC new]: [ViewController new]) : [LoginVC new]);
     UIViewController *frontViewController;
     if(isLogin==YES)
     {
-//        if(isCoach=YES)
-//        {
-//            frontViewController = [TeamsVC new];
-//        }
-//        else
-//        {
-//            frontViewController = [ViewController new];
-//        }
-        
         if([rolecode isEqualToString:plyRolecode])
         {
             frontViewController = [TabHomeVC new];
@@ -71,29 +51,25 @@
         else
         {
             frontViewController = [TeamsVC new];
-
         }
-
     }
     else
     {
         frontViewController = [LoginVC new];
     }
-   // MatchCenterTBC *frontViewController = [HomeScreenStandingsVC new];
-    RearViewController *rearViewController = [[RearViewController alloc] init];
-    
-    
+
+    rearViewController = [[RearViewController alloc] init];
     frontNavigationController = [[UINavigationController alloc] initWithRootViewController:frontViewController];
-    UINavigationController *rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
+    rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];
     
-    viewController = [[SWRevealViewController alloc] initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
+    revealViewController = [[SWRevealViewController alloc] initWithRearViewController:rearNavigationController frontViewController:frontNavigationController];
     [frontNavigationController setNavigationBarHidden:YES];
     [rearNavigationController setNavigationBarHidden:YES];
-    [viewController setFrontViewPosition:FrontViewPositionLeftSide animated:YES];
+    [revealViewController setFrontViewPosition:FrontViewPositionLeftSide animated:YES];
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"BACK"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
-    window.rootViewController = viewController;
+    window.rootViewController = revealViewController;
     
     [window setBackgroundColor:[UIColor whiteColor]];
     [window makeKeyAndVisible];

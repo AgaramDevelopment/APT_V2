@@ -20,14 +20,18 @@
     BOOL isGround;
     BOOL isCompetition;
     
+    //Service Call Properties
     NSString *team1Code;
     NSString *team2Code;
     NSString *groundCode;
     NSString *competitionCode;
+    NSString *team1InnsNum;
+    NSString *team2InnsNum;
+    NSString *fromOver;
+    NSString *toOver;
 }
 
 @property (nonatomic, strong) IBOutlet NSMutableArray *commonArray;
-//@property (nonatomic, strong) IBOutlet NSMutableArray *h2hResultsArray;
 @property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableWidth;
 @property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableXposition;
 @property (nonatomic, strong)IBOutlet  NSLayoutConstraint *tableYposition;
@@ -159,6 +163,99 @@
     });
 }
 
+- (IBAction)firstInningsButtonTapped:(id)sender {
+    
+//    check = [UIImage imageNamed:@"check"];
+//    uncheck = [UIImage imageNamed:@"uncheck"];
+    
+    if([self.firstInn.currentImage isEqual:[UIImage imageNamed:@"uncheck"]])
+    {
+        [self.firstInn setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
+        team1InnsNum = @"1";
+    
+    } else {
+        [self.firstInn setImage:[UIImage imageNamed:@"uncheck"] forState:UIControlStateNormal];
+        team1InnsNum = @"";
+    }
+}
+
+- (IBAction)secondInningsButtonTapped:(id)sender {
+    
+    if([self.secondInn.currentImage isEqual:[UIImage imageNamed:@"uncheck"]])
+        {
+        [self.secondInn setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
+        team2InnsNum = @"2";
+        
+        } else {
+            [self.secondInn setImage:[UIImage imageNamed:@"uncheck"] forState:UIControlStateNormal];
+            team2InnsNum = @"";
+        }
+}
+- (IBAction)CSKWinButtonTapped:(id)sender {
+    
+    if([self.team1win.currentImage isEqual:[UIImage imageNamed:@"uncheck"]])
+        {
+        [self.team1win setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
+        } else {
+            [self.team1win setImage:[UIImage imageNamed:@"uncheck"] forState:UIControlStateNormal];
+        }
+}
+- (IBAction)MIWinButtonTapped:(id)sender {
+    
+    if([self.team2win.currentImage isEqual:[UIImage imageNamed:@"uncheck"]])
+        {
+        [self.team2win setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
+        } else {
+            [self.team2win setImage:[UIImage imageNamed:@"uncheck"] forState:UIControlStateNormal];
+        }
+}
+
+
+- (IBAction)oneToSixOversButtonTapped:(id)sender {
+    
+    if([self.spell1Inn.currentImage isEqual:[UIImage imageNamed:@"uncheck"]])
+    {
+        [self.spell1Inn setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
+        fromOver = @"0";
+        toOver = @"5";
+        [self checkValidations];
+    } else {
+            [self.spell1Inn setImage:[UIImage imageNamed:@"uncheck"] forState:UIControlStateNormal];
+            fromOver = @"";
+            toOver = @"";
+    }
+}
+
+- (IBAction)sevenToFifteenOversButtonTapped:(id)sender {
+    
+    if([self.spell2Inn.currentImage isEqual:[UIImage imageNamed:@"uncheck"]])
+    {
+        [self.spell2Inn setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
+        fromOver = @"6";
+        toOver = @"14";
+        [self checkValidations];
+    } else {
+            [self.spell2Inn setImage:[UIImage imageNamed:@"uncheck"] forState:UIControlStateNormal];
+            fromOver = @"";
+            toOver = @"";
+    }
+}
+
+- (IBAction)sixteenToTwentyOversButtonTapped:(id)sender {
+    
+    if([self.spell3Inn.currentImage isEqual:[UIImage imageNamed:@"uncheck"]])
+        {
+        [self.spell3Inn setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
+        fromOver = @"15";
+        toOver = @"19";
+        [self checkValidations];
+        } else {
+            [self.spell3Inn setImage:[UIImage imageNamed:@"uncheck"] forState:UIControlStateNormal];
+            fromOver = @"";
+            toOver = @"";
+        }
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -234,7 +331,7 @@
         self.groundTF.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"Ground"];
         groundCode = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"Groundcode"];
         self.Poptable.hidden = YES;
-        [self checkValidations];
+//        [self checkValidations];
     }
 }
 
@@ -280,40 +377,91 @@
         [self altermsg:@"Please Select Team2"];
     } else if ([self.competitionTF.text isEqualToString:@""]) {
         [self altermsg:@"Please Select Competition"];
-    } else if ([self.groundTF.text isEqualToString:@""])
-    {
+    } else if ([self.groundTF.text isEqualToString:@""]) {
         [self altermsg:@"Please Select Ground"];
+    } else if ([team1InnsNum isEqualToString:@""] || team1InnsNum == (id)[NSNull null] || team1InnsNum.length == 0) {
+        [self altermsg:@"Please Select 1st Innings"];
+    } else if ([team1InnsNum isEqualToString:@""] || team1InnsNum == (id)[NSNull null] || team1InnsNum.length == 0) {
+        [self altermsg:@"Please Select 2st Innings"];
+    } else if ([fromOver isEqualToString:@""] || [toOver isEqualToString:@""] || team1InnsNum == (id)[NSNull null] || team1InnsNum.length == 0) {
+        [self altermsg:@"Please Select Spell(From Overs and To Overs)"];
     } else {
-        [self headToHeadResultsGetService];
+        [self headToHeadResultsPostService];
     }
 }
 
-- (void)headToHeadResultsGetService {
-    /*
-     API URL    :   http://192.168.0.151:8044/AGAPTService.svc/FETCH_SCORECARD_PITCHMAP/
-     METHOD     :   GET
-     PARAMETER  :   {PLAYERCODE}/{MATCHCODE}/{INNGS}
-     */
+- (void)headToHeadResultsPostService {
     
     if(![COMMON isInternetReachable])
-        [AppCommon showLoading];
+        return;
     
-    NSString *API_URL = [NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),HTHResults, @"UCC0000008", @"TEA0000010", @"TEA0000008", @"GRD0000001"];
+    [AppCommon showLoading];
+        //** http://192.168.0.151:8044/AGAPTService.svc/APT_HTHRESULTS **//
+    NSString *URLString =  URL_FOR_RESOURCE(HTHResults);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
     manager.requestSerializer = requestSerializer;
     
-    [manager GET:API_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    /*
+     "CompetitionCode":"UCC0000015",
+     "TeamACode":"TEA0000021",
+     "TeamBCode":"TEA0000028",
+     "GroundCode":"GRD0000073",
+     "ATInnsNum":"1",
+     "BTInnsNum":"2",
+     "FromOver":"1",
+     "ToOver":"5"
+     */
+    
+    /*
+     "CompetitionCode":"UCC0000115",
+     "TeamACode":"TEA0000001",
+     "TeamBCode":"TEA0000009",
+     "GroundCode":"",
+     "ATInnsNum":"",
+     "BTInnsNum":"2",
+     "FromOver":"1",
+     "ToOver":"5"
+     */
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    
+//    [dic setObject:team1Code forKey:@"TeamACode"];
+//    [dic setObject:team2Code forKey:@"TeamBCode"];
+//    [dic setObject:competitionCode forKey:@"CompetitionCode"];
+//    [dic setObject:groundCode forKey:@"GroundCode"];
+//    [dic setObject:team1InnsNum forKey:@"ATInnsNum"];
+//    [dic setObject:team2InnsNum forKey:@"BTInnsNum"];
+//    [dic setObject:fromOver forKey:@"FromOver"];
+//    [dic setObject:toOver forKey:@"ToOver"];
+    
+    [dic setObject:@"TEA0000001" forKey:@"TeamACode"];
+    [dic setObject:@"TEA0000009" forKey:@"TeamBCode"];
+    [dic setObject:@"UCC0000115" forKey:@"CompetitionCode"];
+    [dic setObject:@"" forKey:@"GroundCode"];
+    [dic setObject:@"" forKey:@"ATInnsNum"];
+    [dic setObject:@"" forKey:@"BTInnsNum"];
+    [dic setObject:@"1" forKey:@"FromOver"];
+    [dic setObject:@"5" forKey:@"ToOver"];
+    
+    NSLog(@"parameters : %@",dic);
+    [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
         NSLog(@"SUCCESS RESPONSE:%@",responseObject);
         NSMutableDictionary *h2hResultsDict = [[NSMutableDictionary alloc] init];
         h2hResultsDict = responseObject;
         [self assignH2HResultsArrayValuesToView:h2hResultsDict];
+        
+        [AppCommon hideLoading];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"FAILURE RESPONSE %@",error.description);
+        NSLog(@"failed");
         [COMMON webServiceFailureError:error];
+        [AppCommon hideLoading];
+        
     }];
+    
 }
 
 - (void)assignH2HResultsArrayValuesToView:(NSMutableDictionary *)h2hResultsDict {
@@ -354,15 +502,25 @@
     NSLog(@"teamWideResultDict:%@", teamWideResultArray);
     for (id key in teamWideResultArray) {
         //Team1
-        self.avgRunsT1Lbl.text = [self checkNull:[key valueForKey:@"AAvgRuns"]];
-        self.avgWicketsT1Lbl.text = [self checkNull:[key valueForKey:@"AAvgwkts"]];
+        self.avgRunsT1Lbl.text = [self checkNSNumber:[key valueForKey:@"AAvgRuns"]];
+        self.avgWicketsT1Lbl.text = [self checkNSNumber:[key valueForKey:@"AAvgwkts"]];
         self.avgRunsOrWicketsT1Lbl.text = [self checkNull:[key valueForKey:@"AAVGRW"]];
         self.highScoreT1Lbl.text = [self checkNull:[key valueForKey:@"ATHighscore"]];
         self.lowScoreT1Lbl.text = [self checkNull:[key valueForKey:@"ATLowscore"]];
         
         //Team1 Progress View
+        int ATRuns = [[key valueForKey:@"ATRuns"] intValue];
+        int BTRuns = [[key valueForKey:@"BTRuns"] intValue];
+        int sum = ATRuns + BTRuns;
         self.runsScoredT1Lbl.text = [self checkNSNumber:[key valueForKey:@"ATRuns"]];
-        self.runsScoredT1PV.progress = 1 - [self.runsScoredT1Lbl.text floatValue]/100;
+        self.runsScoredT1PV.progress = 1 - ATRuns/sum;
+        
+        self.runsScoredT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BTRuns"]];
+        int progress =  BTRuns/sum;
+        //In Progress
+        if (progress > 0.0 && progress <= 1.0) {
+            self.runsScoredT2PV.progress = progress;
+        }
         
         self.runsPerOverT1Lbl.text = [self checkNSNumber:[key valueForKey:@"ATOvers"]];
         self.runsPerOverT1PV.progress = 1 - [self.runsPerOverT1Lbl.text floatValue]/100;
@@ -382,20 +540,17 @@
         self.bowlingSRT1Lbl.text = [self checkNSNumber:[key valueForKey:@"ABowlingSR"]];
         self.bowlingSRT1PV.progress = 1 - [self.bowlingSRT1Lbl.text floatValue]/100;
         
-        self.bowlingAvgT1Lbl.text = [self checkNSNumber:[key valueForKey:@""]];
+        self.bowlingAvgT1Lbl.text = [self checkNSNumber:[key valueForKey:@"ABowlingAvg"]];
         self.bowlingAvgT1PV.progress = 1 - [self.bowlingAvgT1Lbl.text floatValue]/100;
         
         //Team2
-        self.avgRunsT2Lbl.text = [self checkNull:[key valueForKey:@"BAvgRuns"]];
-        self.avgWicketsT2Lbl.text = [self checkNull:[key valueForKey:@"BAvgwkts"]];
+        self.avgRunsT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BAvgRuns"]];
+        self.avgWicketsT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BAvgwkts"]];
         self.avgRunsOrWicketsT1Lbl.text = [self checkNull:[key valueForKey:@"BAVGRW"]];
         self.highScoreT2Lbl.text = [self checkNull:[key valueForKey:@"BTHighscore"]];
         self.lowScoreT2Lbl.text = [self checkNull:[key valueForKey:@"BTLowscore"]];
         
         //Team2 Progress View
-        self.runsScoredT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BTRuns"]];
-        self.runsScoredT2PV.progress = [self.runsScoredT2Lbl.text floatValue]/100;
-        
         self.runsPerOverT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BTOvers"]];
         self.runsPerOverT2PV.progress = [self.runsPerOverT2Lbl.text floatValue]/100;
         
@@ -414,7 +569,7 @@
         self.bowlingSRT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BBowlingSR"]];
         self.bowlingSRT2PV.progress = [self.bowlingSRT2Lbl.text floatValue]/100;
         
-        self.bowlingAvgT2Lbl.text = [self checkNSNumber:[key valueForKey:@""]];
+        self.bowlingAvgT2Lbl.text = [self checkNSNumber:[key valueForKey:@"BBowlingAvg"]];
         self.bowlingAvgT2PV.progress = [self.bowlingAvgT2Lbl.text floatValue]/100;
     }
     

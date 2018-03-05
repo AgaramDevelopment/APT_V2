@@ -22,8 +22,31 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MCOverViewVC">
             <connections>
+                <outlet property="Captainnamelbl" destination="dwy-3f-XOd" id="iO8-Y7-VPz"/>
+                <outlet property="Groundmnamelbl" destination="8iN-Sa-YcD" id="3TW-Q9-5fo"/>
+                <outlet property="Player1Countlbl" destination="OPw-gU-1D1" id="Ylm-Ze-O7C"/>
+                <outlet property="Player1Img" destination="kWh-6Y-VqA" id="NTs-q6-kFt"/>
+                <outlet property="Player1Namelbl" destination="bxD-Z5-g2Y" id="FDI-9i-L5C"/>
+                <outlet property="Player1SRlbl" destination="LW4-Wc-MHF" id="8PQ-Gi-rFB"/>
+                <outlet property="Player2Countlbl" destination="s09-uc-0Rp" id="zNB-gI-re1"/>
+                <outlet property="Player2Namelbl" destination="I0g-Bd-oE5" id="zJs-m5-4SN"/>
+                <outlet property="Player2SRlbl" destination="Acz-tn-Bje" id="dNi-gU-asV"/>
+                <outlet property="Player3Countlbl" destination="1Ge-IF-EeS" id="TA7-ao-TLS"/>
+                <outlet property="Player3Namelbl" destination="Q3i-E0-epA" id="S5E-aG-aUa"/>
+                <outlet property="Player3SRlbl" destination="mbo-Vd-vos" id="rfg-o0-rzD"/>
+                <outlet property="Player4Countlbl" destination="Sh9-IU-WOf" id="QSK-7I-NFa"/>
+                <outlet property="Player4Namelbl" destination="9Ob-S3-stK" id="eun-Va-YQL"/>
+                <outlet property="Player4SRlbl" destination="6Vk-8A-x0l" id="zAz-10-Xej"/>
+                <outlet property="Player5Countlbl" destination="9OZ-CV-v1y" id="Zod-gG-0bA"/>
+                <outlet property="Player5Namelbl" destination="rmU-RY-qkK" id="Dwm-AM-iB2"/>
+                <outlet property="Player5SRlbl" destination="fGU-h1-GBo" id="KVj-x3-w56"/>
+                <outlet property="PlayerTypelbl" destination="6xN-la-Muh" id="6d5-g5-3By"/>
+                <outlet property="TeamImgView" destination="duD-aO-sJ8" id="Num-qC-gaM"/>
+                <outlet property="Teamnamelbl" destination="s9D-3L-VQN" id="qAb-pg-xQs"/>
                 <outlet property="contentView" destination="iYv-2o-8sy" id="fi7-CP-laH"/>
                 <outlet property="headerView" destination="u1r-4u-dnr" id="KCR-2y-V8y"/>
+                <outlet property="nextBtn" destination="4pq-Y2-bfR" id="U95-12-Sd2"/>
+                <outlet property="prevBtn" destination="oiw-FN-2BX" id="Iok-UT-YaU"/>
                 <outlet property="resultCollectionView" destination="7DJ-Ub-D1B" id="S3l-HH-bYu"/>
                 <outlet property="rootView" destination="9Pd-BK-t56" id="Bls-yv-57l"/>
                 <outlet property="scrollView" destination="pDm-o4-weW" id="PJc-4Y-HKu"/>
@@ -57,15 +80,15 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eEt-5m-JeZ">
                                                     <rect key="frame" x="8" y="8" width="359" height="100"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="team_logo_csk" translatesAutoresizingMaskIntoConstraints="NO" id="duD-aO-sJ8">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-image" translatesAutoresizingMaskIntoConstraints="NO" id="duD-aO-sJ8">
                                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="100" id="KcN-fE-IAm"/>
                                                                 <constraint firstAttribute="height" constant="100" id="YPe-uI-2bi"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chennai Super Kings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9D-3L-VQN">
-                                                            <rect key="frame" x="108" y="13" width="243" height="13.666666666666664"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9D-3L-VQN">
+                                                            <rect key="frame" x="108" y="13" width="243" height="0.0"/>
                                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -73,8 +96,8 @@
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                             </variation>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Head Coach : Stephen Fleming" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwy-3f-XOd">
-                                                            <rect key="frame" x="108" y="51" width="243" height="13.666666666666671"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwy-3f-XOd">
+                                                            <rect key="frame" x="108" y="23.666666666666671" width="243" height="0.0"/>
                                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -82,8 +105,8 @@
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                             </variation>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Captain : MS Dhoni" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J7b-lV-VD8">
-                                                            <rect key="frame" x="108" y="69.666666666666657" width="243" height="13.666666666666671"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J7b-lV-VD8">
+                                                            <rect key="frame" x="108" y="28.666666666666671" width="243" height="0.0"/>
                                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -91,8 +114,8 @@
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                                             </variation>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="M A Chidambaram stadium" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8iN-Sa-YcD">
-                                                            <rect key="frame" x="108" y="32.333333333333329" width="243" height="13.666666666666664"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8iN-Sa-YcD">
+                                                            <rect key="frame" x="108" y="18.666666666666671" width="243" height="0.0"/>
                                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -556,6 +579,9 @@
                                                                         <constraint firstAttribute="width" constant="25" id="jLO-DO-han"/>
                                                                     </constraints>
                                                                     <state key="normal" image="left_arrow"/>
+                                                                    <connections>
+                                                                        <action selector="onClickPrevBtn:" destination="-1" eventType="touchUpInside" id="quO-48-KMv"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4pq-Y2-bfR">
                                                                     <rect key="frame" x="326" y="7" width="25" height="25"/>
@@ -564,6 +590,9 @@
                                                                         <constraint firstAttribute="width" constant="25" id="hzF-aE-mja"/>
                                                                     </constraints>
                                                                     <state key="normal" image="right_arrow"/>
+                                                                    <connections>
+                                                                        <action selector="onClickNextBtn:" destination="-1" eventType="touchUpInside" id="BkC-Ha-cuR"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -999,8 +1028,8 @@ Anderson</string>
     </objects>
     <resources>
         <image name="left_arrow" width="128" height="128"/>
+        <image name="no-image" width="300" height="300"/>
         <image name="player_andr" width="230" height="284"/>
         <image name="right_arrow" width="128" height="128"/>
-        <image name="team_logo_csk" width="400" height="400"/>
     </resources>
 </document>

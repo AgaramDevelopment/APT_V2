@@ -211,6 +211,17 @@
                 <constraint firstItem="JXZ-7P-QXk" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="hJU-T6-I5l"/>
             </constraints>
             <size key="customSize" width="491" height="110"/>
+            <connections>
+                <outlet property="Datelbl" destination="Jhs-Jg-bm1" id="S7A-ye-cZ0"/>
+                <outlet property="TeamOver2lbl" destination="nal-GZ-UYk" id="eCO-f5-Tyy"/>
+                <outlet property="TeamOvers1lbl" destination="YuR-YY-AQL" id="98q-Bi-d01"/>
+                <outlet property="Teamname1lbl" destination="VUL-L8-q5d" id="yUg-aq-KZc"/>
+                <outlet property="Teamname2lbl" destination="BIY-Zr-7ag" id="rCm-Zd-Slh"/>
+                <outlet property="runrate1lbl" destination="YuR-YY-AQL" id="WAL-Yj-CMV"/>
+                <outlet property="runrate2lbl" destination="nal-GZ-UYk" id="6Ly-7g-DOb"/>
+                <outlet property="team1Img" destination="Di3-sg-v5v" id="9By-dh-r1L"/>
+                <outlet property="team2Img" destination="Bze-CL-gjh" id="6DT-4g-AIh"/>
+            </connections>
             <point key="canvasLocation" x="308.5" y="82"/>
         </collectionViewCell>
     </objects>

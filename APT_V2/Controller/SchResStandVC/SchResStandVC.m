@@ -368,14 +368,16 @@
         
         [scoreArray addObject:dic];
         
+        
+        
                 ScoreCardVC * objFix = [[ScoreCardVC alloc]init];
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
         objFix = (ScoreCardVC *)[storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVC"];
                 objFix.matchCode = displayMatchCode;
                 objFix.matchDetails = scoreArray;
                 objFix.backkey = @"yes";
-                [self.navigationController pushViewController:objFix animated:YES];
-                //[appDel.frontNavigationController pushViewController:objFix animated:YES];
+                //[self.navigationController pushViewController:objFix animated:YES];
+                [appDel.frontNavigationController pushViewController:objFix animated:YES];
         
                 //[self.view addSubview:objFix];
           //[self displayContentController:objFix];

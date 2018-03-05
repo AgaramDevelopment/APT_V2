@@ -298,12 +298,16 @@
         InjuryVC *injuryObj = [InjuryVC new];
         injuryObj.InjuryListArray = [injuryArray objectAtIndex:indexPath.row];
         [self.navigationController pushViewController:injuryObj animated:YES];
-
-        
     }
     
+    if (tableView == self.illnessTableView) {
+        
+        IllnessTracker *illnessObj = [IllnessTracker new];
+        illnessObj.isUpdate = YES;
+        illnessObj.objSelectobjIllnessArray = [illnessArray objectAtIndex:indexPath.row];
+        [self.navigationController pushViewController:illnessObj animated:YES];
+    }
 }
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -47,11 +47,14 @@
     NSString *xrData;
     NSString *bloodData;
     
+    NSMutableArray *affectArray;
+    NSMutableArray* mainSymptomArray;
+    NSMutableArray *causeIllnessArray;
 }
 
-@property (nonatomic,strong) NSMutableArray *affectArray;
-@property (nonatomic,strong) NSMutableArray* mainSymptomArray;
-@property (nonatomic,strong) NSMutableArray *causeIllnessArray;
+//@property (nonatomic,strong) NSMutableArray *affectArray;
+//@property (nonatomic,strong) NSMutableArray* mainSymptomArray;
+//@property (nonatomic,strong) NSMutableArray *causeIllnessArray;
 @property (nonatomic,strong) NSMutableArray * commonArray;
 @end
 
@@ -96,7 +99,7 @@
         //setting toolbar as inputAccessoryView
     self.expectedDateTF.inputAccessoryView = toolbar;
     self.onsetDateTF.inputAccessoryView = toolbar;
-//    [self loadSelectedData];
+    [self loadSelectedData];
     [self Fetchillnessloadingwebservice];
 }
 
@@ -177,72 +180,65 @@
         self.updateBtn.hidden =NO;
         self.deleteBtn.hidden =NO;
         /*
-        NSString *plycode = [self.objSelectobjIllnessArray valueForKey:@"playerCode"];
-        NSMutableArray *selectedPlayer;
-        selectedPlayer = [[NSMutableArray alloc]init];
-        for(int i=0;i<self.playerArray.count;i++)
-            {
-            NSDictionary *players = [[NSDictionary alloc]init];
-            players = [self.playerArray objectAtIndex:i];
-            NSString *plyscode = [players valueForKey:@"athleteCode"];
-            
-            if([plycode isEqualToString:plyscode])
-                {
-                [selectedPlayer addObject:players];
-                }
-            }
-        
-        
-        NSMutableArray *tt=[[NSMutableArray alloc]init];
-        tt=[selectedPlayer objectAtIndex:0];
-        self.playerLbl.text =[tt valueForKey:@"athleteName"];
-        */
+         NSString *plycode = [self.objSelectobjIllnessArray valueForKey:@"playerCode"];
+         NSMutableArray *selectedPlayer;
+         selectedPlayer = [[NSMutableArray alloc]init];
+         for(int i=0;i<self.playerArray.count;i++)
+         {
+         NSDictionary *players = [[NSDictionary alloc]init];
+         players = [self.playerArray objectAtIndex:i];
+         NSString *plyscode = [players valueForKey:@"athleteCode"];
+         
+         if([plycode isEqualToString:plyscode])
+         {
+         [selectedPlayer addObject:players];
+         }
+         }
+         
+         
+         NSMutableArray *tt=[[NSMutableArray alloc]init];
+         tt=[selectedPlayer objectAtIndex:0];
+         self.playerLbl.text =[tt valueForKey:@"athleteName"];
+         */
             //self.playerLbl.text =[self.objSelectobjIllnessArray valueForKey:@"playerName"];
         
-        NSString *DateTime = [self.objSelectobjIllnessArray valueForKey:@"dateOnSet"];
+            //        NSString *Dt =[self checkNull:[self.objSelectobjIllnessArray valueForKey:@"ExpectedDateofRecovery"]];
+            //        NSArray *components1 = [Dt componentsSeparatedByString:@" "];
+            //        NSString *Dat = components1[0];
+        
+        self.expectedDateTF.text = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"ExpectedDateofRecovery"]];
+        
+        NSString *DateTime = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"DateofOnset"]];
         
         NSArray *components = [DateTime componentsSeparatedByString:@" "];
         
         NSString *Date = components[0];
         self.onsetDateTF.text =Date;
         
-        self.affectSystemTF.text =[self.objSelectobjIllnessArray valueForKey:@"affectedSystemName"];
-        self.mainSymptomTF.text =[self.objSelectobjIllnessArray valueForKey:@"mainSymptomName"];
-            //self.CauseLbl.text =[self.objSelectobjIllnessArray valueForKey:@"causeOfIllnessName"];
+        self.illnessNameTF.text = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"IllnessName"]];
+        self.chiefCompliantTF.text = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"ChiefCompliant"]];
         
+//        self.affectSystemTF.text = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"AffectedSystem"]];
+//        self.mainSymptomTF.text = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"MainSymptom"]];
+//        self.causeOfIllnessTF.text = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"Causeofillness"]];
         
+        selectAffectSystemCode = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"AffectedSystem"]];
+        selectMainSymptomCode = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"MainSymptom"]];
+        selectCauseCode = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"Causeofillness"]];
+        selectExpertOpinionCode = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"ExpertOpinionTaken"]];
+        selectIllnessCode = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"IllnessCode"]];
         
-        NSString *Dt = [self.objSelectobjIllnessArray valueForKey:@"expertedDateofRecovery"];
-        
-        NSArray *components1 = [Dt componentsSeparatedByString:@" "];
-        
-        NSString *Dat = components1[0];
-        self.expectedDateTF.text =Dat;
-        self.illnessNameTF.text =[self.objSelectobjIllnessArray valueForKey:@"illnessName"];
-        self.chiefCompliantTF.text =[self.objSelectobjIllnessArray valueForKey:@"chiefCompliant"];
-        
-        selectAffectSystemCode =[self.objSelectobjIllnessArray valueForKey:@"affectedSystemCode"] ;
-        selectMainSymptomCode =[self.objSelectobjIllnessArray valueForKey:@"mainSymptomCode"];
-        selectCauseCode =[self.objSelectobjIllnessArray valueForKey:@"causeOfIllnessCode"];
-        selectExpertOpinionCode =[self.objSelectobjIllnessArray valueForKey:@"expertOpinionTaken"];
-        selectIllnessCode =[self.objSelectobjIllnessArray valueForKey:@"illnessCode"];
-        if([selectExpertOpinionCode isEqualToString:@"MSC215"])
-            {
+        if([selectExpertOpinionCode isEqualToString:@"MSC215"]) {
             [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
             [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-            
-            }
-        else
-            {
+        } else {
             [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
             [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-            }
         }
-    else
-        {
-        self.saveBtn.hidden=NO;
-        self.updateBtn.hidden =YES;
-        self.deleteBtn.hidden =YES;
+        } else {
+            self.saveBtn.hidden=NO;
+            self.updateBtn.hidden =YES;
+            self.deleteBtn.hidden =YES;
         }
 }
 
@@ -327,7 +323,7 @@
         isAffect = YES;
         
         self.commonArray =[[NSMutableArray alloc]init];
-        self.commonArray = self.affectArray;
+        self.commonArray = affectArray;
         
         if (IS_IPAD) {
             dropDownTblView.frame = CGRectMake(self.affectSystemView.frame.origin.x, self.affectSystemView.frame.origin.y+self.affectSystemView.frame.size.height+288, self.affectSystemView.frame.size.width, self.commonArray.count >= 5 ? 150 : self.commonArray.count*45);
@@ -356,7 +352,7 @@
         isMainSymptom = YES;
         
         self.commonArray =[[NSMutableArray alloc]init];
-        self.commonArray = self.mainSymptomArray;
+        self.commonArray = mainSymptomArray;
         if (IS_IPAD) {
             dropDownTblView.frame = CGRectMake(self.mainSymptomView.frame.origin.x, self.mainSymptomView.frame.origin.y+self.mainSymptomView.frame.size.height+335, self.mainSymptomView.frame.size.width, self.commonArray.count >= 5 ? 150 : self.commonArray.count*45);
         } else {
@@ -383,7 +379,7 @@
         isCause = YES;
         
         self.commonArray =[[NSMutableArray alloc]init];
-        self.commonArray = self.causeIllnessArray;
+        self.commonArray = causeIllnessArray;
         if (IS_IPAD) {
             dropDownTblView.frame = CGRectMake(self.causeIllnessView.frame.origin.x, self.causeIllnessView.frame.origin.y+self.causeIllnessView.frame.size.height+385, self.causeIllnessView.frame.size.width, self.commonArray.count >= 5 ? 150 : self.commonArray.count*45);
         } else {
@@ -486,56 +482,33 @@
 
 -(void)validation
 {
-     if ([self.expectedDateTF.text isEqualToString:@""])
-    {
+    if ([self.expectedDateTF.text isEqualToString:@""]) {
         [self altermsg:@"Please Select Expected Date of Recovery"];
-    }
-    
-    else if ([self.onsetDateTF.text isEqualToString:@""])
-    {
+    } else if ([self.onsetDateTF.text isEqualToString:@""]) {
         [self altermsg:@"Please select Date of Onset"];
-    }
-    else if ([self.illnessNameTF.text isEqualToString:@""])
-    {
+    } else if ([self.illnessNameTF.text isEqualToString:@""]) {
         [self altermsg:@"Please Enter IllnessName"];
-    }
-    else if ([self.chiefCompliantTF.text isEqualToString:@""])
-    {
+    } else if ([self.chiefCompliantTF.text isEqualToString:@""]) {
         [self altermsg:@"Please Enter Chief Compliant"];
-    }
-    else if ([self.affectSystemTF.text isEqualToString:@""])
-    {
+    } else if ([self.affectSystemTF.text isEqualToString:@""]) {
         [self altermsg:@"Please select Affect System"];
-    }
-    else if ([self.mainSymptomTF.text isEqualToString:@""])
-    {
+    } else if ([self.mainSymptomTF.text isEqualToString:@""]) {
         [self altermsg:@"Please select Main Syptom"];
-    }
-    else if ([self.causeOfIllnessTF.text isEqualToString:@""])
-    {
+    } else if ([self.causeOfIllnessTF.text isEqualToString:@""]) {
         [self altermsg:@"Please select Cause Illness"];
-    }
-    else if ([selectExpertOpinionCode isEqualToString:@""])
-    {
+    } else if ([selectExpertOpinionCode isEqualToString:@""]) {
         [self altermsg:@"Please select Expert Opinion Taken"];
-    }
-    else
-        {
-        if(self.isUpdate ==YES)
-            {
+    } else {
+        if(self.isUpdate ==YES) {
             [self UpdateWebservice];
-            }
-        else{
+        } else {
             [self InsertWebservice];
         }
-        
-        }
-    
+    }
 }
 
 -(void)UpdateWebservice
 {
-//    [COMMON loadingIcon:self.view];
     if([COMMON isInternetReachable])
     {
         [AppCommon showLoading];
@@ -575,10 +548,9 @@
         if(selectIllnessCode)   [dic    setObject:selectIllnessCode     forKey:@"ILLNESSCODE"];
         
         if(xrData == nil)
-            {
+        {
             [dic    setObject:@""     forKey:@"XRAYSFILE"];
-            }
-        else{
+        } else {
             [dic    setObject:xrData     forKey:@"XRAYSFILE"];
         }
         [dic    setObject:@"Xray.png"     forKey:@"XRAYSFILENAME"];
@@ -586,36 +558,30 @@
         
         
         if(ctData == nil)
-            {
+        {
             [dic    setObject:@""     forKey:@"CTSCANSFILE"];
-            }
-        else
-            {
+        } else {
             [dic    setObject:ctData     forKey:@"CTSCANSFILE"];
-            }
+        }
         [dic    setObject:@"Ctscan.png"     forKey:@"CTSCANSFILENAME"];
         
         
         
         if(mrData == nil)
-            {
+        {
             [dic    setObject:@""     forKey:@"MRISCANSFILE"];
-            }
-        else
-            {
+        } else {
             [dic    setObject:mrData     forKey:@"MRISCANSFILE"];;
-            }
+        }
         [dic    setObject:@"Mriscan.png"     forKey:@"MRISCANSFILENAME"];
         
         
         if(bloodData == nil)
-            {
+        {
             [dic    setObject:@""     forKey:@"BLOODTESTFILE"];
-            }
-        else
-            {
+        } else {
             [dic    setObject:bloodData     forKey:@"BLOODTESTFILE"];;
-            }
+        }
         [dic    setObject:@"Bloodtest.png"     forKey:@"BLOODTESTFILENAME"];
         
         
@@ -631,32 +597,26 @@
             NSLog(@"Success: %@", responseObject);
             BOOL status=[responseObject valueForKey:@"Status"];
             if(status == YES)
-                {
+            {
                     // Illness Updated Successfully
                 [self altermsg:@"Illness Updated Successfully"];
                 
 //                [self.navigationController popViewControllerAnimated:YES];
-                
-                }
-            else{
+            } else {
                 [self altermsg:@"Illness Update failed"];
             }
             
             [AppCommon hideLoading];
-//            [self.view setUserInteractionEnabled:YES];
-            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [COMMON webServiceFailureError:error];
-//            [self.view setUserInteractionEnabled:YES];
         }];
-        }
+    }
 }
 
 -(void)InsertWebservice
 {
-//    [COMMON loadingIcon:self.view];
     if([COMMON isInternetReachable])
-    {
+        {
         [AppCommon showLoading];
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(clientCode)   [dic    setObject:clientCode     forKey:@"CLIENTCODE"];
@@ -695,19 +655,16 @@
         if(xrData==nil)
             {
             [dic    setObject:@""     forKey:@"XRAYSFILE"];
+            } else {
+                [dic    setObject:xrData     forKey:@"XRAYSFILE"];
             }
-        else{
-            [dic    setObject:xrData     forKey:@"XRAYSFILE"];
-        }
         [dic    setObject:@"Xray.png"     forKey:@"XRAYSFILENAME"];
         
         if(ctData==nil)
             {
             [dic    setObject:@""     forKey:@"CTSCANSFILE"];
-            }
-        else
-            {
-            [dic    setObject:ctData     forKey:@"CTSCANSFILE"];
+            } else {
+                [dic    setObject:ctData     forKey:@"CTSCANSFILE"];
             }
         [dic    setObject:@"Ctscan.png"     forKey:@"CTSCANSFILENAME"];
         
@@ -716,10 +673,8 @@
         if(mrData==nil)
             {
             [dic    setObject:@""     forKey:@"MRISCANSFILE"];
-            }
-        else
-            {
-            [dic    setObject:mrData     forKey:@"MRISCANSFILE"];;
+            } else {
+                [dic    setObject:mrData     forKey:@"MRISCANSFILE"];;
             }
         [dic    setObject:@"Mriscan.png"     forKey:@"MRISCANSFILENAME"];
         
@@ -727,10 +682,8 @@
         if(bloodData==nil)
             {
             [dic    setObject:@""     forKey:@"BLOODTESTFILE"];
-            }
-        else
-            {
-            [dic    setObject:bloodData     forKey:@"BLOODTESTFILE"];;
+            } else {
+                [dic    setObject:bloodData     forKey:@"BLOODTESTFILE"];;
             }
         [dic    setObject:@"Bloodtest.png"     forKey:@"BLOODTESTFILENAME"];
         
@@ -748,10 +701,10 @@
             NSLog(@"Success: %@", responseObject);
             
             if(responseObject >0)
-                {
+            {
                 BOOL status=[responseObject valueForKey:@"Status"];
                 if(status == YES)
-                    {
+                {
                     UIAlertView * objaltert =[[UIAlertView alloc]initWithTitle:@"Add Illness" message:[NSString stringWithFormat:@"Illness Inserted Successfully"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     objaltert.tag = 301;
                     [objaltert show];
@@ -759,19 +712,14 @@
                         //
                         //            [self.navigationController popViewControllerAnimated:YES];
                     
-                    }
-                else{
+                } else {
                     [self altermsg:@"Illness Insert failed"];
                 }
-                }
+            }
             [AppCommon hideLoading];
-//            [self.view setUserInteractionEnabled:YES];
-            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [COMMON webServiceFailureError:error];
-//            [self.view setUserInteractionEnabled:YES];
         }];
-        
     }
 }
 
@@ -791,25 +739,15 @@
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString * objPath =[[picker valueForKey:@"mediaTypes"] objectAtIndex:0];
     NSString *savedImagePath =   [documentsDirectory stringByAppendingPathComponent:objPath];
-    if(isXray ==YES)
-        {
+    if(isXray ==YES) {
         self.xrayLbl.text =savedImagePath;
-        }
-    else if (isCT ==YES)
-        {
+    } else if (isCT ==YES) {
         self.CTScanLbl.text =savedImagePath;
-        
-        }
-    else if (isMRI ==YES)
-        {
+    } else if (isMRI ==YES) {
         self.MRILbl.text =savedImagePath;
-        
-        }
-    else if (isBlood ==YES)
-        {
+    } else if (isBlood ==YES) {
         self.BloodTestLbl.text =savedImagePath;
-        
-        }
+    }
     imageToPost = image;
     [picker dismissViewControllerAnimated:YES completion:nil];
     
@@ -831,10 +769,9 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"illmnessCell";
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
-    if(cell == nil){
+    if(cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
@@ -845,25 +782,15 @@
         bgColorView.backgroundColor = [UIColor colorWithRed:(8/255.0f) green:(26/255.0f) blue:(77/255.0f) alpha:1.0f];
         cell.selectedBackgroundView = bgColorView;
         cell.textLabel.textColor = [UIColor whiteColor];
-       
         
-            if (isAffect == YES)
-            {
+        if (isAffect == YES) {
             cell.textLabel.text = [[self.commonArray valueForKey:@"IlnessMetaDataTypeCode"] objectAtIndex:indexPath.row];
-            
-            }
-            else if (isCause == YES)
-            {
+        } else if (isCause == YES) {
             cell.textLabel.text = [[self.commonArray valueForKey:@"IlnessMetaDataTypeCode"] objectAtIndex:indexPath.row];
-            
-            }
-            else if (isMainSymptom == YES)
-            {
+        } else if (isMainSymptom == YES) {
             cell.textLabel.text = [[self.commonArray valueForKey:@"IlnessMetaDataTypeCode"] objectAtIndex:indexPath.row];
-            
-            }
+        }
     }
-    
     return cell;
 }
 
@@ -871,7 +798,6 @@
     // when user tap the row, what action you want to perform
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     if (tableView == dropDownTblView) {
         
         if (isAffect) {
@@ -890,14 +816,13 @@
         }
         [self resetDropDownIllnesstatus];
     }
-    
 }
 
 -(void)Fetchillnessloadingwebservice
 {
         //[COMMON loadingIcon:self.view];
     if([COMMON isInternetReachable])
-    {
+        {
         [AppCommon showLoading];
         [objWebservice getFetchMetadataList :illnessFetchload success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"response ; %@",responseObject);
@@ -905,54 +830,81 @@
             if(responseObject >0)
                 {
                 
-                self.AffectArray =[[NSMutableArray alloc]init];
-                self.mainSymptomArray =[[NSMutableArray alloc]init];
-                self.causeIllnessArray =[[NSMutableArray alloc]init];
+                affectArray =[[NSMutableArray alloc]init];
+                mainSymptomArray =[[NSMutableArray alloc]init];
+                causeIllnessArray =[[NSMutableArray alloc]init];
                 
                 
-                self.AffectArray =[responseObject valueForKey:@"AffectedSystem"];
+                affectArray =[responseObject valueForKey:@"AffectedSystem"];
                 
-                self.mainSymptomArray =[responseObject valueForKey:@"MainSymptoms"];
+                mainSymptomArray =[responseObject valueForKey:@"MainSymptoms"];
                 
-                self.causeIllnessArray =[responseObject valueForKey:@"CauseOfIllness"];
+                causeIllnessArray =[responseObject valueForKey:@"CauseOfIllness"];
                 
                 /*
-                if(self.isUpdate == YES)
-                    {
-                    
-                    
-                    NSString *CauseOfillnessCode = [self.objSelectobjIllnessArray valueForKey:@"causeOfIllnessCode"];
-                    
-                    NSMutableArray *selectedCause;
-                    selectedCause = [[NSMutableArray alloc]init];
-                    for(int i=0;i<self.causeillnessArray.count;i++)
-                        {
-                        NSDictionary *players = [[NSDictionary alloc]init];
-                        players = [self.causeillnessArray objectAtIndex:i];
-                        NSString *Cascode = [players valueForKey:@"IllnessMetaSubCode"];
-                        
-                        if([CauseOfillnessCode isEqualToString:Cascode])
-                            {
-                            [selectedCause addObject:players];
-                            }
-                        }
-                    
-                    NSMutableArray *tt=[[NSMutableArray alloc]init];
-                    tt=[selectedCause objectAtIndex:0];
-                    
-                    self.CauseLbl.text =[tt valueForKey:@"IlnessMetaDataTypeCode"];
-                    
-                    
-                    }
+                 if(self.isUpdate == YES)
+                 {
+                 
+                 
+                 NSString *CauseOfillnessCode = [self.objSelectobjIllnessArray valueForKey:@"causeOfIllnessCode"];
+                 
+                 NSMutableArray *selectedCause;
+                 selectedCause = [[NSMutableArray alloc]init];
+                 for(int i=0;i<self.causeillnessArray.count;i++)
+                 {
+                 NSDictionary *players = [[NSDictionary alloc]init];
+                 players = [self.causeillnessArray objectAtIndex:i];
+                 NSString *Cascode = [players valueForKey:@"IllnessMetaSubCode"];
+                 
+                 if([CauseOfillnessCode isEqualToString:Cascode])
+                 {
+                 [selectedCause addObject:players];
+                 }
+                 }
+                 
+                 NSMutableArray *tt=[[NSMutableArray alloc]init];
+                 tt=[selectedCause objectAtIndex:0];
+                 
+                 self.CauseLbl.text =[tt valueForKey:@"IlnessMetaDataTypeCode"];
+                 
+                 
+                 }
+                 */
+                /*
+                selectAffectSystemCode = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"AffectedSystem"]];
+                selectMainSymptomCode = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"MainSymptom"]];
+                selectCauseCode = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"Causeofillness"]];
+                selectExpertOpinionCode = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"ExpertOpinionTaken"]];
+                selectIllnessCode =
                 */
+                
+                if (self.isUpdate ) {
+                    //Affected System
+                    for (id key in affectArray) {
+                        if ([selectAffectSystemCode isEqualToString:[key valueForKey:@"IllnessMetaSubCode"]]) {
+                            self.affectSystemTF.text = [key valueForKey:@"IlnessMetaDataTypeCode"];
+                        }
+                    }
+                    //Main Symptoms
+                    for (id key in mainSymptomArray) {
+                        if ([selectMainSymptomCode isEqualToString:[key valueForKey:@"IllnessMetaSubCode"]]) {
+                            self.mainSymptomTF.text = [key valueForKey:@"IlnessMetaDataTypeCode"];
+                        }
+                    }
+                    
+                    //Cause Of Illness
+                    for (id key in causeIllnessArray) {
+                        if ([selectCauseCode isEqualToString:[key valueForKey:@"IllnessMetaSubCode"]]) {
+                            self.causeOfIllnessTF.text = [key valueForKey:@"IlnessMetaDataTypeCode"];
+                        }
+                    }
                 }
-             [AppCommon hideLoading];
-//            [self.view setUserInteractionEnabled:YES];
+                
+                }
+            [AppCommon hideLoading];
         } failure:^(AFHTTPRequestOperation *operation, id error) {
             [COMMON webServiceFailureError:error];
-//            [self.view setUserInteractionEnabled:YES];
         }];
-        
         }
 }
 
@@ -964,7 +916,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-
+    
     if (buttonIndex == [alertView cancelButtonIndex])
         {
         alertView.hidden=YES;
@@ -976,7 +928,7 @@
     else if (alertView.tag == 301)
         {
         
-       self.expectedDateTF.text =@"";
+        self.expectedDateTF.text =@"";
         self.onsetDateTF.text =@"";
         self.illnessNameTF.text =@"";
         self.chiefCompliantTF.text =@"";
@@ -1007,9 +959,8 @@
 
 -(void)startDeleteInjuryService :(NSString *) Usercode :(NSString *)selectillnessCode
 {
-//    [COMMON loadingIcon:self.view];
     if([COMMON isInternetReachable])
-    {
+        {
         [AppCommon showLoading];
         [objWebservice getinjuryDelete:deleteIllness :selectillnessCode :Usercode success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"response ; %@",responseObject);
@@ -1032,13 +983,10 @@
                 
                 }
             [AppCommon hideLoading];
-//            [self.view setUserInteractionEnabled:YES];
         } failure:^(AFHTTPRequestOperation *operation, id error) {
             [COMMON webServiceFailureError:error];
-//            [self.view setUserInteractionEnabled:YES];
         }];
-        
-    }
+        }
 }
 
     // press return to hide keyboard
@@ -1065,6 +1013,14 @@
     }
     
     return YES;
+}
+
+- (NSString *)checkNull:(NSString *)_value
+{
+    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"]) {
+        _value=@"";
+    }
+    return _value;
 }
 
 @end

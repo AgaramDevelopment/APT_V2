@@ -170,6 +170,9 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 -(void)TeamStandings :(NSString *)list :(NSString *)Competitioncode  success:(WebserviceRequestSuccessHandler)success
               failure:(WebserviceRequestFailureHandler)failure;
 
+-(void)Overview :(NSString *)list :(NSString *)Competitioncode :(NSString *)teamcode  success:(WebserviceRequestSuccessHandler)success
+         failure:(WebserviceRequestFailureHandler)failure;
+
 
 
 @end

@@ -118,6 +118,7 @@
 }
 */
 
+
 -(void)customnavigationmethod
 {
     CustomNavigation *objCustomNavigation=[CustomNavigation new];
@@ -175,7 +176,7 @@
 - (void)loadSelectedData {
     
     if(self.isUpdate == YES)
-        {
+    {
         self.saveBtn.hidden=YES;
         self.updateBtn.hidden =NO;
         self.deleteBtn.hidden =NO;
@@ -206,21 +207,41 @@
             //        NSArray *components1 = [Dt componentsSeparatedByString:@" "];
             //        NSString *Dat = components1[0];
         
-        self.expectedDateTF.text = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"ExpectedDateofRecovery"]];
+            //                Date Format
         
-        NSString *DateTime = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"DateofOnset"]];
+        NSString *currentDate1 = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"ExpectedDateofRecovery"]];
+        NSDateFormatter *dateFormatters1 = [[NSDateFormatter alloc] init];
+        [dateFormatters1 setDateFormat:@"MM/dd/yyyy"];
+        NSDate *dates1 = [dateFormatters1 dateFromString:currentDate1];
         
-        NSArray *components = [DateTime componentsSeparatedByString:@" "];
+        NSDateFormatter* dfs1 = [[NSDateFormatter alloc]init];
+        [dfs1 setDateFormat:@"MM-dd-yyyy"];
+        self.expectedDateTF.text  = [dfs1 stringFromDate:dates1];
         
-        NSString *Date = components[0];
-        self.onsetDateTF.text =Date;
+        
+            //        self.expectedDateTF.text = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"ExpectedDateofRecovery"]];
+        
+        
+        NSString *currentDate = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"DateofOnset"]];
+        NSDateFormatter *dateFormatters = [[NSDateFormatter alloc] init];
+        [dateFormatters setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+        NSDate *dates = [dateFormatters dateFromString:currentDate];
+        
+        NSDateFormatter* dfs = [[NSDateFormatter alloc]init];
+        [dfs setDateFormat:@"MM-dd-yyyy"];
+        self.onsetDateTF.text = [dfs stringFromDate:dates];
+        
+        
+            //        NSString *DateTime = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"DateofOnset"]];
+            //
+            //        NSArray *components = [DateTime componentsSeparatedByString:@" "];
+            //
+            //        NSString *Date = components[0];
+            //        self.onsetDateTF.text =Date;
         
         self.illnessNameTF.text = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"IllnessName"]];
         self.chiefCompliantTF.text = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"ChiefCompliant"]];
         
-//        self.affectSystemTF.text = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"AffectedSystem"]];
-//        self.mainSymptomTF.text = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"MainSymptom"]];
-//        self.causeOfIllnessTF.text = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"Causeofillness"]];
         
         selectAffectSystemCode = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"AffectedSystem"]];
         selectMainSymptomCode = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"MainSymptom"]];
@@ -228,13 +249,13 @@
         selectExpertOpinionCode = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"ExpertOpinionTaken"]];
         selectIllnessCode = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"IllnessCode"]];
         
-        if([selectExpertOpinionCode isEqualToString:@"MSC215"]) {
-            [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-            [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-        } else {
-            [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-            [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-        }
+            if([selectExpertOpinionCode isEqualToString:@"MSC215"]) {
+                [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+                [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+            } else {
+                [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+                [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+            }
         } else {
             self.saveBtn.hidden=NO;
             self.updateBtn.hidden =YES;
@@ -870,13 +891,6 @@
                  
                  }
                  */
-                /*
-                selectAffectSystemCode = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"AffectedSystem"]];
-                selectMainSymptomCode = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"MainSymptom"]];
-                selectCauseCode = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"Causeofillness"]];
-                selectExpertOpinionCode = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"ExpertOpinionTaken"]];
-                selectIllnessCode =
-                */
                 
                 if (self.isUpdate ) {
                     //Affected System

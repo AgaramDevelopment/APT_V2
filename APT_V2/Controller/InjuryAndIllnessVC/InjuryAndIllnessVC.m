@@ -70,6 +70,7 @@
 
 - (IBAction)illnessAction:(id)sender {
     IllnessTracker *illnessObj = [IllnessTracker new];
+    illnessObj.isUpdate = NO;
     [self.navigationController pushViewController:illnessObj animated:YES];
 }
 

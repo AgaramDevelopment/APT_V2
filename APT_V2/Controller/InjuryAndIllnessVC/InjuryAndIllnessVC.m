@@ -33,12 +33,18 @@
     userRefCode = [AppCommon GetuserReference];
     
     //FETCHLOADINJURYWEB
-    [self fetchLoadInjuryPostMethodService];
+//    [self fetchLoadInjuryPostMethodService];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+        //FETCHLOADINJURYWEB
+    [self fetchLoadInjuryPostMethodService];
 }
 
 -(void)customnavigationmethod

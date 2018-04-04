@@ -62,13 +62,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+        // Do any additional setup after loading the view from its nib.
     
     dropDownTblView = [[UITableView alloc]init];
     dropDownTblView.dataSource = self;
     dropDownTblView.delegate = self;
     
-    //Navigation View
+        //Navigation View
     [self customnavigationmethod];
     [self allViewSetBorderMethod];
     
@@ -105,7 +105,7 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+        // Dispose of any resources that can be recreated.
 }
 
 /*
@@ -123,7 +123,7 @@
 {
     CustomNavigation *objCustomNavigation=[CustomNavigation new];
     [self.navigationView addSubview:objCustomNavigation.view];
-        //    objCustomNavigation.tittle_lbl.text=@"";
+    //    objCustomNavigation.tittle_lbl.text=@"";
     objCustomNavigation.btn_back.hidden =NO;
     objCustomNavigation.menu_btn.hidden =YES;
     [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
@@ -142,7 +142,7 @@
     
     self.chiefCompliantView.layer.borderWidth =0.5;
     self.chiefCompliantView.layer.masksToBounds=YES;
-
+    
     self.affectSystemView.layer.borderWidth =0.5;
     self.affectSystemView.layer.masksToBounds=YES;
     
@@ -249,14 +249,14 @@
         selectExpertOpinionCode = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"ExpertOpinionTaken"]];
         selectIllnessCode = [self checkNull:[self.objSelectobjIllnessArray valueForKey:@"IllnessCode"]];
         
-            if([selectExpertOpinionCode isEqualToString:@"MSC215"]) {
-                [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-                [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-            } else {
-                [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
-                [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
-            }
+        if([selectExpertOpinionCode isEqualToString:@"MSC215"]) {
+            [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+            [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
         } else {
+            [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+            [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
+        }
+    } else {
             self.saveBtn.hidden=NO;
             self.updateBtn.hidden =YES;
             self.deleteBtn.hidden =YES;
@@ -265,7 +265,7 @@
 
 - (IBAction)expectedDateButtonTapped:(id)sender {
     isExpected =YES;
-//    isOnset =NO;
+        //    isOnset =NO;
     [self displayDatePicker];
 }
 
@@ -306,7 +306,7 @@
     {
         self.expectedDateTF.text = [dateFormatter stringFromDate:[datePicker date]];
     } else if (isOnset) {
-        self.onsetDateTF.text = [dateFormatter stringFromDate:[datePicker date]];
+            self.onsetDateTF.text = [dateFormatter stringFromDate:[datePicker date]];
     }
 }
 
@@ -335,7 +335,7 @@
 
 - (IBAction)didClickAffectSystem:(id)sender {
     
-    if(dropDownTblView != nil){
+    if(dropDownTblView != nil) {
         [dropDownTblView removeFromSuperview];
     }
     
@@ -425,23 +425,23 @@
 - (IBAction)didClickInvestigationsUpload:(id)sender {
     
     if(isSelectPop == NO)
-        {
+    {
         self.filePopView.hidden = NO;
         isSelectPop = YES;
-//        [self showAnimate];
-        }
+            //        [self showAnimate];
+    }
     else
-        {
+    {
         self.filePopView.hidden = YES;
         isSelectPop = NO;
         /*
-        self.xrayLbl = @"";
-        self.CTScanLbl = @"";
-        self.MRILbl = @"";
-        self.BloodTestLbl = @"";
+         self.xrayLbl = @"";
+         self.CTScanLbl = @"";
+         self.MRILbl = @"";
+         self.BloodTestLbl = @"";
          */
-//        [self removeAnimate];
-        }
+            //        [self removeAnimate];
+    }
     
 }
 
@@ -619,10 +619,15 @@
             BOOL status=[responseObject valueForKey:@"Status"];
             if(status == YES)
             {
+            
+            UIAlertView * objaltert =[[UIAlertView alloc]initWithTitle:@"Add Illness" message:[NSString stringWithFormat:@"Illness Updated Successfully"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            objaltert.tag = 301;
+            [objaltert show];
                     // Illness Updated Successfully
-                [self altermsg:@"Illness Updated Successfully"];
-                
-//                [self.navigationController popViewControllerAnimated:YES];
+//                [self altermsg:@"Illness Updated Successfully"];
+            
+            
+                [self.navigationController popViewControllerAnimated:YES];
             } else {
                 [self altermsg:@"Illness Update failed"];
             }
@@ -637,7 +642,7 @@
 -(void)InsertWebservice
 {
     if([COMMON isInternetReachable])
-        {
+    {
         [AppCommon showLoading];
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(clientCode)   [dic    setObject:clientCode     forKey:@"CLIENTCODE"];
@@ -674,38 +679,38 @@
         if(selectExpertOpinionCode)   [dic    setObject:selectExpertOpinionCode     forKey:@"EXPERTOPINIONTAKEN"];
         
         if(xrData==nil)
-            {
+        {
             [dic    setObject:@""     forKey:@"XRAYSFILE"];
-            } else {
+        } else {
                 [dic    setObject:xrData     forKey:@"XRAYSFILE"];
-            }
+        }
         [dic    setObject:@"Xray.png"     forKey:@"XRAYSFILENAME"];
         
         if(ctData==nil)
-            {
+        {
             [dic    setObject:@""     forKey:@"CTSCANSFILE"];
-            } else {
+        } else {
                 [dic    setObject:ctData     forKey:@"CTSCANSFILE"];
-            }
+        }
         [dic    setObject:@"Ctscan.png"     forKey:@"CTSCANSFILENAME"];
         
         
         
         if(mrData==nil)
-            {
+        {
             [dic    setObject:@""     forKey:@"MRISCANSFILE"];
-            } else {
+        } else {
                 [dic    setObject:mrData     forKey:@"MRISCANSFILE"];;
-            }
+        }
         [dic    setObject:@"Mriscan.png"     forKey:@"MRISCANSFILENAME"];
         
         
         if(bloodData==nil)
-            {
+        {
             [dic    setObject:@""     forKey:@"BLOODTESTFILE"];
-            } else {
+        } else {
                 [dic    setObject:bloodData     forKey:@"BLOODTESTFILE"];;
-            }
+        }
         [dic    setObject:@"Bloodtest.png"     forKey:@"BLOODTESTFILENAME"];
         
         
@@ -731,11 +736,11 @@
                     [objaltert show];
                         //            [self altermsg:[NSString stringWithFormat:@"Illness Insert %@",[responseObject valueForKey:@"Message"]]];
                         //
-                        //            [self.navigationController popViewControllerAnimated:YES];
+                    [self.navigationController popViewControllerAnimated:YES];
                     
                 } else {
-                    [self altermsg:@"Illness Insert failed"];
-                }
+                        [self altermsg:@"Illness Insert failed"];
+                    }
             }
             [AppCommon hideLoading];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -843,13 +848,13 @@
 {
         //[COMMON loadingIcon:self.view];
     if([COMMON isInternetReachable])
-        {
+    {
         [AppCommon showLoading];
         [objWebservice getFetchMetadataList :illnessFetchload success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"response ; %@",responseObject);
             
             if(responseObject >0)
-                {
+            {
                 
                 affectArray =[[NSMutableArray alloc]init];
                 mainSymptomArray =[[NSMutableArray alloc]init];
@@ -893,20 +898,20 @@
                  */
                 
                 if (self.isUpdate ) {
-                    //Affected System
+                        //Affected System
                     for (id key in affectArray) {
                         if ([selectAffectSystemCode isEqualToString:[key valueForKey:@"IllnessMetaSubCode"]]) {
                             self.affectSystemTF.text = [key valueForKey:@"IlnessMetaDataTypeCode"];
                         }
                     }
-                    //Main Symptoms
+                        //Main Symptoms
                     for (id key in mainSymptomArray) {
                         if ([selectMainSymptomCode isEqualToString:[key valueForKey:@"IllnessMetaSubCode"]]) {
                             self.mainSymptomTF.text = [key valueForKey:@"IlnessMetaDataTypeCode"];
                         }
                     }
                     
-                    //Cause Of Illness
+                        //Cause Of Illness
                     for (id key in causeIllnessArray) {
                         if ([selectCauseCode isEqualToString:[key valueForKey:@"IllnessMetaSubCode"]]) {
                             self.causeOfIllnessTF.text = [key valueForKey:@"IlnessMetaDataTypeCode"];
@@ -914,12 +919,12 @@
                     }
                 }
                 
-                }
+            }
             [AppCommon hideLoading];
         } failure:^(AFHTTPRequestOperation *operation, id error) {
             [COMMON webServiceFailureError:error];
         }];
-        }
+    }
 }
 
 -(void)altermsg:(NSString *) message
@@ -932,16 +937,17 @@
 {
     
     if (buttonIndex == [alertView cancelButtonIndex])
-        {
+    {
         alertView.hidden=YES;
-        }
+    }
     else if (alertView.tag == 300)
-        {
-        [self startDeleteInjuryService:userCode :selectIllnessCode];
+    {
+        if (buttonIndex == 1) {
+            [self startDeleteInjuryService:userCode :selectIllnessCode];
         }
+    }
     else if (alertView.tag == 301)
-        {
-        
+    {
         self.expectedDateTF.text =@"";
         self.onsetDateTF.text =@"";
         self.illnessNameTF.text =@"";
@@ -964,68 +970,67 @@
         self.CTScanLbl.text =@"";
         self.MRILbl.text =@"";
         self.BloodTestLbl.text=@"";
-        }
+    }
     else
-        {
+    {
             //Do something else
-        }
+    }
 }
 
 -(void)startDeleteInjuryService :(NSString *) Usercode :(NSString *)selectillnessCode
 {
     if([COMMON isInternetReachable])
-        {
+    {
         [AppCommon showLoading];
         [objWebservice getinjuryDelete:deleteIllness :selectillnessCode :Usercode success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"response ; %@",responseObject);
             
             if(responseObject >0)
-                {
+            {
                 
                 NSLog(@"%@",responseObject);
                 BOOL status=[responseObject valueForKey:@"Status"];
                 if(status == YES)
-                    {
+                {
                     [self altermsg:[NSString stringWithFormat:@"Illness Deleted Successfully"]];
                     
                     [self.navigationController popViewControllerAnimated:YES];
                     
-                    }
-                else{
+                }
+                else {
                     [self altermsg:@"Delete failed"];
                 }
                 
-                }
+            }
             [AppCommon hideLoading];
         } failure:^(AFHTTPRequestOperation *operation, id error) {
             [COMMON webServiceFailureError:error];
         }];
-        }
+    }
 }
 
     // press return to hide keyboard
 -(BOOL) textFieldShouldReturn:(UITextField *)textField {
     
-    if(textField == self.illnessNameTF){
+    if(textField == self.illnessNameTF) {
         [self.chiefCompliantTF becomeFirstResponder];
         
-    }else if(textField == self.chiefCompliantTF){
+    } else if(textField == self.chiefCompliantTF) {
         [textField resignFirstResponder];
         [self didClickAffectSystem:self.affectSystemBtn];
         
-    }else if(textField == self.affectSystemTF){
+    } else if(textField == self.affectSystemTF) {
         [textField resignFirstResponder];
         [self didClickMainSymptom:self.mainSymptomBtn];
         
-    }else if(textField == self.mainSymptomTF){
+    } else if(textField == self.mainSymptomTF) {
         [textField resignFirstResponder];
         [self didClickCauseOfIllness:self.causeBtn];
         
-    }else if(textField == self.causeOfIllnessTF){
+    } else if(textField == self.causeOfIllnessTF) {
         [textField resignFirstResponder];
         return NO;
     }
-    
     return YES;
 }
 

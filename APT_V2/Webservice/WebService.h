@@ -23,38 +23,13 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 
 #pragma Testing Url
 
-    // LIVE
-#define BASE_URL    @"http://13.126.151.253:9001/AGAPTService.svc/"
+//#define BASE_URL    @"http://13.126.151.253:9001/AGAPTService.svc/"
 
 //Local Dev
-//#define BASE_URL    @"http://192.168.0.151:8044/AGAPTService.svc/"
-#define IMAGE_URL   @"http://192.168.0.151:8045/"
-#define Video_URL   @"http://192.168.0.151:8044/"
-#define BASE_Image_URL @"http://192.168.0.151:8045/bcciapp/"
-
-
-//#define BASE_URL   @"http://192.168.0.151:8029/AGAPTService.svc/"
-//#define IMAGE_URL   @"http://192.168.0.151:8030/"
-//#define Video_URL   @"http://192.168.0.151:8029/"
-
-//#define BASE_URL   @"http://192.168.1.84:8044/AGAPTService.svc/"
-//#define IMAGE_URL   @"http://192.168.1.84:8045/"
-
-
-//#define BASE_URL   @"http://192.168.1.84:8039/AGAPTService.svc/"
-
-//#define BASE_URL  @"http://13.126.151.253:9001/AGAPTService.svc/"
-//#define IMAGE_URL   @"http://13.126.151.253:9000/"
-
-//#define BASE_URL  @"http://192.168.1.209:8005/AGAPTService.svc/"
-//#define BASE_URL  @"http://13.126.151.253:9001/AGAPTService.svc/"
-
-
-//#ifdef DEBUG
-//#define push_type   @"dev"
-//#else
-//#define push_type   @"pro"
-//#endif
+#define BASE_URL    @"http://192.168.0.154:8029/AGAPTService.svc/"
+#define IMAGE_URL     @"http://192.168.0.154:8045/"
+#define Video_URL     @"http://192.168.0.154:8044/"
+#define BASE_Image_URL @"http://192.168.0.154:8045/bcciapp/"
 
 #define URL_FOR_RESOURCE(RESOURCE) [NSString stringWithFormat:@"%@%@",BASE_URL,RESOURCE]
 

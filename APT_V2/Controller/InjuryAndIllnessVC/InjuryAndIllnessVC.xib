@@ -15,8 +15,8 @@
             <connections>
                 <outlet property="illnessTableView" destination="LgS-eH-AWP" id="aCf-I7-53k"/>
                 <outlet property="injuryTableView" destination="ErW-ke-mrE" id="kOp-d0-Rgc"/>
-                <outlet property="navigationView" destination="V3J-Qk-7j3" id="khQ-Uw-Aio"/>
-                <outlet property="view" destination="F6f-H6-9DU" id="Hb2-NZ-gzP"/>
+                <outlet property="navigationView" destination="RWK-zm-j24" id="Unp-eq-PT5"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="oAe-ME-D7m"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

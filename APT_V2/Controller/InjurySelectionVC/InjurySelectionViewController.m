@@ -104,7 +104,7 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self customnavigationmethod];
+//    [self customnavigationmethod];
 
 //    blueLayer = [[CALayer alloc] init];
 //    blueLayer.frame = CGRectMake(100, 100, 100, 100);
@@ -162,27 +162,22 @@
     
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(nullable UIEvent *)event
-{
-
-}
-
 //The next step is to use the UIViewController's inheritance from the UIResponder class to take advantage of the touchesEnded: method.
-- (void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
-
-//    [super touchesBegan:touches withEvent:event];
-//    [self.nextResponder touchesBegan:touches withEvent:event];
-
-    CGPoint location = [[touches anyObject] locationInView:self.view];
-    CALayer *hitLayer = [self.view.layer hitTest:[self.view convertPoint:location fromView:nil]];
-
-    [self displayInfo:hitLayer.name];
-}
-
--(void)displayInfo:(NSString *)nameOfLayer
-{
-    NSLog(@"%@",nameOfLayer);
-}
+//- (void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
+//
+////    [super touchesBegan:touches withEvent:event];
+////    [self.nextResponder touchesBegan:touches withEvent:event];
+//
+//    CGPoint location = [[touches anyObject] locationInView:self.view];
+//    CALayer *hitLayer = [self.view.layer hitTest:[self.view convertPoint:location fromView:nil]];
+//
+//    [self displayInfo:hitLayer.name];
+//}
+//
+//-(void)displayInfo:(NSString *)nameOfLayer
+//{
+//    NSLog(@"%@",nameOfLayer);
+//}
 
 
 -(void)customnavigationmethod
@@ -193,19 +188,6 @@
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
     
-//    BOOL isBackEnable = [[NSUserDefaults standardUserDefaults] boolForKey:@"BACK"];
-//
-//    if (isBackEnable) {
-//        objCustomNavigation.menu_btn.hidden =YES;
-//        objCustomNavigation.btn_back.hidden =NO;
-//        [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
-//    }
-//    else
-//    {
-//        objCustomNavigation.menu_btn.hidden =NO;
-//        objCustomNavigation.btn_back.hidden =YES;
-//        [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-//    }
     
     objCustomNavigation.menu_btn.hidden =YES;
     objCustomNavigation.btn_back.hidden =NO;
@@ -254,31 +236,36 @@
     
     if (![sender tag]) {
         // show Back side
-        [UIView transitionWithView:self.BackView
-                          duration:1.0
-                           options:UIViewAnimationOptionTransitionFlipFromRight
-                        animations:^{
-                            [FrontView addSubview:self.BackView];
-                        }
-                        completion:^(BOOL finished) {
-                            [self.BackView.topAnchor constraintEqualToAnchor:FrontView.topAnchor];
-                            [self.BackView.leadingAnchor constraintEqualToAnchor:FrontView.leadingAnchor];
-                            [self.BackView.bottomAnchor constraintEqualToAnchor:FrontView.bottomAnchor];
-                            [self.BackView.trailingAnchor constraintEqualToAnchor:FrontView.trailingAnchor];
-                            [self.BackView setTranslatesAutoresizingMaskIntoConstraints:NO];
-                        }];
+        
+        [FrontView addSubview:self.BackView];
+
+//        [UIView transitionWithView:self.BackView
+//                          duration:1.0
+//                           options:UIViewAnimationOptionTransitionFlipFromRight
+//                        animations:^{
+//                            [FrontView addSubview:self.BackView];
+//                        }
+//                        completion:^(BOOL finished) {
+//                            [self.BackView.topAnchor constraintEqualToAnchor:FrontView.topAnchor];
+//                            [self.BackView.leadingAnchor constraintEqualToAnchor:FrontView.leadingAnchor];
+//                            [self.BackView.bottomAnchor constraintEqualToAnchor:FrontView.bottomAnchor];
+//                            [self.BackView.trailingAnchor constraintEqualToAnchor:FrontView.trailingAnchor];
+//                            [self.BackView setTranslatesAutoresizingMaskIntoConstraints:NO];
+//                        }];
 
         
     }
     else // show front side
     {
-        [UIView transitionWithView:self.FrontView
-                          duration:1.0
-                           options:UIViewAnimationOptionTransitionFlipFromLeft
-                        animations:^{
-                            [self.BackView removeFromSuperview];
-                        }
-                        completion:NULL];
+        [self.BackView removeFromSuperview];
+
+//        [UIView transitionWithView:self.FrontView
+//                          duration:1.0
+//                           options:UIViewAnimationOptionTransitionFlipFromLeft
+//                        animations:^{
+//                            [self.BackView removeFromSuperview];
+//                        }
+//                        completion:NULL];
         
     }
 }

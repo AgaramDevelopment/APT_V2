@@ -12,4 +12,5 @@
 @property (nonatomic,strong)IBOutlet UISwitch *swt;
 
 @property (nonatomic,strong)IBOutlet UIImageView *securityImage;
+@property (weak, nonatomic) IBOutlet UIView *teamview;
 @end

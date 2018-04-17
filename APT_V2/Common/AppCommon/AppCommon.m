@@ -8,6 +8,7 @@
 
 #import "AppCommon.h"
 #import "Header.h"
+#import "WebService.h"
 
 @implementation AppCommon
 AppCommon *sharedCommon = nil;
@@ -88,6 +89,118 @@ AppCommon *sharedCommon = nil;
 {
     NSString * userreference =  [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
     return userreference;
+}
+
++(NSString *)getCurrentTeamCode
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedTeamCode"];
+}
+
++(NSString *)getAppVersion
+{
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSDictionary *info = [bundle infoDictionary];
+        //    NSString *productName = [info objectForKey:@"CFBundleName"];
+    NSString *AppVersion = [info objectForKey:@"CFBundleShortVersionString"];
+    
+    return AppVersion;
+}
+
+-(void)getIPLteams
+{
+    if(![COMMON isInternetReachable])
+        return;
+    
+    
+        //    [AppCommon showLoading];
+    
+    WebService* objWebservice = [[WebService alloc]init];
+    [objWebservice getIPLTeamCodessuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if(responseObject >0)
+            {
+            appDel.MainArray = [NSMutableArray new];
+            appDel.MainArray = responseObject;
+            NSLog(@"IPL TEAMS %@ ",appDel.MainArray);
+            NSString* Teamcode = [[responseObject firstObject] valueForKey:@"TeamCode"];
+            NSString* TeamName = [[responseObject firstObject] valueForKey:@"TeamName"];
+            
+            [[NSUserDefaults standardUserDefaults] setValue:TeamName forKey:@"SelectedTeamName"];
+            [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
+            
+            NSLog(@"IPL COMPETETION %@ ",appDel.MainArray);
+            NSString* Competetioncode = [[responseObject firstObject] valueForKey:@"CompetitionCode"];
+            NSString* CompetetionName = [[responseObject firstObject] valueForKey:@"CompetitionName"];
+            
+            [[NSUserDefaults standardUserDefaults] setValue:CompetetionName forKey:@"SelectedCompetitionName"];
+            [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+                //            NSSet* set1 = [NSSet setWithArray:[responseObject valueForKey:@"CompetitionCode"]];
+                //            [appDel.ArrayCompetition addObjectsFromArray:];
+            
+            appDel.ArrayCompetition = [NSMutableArray new];
+            
+                //            NSMutableArray* temp = [NSMutableArray new];
+            for (NSDictionary* dict in responseObject) {
+                
+                NSLog(@"%@",dict[@"CompetitionCode"]);
+                if (![[appDel.ArrayCompetition valueForKey:@"CompetitionCode"] containsObject:dict[@"CompetitionCode"]]) {
+                    [appDel.ArrayCompetition addObject:dict];
+                    NSLog(@"temp %@",[appDel.ArrayCompetition valueForKey:@"CompetitionCode"]);
+                }
+                
+            }
+            NSString* lastYearTeams = [[appDel.ArrayCompetition firstObject] valueForKey:@"CompetitionName"];
+            NSArray* temp = [COMMON getCorrespondingTeamName:lastYearTeams];
+                //            appDel.ArrayCompetition = temp;
+            NSLog(@"appDel.ArrayCompetition %@ ",appDel.ArrayCompetition);
+            
+            }
+        
+            //        [AppCommon hideLoading];
+        
+            //        dispatch_async(dispatch_get_main_queue(), ^{
+            //            [self getIPLCompetetion];
+            //        });
+        
+    } failure:^(AFHTTPRequestOperation *operation, id error) {
+            //        [AppCommon hideLoading];
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+        
+    }];
+    
+}
+
+-(NSArray *)getCorrespondingTeamName:(NSString *)competetionName
+{
+    
+    if (![[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedCompetitionName"]) {
+        NSLog(@"Please select Competetion");
+    }
+    
+    NSLog(@"competetionName %@",appDel.MainArray);
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"CompetitionName == %@", competetionName];
+    NSArray* temparray = [appDel.MainArray filteredArrayUsingPredicate:resultPredicate];
+    
+    if (temparray.count > 0) {
+        appDel.ArrayTeam = [NSMutableArray new];
+        
+        for (NSDictionary* temp1 in temparray) {
+            if (![[appDel.ArrayTeam valueForKey:@"TeamCode"] containsObject:[temp1 valueForKey:@"TeamCode"]]) {
+                [appDel.ArrayTeam addObject:temp1];
+            }
+        }
+        
+    }
+    else
+        {
+        NSString* msg = [NSString stringWithFormat:@"NO Teams Founds in %@",competetionName];
+        [AppCommon showAlertWithMessage:msg];
+        }
+    
+    return appDel.ArrayTeam;
 }
 
 #pragma mark - Get Height of Control

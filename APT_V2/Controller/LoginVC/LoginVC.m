@@ -9,17 +9,25 @@
 #import "LoginVC.h"
 #import "Header.h"
 #import "TabHomeVC.h"
+#import "TeamMembersVC.h"
 
-@interface LoginVC ()
+@interface LoginVC () <selectedDropDown>
 {
-    
+    NSMutableArray *teamArray;
+    BOOL isTeam;
 }
+
 @property (weak,nonatomic)  IBOutlet UIView *commonview;
+@property (strong, nonatomic) IBOutlet UIView *teamView;
+@property (strong, nonatomic) IBOutlet UITextField *teamTF;
+
 @property (weak,nonatomic)  IBOutlet UIView *usernameview;
 @property (weak,nonatomic)  IBOutlet UIView *passwordview;
 
 @property (weak,nonatomic)  IBOutlet UITextField *userTxt;
 @property (weak,nonatomic) IBOutlet UITextField * passwordTxt;
+@property (strong, nonatomic) IBOutlet UITableView *teamTableView;
+
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * commonViewHeight;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * commonViewWidth;
@@ -38,13 +46,17 @@
 
 @implementation LoginVC
 
+@synthesize teamview;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+    self.teamTableView.hidden = YES;
     _isVisible = false;
     self.securityImage.image = [UIImage imageNamed:@"eye_hide_icon"];
     self.passwordTxt.secureTextEntry= !_isVisible;
+    
+    [self teamCodeGetService];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -62,6 +74,10 @@
         
     }
     
+    _teamTF.text = @"";
+    _userTxt.text = @"";
+    _passwordTxt.text = @"";
+    
     SWRevealViewController *revealController = [self revealViewController];
     [revealController.panGestureRecognizer setEnabled:NO];
     [revealController.tapGestureRecognizer setEnabled:NO];
@@ -75,7 +91,7 @@
 
 -(IBAction)didClickSubmitBtnAction:(id)sender
 {
-    
+
     [self validation];
     
     //    objpalyer.selectPlayerimg = [[NSUserDefaults standardUserDefaults]stringForKey:@"PhotoPath"];
@@ -102,7 +118,6 @@
         return;
     
     [AppCommon showLoading];
-    //        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",LoginKey]];
     NSString *URLString =  URL_FOR_RESOURCE(LoginKey);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -112,11 +127,16 @@
     manager.requestSerializer = requestSerializer;
     
     
-    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    NSString* teamCode = [AppCommon getCurrentTeamCode];
+    if(_teamTF.hasText)  [dic    setObject:teamCode forKey:@"teamcode"];
     if(username)   [dic    setObject:username     forKey:@"username"];
     if(password)   [dic    setObject:password     forKey:@"password"];
-    
+       [dic    setObject:[AppCommon getAppVersion]     forKey:@"version"];
+        [dic    setObject:@"ios"     forKey:@"platform"];
+
+    NSLog(@"API URL : %@",URLString);
+
     NSLog(@"parameters : %@",dic);
     [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"response ; %@",responseObject);
@@ -128,40 +148,76 @@
             NSString * objRoleCode =[[objRole valueForKey:@"Rolecode"] objectAtIndex:0];
             
             NSString * objRoleName =[[objRole valueForKey:@"RoleName"] objectAtIndex:0];
-            [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"UserCode"] forKey:@"UserCode"];
-            [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"ClientCode"] forKey:@"ClientCode"];
+            /*Password*/
+            [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"Password"];
+            [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"UserCode"] forKey:@"UserCode"]; //Createdby
+            [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"ClientCode"] forKey:@"ClientCode"]; //Clientcode
             [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"Userreferencecode"] forKey:@"Userreferencecode"];
             
-            [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"Username"] forKey:@"UserName"];
+            [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"Username"] forKey:@"UserName"]; //LoginID
             [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"AssociationCode"]  forKey:@"AssociationCode"];
             
             [[NSUserDefaults standardUserDefaults] setObject:[responseObject valueForKey:@"PhotoPath"] forKey:@"PhotoPath"];
             [[NSUserDefaults standardUserDefaults] setObject:objRoleName forKey:@"RoleName"];
             
             [[NSUserDefaults standardUserDefaults] setObject:objRoleCode forKey:@"RoleCode"];
-            
+
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLogin"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
         
             
-            UIViewController* VC;
-            if([objRoleCode isEqualToString:@"ROL0000002"]) // player
-            {
+                UIViewController* VC;
+            
+            //if (![AppCommon isCoach]) {
+                NSString * APTTeamCode =[responseObject valueForKey:@"APTTeamcode"];
+                [[NSUserDefaults standardUserDefaults] setValue:APTTeamCode forKey:@"APTTeamcode"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+
+                
+                NSString * playerTeamCode =[responseObject valueForKey:@"CAPTeamcode"];
+                [[NSUserDefaults standardUserDefaults] setValue:playerTeamCode forKey:@"CAPTeamcode"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            //}
+            
+            [[NSUserDefaults standardUserDefaults] setObject:self.userTxt.text forKey:@"UserID"];//LogID
+
                 VC = [TabHomeVC new];
-            }
-            else
-            {
-                VC = [TeamsVC new];
-            }
+                [COMMON getIPLteams];
+            
+//            if([objRoleCode isEqualToString:@"ROL0000002"]) // player
+//            {
+//                NSString * playerTeamCode =[responseObject valueForKey:@"CAPTeamcode"];
+//                if (!playerTeamCode) {
+//                    [AppCommon showAlertWithMessage:@"Player code missing"];
+//                    return;
+//                }
+//
+//                [[NSUserDefaults standardUserDefaults] setObject:playerTeamCode forKey:@"SelectedTeamCode"];
+//                VC = [TabHomeVC new];
+//            }
+//            else
+//            {
+//               TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
+//                objPlayersVC.teamCode = [AppCommon getCurrentTeamCode];
+//                objPlayersVC.teamname = self.teamTF.text;
+//                VC = objPlayersVC;
+//
+//            }
+            
             appDel.frontNavigationController = self.navigationController;
             [self.navigationController pushViewController:VC animated:YES];
             
-            
-           
+//            NSInteger* isLatestVersion = [[responseObject valueForKey:@"isLatestVersion"] integerValue];
+//            NSLog(@"isLatestVersion %@",[responseObject valueForKey:@"isLatestVersion"] );
+//            if (!isLatestVersion) {
+//                NSLog(@"canUpdate TRUE ");
+//                [AppCommon newVersionUpdateAlert];
+//            }
             
         }
         else{
+            
             [AppCommon showAlertWithMessage:@"Invalid Login"];
         }
         
@@ -176,23 +232,94 @@
     
 }
 
+
+- (void)teamCodeGetService {
+    /*
+     API URL    :   http://192.168.0.151:8044/AGAPTService.svc/FETCH_LOGIN_TEAMS/
+     METHOD     :   GET
+     PARAMETER  :   nil
+     */
+    
+    if(![COMMON isInternetReachable]) // APT Teamcode
+        return;
+    
+    [AppCommon showLoading];
+    
+    NSString *API_URL = URL_FOR_RESOURCE(@"FETCH_LOGIN_TEAMS");
+
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = requestSerializer;
+    
+    [manager GET:API_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"SUCCESS RESPONSE:%@",responseObject);
+        teamArray = [[NSMutableArray alloc] init];
+        teamArray = responseObject;
+        
+        [AppCommon hideLoading];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"FAILURE RESPONSE %@",error.description);
+        [AppCommon hideLoading];
+        [COMMON webServiceFailureError:error];
+    }];
+}
+
+
 - (IBAction)switchAction:(id)sender {
     
     _isVisible = !_isVisible;
     
-    if(!_isVisible){
-        self.securityImage.image = [UIImage imageNamed:@"eye_hide_icon"];
-    }else{
-        self.securityImage.image = [UIImage imageNamed:@"eye_show_icon"];
-    }
-   // self.passwordTxt.secureTextEntry= ![sender isOn];
+    self.securityImage.image = [UIImage imageNamed:(!_isVisible ? @"eye_hide_icon" : @"eye_show_icon") ];
     self.passwordTxt.secureTextEntry= !_isVisible;
 }
 
-//- (IBAction)switchAction:(id)sender {
-//    
-//    self.passwordTxt.secureTextEntry= ![sender isOn];
-//}
+- (IBAction)teamButtonTapped:(id)sender {
+    
+  
+    if (!teamArray.count) {
+        [self teamCodeGetService];
+        return;
+    }
+    
+    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+    dropVC.protocol = self;
+    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+    
+        dropVC.array = teamArray;
+        dropVC.key = @"Teamname";
+    
+    CGFloat xValue = CGRectGetMinX(teamview.superview.frame) + CGRectGetMinX(teamview.frame);
+    CGFloat yValue = CGRectGetMinY(teamview.superview.frame) + CGRectGetMaxY(teamview.frame)+5;
+
+    [dropVC.tblDropDown setFrame:CGRectMake(xValue, yValue, CGRectGetWidth(teamview.frame), (IS_IPAD ? 200 : 150))];
+        
+    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
+        NSLog(@"DropDown loaded");
+    }];
+
+}
+
+-(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
+{
+    
+        _teamTF.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        [[NSUserDefaults standardUserDefaults] setValue:_teamTF.text forKey:@"loginedUserTeam"];
+        NSString* Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"Teamcode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:_teamTF.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"loginedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] setValue:_teamTF.text forKey:@"loginedTeamName"];
+
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
+}
+
+
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
@@ -201,6 +328,7 @@
     [_userTxt resignFirstResponder];
     
 }
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if(textField.returnKeyType == UIReturnKeyNext && _userTxt.isFirstResponder)

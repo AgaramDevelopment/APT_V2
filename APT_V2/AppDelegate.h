@@ -19,5 +19,8 @@
 @property (strong, nonatomic) UINavigationController *frontNavigationController;
 @property (strong, nonatomic) RearViewController *rearViewController;
 @property (strong, nonatomic) UINavigationController *rearNavigationController;
+@property (strong, nonatomic) NSMutableArray *MainArray;
+@property (strong, nonatomic) NSMutableArray *ArrayCompetition;
+@property (strong, nonatomic) NSMutableArray *ArrayTeam;
 @end
 

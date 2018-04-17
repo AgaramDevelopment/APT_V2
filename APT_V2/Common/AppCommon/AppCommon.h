@@ -32,6 +32,9 @@
 +(NSString *)GetUserRoleName;
 +(NSString *)GetUserRoleCode;
 
++(NSString *)getCurrentTeamCode;
++(NSString *)getAppVersion;
+-(void)getIPLteams;
 
 +(NSString *)getFileType:(NSString *)filePath;
 +(void)showAlertWithMessage:(NSString *)message;

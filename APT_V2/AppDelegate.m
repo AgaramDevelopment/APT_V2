@@ -69,9 +69,18 @@
     
     UIViewController *frontViewController;
     [COMMON getIPLteams];
-
-    frontViewController = (isLogin ? [TabHomeVC new] : [LoginVC new] );
-
+    
+    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+    NSString *plyRolecode = @"ROL0000002";
+    
+    if([rolecode isEqualToString:plyRolecode])
+    {
+        frontViewController = (isLogin ? [TabHomeVC new] : [LoginVC new] );
+    } else {
+        frontViewController = (isLogin ? [TeamsVC new] : [LoginVC new] );
+    }
+    
+    
     rearViewController = [[RearViewController alloc] init];
     frontNavigationController = [[UINavigationController alloc] initWithRootViewController:frontViewController];
     rearNavigationController = [[UINavigationController alloc] initWithRootViewController:rearViewController];

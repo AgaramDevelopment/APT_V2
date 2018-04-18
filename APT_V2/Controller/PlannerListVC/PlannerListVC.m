@@ -39,7 +39,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self customnavigationmethod];
     self.addBtn.layer.cornerRadius = 20;
     self.addBtn.layer.masksToBounds = YES;
     self.objWebservice =[[WebService alloc]init];
@@ -62,6 +61,11 @@
 //
 //
 //}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
 
 -(void)customnavigationmethod
 {
@@ -150,7 +154,7 @@
                 
                 self.EventStatusArray =[[NSMutableArray alloc]init];
                 self.EventStatusArray =[responseObject valueForKey:@"ListEventStatusDetails"];
-                
+            
                 [self.PlannerListTbl reloadData];
                 
             }
@@ -257,22 +261,22 @@
 
 -(IBAction)didClickAddBtn:(id)sender
 {
-//    PlannerAddEvent  * objaddEvent=[[PlannerAddEvent alloc]init];
-//    objaddEvent = (PlannerAddEvent *)[self.storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
-//    //objaddEvent.selectDateStr =selectdate;
-//    objaddEvent.isEdit =NO;
-//    objaddEvent.ListeventTypeArray = self.EventTypeArray;
-//    objaddEvent.ListeventStatusArray =self.EventStatusArray;
-//    objaddEvent.ListparticipantTypeArray =self.ParticipantsTypeArray;
-//    
-//    [self.navigationController pushViewController:objaddEvent animated:YES];
-    
-    PlannerAddEvent *objaddEvent = [[PlannerAddEvent alloc] initWithNibName:@"PlannerAddEvent" bundle:nil];
+    PlannerAddEvent  * objaddEvent=[[PlannerAddEvent alloc]init];
+    objaddEvent = (PlannerAddEvent *)[self.storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
+    //objaddEvent.selectDateStr =selectdate;
     objaddEvent.isEdit =NO;
     objaddEvent.ListeventTypeArray = self.EventTypeArray;
     objaddEvent.ListeventStatusArray =self.EventStatusArray;
     objaddEvent.ListparticipantTypeArray =self.ParticipantsTypeArray;
-    [self.view addSubview:objaddEvent.view];
+    
+    [self.navigationController pushViewController:objaddEvent animated:YES];
+    
+//    PlannerAddEvent *objaddEvent = [[PlannerAddEvent alloc] initWithNibName:@"PlannerAddEvent" bundle:nil];
+//    objaddEvent.isEdit =NO;
+//    objaddEvent.ListeventTypeArray = self.EventTypeArray;
+//    objaddEvent.ListeventStatusArray =self.EventStatusArray;
+//    objaddEvent.ListparticipantTypeArray =self.ParticipantsTypeArray;
+//    [self.view addSubview:objaddEvent.view];
 }
 
 -(IBAction)didClickBackBtn:(id)sender

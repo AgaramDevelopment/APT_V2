@@ -82,12 +82,14 @@
     [arrayDates removeAllObjects];
     
     NSDateComponents *compDateManeger = [NSDate componentsOfDate:[[FFDateManager sharedManager] currentDate]];
-    compDateManeger.month += (section-1);
+    //compDateManeger.month += (section-1);
     NSDate *dateFirstDayOfMonth = [NSDate dateWithYear:compDateManeger.year month:compDateManeger.month day:1];
+   
     [arrayWithFirstDay replaceObjectAtIndex:section withObject:dateFirstDayOfMonth];
     NSDateComponents *componentsFirstDayOfMonth = [NSDate componentsOfDate:dateFirstDayOfMonth];
     
     NSLog(@"Weekday:%li", (long)componentsFirstDayOfMonth.weekday);
+    
     
     long lastDayMonth = [dateFirstDayOfMonth numberOfDaysInMonthCount];
     long numOfCellsInCollection = [dateFirstDayOfMonth numberOfWeekInMonthCount]*7;
@@ -108,6 +110,8 @@
     return [arrayDates count];
 }
 
+
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     NSMutableArray *arrayDates = [array objectAtIndex:indexPath.section];
@@ -126,10 +130,35 @@
     
         NSDate *date = (NSDate *)obj;
         NSDateComponents *components = [NSDate componentsOfDate:date];
-        
+        [cell.EventNamelbl setText:@""];
         [cell setArrayEvents:[dictEvents objectForKey:date]];
+        
         [cell.labelDay setText:[NSString stringWithFormat:@"%li", (long)[components day]]];
-//        cell.backgroundColor = [UIColor greenColor];
+        //FFEvent *event = [arEvents objectAtIndex:0];
+        //[cell.EventNamelbl setText:event.stringCustomerName];
+        
+//         NSMutableArray *arEvents = [[NSMutableArray alloc]init];
+//         arEvents = [dictEvents objectForKey:date];
+//
+//                NSMutableArray *arr = [[NSMutableArray alloc]init];
+//                FFEvent *event = [FFEvent new];
+//                for(int i=0;i<arEvents.count;i++)
+//                {
+//                    FFEvent *event = [FFEvent new];
+//                    event = [arEvents objectAtIndex:i];
+//                    [arr addObject:event.stringCustomerName];
+//                }
+//
+//                if(arr.count>0)
+//                {
+//                    NSString *names = [arr componentsJoinedByString:@"/"];
+//                    [cell.EventNamelbl setText:[NSString stringWithFormat:@"%@", names]];
+//                }
+//                else
+//                {
+//                    [cell.EventNamelbl setText:@""];
+//                }
+        //        cell.backgroundColor = [UIColor greenColor];
         NSLog(@"day %li", (long)[components day]);
 
         if ([NSDate isTheSameDateTheCompA:components compB:[NSDate componentsOfCurrentDate]]) {

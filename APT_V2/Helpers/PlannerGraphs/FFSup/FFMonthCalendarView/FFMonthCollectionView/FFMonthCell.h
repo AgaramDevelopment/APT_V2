@@ -24,6 +24,7 @@
 @property (nonatomic, strong) NSMutableArray *arrayEvents;
 
 @property (strong, nonatomic) UILabel *labelDay;
+@property (strong, nonatomic) UILabel *EventNamelbl;
 @property (strong, nonatomic) UIImageView *imageViewCircle;
 
 - (void)initLayout;

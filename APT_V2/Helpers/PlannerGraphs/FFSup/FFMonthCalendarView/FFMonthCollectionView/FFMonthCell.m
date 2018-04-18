@@ -26,6 +26,7 @@
 @synthesize arrayEvents;
 @synthesize labelDay;
 @synthesize imageViewCircle;
+@synthesize EventNamelbl;
 
 #pragma mark - Lifecycle
 
@@ -56,8 +57,17 @@
         
         labelDay = [[UILabel alloc] initWithFrame:CGRectMake((imageViewCircle.frame.size.width-20.)/2., (imageViewCircle.frame.size.height-20.)/2., 30., 20.)];
         [labelDay setAutoresizingMask:AR_LEFT_BOTTOM];
-        [labelDay setTextAlignment:NSTextAlignmentCenter];
+        [labelDay setTextAlignment:NSTextAlignmentLeft];
         [imageViewCircle addSubview:labelDay];
+        
+//        EventNamelbl = [[UILabel alloc] initWithFrame:CGRectMake(0, imageViewCircle.frame.size.width+2, self.frame.size.width, self.frame.size.height-20)];
+//        [EventNamelbl setFont:[UIFont fontWithName:@"HelveticaNeue" size:12]];
+//        [EventNamelbl setText:@""];
+//        [EventNamelbl setNumberOfLines:10];
+//        [EventNamelbl setAutoresizingMask:AR_LEFT_BOTTOM];
+//        [EventNamelbl setTextAlignment:NSTextAlignmentCenter];
+//        [self addSubview:EventNamelbl];
+        
     }
     
     [self setBackgroundColor:[UIColor whiteColor]];
@@ -97,28 +107,32 @@
         NSLog(@"DATE %@ ",event.color);
         [self setBackgroundColor:[AppCommon colorWithHexString:event.color]];
         
-//        int maxNumOfButtons = 4;
-//        CGFloat yFirstButton = imageViewCircle.frame.origin.y+imageViewCircle.frame.size.height;
-//        CGFloat height = (self.frame.size.height-yFirstButton)/maxNumOfButtons;
-//
-//        int buttonOfNumber = 0;
-//        for (int i = 0; i < [arrayEvents count] ; i++) {
-//            buttonOfNumber++;
-//            FFButtonWithEditAndDetailPopoversForMonthCell *button = [[FFButtonWithEditAndDetailPopoversForMonthCell alloc] initWithFrame:CGRectMake(0, yFirstButton+(buttonOfNumber-1)*height, self.frame.size.width, height)];
-//            [button setAutoresizingMask:AR_TOP_BOTTOM | UIViewAutoresizingFlexibleWidth];
-//            [self addSubview:button];
-//            [arrayButtons addObject:button];
-//
-//            if ((buttonOfNumber == maxNumOfButtons) && ([arrayEvents count] - maxNumOfButtons > 0)) {
-//                [button setTitle:[NSString stringWithFormat:@"%lu more...", (long)[arrayEvents count] - maxNumOfButtons] forState:UIControlStateNormal];
-//                break;
-//            } else {
-//                FFEvent *event = [arrayEvents objectAtIndex:i];
-//                [button setTitle:event.stringCustomerName forState:UIControlStateNormal];
-//                [button setEvent:event];
-//                [button setProtocol:self];
-//            }
-//        }
+
+        int maxNumOfButtons = 4;
+        CGFloat yFirstButton = imageViewCircle.frame.origin.y+imageViewCircle.frame.size.height;
+        CGFloat height = (self.frame.size.height-yFirstButton)/maxNumOfButtons;
+
+        int buttonOfNumber = 0;
+        for (int i = 0; i < [arrayEvents count] ; i++) {
+            buttonOfNumber++;
+            FFButtonWithEditAndDetailPopoversForMonthCell *button = [[FFButtonWithEditAndDetailPopoversForMonthCell alloc] initWithFrame:CGRectMake(0, yFirstButton+(buttonOfNumber-1)*height, self.frame.size.width, height)];
+            [button setAutoresizingMask:AR_TOP_BOTTOM | UIViewAutoresizingFlexibleWidth];
+            [self addSubview:button];
+            [arrayButtons addObject:button];
+
+            if ((buttonOfNumber == maxNumOfButtons) && ([arrayEvents count] - maxNumOfButtons > 0)) {
+                [button setTitle:[NSString stringWithFormat:@"%lu more...", (long)[arrayEvents count] - maxNumOfButtons] forState:UIControlStateNormal];
+                [button setUserInteractionEnabled:NO];
+                break;
+            } else {
+                FFEvent *event = [arrayEvents objectAtIndex:i];
+                [button setTitle:event.stringCustomerName forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+                [button setUserInteractionEnabled:NO];
+                //[button setEvent:event];
+                [button setProtocol:self];
+            }
+        }
     }
 }
 

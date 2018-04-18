@@ -47,7 +47,7 @@
         
         viewWithHourLines = [[FFViewWithHourLines alloc] initWithFrame:CGRectMake(0, 0, 80., self.frame.size.height)];
         [self addSubview:viewWithHourLines];
-        viewWithHourLines.backgroundColor = [UIColor greenColor];
+        viewWithHourLines.backgroundColor = [UIColor whiteColor];
         
         collectionViewWeek = [[FFWeekCollectionView alloc] initWithFrame:CGRectMake(viewWithHourLines.frame.size.width,viewWithHourLines.frame.origin.y,self.frame.size.width-viewWithHourLines.frame.size.width,viewWithHourLines.totalHeight+HEIGHT_CELL_HOUR)collectionViewLayout:[UICollectionViewFlowLayout new]];
         [self scrollToPage:(int)[NSDate componentsOfDate:[[FFDateManager sharedManager] currentDate]].weekOfMonth+1];

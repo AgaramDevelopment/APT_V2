@@ -87,7 +87,9 @@
 @synthesize viewCalendarMonth;
 @synthesize viewCalendarWeek;
 @synthesize viewCalendarDay;
-@synthesize calendarView;
+@synthesize calendarView,tapview;
+
+@synthesize plannerTblHeight;
 
 #pragma mark - Lifecycle
 
@@ -107,9 +109,7 @@
     [super viewDidLoad];
 
     self.nameOfMonth.text = @"";
-    [self customnavigationmethod];
-    
-    self.eventTbl.hidden =YES;
+//    self.eventTbl.hidden =YES;
     
     self.objWebservice =[[WebService alloc]init];
     
@@ -120,6 +120,7 @@
     userreference = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     
     viewCalendarMonth = [[FFMonthCalendarView alloc] initWithFrame:calendarView.frame];
+    
     [viewCalendarMonth setCollectionDidSelectDelegate:self];
     viewCalendarWeek = [[FFWeekCalendarView alloc] initWithFrame:calendarView.frame];
     [viewCalendarWeek setCollectionDidSelectDelegate:self];
@@ -128,6 +129,12 @@
     loadedCalendrType = 0;
     arrayButtons = @[self.MONTH, self.WEEK, self.DAY];
 }
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -138,8 +145,8 @@
     }
     
     [self EventTypeWebservice];
-    self.TabbarPosition.constant = self.MONTH.frame.origin.x;
-    self.TabbarWidth.constant = self.MONTH.frame.size.width;
+    self.TabbarPosition.constant = self.MONTH.frame.origin.x + self.MONTH.frame.size.width/4;
+    self.TabbarWidth.constant = self.MONTH.frame.size.width/2;
    // [COMMON AddMenuView:self.view];
     
 }
@@ -148,8 +155,13 @@
 {
     self.Tabbar.hidden = NO;
     self.nameOfMonth.text = @"";
-    self.TabbarPosition.constant = self.MONTH.frame.origin.x;
-    self.TabbarWidth.constant = self.MONTH.frame.size.width;
+    
+    self.TabbarPosition.constant = self.MONTH.frame.origin.x + [sender frame].size.width/4;
+    self.TabbarWidth.constant = self.MONTH.frame.size.width/2;
+    [UIView animateWithDuration:0.1 animations:^{
+        [sender layoutIfNeeded];
+    }];
+
     loadedCalendrType = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateChanged:) name:DATE_MANAGER_DATE_CHANGED object:nil];
 
@@ -165,8 +177,15 @@
     loadedCalendrType = 1;
     self.Tabbar.hidden = NO;
     
-    self.TabbarPosition.constant = self.WEEK.frame.origin.x;
-    self.TabbarWidth.constant = self.WEEK.frame.size.width;
+//    self.TabbarPosition.constant = self.WEEK.frame.origin.x + [sender frame].size.width/4;
+//    self.TabbarWidth.constant = self.WEEK.frame.size.width/2;
+    
+    self.TabbarPosition.constant = self.WEEK.frame.origin.x + [sender frame].size.width/4;
+    self.TabbarWidth.constant = self.WEEK.frame.size.width/2;
+    [UIView animateWithDuration:0.1 animations:^{
+        [sender layoutIfNeeded];
+    }];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateChanged:) name:DATE_MANAGER_DATE_CHANGED object:nil];
     [viewCalendarMonth removeFromSuperview];
     [viewCalendarWeek removeFromSuperview];
@@ -181,9 +200,15 @@
 {
     loadedCalendrType = 2;
     self.Tabbar.hidden = NO;
-    self.TabbarPosition.constant = self.DAY.frame.origin.x;
-    self.TabbarWidth.constant = self.DAY.frame.size.width;
+//    self.TabbarPosition.constant = self.DAY.frame.origin.x + [sender frame].size.width/4;
+//    self.TabbarWidth.constant = self.DAY.frame.size.width/2;
     
+    self.TabbarPosition.constant = self.DAY.frame.origin.x + [sender frame].size.width/4;
+    self.TabbarWidth.constant = self.DAY.frame.size.width/2;
+    [UIView animateWithDuration:0.1 animations:^{
+        [sender layoutIfNeeded];
+    }];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(dateChanged:) name:DATE_MANAGER_DATE_CHANGED object:nil];
     [viewCalendarMonth removeFromSuperview];
     [viewCalendarWeek removeFromSuperview];
@@ -231,19 +256,53 @@
 {
     if(isEvent==NO)
     {
-        self.eventTbl.hidden =NO;
+        [tapview setHidden:NO];
+
+//        self.eventTbl.hidden =NO;
         isEvent=YES;
         
-        CGFloat height = MIN(self.view.bounds.size.height, self.eventTbl.contentSize.height);
-        self.tableHeight.constant = height-100;
-        [self.view layoutIfNeeded];
+//        CGFloat height = MIN(self.view.bounds.size.height, self.eventTbl.contentSize.height);
+//        self.tableHeight.constant = height-100;
+//        [self.view layoutIfNeeded];
        // [self EventTypeWebservice :usercode:cliendcode:userref];
+        NSIndexSet* set = [NSIndexSet indexSetWithIndex:0];
+        [self.eventTbl reloadSections:set withRowAnimation:UITableViewRowAnimationBottom];
+        
+//        constraint.constant = someValue //change constraint's property
+//        UIView.animateWithDuration(0.3){
+//            self.view.layoutIfNeeded() //tell the view to layout again
+//        }
+        
     }
     else{
-        self.eventTbl.hidden =YES;
+//        self.plannerTblHeight.constant = 0;
+//        [UIView animateWithDuration:0.3 animations:^{
+////            self.plannerTblHeight.constant = 0;
+//            self.view.layoutIfNeeded;
+//        }];
+
+//        self.eventTbl.hidden =YES;
         isEvent =NO;
+        [tapview setHidden:YES];
+
     }
+    [self tblShowHideAnimation];
 }
+
+
+-(void)tblShowHideAnimation{
+    // initially 0 to 175
+    
+    self.plannerTblHeight.constant = (self.plannerTblHeight.constant == 0 ? 175 : 0);
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.eventTbl layoutIfNeeded];
+    }];
+
+}
+
+
+
+
 -(void)EventTypeWebservice
 {
     if(![COMMON isInternetReachable])
@@ -285,19 +344,27 @@
             }
             
             [AppCommon hideLoading];
-            [self.eventTbl reloadData];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [self.eventTbl reloadData];
+//            });
+//
+            NSDate *now = [NSDate date]; //2018-03-31 09:22:11 +0000
+
+            NSDate *startDate = [now dateByAddingTimeInterval:-30*24*60*60];//2018-03-01 09:22:11 +0000
             
-            NSDate *now = [NSDate date];
-            NSDate *startDate = [now dateByAddingTimeInterval:-30*24*60*60];
+
             NSDateFormatter* df = [[NSDateFormatter alloc]init];
             [df setDateFormat:@"MM-dd-YYYY hh:mm:ss a"];
-            NSString *startDateStr = [df stringFromDate:startDate];
+            NSString *startDateStr = [df stringFromDate:startDate];//03-01-2018 02:52:11 PM
+
             
             
-            NSDate *enddate = [now dateByAddingTimeInterval:30*24*60*60];
+            NSDate *enddate = [now dateByAddingTimeInterval:30*24*60*60]; //2018-04-30 09:22:11 +0000
+
             NSDateFormatter* dfs = [[NSDateFormatter alloc]init];
             [dfs setDateFormat:@"MM-dd-YYYY hh:mm:ss a"];
-            NSString * endDateStr = [dfs stringFromDate:enddate];
+            NSString * endDateStr = [dfs stringFromDate:enddate];//04-30-2018 02:52:11 PM
+
             
             NSString *usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
             
@@ -326,7 +393,8 @@
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         manager.requestSerializer = requestSerializer;
-    startDate = @"12-31-2017 12:14:01 PM";
+    
+    //startDate = @"01-03-2018 12:14:01 PM";
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(startDate)   [dic    setObject:startDate     forKey:@"start"];
         if(endDate)   [dic    setObject:endDate     forKey:@"end"];
@@ -471,7 +539,7 @@
         NSString * selectStr = [[self.AllEventListArray valueForKey:@"EventTypename"] objectAtIndex:indexPath.row];
         NSString * eventTypeCode =[[self.AllEventListArray valueForKey:@"EventTypeCode"] objectAtIndex:indexPath.row];
         self.eventLbl.text = selectStr;
-        self.eventTbl.hidden =YES;
+//        self.eventTbl.hidden =YES;
         isEvent =NO;
         
         self.AllEventDetailListArray = [[NSMutableArray alloc]init];
@@ -491,7 +559,7 @@
         NSString * selectStr = [[self.AllEventListArray valueForKey:@"EventTypename"] objectAtIndex:indexPath.row];
         NSString * eventTypeCode =[[self.AllEventListArray valueForKey:@"EventTypeCode"] objectAtIndex:indexPath.row];
         self.eventLbl.text = selectStr;
-        self.eventTbl.hidden =YES;
+//        self.eventTbl.hidden =YES;
         isEvent =NO;
     
         self.AllEventDetailListArray = [[NSMutableArray alloc]init];
@@ -513,6 +581,7 @@
         
         });
     }
+    
     
     if(indexPath.row ==0)
     {
@@ -567,7 +636,8 @@
         self.eventview.backgroundColor=[UIColor colorWithRed:(97/255.0f) green:(50/255.0f) blue:(139/255.0f) alpha:1.0f];
     }
     
-    
+//    [self tblShowHideAnimation];
+    [self closeView:nil];
 
 }
 
@@ -603,7 +673,7 @@
 - (void)updateLabelWithMonthAndYear {
     
     NSDateComponents *comp = [NSDate componentsOfDate:[[FFDateManager sharedManager] currentDate]];
-    NSString *string = boolYearViewIsShowing ? [NSString stringWithFormat:@"%li", (long)comp.year] : [NSString stringWithFormat:@"%@ %li", [arrayMonthName objectAtIndex:comp.month-1], (long)comp.year];
+    NSString *string = boolYearViewIsShowing ? [NSString stringWithFormat:@"%li", (long)comp.year] : [NSString stringWithFormat:@"%@ %li", [arrayMonthName objectAtIndex:comp.month], (long)comp.year];
     //[self.nameOfMonth setText:string];
     
     self.nameOfMonth.text = [NSString stringWithFormat:@"%@ %ld",[arrayMonthName objectAtIndex:comp.month-1],(long)comp.year];
@@ -901,6 +971,8 @@
         
         else
         {
+           // if([AppCommon isCoach])
+            //{
             PlannerAddEvent  * objaddEvent=[[PlannerAddEvent alloc]init];
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
             objaddEvent = (PlannerAddEvent *)[storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
@@ -911,6 +983,7 @@
             objaddEvent.ListparticipantTypeArray = [self.PlannerResponseArray valueForKey:@"ListParticipantsTypeDetails"];
 
             [self.navigationController pushViewController:objaddEvent animated:YES];
+            //}
             
 //            PlannerAddEvent *objaddEvent = [[PlannerAddEvent alloc] initWithNibName:@"PlannerAddEvent" bundle:nil];
 //            objaddEvent.selectDateStr =selectdate;
@@ -939,6 +1012,17 @@
     }
     else
         NSLog(@"Both dates are same");
+
+}
+
+///yes
+
+-(IBAction)closeView:(id)sender
+{
+//    self.eventTbl.hidden =YES;
+    [tapview setHidden:YES];
+    isEvent =NO;
+    [self tblShowHideAnimation];
 
 }
 

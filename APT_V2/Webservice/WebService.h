@@ -12,58 +12,30 @@
 #import <Foundation/Foundation.h>
 
 typedef void (^WebserviceRequestSuccessHandler)(AFHTTPRequestOperation *operation, id responseObject);
-
 typedef void (^WebserviceRequestFailureHandler)(AFHTTPRequestOperation  *operation, id error);
-
 typedef void (^WebserviceRequestXMLSuccessHandler)(AFHTTPRequestOperation  *operation);
 typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *operation, NSError *error);
 
-#pragma Local URL
-//#define BASE_URL  @"http://119.226.98.154:8002/FanZone/FanEngagement.svc/"     //@"http://www.dindiguldragons.com:8002/FanZone/FanEngagement.svc/"
 
 #pragma Testing Url
 
+// LOCAL 1
+//#define BASE_URL    @"http://192.168.0.151:8044/AGAPTService.svc/"
+
+// LOCAL 2
+#define BASE_URL    @"http://192.168.0.154:8029/AGAPTService.svc/"
+
+// LIVE
 //#define BASE_URL    @"http://13.126.151.253:9001/AGAPTService.svc/"
 
-//Local Dev - 1
-//#define BASE_URL    @"http://192.168.0.151:8044/AGAPTService.svc/"
-//#define IMAGE_URL   @"http://192.168.0.151:8045/"
-//#define Video_URL   @"http://192.168.0.151:8044/"
-//#define BASE_Image_URL @"http://192.168.0.151:8045/bcciapp/"
-
-//Local Dev - 2
-#define BASE_URL   @"http://192.168.0.154:8029/AGAPTService.svc/"
+//Local Dev - URL Path
+//#define BASE_URL   @"http://192.168.0.154:8029/AGAPTService.svc/"
 #define IMAGE_URL   @"http://192.168.0.154:8030/"
 #define Video_URL   @"http://192.168.0.154:8029/"
 #define BASE_Image_URL @"http://192.168.0.154:8029/bcciapp/"
 
-//#define BASE_URL   @"http://192.168.0.151:8029/AGAPTService.svc/"
-//#define IMAGE_URL   @"http://192.168.0.151:8030/"
-//#define Video_URL   @"http://192.168.0.151:8029/"
-
-//#define BASE_URL   @"http://192.168.1.84:8044/AGAPTService.svc/"
-//#define IMAGE_URL   @"http://192.168.1.84:8045/"
-
-
-//#define BASE_URL   @"http://192.168.1.84:8039/AGAPTService.svc/"
-
-//#define BASE_URL  @"http://13.126.151.253:9001/AGAPTService.svc/"
-//#define IMAGE_URL   @"http://13.126.151.253:9000/"
-
-//#define BASE_URL  @"http://192.168.1.209:8005/AGAPTService.svc/"
-//#define BASE_URL  @"http://13.126.151.253:9001/AGAPTService.svc/"
-
-
-//#ifdef DEBUG
-//#define push_type   @"dev"
-//#else
-//#define push_type   @"pro"
-//#endif
 
 #define URL_FOR_RESOURCE(RESOURCE) [NSString stringWithFormat:@"%@%@",BASE_URL,RESOURCE]
-
-
-
 
 @interface WebService : AFHTTPRequestOperationManager
 
@@ -76,7 +48,6 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 //                     failure:(WebserviceRequestFailureHandler)failure;
 
 -(void)cancelRequest;
-
 
 
 -(void)getLogin :(NSString *) loginValue :(NSString *) userName:(NSString *)password success:(WebserviceRequestSuccessHandler)success
@@ -181,8 +152,24 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 -(void)Overview :(NSString *)list :(NSString *)Competitioncode :(NSString *)teamcode  success:(WebserviceRequestSuccessHandler)success
          failure:(WebserviceRequestFailureHandler)failure;
 
+-(void)BattingOverBlock :(NSString *)list :(NSString *)Competitioncode :(NSString *)teamcode  success:(WebserviceRequestSuccessHandler)success
+                 failure:(WebserviceRequestFailureHandler)failure;
+
+-(void)BowlingTeam :(NSString *)list :(NSString *)Competitioncode :(NSString *)teamcode :(NSString *)innNo :(NSString *)result :(NSString *)type success:(WebserviceRequestSuccessHandler)success
+            failure:(WebserviceRequestFailureHandler)failure;
+
 -(void)getIPLTeamCodessuccess:(WebserviceRequestSuccessHandler)success
-                      failure:(WebserviceRequestFailureHandler)failure;
+failure:(WebserviceRequestFailureHandler)failure;
+
+-(void)getIPLCompeteionCodesuccess:(WebserviceRequestSuccessHandler)success
+                           failure:(WebserviceRequestFailureHandler)failure;
+
+-(void)TeamComposition :(NSString *)list :(NSString *)Competitioncode :(NSString *)teamcode success:(WebserviceRequestSuccessHandler)success
+                failure:(WebserviceRequestFailureHandler)failure;
+
+-(void)Bowlingpitchmap :(NSString *)list :(NSString *)playercode :(NSString *)matchcode:(NSString *)innno success:(WebserviceRequestSuccessHandler)success
+                failure:(WebserviceRequestFailureHandler)failure;
+
 
 @end
 

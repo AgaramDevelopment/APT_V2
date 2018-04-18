@@ -23,7 +23,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     teamArray = [[NSMutableArray alloc] initWithObjects:@"Chennai Super Kings", @"Chennai Super Kings", @"Chennai Super Kings", @"Chennai Super Kings", @"Chennai Super Kings", @"Chennai Super Kings", @"Chennai Super Kings", nil];
-    [self customnavigationmethod];
     
     dropDownTblView = [[UITableView alloc]init];
     dropDownTblView.dataSource = self;
@@ -35,6 +34,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod
@@ -78,7 +82,9 @@
         
         dropDownTblView.backgroundColor = [UIColor lightGrayColor];
         [self.view addSubview:dropDownTblView];
+        
         [dropDownTblView reloadData];
+        
     } else {
         [self resetDropDownTeamstatus];
     }

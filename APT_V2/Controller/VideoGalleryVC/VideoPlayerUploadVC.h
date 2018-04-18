@@ -42,4 +42,8 @@
 @property (nonatomic,strong) IBOutlet UITextField * objKeyword_Txt;
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ImgViewBottomConst;
 
+@property (strong, nonatomic) IBOutlet UIView *datepickerView;
+@property (weak, nonatomic) IBOutlet UITextField *txtVideoDate;
+- (IBAction)didClickType:(id)sender;
+
 @end

@@ -23,6 +23,16 @@
     self.menu_btn.hidden =YES;
     self.cartBtn.hidden=YES;
     self.ticketBtn.hidden=YES;
+    
+//    if (IS_IPAD) {
+//        self.notificationCountLbl.layer.cornerRadius = self.notificationCountLbl.frame.size.width/2;
+//    } else {
+//        self.notificationCountLbl.layer.cornerRadius = self.notificationCountLbl.frame.size.width/2;
+//    }
+    
+    self.notificationCountLbl.layer.cornerRadius = self.notificationCountLbl.frame.size.height/2;
+    self.notificationCountLbl.clipsToBounds = YES;
+
 }
 
 - (BOOL)shouldAutorotate {

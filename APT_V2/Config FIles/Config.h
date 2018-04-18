@@ -249,8 +249,6 @@
 //Wagon Wheel And Pitch Map
 #define ScorecardWagonKey           @"GETSCORECARDBATTINGSPIDERWAGONWHEEL"
 
-#define ScorecardPitchmapKey                           @"FETCH_SCORECARD_PITCHMAP"
-
 #define  TraingLoadDropKey              @"MOBILE_GETTRAININGLOAD"
 
 
@@ -314,3 +312,31 @@
 #define teamBattingKey         @"APT_TEAMBATTING"
 
 #define OverviewKey         @"APT_TEAMOVERVIEW"
+
+#define Ground              @"APT_GROUND"
+
+#define GroundList              @"APT_GROUNDLIST"
+
+#define groundOverResults         @"APT_GROUNDOVERRESULTS"
+#define battingOverViewkKey       @"APT_BATTINGOVERBLOCKOVERVIEW"
+
+#define battingOverblockKey                       @"APT_BATTINGOVERBLOCK"
+
+#define ResultsKey                               @"FETCHRESULT"
+
+#define TeambowlingKey                       @"APT_TEAMBOWLING"
+
+#define bowlingOverViewkKey       @"APT_BOWLINGOVERBLOCKOVERVIEW"
+
+#define bowlingOverblockKey                       @"APT_BOWLINGOVERBLOCK"
+
+#define FixturesKey                               @"FETCHFIXTURES"
+
+#define TeamCompoKey                               @"APT_TEAMCOMPOSITION"
+
+#define GetNotifications              @"APT_GETNOTIFICATIONS"
+
+#define UpdateNotifications           @"APT_UPDATENOTIFICATIONS"
+
+#define ChangePassword                @"INSERTRESETPWDDETAILS"
+

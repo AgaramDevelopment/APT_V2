@@ -31,7 +31,9 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
     self = [super init];
     if (self) {
         
-        self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"text/json", @"text/javascript", @"text/plain", @"application/json",@"image/png",nil];
+//        self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"text/json", @"text/javascript", @"text/plain", @"application/json",@"image/png",nil];
+        self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"text/json", @"text/javascript", @"text/plain", @"application/json",@"image/png",@"application/octest-stream",nil];
+
     }
     return self;
 }
@@ -441,6 +443,20 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
           completionFailureHandler:failure];
 }
 
+
+-(void)Bowlingpitchmap :(NSString *)list :(NSString *)playercode :(NSString *)matchcode:(NSString *)innno success:(WebserviceRequestSuccessHandler)success
+                failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@/%@/%@",list,playercode,matchcode,innno]];
+    NSLog(@"urlString = %@",urlString);
+    
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:nil
+                            method:ServiceGet
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+}
 -(void)BattingWagonWheel :(NSString *)list :(NSString *)playercode :(NSString *)matchcode:(NSString *)innno success:(WebserviceRequestSuccessHandler)success
                   failure:(WebserviceRequestFailureHandler)failure
 {
@@ -543,7 +559,49 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
 }
 
 -(void)Overview :(NSString *)list :(NSString *)Competitioncode :(NSString *)teamcode  success:(WebserviceRequestSuccessHandler)success
-              failure:(WebserviceRequestFailureHandler)failure
+         failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@/%@",list,Competitioncode,teamcode]];
+    NSLog(@"urlString = %@",urlString);
+    
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:nil
+                            method:ServiceGet
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+}
+
+-(void)BattingOverBlock :(NSString *)list :(NSString *)Competitioncode :(NSString *)teamcode  success:(WebserviceRequestSuccessHandler)success
+         failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@/%@",list,Competitioncode,teamcode]];
+    NSLog(@"urlString = %@",urlString);
+    
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:nil
+                            method:ServiceGet
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+}
+
+-(void)BowlingTeam :(NSString *)list :(NSString *)Competitioncode :(NSString *)teamcode :(NSString *)innNo :(NSString *)result :(NSString *)type success:(WebserviceRequestSuccessHandler)success
+                 failure:(WebserviceRequestFailureHandler)failure
+{
+    urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@/%@/%@/%@/%@",list,Competitioncode,teamcode,innNo,result,type]];
+    NSLog(@"urlString = %@",urlString);
+    
+    
+    [self sendRequestWithURLString:urlString
+                     andParameters:nil
+                            method:ServiceGet
+           completionSucessHandler:success
+          completionFailureHandler:failure];
+}
+
+-(void)TeamComposition :(NSString *)list :(NSString *)Competitioncode :(NSString *)teamcode success:(WebserviceRequestSuccessHandler)success
+            failure:(WebserviceRequestFailureHandler)failure
 {
     urlString = [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@/%@/%@",list,Competitioncode,teamcode]];
     NSLog(@"urlString = %@",urlString);
@@ -614,23 +672,43 @@ static NSString       *ServiceMimeType    = @"image/jpeg";
 -(void)getIPLTeamCodessuccess:(WebserviceRequestSuccessHandler)success failure:(WebserviceRequestFailureHandler)failure
 {
     NSString* URL = URL_FOR_RESOURCE(@"FETCH_IPLTEAMS");
-    
-        //    NSString* URL = URL_FOR_RESOURCE(@"FETCH_IPLTEAMSTEMP");
+
+//    NSString* URL = URL_FOR_RESOURCE(@"FETCH_IPLTEAMSTEMP");
     [self GET:URL parameters:nil
       success:^(AFHTTPRequestOperation *operation, id responseDict)
      {
-     if (success){
-         success(operation,responseDict);
-     }
+         if (success){
+             success(operation,responseDict);
+         }
      }
       failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
-     if (failure){
-         NSLog(@"response");
-         failure(operation, error);
-     }
+         if (failure){
+             NSLog(@"response");
+             failure(operation, error);
+         }
      }];
-    
+
 }
+
+-(void)getIPLCompeteionCodesuccess:(WebserviceRequestSuccessHandler)success failure:(WebserviceRequestFailureHandler)failure
+{
+    NSString* URL = URL_FOR_RESOURCE(@"FETCH_IPLCOMPETITIONS");
+    [self GET:URL parameters:nil
+      success:^(AFHTTPRequestOperation *operation, id responseDict)
+     {
+         if (success){
+             success(operation,responseDict);
+         }
+     }
+      failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+         if (failure){
+             NSLog(@"response");
+             failure(operation, error);
+         }
+     }];
+}
+
 @end
 

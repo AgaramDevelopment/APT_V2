@@ -45,7 +45,7 @@
                                         </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12-08-2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWh-8T-ql0">
-                                        <rect key="frame" x="8" y="34" width="67.5" height="22"/>
+                                        <rect key="frame" x="8" y="34" width="68" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="bDU-OT-shy"/>
                                         </constraints>
@@ -87,21 +87,21 @@
                                 <rect key="frame" x="0.0" y="63" width="404" height="52"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="btK-eV-EQ5">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="2"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="1"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="YkF-Us-KiF"/>
+                                            <constraint firstAttribute="height" constant="1" id="YkF-Us-KiF"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shivam Chaudhary" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbI-8b-vqr">
-                                        <rect key="frame" x="8" y="16" width="350" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbI-8b-vqr">
+                                        <rect key="frame" x="8" y="15" width="350" height="23"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="batball" translatesAutoresizingMaskIntoConstraints="NO" id="rUQ-fK-H1T">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rUQ-fK-H1T">
                                         <rect key="frame" x="366" y="11" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="nry-Fh-Pqp"/>
@@ -127,21 +127,21 @@
                                 <rect key="frame" x="0.0" y="115" width="404" height="52"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggh-qs-AkG">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="2"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="1"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="gql-eH-0bf"/>
+                                            <constraint firstAttribute="height" constant="1" id="gql-eH-0bf"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Himanshu Asnora" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Nm-e4-V7m">
-                                        <rect key="frame" x="8" y="16" width="350" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Nm-e4-V7m">
+                                        <rect key="frame" x="8" y="15" width="350" height="23"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="batball" translatesAutoresizingMaskIntoConstraints="NO" id="VR7-KG-NjD">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VR7-KG-NjD">
                                         <rect key="frame" x="366" y="11" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="fxr-Te-cHS"/>
@@ -167,21 +167,21 @@
                                 <rect key="frame" x="0.0" y="167" width="404" height="52"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IWp-F8-NZJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="2"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="1"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="Ua1-sk-38X"/>
+                                            <constraint firstAttribute="height" constant="1" id="Ua1-sk-38X"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Umang Sharma" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="osb-Pc-TKK">
-                                        <rect key="frame" x="8" y="16" width="350" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="osb-Pc-TKK">
+                                        <rect key="frame" x="8" y="15" width="350" height="23"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="batball" translatesAutoresizingMaskIntoConstraints="NO" id="0sz-HM-rMD">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0sz-HM-rMD">
                                         <rect key="frame" x="366" y="11" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="mO3-i8-KRY"/>
@@ -207,21 +207,21 @@
                                 <rect key="frame" x="0.0" y="219" width="404" height="52"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JwS-F6-K20">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="2"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="1"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="qTP-MP-4Vf"/>
+                                            <constraint firstAttribute="height" constant="1" id="qTP-MP-4Vf"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Suresh Raina *" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M9K-uR-p1F">
-                                        <rect key="frame" x="8" y="16" width="350" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M9K-uR-p1F">
+                                        <rect key="frame" x="8" y="15" width="350" height="23"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="batball" translatesAutoresizingMaskIntoConstraints="NO" id="a4a-dk-UFd">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a4a-dk-UFd">
                                         <rect key="frame" x="366" y="11" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="CIm-OV-z6w"/>
@@ -247,21 +247,21 @@
                                 <rect key="frame" x="0.0" y="271" width="404" height="52"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TAe-yH-f4u">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="2"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="1"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="1PX-kB-Fpo"/>
+                                            <constraint firstAttribute="height" constant="1" id="1PX-kB-Fpo"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Akshdeep Nath" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWj-cK-IHW">
-                                        <rect key="frame" x="8" y="16" width="350" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWj-cK-IHW">
+                                        <rect key="frame" x="8" y="15" width="350" height="23"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="batball" translatesAutoresizingMaskIntoConstraints="NO" id="HmS-eE-fLG">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HmS-eE-fLG">
                                         <rect key="frame" x="366" y="11" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="77h-fa-5cG"/>
@@ -287,21 +287,21 @@
                                 <rect key="frame" x="0.0" y="323" width="404" height="52"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iK5-Dz-kAx">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="2"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="1"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="JtZ-Pw-oEc"/>
+                                            <constraint firstAttribute="height" constant="1" id="JtZ-Pw-oEc"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ekalavya Dwivedi +" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sq1-5s-4rB">
-                                        <rect key="frame" x="8" y="16" width="350" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sq1-5s-4rB">
+                                        <rect key="frame" x="8" y="15" width="350" height="23"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="glove" translatesAutoresizingMaskIntoConstraints="NO" id="mK6-Lt-s6T">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mK6-Lt-s6T">
                                         <rect key="frame" x="366" y="11" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="VYr-Jx-UNJ"/>
@@ -327,21 +327,21 @@
                                 <rect key="frame" x="0.0" y="375" width="404" height="52"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jve-0v-akc">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="2"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="1"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="BWX-Ug-YB2"/>
+                                            <constraint firstAttribute="height" constant="1" id="BWX-Ug-YB2"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rinku Singh" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JN7-WG-iY4">
-                                        <rect key="frame" x="8" y="16" width="350" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JN7-WG-iY4">
+                                        <rect key="frame" x="8" y="15" width="350" height="23"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ball" translatesAutoresizingMaskIntoConstraints="NO" id="Wu0-8u-uGo">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wu0-8u-uGo">
                                         <rect key="frame" x="366" y="11" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="HAX-bs-k1n"/>
@@ -367,21 +367,21 @@
                                 <rect key="frame" x="0.0" y="427" width="404" height="52"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="41O-Oj-XbQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="2"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="1"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="Ioh-Tk-mH5"/>
+                                            <constraint firstAttribute="height" constant="1" id="Ioh-Tk-mH5"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Praveen Kumar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3i-Iu-QE9">
-                                        <rect key="frame" x="8" y="16" width="350" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l3i-Iu-QE9">
+                                        <rect key="frame" x="8" y="15" width="350" height="23"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ball" translatesAutoresizingMaskIntoConstraints="NO" id="jwL-1D-7ex">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jwL-1D-7ex">
                                         <rect key="frame" x="366" y="11" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="47Z-Xl-NDA"/>
@@ -407,21 +407,21 @@
                                 <rect key="frame" x="0.0" y="479" width="404" height="52"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="axV-Q4-jFY">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="2"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="1"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="b2T-6Q-ok2"/>
+                                            <constraint firstAttribute="height" constant="1" id="b2T-6Q-ok2"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zeeshan Ansari" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hvE-ts-oE7">
-                                        <rect key="frame" x="8" y="16" width="350" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hvE-ts-oE7">
+                                        <rect key="frame" x="8" y="15" width="350" height="23"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ball" translatesAutoresizingMaskIntoConstraints="NO" id="sRR-gO-rng">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sRR-gO-rng">
                                         <rect key="frame" x="366" y="11" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="BQy-Zm-n1b"/>
@@ -447,21 +447,21 @@
                                 <rect key="frame" x="0.0" y="531" width="404" height="52"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cS2-Bt-dbG">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="2"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="1"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="yvs-v6-Bcr"/>
+                                            <constraint firstAttribute="height" constant="1" id="yvs-v6-Bcr"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Karthik Tyagi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ve4-mH-5am">
-                                        <rect key="frame" x="8" y="16" width="350" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ve4-mH-5am">
+                                        <rect key="frame" x="8" y="15" width="350" height="23"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ball" translatesAutoresizingMaskIntoConstraints="NO" id="c8S-uG-rbY">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="c8S-uG-rbY">
                                         <rect key="frame" x="366" y="11" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="PLJ-XW-kAp"/>
@@ -487,21 +487,21 @@
                                 <rect key="frame" x="0.0" y="583" width="404" height="52"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A5J-hq-I9Y">
-                                        <rect key="frame" x="0.0" y="0.0" width="404" height="2"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="404" height="1"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="2" id="x0M-XN-zCP"/>
+                                            <constraint firstAttribute="height" constant="1" id="x0M-XN-zCP"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ankit Rajpoot" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ux4-Qy-EOQ">
-                                        <rect key="frame" x="8" y="16" width="350" height="22"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ux4-Qy-EOQ">
+                                        <rect key="frame" x="8" y="15" width="350" height="23"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                         </variation>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ball" translatesAutoresizingMaskIntoConstraints="NO" id="LiW-Jt-E26">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LiW-Jt-E26">
                                         <rect key="frame" x="366" y="11" width="30" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="5i4-ZV-b32"/>
@@ -526,7 +526,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sj4-3C-xTl">
                                 <rect key="frame" x="0.0" y="635" width="404" height="45"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Batsmen-7 Pace-3 Spin-1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Fj-QJ-6vh">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Fj-QJ-6vh">
                                         <rect key="frame" x="9" y="11" width="386" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="Ncx-VW-VLG"/>
@@ -551,19 +551,16 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qH6-Y7-PaT">
                                 <rect key="frame" x="0.0" y="685" width="404" height="140"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ijl-nj-u07">
-                                        <rect key="frame" x="8" y="8" width="388" height="90"/>
-                                        <string key="text">Praveen Kumar
-Zeeshan Ansari
-Karthik Tyagi</string>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ijl-nj-u07">
+                                        <rect key="frame" x="5" y="3" width="394" height="51.5"/>
                                         <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="11"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.45138680930000002" green="0.99309605359999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
                                         </variation>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maharasshtra Won by 31 Runs" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGN-MH-uWR">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rGN-MH-uWR">
                                         <rect key="frame" x="8" y="106" width="388" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="29" id="w12-iU-656"/>
@@ -575,16 +572,29 @@ Karthik Tyagi</string>
                                             <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
                                         </variation>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udw-5z-Rke">
+                                        <rect key="frame" x="5" y="54.5" width="394" height="51.5"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="11"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
+                                        </variation>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.97611588240000002" green="0.059988744560000001" blue="0.0045252409760000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="rGN-MH-uWR" firstAttribute="top" secondItem="Ijl-nj-u07" secondAttribute="bottom" constant="8" id="14h-dg-9ag"/>
+                                    <constraint firstItem="rGN-MH-uWR" firstAttribute="top" secondItem="udw-5z-Rke" secondAttribute="bottom" id="Grl-iw-82i"/>
                                     <constraint firstAttribute="bottom" secondItem="rGN-MH-uWR" secondAttribute="bottom" constant="5" id="JRy-8O-nM4"/>
+                                    <constraint firstAttribute="trailing" secondItem="udw-5z-Rke" secondAttribute="trailing" constant="5" id="Ke6-3p-FAI"/>
                                     <constraint firstItem="rGN-MH-uWR" firstAttribute="leading" secondItem="qH6-Y7-PaT" secondAttribute="leading" constant="8" id="Y0E-PV-Xe2"/>
-                                    <constraint firstItem="Ijl-nj-u07" firstAttribute="top" secondItem="qH6-Y7-PaT" secondAttribute="top" constant="8" id="cUG-f8-7Iy"/>
+                                    <constraint firstItem="udw-5z-Rke" firstAttribute="top" secondItem="Ijl-nj-u07" secondAttribute="bottom" id="ZfL-rU-Pcs"/>
+                                    <constraint firstItem="Ijl-nj-u07" firstAttribute="top" secondItem="qH6-Y7-PaT" secondAttribute="top" constant="3" id="bI7-U5-Shm"/>
                                     <constraint firstAttribute="trailing" secondItem="rGN-MH-uWR" secondAttribute="trailing" constant="8" id="ezy-kM-Ev4"/>
-                                    <constraint firstAttribute="trailing" secondItem="Ijl-nj-u07" secondAttribute="trailing" constant="8" id="kf5-KZ-d6B"/>
-                                    <constraint firstItem="Ijl-nj-u07" firstAttribute="leading" secondItem="qH6-Y7-PaT" secondAttribute="leading" constant="8" id="xGK-rD-avv"/>
+                                    <constraint firstItem="udw-5z-Rke" firstAttribute="height" secondItem="Ijl-nj-u07" secondAttribute="height" id="fTb-Qt-GFg"/>
+                                    <constraint firstItem="Ijl-nj-u07" firstAttribute="leading" secondItem="qH6-Y7-PaT" secondAttribute="leading" constant="5" id="k30-iL-qEt"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ijl-nj-u07" secondAttribute="trailing" constant="5" id="vT8-pt-ln7"/>
+                                    <constraint firstItem="udw-5z-Rke" firstAttribute="leading" secondItem="qH6-Y7-PaT" secondAttribute="leading" constant="5" id="xoZ-rW-JXQ"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -649,12 +659,38 @@ Karthik Tyagi</string>
                 <constraint firstAttribute="trailing" secondItem="tmd-GZ-Cdp" secondAttribute="trailing" id="zFt-le-fNs"/>
             </constraints>
             <size key="customSize" width="404" height="825"/>
+            <connections>
+                <outlet property="Player1" destination="pbI-8b-vqr" id="NKg-9o-QO2"/>
+                <outlet property="Player10" destination="ve4-mH-5am" id="Nfr-l4-RNO"/>
+                <outlet property="Player10Img" destination="c8S-uG-rbY" id="brG-pA-d4A"/>
+                <outlet property="Player11" destination="Ux4-Qy-EOQ" id="4Tn-QT-L2u"/>
+                <outlet property="Player11Img" destination="LiW-Jt-E26" id="6rK-5U-f44"/>
+                <outlet property="Player1Img" destination="rUQ-fK-H1T" id="BSO-fD-tmo"/>
+                <outlet property="Player2" destination="2Nm-e4-V7m" id="K5N-D0-NOb"/>
+                <outlet property="Player2Img" destination="VR7-KG-NjD" id="ZT9-lm-lBW"/>
+                <outlet property="Player3" destination="osb-Pc-TKK" id="Idx-kr-znd"/>
+                <outlet property="Player3Img" destination="0sz-HM-rMD" id="MxC-K6-rt1"/>
+                <outlet property="Player4" destination="M9K-uR-p1F" id="noq-Zu-oZv"/>
+                <outlet property="Player4Img" destination="a4a-dk-UFd" id="tzc-8g-Gsa"/>
+                <outlet property="Player5" destination="UWj-cK-IHW" id="7ID-Mn-PIc"/>
+                <outlet property="Player5Img" destination="HmS-eE-fLG" id="eyh-XV-Cct"/>
+                <outlet property="Player6" destination="sq1-5s-4rB" id="Nhs-8G-RJz"/>
+                <outlet property="Player6Img" destination="mK6-Lt-s6T" id="AF9-nJ-8Wz"/>
+                <outlet property="Player7" destination="JN7-WG-iY4" id="yd7-cI-FfB"/>
+                <outlet property="Player7Img" destination="Wu0-8u-uGo" id="4Dt-pN-2sI"/>
+                <outlet property="Player8" destination="l3i-Iu-QE9" id="XQi-Ap-qED"/>
+                <outlet property="Player8Img" destination="jwL-1D-7ex" id="KIl-eG-NxK"/>
+                <outlet property="Player9" destination="hvE-ts-oE7" id="SUo-N7-Zhg"/>
+                <outlet property="Player9Img" destination="sRR-gO-rng" id="dfm-9F-A5c"/>
+                <outlet property="PlayerRoleCountlbl" destination="8Fj-QJ-6vh" id="xiu-Qw-BFH"/>
+                <outlet property="TeamVenuelbl" destination="3jI-1B-Vfv" id="AIC-O7-KAs"/>
+                <outlet property="WonStatuslbl" destination="rGN-MH-uWR" id="5cP-gA-Pcg"/>
+                <outlet property="datelbl" destination="VWh-8T-ql0" id="Ek4-pZ-Y4s"/>
+                <outlet property="outPlayerslbl" destination="udw-5z-Rke" id="rJe-qz-GMC"/>
+                <outlet property="replacePlayersCountlbl" destination="wLe-yg-pKb" id="a0Z-vz-tZ7"/>
+                <outlet property="replacePlayerslbl" destination="Ijl-nj-u07" id="myN-lK-QpK"/>
+            </connections>
             <point key="canvasLocation" x="46" y="320.5"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="ball" width="200" height="200"/>
-        <image name="batball" width="200" height="200"/>
-        <image name="glove" width="512" height="512"/>
-    </resources>
 </document>

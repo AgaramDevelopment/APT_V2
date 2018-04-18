@@ -16,7 +16,6 @@
 #import "CRTableViewCell.h"
 //#import "HomeVC.h"
 
-
 @interface PlannerAddEvent ()
 {
     BOOL isEventType;
@@ -86,6 +85,8 @@
 //@property (nonatomic,strong) IBOutlet UIView * participantAddView;
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * addeventTblheight;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * popTblheight;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * mainParticipantViewheight;
 
 
 @property (nonatomic,strong) NSMutableArray * participantsArray;
@@ -101,6 +102,7 @@
 @property (nonatomic,strong) NSMutableArray * addParticipantArray;
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * popviewYposition;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * popviewXposition;
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * popviewWidth;
 
@@ -109,6 +111,7 @@
 @property (nonatomic,strong) IBOutlet UIButton * updateBtn;
 
 @property (nonatomic,strong) IBOutlet UIButton * deleteBtn;
+@property (nonatomic,strong) IBOutlet UIButton * AddParticipantBtn;
 
 @property (nonatomic,strong) IBOutlet UIButton * saveBtn;
 
@@ -128,7 +131,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self customnavigationmethod];
     [self setBorderwithView];
     
     self.popviewTbl.hidden=YES;
@@ -141,10 +143,48 @@
     if(_isEdit == YES)
     {
         
-        self.updateBtn.hidden=NO;
-        self.deleteBtn.hidden =NO;
-        self.saveBtn.hidden =YES;
+        
+        if([_isNotification isEqualToString:@"yes"])
+        {
+            if([AppCommon isCoach])
+            {
+                self.updateBtn.hidden=NO;
+                self.deleteBtn.hidden =NO;
+                self.saveBtn.hidden =YES;
+                self.AddParticipantBtn.hidden =NO;
+            }
+            else
+            {
+                
+                self.updateBtn.hidden=YES;
+                self.deleteBtn.hidden =YES;
+                self.saveBtn.hidden =YES;
+                self.AddParticipantBtn.hidden =YES;
+            }
+            
+            
+            [self editFetchWebservice:self.eventType :@"0" :@"false"];
+            
+        }
+        else
+        {
+            if([AppCommon isCoach])
+            {
+                self.updateBtn.hidden=NO;
+                self.deleteBtn.hidden =NO;
+                self.saveBtn.hidden =YES;
+                self.AddParticipantBtn.hidden =NO;
+            }
+            else
+            {
+                self.updateBtn.hidden=YES;
+                self.deleteBtn.hidden =YES;
+                self.saveBtn.hidden =YES;
+                self.AddParticipantBtn.hidden =YES;
+            }
+            
         [self editFetchWebservice:[self.objSelectEditDic valueForKey:@"id"] :@"0" :@"false"];
+        }
     }
     else
     {
@@ -157,8 +197,11 @@
     usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
     
     cliendcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-    
-    
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod
@@ -190,6 +233,11 @@
     [self.navi_View addSubview:objCustomNavigation.view];
     //    objCustomNavigation.tittle_lbl.text=@"";
     
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 -(void)setBorderwithView
 {
@@ -314,7 +362,8 @@
     //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"dd/MM/yyyy"];
     
-    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,self.startdateView.frame.origin.y+80,self.view.frame.size.width,100)];
+    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,self.startdateView.frame.origin.y,self.view.frame.size.width,100)];
+    datePicker.backgroundColor = [UIColor lightGrayColor];
     
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     [datePicker setLocale:locale];
@@ -349,13 +398,14 @@
     //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"hh:mm a"];
     
-    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,self.startdateView.frame.origin.y+80,self.view.frame.size.width,100)];
+    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,self.startdateView.frame.origin.y,self.view.frame.size.width,100)];
     
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     [datePicker setLocale:locale];
     
     // [datePicker setDatePickerMode:UIDatePickerModeDateAndTime];
     datePicker.datePickerMode = UIDatePickerModeTime;
+    datePicker.backgroundColor = [UIColor lightGrayColor];
     
     [datePicker reloadInputViews];
     [self.view_datepicker addSubview:datePicker];
@@ -375,6 +425,10 @@
     isTime =YES;
     isStartTime=NO;
     [self DisplayTime];
+}
+-(IBAction)didClickcloseDate:(id)sender
+{
+    [self.view_datepicker setHidden:YES];
 }
 -(IBAction)showSelecteddate:(id)sender{
     
@@ -428,16 +482,17 @@
     {
         self.popviewTbl.hidden =NO;
         
-        self.popviewYposition.constant =self.eventTypeView.frame.origin.y+10;
+        self.popviewYposition.constant =self.eventTypeView.frame.origin.y+30;
+        self.popviewXposition.constant =self.eventTypeView.frame.origin.x;
         self.popviewWidth.constant =self.eventTypeView.frame.size.width;
         
         self.commonArray =[[NSMutableArray alloc]init];
-        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
-        [mutableDict setObject:@"" forKey:@"EventTypeColor"];
-        [mutableDict setObject:@"" forKey:@"EventTypeCode"];
-        [mutableDict setObject:@"Select" forKey:@"EventTypename"];
-        
-        [self.commonArray addObject:mutableDict];
+//        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
+//        [mutableDict setObject:@"" forKey:@"EventTypeColor"];
+//        [mutableDict setObject:@"" forKey:@"EventTypeCode"];
+//        [mutableDict setObject:@"Select" forKey:@"EventTypename"];
+//
+//        [self.commonArray addObject:mutableDict];
         
         for(int i=0; self.ListeventTypeArray.count>i;i++)
         {
@@ -452,7 +507,10 @@
         isParticipantType=NO;
         isteam =NO;
         isaddPartcipant=NO;
+    
         [self.popviewTbl reloadData];
+        
+       // self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
     }
     else{
         self.popviewTbl.hidden =YES;
@@ -465,17 +523,19 @@
     if(isEventStatus == NO)
     {
         self.popviewTbl.hidden = NO;
-        self.popviewYposition.constant =self.eventTypeView.frame.origin.y+self.eventTypeView.frame.size.height+20;
-        self.popviewWidth.constant =self.eventTypeView.frame.size.width;
+        
+        self.popviewYposition.constant =self.eventStatusView.frame.origin.y+30;
+        self.popviewXposition.constant =self.eventStatusView.frame.origin.x;
+        self.popviewWidth.constant =self.eventStatusView.frame.size.width;
         
         self.commonArray =[[NSMutableArray alloc]init];
         
-        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
-        [mutableDict setObject:@"" forKey:@"EventStatusCode"];
-        [mutableDict setObject:@"Select" forKey:@"EventStatusname"];
-        
-        
-        [self.commonArray addObject:mutableDict];
+//        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
+//        [mutableDict setObject:@"" forKey:@"EventStatusCode"];
+//        [mutableDict setObject:@"Select" forKey:@"EventStatusname"];
+//
+//
+//        [self.commonArray addObject:mutableDict];
         
         for(int i=0; self.ListeventStatusArray.count>i;i++)
         {
@@ -492,7 +552,10 @@
         isParticipantType=NO;
         isteam =NO;
         isaddPartcipant=NO;
+    
         [self.popviewTbl reloadData];
+    
+        //self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
     }
     else{
         self.popviewTbl.hidden =YES;
@@ -504,17 +567,20 @@
     if(isParticipantType == NO)
     {
         self.popviewTbl.hidden=NO;
-        self.popviewYposition.constant =self.mainParticipantTypeView.frame.origin.y-315;
+        
+        
+        self.popviewYposition.constant =self.mainParticipantTypeView.frame.origin.y-200;
         self.popviewWidth.constant =self.particiTypeView.frame.size.width;
+        self.popviewXposition.constant = self.mainParticipantTypeView.frame.origin.x+5;
         
         self.commonArray =[[NSMutableArray alloc]init];
         
-        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
-        [mutableDict setObject:@"" forKey:@"ParticipantTypecode"];
-        [mutableDict setObject:@"Select" forKey:@"ParticipantTypename"];
-        
-        
-        [self.commonArray addObject:mutableDict];
+//        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
+//        [mutableDict setObject:@"" forKey:@"ParticipantTypecode"];
+//        [mutableDict setObject:@"Select" forKey:@"ParticipantTypename"];
+//
+//
+//        [self.commonArray addObject:mutableDict];
         
         for(int i=0; self.ListparticipantTypeArray.count>i;i++)
         {
@@ -531,7 +597,10 @@
         isParticipantType=YES;
         isteam =NO;
         isaddPartcipant=NO;
+    
         [self.popviewTbl reloadData];
+    
+        //self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
     }
     else{
         self.popviewTbl.hidden=YES;
@@ -571,7 +640,9 @@
         isParticipantType=NO;
         isteam =YES;
         isaddPartcipant=NO;
+    
         [self.popviewTbl reloadData];
+    
     }
     else{
         self.popviewTbl.hidden=YES;
@@ -589,15 +660,14 @@
         //self.popviewWidth.constant =self.particiView.frame.size.width;
         self.comPopview.hidden =NO;
         self.commonArray =[[NSMutableArray alloc]init];
-        
-        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
-        [mutableDict setObject:@"" forKey:@"Participantcode"];
-        [mutableDict setObject:@"Select" forKey:@"Participantname"];
-        [mutableDict setObject:@"" forKey:@"Participanttype"];
-        
-        
-        [self.commonArray addObject:mutableDict];
-        
+//        NSMutableDictionary *mutableDict = [[NSMutableDictionary alloc]init];
+//        [mutableDict setObject:@"" forKey:@"Participantcode"];
+//        [mutableDict setObject:@"Select" forKey:@"Participantname"];
+//        [mutableDict setObject:@"" forKey:@"Participanttype"];
+//
+//
+//        [self.commonArray addObject:mutableDict];
+    
         for(int i=0; self.participantsArray.count>i;i++)
         {
             NSMutableDictionary * objDic =[self.participantsArray objectAtIndex:i];
@@ -629,7 +699,9 @@
         isParticipantType=NO;
         isaddPartcipant=NO;
         isteam =NO;
+    
         [self.multselectTbl reloadData];
+    
 //    }
 //    else{
 //        self.comPopview.hidden=YES;
@@ -656,6 +728,7 @@
     cell.isSelected = [selectedMarks containsObject:selectParticipantCode] ? YES : NO;
     
    // self.addParticipantArray = selectedMarks;
+    
     [self.multselectTbl reloadData];
     
 }
@@ -663,13 +736,48 @@
 -(IBAction)didClickClearAllBtn:(id)sender
 {
     [selectedMarks removeAllObjects];
+    int a = selectedMarks.count;
+    if(a == 0)
+    {
+        //NSString *b = [NSString stringWithFormat:@"%d", a];
+        self.particiLbl.text = @"";
+    }
+    if(a == 1)
+    {
+        //NSString *b = [NSString stringWithFormat:@"%d", a];
+        self.particiLbl.text = [NSString stringWithFormat:@"%d item selected", a];
+    }
+    else
+    {
+        self.particiLbl.text = [NSString stringWithFormat:@"%d items selected", a];
+    }
+    
     [self.multselectTbl reloadData];
+    
 }
 -(IBAction)didClickSelectAll:(id)sender
 {
     selectedMarks=[[NSMutableArray alloc]init];
     selectedMarks =self.commonArray;
+    
+    int a = selectedMarks.count;
+    if(a == 0)
+    {
+        //NSString *b = [NSString stringWithFormat:@"%d", a];
+        self.particiLbl.text = @"";
+    }
+    if(a == 1)
+    {
+        //NSString *b = [NSString stringWithFormat:@"%d", a];
+        self.particiLbl.text = [NSString stringWithFormat:@"%d item selected", a];
+    }
+    else
+    {
+        self.particiLbl.text = [NSString stringWithFormat:@"%d items selected", a];
+    }
+    
     [self.multselectTbl reloadData];
+    
 }
 -(IBAction)didClickUpdateBtnAction:(id)sender
 {
@@ -692,6 +800,9 @@
     
     
 }
+
+
+
 
 #pragma participant addbtn Action
 
@@ -783,22 +894,35 @@
         if(![self.particiTypeLbl.text isEqualToString:@"Select"] && ![self.teamLbl.text isEqualToString:@"Select"] && ![self.particiLbl.text isEqualToString:@"Select"] && ![self.particiTypeLbl.text isEqualToString:@""] && ![self.teamLbl.text isEqualToString:@""] && ![self.particiLbl.text isEqualToString:@""] )
         {
             NSMutableArray *a1 = [[NSMutableArray alloc]init];
-            a1 = [selectedMarks valueForKey:@"Participantcode"];
+            a1 = selectedMarks;
             
+            BOOL isdata ;
+            isdata = YES;
             for(int i=0;i<selectedMarks.count;i++)
             {
-                NSString *ppcode = [a1 objectAtIndex:i];
+                NSString *ppcode = [[a1 valueForKey:@"Participantcode"] objectAtIndex:i];
                 NSMutableArray *add = [[NSMutableArray alloc]init];
-                add = [self.addParticipantArray valueForKey:@"Participantcode"];
-                
+                for( int j=0;j<self.addParticipantArray.count;j++)
+                {
+                    NSString *reCode = [[self.addParticipantArray valueForKey:@"Participantcode"] objectAtIndex:j];
+                    [add addObject:reCode];
+                }
+            
                 if([add containsObject:ppcode])
                 {
                     [self altermsg:@"Please select different Participant"];
+                    isdata = YES;
+                    return;
                 }
                 else
                 {
-                    [self ParticipantAddMethod];
+                    isdata = NO;
                 }
+            }
+            if(!isdata)
+            {
+            [self ParticipantAddMethod];
+            }
                 
 //                if(self.addParticipantArray.count ==0)
 //                {
@@ -808,7 +932,7 @@
 //                {
 //                    for(int j=0;j<self.addParticipantArray.count;j++)
 //                    {
-//                        NSString *ppcode1 = [[self.addParticipantArray valueForKey:@"Participantcode"] objectAtIndex:j];
+//         NSString *ppcode1 = [[self.addParticipantArray valueForKey:@"Participantcode"] objectAtIndex:j];
 //                    
 //                        if([ppcode1 isEqualToString:ppcode])
 //                        {
@@ -825,10 +949,7 @@
                 
                 
             }
-            
-            
-        }
-    }
+}
 
 
 #pragma participantAdd method
@@ -889,11 +1010,16 @@
         
         //[self.addParticipantArray addObject:mutableDict];
     }
+    
     [self.participantTbl reloadData];
 
     self.addeventTblheight.constant =self.participantTbl.contentSize.height;
     
-    self.commonScrollview.contentSize = CGSizeMake(self.commonScrollview.frame.size.width,self.commonScrollview.frame.size.height+self.addeventTblheight.constant+250);
+    self.commonScrollview.contentSize = CGSizeMake(self.commonScrollview.frame.size.width,self.commonScrollview.frame.size.height+self.addeventTblheight.constant-200);
+    self.mainParticipantViewheight.constant = self.participantTbl.contentSize.height+200;
+    
+    //self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
+    
 
     self.particiLbl.text =@"Select";
     self.particiTypeLbl.text =@"Select";
@@ -953,7 +1079,7 @@
     
 }
 
--(void)startFetchPlayerByTeamAndParticipantType :(NSString *) participantType :(NSString *)team
+-(void)startFetchPlayerByTeamAndParticipantType :(NSString *) participantType
 {
     [AppCommon showLoading];
     if([COMMON isInternetReachable])
@@ -967,6 +1093,9 @@
         
         manager.requestSerializer = requestSerializer;
         
+        
+        NSString *team = [[NSUserDefaults standardUserDefaults]stringForKey:@"APTTeamcode"];
+
         
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -1152,12 +1281,14 @@
                 isParticipantType=NO;
                 isaddPartcipant=YES;
                 isteam =NO;
-                
+            
                 [self.participantTbl reloadData];
                 
                 self.addeventTblheight.constant =self.participantTbl.contentSize.height;
+                //self.popTblheight.constant =self.popviewTbl.contentSize.height-100;
                 
-                self.commonScrollview.contentSize = CGSizeMake(self.commonScrollview.frame.size.width,self.commonScrollview.frame.size.height+self.addeventTblheight.constant+250);
+                self.commonScrollview.contentSize = CGSizeMake(self.commonScrollview.frame.size.width,self.commonScrollview.frame.size.height+self.addeventTblheight.constant-200);
+                self.mainParticipantViewheight.constant = self.participantTbl.contentSize.height+200;
                 
             }
             
@@ -1300,7 +1431,8 @@
                 {
                     [self altermsg:@"Delete successfully"];
                     PlannerVC  * objPlannerlist=[[PlannerVC alloc]init];
-                    objPlannerlist = (PlannerVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"Planner"];
+                    objPlannerlist = [[PlannerVC alloc] initWithNibName:@"PlannerVC" bundle:nil];
+                   // objPlannerlist = (PlannerVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"PlannerVC"];
                     [self.navigationController pushViewController:objPlannerlist animated:YES];
 
                     
@@ -1368,7 +1500,7 @@
     {
         static NSString *CellIdentifier = @"AddParticipant";
         
-        AddParticipantCell * objCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        AddParticipantCell * objCell = [tableView dequeueReusableCellWithIdentifier:nil];
         
         if (objCell == nil)
         {
@@ -1379,8 +1511,13 @@
         objCell.participationTypeLbl.text =[[self.addParticipantArray valueForKey:@"ParticipantTypename"] objectAtIndex:indexPath.row];
         objCell.participantLbl.text =[[self.addParticipantArray valueForKey:@"Participantname"] objectAtIndex:indexPath.row];
         objCell.availableLbl.text= [[self.addParticipantArray valueForKey:@"IsAvailable"] objectAtIndex:indexPath.row];
+        if([AppCommon isCoach])
+        {
+            [objCell.deleteBtn addTarget:self action:@selector(didClickDeleteParticipantAction:) forControlEvents:UIControlEventTouchUpInside];
+        }
         
-        [objCell.deleteBtn addTarget:self action:@selector(didClickDeleteParticipantAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
         
         
         
@@ -1395,12 +1532,35 @@
         if (cell == nil) {
             cell = [[CRTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CRTableViewCellIdentifier];
         }
+    
         
         selectParticipantCode =[[self.commonArray valueForKey:@"Participantcode"] objectAtIndex:indexPath.row];
         // Check if the cell is currently selected (marked)
         NSString *text = [[self.commonArray valueForKey:@"Participantname"] objectAtIndex:[indexPath row]];
         cell.isSelected = [[selectedMarks  valueForKey:@"Participantcode" ]containsObject:selectParticipantCode] ? YES : NO;
         cell.textLabel.text = text;
+        //cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        
+        cell.contentView.backgroundColor = [UIColor colorWithRed:13.0/255.0 green:46.0/255.0 blue:125.0/255.0 alpha:1.0];
+        cell.textLabel.font = [UIFont fontWithName:@"Montserrat-Regular" size:(IS_IPAD ? 13.0 : 13.0 )];
+        if(IS_IPHONE_DEVICE)
+        {
+            cell.textLabel.textAlignment = NSTextAlignmentLeft;
+        }else
+        {
+            cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        }
+        
+        
+//        cell.imageView.layer.masksToBounds=YES;
+//        cell.imageView.layer.borderWidth=2.0;
+//        cell.imageView.layer.borderColor = (__bridge CGColorRef _Nullable)([UIColor whiteColor]);
+        
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.numberOfLines = 2;
+        
+        
+        //cell.contentView.backgroundColor = [UIColor lightGrayColor];
         
         return cell;
 
@@ -1419,15 +1579,18 @@
         if(isEventType)
         {
             cell.textLabel.text = [[self.commonArray valueForKey:@"EventTypename"] objectAtIndex:indexPath.row];
+            cell.backgroundColor = [UIColor clearColor];
         }
         else if (isEventStatus)
         {
             cell.textLabel.text = [[self.commonArray valueForKey:@"EventStatusname"] objectAtIndex:indexPath.row];
+            cell.backgroundColor = [UIColor clearColor];
             
         }
         else if (isParticipantType)
         {
             cell.textLabel.text = [[self.commonArray valueForKey:@"ParticipantTypename"] objectAtIndex:indexPath.row];
+            cell.backgroundColor = [UIColor clearColor];
             
         }
         else if (isteam)
@@ -1447,7 +1610,16 @@
 
        // }
         
-        cell.backgroundColor = [UIColor clearColor];
+        
+        //cell.backgroundColor = [UIColor clearColor];
+        
+       // cell.contentView.backgroundColor = [UIColor colorWithRed:28.0/255.0 green:26.0/255.0 blue:68.0/255.0 alpha:1.0];
+        cell.contentView.backgroundColor = [UIColor colorWithRed:13.0/255.0 green:46.0/255.0 blue:125.0/255.0 alpha:1.0];
+        cell.textLabel.font = [UIFont fontWithName:@"Montserrat-Regular" size:(IS_IPAD ? 13.0 : 13.0 )];
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+        cell.textLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.numberOfLines = 2;
+        
         return cell;
     }
     return nil;
@@ -1471,13 +1643,14 @@
         self.particiTypeLbl.text =[[self.commonArray valueForKey:@"ParticipantTypename"] objectAtIndex:indexPath.row];
         selectParticipantType =[[self.commonArray valueForKey:@"ParticipantTypecode"] objectAtIndex:indexPath.row];
         [self startFetchTeamByParticipantType:selectParticipantType];
+         [self startFetchPlayerByTeamAndParticipantType:selectParticipantType];
         self.popviewTbl.hidden =YES;
     }
     else if (isteam)
     {
         self.teamLbl.text =[[self.commonArray valueForKey:@"Teamname"] objectAtIndex:indexPath.row];
         selectTeam  =[[self.commonArray valueForKey:@"Teamcode"] objectAtIndex:indexPath.row];
-        [self startFetchPlayerByTeamAndParticipantType:selectParticipantType :selectTeam];
+        [self startFetchPlayerByTeamAndParticipantType:selectParticipantType];
         self.popviewTbl.hidden =YES;
     }
     else if (isParticipant)
@@ -1488,6 +1661,7 @@
             [selectedMarks removeObject:dic];
         else
             [selectedMarks addObject:dic];
+        self.particiLbl.text = @"";
         
         int a = selectedMarks.count;
         if(a == 0)
@@ -1511,7 +1685,7 @@
         
         self.multselectTbl.hidden =NO;
         
-       // isaddPartcipant=YES;
+        //isaddPartcipant=NO;
     }
     
     
@@ -1527,9 +1701,12 @@
     
     [self.addParticipantArray removeObjectAtIndex:indexPath.row];
     
+    
     [self.participantTbl reloadData];
+    
     self.addeventTblheight.constant =self.participantTbl.contentSize.height;
-    self.commonScrollview.contentSize = CGSizeMake(self.commonScrollview.frame.size.width,self.commonScrollview.frame.size.height+self.addeventTblheight.constant+250);
+    self.commonScrollview.contentSize = CGSizeMake(self.commonScrollview.frame.size.width,self.commonScrollview.frame.size.height+self.addeventTblheight.constant-200);
+    self.mainParticipantViewheight.constant = self.participantTbl.contentSize.height+200;
 }
 -(IBAction)didClickBackBtn:(id)sender
 {

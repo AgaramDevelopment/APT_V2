@@ -16,5 +16,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *BattingStylelbl;
 @property (strong, nonatomic) IBOutlet UILabel *agelbl;
 @property (strong, nonatomic) IBOutlet UIView *availabilityView;
+@property (weak, nonatomic) IBOutlet UIImageView *playerImg;
 
 @end

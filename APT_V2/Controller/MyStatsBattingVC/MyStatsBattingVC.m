@@ -13,10 +13,12 @@
 #import "WebService.h"
 #import "CustomNavigation.h"
 #import "SWRevealViewController.h"
+#import "ScoreCardVC.h"
+#import "AppDelegate.h"
+#import "TabbarVC.h"
 
 @interface MyStatsBattingVC ()
 {
-    
     NSInteger selectedIndex;
     NSIndexPath *lastIndex;
     
@@ -30,6 +32,8 @@
     BOOL isThrees;
     BOOL isFours;
     BOOL isSixes;
+    BOOL isDotBall;
+    BOOL isWkt;
     BOOL isAll;
     
     UIColor *strokeColor;
@@ -40,17 +44,20 @@
     BOOL isBatting;
     BOOL isBowling;
     
+    TabbarVC *objtab;
 }
+
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *battingTableViewHeight;
 
 @end
 
 @implementation MyStatsBattingVC
 
+@synthesize selectedPlayerCode;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self customnavigationmethod];
     
         //Get Server Data
     bowlingmatchDetailsArray = [NSMutableArray new];
@@ -62,6 +69,8 @@
     battingWagonWheelDrawData = [NSMutableArray new];
     battingPitchData = [NSMutableArray new];
     
+    
+    self.PlayerNamelbl.text = self.selectedPlayerName;
 //    lastIndex = NULL;
 //    selectedIndex = -1;
 //
@@ -70,7 +79,8 @@
 //    isThrees = YES;
 //    isFours = YES;
 //    isSixes = YES;
-//
+//    isWkt = YES;
+//     isDotBall = YES;
 //    isBatting = YES;
 //    isBowling = NO;
     
@@ -81,8 +91,6 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    
     
     SWRevealViewController *revealController = [self revealViewController];
     [revealController.panGestureRecognizer setEnabled:YES];
@@ -95,6 +103,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
+
 -(void)customnavigationmethod
 {
     CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
@@ -102,19 +115,18 @@
     SWRevealViewController *revealController = [self revealViewController];
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
+    [self.navBar addSubview:objCustomNavigation.view];
     
-        //    [self.view addSubview:objCustomNavigation.view];
-        //    objCustomNavigation.tittle_lbl.text=@"";
-    
-        //UIView* view= self.navigation_view.subviews.firstObject;
-    [self.navigationView addSubview:objCustomNavigation.view];
-    
-    objCustomNavigation.btn_back.hidden =YES;
-    objCustomNavigation.menu_btn.hidden =NO;
-        //        [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-        //        [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    objCustomNavigation.btn_back.hidden = NO;
+    objCustomNavigation.menu_btn.hidden = YES;
+    [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
 }
+
+-(void)actionBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 #pragma mark - UITableViewDataSource
     // number of section(s), now I assume there is only 1 section
@@ -165,7 +177,7 @@
     if (section == 0) {
         return 0;
     }
-    if (section == 1) {
+    else if (section == 1) {
         return (IS_IPAD)?65:55;
     }
     return 0;
@@ -240,7 +252,13 @@
         }
         cell.backgroundColor = [UIColor clearColor];
 
+    
+            //Drop Down Action For Expanded Cell
+        [[cell dropDowniPhoneBtn] setTag:[indexPath row]];
+        [cell.dropDowniPhoneBtn addTarget:self action:@selector(didClickDropDownButtonForExpandCell:) forControlEvents:UIControlEventTouchUpInside];
         
+        [[cell dropDowniPadBtn] setTag:[indexPath row]];
+        [cell.dropDowniPadBtn addTarget:self action:@selector(didClickDropDownButtonForExpandCell:) forControlEvents:UIControlEventTouchUpInside];
         
         NSLog(@"recentMatchesArray:%@", recentMatchesArray);
         if (IS_IPAD) {
@@ -262,8 +280,20 @@
             cell.matchDateiPadLbl.text = [dateFormatter stringFromDate:yourDate];
             cell.groundNameiPadLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"GroundName"];
             
+
+            if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"HOME"])
+            {
+                cell.teamiPadImage.image = [UIImage imageNamed:@"matchHome"];
+            }
+            else  if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"AWAY"])
+            {
+                cell.teamiPadImage.image = [UIImage imageNamed:@"matchAway"];
+            }
+            else
+            {
+                cell.teamiPadImage.image = [UIImage imageNamed:@"NeutralImg"];
+            }
            
-                
                 if (matchDetailsArray.count != 0 && indexPath.row == selectedIndex) {
 
                 // EXpanded iPad Cell Header
@@ -287,8 +317,12 @@
                 [cell.threeBtniPad addTarget:self action:@selector(didClickthreeBatting:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.fourBtniPad addTarget:self action:@selector(didClickfourssBatting:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.sixBtniPad addTarget:self action:@selector(didClicksixesBatting:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.dotBtniPad addTarget:self action:@selector(didClickdotsBatting:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.wktBtniPad addTarget:self action:@selector(didClickwicketBatting:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.alllbliPad addTarget:self action:@selector(didClickAllBatting:) forControlEvents:UIControlEventTouchUpInside];
                 
+                    
+
                     //wagon wheel
                 if(self.wagonWheelDrawData.count>0)
                     {
@@ -324,8 +358,7 @@
                         NSMutableArray *threescount = [[NSMutableArray alloc]init];
                         NSMutableArray *fourscount = [[NSMutableArray alloc]init];
                         NSMutableArray *sixscount = [[NSMutableArray alloc]init];
-                        
-                        
+                        NSMutableArray *dotscount = [[NSMutableArray alloc]init];
                         
                         for(int i=0; i<sepArray.count;i++)
                             {
@@ -524,6 +557,43 @@
                                     strokeColor = [UIColor clearColor];
                                     }
                                 
+                            } else if ([self.selectRuns isEqualToString: @"90"]){
+                                
+                                    //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                [dotscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+                                NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)dotscount.count];
+                                [cell.dotBtniPad setTitle:ss forState:UIControlStateNormal];
+                                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+                                    //strokeColor = [self colorWithHexString:@"#eee"];
+                                
+                                if(isDotBall == YES)
+                                    {
+                                    strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+                                    }
+                                else
+                                    {
+                                    strokeColor = [UIColor clearColor];
+                                    }
+                                
+                                    //strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+                                
+                            }
+                            else if ([self.selectRuns isEqualToString: @"80"]){
+                                
+                                
+                                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+                                    //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                
+                                if(isWkt == YES)
+                                    {
+                                    strokeColor = [self colorWithHexString:color];
+                                    }
+                                else
+                                    {
+                                    strokeColor = [UIColor clearColor];
+                                    }
+                                
+                                
                             }
                             
                                 //                else if ([self.selectRuns isEqualToString: @"0"]){
@@ -592,7 +662,7 @@
                                 
                                 }
                             
-                            if([[self.pitchData valueForKey:@"Battingstyle"] isEqualToString:@"RIGHT"])
+                            if([[self.pitchData valueForKey:@"BattingStyle"] isEqualToString:@"RIGHT"])
                                 {
                                 
                                 cell.PitchImgiPad.image = [UIImage imageNamed:@"Pitchmap"];
@@ -674,7 +744,7 @@
                                         }
                                     
                                     
-                                }else if ([run isEqualToString: @"6"]){
+                                } else if ([run isEqualToString: @"6"]){
                                         // Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
                                     
                                     
@@ -687,6 +757,36 @@
                                         Img_ball.backgroundColor =[UIColor clearColor];
                                         }
                                     
+                                    
+                                }else if ([run isEqualToString: @"90"]){
+                                    
+                                        //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                    
+                                    
+                                    if(isDotBall == YES)
+                                        {
+                                        Img_ball.backgroundColor = [self colorWithHexString:@"EEEEEE"];
+                                        }
+                                    else
+                                        {
+                                        Img_ball.backgroundColor =[UIColor clearColor];
+                                        }
+                                    
+                                }
+                                else if ([run isEqualToString: @"80"]){
+                                        //ed1d24
+                                        //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                    
+                                    
+                                    
+                                    if(isWkt == YES)
+                                        {
+                                        Img_ball.backgroundColor = [self colorWithHexString:@"ed1d24"];
+                                        }
+                                    else
+                                        {
+                                        Img_ball.backgroundColor =[UIColor clearColor];
+                                        }
                                     
                                 }
                                 
@@ -722,6 +822,19 @@
             cell.matchDateiPhoneLbl.text = [dateFormatter stringFromDate:yourDate];
             cell.groundNameiPhoneLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"GroundName"];
             
+            if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"HOME"])
+                {
+                cell.teamiPhoneImage.image = [UIImage imageNamed:@"matchHome"];
+                }
+            else if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"AWAY"])
+                {
+                cell.teamiPhoneImage.image = [UIImage imageNamed:@"matchAway"];
+                }
+             else
+               {
+                 cell.teamiPhoneImage.image = [UIImage imageNamed:@"NeutralImg"];
+               }
+            
                 if (matchDetailsArray.count != 0 && indexPath.row == selectedIndex) {
 
                 // EXpanded iPhone Cell Header
@@ -744,6 +857,8 @@
                 [cell.threeBtniPhone addTarget:self action:@selector(didClickthreeBatting:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.fourBtniPhone addTarget:self action:@selector(didClickfourssBatting:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.sixBtniPhone addTarget:self action:@selector(didClicksixesBatting:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.dotBtniPhone addTarget:self action:@selector(didClickdotsBatting:) forControlEvents:UIControlEventTouchUpInside];
+                [cell.wktBtniPhone addTarget:self action:@selector(didClickwicketBatting:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.alllbliPhone addTarget:self action:@selector(didClickAllBatting:) forControlEvents:UIControlEventTouchUpInside];
                 
                     //wagon wheel
@@ -781,7 +896,7 @@
                         NSMutableArray *threescount = [[NSMutableArray alloc]init];
                         NSMutableArray *fourscount = [[NSMutableArray alloc]init];
                         NSMutableArray *sixscount = [[NSMutableArray alloc]init];
-                        
+                        NSMutableArray *dotscount = [[NSMutableArray alloc]init];
                         
                         
                         for(int i=0; i<sepArray.count;i++)
@@ -964,7 +1079,7 @@
                                     //                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
                                     //                    strokeColor = [self colorWithHexString:color];
                                 
-                            }else if ([self.selectRuns isEqualToString: @"6"]){
+                            } else if ([self.selectRuns isEqualToString: @"6"]){
                                 
                                 
                                     // strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
@@ -985,8 +1100,44 @@
                                     strokeColor = [UIColor clearColor];
                                     }
                                 
+                            } else if ([self.selectRuns isEqualToString: @"90"]){
+                                
+                                    //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                [dotscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+                                NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)dotscount.count];
+                                [cell.dotBtniPhone setTitle:ss forState:UIControlStateNormal];
+                                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+                                    //strokeColor = [self colorWithHexString:@"#eee"];
+                                
+                                if(isDotBall == YES)
+                                    {
+                                    strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+                                    }
+                                else
+                                    {
+                                    strokeColor = [UIColor clearColor];
+                                    }
+                                
+                                    //strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+                                
                             }
-                            
+                            else if ([self.selectRuns isEqualToString: @"80"]){
+                                
+                                
+                                NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+                                    //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                
+                                if(isWkt == YES)
+                                    {
+                                    strokeColor = [self colorWithHexString:color];
+                                    }
+                                else
+                                    {
+                                    strokeColor = [UIColor clearColor];
+                                    }
+                                
+                                
+                            }
                                 //                else if ([self.selectRuns isEqualToString: @"0"]){
                                 //
                                 //                    //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
@@ -1151,6 +1302,36 @@
                                         }
                                     
                                     
+                                } else if ([run isEqualToString: @"90"]){
+                                    
+                                        //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                    
+                                    
+                                    if(isDotBall == YES)
+                                        {
+                                        Img_ball.backgroundColor = [self colorWithHexString:@"EEEEEE"];
+                                        }
+                                    else
+                                        {
+                                        Img_ball.backgroundColor =[UIColor clearColor];
+                                        }
+                                    
+                                }
+                                else if ([run isEqualToString: @"80"]){
+                                        //ed1d24
+                                        //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                    
+                                    
+                                    
+                                    if(isWkt == YES)
+                                        {
+                                        Img_ball.backgroundColor = [self colorWithHexString:@"ed1d24"];
+                                        }
+                                    else
+                                        {
+                                        Img_ball.backgroundColor =[UIColor clearColor];
+                                        }
+                                    
                                 }
                                 
                                     //                        else if ([run isEqualToString: @"0"]){
@@ -1166,6 +1347,7 @@
                     }
             }
         }
+        cell.selectionStyle = UIAccessibilityTraitNone;
     }
         return cell;
     }
@@ -1238,6 +1420,12 @@
             }
             cell.backgroundColor = [UIColor clearColor];
             
+                //Drop Down Action For Expanded Cell
+            [[cell dropDowniPhoneBtn] setTag:[indexPath row]];
+            [cell.dropDowniPhoneBtn addTarget:self action:@selector(didClickDropDownButtonForExpandCell:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [[cell dropDowniPadBtn] setTag:[indexPath row]];
+            [cell.dropDowniPadBtn addTarget:self action:@selector(didClickDropDownButtonForExpandCell:) forControlEvents:UIControlEventTouchUpInside];
             
             
             NSLog(@"recentMatchesArray:%@", recentMatchesArray);
@@ -1260,6 +1448,19 @@
                 
                 cell.matchDateiPadLbl.text = [dateFormatter stringFromDate:yourDate];
                 cell.groundNameiPadLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"GroundName"];
+                
+                if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"HOME"])
+                    {
+                        cell.teamiPadImage.image = [UIImage imageNamed:@"matchHome"];
+                    }
+                else if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"AWAY"])
+                    {
+                        cell.teamiPadImage.image = [UIImage imageNamed:@"matchAway"];
+                    }
+                    else
+                    {
+                        cell.teamiPadImage.image = [UIImage imageNamed:@"NeutralImg"];
+                    }
                 
                 if (matchDetailsArray.count != 0 && indexPath.row == selectedIndex) {
                     
@@ -1292,6 +1493,8 @@
                     [cell.threeBtniPad addTarget:self action:@selector(didClickthreeBatting:) forControlEvents:UIControlEventTouchUpInside];
                     [cell.fourBtniPad addTarget:self action:@selector(didClickfourssBatting:) forControlEvents:UIControlEventTouchUpInside];
                     [cell.sixBtniPad addTarget:self action:@selector(didClicksixesBatting:) forControlEvents:UIControlEventTouchUpInside];
+                    [cell.dotBtniPad addTarget:self action:@selector(didClickdotsBatting:) forControlEvents:UIControlEventTouchUpInside];
+                    [cell.wktBtniPad addTarget:self action:@selector(didClickwicketBatting:) forControlEvents:UIControlEventTouchUpInside];
                     [cell.alllbliPad addTarget:self action:@selector(didClickAllBatting:) forControlEvents:UIControlEventTouchUpInside];
                     
                         //wagon wheel
@@ -1329,7 +1532,8 @@
                             NSMutableArray *threescount = [[NSMutableArray alloc]init];
                             NSMutableArray *fourscount = [[NSMutableArray alloc]init];
                             NSMutableArray *sixscount = [[NSMutableArray alloc]init];
-                            
+                            NSMutableArray *dotscount = [[NSMutableArray alloc]init];
+                            NSMutableArray *wktsscount = [[NSMutableArray alloc]init];
                             
                             
                             for(int i=0; i<sepArray.count;i++)
@@ -1529,6 +1733,45 @@
                                         strokeColor = [UIColor clearColor];
                                         }
                                     
+                                } else if ([self.selectRuns isEqualToString: @"90"]){
+                                    
+                                    
+                                    
+                                        //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                    [dotscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+                                    NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)dotscount.count];
+                                    [cell.dotBtniPad setTitle:ss forState:UIControlStateNormal];
+                                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+                                        //strokeColor = [self colorWithHexString:@"#eee"];
+                                    
+                                    if(isDotBall == YES)
+                                        {
+                                        strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+                                        }
+                                    else
+                                        {
+                                        strokeColor = [UIColor clearColor];
+                                        }
+                                    
+                                        //strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+                                    
+                                }
+                                else if ([self.selectRuns isEqualToString: @"80"]){
+                                    
+                                    
+                                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+                                        //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                    
+                                    if(isWkt == YES)
+                                        {
+                                        strokeColor = [self colorWithHexString:color];
+                                        }
+                                    else
+                                        {
+                                        strokeColor = [UIColor clearColor];
+                                        }
+                                    
+                                    
                                 }
                                 
                                     //                else if ([self.selectRuns isEqualToString: @"0"]){
@@ -1691,7 +1934,35 @@
                                             {
                                             Img_ball.backgroundColor =[UIColor clearColor];
                                             }
+                                    } else if ([run isEqualToString: @"90"]){
                                         
+                                            //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                        
+                                        
+                                        if(isDotBall == YES)
+                                            {
+                                            Img_ball.backgroundColor = [self colorWithHexString:@"EEEEEE"];
+                                            }
+                                        else
+                                            {
+                                            Img_ball.backgroundColor =[UIColor clearColor];
+                                            }
+                                        
+                                    }
+                                    else if ([run isEqualToString: @"80"]){
+                                            //ed1d24
+                                            //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                        
+                                        
+                                        
+                                        if(isWkt == YES)
+                                            {
+                                            Img_ball.backgroundColor = [self colorWithHexString:@"ed1d24"];
+                                            }
+                                        else
+                                            {
+                                            Img_ball.backgroundColor =[UIColor clearColor];
+                                            }
                                         
                                     }
                                     
@@ -1728,6 +1999,19 @@
                 cell.matchDateiPhoneLbl.text = [dateFormatter stringFromDate:yourDate];
                 cell.groundNameiPhoneLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"GroundName"];
                 
+                if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"HOME"])
+                    {
+                    cell.teamiPhoneImage.image = [UIImage imageNamed:@"matchHome"];
+                    }
+                else if([[self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Condition"]] isEqualToString:@"AWAY"])
+                    {
+                    cell.teamiPhoneImage.image = [UIImage imageNamed:@"matchAway"];
+                    }
+                else
+                {
+                    cell.teamiPhoneImage.image = [UIImage imageNamed:@"NeutralImg"];
+                }
+                
                 if (matchDetailsArray.count != 0 && indexPath.row == selectedIndex) {
                     
                         // EXpanded iPhone Cell Header
@@ -1751,6 +2035,8 @@
                     [cell.threeBtniPhone addTarget:self action:@selector(didClickthreeBatting:) forControlEvents:UIControlEventTouchUpInside];
                     [cell.fourBtniPhone addTarget:self action:@selector(didClickfourssBatting:) forControlEvents:UIControlEventTouchUpInside];
                     [cell.sixBtniPhone addTarget:self action:@selector(didClicksixesBatting:) forControlEvents:UIControlEventTouchUpInside];
+                    [cell.dotBtniPhone addTarget:self action:@selector(didClickdotsBatting:) forControlEvents:UIControlEventTouchUpInside];
+                    [cell.wktBtniPhone addTarget:self action:@selector(didClickwicketBatting:) forControlEvents:UIControlEventTouchUpInside];
                     [cell.alllbliPhone addTarget:self action:@selector(didClickAllBatting:) forControlEvents:UIControlEventTouchUpInside];
                     
                         //wagon wheel
@@ -1789,7 +2075,8 @@
                             NSMutableArray *threescount = [[NSMutableArray alloc]init];
                             NSMutableArray *fourscount = [[NSMutableArray alloc]init];
                             NSMutableArray *sixscount = [[NSMutableArray alloc]init];
-                            
+                            NSMutableArray *dotscount = [[NSMutableArray alloc]init];
+                            NSMutableArray *wktsscount = [[NSMutableArray alloc]init];
                             
                             
                             for(int i=0; i<sepArray.count;i++)
@@ -1972,7 +2259,7 @@
                                         //                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
                                         //                    strokeColor = [self colorWithHexString:color];
                                     
-                                }else if ([self.selectRuns isEqualToString: @"6"]){
+                                } else if ([self.selectRuns isEqualToString: @"6"]){
                                     
                                     
                                         // strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
@@ -1993,7 +2280,47 @@
                                         strokeColor = [UIColor clearColor];
                                         }
                                     
+                                }   else if ([self.selectRuns isEqualToString: @"90"]){
+                                    
+                                    
+                                    
+                                        //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                    [dotscount addObject:[[sepArray valueForKey:@"Runs"] objectAtIndex:i]];
+                                    NSString *ss = [NSString stringWithFormat:@"%lu",(unsigned long)dotscount.count];
+                                    [cell.dotBtniPhone setTitle:ss forState:UIControlStateNormal];
+                                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+                                        //strokeColor = [self colorWithHexString:@"#eee"];
+                                    
+                                    if(isDotBall == YES)
+                                        {
+                                        strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+                                        }
+                                    else
+                                        {
+                                        strokeColor = [UIColor clearColor];
+                                        }
+                                    
+                                        //strokeColor = [UIColor colorWithRed:(238/255.0f) green:(238/255.0f) blue:(238/255.0f) alpha:0.8f];
+                                    
                                 }
+                                else if ([self.selectRuns isEqualToString: @"80"]){
+                                    
+                                    
+                                    NSString *color = [[sepArray valueForKey:@"Colour"] objectAtIndex:i];
+                                        //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                    
+                                    if(isWkt == YES)
+                                        {
+                                        strokeColor = [self colorWithHexString:color];
+                                        }
+                                    else
+                                        {
+                                        strokeColor = [UIColor clearColor];
+                                        }
+                                    
+                                    
+                                }
+
                                 
                                     //                else if ([self.selectRuns isEqualToString: @"0"]){
                                     //
@@ -2159,6 +2486,36 @@
                                             }
                                         
                                         
+                                    } else if ([run isEqualToString: @"90"]){
+                                        
+                                            //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                        
+                                        
+                                        if(isDotBall == YES)
+                                            {
+                                            Img_ball.backgroundColor = [self colorWithHexString:@"EEEEEE"];
+                                            }
+                                        else
+                                            {
+                                            Img_ball.backgroundColor =[UIColor clearColor];
+                                            }
+                                        
+                                    }
+                                    else if ([run isEqualToString: @"80"]){
+                                            //ed1d24
+                                            //Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                                        
+                                        
+                                        
+                                        if(isWkt == YES)
+                                            {
+                                            Img_ball.backgroundColor = [self colorWithHexString:@"ed1d24"];
+                                            }
+                                        else
+                                            {
+                                            Img_ball.backgroundColor =[UIColor clearColor];
+                                            }
+                                        
                                     }
                                     
                                         //                        else if ([run isEqualToString: @"0"]){
@@ -2174,6 +2531,7 @@
                         }
                 }
             }
+            cell.selectionStyle = UIAccessibilityTraitNone;
         }
         return cell;
     }
@@ -2185,68 +2543,23 @@
     // when user tap the row, what action you want to perform
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 1) {
-        /*
-        NSString *matchCode = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"MatchCode"]];
-        NSString *innigs = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"InnsNo"]];
-        NSString *playerCode = [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"PlayerCode"]];
-        
-        //Get Match Batting Performance
-        [self getMatchBattingPerformanceGetMethodWebServiceMatchCode:matchCode inningsNo:innigs andPlayerCode:playerCode];
-        //WagonWheel Web Service
-        [self wagonWheelWebservicePlayerCode:playerCode andMatchCode:matchCode andInningsNo:innigs];
-        //Pitch Map Web Service
-        [self pitchMapWebservicePlayerCode:playerCode andMatchCode:matchCode andInningsNo:innigs];
-        */
-//        [self.batttingTableView reloadData];
-        matchDetailsArray = [NSMutableArray new];
-        self.wagonWheelDrawData = [NSMutableArray new];
-        self.pitchData = [NSMutableArray new];
-        NSLog(@"battingmatchDetailsArray:%@", battingmatchDetailsArray);
-        NSLog(@"battingWagonWheelDrawData:%@", battingWagonWheelDrawData);
-        NSLog(@"battingPitchData:%@", battingPitchData);
-        if (isBatting) {
-            matchDetailsArray = [battingmatchDetailsArray objectAtIndex:indexPath.row];
-            self.wagonWheelDrawData = [battingWagonWheelDrawData objectAtIndex:indexPath.row];
-            self.pitchData = [battingPitchData objectAtIndex:indexPath.row];
-        }
-        
-        if (isBowling) {
-            matchDetailsArray = [bowlingmatchDetailsArray objectAtIndex:indexPath.row];
-            self.wagonWheelDrawData = [bowlingWagonWheelDrawData objectAtIndex:indexPath.row];
-            self.pitchData = [bowlingPitchData objectAtIndex:indexPath.row];
-        }
-//        [self.batttingTableView reloadData];
-        [self.batttingTableView beginUpdates];
-        
-        if(indexPath.row == selectedIndex) {
-            selectedIndex = -1;
-                //cell.scoreView.hidden = YES;
-            lastIndex = NULL;
-        } else {
-                //cell.scoreView.hidden = NO;
-            if(lastIndex != nil) {
-            
-                [self.batttingTableView reloadRowsAtIndexPaths:@[lastIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
-                
-                isOnes = YES;
-                isTwos = YES;
-                isThrees = YES;
-                isFours = YES;
-                isSixes = YES;
-            }
-            lastIndex = indexPath;
-            selectedIndex = indexPath.row;
-        }
-            //[self.batttingTableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForItem: indexPath.row inSection:indexPath.section]] withRowAnimation:UITableViewRowAnimationAutomatic];
+    NSLog(@"recentMatchesArray:%@", recentMatchesArray);
+//    AppDelegate *Appobj = [AppDelegate new];
+    appDel.Currentmatchcode = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"MatchCode"];
+    appDel.Scorearray = [recentMatchesArray objectAtIndex:indexPath.row];
     
-            //[self.batttingTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-        [self.batttingTableView endUpdates];
-        
-        [self.batttingTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self.batttingTableView reloadData];
-    }
+//    ScoreCardVC *scoreObj = [[ScoreCardVC alloc] init];
+//    scoreObj = (ScoreCardVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreCardVC"];
+//    [appDel.frontNavigationController pushViewController:scoreObj animated:YES];
+
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    objtab = (TabbarVC *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"TabbarVC"];
+//    appDel.Currentmatchcode = displayMatchCode;
+//    appDel.Scorearray = scoreArray;
+        //objtab.backkey = @"yes";
+        //[self.navigationController pushViewController:objFix animated:YES];
+    [appDel.frontNavigationController pushViewController:objtab animated:YES];
+    
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -2258,7 +2571,7 @@
     if (indexPath.section == 1) {
         if(indexPath.row ==  selectedIndex)
         {
-            return 420;
+            return 450;
         } else {
             return (IS_IPAD)?80: 60;
         }
@@ -2297,7 +2610,6 @@
         return;
     
     [AppCommon showLoading];
-        //        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",LoginKey]];
     NSString *URLString =  URL_FOR_RESOURCE(playerMyStatsBatting);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -2307,12 +2619,12 @@
     manager.requestSerializer = requestSerializer;
     
     clientCode = [AppCommon GetClientCode];
-    userCode = [AppCommon GetUsercode];
-    userRefCode = [AppCommon GetuserReference];
+    userRefCode = ([AppCommon isCoach] ? selectedPlayerCode : [AppCommon GetuserReference]);
+//    userRefCode = [AppCommon GetuserReference];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     if(clientCode)   [dic    setObject:clientCode     forKey:@"ClientCode"];
-    if(userCode)   [dic    setObject:userCode     forKey:@"UserCode"];
+//    if(userCode)   [dic    setObject:userCode     forKey:@"UserCode"];
     if(userRefCode)   [dic    setObject:userRefCode     forKey:@"UserrefCode"];
     
     NSLog(@"parameters : %@",dic);
@@ -2328,9 +2640,11 @@
         [AppCommon hideLoading];
         
         //Bowling Service
-        [self myStatsBowlingPostMethodWebService];
-
-    
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self myStatsBowlingPostMethodWebService];
+        });
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failed");
         [COMMON webServiceFailureError:error];
@@ -2360,7 +2674,7 @@
     if (isBowling) {
         API_URL = [NSString stringWithFormat:@"%@GETMATCHBOWLINGPERFORMANCE/%@/%@/%@/%@/%@",URL_FOR_RESOURCE(@""),clientCode,userRefCode,playerCode, matchCode, innings];
     }
-    __block NSMutableArray *bbPerformanceArray = [[NSMutableArray alloc] init];
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -2368,11 +2682,9 @@
     
     [manager GET:API_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"SUCCESS RESPONSE:%@",responseObject);
+        NSMutableArray *bbPerformanceArray = [[NSMutableArray alloc] init];
         bbPerformanceArray = [responseObject valueForKey:@"PlayerMatchDetailsList"];
-
-        
         NSLog(@"%@", matchCode);
-        [AppCommon hideLoading];
         
         if(isBatting){
             
@@ -2433,13 +2745,13 @@
             }
         }
         
-        
+        [AppCommon hideLoading];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"FAILURE RESPONSE %@",error.description);
         [COMMON webServiceFailureError:error];
         [AppCommon hideLoading];
     }];
-    NSLog(@"bbPerformanceArray:%@", bbPerformanceArray);
+    
 }
 
 -(void)wagonWheelWebservicePlayerCode:(NSString*)playerCode andMatchCode:(NSString*)matchCode andInningsNo:(NSString*)innings  : (int) loopCount : (int) totalCount
@@ -2457,7 +2769,7 @@
     [AppCommon showLoading];
     
     NSString *API_URL = [NSString stringWithFormat:@"%@GETSCORECARDBATTINGSPIDERWAGONWHEEL/%@/%@/%@",URL_FOR_RESOURCE(@""),playerCode, matchCode, innings];
-     __block NSMutableArray *bbWagonWheelArray = [[NSMutableArray alloc] init];
+    
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
@@ -2466,10 +2778,8 @@
     
     [manager GET:API_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"SUCCESS RESPONSE:%@",responseObject);
+        NSMutableArray *bbWagonWheelArray = [[NSMutableArray alloc] init];
         bbWagonWheelArray = responseObject;
-    
-        [AppCommon hideLoading];
-        
         
         if(isBatting){
             if (bbWagonWheelArray.count) {
@@ -2526,7 +2836,7 @@
                 [self wagonWheelWebservicePlayerCode:playerCode andMatchCode:matchCode andInningsNo:innigs:(loopCount+1): (int)bowlingRecentMatchesArray.count];
             }
         }
-        
+        [AppCommon hideLoading];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"FAILURE RESPONSE %@",error.description);
         [COMMON webServiceFailureError:error];
@@ -2546,9 +2856,14 @@
         return ;
     
     [AppCommon showLoading];
+    NSString *API_URL;
+    if (isBatting) {
+        API_URL = [NSString stringWithFormat:@"%@%@/%@/%@/%@",URL_FOR_RESOURCE(@""), ScorecardPitchmapKey, playerCode, matchCode, innings];
+    } else {
+        API_URL = [NSString stringWithFormat:@"%@%@/%@/%@/%@",URL_FOR_RESOURCE(@""), ScorecardPitchbowlmapKey, playerCode, matchCode, innings];
+    }
     
-    NSString *API_URL = [NSString stringWithFormat:@"%@FETCH_SCORECARD_PITCHMAP/%@/%@/%@",URL_FOR_RESOURCE(@""),playerCode, matchCode, innings];
-    __block NSMutableArray *bbPitchDataArray = [[NSMutableArray alloc] init];
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -2557,9 +2872,8 @@
     [manager GET:API_URL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"SUCCESS RESPONSE:%@",responseObject);
 
+        NSMutableArray *bbPitchDataArray = [[NSMutableArray alloc] init];
         bbPitchDataArray = responseObject;
-        [AppCommon hideLoading];
-        
         
         if(isBatting){
         
@@ -2571,8 +2885,8 @@
 
                 recentMatchesArray = [[NSMutableArray alloc] init];
                 recentMatchesArray = battingRecentMatchesArray;
+                
                 [self.batttingTableView reloadData];
-
            
             }else{
                 
@@ -2594,6 +2908,7 @@
                 
                 recentMatchesArray = [[NSMutableArray alloc] init];
                 recentMatchesArray = bowlingRecentMatchesArray;
+                
                 [self.batttingTableView reloadData];
                 
             }else{
@@ -2603,13 +2918,9 @@
                 NSString *playerCode = [self checkNull:[[bowlingRecentMatchesArray objectAtIndex:(loopCount+1)] valueForKey:@"PlayerCode"]];
                 
                 [self pitchMapWebservicePlayerCode:playerCode andMatchCode:matchCode andInningsNo:innigs:(loopCount+1): (int)bowlingRecentMatchesArray.count];
-                
             }
-            
-            
         }
-       
-        
+        [AppCommon hideLoading];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"FAILURE RESPONSE %@",error.description);
         [COMMON webServiceFailureError:error];
@@ -2619,6 +2930,9 @@
 
 - (IBAction)battingAction:(id)sender {
     
+    [self setInningsButtonSelect:self.battingBtn];
+    [self setInningsButtonUnselect:self.bowlingBtn];
+        
     lastIndex = NULL;
     selectedIndex = -1;
     
@@ -2627,6 +2941,8 @@
     isThrees = YES;
     isFours = YES;
     isSixes = YES;
+    isWkt = YES;
+    isDotBall = YES;
     
     isBatting = YES;
     isBowling = NO;
@@ -2649,14 +2965,12 @@
             
             [self getMatchBattingPerformanceGetMethodWebServiceMatchCode:matchCode inningsNo:innigs andPlayerCode:playerCode:0: (int)battingRecentMatchesArray.count];
     }
-        
-    
-    
-    
-   
 }
 
 - (IBAction)bowlingAction:(id)sender {
+    
+    [self setInningsButtonSelect:self.bowlingBtn];
+    [self setInningsButtonUnselect:self.battingBtn];
     
     lastIndex = NULL;
     selectedIndex = -1;
@@ -2666,6 +2980,8 @@
     isThrees = YES;
     isFours = YES;
     isSixes = YES;
+    isWkt = YES;
+    isDotBall = YES;
     
     isBatting = NO;
     isBowling = YES;
@@ -2700,8 +3016,11 @@
     isThrees = NO;
     isFours = NO;
     isSixes = NO;
+    isWkt = NO;
+    isDotBall = NO;
     
     [self.batttingTableView reloadData];
+    
 }
 
 -(IBAction)didClicktwosBatting:(id)sender
@@ -2711,8 +3030,11 @@
     isThrees = NO;
     isFours = NO;
     isSixes = NO;
+    isWkt = NO;
+    isDotBall = NO;
     
     [self.batttingTableView reloadData];
+    
 }
 
 -(IBAction)didClickthreeBatting:(id)sender
@@ -2722,8 +3044,11 @@
     isThrees = YES;
     isFours = NO;
     isSixes = NO;
+    isWkt = NO;
+    isDotBall = NO;
     
     [self.batttingTableView reloadData];
+    
 }
 
 -(IBAction)didClickfourssBatting:(id)sender
@@ -2733,8 +3058,11 @@
     isThrees = NO;
     isFours = YES;
     isSixes = NO;
+    isWkt = NO;
+    isDotBall = NO;
     
     [self.batttingTableView reloadData];
+    
 }
 
 -(IBAction)didClicksixesBatting:(id)sender
@@ -2744,9 +3072,41 @@
     isThrees = NO;
     isFours = NO;
     isSixes = YES;
+    isWkt = NO;
+    isDotBall = NO;
     
     [self.batttingTableView reloadData];
+   
 }
+
+-(IBAction)didClickdotsBatting:(id)sender
+{
+    isOnes = NO;
+    isTwos = NO;
+    isThrees = NO;
+    isFours = NO;
+    isSixes = NO;
+    isWkt = NO;
+    isDotBall = YES;
+    
+    [self.batttingTableView reloadData];
+   
+}
+
+-(IBAction)didClickwicketBatting:(id)sender
+{
+    isOnes = NO;
+    isTwos = NO;
+    isThrees = NO;
+    isFours = NO;
+    isSixes = NO;
+    isWkt = YES;
+    isDotBall = NO;
+    
+    [self.batttingTableView reloadData];
+    
+}
+
 
 -(IBAction)didClickAllBatting:(id)sender
 {
@@ -2756,8 +3116,77 @@
     isThrees = YES;
     isFours = YES;
     isSixes = YES;
-    
+    isWkt = YES;
+    isDotBall = YES;
+
     [self.batttingTableView reloadData];
+    
+}
+
+-(IBAction)didClickDropDownButtonForExpandCell:(id)sender
+{
+    UIButton *button = sender;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag inSection:1];
+    MyStatsBattingCell *cell = [self.batttingTableView cellForRowAtIndexPath:indexPath];
+    
+    if (indexPath.section == 1) {
+        
+        matchDetailsArray = [NSMutableArray new];
+        self.wagonWheelDrawData = [NSMutableArray new];
+        self.pitchData = [NSMutableArray new];
+        
+        if (isBatting) {
+//            NSLog(@"battingWagonWheelDrawData:%@", battingWagonWheelDrawData);
+//            NSLog(@"battingPitchData:%@", battingPitchData);
+            matchDetailsArray = [battingmatchDetailsArray objectAtIndex:indexPath.row];
+            self.wagonWheelDrawData = [battingWagonWheelDrawData objectAtIndex:indexPath.row];
+            self.pitchData = [battingPitchData objectAtIndex:indexPath.row];
+            NSLog(@"wagonWheelDrawData:%@", self.wagonWheelDrawData);
+            NSLog(@"pitchData:%@", self.pitchData);
+        }
+        
+        if (isBowling) {
+//            NSLog(@"bowlingWagonWheelDrawData:%@", bowlingWagonWheelDrawData);
+//            NSLog(@"bowlingPitchData:%@", bowlingPitchData);
+            matchDetailsArray = [bowlingmatchDetailsArray objectAtIndex:indexPath.row];
+            self.wagonWheelDrawData = [bowlingWagonWheelDrawData objectAtIndex:indexPath.row];
+            self.pitchData = [bowlingPitchData objectAtIndex:indexPath.row];
+            NSLog(@"wagonWheelDrawData:%@", self.wagonWheelDrawData);
+            NSLog(@"pitchData:%@", self.pitchData);
+        }
+    
+        [self.batttingTableView beginUpdates];
+        
+        if(indexPath.row == selectedIndex) {
+            selectedIndex = -1;
+                //cell.scoreView.hidden = YES;
+            lastIndex = NULL;
+        } else {
+                //cell.scoreView.hidden = NO;
+            if(lastIndex != nil) {
+                
+                [self.batttingTableView reloadRowsAtIndexPaths:@[lastIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
+                
+                isOnes = YES;
+                isTwos = YES;
+                isThrees = YES;
+                isFours = YES;
+                isSixes = YES;
+                isWkt = YES;
+                isDotBall = YES;
+            }
+            lastIndex = indexPath;
+            selectedIndex = indexPath.row;
+        }
+        
+        [self.batttingTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        [self.batttingTableView endUpdates];
+        
+        
+//        [self.batttingTableView reloadData];
+    }
+    
 }
 
 -(NSString *)checkNull:(NSString *)_value
@@ -2803,13 +3232,30 @@
 }
 
 
+-(void) setInningsButtonSelect : (UIButton*) innsBtn{
+        // innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#1C1A44"];
+    
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+    [innsBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+}
+
+-(void) setInningsButtonUnselect : (UIButton*) innsBtn{
+        //  innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#C8C8C8"];
+    
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+    [innsBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+}
+
 - (void)myStatsBowlingPostMethodWebService {
     
     if(![COMMON isInternetReachable])
         return;
     
     [AppCommon showLoading];
-        //        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",LoginKey]];
     NSString *URLString =  URL_FOR_RESOURCE(playerMyStatsBowling);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -2819,12 +3265,12 @@
     manager.requestSerializer = requestSerializer;
     
     clientCode = [AppCommon GetClientCode];
-    userCode = [AppCommon GetUsercode];
-    userRefCode = [AppCommon GetuserReference];
+    userRefCode = ([AppCommon isCoach] ? selectedPlayerCode : [AppCommon GetuserReference]);
+//    userRefCode = [AppCommon GetuserReference];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     if(clientCode)   [dic    setObject:clientCode     forKey:@"ClientCode"];
-    if(userCode)   [dic    setObject:userCode     forKey:@"UserCode"];
+//    if(userCode)   [dic    setObject:userCode     forKey:@"UserCode"];
     if(userRefCode)   [dic    setObject:userRefCode     forKey:@"UserrefCode"];
     
     NSLog(@"parameters : %@",dic);
@@ -2837,7 +3283,6 @@
         bowlingRecentMatchesArray = [responseObject valueForKey:@"PlayerRecentDetailsList"];
         
         [AppCommon hideLoading];
-//        [self.bowlingBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
         
         //Batting Action Call
         [self.battingBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
@@ -2851,6 +3296,7 @@
     }];
     
 }
+
 /*
 #pragma mark - Navigation
 

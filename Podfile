@@ -12,5 +12,5 @@ target 'APT_V2' do
     pod 'MBProgressHUD', '~> 1.1.0'
     pod 'Charts'
     pod 'drCharts', :git => 'https://github.com/Zomato/DR-charts.git'
-
+    
 end

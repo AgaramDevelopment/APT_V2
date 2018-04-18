@@ -32,7 +32,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Urq-Z6-YCe">
                                 <rect key="frame" x="0.0" y="0.0" width="249" height="136"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="player_andr" translatesAutoresizingMaskIntoConstraints="NO" id="c6g-21-E0j">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-image" translatesAutoresizingMaskIntoConstraints="NO" id="c6g-21-E0j">
                                         <rect key="frame" x="74" y="8" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="B4q-g8-d33"/>
@@ -392,10 +392,23 @@
                 <constraint firstAttribute="trailing" secondItem="gP2-33-uR1" secondAttribute="trailing" id="qXq-ai-s4m"/>
             </constraints>
             <size key="customSize" width="249" height="399"/>
+            <connections>
+                <outlet property="avglbl" destination="EbE-TN-KCN" id="GWf-pU-Bm6"/>
+                <outlet property="bdryPerlbl" destination="ceM-ep-iSm" id="IFY-Ve-9EK"/>
+                <outlet property="dbPrrlbl" destination="mWE-Ox-jCz" id="rLe-eH-bi0"/>
+                <outlet property="fourslbl" destination="XhJ-D8-qrA" id="ieb-WN-mde"/>
+                <outlet property="hslbl" destination="LYz-9s-dIU" id="C4f-4Z-59o"/>
+                <outlet property="playerImg" destination="c6g-21-E0j" id="83v-dg-O5t"/>
+                <outlet property="playerNamelbl" destination="TjT-tx-3hx" id="8Iq-aA-kl3"/>
+                <outlet property="playerStylelbl" destination="GVe-WR-Xmq" id="4rU-zU-Frx"/>
+                <outlet property="runslbl" destination="cim-nW-ftC" id="rBp-ZL-cZv"/>
+                <outlet property="sixeslbl" destination="afl-nw-vz4" id="wQg-Sw-yVc"/>
+                <outlet property="srlbl" destination="Trj-aW-yoa" id="113-Rs-sSz"/>
+            </connections>
             <point key="canvasLocation" x="24.5" y="59.5"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="player_andr" width="230" height="284"/>
+        <image name="no-image" width="300" height="300"/>
     </resources>
 </document>

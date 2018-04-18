@@ -36,12 +36,21 @@
 @property (strong, nonatomic) IBOutlet UIView *navigationView;
 @property (strong, nonatomic) IBOutlet UIButton *battingBtn;
 @property (strong, nonatomic) IBOutlet UIButton *bowlingBtn;
+@property (weak, nonatomic) IBOutlet UIView *navBar;
+@property (weak, nonatomic) IBOutlet UIView *myStats;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *navViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *myStatsViewHeight;
 
+@property (weak, nonatomic) IBOutlet UIView *mainContentview;
 
 @property (nonatomic,strong) NSString *selectRuns;
     //wagon
 @property (nonatomic,strong) NSMutableArray * wagonWheelDrawData;
     //pitch
 @property (nonatomic,strong) NSMutableArray * pitchData;
+
+@property (strong,nonatomic) NSString* selectedPlayerCode;
+@property (strong,nonatomic) NSString* selectedPlayerName;
+@property (strong,nonatomic)IBOutlet UILabel* PlayerNamelbl;
 
 @end

@@ -32,6 +32,8 @@
     NSString * selectModule;
     NSString * selectTeamCode;
     NSString * selectGameCode;
+    NSInteger* buttonTag;
+    NSString* correspondingTeamCode;
 
 }
 @property (nonatomic,strong) NSMutableArray * objPlayerArray;
@@ -43,6 +45,7 @@
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * popTblYposition;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * popTblwidthposition;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * popTblXposition;
+@property (weak, nonatomic) IBOutlet UIDatePicker *DatePicker;
 
 @property (nonatomic, strong) UIDatePicker * datePicker;
 @property (strong, nonatomic)  NSMutableArray *selectedMarks;
@@ -55,11 +58,22 @@
 
 @implementation VideoPlayerUploadVC
 
+@synthesize module_lbl,player_lbl,category_lbl,objKeyword_Txt;
+
+@synthesize popTbl,teamView,playerView,CategoryView,keywordsView;
+
+@synthesize datepickerView,DatePicker,sharetoUserView;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     objWebService = [[WebService alloc]init];
     [self FetchvideouploadWebservice];
+    
+    if (!appDel.ArrayIPL_teamplayers.count) {
+        [AppCommon getTeamAndPlayerCode];
+    }
+    
     [self.view setFrame:CGRectMake(0, 150, [UIScreen mainScreen].bounds.size.width, CGRectGetHeight(self.view.frame))];
 
     // Do any additional setup after loading the view from its nib.
@@ -113,21 +127,18 @@
     [Sandcdict setValue:@"S and C" forKey:@"ModuleName"];
     [Sandcdict setValue:@"MSC086" forKey:@"ModuleCode"];
     
-    
+    [DatePicker addTarget:self action:@selector(showSelecteddate:) forControlEvents:UIControlEventValueChanged];
     self.ModuleArray = [[NSMutableArray alloc]initWithObjects:coachdict,physiodict,Sandcdict, nil];
-    
-    
+    [self.txtVideoDate setInputView:datepickerView];
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-   
-        
         SWRevealViewController *revealController = [self revealViewController];
         [revealController.panGestureRecognizer setEnabled:YES];
         [revealController.tapGestureRecognizer setEnabled:YES];
-
 }
 
 
@@ -142,7 +153,6 @@
         return;
     
     [AppCommon showLoading];
-    //        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",LoginKey]];
     NSString *URLString =  URL_FOR_RESOURCE(FetchVideoUpload);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -192,11 +202,13 @@
     self.popTblXposition.constant = -310;
     if(isModule== NO)
     {
-        self.popTbl.hidden = NO;
-        self.commonArray = [[NSMutableArray alloc]init];
-        self.commonArray = self.ModuleArray;
-        [self.popTbl reloadData];
-        isModule = YES;
+    
+            self.popTbl.hidden = NO;
+            self.commonArray = [[NSMutableArray alloc]init];
+            self.commonArray = self.ModuleArray;
+            [self.popTbl reloadData];
+            isModule = YES;
+    
     }
     else
     {
@@ -217,11 +229,13 @@
 
     if(isPlayer== NO)
     {
-        self.popTbl.hidden = NO;
-        self.commonArray = [[NSMutableArray alloc]init];
-        self.commonArray = self.objPlayerArray;
-        [self.popTbl reloadData];
-        isPlayer = YES;
+    
+            self.popTbl.hidden = NO;
+            self.commonArray = [[NSMutableArray alloc]init];
+            self.commonArray = self.objPlayerArray;
+            [self.popTbl reloadData];
+            isPlayer = YES;
+    
     }
     else
     {
@@ -241,11 +255,13 @@
 
     if(isCategory== NO)
     {
-        self.popTbl.hidden = NO;
-        self.commonArray = [[NSMutableArray alloc]init];
-        self.commonArray = self.objCategoryArray;
-        [self.popTbl reloadData];
-        isCategory = YES;
+    
+            self.popTbl.hidden = NO;
+            self.commonArray = [[NSMutableArray alloc]init];
+            self.commonArray = self.objCategoryArray;
+            [self.popTbl reloadData];
+            isCategory = YES;
+    
     }
     else
     {
@@ -265,11 +281,13 @@
 
     if(isShare== NO)
     {
-        self.popTbl.hidden = NO;
-        self.commonArray = [[NSMutableArray alloc]init];
-        self.commonArray = self.sharetouserArray;
-        [self.popTbl reloadData];
-        isShare = YES;
+    
+            self.popTbl.hidden = NO;
+            self.commonArray = [[NSMutableArray alloc]init];
+            self.commonArray = self.sharetouserArray;
+            [self.popTbl reloadData];
+            isShare = YES;
+    
     }
     else
     {
@@ -319,16 +337,14 @@
 -(IBAction)showSelecteddate:(id)sender{
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    // NSDate *matchdate = [NSDate date];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     
-    NSString * actualDate = [dateFormat stringFromDate:self.datePicker.date];
+    NSString * actualDate = [dateFormat stringFromDate:DatePicker.date];
     
-    self.date_lbl.text = actualDate;
+    _txtVideoDate.text = actualDate;
     
-    [self.date_view setHidden:YES];
-
 }
+
 -(IBAction)didClickCameraBtn:(id)sender
 {
    
@@ -357,8 +373,7 @@
     
     imagePicker.delegate = self;
     
-    imagePicker.sourceType =
-    UIImagePickerControllerSourceTypeCamera;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
     
     imagePicker.mediaTypes =
     @[(NSString *) kUTTypeImage,
@@ -372,7 +387,6 @@
 
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
-
 {
     
     NSLog(@"info[UIImagePickerControllerMediaType] %@",info[UIImagePickerControllerMediaType]);
@@ -481,53 +495,70 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(isShare == YES)
+    if(buttonTag == 4)
     {
-        
-            
+
+
             static NSString *CRTableViewCellIdentifier = @"cellIdentifier";
             CRTableViewCell *cell = (CRTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CRTableViewCellIdentifier];
-            
+
             if (cell == nil) {
                 cell = [[CRTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CRTableViewCellIdentifier];
             }
-            
+
             plyCode = [self.commonArray objectAtIndex:indexPath.row];
             NSString *text = [[self.commonArray valueForKey:@"sharedUserName"] objectAtIndex:[indexPath row]];
             cell.isSelected = [self.selectedMarks containsObject:plyCode] ? YES : NO;
             cell.textLabel.text = text;
             return cell;
-        
+
 
     }
-    else{
     static NSString *MyIdentifier = @"CategoryCell";
-    
+
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    
+
     if (cell == nil)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:MyIdentifier];
     }
-    NSString * selectStr;
-    if(isModule)
+//    NSString * selectStr;
+//    if(isModule)
+//    {
+//        selectStr = [[self.commonArray valueForKey:@"TeamName"] objectAtIndex:indexPath.row];
+//    }
+//    else if (isCategory)
+//    {
+//        selectStr = [[self.commonArray valueForKey:@"CategoryName"] objectAtIndex:indexPath.row];
+//
+//    }
+//    else if (isPlayer)
+//    {
+//        selectStr = [[self.commonArray valueForKey:@"PlayerName"] objectAtIndex:indexPath.row];
+//
+//    }
+//    cell.textLabel.text = selectStr;
+    
+    if (buttonTag == 0) // team
     {
-        selectStr = [[self.commonArray valueForKey:@"ModuleName"] objectAtIndex:indexPath.row];
+        cell.textLabel.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
     }
-    else if (isCategory)
+    else if (buttonTag == 1) // player
     {
-        selectStr = [[self.commonArray valueForKey:@"CategoryName"] objectAtIndex:indexPath.row];
-
+        cell.textLabel.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"PlayerName"];
     }
-    else if (isPlayer)
+    else if (buttonTag == 2) // category
     {
-        selectStr = [[self.commonArray valueForKey:@"PlayerName"] objectAtIndex:indexPath.row];
-
+        cell.textLabel.text = [self.commonArray objectAtIndex:indexPath.row];
     }
-    cell.textLabel.text = selectStr;
+    else if (buttonTag == 3) // type
+    {
+        cell.textLabel.text = [self.commonArray objectAtIndex:indexPath.row];
+    }
+    
     return cell;
-    }
+//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -539,27 +570,54 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if(isPlayer == YES)
+    
+    if (buttonTag == 0) // team
     {
-        self.player_lbl.text = [[self.commonArray valueForKey:@"PlayerName"] objectAtIndex:indexPath.row];
-        selectPlayer = [[self.commonArray valueForKey:@"PlayerCode"] objectAtIndex:indexPath.row];
-        selectTeamCode = [[self.commonArray valueForKey:@"TeamCode"] objectAtIndex:indexPath.row];
-        selectGameCode = [[self.commonArray valueForKey:@"GameCode"] objectAtIndex:indexPath.row];
+        module_lbl.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
+        correspondingTeamCode = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamCode"];
+    }
+    else if (buttonTag == 1) // player
+    {
+        player_lbl.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"PlayerName"];
+        selectPlayer = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"PlayerCode"];
+    }
+    else if (buttonTag == 2) // category
+    {
+        category_lbl.text = [self.commonArray objectAtIndex:indexPath.row];
+    }
+    else if (buttonTag == 3) // type
+    {
+        objKeyword_Txt.text = [self.commonArray objectAtIndex:indexPath.row];
+    }
+    else if (buttonTag == 4)
+    {
+        
+    }
 
-        isPlayer = NO;
-    }
-    else if (isModule == YES)
-    {
-        self.module_lbl.text = [[self.commonArray valueForKey:@"ModuleName"] objectAtIndex:indexPath.row];
-        selectModule = [[self.commonArray valueForKey:@"ModuleCode"] objectAtIndex:indexPath.row];
-        isModule = NO;
-    }
-    else if (isCategory == YES)
-    {
-        self.category_lbl.text = [[self.commonArray valueForKey:@"CategoryName"] objectAtIndex:indexPath.row];
-        selectCategory = [[self.commonArray valueForKey:@"CategoryCode"] objectAtIndex:indexPath.row];
-        isCategory = NO;
-    }
+    
+    
+//    if(isPlayer == YES)
+//    {
+//        self.player_lbl.text = [[self.commonArray valueForKey:@"PlayerName"] objectAtIndex:indexPath.row];
+//        selectPlayer = [[self.commonArray valueForKey:@"PlayerCode"] objectAtIndex:indexPath.row];
+//        selectTeamCode = [[self.commonArray valueForKey:@"TeamCode"] objectAtIndex:indexPath.row];
+//        selectGameCode = [[self.commonArray valueForKey:@"GameCode"] objectAtIndex:indexPath.row];
+//
+//        isPlayer = NO;
+//    }
+//    else if (isModule == YES)
+//    {
+//        self.module_lbl.text = [[self.commonArray valueForKey:@"ModuleName"] objectAtIndex:indexPath.row];
+//        selectModule = [[self.commonArray valueForKey:@"ModuleCode"] objectAtIndex:indexPath.row];
+//        isModule = NO;
+//    }
+//    else if (isCategory == YES)
+//    {
+//        self.category_lbl.text = [[self.commonArray valueForKey:@"CategoryName"] objectAtIndex:indexPath.row];
+//        selectCategory = [[self.commonArray valueForKey:@"CategoryCode"] objectAtIndex:indexPath.row];
+//        isCategory = NO;
+//    }
+    
     if(isShare == YES)
     {
         
@@ -608,12 +666,7 @@
     if(![COMMON isInternetReachable])
         return;
     
-    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    
-    
-
-    
     
     [AppCommon showLoading];
     
@@ -679,11 +732,11 @@
         [self altermsg:@"Please select category"];
 
     }
-    else if ([self.date_lbl.text isEqualToString:@""] || self.date_lbl.text == nil)
-    {
-        [self altermsg:@"Please select date"];
-
-    }
+//    else if ([self.date_lbl.text isEqualToString:@""] || self.date_lbl.text == nil)
+//    {
+//        [self altermsg:@"Please select date"];
+//
+//    }
     else if ([self.objKeyword_Txt.text isEqualToString:@""] || self.objKeyword_Txt.text == nil)
     {
         [self altermsg:@"Please Type keyword"];
@@ -711,25 +764,34 @@
         NSString * comments = @"";
         NSString * videoCode= @"";
         NSString * sharedUserID = [[self.selectedMarks valueForKey:@"sharedUserCode"] componentsJoinedByString:@","];
-    
+        
+    /*
+     plyer code
+     teamcode
+     category
+     type -keyword
+     */
+        
+        
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    if(ClientCode)   [dic    setObject:ClientCode     forKey:@"clientCode"];
-    if(createdby)   [dic    setObject:createdby     forKey:@"Createdby"];
-    if(selectModule)   [dic    setObject:selectModule     forKey:@"moduleCode"];
-    if(selectGameCode)   [dic    setObject:selectGameCode     forKey:@"gameCode"];
-    if(selectTeamCode)   [dic    setObject:selectTeamCode     forKey:@"teamCode"];
-    if(selectPlayer)   [dic    setObject:selectPlayer     forKey:@"playerCode"];
-    if(self.date_lbl.text)   [dic    setObject:self.date_lbl.text     forKey:@"videoDate"];
-    if(selectPlayer)   [dic    setObject:selectPlayer     forKey:@"playerCode"];
-    if(selectCategory)   [dic    setObject:selectCategory     forKey:@"categoryCode"];
-    if(self.objKeyword_Txt.text)   [dic    setObject:self.objKeyword_Txt.text     forKey:@"keyWords"];
-    if(comments)   [dic    setObject:@""    forKey:@"comments"];
-    if(imgFileName)   [dic    setObject:imgFileName  forKey:@"videoFile"];
-        if(imgFileName)   [dic    setObject:imgFileName  forKey:@"fileName"];
+//    if(ClientCode)   [dic    setObject:ClientCode     forKey:@"clientCode"];
+//    if(createdby)   [dic    setObject:createdby     forKey:@"Createdby"];
+//    if(selectModule)   [dic    setObject:selectModule     forKey:@"moduleCode"];
+//    if(selectGameCode)   [dic    setObject:selectGameCode     forKey:@"gameCode"];
+        if(correspondingTeamCode)   [dic    setObject:correspondingTeamCode     forKey:@"teamCode"];
 
-        if(imgData) [dic setObject:imgData forKey:@"newmessagephoto"];
-    if(videoCode)   [dic    setObject:videoCode  forKey:@"videoCode"];
-        if(sharedUserID) [dic setObject:sharedUserID forKey:@"sharedUserID"];
+    if(selectPlayer)   [dic    setObject:selectPlayer     forKey:@"playerCode"];
+//    if(self.date_lbl.text)   [dic    setObject:self.date_lbl.text     forKey:@"videoDate"];
+        if(category_lbl.text)   [dic    setObject:category_lbl.text     forKey:@"categoryCode"];
+    if(self.objKeyword_Txt.text)   [dic    setObject:self.objKeyword_Txt.text     forKey:@"keyWords"];
+//    if(comments)   [dic    setObject:@""    forKey:@"comments"];
+        
+//    if(imgFileName)   [dic    setObject:imgFileName  forKey:@"videoFile"];
+//        if(imgFileName)   [dic    setObject:imgFileName  forKey:@"fileName"];
+//
+//        if(imgData) [dic setObject:imgData forKey:@"newmessagephoto"];
+//    if(videoCode)   [dic    setObject:videoCode  forKey:@"videoCode"];
+//        if(sharedUserID) [dic setObject:sharedUserID forKey:@"sharedUserID"];
 
 
         NSURL *filePath = [NSURL fileURLWithPath:@"file://path/to/image.png"];
@@ -740,12 +802,18 @@
         [manager POST:URLString parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             [formData appendPartWithFileURL:filePath name:@"image" error:nil];
         } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            [AppCommon hideLoading];
+
             NSLog(@"Success: %@", responseObject);
             [self resetImageData];
+            
             dispatch_async(dispatch_get_main_queue(), ^{
+                
                 // Update the UI
                 [AppCommon hideLoading];
-               [self.view removeFromSuperview];
+//                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                [appDel.frontNavigationController dismissViewControllerAnimated:YES completion:nil];
             });
 
             
@@ -757,6 +825,7 @@
         }];
     }
 }
+
 -(void)altermsg:(NSString *)msg
 {
     UIAlertController* alert = [UIAlertController
@@ -771,8 +840,97 @@
     [alert addAction:defaultAction];
     [self presentViewController:alert animated:YES completion:nil];
 }
+
 -(IBAction)didClickCancelBtnAction:(id)sender
 {
-    [self.view removeFromSuperview];
+//    [appDel.frontNavigationController dismissViewControllerAnimated:YES completion:nil];
+    [appDel.frontNavigationController popViewControllerAnimated:YES];
 }
+- (IBAction)actionShowDropDown:(id)sender {
+    [popTbl setHidden:NO];
+    
+    buttonTag = [sender tag];
+    
+    if ([sender tag] == 0) // team
+    {
+        popTbl.frame = CGRectMake(teamView.frame.origin.x, CGRectGetMaxY(teamView.frame), teamView.frame.size.width, 200);
+        
+        self.commonArray = appDel.ArrayTeam;
+    }
+    else if ([sender tag] == 1) // player
+    {
+        
+        popTbl.frame = CGRectMake(playerView.frame.origin.x, CGRectGetMaxY(playerView.frame), playerView.frame.size.width, 200);
+        self.commonArray = [self getCorrespoingPlayerForthisTeamCode:correspondingTeamCode];
+
+    }
+    else if ([sender tag] == 2) // category
+    {
+        popTbl.frame = CGRectMake(CategoryView.frame.origin.x, CGRectGetMaxY(CategoryView.frame), CategoryView.frame.size.width, 200);
+
+        NSArray* arr1 = @[@"Batting",@"Bowling"];
+        self.commonArray = arr1;
+
+    }
+    else if ([sender tag] == 3) // type
+    {
+        
+        popTbl.frame = CGRectMake(keywordsView.frame.origin.x, CGRectGetMaxY(keywordsView.frame), keywordsView.frame.size.width, self.commonArray.count*45);
+
+        /*
+         Beaten
+         Uncomforts,
+         Boundaires,
+         Dotballs,
+         Dismissals
+         
+         bowling
+         Beaten
+         Uncomforts,
+         Boundaries,
+         Dismissals,
+         Variations
+         */
+        
+        NSArray* arr1 = @[@"Beaten",@"Boundaires",@"Dotballs",@"Dismissals"];
+        NSArray* arr2 = @[@"Beaten",@"Boundaires",@"Dotballs",@"Variations"];
+
+        if ([category_lbl.text isEqualToString:@"Batting"]) {
+            self.commonArray = arr1;
+        }
+        else
+        {
+            self.commonArray = arr2;
+        }
+    }
+    else if ([sender tag] == 4) // share to user
+    {
+        popTbl.frame = CGRectMake(sharetoUserView.frame.origin.x, CGRectGetMaxY(sharetoUserView.frame), sharetoUserView.frame.size.width, 200);
+        self.commonArray = self.sharetouserArray;
+        
+    }
+
+    [popTbl reloadData];
+   
+}
+
+-(NSArray *)getCorrespoingPlayerForthisTeamCode:(NSString* )teamcode
+{
+    NSArray* result;
+    
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"TeamCode == %@", teamcode];
+    result = [appDel.ArrayIPL_teamplayers filteredArrayUsingPredicate:resultPredicate];
+    
+    return result;
+}
+
+- (IBAction)didClickType:(id)sender {
+}
+
+- (IBAction)datePickerAction:(id)sender {
+    
+    [_txtVideoDate resignFirstResponder];
+}
+
+
 @end

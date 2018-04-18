@@ -32,7 +32,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Urq-Z6-YCe">
                                 <rect key="frame" x="0.0" y="0.0" width="249" height="136"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bowler_defalut" translatesAutoresizingMaskIntoConstraints="NO" id="c6g-21-E0j">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no-image" translatesAutoresizingMaskIntoConstraints="NO" id="c6g-21-E0j">
                                         <rect key="frame" x="74" y="8" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="B4q-g8-d33"/>
@@ -392,10 +392,23 @@
                 <constraint firstAttribute="trailing" secondItem="gP2-33-uR1" secondAttribute="trailing" id="qXq-ai-s4m"/>
             </constraints>
             <size key="customSize" width="249" height="399"/>
+            <connections>
+                <outlet property="Overslbl" destination="Trj-aW-yoa" id="ERy-rL-0bB"/>
+                <outlet property="Wktslbl" destination="cim-nW-ftC" id="flw-DQ-EAh"/>
+                <outlet property="avglbl" destination="LYz-9s-dIU" id="Ry4-nH-dwK"/>
+                <outlet property="bdryPerlbl" destination="afl-nw-vz4" id="Bl8-kP-ppa"/>
+                <outlet property="dbPrrlbl" destination="XhJ-D8-qrA" id="Fuq-eE-70E"/>
+                <outlet property="econlbl" destination="mWE-Ox-jCz" id="yDJ-UD-qma"/>
+                <outlet property="playerImg" destination="c6g-21-E0j" id="nhi-gb-JfJ"/>
+                <outlet property="playerNamelbl" destination="TjT-tx-3hx" id="j6E-tx-vpo"/>
+                <outlet property="playerStylelbl" destination="GVe-WR-Xmq" id="GgL-lL-pZ3"/>
+                <outlet property="runslbl" destination="EbE-TN-KCN" id="QQl-OP-C2t"/>
+                <outlet property="srlbl" destination="ceM-ep-iSm" id="chK-ys-R3D"/>
+            </connections>
             <point key="canvasLocation" x="24.5" y="59.5"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="bowler_defalut" width="284" height="284"/>
+        <image name="no-image" width="300" height="300"/>
     </resources>
 </document>

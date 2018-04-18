@@ -22,5 +22,9 @@
 @property (strong, nonatomic) IBOutlet UIButton *WktKeeperBtn;
 @property (strong, nonatomic) IBOutlet UIButton *AllrounderBtn;
 @property (strong, nonatomic) IBOutlet UIButton *BowlerBtn;
+@property (weak, nonatomic) IBOutlet UIView *navView;
+@property (weak, nonatomic) IBOutlet UILabel *lblNoData;
+@property (weak, nonatomic) IBOutlet UIView *filterContainerView;
+
 
 @end

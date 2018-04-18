@@ -20,13 +20,15 @@
 #import "SchResStandVC.h"
 
 
-@interface VideoGalleryVC ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate,videoUploadDelegate>
+@interface VideoGalleryVC ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate,videoUploadDelegate,selectedDropDown>
 {
     VideoPlayerViewController * videoPlayerVC;
     WebService * objWebService;
     BOOL isCategory;
-    VideoPlayerUploadVC * videouploadVC;
+    NSString* selectedTeamCode,*selectedPlayerCode;
+    NSInteger* selectedButtonTag;
 }
+
 @property (nonatomic,strong) NSMutableArray * objFirstGalleryArray;
 @property (nonatomic,strong) NSMutableArray * objSecondGalleryArray;
 @property (nonatomic,strong) NSMutableArray * objCatoryArray;
@@ -48,10 +50,26 @@
 
 @implementation VideoGalleryVC
 
+@synthesize btnUpload,dropdownView;
+
+@synthesize btnTeam,btnPlayer,btnType,btnCategory;
+
+@synthesize lblTeam,lblPlayer,lblType,lblcategory;
+
+@synthesize tableMainView,tbl_list,lblNovideo;
+
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
+    if (!appDel.ArrayIPL_teamplayers.count) {
+        [AppCommon getTeamAndPlayerCode];
+    }
+
+    
     objWebService = [[WebService alloc]init];
-    [self videoGalleryWebservice];
+    
+    
     [self.videoCollectionview1 registerNib:[UINib nibWithNibName:@"VideoGalleryCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     [self.videoCollectionview2 registerNib:[UINib nibWithNibName:@"VideoGalleryUploadCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     self.categoryTbl.layer.borderColor = [UIColor brownColor].CGColor;
@@ -62,10 +80,19 @@
     self.categoryTbl.layer.masksToBounds =YES;
     
     self.categoryTbl.hidden= YES;
-    
     self.CancelTextImg.hidden = NO;
     self.clearBtn.hidden = NO;
     [self.view_datepicker setHidden:YES];
+    
+//    [btnUpload setHidden:![AppCommon isCoach]];
+    
+    lblTeam.text = @"KKR";
+    lblPlayer.text = @"Chris Lynn";
+    lblcategory.text = @"BATTING";
+    lblType.text = @"BEATEN&UNCOMFORT";
+    [self newVideoListingwebservice];
+    
+//    view
 
 
 }
@@ -76,6 +103,7 @@
     SWRevealViewController *revealController = [self revealViewController];
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
+
 }
 
 - (void)showAnimate
@@ -101,21 +129,24 @@
     }];
 }
 
+-(NSArray *)getCorrespoingPlayerForthisTeamCode:(NSString* )teamCode
+{
+    NSArray* result;
+    
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"TeamCode == %@", teamCode];
+    result = [appDel.ArrayIPL_teamplayers filteredArrayUsingPredicate:resultPredicate];
+    
+    return result;
+}
+
 
 -(void)videoGalleryWebservice
 {
-   // [AppCommon showLoading ];
     
-    NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-    NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-    NSString *usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-
     
     if(![COMMON isInternetReachable])
         return;
     
-    [AppCommon showLoading];
-    //        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",LoginKey]];
     NSString *URLString =  URL_FOR_RESOURCE(GalleryVideo);
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -127,10 +158,39 @@
     
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    if(ClientCode)   [dic    setObject:ClientCode     forKey:@"clientCode"];
-    if(UserrefCode)   [dic    setObject:UserrefCode     forKey:@"Userreferencecode"];
-    if(usercode)   [dic    setObject:usercode     forKey:@"Usercode"];
+//    if(ClientCode)   [dic    setObject:ClientCode     forKey:@"clientCode"];
+//    if(UserrefCode)   [dic    setObject:UserrefCode     forKey:@"Userreferencecode"];
+//    if(usercode)   [dic    setObject:usercode     forKey:@"Usercode"];
 
+    if (selectedTeamCode == nil) {
+        [AppCommon showAlertWithMessage:@"Please select Team"];
+        return;
+    }
+    else if (selectedPlayerCode == nil) {
+        [AppCommon showAlertWithMessage:@"Please select Player"];
+        return;
+    }
+    else if ([lblType.text isEqualToString:@"Type"]) {
+        [AppCommon showAlertWithMessage:@"Please select type"];
+        return;
+    }
+    else if ([lblType.text isEqualToString:@"category"]) {
+        [AppCommon showAlertWithMessage:@"Please select Category"];
+        return;
+    }
+
+
+
+    
+    
+    
+    
+    if(lblTeam.text)   [dic    setObject:selectedTeamCode     forKey:@"TeamCode"];
+    if(selectedPlayerCode)   [dic    setObject:selectedPlayerCode     forKey:@"PlayerCode"];
+    if(lblType.text)   [dic    setObject:lblType.text     forKey:@"keyWords"];
+    if(lblcategory.text )   [dic    setObject:lblcategory.text     forKey:@"CategoryCode"];
+
+    
     
     NSLog(@"parameters : %@",dic);
     [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -155,12 +215,13 @@
             {
                 [self.CommonArray addObject:[self.objCatoryArray objectAtIndex:i]];
             }
-            
+        
             self.objVideoFilterArray =  self.objSecondGalleryArray;
+                
             [self.videoCollectionview1 reloadData];
             [self.videoCollectionview2 reloadData];
-        }
         
+        }
         
         [AppCommon hideLoading];
         
@@ -175,20 +236,13 @@
 
 - (IBAction)UploadVideoAction:(id)sender {
     
-    [self callVideoUploadMethod];
-    [self.view layoutIfNeeded];
-    //videouploadVC.commonView.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
-
-}
--(void)callVideoUploadMethod
-{
-    if(videouploadVC != nil)
-    {
-        [videouploadVC.view removeFromSuperview];
-    }
-    videouploadVC = [[VideoPlayerUploadVC alloc] initWithNibName:@"VideoPlayerUploadVC" bundle:nil];
+    VideoPlayerUploadVC *VC = [VideoPlayerUploadVC new];
+//    VC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//    VC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//    [VC.view setBackgroundColor:[UIColor clearColor]];
+//    [appDel.frontNavigationController presentViewController:VC animated:YES completion:nil];
     
-    [self.view addSubview:videouploadVC.view];
+    [appDel.frontNavigationController pushViewController:VC animated:YES];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -197,112 +251,152 @@
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //return self.commonArray.count;
-    if(collectionView==self.videoCollectionview1)
+    if(collectionView == self.videoCollectionview1)
     {
-    return self.objFirstGalleryArray.count;
+        return self.objFirstGalleryArray.count;
     }
     else
     {
-        return self.objVideoFilterArray.count;
+//        return self.objVideoFilterArray.count;
+        
+        [lblNovideo setHidden:self.objFirstGalleryArray.count];
+        
+        return self.objFirstGalleryArray.count;
+
     }
 }
+
 #pragma mar - UICollectionViewFlowDelegateLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if(IS_IPHONE_DEVICE)
-    {
-        if(!IS_IPHONE5)
-        {
-            return CGSizeMake(50, 50);
-        }
-        else
-        {
-            if(collectionView == self.videoCollectionview1)
-            {
-                return CGSizeMake(224, 135);
-            }
-            else
-            {
-                return CGSizeMake(120, 180);
-            }
-        }
-    }
-    else
-    {
-        //return CGSizeMake(160, 140);
+    
+    CGFloat width = collectionView.frame.size.width;
+//    CGFloat height = collectionView.frame.size.height;
+    
+    if(IS_IPHONE5) {
         
-        if(collectionView == self.videoCollectionview1)
-        {
-            return CGSizeMake(224, 135);
-        }
-        else
-        {
-            return CGSizeMake(150, 220);
-        }
+        width = width/3;
     }
+    else if(!IS_IPAD && !IS_IPHONE5) {
+        
+        width = width/4;
+    }
+    else if(IS_IPAD) {
+        
+        width = width/5;
+    }
+    
+    return CGSizeMake(width-20, width-20);
+
+    
+//    if(IS_IPHONE_DEVICE)
+//    {
+//        if(!IS_IPHONE5)
+//        {
+//            return CGSizeMake(50, 50);
+//        }
+//        else
+//        {
+//            if(collectionView == self.videoCollectionview1)
+//            {
+//                return CGSizeMake(224, 135);
+//            }
+//            else
+//            {
+//                return CGSizeMake(120, 180);
+//            }
+//        }
+//    }
+//    else
+//    {
+//        //return CGSizeMake(160, 140);
+//
+//        if(collectionView == self.videoCollectionview1)
+//        {
+//            return CGSizeMake(224, 135);
+//        }
+//        else
+//        {
+//            return CGSizeMake(150, 122);
+//        }
+//    }
+    
+    
+    
+    //return UICollectionViewFlowLayoutAutomaticSize;
 }
+
 #pragma mark collection view cell paddings
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    if(!IS_IPHONE_DEVICE)
-    {
-        return UIEdgeInsetsMake(15, 15, 25, 15); // top, left, bottom, right
-    }
-    else{
-        return UIEdgeInsetsMake(10, 10, 10, 10);
-    }
+//    if(!IS_IPHONE_DEVICE)
+//    {
+//        return UIEdgeInsetsMake(15, 15, 25, 15); // top, left, bottom, right
+//    }
+//    else{
+//        return UIEdgeInsetsMake(10, 10, 10, 10);
+//    }
+    
+    return UIEdgeInsetsMake(10, 10, 10, 10);
+
 }
 
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    if(!IS_IPHONE_DEVICE)
-    {
-        return 10.0;
-    }
-    else{
-        return 10.0;
-    }
+//    if(!IS_IPHONE_DEVICE)
+//    {
+//        return 10.0;
+//    }
+//    else{
+//        return 10.0;
+//    }
+    
+    return 10.0;
+
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    if(!IS_IPHONE_DEVICE)
-    {
-        return 23.0;
-    }
-    else{
-        return 10.0;
-    }
+//    if(!IS_IPHONE_DEVICE)
+//    {
+//        return 23.0;
+//    }
+//    else{
+//        return 10.0;
+//    }
+    
+    return 10.0;
+
 }
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if(collectionView==self.videoCollectionview1)
-    {
-        
-        VideoGalleryCell* cell = [self.videoCollectionview1 dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
-        
-        cell.contentView.layer.cornerRadius = 2.0f;
-        cell.contentView.layer.borderWidth = 1.0f;
-        cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
-        cell.contentView.layer.masksToBounds = YES;
-        
-        cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-        cell.layer.shadowOffset = CGSizeMake(0, 2.0f);
-        cell.layer.shadowRadius = 2.0f;
-        cell.layer.shadowOpacity = 1.0f;
-        cell.layer.masksToBounds = NO;
-        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
-        NSString * videoDetailStr = [[self.objFirstGalleryArray valueForKey:@"videoName"] objectAtIndex:indexPath.row];
-        NSArray *component3 = [videoDetailStr componentsSeparatedByString:@" "];
-        
-        cell.playername_lbl.text =  [NSString stringWithFormat:@"%@",component3[0]];
-        cell.batting_lbl.text =  [NSString stringWithFormat:@"%@",component3[1]];
-        cell.date_lbl.text =  [NSString stringWithFormat:@"%@",component3[2]];
-        return cell;
-    }
+//    if(collectionView==self.videoCollectionview1)
+//    {
+//
+//        VideoGalleryCell* cell = [self.videoCollectionview1 dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
+//
+//        cell.contentView.layer.cornerRadius = 2.0f;
+//        cell.contentView.layer.borderWidth = 1.0f;
+//        cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
+//        cell.contentView.layer.masksToBounds = YES;
+//
+//        cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+//        cell.layer.shadowOffset = CGSizeMake(0, 2.0f);
+//        cell.layer.shadowRadius = 2.0f;
+//        cell.layer.shadowOpacity = 1.0f;
+//        cell.layer.masksToBounds = NO;
+//        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
+//        NSString * videoDetailStr = [[self.objFirstGalleryArray valueForKey:@"videoName"] objectAtIndex:indexPath.row];
+//        NSArray *component3 = [videoDetailStr componentsSeparatedByString:@" "];
+//
+//        cell.playername_lbl.text =  [NSString stringWithFormat:@"%@",component3[0]];
+//        cell.batting_lbl.text =  [NSString stringWithFormat:@"%@",component3[1]];
+//        cell.date_lbl.text =  [NSString stringWithFormat:@"%@",component3[2]];
+//        return cell;
+//    }
+    
     if(collectionView==self.videoCollectionview2)
     {
-        
         VideoGalleryUploadCell* cell = [self.videoCollectionview2 dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
         
         cell.contentView.layer.cornerRadius = 2.0f;
@@ -316,13 +410,35 @@
         cell.layer.shadowOpacity = 1.0f;
         cell.layer.masksToBounds = NO;
         cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
-        NSString * videoDetailStr = [[self.objVideoFilterArray valueForKey:@"videoName"] objectAtIndex:indexPath.row];
-        NSArray *component3 = [videoDetailStr componentsSeparatedByString:@" "];
+        
+        NSString * videoDetailStr = [[self.objFirstGalleryArray valueForKey:@"videoFile"] objectAtIndex:indexPath.row];
+//        NSArray *component3 = [videoDetailStr componentsSeparatedByString:@" "];
+        
+//        cell.playername_lbl.text =  [NSString stringWithFormat:@"%@",component3[0]];
+//        if ([[AppCommon checkNull:[[self.objFirstGalleryArray valueForKey:@"videoFile"] objectAtIndex:indexPath.row]] isEqualToString:@""]) {
+//
+//
+//        }
+        
+        cell.batting_lbl.text = [[self.objFirstGalleryArray valueForKey:@"videoName"] objectAtIndex:indexPath.row];
+//        cell.date_lbl.text =  [NSString stringWithFormat:@"%@",component3[2]];
+        
+//        if (indexPath.row % 2 == 1) {
+//
+            cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+//        }
+//        else {
+//            cell.layer.shadowColor = [UIColor redColor].CGColor;
+//        }
+        
 
-        cell.playername_lbl.text =  [NSString stringWithFormat:@"%@",component3[0]];
-        cell.batting_lbl.text =  [NSString stringWithFormat:@"%@",component3[1]];
-        cell.date_lbl.text =  [NSString stringWithFormat:@"%@",component3[2]];
+        cell.layer.shadowOffset = CGSizeZero;
+        cell.layer.shadowRadius = 1.0f;
+        cell.layer.shadowOpacity = 0.5f;
+        cell.layer.masksToBounds = NO;
+        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
 
+        
         return cell;
     }
     
@@ -330,42 +446,35 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-
+    
     NSString * selectvideoStr;
     if (videoPlayerVC != nil) {
-       
+        
     }
-    if(collectionView==self.videoCollectionview1)
+    
+    if(collectionView == self.videoCollectionview1)
     {
-        selectvideoStr =[[self.objFirstGalleryArray valueForKey:@"videoFile"]objectAtIndex:indexPath.row];
+        selectvideoStr = [[self.objFirstGalleryArray valueForKey:@"videoFile"]objectAtIndex:indexPath.row];
     }
-    if(collectionView==self.videoCollectionview2)
+    else if(collectionView == self.videoCollectionview2)
     {
-        selectvideoStr =[[self.objVideoFilterArray valueForKey:@"videoFile"]objectAtIndex:indexPath.row];
+        selectvideoStr = [[self.objFirstGalleryArray valueForKey:@"videoFile"]objectAtIndex:indexPath.row];
+    }
+    
+//    ScoreCardVideoPlayer * videoPlayerVC = [[ScoreCardVideoPlayer alloc]init];
+//    videoPlayerVC = (ScoreCardVideoPlayer *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"ScoreCardVideoPlayer"];
+//    videoPlayerVC.isFromHome = YES;
+//    videoPlayerVC.HomeVideoStr = selectvideoStr;
+//    NSLog(@"appDel.frontNavigationController.topViewController %@",appDel.frontNavigationController.topViewController);
+//    [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
 
-    }
     
-//    NSString * url = [NSString stringWithFormat:@"%@%@",Video_URL,selectvideoStr];
-//
-//    NSURL *videoURL = [NSURL URLWithString:url];
-//    AVPlayer *player = [AVPlayer playerWithURL:videoURL];
-//
-//    // create a player view controller
-//    AVPlayerViewController *controller = [[AVPlayerViewController alloc] init];
-//    [self presentViewController:controller animated:YES completion:nil];
-//    controller.player = player;
-//    [player play];
-    
-     videoPlayerVC = [[VideoPlayerViewController alloc] initWithNibName:@"VideoPlayerViewController" bundle:nil];
+    videoPlayerVC = [[VideoPlayerViewController alloc] initWithNibName:@"VideoPlayerViewController" bundle:nil];
     videoPlayerVC.objSelectVideoLink = selectvideoStr;
-    videoPlayerVC.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
-
-    SchResStandVC *obj = [[SchResStandVC alloc] initWithNibName:@"SchResStandVC" bundle:nil];
+    [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
     
-    
-
-    [self.view addSubview:videoPlayerVC.view];
 }
+
 -(IBAction)didClickcategoryPopView:(id)sender
 {
     if(isCategory == NO)
@@ -400,8 +509,6 @@
     return [self.CommonArray count];    //count number of row from counting array hear cataGorry is An Array
 }
 
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -412,13 +519,36 @@
     if (cell == nil)
     {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                       reuseIdentifier:MyIdentifier];
+                                      reuseIdentifier:MyIdentifier];
     }
     
-    // Here we use the provided setImageWithURL: method to load the web image
-    // Ensure you use a placeholder image otherwise cells will be initialized with no image
-   
-    cell.textLabel.text = [[self.CommonArray valueForKey:@"CategoryName"] objectAtIndex:indexPath.row];
+    
+    cell.backgroundColor = [UIColor colorWithRed:28.0/255.0 green:26.0/255.0 blue:68.0/255.0 alpha:0.5];
+    cell.textLabel.font = [UIFont fontWithName:@"Montserrat-Regular" size:(IS_IPAD ? 13.0 : 13.0 )];
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    cell.textLabel.textColor = [UIColor whiteColor];
+    cell.textLabel.numberOfLines = 2;
+
+    if (selectedButtonTag == 0) {
+        cell.textLabel.text = [[self.CommonArray valueForKey:@"TeamName"] objectAtIndex:indexPath.row];
+
+    }
+    else if (selectedButtonTag == 1) {
+        
+        cell.textLabel.text = [[self.CommonArray valueForKey:@"PlayerName"] objectAtIndex:indexPath.row];
+
+    }
+    else if (selectedButtonTag == 2) {
+        
+        cell.textLabel.text = [[self.CommonArray valueForKey:@"category"] objectAtIndex:indexPath.row];
+
+    }
+    else if (selectedButtonTag == 3) {
+        
+        cell.textLabel.text = [[self.CommonArray valueForKey:@"type"] objectAtIndex:indexPath.row];
+    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -426,42 +556,36 @@
 {
     
     return 44;
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if(indexPath.row == 0)
-    {
-        self.catagory_lbl.text = [[self.CommonArray valueForKey:@"CategoryName"] objectAtIndex:indexPath.row];
-        self.objVideoFilterArray =  self.objSecondGalleryArray;
+    if (selectedButtonTag == 0) {
+        lblTeam.text = [[self.CommonArray valueForKey:@"TeamName"] objectAtIndex:indexPath.row];
+        selectedTeamCode = [[self.CommonArray valueForKey:@"TeamCode"] objectAtIndex:indexPath.row];
+        lblPlayer.text = @"Player";
     }
-    else
-    {
-    
-    self.catagory_lbl.text = [[self.CommonArray valueForKey:@"CategoryName"] objectAtIndex:indexPath.row];
-    NSString * selectCategoryCode = [[self.CommonArray valueForKey:@"categoryCode"] objectAtIndex:indexPath.row];
-    self.objVideoFilterArray =[[NSMutableArray alloc]init];
-    for(NSDictionary * objDic in self.objSecondGalleryArray)
-    {
-        NSString * objStr = [objDic valueForKey:@"categoryCode"];
-        if([objStr isEqualToString:selectCategoryCode])
-        {
-            [self.objVideoFilterArray addObject:objDic];
-        }
-     }
+    else if (selectedButtonTag == 1) {
+        
+        lblPlayer.text = [[self.CommonArray valueForKey:@"PlayerName"] objectAtIndex:indexPath.row];
+        selectedPlayerCode = [[self.CommonArray valueForKey:@"PlayerCode"] objectAtIndex:indexPath.row];
     }
-    [self.videoCollectionview2 reloadData];
-    [self removeAnimate];
-    isCategory = NO;
+    else if (selectedButtonTag == 2) {
+        
+        lblcategory.text = [[self.CommonArray valueForKey:@"category"] objectAtIndex:indexPath.row];
+    }
+    else if (selectedButtonTag == 3) {
+        
+        lblType.text = [[self.CommonArray valueForKey:@"type"] objectAtIndex:indexPath.row];
+    }
+    [self closeView:nil];
 
 }
+
 #pragma mark - Search delegate methods
 
 - (void)filterContentForSearchText:(NSString*)searchText
 {
-    
-    
     
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"videoName CONTAINS[c] %@", searchText];
     _searchResult = [self.objSecondGalleryArray filteredArrayUsingPredicate:resultPredicate];
@@ -471,17 +595,19 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         // Update the UI
         if (_searchResult.count == 0) {
-          self.objVideoFilterArray = [self.searchResult copy];
-          [self.videoCollectionview2 reloadData];
+            self.objVideoFilterArray = [self.searchResult copy];
+            
+            [self.videoCollectionview2 reloadData];
             
         } else {
             
             self.objVideoFilterArray =[[NSMutableArray alloc]init];
             self.objVideoFilterArray = [self.searchResult copy];
+            
             [self.videoCollectionview2 reloadData];
             
         }
-   });
+    });
     
     
 }
@@ -507,7 +633,9 @@
     {
         self.objVideoFilterArray = [[NSMutableArray alloc]init];
         self.objVideoFilterArray =  self.objSecondGalleryArray;
+    
         [self.videoCollectionview2 reloadData];
+    
     }
     
     //[self filterContentForSearchText:searchString];
@@ -523,12 +651,11 @@
     if (textField.text.length == 0) {
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
             [self.videoCollectionview2 reloadData];
         });
     }
     else {
-       
+        
         [self filterContentForSearchText:textField.text];
     }
 }
@@ -537,7 +664,7 @@
 {
     
     //self.videoCollectionview2.hidden = NO;
-  
+    
 }
 
 -(BOOL) textFieldShouldReturn:(UITextField *)textField
@@ -545,7 +672,6 @@
     [textField resignFirstResponder];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        
         [self.videoCollectionview2 reloadData];
     });
     return YES;
@@ -589,7 +715,7 @@
 -(IBAction)showSelecteddate:(id)sender{
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-   // NSDate *matchdate = [NSDate date];
+    // NSDate *matchdate = [NSDate date];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     
     NSString * actualDate = [dateFormat stringFromDate:self.datePicker.date];
@@ -603,7 +729,7 @@
     }
     
     [self.view_datepicker setHidden:YES];
-   
+    
     self.objVideoFilterArray =[[NSMutableArray alloc]init];
     for(NSDictionary * objDic in self.objSecondGalleryArray)
     {
@@ -616,6 +742,7 @@
             [self.objVideoFilterArray addObject:objDic];
         }
     }
+    
     [self.videoCollectionview2 reloadData];
     
 }
@@ -628,10 +755,255 @@
     
     self.objVideoFilterArray = [[NSMutableArray alloc]init];
     self.objVideoFilterArray =  self.objSecondGalleryArray;
+    
     [self.videoCollectionview2 reloadData];
-   
+    
 }
 
 
+
+- (IBAction)showFilter:(id)sender {
+    
+    [tableMainView setHidden:NO];
+    selectedButtonTag = [sender tag];
+    
+//    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+//    dropVC.protocol = self;
+//    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+//
+//    CGFloat leading = (dropVC.view.frame.size.width/2) - dropVC.tblDropDown.frame.size.width;
+
+    if ([sender tag] == 0) { // TEAM
+        _CommonArray = appDel.ArrayTeam;
+//        _CommonArray = appDel.MainArray;
+
+        
+        
+//        dropVC.array = appDel.ArrayTeam;
+//        dropVC.key = @"TeamName";
+//        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropdownView.frame), CGRectGetMinY(dropdownView.frame), CGRectGetWidth(dropdownView.frame)/2, 300)];
+        
+        CGFloat height = 0;
+        if (_CommonArray.count > 5) {
+            height = 5 * 50;
+        }
+        else
+        {
+            height = _CommonArray.count * 50;
+        }
+        
+        
+        [tbl_list setFrame:CGRectMake(CGRectGetMinX(btnTeam.superview.frame), 0, CGRectGetWidth(btnTeam.superview.frame), height)];
+        
+    }
+    else if([sender tag] == 1) // player
+    {
+        if ([lblTeam.text isEqualToString:@"Team"]) {
+            [AppCommon showAlertWithMessage:@"Plaese select Team"];
+            return;
+        }
+        
+        if([lblTeam.text isEqualToString:@"KKR"])
+        {
+            selectedTeamCode = @"TEA0000008";
+        }
+        _CommonArray = [self getCorrespoingPlayerForthisTeamCode:selectedTeamCode];
+
+//        dropVC.array = [self getCorrespoingPlayerForthisTeamCode:selectedTeamCode];
+//        dropVC.key = @"PlayerName";
+//        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropdownView.frame), CGRectGetMaxY(dropdownView.frame), CGRectGetWidth(dropdownView.frame)/2, 300)];
+        
+        CGFloat height = 0;
+        if (_CommonArray.count > 5) {
+            height = 5 * 50;
+        }
+        else
+        {
+            height = _CommonArray.count * 50;
+        }
+
+        
+        [tbl_list setFrame:CGRectMake(CGRectGetMinX(btnPlayer.superview.frame), 0, CGRectGetWidth(btnPlayer.superview.frame), height)];
+
+
+    }
+    else if([sender tag] == 2) // Category
+    {
+        
+        NSArray* typeArray = @[@{@"category":@"BATTING"},@{@"category":@"BOWLING"}];
+        _CommonArray = typeArray;
+        
+        [tbl_list setFrame:CGRectMake(CGRectGetMinX(btnCategory.superview.frame), 0, CGRectGetWidth(btnCategory.superview.frame), 50*_CommonArray.count)];
+
+
+        
+//        dropVC.array = typeArray;
+//        dropVC.key = @"type";
+        
+//        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropdownView.frame), CGRectGetMaxY(dropdownView.superview.frame), CGRectGetWidth(dropdownView.frame)/2, 50*typeArray.count)];
+
+    }
+    else if([sender tag] == 3) // Type
+    {
+        NSString* temp =@"";
+        if ([lblcategory.text isEqualToString:@"Batting"]) {
+            temp = @"DISMISSALS";
+        }
+        else {
+            temp = @"VARIATIONS";
+            
+        }
+        
+        
+        NSArray* typeArray = @[@{@"type":@"BEATEN&UNCOMFORT"},@{@"type":@"BOUNDARIES"},@{@"type":@"DOTBALLS"},@{@"type":temp}];
+        _CommonArray = typeArray;
+        
+        [tbl_list setFrame:CGRectMake(CGRectGetMinX(btnType.superview.frame), 0, CGRectGetWidth(btnType.superview.frame), 50*_CommonArray.count)];
+
+        
+//        [dropVC.tblDropDown setFrame:CGRectMake(leading, CGRectGetMaxY(dropdownView.superview.frame), CGRectGetWidth(dropdownView.frame)/2, 50*typeArray.count)];
+
+    }
+    
+//    [dropVC.tblDropDown setTranslatesAutoresizingMaskIntoConstraints:NO];
+//    [[dropVC.tblDropDown.widthAnchor constraintLessThanOrEqualToConstant:250] setActive:true];
+//    [[dropVC.tblDropDown.heightAnchor constraintLessThanOrEqualToConstant:300] setActive:true];
+//    [[dropVC.tblDropDown.centerXAnchor constraintEqualToAnchor:dropVC.view.centerXAnchor] setActive:true];
+//    [[dropVC.tblDropDown.centerYAnchor constraintEqualToAnchor:dropVC.view.centerYAnchor] setActive:true];
+//    [dropVC.tblDropDown updateFocusIfNeeded];
+
+//    label.widthAnchor.constraint(equalToConstant: 250).isActive = true
+//    label.heightAnchor.constraint(equalToConstant: 100).isActive = true
+//    label.centerXAnchor.constraint(equalTo: self.tableView.centerXAnchor).isActive = true
+//    label.centerYAnchor.constraint(equalTo: self.tableView.centerYAnchor).isActive = true
+//    dropVC.tblDropDown.center = CGPointMake(dropVC.view.frame.size.width/2, dropVC.view.frame.size.height/2);
+    
+
+    
+//    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
+//        NSLog(@"DropDown loaded");
+//
+//    }];
+    
+    [tbl_list reloadData];
+    
+}
+
+
+-(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
+{
+    if ([key isEqualToString:@"TeamName"]) {
+        lblTeam.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        selectedTeamCode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
+    }
+    else if ([key isEqualToString:@"PlayerName"]) {
+        
+        
+        lblPlayer.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        selectedPlayerCode = [[array objectAtIndex:Index.row] valueForKey:@"PlayerCode"];
+    }
+    else if ([key isEqualToString:@"type"]) {
+        lblType.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        
+    }
+    else if ([key isEqualToString:@"category"]) {
+        lblcategory.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        
+    }
+
+
+    
+    NSLog(@"selected value %@",[[array objectAtIndex:Index.row] valueForKey:key]);
+}
+
+
+
+- (IBAction)actionFilterVideo:(id)sender {
+    
+//    [self videoGalleryWebservice];
+    [self newVideoListingwebservice];
+}
+
+-(IBAction)closeView:(id)sender
+{
+    [tableMainView setHidden:YES];
+}
+
+
+-(void)newVideoListingwebservice
+{
+    /*
+     FETCH_AMAZONFILES/{TEAMNAME}/{PLAYERNAME}/{CATEGORY}/{TYPE}
+     
+     {
+     "TeamName":"KKR",
+     "Category":"BATTING",
+     "PlayerName":"Chris Lynn",
+     "Type":"BEATEN&UNCOMFORT"
+     
+     }
+     */
+    
+    if(![COMMON isInternetReachable])
+        return;
+    
+    if (lblTeam.text == nil || [lblTeam.text isEqualToString:@"Team"]) {
+        [AppCommon showAlertWithMessage:@"Please select Team"];
+        return;
+    }
+    else if (lblPlayer.text == nil || [lblPlayer.text isEqualToString:@"Player"]) {
+        [AppCommon showAlertWithMessage:@"Please select Player"];
+        return;
+    }
+    else if (lblType.text == nil || [lblType.text isEqualToString:@"Type"]) {
+        [AppCommon showAlertWithMessage:@"Please select type"];
+        return;
+    }
+    else if (lblcategory.text == nil || [lblcategory.text isEqualToString:@"category"]) {
+        [AppCommon showAlertWithMessage:@"Please select Category"];
+        return;
+    }
+    
+    
+    NSMutableDictionary* paramDict = [NSMutableDictionary new];
+    [paramDict setValue:lblTeam.text forKey:@"TeamName"];
+    [paramDict setValue:lblPlayer.text forKey:@"PlayerName"];
+    [paramDict setValue:lblType.text forKey:@"Type"];
+    [paramDict setValue:lblcategory.text forKey:@"Category"];
+    
+    [AppCommon showLoading];
+    
+    NSString* URLString = URL_FOR_RESOURCE(@"FETCH_AMAZONFILES");
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = requestSerializer;
+    
+    [manager POST:URLString parameters:paramDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if(responseObject >0)
+        {
+            self.objFirstGalleryArray =[[NSMutableArray alloc]init];
+            self.objFirstGalleryArray =responseObject;
+        
+            [self.videoCollectionview2 reloadData];
+        }
+        
+        [AppCommon hideLoading];
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+        [AppCommon hideLoading];
+
+    }];
+    
+
+
+    
+}
 
 @end

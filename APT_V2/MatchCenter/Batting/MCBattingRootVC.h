@@ -14,5 +14,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *overBlockBtn;
 @property (strong, nonatomic) IBOutlet UIView *headderView;
 @property (strong, nonatomic) IBOutlet UIView *containerView;
+@property (weak, nonatomic) IBOutlet UILabel *lblSelectedTab;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *selctedTabLeading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *selectedTabWidth;
 
 @end

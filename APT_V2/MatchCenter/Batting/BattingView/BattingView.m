@@ -16,12 +16,19 @@
 
 
 @implementation BattingView
+@synthesize insideCompetitionView;
+
+@synthesize overallView,runsView,CompetitionView,teamView;
+
+@synthesize overViewlbl,runslbl,lblteam,lblCompetetion;
 
 NSArray* headingKeyArray;
 NSArray* headingButtonNames;
 BOOL isOverview;
 BOOL isRun;
 BOOL isComp;
+BOOL isTeams;
+BOOL runSortingKey;
 
 
 /* Filter */
@@ -33,10 +40,10 @@ BOOL isComp;
 {
     return 1;
 }
+
 // number of row in the section, I assume there is only 1 row
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
     if(isOverview==YES)
     {
         return 7;
@@ -45,16 +52,17 @@ BOOL isComp;
     {
         return 3;
 
-    }else{
-        return 0;
+    }else if(isComp==YES){
+        return appDel.ArrayCompetition.count;
+    }else if(isTeams==YES){
+        return appDel.ArrayTeam.count;
     }
-    
+    return nil;
 }
+
 // the cell will be returned to the tableView
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     
     static NSString *MyIdentifier = @"cellid";
     
@@ -73,8 +81,13 @@ BOOL isComp;
     {
         cell.textLabel.text = indexPath.row == 0 ? @"Runs" : (indexPath.row == 1 ? @"Strike Rate" : @"Average");
 
-    }else{
-        cell.textLabel.text = @"";
+    }else if(isComp==YES)
+    {
+        cell.textLabel.text = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"];
+    }
+    else if(isTeams==YES)
+    {
+        cell.textLabel.text = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
     }
 
     
@@ -83,9 +96,8 @@ BOOL isComp;
     cell.backgroundColor = [UIColor clearColor];
     return cell;
     
-    
-    
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(isOverview==YES)
@@ -146,10 +158,32 @@ BOOL isComp;
         }
         
     }
+    else if(isComp==YES)
+    {
     
+        self.lblCompetetion.text = [self checkNull:[[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionName"]];
+    NSLog(@"Competition:%@", self.lblCompetetion.text);
+        NSString* Competetioncode = [[appDel.ArrayCompetition objectAtIndex:indexPath.row] valueForKey:@"CompetitionCode"];
+    NSLog(@"Competetioncode:%@", Competetioncode);
+        [[NSUserDefaults standardUserDefaults] setValue:self.lblCompetetion.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    else if(isTeams==YES)
+    {
+        self.lblteam.text = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
+        NSString* teamcode = [[appDel.ArrayTeam objectAtIndex:indexPath.row] valueForKey:@"TeamCode"];
+        [[NSUserDefaults standardUserDefaults] setValue:self.lblteam.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        
+    }
+//
     isOverview = NO;
     isRun = NO;
     isComp = NO;
+    isTeams = NO;
     self.PoplistTable.hidden = YES;
 
     if( ![self.overViewlbl.text isEqualToString:@""] && ![self.runslbl.text isEqualToString:@""] )
@@ -160,12 +194,12 @@ BOOL isComp;
 
 - (IBAction)onClickOverViewDD:(id)sender
 {
-    
     if(isOverview){
         
         isOverview = NO;
         isRun = NO;
         isComp = NO;
+        isTeams = NO;
         self.PoplistTable.hidden = YES;
 
         
@@ -174,13 +208,16 @@ BOOL isComp;
     isOverview = YES;
     isRun = NO;
     isComp = NO;
+    isTeams = NO;
     
     self.PoplistTable.hidden = NO;
     
-    self.tableWidth.constant = 142;
-    self.tableXposition.constant = self.filterView.frame.origin.x+8;
-    self.tableYposition.constant = self.filterView.frame.origin.y;
-        [self.PoplistTable reloadData];
+    self.tableWidth.constant = self.overallView.frame.size.width;
+    self.tableXposition.constant = self.overallView.frame.origin.x;
+    self.tableYposition.constant = self.overallView.frame.origin.y;
+       
+    [self.PoplistTable reloadData];
+    
     }
 }
 
@@ -191,6 +228,7 @@ BOOL isComp;
         isOverview = NO;
         isRun = NO;
         isComp = NO;
+        isTeams = NO;
         self.PoplistTable.hidden = YES;
 
         
@@ -198,34 +236,69 @@ BOOL isComp;
     isOverview = NO;
     isRun = YES;
     isComp = NO;
+    isTeams = NO;
     self.PoplistTable.hidden = NO;
-    self.tableWidth.constant = 142;
-    self.tableXposition.constant = self.filterView.frame.origin.x+8+142+16;
-    self.tableYposition.constant = self.filterView.frame.origin.y;
+        self.tableWidth.constant = self.runsView.frame.size.width;
+        self.tableXposition.constant = self.runsView.frame.origin.x;
+        self.tableYposition.constant = self.runsView.frame.origin.y;
+        
         [self.PoplistTable reloadData];
+        
     }
 }
 
 - (IBAction)onClickCompetition:(id)sender
 {
     if(isRun){
+
+        isOverview = NO;
+        isRun = NO;
+        isComp = NO;
+        isTeams = NO;
+        self.PoplistTable.hidden = YES;
+
+
+    }else{
+        isOverview = NO;
+        isRun = NO;
+        isComp = YES;
+        isTeams = NO;
+        self.PoplistTable.hidden = NO;
+        self.tableWidth.constant = self.CompetitionView.frame.size.width;
+        self.tableXposition.constant = self.CompetitionView.frame.origin.x;
+        self.tableYposition.constant = self.CompetitionView.frame.origin.y;
+        
+        [self.PoplistTable reloadData];
+       
+    }
+
+}
+
+- (IBAction)onClickTeam:(id)sender
+{
+    if(isRun){
         
         isOverview = NO;
         isRun = NO;
         isComp = NO;
+        isTeams = NO;
         self.PoplistTable.hidden = YES;
         
         
     }else{
         isOverview = NO;
         isRun = NO;
-        isComp = YES;
+        isComp = NO;
+        isTeams = YES;
         self.PoplistTable.hidden = NO;
-        self.tableWidth.constant = 142;
-        self.tableYposition.constant = self.CompetitionView.frame.origin.y+40;
-        self.tableXposition.constant = self.insideCompetitionView.frame.origin.x+142+70;
+        self.tableWidth.constant = self.teamView.frame.size.width;
+        self.tableXposition.constant = self.teamView.frame.origin.x;
+        self.tableYposition.constant = self.teamView.frame.origin.y;
+        
         [self.PoplistTable reloadData];
+        
     }
+    
 }
 
 
@@ -233,6 +306,17 @@ BOOL isComp;
 /* Table Freez */
 -(void) loadTableFreez{
     
+//    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+//    NSString *plyRolecode = @"ROL0000002";
+//    
+//    if([rolecode isEqualToString:plyRolecode])
+//    {
+//        self.teamView.hidden = YES;
+//    }
+//    else
+//    {
+//        self.teamView.hidden = NO;
+//    }
 
     self.PoplistTable.delegate = self;
     self.PoplistTable.dataSource = self;
@@ -323,6 +407,10 @@ BOOL isComp;
                 break;
             }
         }
+        if ([cell.btnName.currentTitle isEqualToString:@"Runs"]) {
+            [cell.btnName addTarget:self action:@selector(RunsSorting) forControlEvents:UIControlEventTouchUpInside];
+        }
+
         cell.btnName.userInteractionEnabled = YES;
         
     }
@@ -349,18 +437,21 @@ BOOL isComp;
         for (id temp in headingKeyArray) {
             if ([headingKeyArray indexOfObject:temp] == indexPath.row) {
                  //NSString* str = [AppCommon checkNull:[[PlayerListArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
-                
                 NSString *str;
-                if([[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp] isKindOfClass:[NSNumber class]])
-                {
+                if (self.TableValuesArray.count) {
                     
-                    NSNumber *vv = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
-                    str = [vv stringValue];
+                    if([[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp] isKindOfClass:[NSNumber class]])
+                        {
+                        
+                        NSNumber *vv = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                        str = [vv stringValue];
+                        }
+                    else
+                        {
+                        str = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
+                        }
                 }
-                else
-                {
-                    str = [self checkNull:[[self.TableValuesArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
-                }
+                
                 
                 if([temp isEqualToString:@"Player"])
                 {
@@ -413,13 +504,17 @@ BOOL isComp;
 
 /*  Chart  */
 -(void) loadChart
-
 {
-    //[self BattingWebservice];
+    
+    innNum =@"";
+    Result = @"";
+    types = @"runs";
+    [self BattingWebservice];
 }
 
 -(void)barchartloadValues
 {
+    
     
 //    [self setupBarLineChartView:_chartView];
     
@@ -435,10 +530,10 @@ BOOL isComp;
     
     ChartXAxis *xAxis = _chartView.xAxis;
     xAxis.labelPosition = XAxisLabelPositionBottom;
-    xAxis.labelFont = [UIFont systemFontOfSize:8.f];
+    xAxis.labelFont = [UIFont systemFontOfSize:7.f];
     xAxis.drawGridLinesEnabled = NO;
     xAxis.granularity = 1.0; // only intervals of 1 day
-    //xAxis.labelCount = self.ChartXAxisValuesArray.count;
+    xAxis.labelCount = self.ChartXAxisValuesArray.count;
    // xAxis.valueFormatter = [[DayAxisValueFormatter alloc] initForChart:_chartView];
     xAxis.valueFormatter = [[HorizontalXLblFormatter alloc] initForChart: self.ChartXAxisValuesArray];
     
@@ -512,21 +607,24 @@ BOOL isComp;
     
     NSMutableArray *yVals = [[NSMutableArray alloc] init];
     
-    for (int i = 0; i < self.ChartValuesArray.count; i++)
-    {
-//        double mult = (range + 1);
-//        double val = (double) (arc4random_uniform(mult));
-//        if (arc4random_uniform(100) < 25) {
-//            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val icon: [UIImage imageNamed:@"icon"]]];
-//        } else {
-//            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val]];
-//        }
-        
-        
-        double val = [[[self.ChartValuesArray valueForKey:@"Values"]objectAtIndex:i] doubleValue];
-        
+    if (self.ChartValuesArray.count) {
+        for (int i = 0; i < self.ChartValuesArray.count; i++)
+            {
+                //        double mult = (range + 1);
+                //        double val = (double) (arc4random_uniform(mult));
+                //        if (arc4random_uniform(100) < 25) {
+                //            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val icon: [UIImage imageNamed:@"icon"]]];
+                //        } else {
+                //            [yVals addObject:[[BarChartDataEntry alloc] initWithX:i y:val]];
+                //        }
+            
+            
+            double val = [[[self.ChartValuesArray valueForKey:@"Values"]objectAtIndex:i] doubleValue];
+            
             [yVals addObject:[[BarChartDataEntry alloc] initWithX:i*start y:val]];
+            }
     }
+    
     
     BarChartDataSet *set1 = nil;
     if (_chartView.data.dataSetCount > 0)
@@ -584,11 +682,23 @@ BOOL isComp;
 -(void) BattingWebservice
 {
     
-    if([COMMON isInternetReachable])
+    if(![COMMON isInternetReachable])
     {
+        return;
+    }
+    else if ([lblCompetetion.text isEqualToString:@"Competition Name"])
+    {
+        return;
+    }
+    else if([AppCommon isCoach] && [lblteam.text isEqualToString:@"Team Name"])
+    {
+        return;
+    }
+
+        
         [AppCommon showLoading];
         
-        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",teamBattingKey]];
+        NSString *URLString =  URL_FOR_RESOURCE(teamBattingKey);
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -596,12 +706,9 @@ BOOL isComp;
         manager.requestSerializer = requestSerializer;
         
         
-        NSString *CompetitionCode = @"";
-        NSString *TeamCode = @"TEA0000010";
-//        NSString *InningsNum = @"";
-//        NSString *Result = @"";
-//        NSString *Types = @"avg";
-        
+        NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
+        NSString *TeamCode = [AppCommon getCurrentTeamCode];
+    
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(CompetitionCode)   [dic    setObject:CompetitionCode     forKey:@"CompetitionCode"];
@@ -626,16 +733,23 @@ BOOL isComp;
                 self.TableValuesArray = [responseObject valueForKey:@"plyrBattingList"];
                 
                 self.ChartXAxisValuesArray = [[NSMutableArray alloc]init];
-                
-                for(int i=0;i<self.ChartValuesArray.count;i++)
-                {
-                    NSString * value = [[self.ChartValuesArray valueForKey:@"PlayerName"] objectAtIndex:i];
-                    [self.ChartXAxisValuesArray addObject:value];
+            
+                if (self.ChartValuesArray.count) {
+                    for(int i=0;i<self.ChartValuesArray.count;i++)
+                        {
+                        NSString * value = [[self.ChartValuesArray valueForKey:@"PlayerName"] objectAtIndex:i];
+                        [self.ChartXAxisValuesArray addObject:value];
+                        }
+                    
+                    [self barchartloadValues];
+                    [self.resultCollectionView reloadData];
+                    
                 }
                 
                 
                 [self barchartloadValues];
-                [self.resultCollectionView reloadData];
+                [self RunsSorting];
+//                [self.resultCollectionView reloadData];
             }
             
             [AppCommon hideLoading];
@@ -649,7 +763,154 @@ BOOL isComp;
             
             
         }];
+    
+}
+
+//-(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
+//{
+//    NSLog(@"%@",array[Index.row]);
+//    NSLog(@"selected value %@",key);
+//    lblCompetetion.text = [[array objectAtIndex:Index.row] valueForKey:key];
+//    NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+//
+//    [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
+//    [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//
+//    [self BattingWebservice];
+//
+//}
+
+-(void)RunsSorting
+{
+    NSLog(@"SORTING ORDER %ld",runSortingKey);
+    
+    NSArray* sortedArray = [self.TableValuesArray sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"Runs" ascending:runSortingKey selector:@selector(localizedStandardCompare:)]]];
+    
+    if (sortedArray.count > 0) {
+        runSortingKey = !runSortingKey;
+        self.TableValuesArray = [[NSMutableArray alloc]init];
+        [self.TableValuesArray addObjectsFromArray:sortedArray];
+        
+        [self.resultCollectionView reloadData];
+        
     }
+}
+
+- (IBAction)actionDropDowns:(id)sender {
+    
+    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+    dropVC.protocol = self;
+    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+    
+    if ([sender tag] == 0) { // OverAll
+        
+        NSArray* arr = @[@{@"overall":@"Overall",
+                           @"inns":@"",
+                           @"result":@""},
+                         @{@"overall":@"Batting 1st",
+                           @"inns":@"1",
+                           @"result":@""},
+                         @{@"overall":@"Batting 2nd",
+                           @"inns":@"2",
+                           @"result":@""},
+                         @{@"overall":@"Batting 1st Won",
+                           @"inns":@"1"
+                           ,@"result":@"won"},
+                         @{@"overall":@"Batting 2nd Won",
+                           @"inns":@"2"
+                           ,@"result":@"won"},
+                         @{@"overall":@"Batting 1st Lost",
+                           @"inns":@"1"
+                           ,@"result":@"loss"},
+                         @{@"overall":@"Batting 2nd Lost",
+                           @"inns":@"2",@"result":@"loss"}];
+
+
+        dropVC.array = arr;
+        dropVC.key = @"overall";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(overallView.frame), CGRectGetMaxY(overallView.superview.frame)+60+50, CGRectGetWidth(overallView.frame), 300)];
+
+    }
+    else if ([sender tag] == 1) // Runs
+    {
+        
+        NSArray* arr = @[@{@"Runs":@"Runs"
+                           ,@"types":@"runs"},
+                         @{@"Runs":@"Strike Rate",
+                           @"types":@"sr"},
+                         @{@"Runs":@"Average",
+                            @"types":@"avg"}];
+        
+        dropVC.array = arr;
+        dropVC.key = @"Runs";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(runsView.frame), CGRectGetMaxY(runsView.superview.frame)+60+50, CGRectGetWidth(runsView.frame), 300)];
+        
+    }
+    else if ([sender tag] == 2) // Competitions
+    {
+        dropVC.array = appDel.ArrayCompetition;
+        dropVC.key = @"CompetitionName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(CompetitionView.frame), CGRectGetMaxY(CompetitionView.superview.frame)+60+50, CGRectGetWidth(CompetitionView.frame), 300)];
+
+    }
+    else if ([sender tag] == 3) // Teams
+    {
+        dropVC.array = [COMMON getCorrespondingTeamName:lblCompetetion.text];
+        dropVC.key = @"TeamName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(teamView.frame), CGRectGetMaxY(teamView.superview.frame)+60+50, CGRectGetWidth(teamView.frame), 300)];
+
+    }
+    
+    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
+        NSLog(@"DropDown loaded");
+    }];
+
+}
+
+-(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
+{
+    if ([key  isEqualToString: @"CompetitionName"]) {
+        
+        NSLog(@"%@",array[Index.row]);
+        NSLog(@"selected value %@",key);
+        lblCompetetion.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        lblteam.text = @"Team Name";
+        
+    }
+    else if([key isEqualToString:@"TeamName"])
+    {
+        lblteam.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:lblteam.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
+    else if([key isEqualToString:@"overall"])
+    {
+        overViewlbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        Result = [[array objectAtIndex:Index.row] valueForKey:@"result"];
+        innNum = [[array objectAtIndex:Index.row] valueForKey:@"inns"];
+        
+    }
+    else if([key isEqualToString:@"Runs"])
+    {
+        runslbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        types = [[array objectAtIndex:Index.row] valueForKey:@"types"];
+    }
+    
+    [self BattingWebservice];
+    
     
 }
 

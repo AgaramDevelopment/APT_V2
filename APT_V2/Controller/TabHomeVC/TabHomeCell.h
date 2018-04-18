@@ -10,5 +10,6 @@
 
 @interface TabHomeCell : UICollectionViewCell
 @property (strong, nonatomic) IBOutlet UILabel *Title;
+@property (weak, nonatomic) IBOutlet UIView *selectedLineView;
 
 @end

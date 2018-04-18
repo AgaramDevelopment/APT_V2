@@ -22,6 +22,7 @@
 @property (nonatomic,strong) IBOutlet UILabel * runslbl;
 @property (nonatomic,strong) IBOutlet UILabel * wicketslbl;
 @property (nonatomic,strong) IBOutlet UILabel * economylbl;
+@property (nonatomic,strong) IBOutlet UILabel * dotballslbl;
 
 
 @property (nonatomic,strong) IBOutlet UIButton * onesBtn;
@@ -36,6 +37,7 @@
 @property (nonatomic,strong) IBOutlet UIButton * runSBtn;
 @property (nonatomic,strong) IBOutlet UIButton * oversBtn;
 @property (nonatomic,strong) IBOutlet UIButton * wicketsBtn;
+@property (nonatomic,strong) IBOutlet UIButton * dotsBtn;
 
 
 @end

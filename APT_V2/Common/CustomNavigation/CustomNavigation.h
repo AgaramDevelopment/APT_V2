@@ -20,5 +20,8 @@
 @property (nonatomic,strong) IBOutlet UIButton * ticketBtn;
 @property (nonatomic,strong) IBOutlet UIButton * menu_btn;
 @property (nonatomic,strong) IBOutlet UIButton * home_btn;
+@property (strong, nonatomic) IBOutlet UIButton *notificationBtn;
+@property (strong, nonatomic) IBOutlet UILabel *notificationCountLbl;
+@property (strong, nonatomic) IBOutlet UIView *notificationView;
 
 @end

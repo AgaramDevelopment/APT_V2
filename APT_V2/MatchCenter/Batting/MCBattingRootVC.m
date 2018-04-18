@@ -23,13 +23,13 @@
 @end
 
 @implementation MCBattingRootVC
+@synthesize lblSelectedTab,selectedTabWidth,selctedTabLeading;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self customnavigationmethod];
-    [self setInningsBySelection:@"1"];
-    
-    [self loadContainerView:@"1"];
+//    [self setInningsBySelection:@"1"];
+//
+//    [self loadContainerView:@"1"];
 //    btView = [[[NSBundle mainBundle] loadNibNamed:@"BattingView" owner:self options:nil] objectAtIndex:0];
 //
 //
@@ -40,8 +40,36 @@
 //
 //    [btView loadChart];
 //    [btView loadTableFreez];
+    
+//    selctedTabLeading.constant = [_battingBtn frame].origin.x +[_battingBtn frame].size.width/4;
+//    selectedTabWidth.constant = [_battingBtn frame].size.width/2;
+//
+//    [UIView animateWithDuration:0.3 animations:^{
+//        [self.lblSelectedTab layoutIfNeeded];
+//    }];
+
+    
+    [self.battingBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    selctedTabLeading.constant = [self.battingBtn frame].origin.x +[self.battingBtn frame].size.width/4;
+    selectedTabWidth.constant = [self.battingBtn frame].size.width/2;
+    
+    [UIView animateWithDuration:0.1 animations:^{
+        [self.lblSelectedTab layoutIfNeeded];
+    }];
 
 }
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
+
 - (void)removePreviousView:(UIView*)previousView FromSuperView:(UIView*)view{
     for (UIView *subView in view.subviews) {
         if (![subView isKindOfClass:[previousView class]]) {
@@ -50,9 +78,10 @@
     }
 }
 
-
 -(void) loadContainerView : (NSString *) position{
     
+    [self removePreviousView:btView FromSuperView: self.containerView];
+
     if([position isEqualToString:@"1"]){
 
         if(btView == nil){
@@ -61,9 +90,9 @@
         
         btView.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height);
         btView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        [self removePreviousView:btView FromSuperView: self.containerView];
         [self.containerView addSubview:btView];
-        
+        btView.lblCompetetion.text = [AppCommon getCurrentCompetitionName];
+        btView.lblteam.text = [AppCommon getCurrentTeamName];
         [btView loadChart];
         [btView loadTableFreez];
 
@@ -76,18 +105,16 @@
         }
         
         overView.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height);
+        overView.lblCompetetion.text = [AppCommon getCurrentCompetitionName];
+        overView.teamlbl.text = [AppCommon getCurrentTeamName];
+
         overView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        [self removePreviousView:overView FromSuperView: self.containerView];
         [self.containerView addSubview:overView];
         
         [overView loadChart];
        
     }
     else if([position isEqualToString:@"3"]){
-        
-      //  [self setInningsButtonSelect:self.overBlockBtn];
-        
-        
         
         if(battingOverBlockView == nil){
             
@@ -96,8 +123,9 @@
         }
         
         battingOverBlockView.frame = CGRectMake(0, 0, self.containerView.frame.size.width, self.containerView.frame.size.height);
+        battingOverBlockView.lblCompetetion.text = [AppCommon getCurrentCompetitionName];
+        battingOverBlockView.teamlbl.text = [AppCommon getCurrentTeamName];
         battingOverBlockView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        [self removePreviousView:battingOverBlockView FromSuperView: self.containerView];
         [self.containerView addSubview:battingOverBlockView];
         
         [battingOverBlockView loadPowerPlayDetails];
@@ -204,21 +232,44 @@
 }
 - (IBAction)onClickBatting:(id)sender {
     
-    [self setInningsBySelection:@"1"];
+    selctedTabLeading.constant = [sender frame].origin.x +[sender frame].size.width/4;
+    selectedTabWidth.constant = [sender frame].size.width/2;
     
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.lblSelectedTab layoutIfNeeded];
+    }];
+
+//    [self setInningsBySelection:@"1"];
     [self loadContainerView : @"1"];
+    
     
 }
 - (IBAction)onClickOverView:(id)sender {
-    [self setInningsBySelection:@"2"];
+    
+    selctedTabLeading.constant = [sender frame].origin.x +[sender frame].size.width/4;
+    selectedTabWidth.constant = [sender frame].size.width/2;
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.lblSelectedTab layoutIfNeeded];
+    }];
+    
+//    [self setInningsBySelection:@"2"];
     [self loadContainerView : @"2"];
 
 }
 
 - (IBAction)onClickOverBlock:(id)sender {
-    [self setInningsBySelection:@"3"];
-    [self loadContainerView : @"3"];
+    
+    selctedTabLeading.constant = [sender frame].origin.x +[sender frame].size.width/4;
+    selectedTabWidth.constant = [sender frame].size.width/2;
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.lblSelectedTab layoutIfNeeded];
+    }];
 
+//    [self setInningsBySelection:@"3"];
+    [self loadContainerView : @"3"];
+    
 }
 
 

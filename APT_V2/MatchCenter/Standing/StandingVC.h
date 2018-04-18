@@ -22,6 +22,12 @@
 
 
 @property (strong, nonatomic) IBOutlet UIView *popTableView;
+@property (weak, nonatomic) IBOutlet UIView *viewYear;
+@property (weak, nonatomic) IBOutlet UIView *viewCompetetion;
+@property (weak, nonatomic) IBOutlet UIView *viewTeam;
+@property (weak, nonatomic) IBOutlet UILabel *lblCompetetion;
+@property (weak, nonatomic) IBOutlet UILabel *lblTeam;
+- (IBAction)actionDropDown:(id)sender;
 
 
 

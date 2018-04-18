@@ -11,9 +11,10 @@
 #import "Config.h"
 #import "CustomNavigation.h"
 #import "WebService.h"
+#import "Header.h"
 
-
-@interface StandingVC (){
+@interface StandingVC ()<selectedDropDown>
+{
     NSArray* headingKeyArray;
     NSArray* headingButtonNames;
     BOOL isYear;
@@ -29,14 +30,19 @@
 
 @implementation StandingVC
 
+@synthesize viewTeam,viewCompetetion;
+
+@synthesize lblCompetetion,lblTeam;
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self customnavigationmethod];
 
     self.PoplistTable.delegate = self;
     self.PoplistTable.dataSource = self;
     
     self.standingsCollectionView.hidden = YES;
+    self.PoplistTable.hidden = YES;
     
     
     //headingKeyArray =  @[@"Rank",@"Team",@"Played",@"Won",@"Lost",@"Tied",@"N/R",@"Net RR",@"For",@"Against",@"Pts"];
@@ -52,8 +58,16 @@
     self.standingsCollectionView.delegate = self;
     self.standingsCollectionView.dataSource = self;
     
+    lblTeam.text = [AppCommon getCurrentTeamName];
+    lblCompetetion.text = [AppCommon getCurrentCompetitionName];
+    
     [self StandingsWebservice];
+    
+}
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod
@@ -102,7 +116,7 @@
     
     if(isYear==YES)
     {
-        return competitionArray.count;
+        return appDel.ArrayCompetition.count;
     }
     else{
         return 0;
@@ -128,7 +142,7 @@
     {
         //cell.textLabel.text = indexPath.row == 0 ? @"2017" : indexPath.row == 1 ? @"2016" : indexPath.row == 2 ? @"2015" :  indexPath.row == 3 ? @"2014" :  @"2013";
         
-        cell.textLabel.text = [[competitionArray valueForKey:@"CompetitionName"] objectAtIndex:indexPath.row];
+        cell.textLabel.text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"] objectAtIndex:indexPath.row];
         
     }else{
         cell.textLabel.text = @"";
@@ -146,11 +160,14 @@
     if(isYear==YES)
     {
        // self.yearlbl.text = indexPath.row == 0 ? @"2017" : indexPath.row == 1 ? @"2016" : indexPath.row == 2 ? @"2015" :  indexPath.row == 3 ? @"2014" :  @"2013";
-        self.yearlbl.text = [[competitionArray valueForKey:@"CompetitionName"] objectAtIndex:indexPath.row];
-        competitionCode = [[competitionArray valueForKey:@"CompetitionCode"] objectAtIndex:indexPath.row];
+        self.yearlbl.text = [[appDel.ArrayCompetition valueForKey:@"CompetitionName"] objectAtIndex:indexPath.row];
+        competitionCode = [[appDel.ArrayCompetition valueForKey:@"CompetitionCode"] objectAtIndex:indexPath.row];
         self.standingsCollectionView.hidden = NO;
-        self.popTableView.hidden = YES;
-        [self StandingsTeamTableWebservice];
+        self.PoplistTable.hidden = YES;
+        [[NSUserDefaults standardUserDefaults] setValue:self.yearlbl.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:competitionCode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self StandingsWebservice];
         
     }
     
@@ -176,9 +193,11 @@
         self.PoplistTable.hidden = NO;
         self.popTableView.hidden = NO;
         
-        self.tableWidth.constant = self.standingsCollectionView.frame.size.width;
-        self.tableXposition.constant = self.standingsCollectionView.frame.origin.x;
+        self.tableWidth.constant = self.viewCompetetion.frame.size.width;
+        self.tableXposition.constant = self.viewCompetetion.frame.origin.x;
+        
         [self.PoplistTable reloadData];
+        
     }
 }
 
@@ -346,14 +365,26 @@
 
 -(void)StandingsWebservice
 {
+    
+    if(![COMMON isInternetReachable])
+    {
+        return;
+    }
+    else if ([lblCompetetion.text isEqualToString:@"Competetion Name"]) {
+        
+        return;
+    }
+//    else if([AppCommon isCoach] && [lblTeam.text isEqualToString:@"Team Name"])
+//    {
+//        return;
+//    }
+
+    
     [AppCommon showLoading ];
     
-    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
-    //NSString *clientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     
-    
-    
-    NSString *CompetitionCode = @"UCC0000001";
+    NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
+    self.yearlbl.text = [AppCommon getCurrentCompetitionName];
     objWebservice = [[WebService alloc]init];
     
     
@@ -362,10 +393,14 @@
         
         if(responseObject >0)
         {
-            competitionArray = [[NSMutableArray alloc]init];
-            competitionArray = [responseObject valueForKey:@"CompetitionResult"];
+            //competitionArray = [[NSMutableArray alloc]init];
+            //competitionArray = [responseObject valueForKey:@"CompetitionResult"];
+            DetailsArray = [[NSMutableArray alloc]init];
+            DetailsArray = [responseObject valueForKey:@"TeamResult"];
             
-            [self.PoplistTable reloadData];
+            self.standingsCollectionView.hidden = NO;
+        
+            [self.standingsCollectionView reloadData];
             
         }
         [AppCommon hideLoading];
@@ -378,41 +413,66 @@
     
 }
 
--(void)StandingsTeamTableWebservice
-{
-    [AppCommon showLoading ];
+
+- (IBAction)actionDropDown:(id)sender {
     
-    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
-    //NSString *clientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+    dropVC.protocol = self;
+    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [dropVC.view setBackgroundColor:[UIColor clearColor]];
     
-    
-    
-    //NSString *CompetitionCode = @"UCC0000001";
-    objWebservice = [[WebService alloc]init];
-    
-    
-    [objWebservice TeamStandings:StandingsKey :competitionCode success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"responseObject=%@",responseObject);
-        
-        if(responseObject >0)
-        {
-            DetailsArray = [[NSMutableArray alloc]init];
-            DetailsArray = [responseObject valueForKey:@"TeamResult"];
-            
-            [self.standingsCollectionView reloadData];
-            
-        }
-        [AppCommon hideLoading];
-        
+    if(![sender tag]) // COMPETETION
+    {
+        dropVC.array = appDel.ArrayCompetition;
+        dropVC.key = @"CompetitionName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewCompetetion.frame), CGRectGetMaxY(viewCompetetion.superview.frame)+60, CGRectGetWidth(viewCompetetion.frame), 300)];
+
     }
-                         failure:^(AFHTTPRequestOperation *operation, id error) {
-                             NSLog(@"failed");
-                             [COMMON webServiceFailureError:error];
-                         }];
+    else // TEAM
+    {
+        dropVC.array = appDel.ArrayTeam;
+        dropVC.key = @"TeamName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewTeam.frame), CGRectGetMaxY(viewTeam.superview.frame)+60, CGRectGetWidth(viewTeam.frame), 300)];
+
+    }
     
+    [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
+        NSLog(@"DropDown loaded");
+    }];
+
 }
 
-
+-(void)selectedValue:(NSMutableArray *)array andKey:(NSString*)key andIndex:(NSIndexPath *)Index
+{
+    
+    if ([key  isEqualToString: @"CompetitionName"]) {
+        
+        lblCompetetion.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:lblCompetetion.text forKey:@"SelectedCompetitionName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        lblTeam.text =@"Team Name";
+        
+        
+    }
+    else
+    {
+        lblTeam.text = [[array objectAtIndex:Index.row] valueForKey:key];
+        NSString* Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:lblTeam.text forKey:@"SelectedTeamName"];
+        [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }
+    
+    
+    [self StandingsWebservice];
+    
+}
 
 
 @end

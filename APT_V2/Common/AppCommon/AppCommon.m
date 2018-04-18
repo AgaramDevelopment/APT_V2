@@ -8,7 +8,6 @@
 
 #import "AppCommon.h"
 #import "Header.h"
-#import "WebService.h"
 
 @implementation AppCommon
 AppCommon *sharedCommon = nil;
@@ -54,6 +53,126 @@ AppCommon *sharedCommon = nil;
     [AppCommon showAlertWithMessage:error.localizedDescription];
 }
 
+-(void)getIPLCompetetion
+{
+    if(![COMMON isInternetReachable])
+        return;
+
+    
+//    [AppCommon showLoading];
+    
+    WebService* objWebservice = [[WebService alloc]init];
+    [objWebservice getIPLCompeteionCodesuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if(responseObject >0)
+        {
+            appDel.ArrayCompetition = [NSMutableArray new];
+            appDel.ArrayCompetition = responseObject;
+            
+            NSString* Competetioncode = [[appDel.ArrayCompetition firstObject] valueForKey:@"CompetitionCode"];
+            NSString* CompetetionName = [[appDel.ArrayCompetition firstObject] valueForKey:@"CompetitionName"];
+            NSLog(@"IPL COMPETETION %@ ",responseObject);
+            [[NSUserDefaults standardUserDefaults] setValue:CompetetionName forKey:@"SelectedCompetitionName"];
+            [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+
+        }
+//        [AppCommon hideLoading];
+    } failure:^(AFHTTPRequestOperation *operation, id error) {
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+    }];
+
+}
+
++(NSString *)getCurrentCompetitionCode
+{
+   return [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedCompetitionCode"];
+}
+
++(NSString *)getCurrentCompetitionName
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedCompetitionName"];
+}
+
++(NSString *)getCurrentTeamCode
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedTeamCode"];
+}
+
++(NSString *)getCurrentTeamName
+{
+    return [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedTeamName"];
+}
+
+-(void)getIPLteams
+{
+    if(![COMMON isInternetReachable])
+        return;
+
+    
+//    [AppCommon showLoading];
+    
+    WebService* objWebservice = [[WebService alloc]init];
+    [objWebservice getIPLTeamCodessuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if(responseObject >0)
+        {
+            appDel.MainArray = [NSMutableArray new];
+            appDel.MainArray = responseObject;
+            NSLog(@"IPL TEAMS %@ ",appDel.MainArray);
+            NSString* Teamcode = [[responseObject firstObject] valueForKey:@"TeamCode"];
+            NSString* TeamName = [[responseObject firstObject] valueForKey:@"TeamName"];
+            
+            [[NSUserDefaults standardUserDefaults] setValue:TeamName forKey:@"SelectedTeamName"];
+            [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
+            
+            NSLog(@"IPL COMPETETION %@ ",appDel.MainArray);
+            NSString* Competetioncode = [[responseObject firstObject] valueForKey:@"CompetitionCode"];
+            NSString* CompetetionName = [[responseObject firstObject] valueForKey:@"CompetitionName"];
+
+            [[NSUserDefaults standardUserDefaults] setValue:CompetetionName forKey:@"SelectedCompetitionName"];
+            [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+//            NSSet* set1 = [NSSet setWithArray:[responseObject valueForKey:@"CompetitionCode"]];
+//            [appDel.ArrayCompetition addObjectsFromArray:];
+            
+            appDel.ArrayCompetition = [NSMutableArray new];
+
+//            NSMutableArray* temp = [NSMutableArray new];
+            for (NSDictionary* dict in responseObject) {
+
+                NSLog(@"%@",dict[@"CompetitionCode"]);
+                if (![[appDel.ArrayCompetition valueForKey:@"CompetitionCode"] containsObject:dict[@"CompetitionCode"]]) {
+                    [appDel.ArrayCompetition addObject:dict];
+                    NSLog(@"temp %@",[appDel.ArrayCompetition valueForKey:@"CompetitionCode"]);
+                }
+                
+            }
+            NSString* lastYearTeams = [[appDel.ArrayCompetition firstObject] valueForKey:@"CompetitionName"];
+            NSArray* temp = [COMMON getCorrespondingTeamName:lastYearTeams];
+//            appDel.ArrayCompetition = temp;
+            NSLog(@"appDel.ArrayCompetition %@ ",appDel.ArrayCompetition);
+
+        }
+
+//        [AppCommon hideLoading];
+        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [self getIPLCompetetion];
+//        });
+
+    } failure:^(AFHTTPRequestOperation *operation, id error) {
+//        [AppCommon hideLoading];
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+
+    }];
+    
+}
+
+
 #pragma mark - get usercode,clientcode,usereferencecode
 
 +(NSString *)GetUsercode
@@ -91,116 +210,24 @@ AppCommon *sharedCommon = nil;
     return userreference;
 }
 
-+(NSString *)getCurrentTeamCode
++(NSString *)GetPassword
 {
-    return [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedTeamCode"];
+    NSString *password =  [[NSUserDefaults standardUserDefaults]stringForKey:@"Password"];
+    return password;
 }
 
-+(NSString *)getAppVersion
++(BOOL)isKXIP
 {
-    NSBundle *bundle = [NSBundle mainBundle];
-    NSDictionary *info = [bundle infoDictionary];
-        //    NSString *productName = [info objectForKey:@"CFBundleName"];
-    NSString *AppVersion = [info objectForKey:@"CFBundleShortVersionString"];
+    NSString* KXIP_Clientcode = @"CLI0000003";
     
-    return AppVersion;
+    return [KXIP_Clientcode isEqualToString: [AppCommon GetClientCode]];
 }
 
--(void)getIPLteams
++(BOOL)isCoach
 {
-    if(![COMMON isInternetReachable])
-        return;
+   //  ROL0000002 player code
     
-    
-        //    [AppCommon showLoading];
-    
-    WebService* objWebservice = [[WebService alloc]init];
-    [objWebservice getIPLTeamCodessuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        if(responseObject >0)
-            {
-            appDel.MainArray = [NSMutableArray new];
-            appDel.MainArray = responseObject;
-            NSLog(@"IPL TEAMS %@ ",appDel.MainArray);
-            NSString* Teamcode = [[responseObject firstObject] valueForKey:@"TeamCode"];
-            NSString* TeamName = [[responseObject firstObject] valueForKey:@"TeamName"];
-            
-            [[NSUserDefaults standardUserDefaults] setValue:TeamName forKey:@"SelectedTeamName"];
-            [[NSUserDefaults standardUserDefaults] setValue:Teamcode forKey:@"SelectedTeamCode"];
-            
-            NSLog(@"IPL COMPETETION %@ ",appDel.MainArray);
-            NSString* Competetioncode = [[responseObject firstObject] valueForKey:@"CompetitionCode"];
-            NSString* CompetetionName = [[responseObject firstObject] valueForKey:@"CompetitionName"];
-            
-            [[NSUserDefaults standardUserDefaults] setValue:CompetetionName forKey:@"SelectedCompetitionName"];
-            [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-                //            NSSet* set1 = [NSSet setWithArray:[responseObject valueForKey:@"CompetitionCode"]];
-                //            [appDel.ArrayCompetition addObjectsFromArray:];
-            
-            appDel.ArrayCompetition = [NSMutableArray new];
-            
-                //            NSMutableArray* temp = [NSMutableArray new];
-            for (NSDictionary* dict in responseObject) {
-                
-                NSLog(@"%@",dict[@"CompetitionCode"]);
-                if (![[appDel.ArrayCompetition valueForKey:@"CompetitionCode"] containsObject:dict[@"CompetitionCode"]]) {
-                    [appDel.ArrayCompetition addObject:dict];
-                    NSLog(@"temp %@",[appDel.ArrayCompetition valueForKey:@"CompetitionCode"]);
-                }
-                
-            }
-            NSString* lastYearTeams = [[appDel.ArrayCompetition firstObject] valueForKey:@"CompetitionName"];
-            NSArray* temp = [COMMON getCorrespondingTeamName:lastYearTeams];
-                //            appDel.ArrayCompetition = temp;
-            NSLog(@"appDel.ArrayCompetition %@ ",appDel.ArrayCompetition);
-            
-            }
-        
-            //        [AppCommon hideLoading];
-        
-            //        dispatch_async(dispatch_get_main_queue(), ^{
-            //            [self getIPLCompetetion];
-            //        });
-        
-    } failure:^(AFHTTPRequestOperation *operation, id error) {
-            //        [AppCommon hideLoading];
-        NSLog(@"failed");
-        [COMMON webServiceFailureError:error];
-        
-    }];
-    
-}
-
--(NSArray *)getCorrespondingTeamName:(NSString *)competetionName
-{
-    
-    if (![[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedCompetitionName"]) {
-        NSLog(@"Please select Competetion");
-    }
-    
-    NSLog(@"competetionName %@",appDel.MainArray);
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"CompetitionName == %@", competetionName];
-    NSArray* temparray = [appDel.MainArray filteredArrayUsingPredicate:resultPredicate];
-    
-    if (temparray.count > 0) {
-        appDel.ArrayTeam = [NSMutableArray new];
-        
-        for (NSDictionary* temp1 in temparray) {
-            if (![[appDel.ArrayTeam valueForKey:@"TeamCode"] containsObject:[temp1 valueForKey:@"TeamCode"]]) {
-                [appDel.ArrayTeam addObject:temp1];
-            }
-        }
-        
-    }
-    else
-        {
-        NSString* msg = [NSString stringWithFormat:@"NO Teams Founds in %@",competetionName];
-        [AppCommon showAlertWithMessage:msg];
-        }
-    
-    return appDel.ArrayTeam;
+    return (![[AppCommon GetUserRoleCode] isEqualToString:@"ROL0000002"]);
 }
 
 #pragma mark - Get Height of Control
@@ -251,14 +278,27 @@ AppCommon *sharedCommon = nil;
 
 +(void)showLoading
 {
+//    if (appDel.window.subviews containsObject:) {
+//
+//    }
+    NSLog(@"%@ ",appDel.window.subviews);
+    
+//    [MBProgressHUD showHUDAddedTo:appDel.window animated:YES];
+//    [MBProgressHUD]
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:appDel.window animated:YES];
     [hud setMode:MBProgressHUDModeIndeterminate];
     hud.label.text = @"Please wait";
     [hud setBackgroundColor:[UIColor clearColor]];
+    
 }
+
 +(void)hideLoading
 {
-    [MBProgressHUD hideHUDForView:appDel.window animated:YES];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+        [MBProgressHUD hideHUDForView:appDel.window animated:YES];
+//    });
+    
 }
 
 +(UIColor*)colorWithHexString:(NSString*)hex
@@ -293,5 +333,127 @@ AppCommon *sharedCommon = nil;
     return @"Sync";
 }
 
++(void)getTeamAndPlayerCode
+{
+    NSString *URLString =  URL_FOR_RESOURCE(@"FETCH_IPLPLAYERS");
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    [manager GET:URLString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response ; %@",responseObject);
+        
+        if(responseObject >0)
+        {
+            /*
+             {
+             "TeamCode": "TEA0000008",
+             "PlayerCode": "PYC0000277",
+             "PlayerName": "AAKASH CHOPRA"
+             },
+             
+             */
+            
+            appDel.ArrayIPL_teamplayers = [NSMutableArray new];
+            appDel.ArrayIPL_teamplayers = responseObject;
+        }
+        
+        
+        [AppCommon hideLoading];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+        [AppCommon hideLoading];
+        
+    }];
+    
+}
+
++(NSString *)checkNull:(NSString *)_value
+{
+    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"]) {
+        _value=@"";
+    }
+    return _value;
+}
+
+-(NSArray *)getCorrespondingTeamName:(NSString *)competetionName
+{
+    
+    if (![[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedCompetitionName"]) {
+        NSLog(@"Please select Competetion");
+    }
+    
+    NSLog(@"competetionName %@",appDel.MainArray);
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"CompetitionName == %@", competetionName];
+    NSArray* temparray = [appDel.MainArray filteredArrayUsingPredicate:resultPredicate];
+    
+    if (temparray.count > 0) {
+        appDel.ArrayTeam = [NSMutableArray new];
+
+        for (NSDictionary* temp1 in temparray) {
+            if (![[appDel.ArrayTeam valueForKey:@"TeamCode"] containsObject:[temp1 valueForKey:@"TeamCode"]]) {
+                [appDel.ArrayTeam addObject:temp1];
+            }
+        }
+
+    }
+    else
+    {
+        NSString* msg = [NSString stringWithFormat:@"NO Teams Founds in %@",competetionName];
+        [AppCommon showAlertWithMessage:msg];
+    }
+   
+    return appDel.ArrayTeam;
+}
+
+-(NSString *)getDeviceUUID
+{
+    NSString* Identifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+    NSLog(@"output is : %@", Identifier);
+
+    return Identifier;
+}
+
++(NSString *)getAppVersion
+{
+    
+    
+    NSBundle *bundle = [NSBundle mainBundle];
+    NSDictionary *info = [bundle infoDictionary];
+//    NSString *productName = [info objectForKey:@"CFBundleName"];
+    NSString *AppVersion = [info objectForKey:@"CFBundleShortVersionString"];
+
+    return AppVersion;
+    
+}
+
++(void)newVersionUpdateAlert
+{
+    NSString* msg = [NSString stringWithFormat:@"New Verion was released.Do you want the updates?"];
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:APP_NAME message:msg preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* actionNo = [UIAlertAction actionWithTitle:@"Later" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"isLater"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    }];
+    
+    UIAlertAction* actionYes = [UIAlertAction actionWithTitle:@"Update Now" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        NSString *iTunesLink = @"https://itunes.apple.com/us/app/apt-cricket/id1356455542?ls=1&mt=8";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
+        
+    }];
+    
+    [alert addAction:actionYes];
+    [alert addAction:actionNo];
+    [appDel.window.rootViewController presentViewController:alert animated:YES completion:nil];
+
+}
 @end
 

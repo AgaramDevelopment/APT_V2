@@ -13,24 +13,32 @@
 #import "Config.h"
 #import "WebService.h"
 #import "TeamMemebersCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "MyStatsBattingVC.h"
 
 @interface TeamMembersVC ()
+{
+    UIRefreshControl *refreshControl;
+}
 
 @property (strong, nonatomic)  NSMutableArray *PlayersArray;
 @property (strong, nonatomic)  NSMutableArray *PlayerRoleArray;
-
 @property (strong, nonatomic)  NSMutableArray *CommonArray;
 
 @end
 
 @implementation TeamMembersVC
 
+@synthesize AllrounderBtn,WktKeeperBtn;
+
+@synthesize navView,filterContainerView;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    refreshControl = [[UIRefreshControl alloc] init];
+
       [self.playesTable registerNib:[UINib nibWithNibName:@"TeamMemebersCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
-    [self TeamsWebservice];
     self.TeamNamelbl.text = _teamname;
     
     self.AllBtn.layer.cornerRadius = 5;
@@ -48,8 +56,55 @@
     self.BowlerBtn.layer.cornerRadius = 5;
     self.BowlerBtn.clipsToBounds = YES;
     
+    [self addRefreshControl];
+
+//    AllrounderBtn.align
     
+    NSString* str_wkt_keeper = [NSString stringWithFormat:@"Wkt\n Keeper"];
+    NSString* str_all_rounder = [NSString stringWithFormat:@"All\n Rounder"];
+    [AllrounderBtn setTitle:str_all_rounder forState:UIControlStateNormal];
+    [WktKeeperBtn setTitle:str_wkt_keeper forState:UIControlStateNormal];
+    AllrounderBtn.titleLabel.numberOfLines = 2;
+    WktKeeperBtn.titleLabel.numberOfLines = 2;
+    AllrounderBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+    WktKeeperBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
     
+    [self TeamsWebservice];
+
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
+
+-(void)addRefreshControl
+{
+    refreshControl.tintColor = [UIColor grayColor];
+    [refreshControl addTarget:self action:@selector(refershControlAction) forControlEvents:UIControlEventValueChanged];
+    [self.playesTable addSubview:refreshControl];
+    self.playesTable.alwaysBounceVertical = YES;
+}
+
+
+-(void)refershControlAction
+{
+    [self TeamsWebservice];
+}
+
+-(void)customnavigationmethod
+{
+    CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    
+    [navView addSubview:objCustomNavigation.view];
+    
+    objCustomNavigation.btn_back.hidden =YES;
+    objCustomNavigation.menu_btn.hidden =NO;
+    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -68,58 +123,84 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //return self.commonArray.count;
     
+    [self.lblNoData setHidden:_CommonArray.count];
     return _CommonArray.count;
 }
 #pragma mar - UICollectionViewFlowDelegateLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if(IS_IPHONE_DEVICE)
+    
+    CGFloat widthF = self.playesTable.superview.frame.size.width/2;
+
+    if(IS_IPHONE5)
     {
-        if(!IS_IPHONE5)
-        {
-            return CGSizeMake(50, 50);
-        }
-        else
-        {
-                return CGSizeMake(130, 178);
-        }
+         widthF = self.playesTable.superview.frame.size.width/2;
     }
-    else
+    else if (IS_IPAD)
     {
-        
-            return CGSizeMake(210, 178);
+        widthF = self.playesTable.superview.frame.size.width/4;
     }
+    
+    return CGSizeMake(widthF-20, widthF);
+    
+//    return UICollectionViewFlowLayoutAutomaticSize;
+    
+//    if(IS_IPHONE_DEVICE)
+//    {
+//        if(!IS_IPHONE5)
+//        {
+//            return CGSizeMake(50, 50);
+//        }
+//        else
+//        {
+//                return CGSizeMake(130, 178);
+//        }
+//    }
+//    else
+//    {
+//
+//            return CGSizeMake(210, 178);
+//    }
 }
+
 #pragma mark collection view cell paddings
 - (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    if(!IS_IPHONE_DEVICE)
-    {
-        return UIEdgeInsetsMake(20, 20, 30, 20); // top, left, bottom, right
-    }
-    else{
-        return UIEdgeInsetsMake(10, 10, 10, 10);
-    }
+    
+//    if(!IS_IPHONE_DEVICE)
+//    {
+//        return UIEdgeInsetsMake(20, 20, 30, 20); // top, left, bottom, right
+//    }
+//    else{
+//        return UIEdgeInsetsMake(10, 10, 10, 10);
+//    }
+    return UIEdgeInsetsMake(10, 10, 10, 10);
+
 }
 
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    if(!IS_IPHONE_DEVICE)
-    {
-        return 20.0;
-    }
-    else{
-        return 10.0;
-    }
+////    if(!IS_IPHONE_DEVICE)
+////    {
+////        return 20.0;
+////    }
+////    else{
+////        return 10.0;
+////    }
+    return 10.0;
+//
 }
-
+//
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    if(!IS_IPHONE_DEVICE)
-    {
-        return 23.0;
-    }
-    else{
-        return 10.0;
-    }
+////    if(!IS_IPHONE_DEVICE)
+////    {
+////        return 23.0;
+////    }
+////    else{
+////        return 10.0;
+////    }
+//
+    return 10.0;
+//
 }
 
 
@@ -135,7 +216,7 @@
     
     NSString *bowlingStyle = [self checkNull:[[self.CommonArray valueForKey:@"BowlingStyle"]objectAtIndex:indexPath.row]];
     NSLog(@"%ld",(long)indexPath.row);
-    cell.BowlingStylelbl.text = bowlingStyle;
+    cell.BowlingStylelbl.text = [NSString stringWithFormat:@"/%@", bowlingStyle];
     
     NSString *battingStyle = [self checkNull:[[self.CommonArray valueForKey:@"BattingStyle"]objectAtIndex:indexPath.row]];
     NSLog(@"%ld",(long)indexPath.row);
@@ -147,6 +228,8 @@
     
     NSString *availability = [self checkNull:[[self.CommonArray valueForKey:@"PlayerAvailability"]objectAtIndex:indexPath.row]];
     NSLog(@"%ld",(long)indexPath.row);
+    
+    [cell.playerImg sd_setImageWithURL:[NSURL URLWithString: [self checkNull:[[self.CommonArray objectAtIndex:indexPath.row] valueForKey:@"AthletePhoto"]]] placeholderImage:[UIImage imageNamed:@"no-image"]];
     
     if([availability isEqualToString:@"Available"])
     {
@@ -179,7 +262,7 @@
         cell.contentView.layer.masksToBounds = YES;
 
         cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-        cell.layer.shadowOffset = CGSizeMake(0, 2.0f);
+        cell.layer.shadowOffset = CGSizeMake(0,0);
         cell.layer.shadowRadius = 2.0f;
         cell.layer.shadowOpacity = 1.0f;
         cell.layer.masksToBounds = NO;
@@ -190,14 +273,16 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    PlayerDetailViewController* PlayerVC = [PlayerDetailViewController new];
-    PlayerVC.selectedPlayerArray = [self.CommonArray objectAtIndex:indexPath.row];
     
-    PlayerVC.TeamName = self.teamname;
-    NSLog(@"%@",appDel.frontNavigationController);
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [appDel.frontNavigationController pushViewController:PlayerVC animated:YES];
-    });
+    MyStatsBattingVC* objStats = [MyStatsBattingVC new];
+    objStats.selectedPlayerCode = [[self.CommonArray objectAtIndex:indexPath.item] valueForKey:@"AthleteCode"];
+    objStats.selectedPlayerName = [[self.CommonArray objectAtIndex:indexPath.item] valueForKey:@"AthleteName"];
+//    [objStats viewDidLoad];
+//    objStats.myStatsViewHeight.constant = 60;
+//    objStats.navViewHeight.constant = 35;
+//    objStats.view.frame = CGRectMake(0, 0, objStats.view.frame.size.width, objStats.view.frame.size.height);
+    [appDel.frontNavigationController pushViewController:objStats animated:YES];
+    
 }
 
 
@@ -209,31 +294,53 @@
     return _value;
 }
 
+
+- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if ( !error )
+                               {
+                                   UIImage *image = [[UIImage alloc] initWithData:data];
+                                   completionBlock(YES,image);
+                               } else{
+                                   completionBlock(NO,nil);
+                               }
+                           }];
+}
+
+
 -(void)TeamsWebservice
 {
     
-    if([COMMON isInternetReachable])
-    {
+    if(![COMMON isInternetReachable])
+        return;
+    
+    [refreshControl endRefreshing];
         [AppCommon showLoading];
         
-        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",playersKey]];
+        NSString *URLString =  URL_FOR_RESOURCE(playersKey);
+                                
+
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         
         manager.requestSerializer = requestSerializer;
-        
-        
-        NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-        NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-        
-        
-        
+    
+        NSString *ClientCode = [AppCommon GetClientCode];
+        NSString *UserrefCode = [AppCommon GetuserReference];
+//        NSString *TeamCode = [AppCommon getCurrentTeamCode]; // APT teamcode
+
+        NSString *TeamCode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"APTTeamcode"];
+
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(ClientCode)   [dic    setObject:ClientCode     forKey:@"Clientcode"];
         if(UserrefCode)   [dic    setObject:UserrefCode     forKey:@"Userreferencecode"];
-        if(self.teamCode)   [dic    setObject:self.teamCode     forKey:@"Teamcode"];
+        if(TeamCode)   [dic    setObject:TeamCode     forKey:@"Teamcode"];
         
         
         NSLog(@"parameters : %@",dic);
@@ -247,23 +354,22 @@
                 
                 self.PlayerRoleArray = [[NSMutableArray alloc]init];
                 self.PlayerRoleArray = [responseObject valueForKey:@"lstPlayerRoles"];
+            
                 [self.playesTable reloadData];
-                
-               [self.AllBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
+                [self.AllBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
+            
             }
             
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [refreshControl endRefreshing];
             NSLog(@"failed");
             [AppCommon hideLoading];
             [COMMON webServiceFailureError:error];
-            [self.view setUserInteractionEnabled:YES];
             
         }];
-    }
     
 }
 
@@ -278,8 +384,11 @@
     
     self.CommonArray = [[NSMutableArray alloc]init];
     self.CommonArray = self.PlayersArray;
+    
     [self.playesTable reloadData];
+    
 }
+
 - (IBAction)BatsmanBtnAction:(id)sender
 {
     [self setInningsBySelection:@"2"];
@@ -295,7 +404,9 @@
     }
     
     [self.playesTable reloadData];
+    
 }
+
 - (IBAction)WktKeeperBtnAction:(id)sender
 {
     [self setInningsBySelection:@"3"];
@@ -310,9 +421,11 @@
         }
     }
     
-   
+    
     [self.playesTable reloadData];
+    
 }
+
 - (IBAction)AllrounderBtnAction:(id)sender
 {
     [self setInningsBySelection:@"4"];
@@ -327,7 +440,9 @@
     }
     
     [self.playesTable reloadData];
+    
 }
+
 - (IBAction)BowlerBtnAction:(id)sender
 {
    [self setInningsBySelection:@"5"];
@@ -343,6 +458,7 @@
     }
     
     [self.playesTable reloadData];
+    
 }
 
 -(void) setInningsBySelection: (NSString*) innsNo{

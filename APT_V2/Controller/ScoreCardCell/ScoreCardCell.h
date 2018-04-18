@@ -35,12 +35,15 @@
 @property (nonatomic,strong) IBOutlet UILabel * sixeslbl;
 @property (nonatomic,strong) IBOutlet UILabel * strikelbl;
 @property (nonatomic,strong) IBOutlet UILabel * wktDesclbl;
+@property (nonatomic,strong) IBOutlet UILabel * dotballslbl;
 
 
 @property (nonatomic,strong) IBOutlet UIButton * runsBtn;
 @property (nonatomic,strong) IBOutlet UIButton * ballsBtn;
 @property (nonatomic,strong) IBOutlet UIButton * foursBtn;
 @property (nonatomic,strong) IBOutlet UIButton * sixesBtn;
+@property (nonatomic,strong) IBOutlet UIButton * dotsBtn;
+@property (nonatomic,strong) IBOutlet UIButton * wktsBtn;
 
 
 

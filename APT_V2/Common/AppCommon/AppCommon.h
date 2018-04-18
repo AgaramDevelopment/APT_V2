@@ -18,6 +18,7 @@
     
 }
 @property (nonatomic, strong) NSArray *contents;
+@property (nonatomic, strong) MBProgressHUD *hud;
 
 + (AppCommon *)common;
 -(BOOL) isInternetReachable;
@@ -31,10 +32,8 @@
 +(NSString *) GetuserReference;
 +(NSString *)GetUserRoleName;
 +(NSString *)GetUserRoleCode;
++(NSString *)GetPassword;
 
-+(NSString *)getCurrentTeamCode;
-+(NSString *)getAppVersion;
--(void)getIPLteams;
 
 +(NSString *)getFileType:(NSString *)filePath;
 +(void)showAlertWithMessage:(NSString *)message;
@@ -45,6 +44,23 @@
 
 -(void)actionLogOut;
 + (NSString *)syncId;
+
+-(void)getIPLCompetetion;
+-(void)getIPLteams;
+
+
++(NSString *)getCurrentCompetitionCode;
++(NSString *)getCurrentCompetitionName;
++(NSString *)getCurrentTeamCode;
++(NSString *)getCurrentTeamName;
++(BOOL)isCoach;
++(void)getTeamAndPlayerCode;
++(NSString *)checkNull:(NSString *)_value;
+-(NSArray *)getCorrespondingTeamName:(NSString *)competetionName;
++(BOOL)isKXIP;
+
++(NSString *)getAppVersion;
++(void)newVersionUpdateAlert;
 
 @end
 

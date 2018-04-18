@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,18 +19,21 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabHomeCell"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cellid" id="cS1-d4-RAY" customClass="TabHomeCell">
-            <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
+            <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                <rect key="frame" x="0.0" y="0.0" width="200" height="40"/>
+                <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sIA-Js-Qd0">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="36"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <rect key="frame" x="75" y="25" width="51" height="6"/>
+                        <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="6" id="2cy-eZ-9qJ"/>
+                        </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ap6-Uv-a13">
-                        <rect key="frame" x="5" y="9" width="190" height="27"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ap6-Uv-a13">
+                        <rect key="frame" x="87.5" y="8.5" width="25.5" height="13.5"/>
                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="11"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -41,21 +45,19 @@
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="sIA-Js-Qd0" firstAttribute="leading" secondItem="cS1-d4-RAY" secondAttribute="leading" id="L87-hH-Dpu"/>
-                <constraint firstAttribute="bottom" secondItem="Ap6-Uv-a13" secondAttribute="bottom" constant="4" id="PwA-Ec-wDB"/>
-                <constraint firstItem="Ap6-Uv-a13" firstAttribute="leading" secondItem="cS1-d4-RAY" secondAttribute="leading" constant="5" id="aTT-hL-fFY"/>
-                <constraint firstAttribute="trailing" secondItem="Ap6-Uv-a13" secondAttribute="trailing" constant="5" id="bZd-oZ-hA1"/>
-                <constraint firstItem="Ap6-Uv-a13" firstAttribute="top" secondItem="cS1-d4-RAY" secondAttribute="top" constant="9" id="duf-tD-7NB"/>
-                <constraint firstAttribute="trailing" secondItem="sIA-Js-Qd0" secondAttribute="trailing" id="rRs-Mj-9qA"/>
-                <constraint firstItem="sIA-Js-Qd0" firstAttribute="top" secondItem="cS1-d4-RAY" secondAttribute="top" id="umL-NQ-uLb"/>
-                <constraint firstAttribute="bottom" secondItem="sIA-Js-Qd0" secondAttribute="bottom" constant="4" id="uxG-eJ-4Er"/>
+                <constraint firstItem="sIA-Js-Qd0" firstAttribute="centerX" secondItem="cS1-d4-RAY" secondAttribute="centerX" id="2tb-hl-WuO"/>
+                <constraint firstItem="Ap6-Uv-a13" firstAttribute="centerY" secondItem="cS1-d4-RAY" secondAttribute="centerY" id="C83-wb-tmV"/>
+                <constraint firstItem="sIA-Js-Qd0" firstAttribute="top" secondItem="Ap6-Uv-a13" secondAttribute="bottom" constant="3" id="JA1-H0-TUE"/>
+                <constraint firstItem="sIA-Js-Qd0" firstAttribute="width" secondItem="Ap6-Uv-a13" secondAttribute="width" multiplier="2" id="ROz-tM-JGj"/>
+                <constraint firstItem="Ap6-Uv-a13" firstAttribute="centerX" secondItem="cS1-d4-RAY" secondAttribute="centerX" id="nin-4H-4JH"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="9WJ-5L-7eH"/>
             <size key="customSize" width="200" height="39"/>
             <connections>
                 <outlet property="Title" destination="Ap6-Uv-a13" id="SdU-lM-iC2"/>
+                <outlet property="selectedLineView" destination="sIA-Js-Qd0" id="yc2-eA-Fwj"/>
             </connections>
-            <point key="canvasLocation" x="99" y="-122.5"/>
+            <point key="canvasLocation" x="99" y="-123"/>
         </collectionViewCell>
     </objects>
 </document>

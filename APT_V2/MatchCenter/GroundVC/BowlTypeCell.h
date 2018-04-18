@@ -9,5 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface BowlTypeCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *bowlingStyleLbl;
+@property (strong, nonatomic) IBOutlet UILabel *wicketsLbl;
+@property (strong, nonatomic) IBOutlet UILabel *economyLbl;
+@property (strong, nonatomic) IBOutlet UILabel *avgLbl;
+@property (strong, nonatomic) IBOutlet UILabel *strikeRateLbl;
+@property (strong, nonatomic) IBOutlet UILabel *dotBallsPercentLbl;
+@property (strong, nonatomic) IBOutlet UILabel *boundaryPercentLbl;
 
 @end

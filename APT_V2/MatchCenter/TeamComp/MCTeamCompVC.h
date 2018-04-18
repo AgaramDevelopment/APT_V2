@@ -11,11 +11,20 @@
 @interface MCTeamCompVC : UIViewController
 @property (strong, nonatomic) IBOutlet UICollectionView *teamCompCollectionView;
 @property (strong, nonatomic) IBOutlet UIView *headerView;
-
+@property (strong, nonatomic) IBOutlet UITableView *PopTableView;
 
 @property (strong, nonatomic) IBOutlet UICollectionView *BowlerCollectionView;
 @property (strong, nonatomic) IBOutlet UICollectionView *BatsmenCollectionView;
 @property (strong, nonatomic) IBOutlet UICollectionView *AllrounderCollectionView;
 
+
+@property (weak, nonatomic) IBOutlet UIView *dropviewComp1;
+@property (weak, nonatomic) IBOutlet UIView *dropviewComp2;
+
+@property (weak, nonatomic) IBOutlet UILabel *Competitionlbl;
+@property (weak, nonatomic) IBOutlet UILabel *Teamnamelbl;
+
+@property (strong, nonatomic) IBOutlet UIView *teamView;
+- (IBAction)actionCompetetionTeam:(id)sender;
 
 @end

@@ -200,6 +200,8 @@
 		18949A3220875C5F002ECEE0 /* redCircle_mini.png in Resources */ = {isa = PBXBuildFile; fileRef = 189499F620875C5E002ECEE0 /* redCircle_mini.png */; };
 		18949A3320875C5F002ECEE0 /* WeeklyCalendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 189499F720875C5E002ECEE0 /* WeeklyCalendar.png */; };
 		18949A3420875C5F002ECEE0 /* YearlyCalendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 189499F820875C5E002ECEE0 /* YearlyCalendar.png */; };
+		18949A3820876767002ECEE0 /* FieldSummaryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18949A3520876767002ECEE0 /* FieldSummaryTVC.m */; };
+		18949A3920876767002ECEE0 /* FieldSummaryTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18949A3620876767002ECEE0 /* FieldSummaryTVC.xib */; };
 		18A2E712203D49CA00F91E73 /* TrainingPiechart.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2E710203D49CA00F91E73 /* TrainingPiechart.xib */; };
 		18A590682047C4C8002BBF64 /* LargeValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A590672047C4C8002BBF64 /* LargeValueFormatter.swift */; };
 		18A5CAB520383FAD00586896 /* TeamsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A5CAB320383FAD00586896 /* TeamsVC.m */; };
@@ -258,8 +260,6 @@
 		CE6C162F204520D100672253 /* SessionDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C1623204520D000672253 /* SessionDayCell.m */; };
 		CE6C1630204520D100672253 /* SessionPartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C1626204520D000672253 /* SessionPartCell.m */; };
 		CE6C1631204520D100672253 /* SessionSummaryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C1628204520D000672253 /* SessionSummaryVC.m */; };
-		CE6C1632204520D100672253 /* FieldSummaryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C162B204520D000672253 /* FieldSummaryTVC.m */; };
-		CE6C1633204520D100672253 /* FieldSummaryTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6C162C204520D000672253 /* FieldSummaryTVC.xib */; };
 		CE6C1634204520D100672253 /* FieldSummaryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C162E204520D000672253 /* FieldSummaryVC.m */; };
 		CE6C16462045211300672253 /* BowlingKPIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C163B2045211300672253 /* BowlingKPIViewController.m */; };
 		CE6C16472045211300672253 /* BattingKPIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C163E2045211300672253 /* BattingKPIViewController.m */; };
@@ -672,6 +672,9 @@
 		189499F720875C5E002ECEE0 /* WeeklyCalendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeeklyCalendar.png; sourceTree = "<group>"; };
 		189499F820875C5E002ECEE0 /* YearlyCalendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YearlyCalendar.png; sourceTree = "<group>"; };
 		189499F920875C5E002ECEE0 /* DateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateProtocol.h; sourceTree = "<group>"; };
+		18949A3520876767002ECEE0 /* FieldSummaryTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldSummaryTVC.m; sourceTree = "<group>"; };
+		18949A3620876767002ECEE0 /* FieldSummaryTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FieldSummaryTVC.xib; sourceTree = "<group>"; };
+		18949A3720876767002ECEE0 /* FieldSummaryTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldSummaryTVC.h; sourceTree = "<group>"; };
 		18A2E70E203D49CA00F91E73 /* TrainingPiechart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrainingPiechart.h; sourceTree = "<group>"; };
 		18A2E70F203D49CA00F91E73 /* TrainingPiechart.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrainingPiechart.m; sourceTree = "<group>"; };
 		18A2E710203D49CA00F91E73 /* TrainingPiechart.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainingPiechart.xib; sourceTree = "<group>"; };
@@ -770,9 +773,6 @@
 		CE6C1626204520D000672253 /* SessionPartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionPartCell.m; sourceTree = "<group>"; };
 		CE6C1627204520D000672253 /* SessionSummaryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionSummaryVC.h; sourceTree = "<group>"; };
 		CE6C1628204520D000672253 /* SessionSummaryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionSummaryVC.m; sourceTree = "<group>"; };
-		CE6C162A204520D000672253 /* FieldSummaryTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldSummaryTVC.h; sourceTree = "<group>"; };
-		CE6C162B204520D000672253 /* FieldSummaryTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldSummaryTVC.m; sourceTree = "<group>"; };
-		CE6C162C204520D000672253 /* FieldSummaryTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FieldSummaryTVC.xib; sourceTree = "<group>"; };
 		CE6C162D204520D000672253 /* FieldSummaryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldSummaryVC.h; sourceTree = "<group>"; };
 		CE6C162E204520D000672253 /* FieldSummaryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldSummaryVC.m; sourceTree = "<group>"; };
 		CE6C163A2045211300672253 /* BowlingKPIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlingKPIViewController.h; sourceTree = "<group>"; };
@@ -1935,9 +1935,9 @@
 		CE6C1629204520D000672253 /* FieldSumary */ = {
 			isa = PBXGroup;
 			children = (
-				CE6C162A204520D000672253 /* FieldSummaryTVC.h */,
-				CE6C162B204520D000672253 /* FieldSummaryTVC.m */,
-				CE6C162C204520D000672253 /* FieldSummaryTVC.xib */,
+				18949A3720876767002ECEE0 /* FieldSummaryTVC.h */,
+				18949A3520876767002ECEE0 /* FieldSummaryTVC.m */,
+				18949A3620876767002ECEE0 /* FieldSummaryTVC.xib */,
 				CE6C162D204520D000672253 /* FieldSummaryVC.h */,
 				CE6C162E204520D000672253 /* FieldSummaryVC.m */,
 			);
@@ -2611,6 +2611,7 @@
 				04BC4A422085FF4200CEB23E /* MCBattingRootVC.xib in Resources */,
 				CEB2B9CE2025994F00E7D5E4 /* RearViewController.xib in Resources */,
 				04BC4B6E20863B9200CEB23E /* AddParticipantCell.xib in Resources */,
+				18949A3920876767002ECEE0 /* FieldSummaryTVC.xib in Resources */,
 				CEB2B98620257BBD00E7D5E4 /* MontserratAlternates-Bold.otf in Resources */,
 				CEB2B97720257BBD00E7D5E4 /* Montserrat-ExtraBoldItalic.otf in Resources */,
 				CE6C164B2045211400672253 /* BowlingTableViewCell.xib in Resources */,
@@ -2706,7 +2707,6 @@
 				04BC4A322085FE3F00CEB23E /* BattingOverBlockView.xib in Resources */,
 				CEB2B98120257BBD00E7D5E4 /* Montserrat-SemiBoldItalic.otf in Resources */,
 				18EF9D1520316C3000CDA268 /* PlayerListCollectionViewCell.xib in Resources */,
-				CE6C1633204520D100672253 /* FieldSummaryTVC.xib in Resources */,
 				1894995B208759F8002ECEE0 /* PlannerVC.xib in Resources */,
 				18949A2F20875C5F002ECEE0 /* DailyCalendar.png in Resources */,
 			);
@@ -2819,7 +2819,6 @@
 				CE76ECE320416AE100E183EA /* UIImage+GetPoints.m in Sources */,
 				CE6C16572045213C00672253 /* DMLazyScrollView.m in Sources */,
 				04BC4B602086387B00CEB23E /* MyStatsBattingVC.m in Sources */,
-				CE6C1632204520D100672253 /* FieldSummaryTVC.m in Sources */,
 				18949A2B20875C5F002ECEE0 /* FFSearchBarWithAutoComplete.m in Sources */,
 				1894996320875A3C002ECEE0 /* PlannerListVC.m in Sources */,
 				18949A1F20875C5F002ECEE0 /* UIImage+FFCustomMethods.m in Sources */,
@@ -2895,6 +2894,7 @@
 				CE6C1634204520D100672253 /* FieldSummaryVC.m in Sources */,
 				CE6C16562045213C00672253 /* DateUtil.m in Sources */,
 				04254271202822FC0088B87B /* AssessmentPopupVC.m in Sources */,
+				18949A3820876767002ECEE0 /* FieldSummaryTVC.m in Sources */,
 				CE60F10A20870C9E00B74A2C /* BPXLUUIDHandler.m in Sources */,
 				CE6C1631204520D100672253 /* SessionSummaryVC.m in Sources */,
 				18A5CABA20384F3800586896 /* ProfileVCCell.m in Sources */,

@@ -64,7 +64,8 @@
         for (int min=0; min<=45; min=min+MINUTES_PER_LABEL) {
             
             FFHourAndMinLabel *labelHourMin = [[FFHourAndMinLabel alloc] initWithFrame:CGRectMake(0, y, self.frame.size.width, HEIGHT_CELL_MIN) date:[NSDate dateWithHour:hour min:min]];
-            [labelHourMin setTextColor:[UIColor grayColor]];
+            [labelHourMin setTextColor:[UIColor blackColor]];
+            
             if (min == 0) {
                 UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT_CELL_MIN/2., self.frame.size.width, 1.)];
                 [view setBackgroundColor:[UIColor lightGrayCustom]];
@@ -117,8 +118,8 @@
             }
             
             FFBlueButton *_button = [[FFBlueButton alloc] initWithFrame:CGRectMake(0, yTimeBegin, self.frame.size.width, yTimeEnd-yTimeBegin)];
-//            [_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-//            [_button setTitle:event.stringCustomerName forState:UIControlStateNormal];
+            //[_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+            [_button setTitle:event.stringCustomerName forState:UIControlStateNormal];
             UIColor *color = [self colorWithHexString:event.color];
             [_button setBackgroundColor:color];
             [_button setEvent:event];

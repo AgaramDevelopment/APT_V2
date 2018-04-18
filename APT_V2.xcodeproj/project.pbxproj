@@ -136,6 +136,70 @@
 		04C1EC502084C9410030E358 /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C1EC4E2084C9410030E358 /* LoginVC.xib */; };
 		182D854820342D1F005FFBF8 /* CategoryTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182D854620342D1F005FFBF8 /* CategoryTableCell.m */; };
 		182D854920342D1F005FFBF8 /* CategoryTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182D854720342D1F005FFBF8 /* CategoryTableCell.xib */; };
+		1894995A208759F8002ECEE0 /* PlannerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18949957208759F7002ECEE0 /* PlannerVC.m */; };
+		1894995B208759F8002ECEE0 /* PlannerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18949958208759F8002ECEE0 /* PlannerVC.xib */; };
+		1894996120875A3C002ECEE0 /* PlannerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1894995C20875A3B002ECEE0 /* PlannerCell.xib */; };
+		1894996220875A3C002ECEE0 /* PlannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894995D20875A3C002ECEE0 /* PlannerCell.m */; };
+		1894996320875A3C002ECEE0 /* PlannerListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894995F20875A3C002ECEE0 /* PlannerListVC.m */; };
+		189499FA20875C5F002ECEE0 /* FFAddEventPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894996720875C5E002ECEE0 /* FFAddEventPopoverController.m */; };
+		189499FB20875C5F002ECEE0 /* FFButtonAddEventWithPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894996920875C5E002ECEE0 /* FFButtonAddEventWithPopover.m */; };
+		189499FC20875C5F002ECEE0 /* FFCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894996B20875C5E002ECEE0 /* FFCalendarViewController.m */; };
+		189499FD20875C5F002ECEE0 /* FFDayCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894997020875C5E002ECEE0 /* FFDayCalendarView.m */; };
+		189499FE20875C5F002ECEE0 /* FFDayHeaderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894997420875C5E002ECEE0 /* FFDayHeaderButton.m */; };
+		189499FF20875C5F002ECEE0 /* FFDayHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894997620875C5E002ECEE0 /* FFDayHeaderCell.m */; };
+		18949A0020875C5F002ECEE0 /* FFDayHeaderCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894997820875C5E002ECEE0 /* FFDayHeaderCollectionView.m */; };
+		18949A0120875C5F002ECEE0 /* FFDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894997D20875C5E002ECEE0 /* FFDayCell.m */; };
+		18949A0220875C5F002ECEE0 /* FFDayCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894997F20875C5E002ECEE0 /* FFDayCollectionView.m */; };
+		18949A0320875C5F002ECEE0 /* FFDayCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894998120875C5E002ECEE0 /* FFDayCollectionViewFlowLayout.m */; };
+		18949A0420875C5F002ECEE0 /* FFDayScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894998320875C5E002ECEE0 /* FFDayScrollView.m */; };
+		18949A0520875C5F002ECEE0 /* FFMonthCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894998620875C5E002ECEE0 /* FFMonthCalendarView.m */; };
+		18949A0620875C5F002ECEE0 /* FFButtonWithEditAndDetailPopoversForMonthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894998A20875C5E002ECEE0 /* FFButtonWithEditAndDetailPopoversForMonthCell.m */; };
+		18949A0720875C5F002ECEE0 /* FFMonthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894998C20875C5E002ECEE0 /* FFMonthCell.m */; };
+		18949A0820875C5F002ECEE0 /* FFMonthCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894998E20875C5E002ECEE0 /* FFMonthCollectionView.m */; };
+		18949A0920875C5F002ECEE0 /* FFMonthCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894999020875C5E002ECEE0 /* FFMonthCollectionViewFlowLayout.m */; };
+		18949A0A20875C5F002ECEE0 /* FFMonthHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894999320875C5E002ECEE0 /* FFMonthHeaderView.m */; };
+		18949A0B20875C5F002ECEE0 /* FFWeekCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894999620875C5E002ECEE0 /* FFWeekCalendarView.m */; };
+		18949A0C20875C5F002ECEE0 /* FFWeekHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894999920875C5E002ECEE0 /* FFWeekHeaderCell.m */; };
+		18949A0D20875C5F002ECEE0 /* FFWeekHeaderCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894999B20875C5E002ECEE0 /* FFWeekHeaderCollectionView.m */; };
+		18949A0E20875C5F002ECEE0 /* FFHourAndMinLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1894999F20875C5E002ECEE0 /* FFHourAndMinLabel.m */; };
+		18949A0F20875C5F002ECEE0 /* FFViewWithHourLines.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499A120875C5E002ECEE0 /* FFViewWithHourLines.m */; };
+		18949A1020875C5F002ECEE0 /* FFWeekCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499A420875C5E002ECEE0 /* FFWeekCell.m */; };
+		18949A1120875C5F002ECEE0 /* FFWeekCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499A620875C5E002ECEE0 /* FFWeekCollectionView.m */; };
+		18949A1220875C5F002ECEE0 /* FFWeekCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499A820875C5E002ECEE0 /* FFWeekCollectionViewFlowLayout.m */; };
+		18949A1320875C5F002ECEE0 /* FFWeekScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499AA20875C5E002ECEE0 /* FFWeekScrollView.m */; };
+		18949A1420875C5F002ECEE0 /* FFYearCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499AD20875C5E002ECEE0 /* FFYearCalendarView.m */; };
+		18949A1520875C5F002ECEE0 /* FFHeaderMonthForYearCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499B220875C5E002ECEE0 /* FFHeaderMonthForYearCell.m */; };
+		18949A1620875C5F002ECEE0 /* FFMonthCellForYearCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499B420875C5E002ECEE0 /* FFMonthCellForYearCell.m */; };
+		18949A1720875C5F002ECEE0 /* FFMonthCollectionViewForYearCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499B620875C5E002ECEE0 /* FFMonthCollectionViewForYearCell.m */; };
+		18949A1820875C5F002ECEE0 /* FFYearCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499B820875C5E002ECEE0 /* FFYearCell.m */; };
+		18949A1920875C5F002ECEE0 /* FFYearCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499BA20875C5E002ECEE0 /* FFYearCollectionView.m */; };
+		18949A1A20875C5F002ECEE0 /* FFYearCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499BC20875C5E002ECEE0 /* FFYearCollectionViewFlowLayout.m */; };
+		18949A1B20875C5F002ECEE0 /* FFBlueButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499C020875C5E002ECEE0 /* FFBlueButton.m */; };
+		18949A1C20875C5F002ECEE0 /* FFRedAndWhiteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499C220875C5E002ECEE0 /* FFRedAndWhiteButton.m */; };
+		18949A1D20875C5F002ECEE0 /* NSDate+FFDaysCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499C520875C5E002ECEE0 /* NSDate+FFDaysCount.m */; };
+		18949A1E20875C5F002ECEE0 /* UIColor+FFMoreColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499C720875C5E002ECEE0 /* UIColor+FFMoreColors.m */; };
+		18949A1F20875C5F002ECEE0 /* UIImage+FFCustomMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499C920875C5E002ECEE0 /* UIImage+FFCustomMethods.m */; };
+		18949A2020875C5F002ECEE0 /* UILabel+FFCustomMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499CB20875C5E002ECEE0 /* UILabel+FFCustomMethods.m */; };
+		18949A2120875C5F002ECEE0 /* FFDateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499CF20875C5E002ECEE0 /* FFDateManager.m */; };
+		18949A2220875C5F002ECEE0 /* FFEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499D220875C5E002ECEE0 /* FFEvent.m */; };
+		18949A2320875C5F002ECEE0 /* FFButtonWithDatePopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499D720875C5E002ECEE0 /* FFButtonWithDatePopover.m */; };
+		18949A2420875C5F002ECEE0 /* FFDatePopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499D920875C5E002ECEE0 /* FFDatePopoverController.m */; };
+		18949A2520875C5F002ECEE0 /* FFButtonWithHourPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499DC20875C5E002ECEE0 /* FFButtonWithHourPopover.m */; };
+		18949A2620875C5F002ECEE0 /* FFHourPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499DE20875C5E002ECEE0 /* FFHourPopoverController.m */; };
+		18949A2720875C5F002ECEE0 /* FFEditEventPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499E020875C5E002ECEE0 /* FFEditEventPopoverController.m */; };
+		18949A2820875C5F002ECEE0 /* FFEditEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499E220875C5E002ECEE0 /* FFEditEventView.m */; };
+		18949A2920875C5F002ECEE0 /* FFGuestsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499E520875C5E002ECEE0 /* FFGuestsTableView.m */; };
+		18949A2A20875C5F002ECEE0 /* FFGuestsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499E720875C5E002ECEE0 /* FFGuestsTableViewCell.m */; };
+		18949A2B20875C5F002ECEE0 /* FFSearchBarWithAutoComplete.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499EA20875C5E002ECEE0 /* FFSearchBarWithAutoComplete.m */; };
+		18949A2C20875C5F002ECEE0 /* FFEventDetailPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499ED20875C5E002ECEE0 /* FFEventDetailPopoverController.m */; };
+		18949A2D20875C5F002ECEE0 /* FFEventDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 189499EF20875C5E002ECEE0 /* FFEventDetailView.m */; };
+		18949A2E20875C5F002ECEE0 /* blackCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 189499F220875C5E002ECEE0 /* blackCircle.png */; };
+		18949A2F20875C5F002ECEE0 /* DailyCalendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 189499F320875C5E002ECEE0 /* DailyCalendar.png */; };
+		18949A3020875C5F002ECEE0 /* MonthlyCalendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 189499F420875C5E002ECEE0 /* MonthlyCalendar.png */; };
+		18949A3120875C5F002ECEE0 /* redCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = 189499F520875C5E002ECEE0 /* redCircle.png */; };
+		18949A3220875C5F002ECEE0 /* redCircle_mini.png in Resources */ = {isa = PBXBuildFile; fileRef = 189499F620875C5E002ECEE0 /* redCircle_mini.png */; };
+		18949A3320875C5F002ECEE0 /* WeeklyCalendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 189499F720875C5E002ECEE0 /* WeeklyCalendar.png */; };
+		18949A3420875C5F002ECEE0 /* YearlyCalendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 189499F820875C5E002ECEE0 /* YearlyCalendar.png */; };
 		18A2E712203D49CA00F91E73 /* TrainingPiechart.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2E710203D49CA00F91E73 /* TrainingPiechart.xib */; };
 		18A590682047C4C8002BBF64 /* LargeValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A590672047C4C8002BBF64 /* LargeValueFormatter.swift */; };
 		18A5CAB520383FAD00586896 /* TeamsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A5CAB320383FAD00586896 /* TeamsVC.m */; };
@@ -189,8 +253,6 @@
 		CE60F10520870C8200B74A2C /* VideoDocumentVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE60F0FC20870C8100B74A2C /* VideoDocumentVC.xib */; };
 		CE60F10620870C8200B74A2C /* TabbarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60F0FF20870C8100B74A2C /* TabbarVC.m */; };
 		CE60F10A20870C9E00B74A2C /* BPXLUUIDHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60F10920870C9E00B74A2C /* BPXLUUIDHandler.m */; };
-		CE6C160B2045200F00672253 /* PlannerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16092045200F00672253 /* PlannerVC.m */; };
-		CE6C160C2045200F00672253 /* PlannerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6C160A2045200F00672253 /* PlannerVC.xib */; };
 		CE6C161E204520B300672253 /* PlayersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C161B204520B200672253 /* PlayersCell.m */; };
 		CE6C161F204520B300672253 /* PlayersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C161D204520B200672253 /* PlayersVC.m */; };
 		CE6C162F204520D100672253 /* SessionDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C1623204520D000672253 /* SessionDayCell.m */; };
@@ -209,68 +271,6 @@
 		CE6C16572045213C00672253 /* DMLazyScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16502045213C00672253 /* DMLazyScrollView.m */; };
 		CE6C16582045213C00672253 /* SACalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16522045213C00672253 /* SACalendar.m */; };
 		CE6C16592045213C00672253 /* SACalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16542045213C00672253 /* SACalendarCell.m */; };
-		CE6C166D2045216100672253 /* PlannerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16652045216000672253 /* PlannerCell.m */; };
-		CE6C166E2045216100672253 /* PlannerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6C16662045216000672253 /* PlannerCell.xib */; };
-		CE6C166F2045216100672253 /* PlannerListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16682045216000672253 /* PlannerListVC.m */; };
-		CE6C17072045217A00672253 /* FFAddEventPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16752045217A00672253 /* FFAddEventPopoverController.m */; };
-		CE6C17082045217A00672253 /* FFButtonAddEventWithPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16772045217A00672253 /* FFButtonAddEventWithPopover.m */; };
-		CE6C17092045217A00672253 /* FFCalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16792045217A00672253 /* FFCalendarViewController.m */; };
-		CE6C170A2045217A00672253 /* FFDayCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C167E2045217A00672253 /* FFDayCalendarView.m */; };
-		CE6C170B2045217A00672253 /* FFDayHeaderButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16822045217A00672253 /* FFDayHeaderButton.m */; };
-		CE6C170C2045217A00672253 /* FFDayHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16842045217A00672253 /* FFDayHeaderCell.m */; };
-		CE6C170D2045217A00672253 /* FFDayHeaderCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16862045217A00672253 /* FFDayHeaderCollectionView.m */; };
-		CE6C170E2045217A00672253 /* FFDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C168B2045217A00672253 /* FFDayCell.m */; };
-		CE6C170F2045217A00672253 /* FFDayCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C168D2045217A00672253 /* FFDayCollectionView.m */; };
-		CE6C17102045217A00672253 /* FFDayCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C168F2045217A00672253 /* FFDayCollectionViewFlowLayout.m */; };
-		CE6C17112045217A00672253 /* FFDayScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16912045217A00672253 /* FFDayScrollView.m */; };
-		CE6C17122045217A00672253 /* FFMonthCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16942045217A00672253 /* FFMonthCalendarView.m */; };
-		CE6C17132045217A00672253 /* FFButtonWithEditAndDetailPopoversForMonthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16982045217A00672253 /* FFButtonWithEditAndDetailPopoversForMonthCell.m */; };
-		CE6C17142045217A00672253 /* FFMonthCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C169A2045217A00672253 /* FFMonthCell.m */; };
-		CE6C17152045217A00672253 /* FFMonthCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C169C2045217A00672253 /* FFMonthCollectionView.m */; };
-		CE6C17162045217A00672253 /* FFMonthCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C169E2045217A00672253 /* FFMonthCollectionViewFlowLayout.m */; };
-		CE6C17172045217A00672253 /* FFMonthHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16A12045217A00672253 /* FFMonthHeaderView.m */; };
-		CE6C17182045217A00672253 /* FFWeekCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16A42045217A00672253 /* FFWeekCalendarView.m */; };
-		CE6C17192045217A00672253 /* FFWeekHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16A72045217A00672253 /* FFWeekHeaderCell.m */; };
-		CE6C171A2045217A00672253 /* FFWeekHeaderCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16A92045217A00672253 /* FFWeekHeaderCollectionView.m */; };
-		CE6C171B2045217A00672253 /* FFHourAndMinLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16AD2045217A00672253 /* FFHourAndMinLabel.m */; };
-		CE6C171C2045217A00672253 /* FFViewWithHourLines.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16AF2045217A00672253 /* FFViewWithHourLines.m */; };
-		CE6C171D2045217A00672253 /* FFWeekCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16B22045217A00672253 /* FFWeekCell.m */; };
-		CE6C171E2045217A00672253 /* FFWeekCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16B42045217A00672253 /* FFWeekCollectionView.m */; };
-		CE6C171F2045217A00672253 /* FFWeekCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16B62045217A00672253 /* FFWeekCollectionViewFlowLayout.m */; };
-		CE6C17202045217A00672253 /* FFWeekScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16B82045217A00672253 /* FFWeekScrollView.m */; };
-		CE6C17212045217A00672253 /* FFYearCalendarView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16BB2045217A00672253 /* FFYearCalendarView.m */; };
-		CE6C17222045217A00672253 /* FFHeaderMonthForYearCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16C02045217A00672253 /* FFHeaderMonthForYearCell.m */; };
-		CE6C17232045217A00672253 /* FFMonthCellForYearCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16C22045217A00672253 /* FFMonthCellForYearCell.m */; };
-		CE6C17242045217A00672253 /* FFMonthCollectionViewForYearCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16C42045217A00672253 /* FFMonthCollectionViewForYearCell.m */; };
-		CE6C17252045217A00672253 /* FFYearCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16C62045217A00672253 /* FFYearCell.m */; };
-		CE6C17262045217A00672253 /* FFYearCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16C82045217A00672253 /* FFYearCollectionView.m */; };
-		CE6C17272045217A00672253 /* FFYearCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16CA2045217A00672253 /* FFYearCollectionViewFlowLayout.m */; };
-		CE6C17282045217A00672253 /* FFBlueButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16CE2045217A00672253 /* FFBlueButton.m */; };
-		CE6C17292045217A00672253 /* FFRedAndWhiteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16D02045217A00672253 /* FFRedAndWhiteButton.m */; };
-		CE6C172A2045217A00672253 /* NSDate+FFDaysCount.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16D32045217A00672253 /* NSDate+FFDaysCount.m */; };
-		CE6C172B2045217A00672253 /* UIColor+FFMoreColors.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16D52045217A00672253 /* UIColor+FFMoreColors.m */; };
-		CE6C172C2045217A00672253 /* UIImage+FFCustomMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16D72045217A00672253 /* UIImage+FFCustomMethods.m */; };
-		CE6C172D2045217A00672253 /* UILabel+FFCustomMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16D92045217A00672253 /* UILabel+FFCustomMethods.m */; };
-		CE6C172E2045217A00672253 /* FFDateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16DD2045217A00672253 /* FFDateManager.m */; };
-		CE6C172F2045217A00672253 /* FFEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16E02045217A00672253 /* FFEvent.m */; };
-		CE6C17302045217A00672253 /* FFButtonWithDatePopover.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16E52045217A00672253 /* FFButtonWithDatePopover.m */; };
-		CE6C17312045217A00672253 /* FFDatePopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16E72045217A00672253 /* FFDatePopoverController.m */; };
-		CE6C17322045217A00672253 /* FFButtonWithHourPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16EA2045217A00672253 /* FFButtonWithHourPopover.m */; };
-		CE6C17332045217A00672253 /* FFHourPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16EC2045217A00672253 /* FFHourPopoverController.m */; };
-		CE6C17342045217A00672253 /* FFEditEventPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16EE2045217A00672253 /* FFEditEventPopoverController.m */; };
-		CE6C17352045217A00672253 /* FFEditEventView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16F02045217A00672253 /* FFEditEventView.m */; };
-		CE6C17362045217A00672253 /* FFGuestsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16F32045217A00672253 /* FFGuestsTableView.m */; };
-		CE6C17372045217A00672253 /* FFGuestsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16F52045217A00672253 /* FFGuestsTableViewCell.m */; };
-		CE6C17382045217A00672253 /* FFSearchBarWithAutoComplete.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16F82045217A00672253 /* FFSearchBarWithAutoComplete.m */; };
-		CE6C17392045217A00672253 /* FFEventDetailPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16FB2045217A00672253 /* FFEventDetailPopoverController.m */; };
-		CE6C173A2045217A00672253 /* FFEventDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16FD2045217A00672253 /* FFEventDetailView.m */; };
-		CE6C173B2045217A00672253 /* blackCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6C17002045217A00672253 /* blackCircle.png */; };
-		CE6C173C2045217A00672253 /* DailyCalendar.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6C17012045217A00672253 /* DailyCalendar.png */; };
-		CE6C173D2045217A00672253 /* MonthlyCalendar.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6C17022045217A00672253 /* MonthlyCalendar.png */; };
-		CE6C173E2045217A00672253 /* redCircle.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6C17032045217A00672253 /* redCircle.png */; };
-		CE6C173F2045217A00672253 /* redCircle_mini.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6C17042045217A00672253 /* redCircle_mini.png */; };
-		CE6C17402045217A00672253 /* WeeklyCalendar.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6C17052045217A00672253 /* WeeklyCalendar.png */; };
-		CE6C17412045217A00672253 /* YearlyCalendar.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6C17062045217A00672253 /* YearlyCalendar.png */; };
 		CE76ECE02041498D00E183EA /* TTView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE76ECDF2041498D00E183EA /* TTView.m */; };
 		CE76ECE320416AE100E183EA /* UIImage+GetPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = CE76ECE220416AE100E183EA /* UIImage+GetPoints.m */; };
 		CE76ECE52041715D00E183EA /* shape1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE76ECE42041715B00E183EA /* shape1.png */; };
@@ -549,6 +549,129 @@
 		182D854520342D1F005FFBF8 /* CategoryTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CategoryTableCell.h; path = CategoryTableCell/CategoryTableCell.h; sourceTree = "<group>"; };
 		182D854620342D1F005FFBF8 /* CategoryTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CategoryTableCell.m; path = CategoryTableCell/CategoryTableCell.m; sourceTree = "<group>"; };
 		182D854720342D1F005FFBF8 /* CategoryTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CategoryTableCell.xib; path = CategoryTableCell/CategoryTableCell.xib; sourceTree = "<group>"; };
+		18949957208759F7002ECEE0 /* PlannerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlannerVC.m; sourceTree = "<group>"; };
+		18949958208759F8002ECEE0 /* PlannerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlannerVC.xib; sourceTree = "<group>"; };
+		18949959208759F8002ECEE0 /* PlannerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlannerVC.h; sourceTree = "<group>"; };
+		1894995C20875A3B002ECEE0 /* PlannerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlannerCell.xib; sourceTree = "<group>"; };
+		1894995D20875A3C002ECEE0 /* PlannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlannerCell.m; sourceTree = "<group>"; };
+		1894995E20875A3C002ECEE0 /* PlannerListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlannerListVC.h; sourceTree = "<group>"; };
+		1894995F20875A3C002ECEE0 /* PlannerListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlannerListVC.m; sourceTree = "<group>"; };
+		1894996020875A3C002ECEE0 /* PlannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlannerCell.h; sourceTree = "<group>"; };
+		1894996620875C5E002ECEE0 /* FFAddEventPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFAddEventPopoverController.h; sourceTree = "<group>"; };
+		1894996720875C5E002ECEE0 /* FFAddEventPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFAddEventPopoverController.m; sourceTree = "<group>"; };
+		1894996820875C5E002ECEE0 /* FFButtonAddEventWithPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFButtonAddEventWithPopover.h; sourceTree = "<group>"; };
+		1894996920875C5E002ECEE0 /* FFButtonAddEventWithPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFButtonAddEventWithPopover.m; sourceTree = "<group>"; };
+		1894996A20875C5E002ECEE0 /* FFCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFCalendarViewController.h; sourceTree = "<group>"; };
+		1894996B20875C5E002ECEE0 /* FFCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFCalendarViewController.m; sourceTree = "<group>"; };
+		1894996D20875C5E002ECEE0 /* FFCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFCalendar.h; sourceTree = "<group>"; };
+		1894996F20875C5E002ECEE0 /* FFDayCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayCalendarView.h; sourceTree = "<group>"; };
+		1894997020875C5E002ECEE0 /* FFDayCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayCalendarView.m; sourceTree = "<group>"; };
+		1894997320875C5E002ECEE0 /* FFDayHeaderButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayHeaderButton.h; sourceTree = "<group>"; };
+		1894997420875C5E002ECEE0 /* FFDayHeaderButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayHeaderButton.m; sourceTree = "<group>"; };
+		1894997520875C5E002ECEE0 /* FFDayHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayHeaderCell.h; sourceTree = "<group>"; };
+		1894997620875C5E002ECEE0 /* FFDayHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayHeaderCell.m; sourceTree = "<group>"; };
+		1894997720875C5E002ECEE0 /* FFDayHeaderCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayHeaderCollectionView.h; sourceTree = "<group>"; };
+		1894997820875C5E002ECEE0 /* FFDayHeaderCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayHeaderCollectionView.m; sourceTree = "<group>"; };
+		1894997C20875C5E002ECEE0 /* FFDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayCell.h; sourceTree = "<group>"; };
+		1894997D20875C5E002ECEE0 /* FFDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayCell.m; sourceTree = "<group>"; };
+		1894997E20875C5E002ECEE0 /* FFDayCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayCollectionView.h; sourceTree = "<group>"; };
+		1894997F20875C5E002ECEE0 /* FFDayCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayCollectionView.m; sourceTree = "<group>"; };
+		1894998020875C5E002ECEE0 /* FFDayCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		1894998120875C5E002ECEE0 /* FFDayCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		1894998220875C5E002ECEE0 /* FFDayScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayScrollView.h; sourceTree = "<group>"; };
+		1894998320875C5E002ECEE0 /* FFDayScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayScrollView.m; sourceTree = "<group>"; };
+		1894998520875C5E002ECEE0 /* FFMonthCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthCalendarView.h; sourceTree = "<group>"; };
+		1894998620875C5E002ECEE0 /* FFMonthCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthCalendarView.m; sourceTree = "<group>"; };
+		1894998920875C5E002ECEE0 /* FFButtonWithEditAndDetailPopoversForMonthCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFButtonWithEditAndDetailPopoversForMonthCell.h; sourceTree = "<group>"; };
+		1894998A20875C5E002ECEE0 /* FFButtonWithEditAndDetailPopoversForMonthCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFButtonWithEditAndDetailPopoversForMonthCell.m; sourceTree = "<group>"; };
+		1894998B20875C5E002ECEE0 /* FFMonthCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthCell.h; sourceTree = "<group>"; };
+		1894998C20875C5E002ECEE0 /* FFMonthCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthCell.m; sourceTree = "<group>"; };
+		1894998D20875C5E002ECEE0 /* FFMonthCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthCollectionView.h; sourceTree = "<group>"; };
+		1894998E20875C5E002ECEE0 /* FFMonthCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthCollectionView.m; sourceTree = "<group>"; };
+		1894998F20875C5E002ECEE0 /* FFMonthCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		1894999020875C5E002ECEE0 /* FFMonthCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		1894999220875C5E002ECEE0 /* FFMonthHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthHeaderView.h; sourceTree = "<group>"; };
+		1894999320875C5E002ECEE0 /* FFMonthHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthHeaderView.m; sourceTree = "<group>"; };
+		1894999520875C5E002ECEE0 /* FFWeekCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekCalendarView.h; sourceTree = "<group>"; };
+		1894999620875C5E002ECEE0 /* FFWeekCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekCalendarView.m; sourceTree = "<group>"; };
+		1894999820875C5E002ECEE0 /* FFWeekHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekHeaderCell.h; sourceTree = "<group>"; };
+		1894999920875C5E002ECEE0 /* FFWeekHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekHeaderCell.m; sourceTree = "<group>"; };
+		1894999A20875C5E002ECEE0 /* FFWeekHeaderCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekHeaderCollectionView.h; sourceTree = "<group>"; };
+		1894999B20875C5E002ECEE0 /* FFWeekHeaderCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekHeaderCollectionView.m; sourceTree = "<group>"; };
+		1894999E20875C5E002ECEE0 /* FFHourAndMinLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFHourAndMinLabel.h; sourceTree = "<group>"; };
+		1894999F20875C5E002ECEE0 /* FFHourAndMinLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFHourAndMinLabel.m; sourceTree = "<group>"; };
+		189499A020875C5E002ECEE0 /* FFViewWithHourLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFViewWithHourLines.h; sourceTree = "<group>"; };
+		189499A120875C5E002ECEE0 /* FFViewWithHourLines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFViewWithHourLines.m; sourceTree = "<group>"; };
+		189499A320875C5E002ECEE0 /* FFWeekCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekCell.h; sourceTree = "<group>"; };
+		189499A420875C5E002ECEE0 /* FFWeekCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekCell.m; sourceTree = "<group>"; };
+		189499A520875C5E002ECEE0 /* FFWeekCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekCollectionView.h; sourceTree = "<group>"; };
+		189499A620875C5E002ECEE0 /* FFWeekCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekCollectionView.m; sourceTree = "<group>"; };
+		189499A720875C5E002ECEE0 /* FFWeekCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		189499A820875C5E002ECEE0 /* FFWeekCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		189499A920875C5E002ECEE0 /* FFWeekScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekScrollView.h; sourceTree = "<group>"; };
+		189499AA20875C5E002ECEE0 /* FFWeekScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekScrollView.m; sourceTree = "<group>"; };
+		189499AC20875C5E002ECEE0 /* FFYearCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFYearCalendarView.h; sourceTree = "<group>"; };
+		189499AD20875C5E002ECEE0 /* FFYearCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFYearCalendarView.m; sourceTree = "<group>"; };
+		189499B120875C5E002ECEE0 /* FFHeaderMonthForYearCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFHeaderMonthForYearCell.h; sourceTree = "<group>"; };
+		189499B220875C5E002ECEE0 /* FFHeaderMonthForYearCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFHeaderMonthForYearCell.m; sourceTree = "<group>"; };
+		189499B320875C5E002ECEE0 /* FFMonthCellForYearCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthCellForYearCell.h; sourceTree = "<group>"; };
+		189499B420875C5E002ECEE0 /* FFMonthCellForYearCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthCellForYearCell.m; sourceTree = "<group>"; };
+		189499B520875C5E002ECEE0 /* FFMonthCollectionViewForYearCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthCollectionViewForYearCell.h; sourceTree = "<group>"; };
+		189499B620875C5E002ECEE0 /* FFMonthCollectionViewForYearCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthCollectionViewForYearCell.m; sourceTree = "<group>"; };
+		189499B720875C5E002ECEE0 /* FFYearCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFYearCell.h; sourceTree = "<group>"; };
+		189499B820875C5E002ECEE0 /* FFYearCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFYearCell.m; sourceTree = "<group>"; };
+		189499B920875C5E002ECEE0 /* FFYearCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFYearCollectionView.h; sourceTree = "<group>"; };
+		189499BA20875C5E002ECEE0 /* FFYearCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFYearCollectionView.m; sourceTree = "<group>"; };
+		189499BB20875C5E002ECEE0 /* FFYearCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFYearCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		189499BC20875C5E002ECEE0 /* FFYearCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFYearCollectionViewFlowLayout.m; sourceTree = "<group>"; };
+		189499BF20875C5E002ECEE0 /* FFBlueButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFBlueButton.h; sourceTree = "<group>"; };
+		189499C020875C5E002ECEE0 /* FFBlueButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFBlueButton.m; sourceTree = "<group>"; };
+		189499C120875C5E002ECEE0 /* FFRedAndWhiteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFRedAndWhiteButton.h; sourceTree = "<group>"; };
+		189499C220875C5E002ECEE0 /* FFRedAndWhiteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFRedAndWhiteButton.m; sourceTree = "<group>"; };
+		189499C420875C5E002ECEE0 /* NSDate+FFDaysCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+FFDaysCount.h"; sourceTree = "<group>"; };
+		189499C520875C5E002ECEE0 /* NSDate+FFDaysCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+FFDaysCount.m"; sourceTree = "<group>"; };
+		189499C620875C5E002ECEE0 /* UIColor+FFMoreColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FFMoreColors.h"; sourceTree = "<group>"; };
+		189499C720875C5E002ECEE0 /* UIColor+FFMoreColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FFMoreColors.m"; sourceTree = "<group>"; };
+		189499C820875C5E002ECEE0 /* UIImage+FFCustomMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FFCustomMethods.h"; sourceTree = "<group>"; };
+		189499C920875C5E002ECEE0 /* UIImage+FFCustomMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FFCustomMethods.m"; sourceTree = "<group>"; };
+		189499CA20875C5E002ECEE0 /* UILabel+FFCustomMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+FFCustomMethods.h"; sourceTree = "<group>"; };
+		189499CB20875C5E002ECEE0 /* UILabel+FFCustomMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FFCustomMethods.m"; sourceTree = "<group>"; };
+		189499CC20875C5E002ECEE0 /* FFConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFConstants.h; sourceTree = "<group>"; };
+		189499CE20875C5E002ECEE0 /* FFDateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDateManager.h; sourceTree = "<group>"; };
+		189499CF20875C5E002ECEE0 /* FFDateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDateManager.m; sourceTree = "<group>"; };
+		189499D120875C5E002ECEE0 /* FFEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFEvent.h; sourceTree = "<group>"; };
+		189499D220875C5E002ECEE0 /* FFEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFEvent.m; sourceTree = "<group>"; };
+		189499D620875C5E002ECEE0 /* FFButtonWithDatePopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFButtonWithDatePopover.h; sourceTree = "<group>"; };
+		189499D720875C5E002ECEE0 /* FFButtonWithDatePopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFButtonWithDatePopover.m; sourceTree = "<group>"; };
+		189499D820875C5E002ECEE0 /* FFDatePopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDatePopoverController.h; sourceTree = "<group>"; };
+		189499D920875C5E002ECEE0 /* FFDatePopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDatePopoverController.m; sourceTree = "<group>"; };
+		189499DB20875C5E002ECEE0 /* FFButtonWithHourPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFButtonWithHourPopover.h; sourceTree = "<group>"; };
+		189499DC20875C5E002ECEE0 /* FFButtonWithHourPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFButtonWithHourPopover.m; sourceTree = "<group>"; };
+		189499DD20875C5E002ECEE0 /* FFHourPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFHourPopoverController.h; sourceTree = "<group>"; };
+		189499DE20875C5E002ECEE0 /* FFHourPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFHourPopoverController.m; sourceTree = "<group>"; };
+		189499DF20875C5E002ECEE0 /* FFEditEventPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFEditEventPopoverController.h; sourceTree = "<group>"; };
+		189499E020875C5E002ECEE0 /* FFEditEventPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFEditEventPopoverController.m; sourceTree = "<group>"; };
+		189499E120875C5E002ECEE0 /* FFEditEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFEditEventView.h; sourceTree = "<group>"; };
+		189499E220875C5E002ECEE0 /* FFEditEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFEditEventView.m; sourceTree = "<group>"; };
+		189499E420875C5E002ECEE0 /* FFGuestsTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFGuestsTableView.h; sourceTree = "<group>"; };
+		189499E520875C5E002ECEE0 /* FFGuestsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFGuestsTableView.m; sourceTree = "<group>"; };
+		189499E620875C5E002ECEE0 /* FFGuestsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFGuestsTableViewCell.h; sourceTree = "<group>"; };
+		189499E720875C5E002ECEE0 /* FFGuestsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFGuestsTableViewCell.m; sourceTree = "<group>"; };
+		189499E920875C5E002ECEE0 /* FFSearchBarWithAutoComplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFSearchBarWithAutoComplete.h; sourceTree = "<group>"; };
+		189499EA20875C5E002ECEE0 /* FFSearchBarWithAutoComplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFSearchBarWithAutoComplete.m; sourceTree = "<group>"; };
+		189499EC20875C5E002ECEE0 /* FFEventDetailPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFEventDetailPopoverController.h; sourceTree = "<group>"; };
+		189499ED20875C5E002ECEE0 /* FFEventDetailPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFEventDetailPopoverController.m; sourceTree = "<group>"; };
+		189499EE20875C5E002ECEE0 /* FFEventDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFEventDetailView.h; sourceTree = "<group>"; };
+		189499EF20875C5E002ECEE0 /* FFEventDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFEventDetailView.m; sourceTree = "<group>"; };
+		189499F020875C5E002ECEE0 /* FFImportantFilesForCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFImportantFilesForCalendar.h; sourceTree = "<group>"; };
+		189499F220875C5E002ECEE0 /* blackCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackCircle.png; sourceTree = "<group>"; };
+		189499F320875C5E002ECEE0 /* DailyCalendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DailyCalendar.png; sourceTree = "<group>"; };
+		189499F420875C5E002ECEE0 /* MonthlyCalendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MonthlyCalendar.png; sourceTree = "<group>"; };
+		189499F520875C5E002ECEE0 /* redCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redCircle.png; sourceTree = "<group>"; };
+		189499F620875C5E002ECEE0 /* redCircle_mini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redCircle_mini.png; sourceTree = "<group>"; };
+		189499F720875C5E002ECEE0 /* WeeklyCalendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeeklyCalendar.png; sourceTree = "<group>"; };
+		189499F820875C5E002ECEE0 /* YearlyCalendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YearlyCalendar.png; sourceTree = "<group>"; };
+		189499F920875C5E002ECEE0 /* DateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateProtocol.h; sourceTree = "<group>"; };
 		18A2E70E203D49CA00F91E73 /* TrainingPiechart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrainingPiechart.h; sourceTree = "<group>"; };
 		18A2E70F203D49CA00F91E73 /* TrainingPiechart.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrainingPiechart.m; sourceTree = "<group>"; };
 		18A2E710203D49CA00F91E73 /* TrainingPiechart.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainingPiechart.xib; sourceTree = "<group>"; };
@@ -637,9 +760,6 @@
 		CE60F0FF20870C8100B74A2C /* TabbarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabbarVC.m; sourceTree = "<group>"; };
 		CE60F10820870C9E00B74A2C /* BPXLUUIDHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPXLUUIDHandler.h; sourceTree = "<group>"; };
 		CE60F10920870C9E00B74A2C /* BPXLUUIDHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPXLUUIDHandler.m; sourceTree = "<group>"; };
-		CE6C16082045200F00672253 /* PlannerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlannerVC.h; sourceTree = "<group>"; };
-		CE6C16092045200F00672253 /* PlannerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlannerVC.m; sourceTree = "<group>"; };
-		CE6C160A2045200F00672253 /* PlannerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlannerVC.xib; sourceTree = "<group>"; };
 		CE6C161A204520B200672253 /* PlayersCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayersCell.h; sourceTree = "<group>"; };
 		CE6C161B204520B200672253 /* PlayersCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayersCell.m; sourceTree = "<group>"; };
 		CE6C161C204520B200672253 /* PlayersVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayersVC.h; sourceTree = "<group>"; };
@@ -674,126 +794,6 @@
 		CE6C16532045213C00672253 /* SACalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SACalendarCell.h; sourceTree = "<group>"; };
 		CE6C16542045213C00672253 /* SACalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SACalendarCell.m; sourceTree = "<group>"; };
 		CE6C16552045213C00672253 /* SACalendarConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SACalendarConstants.h; sourceTree = "<group>"; };
-		CE6C16642045216000672253 /* PlannerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlannerCell.h; sourceTree = "<group>"; };
-		CE6C16652045216000672253 /* PlannerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlannerCell.m; sourceTree = "<group>"; };
-		CE6C16662045216000672253 /* PlannerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlannerCell.xib; sourceTree = "<group>"; };
-		CE6C16672045216000672253 /* PlannerListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlannerListVC.h; sourceTree = "<group>"; };
-		CE6C16682045216000672253 /* PlannerListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlannerListVC.m; sourceTree = "<group>"; };
-		CE6C16712045217A00672253 /* DateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateProtocol.h; sourceTree = "<group>"; };
-		CE6C16742045217A00672253 /* FFAddEventPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFAddEventPopoverController.h; sourceTree = "<group>"; };
-		CE6C16752045217A00672253 /* FFAddEventPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFAddEventPopoverController.m; sourceTree = "<group>"; };
-		CE6C16762045217A00672253 /* FFButtonAddEventWithPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFButtonAddEventWithPopover.h; sourceTree = "<group>"; };
-		CE6C16772045217A00672253 /* FFButtonAddEventWithPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFButtonAddEventWithPopover.m; sourceTree = "<group>"; };
-		CE6C16782045217A00672253 /* FFCalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFCalendarViewController.h; sourceTree = "<group>"; };
-		CE6C16792045217A00672253 /* FFCalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFCalendarViewController.m; sourceTree = "<group>"; };
-		CE6C167B2045217A00672253 /* FFCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFCalendar.h; sourceTree = "<group>"; };
-		CE6C167D2045217A00672253 /* FFDayCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayCalendarView.h; sourceTree = "<group>"; };
-		CE6C167E2045217A00672253 /* FFDayCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayCalendarView.m; sourceTree = "<group>"; };
-		CE6C16812045217A00672253 /* FFDayHeaderButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayHeaderButton.h; sourceTree = "<group>"; };
-		CE6C16822045217A00672253 /* FFDayHeaderButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayHeaderButton.m; sourceTree = "<group>"; };
-		CE6C16832045217A00672253 /* FFDayHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayHeaderCell.h; sourceTree = "<group>"; };
-		CE6C16842045217A00672253 /* FFDayHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayHeaderCell.m; sourceTree = "<group>"; };
-		CE6C16852045217A00672253 /* FFDayHeaderCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayHeaderCollectionView.h; sourceTree = "<group>"; };
-		CE6C16862045217A00672253 /* FFDayHeaderCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayHeaderCollectionView.m; sourceTree = "<group>"; };
-		CE6C168A2045217A00672253 /* FFDayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayCell.h; sourceTree = "<group>"; };
-		CE6C168B2045217A00672253 /* FFDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayCell.m; sourceTree = "<group>"; };
-		CE6C168C2045217A00672253 /* FFDayCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayCollectionView.h; sourceTree = "<group>"; };
-		CE6C168D2045217A00672253 /* FFDayCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayCollectionView.m; sourceTree = "<group>"; };
-		CE6C168E2045217A00672253 /* FFDayCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayCollectionViewFlowLayout.h; sourceTree = "<group>"; };
-		CE6C168F2045217A00672253 /* FFDayCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayCollectionViewFlowLayout.m; sourceTree = "<group>"; };
-		CE6C16902045217A00672253 /* FFDayScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDayScrollView.h; sourceTree = "<group>"; };
-		CE6C16912045217A00672253 /* FFDayScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDayScrollView.m; sourceTree = "<group>"; };
-		CE6C16932045217A00672253 /* FFMonthCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthCalendarView.h; sourceTree = "<group>"; };
-		CE6C16942045217A00672253 /* FFMonthCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthCalendarView.m; sourceTree = "<group>"; };
-		CE6C16972045217A00672253 /* FFButtonWithEditAndDetailPopoversForMonthCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFButtonWithEditAndDetailPopoversForMonthCell.h; sourceTree = "<group>"; };
-		CE6C16982045217A00672253 /* FFButtonWithEditAndDetailPopoversForMonthCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFButtonWithEditAndDetailPopoversForMonthCell.m; sourceTree = "<group>"; };
-		CE6C16992045217A00672253 /* FFMonthCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthCell.h; sourceTree = "<group>"; };
-		CE6C169A2045217A00672253 /* FFMonthCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthCell.m; sourceTree = "<group>"; };
-		CE6C169B2045217A00672253 /* FFMonthCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthCollectionView.h; sourceTree = "<group>"; };
-		CE6C169C2045217A00672253 /* FFMonthCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthCollectionView.m; sourceTree = "<group>"; };
-		CE6C169D2045217A00672253 /* FFMonthCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthCollectionViewFlowLayout.h; sourceTree = "<group>"; };
-		CE6C169E2045217A00672253 /* FFMonthCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthCollectionViewFlowLayout.m; sourceTree = "<group>"; };
-		CE6C16A02045217A00672253 /* FFMonthHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthHeaderView.h; sourceTree = "<group>"; };
-		CE6C16A12045217A00672253 /* FFMonthHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthHeaderView.m; sourceTree = "<group>"; };
-		CE6C16A32045217A00672253 /* FFWeekCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekCalendarView.h; sourceTree = "<group>"; };
-		CE6C16A42045217A00672253 /* FFWeekCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekCalendarView.m; sourceTree = "<group>"; };
-		CE6C16A62045217A00672253 /* FFWeekHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekHeaderCell.h; sourceTree = "<group>"; };
-		CE6C16A72045217A00672253 /* FFWeekHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekHeaderCell.m; sourceTree = "<group>"; };
-		CE6C16A82045217A00672253 /* FFWeekHeaderCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekHeaderCollectionView.h; sourceTree = "<group>"; };
-		CE6C16A92045217A00672253 /* FFWeekHeaderCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekHeaderCollectionView.m; sourceTree = "<group>"; };
-		CE6C16AC2045217A00672253 /* FFHourAndMinLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFHourAndMinLabel.h; sourceTree = "<group>"; };
-		CE6C16AD2045217A00672253 /* FFHourAndMinLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFHourAndMinLabel.m; sourceTree = "<group>"; };
-		CE6C16AE2045217A00672253 /* FFViewWithHourLines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFViewWithHourLines.h; sourceTree = "<group>"; };
-		CE6C16AF2045217A00672253 /* FFViewWithHourLines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFViewWithHourLines.m; sourceTree = "<group>"; };
-		CE6C16B12045217A00672253 /* FFWeekCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekCell.h; sourceTree = "<group>"; };
-		CE6C16B22045217A00672253 /* FFWeekCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekCell.m; sourceTree = "<group>"; };
-		CE6C16B32045217A00672253 /* FFWeekCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekCollectionView.h; sourceTree = "<group>"; };
-		CE6C16B42045217A00672253 /* FFWeekCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekCollectionView.m; sourceTree = "<group>"; };
-		CE6C16B52045217A00672253 /* FFWeekCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekCollectionViewFlowLayout.h; sourceTree = "<group>"; };
-		CE6C16B62045217A00672253 /* FFWeekCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekCollectionViewFlowLayout.m; sourceTree = "<group>"; };
-		CE6C16B72045217A00672253 /* FFWeekScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFWeekScrollView.h; sourceTree = "<group>"; };
-		CE6C16B82045217A00672253 /* FFWeekScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFWeekScrollView.m; sourceTree = "<group>"; };
-		CE6C16BA2045217A00672253 /* FFYearCalendarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFYearCalendarView.h; sourceTree = "<group>"; };
-		CE6C16BB2045217A00672253 /* FFYearCalendarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFYearCalendarView.m; sourceTree = "<group>"; };
-		CE6C16BF2045217A00672253 /* FFHeaderMonthForYearCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFHeaderMonthForYearCell.h; sourceTree = "<group>"; };
-		CE6C16C02045217A00672253 /* FFHeaderMonthForYearCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFHeaderMonthForYearCell.m; sourceTree = "<group>"; };
-		CE6C16C12045217A00672253 /* FFMonthCellForYearCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthCellForYearCell.h; sourceTree = "<group>"; };
-		CE6C16C22045217A00672253 /* FFMonthCellForYearCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthCellForYearCell.m; sourceTree = "<group>"; };
-		CE6C16C32045217A00672253 /* FFMonthCollectionViewForYearCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFMonthCollectionViewForYearCell.h; sourceTree = "<group>"; };
-		CE6C16C42045217A00672253 /* FFMonthCollectionViewForYearCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFMonthCollectionViewForYearCell.m; sourceTree = "<group>"; };
-		CE6C16C52045217A00672253 /* FFYearCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFYearCell.h; sourceTree = "<group>"; };
-		CE6C16C62045217A00672253 /* FFYearCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFYearCell.m; sourceTree = "<group>"; };
-		CE6C16C72045217A00672253 /* FFYearCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFYearCollectionView.h; sourceTree = "<group>"; };
-		CE6C16C82045217A00672253 /* FFYearCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFYearCollectionView.m; sourceTree = "<group>"; };
-		CE6C16C92045217A00672253 /* FFYearCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFYearCollectionViewFlowLayout.h; sourceTree = "<group>"; };
-		CE6C16CA2045217A00672253 /* FFYearCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFYearCollectionViewFlowLayout.m; sourceTree = "<group>"; };
-		CE6C16CD2045217A00672253 /* FFBlueButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFBlueButton.h; sourceTree = "<group>"; };
-		CE6C16CE2045217A00672253 /* FFBlueButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFBlueButton.m; sourceTree = "<group>"; };
-		CE6C16CF2045217A00672253 /* FFRedAndWhiteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFRedAndWhiteButton.h; sourceTree = "<group>"; };
-		CE6C16D02045217A00672253 /* FFRedAndWhiteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFRedAndWhiteButton.m; sourceTree = "<group>"; };
-		CE6C16D22045217A00672253 /* NSDate+FFDaysCount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+FFDaysCount.h"; sourceTree = "<group>"; };
-		CE6C16D32045217A00672253 /* NSDate+FFDaysCount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+FFDaysCount.m"; sourceTree = "<group>"; };
-		CE6C16D42045217A00672253 /* UIColor+FFMoreColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+FFMoreColors.h"; sourceTree = "<group>"; };
-		CE6C16D52045217A00672253 /* UIColor+FFMoreColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+FFMoreColors.m"; sourceTree = "<group>"; };
-		CE6C16D62045217A00672253 /* UIImage+FFCustomMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FFCustomMethods.h"; sourceTree = "<group>"; };
-		CE6C16D72045217A00672253 /* UIImage+FFCustomMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FFCustomMethods.m"; sourceTree = "<group>"; };
-		CE6C16D82045217A00672253 /* UILabel+FFCustomMethods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+FFCustomMethods.h"; sourceTree = "<group>"; };
-		CE6C16D92045217A00672253 /* UILabel+FFCustomMethods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+FFCustomMethods.m"; sourceTree = "<group>"; };
-		CE6C16DA2045217A00672253 /* FFConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFConstants.h; sourceTree = "<group>"; };
-		CE6C16DC2045217A00672253 /* FFDateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDateManager.h; sourceTree = "<group>"; };
-		CE6C16DD2045217A00672253 /* FFDateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDateManager.m; sourceTree = "<group>"; };
-		CE6C16DF2045217A00672253 /* FFEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFEvent.h; sourceTree = "<group>"; };
-		CE6C16E02045217A00672253 /* FFEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFEvent.m; sourceTree = "<group>"; };
-		CE6C16E42045217A00672253 /* FFButtonWithDatePopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFButtonWithDatePopover.h; sourceTree = "<group>"; };
-		CE6C16E52045217A00672253 /* FFButtonWithDatePopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFButtonWithDatePopover.m; sourceTree = "<group>"; };
-		CE6C16E62045217A00672253 /* FFDatePopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFDatePopoverController.h; sourceTree = "<group>"; };
-		CE6C16E72045217A00672253 /* FFDatePopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFDatePopoverController.m; sourceTree = "<group>"; };
-		CE6C16E92045217A00672253 /* FFButtonWithHourPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFButtonWithHourPopover.h; sourceTree = "<group>"; };
-		CE6C16EA2045217A00672253 /* FFButtonWithHourPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFButtonWithHourPopover.m; sourceTree = "<group>"; };
-		CE6C16EB2045217A00672253 /* FFHourPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFHourPopoverController.h; sourceTree = "<group>"; };
-		CE6C16EC2045217A00672253 /* FFHourPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFHourPopoverController.m; sourceTree = "<group>"; };
-		CE6C16ED2045217A00672253 /* FFEditEventPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFEditEventPopoverController.h; sourceTree = "<group>"; };
-		CE6C16EE2045217A00672253 /* FFEditEventPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFEditEventPopoverController.m; sourceTree = "<group>"; };
-		CE6C16EF2045217A00672253 /* FFEditEventView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFEditEventView.h; sourceTree = "<group>"; };
-		CE6C16F02045217A00672253 /* FFEditEventView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFEditEventView.m; sourceTree = "<group>"; };
-		CE6C16F22045217A00672253 /* FFGuestsTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFGuestsTableView.h; sourceTree = "<group>"; };
-		CE6C16F32045217A00672253 /* FFGuestsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFGuestsTableView.m; sourceTree = "<group>"; };
-		CE6C16F42045217A00672253 /* FFGuestsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFGuestsTableViewCell.h; sourceTree = "<group>"; };
-		CE6C16F52045217A00672253 /* FFGuestsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFGuestsTableViewCell.m; sourceTree = "<group>"; };
-		CE6C16F72045217A00672253 /* FFSearchBarWithAutoComplete.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFSearchBarWithAutoComplete.h; sourceTree = "<group>"; };
-		CE6C16F82045217A00672253 /* FFSearchBarWithAutoComplete.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFSearchBarWithAutoComplete.m; sourceTree = "<group>"; };
-		CE6C16FA2045217A00672253 /* FFEventDetailPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFEventDetailPopoverController.h; sourceTree = "<group>"; };
-		CE6C16FB2045217A00672253 /* FFEventDetailPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFEventDetailPopoverController.m; sourceTree = "<group>"; };
-		CE6C16FC2045217A00672253 /* FFEventDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFEventDetailView.h; sourceTree = "<group>"; };
-		CE6C16FD2045217A00672253 /* FFEventDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FFEventDetailView.m; sourceTree = "<group>"; };
-		CE6C16FE2045217A00672253 /* FFImportantFilesForCalendar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FFImportantFilesForCalendar.h; sourceTree = "<group>"; };
-		CE6C17002045217A00672253 /* blackCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackCircle.png; sourceTree = "<group>"; };
-		CE6C17012045217A00672253 /* DailyCalendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DailyCalendar.png; sourceTree = "<group>"; };
-		CE6C17022045217A00672253 /* MonthlyCalendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MonthlyCalendar.png; sourceTree = "<group>"; };
-		CE6C17032045217A00672253 /* redCircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redCircle.png; sourceTree = "<group>"; };
-		CE6C17042045217A00672253 /* redCircle_mini.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redCircle_mini.png; sourceTree = "<group>"; };
-		CE6C17052045217A00672253 /* WeeklyCalendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeeklyCalendar.png; sourceTree = "<group>"; };
-		CE6C17062045217A00672253 /* YearlyCalendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YearlyCalendar.png; sourceTree = "<group>"; };
 		CE76ECDE2041498D00E183EA /* TTView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTView.h; sourceTree = "<group>"; };
 		CE76ECDF2041498D00E183EA /* TTView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTView.m; sourceTree = "<group>"; };
 		CE76ECE120416A3800E183EA /* UIImage+GetPoints.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+GetPoints.h"; sourceTree = "<group>"; };
@@ -1084,6 +1084,398 @@
 				04BC4AC2208618A000CEB23E /* TabHomeVC.xib */,
 			);
 			path = TabHomeVC;
+			sourceTree = "<group>";
+		};
+		1894996420875C5E002ECEE0 /* Ffcalendar */ = {
+			isa = PBXGroup;
+			children = (
+				1894996520875C5E002ECEE0 /* FFButtonAddEventWithPopover */,
+				1894996A20875C5E002ECEE0 /* FFCalendarViewController.h */,
+				1894996B20875C5E002ECEE0 /* FFCalendarViewController.m */,
+			);
+			path = Ffcalendar;
+			sourceTree = "<group>";
+		};
+		1894996520875C5E002ECEE0 /* FFButtonAddEventWithPopover */ = {
+			isa = PBXGroup;
+			children = (
+				1894996620875C5E002ECEE0 /* FFAddEventPopoverController.h */,
+				1894996720875C5E002ECEE0 /* FFAddEventPopoverController.m */,
+				1894996820875C5E002ECEE0 /* FFButtonAddEventWithPopover.h */,
+				1894996920875C5E002ECEE0 /* FFButtonAddEventWithPopover.m */,
+			);
+			path = FFButtonAddEventWithPopover;
+			sourceTree = "<group>";
+		};
+		1894996C20875C5E002ECEE0 /* FFSup */ = {
+			isa = PBXGroup;
+			children = (
+				1894996D20875C5E002ECEE0 /* FFCalendar.h */,
+				1894996E20875C5E002ECEE0 /* FFDayCalendarView */,
+				1894998420875C5E002ECEE0 /* FFMonthCalendarView */,
+				1894999420875C5E002ECEE0 /* FFWeekCalendarView */,
+				189499AB20875C5E002ECEE0 /* FFYearCalendarView */,
+				189499BD20875C5E002ECEE0 /* Util */,
+			);
+			path = FFSup;
+			sourceTree = "<group>";
+		};
+		1894996E20875C5E002ECEE0 /* FFDayCalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				1894996F20875C5E002ECEE0 /* FFDayCalendarView.h */,
+				1894997020875C5E002ECEE0 /* FFDayCalendarView.m */,
+				1894997120875C5E002ECEE0 /* FFDayHeaderCollectionView */,
+				1894997920875C5E002ECEE0 /* FFDayScrollView */,
+			);
+			path = FFDayCalendarView;
+			sourceTree = "<group>";
+		};
+		1894997120875C5E002ECEE0 /* FFDayHeaderCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				1894997220875C5E002ECEE0 /* FFDayHeaderCell */,
+				1894997720875C5E002ECEE0 /* FFDayHeaderCollectionView.h */,
+				1894997820875C5E002ECEE0 /* FFDayHeaderCollectionView.m */,
+			);
+			path = FFDayHeaderCollectionView;
+			sourceTree = "<group>";
+		};
+		1894997220875C5E002ECEE0 /* FFDayHeaderCell */ = {
+			isa = PBXGroup;
+			children = (
+				1894997320875C5E002ECEE0 /* FFDayHeaderButton.h */,
+				1894997420875C5E002ECEE0 /* FFDayHeaderButton.m */,
+				1894997520875C5E002ECEE0 /* FFDayHeaderCell.h */,
+				1894997620875C5E002ECEE0 /* FFDayHeaderCell.m */,
+			);
+			path = FFDayHeaderCell;
+			sourceTree = "<group>";
+		};
+		1894997920875C5E002ECEE0 /* FFDayScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				1894997A20875C5E002ECEE0 /* FFDayCollectionView */,
+				1894998220875C5E002ECEE0 /* FFDayScrollView.h */,
+				1894998320875C5E002ECEE0 /* FFDayScrollView.m */,
+			);
+			path = FFDayScrollView;
+			sourceTree = "<group>";
+		};
+		1894997A20875C5E002ECEE0 /* FFDayCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				1894997B20875C5E002ECEE0 /* FFDayCell */,
+				1894997E20875C5E002ECEE0 /* FFDayCollectionView.h */,
+				1894997F20875C5E002ECEE0 /* FFDayCollectionView.m */,
+				1894998020875C5E002ECEE0 /* FFDayCollectionViewFlowLayout.h */,
+				1894998120875C5E002ECEE0 /* FFDayCollectionViewFlowLayout.m */,
+			);
+			path = FFDayCollectionView;
+			sourceTree = "<group>";
+		};
+		1894997B20875C5E002ECEE0 /* FFDayCell */ = {
+			isa = PBXGroup;
+			children = (
+				1894997C20875C5E002ECEE0 /* FFDayCell.h */,
+				1894997D20875C5E002ECEE0 /* FFDayCell.m */,
+			);
+			path = FFDayCell;
+			sourceTree = "<group>";
+		};
+		1894998420875C5E002ECEE0 /* FFMonthCalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				1894998520875C5E002ECEE0 /* FFMonthCalendarView.h */,
+				1894998620875C5E002ECEE0 /* FFMonthCalendarView.m */,
+				1894998720875C5E002ECEE0 /* FFMonthCollectionView */,
+				1894999120875C5E002ECEE0 /* FFMonthHeaderView */,
+			);
+			path = FFMonthCalendarView;
+			sourceTree = "<group>";
+		};
+		1894998720875C5E002ECEE0 /* FFMonthCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				1894998820875C5E002ECEE0 /* FFButtonWithEditAndDetailPopoversForMonthCell */,
+				1894998B20875C5E002ECEE0 /* FFMonthCell.h */,
+				1894998C20875C5E002ECEE0 /* FFMonthCell.m */,
+				1894998D20875C5E002ECEE0 /* FFMonthCollectionView.h */,
+				1894998E20875C5E002ECEE0 /* FFMonthCollectionView.m */,
+				1894998F20875C5E002ECEE0 /* FFMonthCollectionViewFlowLayout.h */,
+				1894999020875C5E002ECEE0 /* FFMonthCollectionViewFlowLayout.m */,
+			);
+			path = FFMonthCollectionView;
+			sourceTree = "<group>";
+		};
+		1894998820875C5E002ECEE0 /* FFButtonWithEditAndDetailPopoversForMonthCell */ = {
+			isa = PBXGroup;
+			children = (
+				1894998920875C5E002ECEE0 /* FFButtonWithEditAndDetailPopoversForMonthCell.h */,
+				1894998A20875C5E002ECEE0 /* FFButtonWithEditAndDetailPopoversForMonthCell.m */,
+			);
+			path = FFButtonWithEditAndDetailPopoversForMonthCell;
+			sourceTree = "<group>";
+		};
+		1894999120875C5E002ECEE0 /* FFMonthHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				1894999220875C5E002ECEE0 /* FFMonthHeaderView.h */,
+				1894999320875C5E002ECEE0 /* FFMonthHeaderView.m */,
+			);
+			path = FFMonthHeaderView;
+			sourceTree = "<group>";
+		};
+		1894999420875C5E002ECEE0 /* FFWeekCalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				1894999520875C5E002ECEE0 /* FFWeekCalendarView.h */,
+				1894999620875C5E002ECEE0 /* FFWeekCalendarView.m */,
+				1894999720875C5E002ECEE0 /* FFWeekHeaderCollectionView */,
+				1894999C20875C5E002ECEE0 /* FFWeekScrollView */,
+			);
+			path = FFWeekCalendarView;
+			sourceTree = "<group>";
+		};
+		1894999720875C5E002ECEE0 /* FFWeekHeaderCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				1894999820875C5E002ECEE0 /* FFWeekHeaderCell.h */,
+				1894999920875C5E002ECEE0 /* FFWeekHeaderCell.m */,
+				1894999A20875C5E002ECEE0 /* FFWeekHeaderCollectionView.h */,
+				1894999B20875C5E002ECEE0 /* FFWeekHeaderCollectionView.m */,
+			);
+			path = FFWeekHeaderCollectionView;
+			sourceTree = "<group>";
+		};
+		1894999C20875C5E002ECEE0 /* FFWeekScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				1894999D20875C5E002ECEE0 /* FFViewWithHourLines */,
+				189499A220875C5E002ECEE0 /* FFWeekCollectionView */,
+				189499A920875C5E002ECEE0 /* FFWeekScrollView.h */,
+				189499AA20875C5E002ECEE0 /* FFWeekScrollView.m */,
+			);
+			path = FFWeekScrollView;
+			sourceTree = "<group>";
+		};
+		1894999D20875C5E002ECEE0 /* FFViewWithHourLines */ = {
+			isa = PBXGroup;
+			children = (
+				1894999E20875C5E002ECEE0 /* FFHourAndMinLabel.h */,
+				1894999F20875C5E002ECEE0 /* FFHourAndMinLabel.m */,
+				189499A020875C5E002ECEE0 /* FFViewWithHourLines.h */,
+				189499A120875C5E002ECEE0 /* FFViewWithHourLines.m */,
+			);
+			path = FFViewWithHourLines;
+			sourceTree = "<group>";
+		};
+		189499A220875C5E002ECEE0 /* FFWeekCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				189499A320875C5E002ECEE0 /* FFWeekCell.h */,
+				189499A420875C5E002ECEE0 /* FFWeekCell.m */,
+				189499A520875C5E002ECEE0 /* FFWeekCollectionView.h */,
+				189499A620875C5E002ECEE0 /* FFWeekCollectionView.m */,
+				189499A720875C5E002ECEE0 /* FFWeekCollectionViewFlowLayout.h */,
+				189499A820875C5E002ECEE0 /* FFWeekCollectionViewFlowLayout.m */,
+			);
+			path = FFWeekCollectionView;
+			sourceTree = "<group>";
+		};
+		189499AB20875C5E002ECEE0 /* FFYearCalendarView */ = {
+			isa = PBXGroup;
+			children = (
+				189499AC20875C5E002ECEE0 /* FFYearCalendarView.h */,
+				189499AD20875C5E002ECEE0 /* FFYearCalendarView.m */,
+				189499AE20875C5E002ECEE0 /* FFYearCollectionView */,
+			);
+			path = FFYearCalendarView;
+			sourceTree = "<group>";
+		};
+		189499AE20875C5E002ECEE0 /* FFYearCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				189499AF20875C5E002ECEE0 /* FFYearCell */,
+				189499B920875C5E002ECEE0 /* FFYearCollectionView.h */,
+				189499BA20875C5E002ECEE0 /* FFYearCollectionView.m */,
+				189499BB20875C5E002ECEE0 /* FFYearCollectionViewFlowLayout.h */,
+				189499BC20875C5E002ECEE0 /* FFYearCollectionViewFlowLayout.m */,
+			);
+			path = FFYearCollectionView;
+			sourceTree = "<group>";
+		};
+		189499AF20875C5E002ECEE0 /* FFYearCell */ = {
+			isa = PBXGroup;
+			children = (
+				189499B020875C5E002ECEE0 /* FFMonthCollectionViewForYearCell */,
+				189499B720875C5E002ECEE0 /* FFYearCell.h */,
+				189499B820875C5E002ECEE0 /* FFYearCell.m */,
+			);
+			path = FFYearCell;
+			sourceTree = "<group>";
+		};
+		189499B020875C5E002ECEE0 /* FFMonthCollectionViewForYearCell */ = {
+			isa = PBXGroup;
+			children = (
+				189499B120875C5E002ECEE0 /* FFHeaderMonthForYearCell.h */,
+				189499B220875C5E002ECEE0 /* FFHeaderMonthForYearCell.m */,
+				189499B320875C5E002ECEE0 /* FFMonthCellForYearCell.h */,
+				189499B420875C5E002ECEE0 /* FFMonthCellForYearCell.m */,
+				189499B520875C5E002ECEE0 /* FFMonthCollectionViewForYearCell.h */,
+				189499B620875C5E002ECEE0 /* FFMonthCollectionViewForYearCell.m */,
+			);
+			path = FFMonthCollectionViewForYearCell;
+			sourceTree = "<group>";
+		};
+		189499BD20875C5E002ECEE0 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				189499BE20875C5E002ECEE0 /* FFBlue and FFRed Buttons */,
+				189499C320875C5E002ECEE0 /* FFCategories */,
+				189499CC20875C5E002ECEE0 /* FFConstants.h */,
+				189499CD20875C5E002ECEE0 /* FFDateManeger */,
+				189499D020875C5E002ECEE0 /* FFEvent */,
+				189499D320875C5E002ECEE0 /* FFEventDetail and FFEditEvent Views and Popovers */,
+				189499F020875C5E002ECEE0 /* FFImportantFilesForCalendar.h */,
+				189499F120875C5E002ECEE0 /* Images */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		189499BE20875C5E002ECEE0 /* FFBlue and FFRed Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				189499BF20875C5E002ECEE0 /* FFBlueButton.h */,
+				189499C020875C5E002ECEE0 /* FFBlueButton.m */,
+				189499C120875C5E002ECEE0 /* FFRedAndWhiteButton.h */,
+				189499C220875C5E002ECEE0 /* FFRedAndWhiteButton.m */,
+			);
+			path = "FFBlue and FFRed Buttons";
+			sourceTree = "<group>";
+		};
+		189499C320875C5E002ECEE0 /* FFCategories */ = {
+			isa = PBXGroup;
+			children = (
+				189499C420875C5E002ECEE0 /* NSDate+FFDaysCount.h */,
+				189499C520875C5E002ECEE0 /* NSDate+FFDaysCount.m */,
+				189499C620875C5E002ECEE0 /* UIColor+FFMoreColors.h */,
+				189499C720875C5E002ECEE0 /* UIColor+FFMoreColors.m */,
+				189499C820875C5E002ECEE0 /* UIImage+FFCustomMethods.h */,
+				189499C920875C5E002ECEE0 /* UIImage+FFCustomMethods.m */,
+				189499CA20875C5E002ECEE0 /* UILabel+FFCustomMethods.h */,
+				189499CB20875C5E002ECEE0 /* UILabel+FFCustomMethods.m */,
+			);
+			path = FFCategories;
+			sourceTree = "<group>";
+		};
+		189499CD20875C5E002ECEE0 /* FFDateManeger */ = {
+			isa = PBXGroup;
+			children = (
+				189499CE20875C5E002ECEE0 /* FFDateManager.h */,
+				189499CF20875C5E002ECEE0 /* FFDateManager.m */,
+			);
+			path = FFDateManeger;
+			sourceTree = "<group>";
+		};
+		189499D020875C5E002ECEE0 /* FFEvent */ = {
+			isa = PBXGroup;
+			children = (
+				189499D120875C5E002ECEE0 /* FFEvent.h */,
+				189499D220875C5E002ECEE0 /* FFEvent.m */,
+			);
+			path = FFEvent;
+			sourceTree = "<group>";
+		};
+		189499D320875C5E002ECEE0 /* FFEventDetail and FFEditEvent Views and Popovers */ = {
+			isa = PBXGroup;
+			children = (
+				189499D420875C5E002ECEE0 /* FFEditEvent View and Popover */,
+				189499EB20875C5E002ECEE0 /* FFEventDetail View and Popover */,
+			);
+			path = "FFEventDetail and FFEditEvent Views and Popovers";
+			sourceTree = "<group>";
+		};
+		189499D420875C5E002ECEE0 /* FFEditEvent View and Popover */ = {
+			isa = PBXGroup;
+			children = (
+				189499D520875C5E002ECEE0 /* FFButtonWithDatePopover */,
+				189499DA20875C5E002ECEE0 /* FFButtonWithTimePopover */,
+				189499DF20875C5E002ECEE0 /* FFEditEventPopoverController.h */,
+				189499E020875C5E002ECEE0 /* FFEditEventPopoverController.m */,
+				189499E120875C5E002ECEE0 /* FFEditEventView.h */,
+				189499E220875C5E002ECEE0 /* FFEditEventView.m */,
+				189499E320875C5E002ECEE0 /* FFGuestsTableViewCell */,
+				189499E820875C5E002ECEE0 /* FFSearchBarWithAutoComplete */,
+			);
+			path = "FFEditEvent View and Popover";
+			sourceTree = "<group>";
+		};
+		189499D520875C5E002ECEE0 /* FFButtonWithDatePopover */ = {
+			isa = PBXGroup;
+			children = (
+				189499D620875C5E002ECEE0 /* FFButtonWithDatePopover.h */,
+				189499D720875C5E002ECEE0 /* FFButtonWithDatePopover.m */,
+				189499D820875C5E002ECEE0 /* FFDatePopoverController.h */,
+				189499D920875C5E002ECEE0 /* FFDatePopoverController.m */,
+			);
+			path = FFButtonWithDatePopover;
+			sourceTree = "<group>";
+		};
+		189499DA20875C5E002ECEE0 /* FFButtonWithTimePopover */ = {
+			isa = PBXGroup;
+			children = (
+				189499DB20875C5E002ECEE0 /* FFButtonWithHourPopover.h */,
+				189499DC20875C5E002ECEE0 /* FFButtonWithHourPopover.m */,
+				189499DD20875C5E002ECEE0 /* FFHourPopoverController.h */,
+				189499DE20875C5E002ECEE0 /* FFHourPopoverController.m */,
+			);
+			path = FFButtonWithTimePopover;
+			sourceTree = "<group>";
+		};
+		189499E320875C5E002ECEE0 /* FFGuestsTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				189499E420875C5E002ECEE0 /* FFGuestsTableView.h */,
+				189499E520875C5E002ECEE0 /* FFGuestsTableView.m */,
+				189499E620875C5E002ECEE0 /* FFGuestsTableViewCell.h */,
+				189499E720875C5E002ECEE0 /* FFGuestsTableViewCell.m */,
+			);
+			path = FFGuestsTableViewCell;
+			sourceTree = "<group>";
+		};
+		189499E820875C5E002ECEE0 /* FFSearchBarWithAutoComplete */ = {
+			isa = PBXGroup;
+			children = (
+				189499E920875C5E002ECEE0 /* FFSearchBarWithAutoComplete.h */,
+				189499EA20875C5E002ECEE0 /* FFSearchBarWithAutoComplete.m */,
+			);
+			path = FFSearchBarWithAutoComplete;
+			sourceTree = "<group>";
+		};
+		189499EB20875C5E002ECEE0 /* FFEventDetail View and Popover */ = {
+			isa = PBXGroup;
+			children = (
+				189499EC20875C5E002ECEE0 /* FFEventDetailPopoverController.h */,
+				189499ED20875C5E002ECEE0 /* FFEventDetailPopoverController.m */,
+				189499EE20875C5E002ECEE0 /* FFEventDetailView.h */,
+				189499EF20875C5E002ECEE0 /* FFEventDetailView.m */,
+			);
+			path = "FFEventDetail View and Popover";
+			sourceTree = "<group>";
+		};
+		189499F120875C5E002ECEE0 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				189499F220875C5E002ECEE0 /* blackCircle.png */,
+				189499F320875C5E002ECEE0 /* DailyCalendar.png */,
+				189499F420875C5E002ECEE0 /* MonthlyCalendar.png */,
+				189499F520875C5E002ECEE0 /* redCircle.png */,
+				189499F620875C5E002ECEE0 /* redCircle_mini.png */,
+				189499F720875C5E002ECEE0 /* WeeklyCalendar.png */,
+				189499F820875C5E002ECEE0 /* YearlyCalendar.png */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		18A590632047C382002BBF64 /* Formatters */ = {
@@ -1461,9 +1853,9 @@
 		CE6C16072045200F00672253 /* PlannerVC */ = {
 			isa = PBXGroup;
 			children = (
-				CE6C16082045200F00672253 /* PlannerVC.h */,
-				CE6C16092045200F00672253 /* PlannerVC.m */,
-				CE6C160A2045200F00672253 /* PlannerVC.xib */,
+				18949959208759F8002ECEE0 /* PlannerVC.h */,
+				18949957208759F7002ECEE0 /* PlannerVC.m */,
+				18949958208759F8002ECEE0 /* PlannerVC.xib */,
 			);
 			path = PlannerVC;
 			sourceTree = "<group>";
@@ -1634,11 +2026,11 @@
 		CE6C16632045216000672253 /* PlannerListVC */ = {
 			isa = PBXGroup;
 			children = (
-				CE6C16642045216000672253 /* PlannerCell.h */,
-				CE6C16652045216000672253 /* PlannerCell.m */,
-				CE6C16662045216000672253 /* PlannerCell.xib */,
-				CE6C16672045216000672253 /* PlannerListVC.h */,
-				CE6C16682045216000672253 /* PlannerListVC.m */,
+				1894996020875A3C002ECEE0 /* PlannerCell.h */,
+				1894995D20875A3C002ECEE0 /* PlannerCell.m */,
+				1894995C20875A3B002ECEE0 /* PlannerCell.xib */,
+				1894995E20875A3C002ECEE0 /* PlannerListVC.h */,
+				1894995F20875A3C002ECEE0 /* PlannerListVC.m */,
 			);
 			path = PlannerListVC;
 			sourceTree = "<group>";
@@ -1646,403 +2038,11 @@
 		CE6C16702045217A00672253 /* PlannerGraphs */ = {
 			isa = PBXGroup;
 			children = (
-				CE6C16712045217A00672253 /* DateProtocol.h */,
-				CE6C16722045217A00672253 /* Ffcalendar */,
-				CE6C167A2045217A00672253 /* FFSup */,
+				189499F920875C5E002ECEE0 /* DateProtocol.h */,
+				1894996420875C5E002ECEE0 /* Ffcalendar */,
+				1894996C20875C5E002ECEE0 /* FFSup */,
 			);
 			path = PlannerGraphs;
-			sourceTree = "<group>";
-		};
-		CE6C16722045217A00672253 /* Ffcalendar */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16732045217A00672253 /* FFButtonAddEventWithPopover */,
-				CE6C16782045217A00672253 /* FFCalendarViewController.h */,
-				CE6C16792045217A00672253 /* FFCalendarViewController.m */,
-			);
-			path = Ffcalendar;
-			sourceTree = "<group>";
-		};
-		CE6C16732045217A00672253 /* FFButtonAddEventWithPopover */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16742045217A00672253 /* FFAddEventPopoverController.h */,
-				CE6C16752045217A00672253 /* FFAddEventPopoverController.m */,
-				CE6C16762045217A00672253 /* FFButtonAddEventWithPopover.h */,
-				CE6C16772045217A00672253 /* FFButtonAddEventWithPopover.m */,
-			);
-			path = FFButtonAddEventWithPopover;
-			sourceTree = "<group>";
-		};
-		CE6C167A2045217A00672253 /* FFSup */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C167B2045217A00672253 /* FFCalendar.h */,
-				CE6C167C2045217A00672253 /* FFDayCalendarView */,
-				CE6C16922045217A00672253 /* FFMonthCalendarView */,
-				CE6C16A22045217A00672253 /* FFWeekCalendarView */,
-				CE6C16B92045217A00672253 /* FFYearCalendarView */,
-				CE6C16CB2045217A00672253 /* Util */,
-			);
-			path = FFSup;
-			sourceTree = "<group>";
-		};
-		CE6C167C2045217A00672253 /* FFDayCalendarView */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C167D2045217A00672253 /* FFDayCalendarView.h */,
-				CE6C167E2045217A00672253 /* FFDayCalendarView.m */,
-				CE6C167F2045217A00672253 /* FFDayHeaderCollectionView */,
-				CE6C16872045217A00672253 /* FFDayScrollView */,
-			);
-			path = FFDayCalendarView;
-			sourceTree = "<group>";
-		};
-		CE6C167F2045217A00672253 /* FFDayHeaderCollectionView */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16802045217A00672253 /* FFDayHeaderCell */,
-				CE6C16852045217A00672253 /* FFDayHeaderCollectionView.h */,
-				CE6C16862045217A00672253 /* FFDayHeaderCollectionView.m */,
-			);
-			path = FFDayHeaderCollectionView;
-			sourceTree = "<group>";
-		};
-		CE6C16802045217A00672253 /* FFDayHeaderCell */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16812045217A00672253 /* FFDayHeaderButton.h */,
-				CE6C16822045217A00672253 /* FFDayHeaderButton.m */,
-				CE6C16832045217A00672253 /* FFDayHeaderCell.h */,
-				CE6C16842045217A00672253 /* FFDayHeaderCell.m */,
-			);
-			path = FFDayHeaderCell;
-			sourceTree = "<group>";
-		};
-		CE6C16872045217A00672253 /* FFDayScrollView */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16882045217A00672253 /* FFDayCollectionView */,
-				CE6C16902045217A00672253 /* FFDayScrollView.h */,
-				CE6C16912045217A00672253 /* FFDayScrollView.m */,
-			);
-			path = FFDayScrollView;
-			sourceTree = "<group>";
-		};
-		CE6C16882045217A00672253 /* FFDayCollectionView */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16892045217A00672253 /* FFDayCell */,
-				CE6C168C2045217A00672253 /* FFDayCollectionView.h */,
-				CE6C168D2045217A00672253 /* FFDayCollectionView.m */,
-				CE6C168E2045217A00672253 /* FFDayCollectionViewFlowLayout.h */,
-				CE6C168F2045217A00672253 /* FFDayCollectionViewFlowLayout.m */,
-			);
-			path = FFDayCollectionView;
-			sourceTree = "<group>";
-		};
-		CE6C16892045217A00672253 /* FFDayCell */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C168A2045217A00672253 /* FFDayCell.h */,
-				CE6C168B2045217A00672253 /* FFDayCell.m */,
-			);
-			path = FFDayCell;
-			sourceTree = "<group>";
-		};
-		CE6C16922045217A00672253 /* FFMonthCalendarView */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16932045217A00672253 /* FFMonthCalendarView.h */,
-				CE6C16942045217A00672253 /* FFMonthCalendarView.m */,
-				CE6C16952045217A00672253 /* FFMonthCollectionView */,
-				CE6C169F2045217A00672253 /* FFMonthHeaderView */,
-			);
-			path = FFMonthCalendarView;
-			sourceTree = "<group>";
-		};
-		CE6C16952045217A00672253 /* FFMonthCollectionView */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16962045217A00672253 /* FFButtonWithEditAndDetailPopoversForMonthCell */,
-				CE6C16992045217A00672253 /* FFMonthCell.h */,
-				CE6C169A2045217A00672253 /* FFMonthCell.m */,
-				CE6C169B2045217A00672253 /* FFMonthCollectionView.h */,
-				CE6C169C2045217A00672253 /* FFMonthCollectionView.m */,
-				CE6C169D2045217A00672253 /* FFMonthCollectionViewFlowLayout.h */,
-				CE6C169E2045217A00672253 /* FFMonthCollectionViewFlowLayout.m */,
-			);
-			path = FFMonthCollectionView;
-			sourceTree = "<group>";
-		};
-		CE6C16962045217A00672253 /* FFButtonWithEditAndDetailPopoversForMonthCell */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16972045217A00672253 /* FFButtonWithEditAndDetailPopoversForMonthCell.h */,
-				CE6C16982045217A00672253 /* FFButtonWithEditAndDetailPopoversForMonthCell.m */,
-			);
-			path = FFButtonWithEditAndDetailPopoversForMonthCell;
-			sourceTree = "<group>";
-		};
-		CE6C169F2045217A00672253 /* FFMonthHeaderView */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16A02045217A00672253 /* FFMonthHeaderView.h */,
-				CE6C16A12045217A00672253 /* FFMonthHeaderView.m */,
-			);
-			path = FFMonthHeaderView;
-			sourceTree = "<group>";
-		};
-		CE6C16A22045217A00672253 /* FFWeekCalendarView */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16A32045217A00672253 /* FFWeekCalendarView.h */,
-				CE6C16A42045217A00672253 /* FFWeekCalendarView.m */,
-				CE6C16A52045217A00672253 /* FFWeekHeaderCollectionView */,
-				CE6C16AA2045217A00672253 /* FFWeekScrollView */,
-			);
-			path = FFWeekCalendarView;
-			sourceTree = "<group>";
-		};
-		CE6C16A52045217A00672253 /* FFWeekHeaderCollectionView */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16A62045217A00672253 /* FFWeekHeaderCell.h */,
-				CE6C16A72045217A00672253 /* FFWeekHeaderCell.m */,
-				CE6C16A82045217A00672253 /* FFWeekHeaderCollectionView.h */,
-				CE6C16A92045217A00672253 /* FFWeekHeaderCollectionView.m */,
-			);
-			path = FFWeekHeaderCollectionView;
-			sourceTree = "<group>";
-		};
-		CE6C16AA2045217A00672253 /* FFWeekScrollView */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16AB2045217A00672253 /* FFViewWithHourLines */,
-				CE6C16B02045217A00672253 /* FFWeekCollectionView */,
-				CE6C16B72045217A00672253 /* FFWeekScrollView.h */,
-				CE6C16B82045217A00672253 /* FFWeekScrollView.m */,
-			);
-			path = FFWeekScrollView;
-			sourceTree = "<group>";
-		};
-		CE6C16AB2045217A00672253 /* FFViewWithHourLines */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16AC2045217A00672253 /* FFHourAndMinLabel.h */,
-				CE6C16AD2045217A00672253 /* FFHourAndMinLabel.m */,
-				CE6C16AE2045217A00672253 /* FFViewWithHourLines.h */,
-				CE6C16AF2045217A00672253 /* FFViewWithHourLines.m */,
-			);
-			path = FFViewWithHourLines;
-			sourceTree = "<group>";
-		};
-		CE6C16B02045217A00672253 /* FFWeekCollectionView */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16B12045217A00672253 /* FFWeekCell.h */,
-				CE6C16B22045217A00672253 /* FFWeekCell.m */,
-				CE6C16B32045217A00672253 /* FFWeekCollectionView.h */,
-				CE6C16B42045217A00672253 /* FFWeekCollectionView.m */,
-				CE6C16B52045217A00672253 /* FFWeekCollectionViewFlowLayout.h */,
-				CE6C16B62045217A00672253 /* FFWeekCollectionViewFlowLayout.m */,
-			);
-			path = FFWeekCollectionView;
-			sourceTree = "<group>";
-		};
-		CE6C16B92045217A00672253 /* FFYearCalendarView */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16BA2045217A00672253 /* FFYearCalendarView.h */,
-				CE6C16BB2045217A00672253 /* FFYearCalendarView.m */,
-				CE6C16BC2045217A00672253 /* FFYearCollectionView */,
-			);
-			path = FFYearCalendarView;
-			sourceTree = "<group>";
-		};
-		CE6C16BC2045217A00672253 /* FFYearCollectionView */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16BD2045217A00672253 /* FFYearCell */,
-				CE6C16C72045217A00672253 /* FFYearCollectionView.h */,
-				CE6C16C82045217A00672253 /* FFYearCollectionView.m */,
-				CE6C16C92045217A00672253 /* FFYearCollectionViewFlowLayout.h */,
-				CE6C16CA2045217A00672253 /* FFYearCollectionViewFlowLayout.m */,
-			);
-			path = FFYearCollectionView;
-			sourceTree = "<group>";
-		};
-		CE6C16BD2045217A00672253 /* FFYearCell */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16BE2045217A00672253 /* FFMonthCollectionViewForYearCell */,
-				CE6C16C52045217A00672253 /* FFYearCell.h */,
-				CE6C16C62045217A00672253 /* FFYearCell.m */,
-			);
-			path = FFYearCell;
-			sourceTree = "<group>";
-		};
-		CE6C16BE2045217A00672253 /* FFMonthCollectionViewForYearCell */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16BF2045217A00672253 /* FFHeaderMonthForYearCell.h */,
-				CE6C16C02045217A00672253 /* FFHeaderMonthForYearCell.m */,
-				CE6C16C12045217A00672253 /* FFMonthCellForYearCell.h */,
-				CE6C16C22045217A00672253 /* FFMonthCellForYearCell.m */,
-				CE6C16C32045217A00672253 /* FFMonthCollectionViewForYearCell.h */,
-				CE6C16C42045217A00672253 /* FFMonthCollectionViewForYearCell.m */,
-			);
-			path = FFMonthCollectionViewForYearCell;
-			sourceTree = "<group>";
-		};
-		CE6C16CB2045217A00672253 /* Util */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16CC2045217A00672253 /* FFBlue and FFRed Buttons */,
-				CE6C16D12045217A00672253 /* FFCategories */,
-				CE6C16DA2045217A00672253 /* FFConstants.h */,
-				CE6C16DB2045217A00672253 /* FFDateManeger */,
-				CE6C16DE2045217A00672253 /* FFEvent */,
-				CE6C16E12045217A00672253 /* FFEventDetail and FFEditEvent Views and Popovers */,
-				CE6C16FE2045217A00672253 /* FFImportantFilesForCalendar.h */,
-				CE6C16FF2045217A00672253 /* Images */,
-			);
-			path = Util;
-			sourceTree = "<group>";
-		};
-		CE6C16CC2045217A00672253 /* FFBlue and FFRed Buttons */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16CD2045217A00672253 /* FFBlueButton.h */,
-				CE6C16CE2045217A00672253 /* FFBlueButton.m */,
-				CE6C16CF2045217A00672253 /* FFRedAndWhiteButton.h */,
-				CE6C16D02045217A00672253 /* FFRedAndWhiteButton.m */,
-			);
-			path = "FFBlue and FFRed Buttons";
-			sourceTree = "<group>";
-		};
-		CE6C16D12045217A00672253 /* FFCategories */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16D22045217A00672253 /* NSDate+FFDaysCount.h */,
-				CE6C16D32045217A00672253 /* NSDate+FFDaysCount.m */,
-				CE6C16D42045217A00672253 /* UIColor+FFMoreColors.h */,
-				CE6C16D52045217A00672253 /* UIColor+FFMoreColors.m */,
-				CE6C16D62045217A00672253 /* UIImage+FFCustomMethods.h */,
-				CE6C16D72045217A00672253 /* UIImage+FFCustomMethods.m */,
-				CE6C16D82045217A00672253 /* UILabel+FFCustomMethods.h */,
-				CE6C16D92045217A00672253 /* UILabel+FFCustomMethods.m */,
-			);
-			path = FFCategories;
-			sourceTree = "<group>";
-		};
-		CE6C16DB2045217A00672253 /* FFDateManeger */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16DC2045217A00672253 /* FFDateManager.h */,
-				CE6C16DD2045217A00672253 /* FFDateManager.m */,
-			);
-			path = FFDateManeger;
-			sourceTree = "<group>";
-		};
-		CE6C16DE2045217A00672253 /* FFEvent */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16DF2045217A00672253 /* FFEvent.h */,
-				CE6C16E02045217A00672253 /* FFEvent.m */,
-			);
-			path = FFEvent;
-			sourceTree = "<group>";
-		};
-		CE6C16E12045217A00672253 /* FFEventDetail and FFEditEvent Views and Popovers */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16E22045217A00672253 /* FFEditEvent View and Popover */,
-				CE6C16F92045217A00672253 /* FFEventDetail View and Popover */,
-			);
-			path = "FFEventDetail and FFEditEvent Views and Popovers";
-			sourceTree = "<group>";
-		};
-		CE6C16E22045217A00672253 /* FFEditEvent View and Popover */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16E32045217A00672253 /* FFButtonWithDatePopover */,
-				CE6C16E82045217A00672253 /* FFButtonWithTimePopover */,
-				CE6C16ED2045217A00672253 /* FFEditEventPopoverController.h */,
-				CE6C16EE2045217A00672253 /* FFEditEventPopoverController.m */,
-				CE6C16EF2045217A00672253 /* FFEditEventView.h */,
-				CE6C16F02045217A00672253 /* FFEditEventView.m */,
-				CE6C16F12045217A00672253 /* FFGuestsTableViewCell */,
-				CE6C16F62045217A00672253 /* FFSearchBarWithAutoComplete */,
-			);
-			path = "FFEditEvent View and Popover";
-			sourceTree = "<group>";
-		};
-		CE6C16E32045217A00672253 /* FFButtonWithDatePopover */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16E42045217A00672253 /* FFButtonWithDatePopover.h */,
-				CE6C16E52045217A00672253 /* FFButtonWithDatePopover.m */,
-				CE6C16E62045217A00672253 /* FFDatePopoverController.h */,
-				CE6C16E72045217A00672253 /* FFDatePopoverController.m */,
-			);
-			path = FFButtonWithDatePopover;
-			sourceTree = "<group>";
-		};
-		CE6C16E82045217A00672253 /* FFButtonWithTimePopover */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16E92045217A00672253 /* FFButtonWithHourPopover.h */,
-				CE6C16EA2045217A00672253 /* FFButtonWithHourPopover.m */,
-				CE6C16EB2045217A00672253 /* FFHourPopoverController.h */,
-				CE6C16EC2045217A00672253 /* FFHourPopoverController.m */,
-			);
-			path = FFButtonWithTimePopover;
-			sourceTree = "<group>";
-		};
-		CE6C16F12045217A00672253 /* FFGuestsTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16F22045217A00672253 /* FFGuestsTableView.h */,
-				CE6C16F32045217A00672253 /* FFGuestsTableView.m */,
-				CE6C16F42045217A00672253 /* FFGuestsTableViewCell.h */,
-				CE6C16F52045217A00672253 /* FFGuestsTableViewCell.m */,
-			);
-			path = FFGuestsTableViewCell;
-			sourceTree = "<group>";
-		};
-		CE6C16F62045217A00672253 /* FFSearchBarWithAutoComplete */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16F72045217A00672253 /* FFSearchBarWithAutoComplete.h */,
-				CE6C16F82045217A00672253 /* FFSearchBarWithAutoComplete.m */,
-			);
-			path = FFSearchBarWithAutoComplete;
-			sourceTree = "<group>";
-		};
-		CE6C16F92045217A00672253 /* FFEventDetail View and Popover */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C16FA2045217A00672253 /* FFEventDetailPopoverController.h */,
-				CE6C16FB2045217A00672253 /* FFEventDetailPopoverController.m */,
-				CE6C16FC2045217A00672253 /* FFEventDetailView.h */,
-				CE6C16FD2045217A00672253 /* FFEventDetailView.m */,
-			);
-			path = "FFEventDetail View and Popover";
-			sourceTree = "<group>";
-		};
-		CE6C16FF2045217A00672253 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				CE6C17002045217A00672253 /* blackCircle.png */,
-				CE6C17012045217A00672253 /* DailyCalendar.png */,
-				CE6C17022045217A00672253 /* MonthlyCalendar.png */,
-				CE6C17032045217A00672253 /* redCircle.png */,
-				CE6C17042045217A00672253 /* redCircle_mini.png */,
-				CE6C17052045217A00672253 /* WeeklyCalendar.png */,
-				CE6C17062045217A00672253 /* YearlyCalendar.png */,
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 		CE8DE372203FDE930097BF66 /* InjurySelectionVC */ = {
@@ -2576,7 +2576,6 @@
 				04BC4B3F208632E900CEB23E /* VideoGalleryUploadCell.xib in Resources */,
 				CE76ECE52041715D00E183EA /* shape1.png in Resources */,
 				CE102813202DDB7500FA0B61 /* AssesmentTableViewCell.xib in Resources */,
-				CE6C173C2045217A00672253 /* DailyCalendar.png in Resources */,
 				04BC4A1A2085FD4400CEB23E /* GroundVC.xib in Resources */,
 				04534F8C2037EE9400C22717 /* FoodDiaryVC.xib in Resources */,
 				CEB2B97620257BBD00E7D5E4 /* Montserrat-ExtraBold.otf in Resources */,
@@ -2585,6 +2584,7 @@
 				CEB2B98820257BBD00E7D5E4 /* MontserratAlternates-ExtraBold.otf in Resources */,
 				04BC4A272085FDCF00CEB23E /* TeamOverviewVC.xib in Resources */,
 				04BC4B0220862BC400CEB23E /* TeamMembersVC.xib in Resources */,
+				18949A2E20875C5F002ECEE0 /* blackCircle.png in Resources */,
 				04534F912037F44400C22717 /* FoodDiaryCell.xib in Resources */,
 				18AC345E203EE50C003EE0F0 /* CoachBowlingLoad.xib in Resources */,
 				CE60F10220870C8200B74A2C /* ResultsCell_iPhone.xib in Resources */,
@@ -2605,6 +2605,7 @@
 				04BC49F82085FB7300CEB23E /* TeamHeadToHead.xib in Resources */,
 				CEB2B98720257BBD00E7D5E4 /* MontserratAlternates-BoldItalic.otf in Resources */,
 				04BC4A4E2085FFCD00CEB23E /* MCTeamCompCVC.xib in Resources */,
+				18949A3020875C5F002ECEE0 /* MonthlyCalendar.png in Resources */,
 				04BC4A192085FD4400CEB23E /* BowlTypeCell.xib in Resources */,
 				CEB2B99020257BBD00E7D5E4 /* MontserratAlternates-MediumItalic.otf in Resources */,
 				04BC4A422085FF4200CEB23E /* MCBattingRootVC.xib in Resources */,
@@ -2613,10 +2614,11 @@
 				CEB2B98620257BBD00E7D5E4 /* MontserratAlternates-Bold.otf in Resources */,
 				CEB2B97720257BBD00E7D5E4 /* Montserrat-ExtraBoldItalic.otf in Resources */,
 				CE6C164B2045211400672253 /* BowlingTableViewCell.xib in Resources */,
+				18949A3320875C5F002ECEE0 /* WeeklyCalendar.png in Resources */,
 				04BC4A202085FD9100CEB23E /* StandingVC.xib in Resources */,
+				18949A3120875C5F002ECEE0 /* redCircle.png in Resources */,
 				CEB2B99620257BBD00E7D5E4 /* SIL Open Font License.txt in Resources */,
 				CEA42108203161A900B2DAB5 /* CalendarViewController.xib in Resources */,
-				CE6C173F2045217A00672253 /* redCircle_mini.png in Resources */,
 				CEB2B98420257BBD00E7D5E4 /* MontserratAlternates-Black.otf in Resources */,
 				CEB2B98220257BBD00E7D5E4 /* Montserrat-Thin.otf in Resources */,
 				182D854920342D1F005FFBF8 /* CategoryTableCell.xib in Resources */,
@@ -2637,7 +2639,6 @@
 				CEA42106203161A800B2DAB5 /* VideoPlayerViewController.xib in Resources */,
 				CEB2B98F20257BBD00E7D5E4 /* MontserratAlternates-Medium.otf in Resources */,
 				04B27F18202D784600ECB699 /* illnessVC.xib in Resources */,
-				CE6C173E2045217A00672253 /* redCircle.png in Resources */,
 				CEB2B98A20257BBD00E7D5E4 /* MontserratAlternates-ExtraLight.otf in Resources */,
 				04BC4ABC2086167400CEB23E /* ScheduleCell.xib in Resources */,
 				18A68ABF20371A2C00EBA479 /* TrainingLoadVC.xib in Resources */,
@@ -2659,10 +2660,8 @@
 				04BC4A012085FBC900CEB23E /* BowlingOverBlockCVC.xib in Resources */,
 				CE3E741820248BF100F10917 /* Assets.xcassets in Resources */,
 				04BC4A022085FBC900CEB23E /* BowlingOverBlockView.xib in Resources */,
-				CE6C173B2045217A00672253 /* blackCircle.png in Resources */,
 				18A68ACD20371A7E00EBA479 /* AddWellnessRatingVC.xib in Resources */,
 				18B6D0EE203BDD580003CBA3 /* TrainingLoadGraphVC.xib in Resources */,
-				CE6C166E2045216100672253 /* PlannerCell.xib in Resources */,
 				04BC4ACA208618A200CEB23E /* TabHomeCell.xib in Resources */,
 				CEBD2A8D20289B8C000AFD1B /* ViewController.xib in Resources */,
 				04BC4AD820861A5100CEB23E /* MCOverViewResultCVC.xib in Resources */,
@@ -2671,23 +2670,21 @@
 				04BC4ABB2086167400CEB23E /* SchResStandVC.xib in Resources */,
 				0425429C20289EE70088B87B /* AssessmentPopupVC.xib in Resources */,
 				04BC4A4D2085FFCD00CEB23E /* MCTeamPlayersCompCell.xib in Resources */,
-				CE6C160C2045200F00672253 /* PlannerVC.xib in Resources */,
 				04B27F1D202D7DD100ECB699 /* illnessTableViewCell.xib in Resources */,
 				CE60F10520870C8200B74A2C /* VideoDocumentVC.xib in Resources */,
 				CE8DE377203FDEC70097BF66 /* InjurySelectionViewController.xib in Resources */,
 				04BC4A112085FCFF00CEB23E /* OverviewBowlingView.xib in Resources */,
 				042699CE2043DB06001AB09F /* IllnessTracker.xib in Resources */,
 				CEB2B97F20257BBD00E7D5E4 /* Montserrat-Regular.otf in Resources */,
-				CE6C17402045217A00672253 /* WeeklyCalendar.png in Resources */,
 				04BC4B682086398D00CEB23E /* DocumentViewController.xib in Resources */,
 				18A2E712203D49CA00F91E73 /* TrainingPiechart.xib in Resources */,
 				CEB2B97320257BBD00E7D5E4 /* Montserrat-BlackItalic.otf in Resources */,
 				04BC4B58208637AD00CEB23E /* ScoreCardHeader.xib in Resources */,
 				04BC4B41208632E900CEB23E /* VideoGalleryCell.xib in Resources */,
-				CE6C17412045217A00672253 /* YearlyCalendar.png in Resources */,
 				CE6C16492045211400672253 /* BattingTableViewCell.xib in Resources */,
 				04BC4A382085FE7700CEB23E /* OverviewView.xib in Resources */,
 				04BC49F32085FB1900CEB23E /* MCTossAndResultsVC.xib in Resources */,
+				18949A3420875C5F002ECEE0 /* YearlyCalendar.png in Resources */,
 				04BC4A3E2085FEB500CEB23E /* BattingView.xib in Resources */,
 				18A68ACF20371A7E00EBA479 /* WellnessTrainingBowlingVC.xib in Resources */,
 				CEB2B98E20257BBD00E7D5E4 /* MontserratAlternates-LightItalic.otf in Resources */,
@@ -2698,17 +2695,20 @@
 				04BC4A0B2085FCBC00CEB23E /* MCBowlingRootVC.xib in Resources */,
 				CEBD2A9320289C96000AFD1B /* InjuryVC.xib in Resources */,
 				CEB2B98920257BBD00E7D5E4 /* MontserratAlternates-ExtraBoldItalic.otf in Resources */,
+				1894996120875A3C002ECEE0 /* PlannerCell.xib in Resources */,
 				04BC4A072085FC4000CEB23E /* BowlingView.xib in Resources */,
 				042381CC204173F900212684 /* PopOverVC.xib in Resources */,
 				CEB2B97420257BBD00E7D5E4 /* Montserrat-Bold.otf in Resources */,
 				CEB2B98520257BBD00E7D5E4 /* MontserratAlternates-BlackItalic.otf in Resources */,
+				18949A3220875C5F002ECEE0 /* redCircle_mini.png in Resources */,
 				18AC344C203E812C003EE0F0 /* ReportsVC.xib in Resources */,
-				CE6C173D2045217A00672253 /* MonthlyCalendar.png in Resources */,
 				CEB2B97C20257BBD00E7D5E4 /* Montserrat-LightItalic.otf in Resources */,
 				04BC4A322085FE3F00CEB23E /* BattingOverBlockView.xib in Resources */,
 				CEB2B98120257BBD00E7D5E4 /* Montserrat-SemiBoldItalic.otf in Resources */,
 				18EF9D1520316C3000CDA268 /* PlayerListCollectionViewCell.xib in Resources */,
 				CE6C1633204520D100672253 /* FieldSummaryTVC.xib in Resources */,
+				1894995B208759F8002ECEE0 /* PlannerVC.xib in Resources */,
+				18949A2F20875C5F002ECEE0 /* DailyCalendar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2769,200 +2769,200 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEA42105203161A800B2DAB5 /* VideoPlayerViewController.m in Sources */,
-				CE6C171A2045217A00672253 /* FFWeekHeaderCollectionView.m in Sources */,
-				CE6C173A2045217A00672253 /* FFEventDetailView.m in Sources */,
 				CE6C16472045211300672253 /* BattingKPIViewController.m in Sources */,
+				18949A0720875C5F002ECEE0 /* FFMonthCell.m in Sources */,
 				04BC4A502085FFCD00CEB23E /* MCTeamCompVC.m in Sources */,
+				18949A2320875C5F002ECEE0 /* FFButtonWithDatePopover.m in Sources */,
+				189499FD20875C5F002ECEE0 /* FFDayCalendarView.m in Sources */,
 				04BC4B7320863BC700CEB23E /* EventRecord.m in Sources */,
-				CE6C17252045217A00672253 /* FFYearCell.m in Sources */,
-				CE6C166F2045216100672253 /* PlannerListVC.m in Sources */,
 				04BC4A392085FE7700CEB23E /* OverviewView.m in Sources */,
 				04BC4AC12086173200CEB23E /* SwipeView.m in Sources */,
-				CE6C17232045217A00672253 /* FFMonthCellForYearCell.m in Sources */,
 				CEAF5B6E20384D3200045C91 /* UITextField+testCode.m in Sources */,
+				18949A1C20875C5F002ECEE0 /* FFRedAndWhiteButton.m in Sources */,
 				18E07117204702930020D8EE /* InjuryAndIllnessVC.m in Sources */,
+				18949A0220875C5F002ECEE0 /* FFDayCollectionView.m in Sources */,
 				04BC4B612086387B00CEB23E /* MyStatsBattingCell.m in Sources */,
 				CEB2B9CD2025994F00E7D5E4 /* RearViewController.m in Sources */,
+				18949A1B20875C5F002ECEE0 /* FFBlueButton.m in Sources */,
 				CEB2B9C8202598DB00E7D5E4 /* ViewController.m in Sources */,
 				04BC4A812086068D00CEB23E /* CustomNavigation.m in Sources */,
 				CE60F10420870C8200B74A2C /* VideoDocumentVC.m in Sources */,
+				18949A0C20875C5F002ECEE0 /* FFWeekHeaderCell.m in Sources */,
 				04534F7F2037E63600C22717 /* CRTableViewCell.m in Sources */,
+				189499FC20875C5F002ECEE0 /* FFCalendarViewController.m in Sources */,
+				189499FA20875C5F002ECEE0 /* FFAddEventPopoverController.m in Sources */,
 				04BC4A342085FE3F00CEB23E /* BattingOverBlockView.m in Sources */,
 				04249B7D203D4AF000B13889 /* NutritionCell.m in Sources */,
 				CE6C161F204520B300672253 /* PlayersVC.m in Sources */,
 				04BC4AD920861A5100CEB23E /* MCOverViewVC.m in Sources */,
 				04534F902037F44400C22717 /* FoodDiaryCell.m in Sources */,
+				18949A1320875C5F002ECEE0 /* FFWeekScrollView.m in Sources */,
+				18949A2420875C5F002ECEE0 /* FFDatePopoverController.m in Sources */,
 				18A68ACB20371A7E00EBA479 /* HorizontalXLblFormatter.m in Sources */,
 				04BC4A432085FF4200CEB23E /* MCBattingRootVC.m in Sources */,
 				042542B62028A1110088B87B /* HomeScreenStandingsVC.m in Sources */,
 				04BC4B40208632E900CEB23E /* VideoGalleryCell.m in Sources */,
 				18A590682047C4C8002BBF64 /* LargeValueFormatter.swift in Sources */,
 				04BC4B55208637AD00CEB23E /* UIScrollView+APParallaxHeader.m in Sources */,
+				18949A0020875C5F002ECEE0 /* FFDayHeaderCollectionView.m in Sources */,
 				043C2F30202AF59E00EB3F8C /* XYPieChart.m in Sources */,
-				CE6C17362045217A00672253 /* FFGuestsTableView.m in Sources */,
+				18949A0320875C5F002ECEE0 /* FFDayCollectionViewFlowLayout.m in Sources */,
 				CEBD2A81202899BB000AFD1B /* DBMANAGERSYNC.m in Sources */,
+				18949A0D20875C5F002ECEE0 /* FFWeekHeaderCollectionView.m in Sources */,
 				CEA42104203161A800B2DAB5 /* BallsInVideosCVC.m in Sources */,
 				04BC4ACB208618A200CEB23E /* TabHomeVC.m in Sources */,
+				18949A1920875C5F002ECEE0 /* FFYearCollectionView.m in Sources */,
+				18949A0A20875C5F002ECEE0 /* FFMonthHeaderView.m in Sources */,
+				18949A2620875C5F002ECEE0 /* FFHourPopoverController.m in Sources */,
 				CE367C872046D72300A94B28 /* StepSlider.m in Sources */,
+				18949A1A20875C5F002ECEE0 /* FFYearCollectionViewFlowLayout.m in Sources */,
 				CE76ECE320416AE100E183EA /* UIImage+GetPoints.m in Sources */,
 				CE6C16572045213C00672253 /* DMLazyScrollView.m in Sources */,
-				CE6C17072045217A00672253 /* FFAddEventPopoverController.m in Sources */,
-				CE6C17302045217A00672253 /* FFButtonWithDatePopover.m in Sources */,
 				04BC4B602086387B00CEB23E /* MyStatsBattingVC.m in Sources */,
 				CE6C1632204520D100672253 /* FieldSummaryTVC.m in Sources */,
+				18949A2B20875C5F002ECEE0 /* FFSearchBarWithAutoComplete.m in Sources */,
+				1894996320875A3C002ECEE0 /* PlannerListVC.m in Sources */,
+				18949A1F20875C5F002ECEE0 /* UIImage+FFCustomMethods.m in Sources */,
+				18949A1820875C5F002ECEE0 /* FFYearCell.m in Sources */,
+				18949A2020875C5F002ECEE0 /* UILabel+FFCustomMethods.m in Sources */,
+				18949A0620875C5F002ECEE0 /* FFButtonWithEditAndDetailPopoversForMonthCell.m in Sources */,
 				04BC49F22085FB1900CEB23E /* MCTossAndResultsVC.m in Sources */,
-				CE6C171D2045217A00672253 /* FFWeekCell.m in Sources */,
 				04BC4AC9208618A200CEB23E /* TabHomeCell.m in Sources */,
-				CE6C17352045217A00672253 /* FFEditEventView.m in Sources */,
 				CEF38326203D6BC200FB5838 /* PlayerDetailTableViewCell.m in Sources */,
+				18949A2A20875C5F002ECEE0 /* FFGuestsTableViewCell.m in Sources */,
 				CE6C161E204520B300672253 /* PlayersCell.m in Sources */,
+				18949A2220875C5F002ECEE0 /* FFEvent.m in Sources */,
 				CEBD2A7320289999000AFD1B /* SKSTableViewCell.m in Sources */,
 				CE102812202DDB7500FA0B61 /* AssesmentTableViewCell.m in Sources */,
 				04BC4AD520861A5100CEB23E /* MCOverViewResultCVC.m in Sources */,
 				04C1EC4F2084C9410030E358 /* LoginVC.m in Sources */,
 				CE6C162F204520D100672253 /* SessionDayCell.m in Sources */,
+				18949A1020875C5F002ECEE0 /* FFWeekCell.m in Sources */,
+				18949A2720875C5F002ECEE0 /* FFEditEventPopoverController.m in Sources */,
+				18949A1220875C5F002ECEE0 /* FFWeekCollectionViewFlowLayout.m in Sources */,
 				CE60F10320870C8200B74A2C /* ResultsVc.m in Sources */,
 				CE76ECE02041498D00E183EA /* TTView.m in Sources */,
 				04BC4A512085FFCD00CEB23E /* MCTeamPlayersCompCell.m in Sources */,
 				CE6C16592045213C00672253 /* SACalendarCell.m in Sources */,
+				18949A0F20875C5F002ECEE0 /* FFViewWithHourLines.m in Sources */,
 				18AC344B203E812C003EE0F0 /* ReportsVC.m in Sources */,
 				04BC4A182085FD4400CEB23E /* BowlTypeCell.m in Sources */,
 				CEB2B9E02025E30600E7D5E4 /* LineTextField.m in Sources */,
-				CE6C172A2045217A00672253 /* NSDate+FFDaysCount.m in Sources */,
-				CE6C171F2045217A00672253 /* FFWeekCollectionViewFlowLayout.m in Sources */,
 				18EF9D1420316C3000CDA268 /* PlayerListCollectionViewCell.m in Sources */,
 				182D854820342D1F005FFBF8 /* CategoryTableCell.m in Sources */,
 				18AC345D203EE50C003EE0F0 /* CoachBowlingLoad.m in Sources */,
 				CE8DE376203FDEC70097BF66 /* InjurySelectionViewController.m in Sources */,
-				CE6C171E2045217A00672253 /* FFWeekCollectionView.m in Sources */,
 				CEA42107203161A800B2DAB5 /* CalendarViewController.m in Sources */,
-				CE6C17322045217A00672253 /* FFButtonWithHourPopover.m in Sources */,
+				18949A0420875C5F002ECEE0 /* FFDayScrollView.m in Sources */,
 				04BC4A2A2085FDCF00CEB23E /* TeamOverviewCell.m in Sources */,
 				CEF38320203D419300FB5838 /* PlayerDetailViewController.m in Sources */,
 				18A68ACC20371A7E00EBA479 /* AddWellnessRatingVC.m in Sources */,
 				CE60F10620870C8200B74A2C /* TabbarVC.m in Sources */,
-				CE6C17292045217A00672253 /* FFRedAndWhiteButton.m in Sources */,
-				CE6C172E2045217A00672253 /* FFDateManager.m in Sources */,
 				04BC4B7020863B9200CEB23E /* PlannerAddEvent.m in Sources */,
 				04BC4B47208636AA00CEB23E /* ScoreCardVideoPlayer.m in Sources */,
-				CE6C17222045217A00672253 /* FFHeaderMonthForYearCell.m in Sources */,
 				04BC4A062085FC4000CEB23E /* BowlingView.m in Sources */,
 				04BC4A102085FCFF00CEB23E /* OverviewBowlingView.m in Sources */,
-				CE6C172F2045217A00672253 /* FFEvent.m in Sources */,
-				CE6C17112045217A00672253 /* FFDayScrollView.m in Sources */,
 				042542B52028A1110088B87B /* HomeScreenStandingsCell.m in Sources */,
+				18949A1E20875C5F002ECEE0 /* UIColor+FFMoreColors.m in Sources */,
 				CE6C16582045213C00672253 /* SACalendar.m in Sources */,
 				04B27F22202DA48E00ECB699 /* PlayerProfileChartsVC.m in Sources */,
 				CE3E741E20248BF100F10917 /* main.m in Sources */,
-				CE6C17242045217A00672253 /* FFMonthCollectionViewForYearCell.m in Sources */,
 				18A68ABE20371A2C00EBA479 /* TrainingLoadUpdateVC.m in Sources */,
 				04BC4ABD2086167400CEB23E /* ScheduleCell.m in Sources */,
+				18949A0820875C5F002ECEE0 /* FFMonthCollectionView.m in Sources */,
 				04BC4B4A2086370300CEB23E /* ScorecardBowlCell.m in Sources */,
-				CE6C17382045217A00672253 /* FFSearchBarWithAutoComplete.m in Sources */,
 				CE10281E202DDBFA00FA0B61 /* TestPropertyCollectionViewCell.m in Sources */,
 				CE60F10020870C8200B74A2C /* ResultsCell.m in Sources */,
 				CEB2B9A9202592D900E7D5E4 /* Reachability.m in Sources */,
+				18949A0E20875C5F002ECEE0 /* FFHourAndMinLabel.m in Sources */,
 				04BC49F72085FB7300CEB23E /* TeamHeadToHead.m in Sources */,
 				04BC4B0120862BC400CEB23E /* TeamMembersVC.m in Sources */,
 				04534F8B2037EE9400C22717 /* FoodDiaryVC.m in Sources */,
 				04BC4B4D2086373C00CEB23E /* ScoreCardCell.m in Sources */,
-				CE6C170A2045217A00672253 /* FFDayCalendarView.m in Sources */,
-				CE6C172D2045217A00672253 /* UILabel+FFCustomMethods.m in Sources */,
 				042699CD2043DB06001AB09F /* IllnessTracker.m in Sources */,
 				04534F9520383F0C00C22717 /* FoodDescriptionCell.m in Sources */,
 				CEC34C362046B2A10058ACC3 /* RecentFitnessGraph.m in Sources */,
+				18949A2120875C5F002ECEE0 /* FFDateManager.m in Sources */,
 				18EF9D1220316C3000CDA268 /* CustomButton.m in Sources */,
 				043C2F2F202AF59E00EB3F8C /* PieChartView.m in Sources */,
+				18949A1720875C5F002ECEE0 /* FFMonthCollectionViewForYearCell.m in Sources */,
 				04BC49FF2085FBC900CEB23E /* BowlingOverBlockView.m in Sources */,
 				04BC4A002085FBC900CEB23E /* BowlingOverBlockCVC.m in Sources */,
-				CE6C17122045217A00672253 /* FFMonthCalendarView.m in Sources */,
-				CE6C17262045217A00672253 /* FFYearCollectionView.m in Sources */,
-				CE6C170E2045217A00672253 /* FFDayCell.m in Sources */,
-				CE6C17102045217A00672253 /* FFDayCollectionViewFlowLayout.m in Sources */,
-				CE6C17312045217A00672253 /* FFDatePopoverController.m in Sources */,
-				CE6C17082045217A00672253 /* FFButtonAddEventWithPopover.m in Sources */,
 				18EF3A31203D0492000A7638 /* CustomCollectionPlayer.swift in Sources */,
 				CE6C16482045211300672253 /* BattingTableViewCell.m in Sources */,
-				CE6C171B2045217A00672253 /* FFHourAndMinLabel.m in Sources */,
 				04BC4B3D208632E900CEB23E /* VideoPlayerUploadVC.m in Sources */,
-				CE6C17282045217A00672253 /* FFBlueButton.m in Sources */,
 				04BC4A9B208611D300CEB23E /* AppDelegate.m in Sources */,
 				CE6C1634204520D100672253 /* FieldSummaryVC.m in Sources */,
 				CE6C16562045213C00672253 /* DateUtil.m in Sources */,
-				CE6C172C2045217A00672253 /* UIImage+FFCustomMethods.m in Sources */,
 				04254271202822FC0088B87B /* AssessmentPopupVC.m in Sources */,
-				CE6C17272045217A00672253 /* FFYearCollectionViewFlowLayout.m in Sources */,
 				CE60F10A20870C9E00B74A2C /* BPXLUUIDHandler.m in Sources */,
-				CE6C17192045217A00672253 /* FFWeekHeaderCell.m in Sources */,
 				CE6C1631204520D100672253 /* SessionSummaryVC.m in Sources */,
 				18A5CABA20384F3800586896 /* ProfileVCCell.m in Sources */,
 				18A68AC220371A2C00EBA479 /* TrainingLoadUpdateCell.m in Sources */,
 				CE6C16462045211300672253 /* BowlingKPIViewController.m in Sources */,
 				04BC4ABA2086167400CEB23E /* ResultCell.m in Sources */,
-				CE6C17162045217A00672253 /* FFMonthCollectionViewFlowLayout.m in Sources */,
-				CE6C17092045217A00672253 /* FFCalendarViewController.m in Sources */,
+				189499FB20875C5F002ECEE0 /* FFButtonAddEventWithPopover.m in Sources */,
 				CEC34C552046B8630058ACC3 /* CustomCollectionLayerBowling.swift in Sources */,
 				04BC4AB92086167400CEB23E /* SchResStandVC.m in Sources */,
 				CEB2B9C32025976300E7D5E4 /* CustomAnimationController.m in Sources */,
 				04BC4A1B2085FD4400CEB23E /* GroundVC.m in Sources */,
 				18AC3452203EC0D9003EE0F0 /* CoachTraingLoad.m in Sources */,
+				18949A2920875C5F002ECEE0 /* FFGuestsTableView.m in Sources */,
 				04BC4B56208637AD00CEB23E /* ScoreCardVC.m in Sources */,
-				CE6C17142045217A00672253 /* FFMonthCell.m in Sources */,
 				04BC4B43208632E900CEB23E /* VideoGalleryVC.m in Sources */,
+				189499FF20875C5F002ECEE0 /* FFDayHeaderCell.m in Sources */,
 				04BC4B57208637AD00CEB23E /* ScoreCardHeader.m in Sources */,
-				CE6C170D2045217A00672253 /* FFDayHeaderCollectionView.m in Sources */,
 				CE6C1630204520D100672253 /* SessionPartCell.m in Sources */,
 				18A5CAB520383FAD00586896 /* TeamsVC.m in Sources */,
+				18949A0920875C5F002ECEE0 /* FFMonthCollectionViewFlowLayout.m in Sources */,
 				04249B78203D466200B13889 /* NutritionVC.m in Sources */,
 				04BC4A86208607FF00CEB23E /* DropDownTableViewController.m in Sources */,
 				18DF185D202B087200AB9DCF /* RGSColorSlider.m in Sources */,
+				18949A2C20875C5F002ECEE0 /* FFEventDetailPopoverController.m in Sources */,
 				04BC4B672086398D00CEB23E /* DocumentViewController.m in Sources */,
+				18949A2D20875C5F002ECEE0 /* FFEventDetailView.m in Sources */,
 				04BC4ADA20861A5100CEB23E /* MatchCenterTBC.m in Sources */,
+				18949A0120875C5F002ECEE0 /* FFDayCell.m in Sources */,
+				189499FE20875C5F002ECEE0 /* FFDayHeaderButton.m in Sources */,
 				04BC4A292085FDCF00CEB23E /* TeamOverviewVC.m in Sources */,
+				18949A1620875C5F002ECEE0 /* FFMonthCellForYearCell.m in Sources */,
 				04B27F1C202D7DD100ECB699 /* illnessTableViewCell.m in Sources */,
 				04BC4A76208602C200CEB23E /* AppCommon.m in Sources */,
 				18E07115204702930020D8EE /* InjuryAndIllnessCell.m in Sources */,
 				04BC4A89208609CB00CEB23E /* WebService.m in Sources */,
+				18949A1D20875C5F002ECEE0 /* NSDate+FFDaysCount.m in Sources */,
 				18DF185C202B087200AB9DCF /* RGSPreviewView.m in Sources */,
+				18949A0520875C5F002ECEE0 /* FFMonthCalendarView.m in Sources */,
 				18B6D0ED203BDD580003CBA3 /* TrainingLoadGraphVC.m in Sources */,
-				CE6C17342045217A00672253 /* FFEditEventPopoverController.m in Sources */,
 				CEBD2A7220289999000AFD1B /* SKSTableView.m in Sources */,
-				CE6C170B2045217A00672253 /* FFDayHeaderButton.m in Sources */,
-				CE6C17152045217A00672253 /* FFMonthCollectionView.m in Sources */,
+				18949A1420875C5F002ECEE0 /* FFYearCalendarView.m in Sources */,
 				04B27F17202D784600ECB699 /* illnessVC.m in Sources */,
-				CE6C17182045217A00672253 /* FFWeekCalendarView.m in Sources */,
 				04BC4A522085FFCD00CEB23E /* MCTeamCompCVC.m in Sources */,
 				04BC4B42208632E900CEB23E /* VideoGalleryUploadCell.m in Sources */,
+				1894996220875A3C002ECEE0 /* PlannerCell.m in Sources */,
+				18949A2820875C5F002ECEE0 /* FFEditEventView.m in Sources */,
 				CEAF5B712038514300045C91 /* customTextField.m in Sources */,
 				04BC4B0320862BC400CEB23E /* TeamMemebersCell.m in Sources */,
 				CEBD2A7420289999000AFD1B /* SKSTableViewCellIndicator.m in Sources */,
 				04BC4A312085FE3F00CEB23E /* BattingOverBlockCVC.m in Sources */,
-				CE6C160B2045200F00672253 /* PlannerVC.m in Sources */,
 				18A68AC020371A2C00EBA479 /* TrainingLoadVC.m in Sources */,
-				CE6C171C2045217A00672253 /* FFViewWithHourLines.m in Sources */,
+				18949A1520875C5F002ECEE0 /* FFHeaderMonthForYearCell.m in Sources */,
 				04BC4B6F20863B9200CEB23E /* AddParticipantCell.m in Sources */,
+				1894995A208759F8002ECEE0 /* PlannerVC.m in Sources */,
 				18A68ACE20371A7E00EBA479 /* WellnessTrainingBowlingVC.m in Sources */,
-				CE6C17132045217A00672253 /* FFButtonWithEditAndDetailPopoversForMonthCell.m in Sources */,
-				CE6C17212045217A00672253 /* FFYearCalendarView.m in Sources */,
-				CE6C17392045217A00672253 /* FFEventDetailPopoverController.m in Sources */,
+				18949A2520875C5F002ECEE0 /* FFButtonWithHourPopover.m in Sources */,
 				042381CD204173F900212684 /* PopOverVC.m in Sources */,
 				CEB2B9BD2025939F00E7D5E4 /* SWRevealViewController.m in Sources */,
 				04BC4A3D2085FEB500CEB23E /* BattingView.m in Sources */,
 				18AAC6DC2046192B00D5495A /* CustomCollectionStandings.swift in Sources */,
-				CE6C166D2045216100672253 /* PlannerCell.m in Sources */,
-				CE6C17332045217A00672253 /* FFHourPopoverController.m in Sources */,
 				CEBD2A9220289C96000AFD1B /* InjuryVC.m in Sources */,
 				04BC4A1F2085FD9100CEB23E /* StandingVC.m in Sources */,
 				CEBD2A82202899BB000AFD1B /* DBAConnection.m in Sources */,
 				18EF9D1320316C3000CDA268 /* CustomCollectionViewLayout.swift in Sources */,
 				04BC4A0C2085FCBC00CEB23E /* MCBowlingRootVC.m in Sources */,
-				CE6C17202045217A00672253 /* FFWeekScrollView.m in Sources */,
 				CE6C164A2045211400672253 /* BowlingTableViewCell.m in Sources */,
-				CE6C17372045217A00672253 /* FFGuestsTableViewCell.m in Sources */,
-				CE6C17172045217A00672253 /* FFMonthHeaderView.m in Sources */,
-				CE6C172B2045217A00672253 /* UIColor+FFMoreColors.m in Sources */,
-				CE6C170C2045217A00672253 /* FFDayHeaderCell.m in Sources */,
-				CE6C170F2045217A00672253 /* FFDayCollectionView.m in Sources */,
+				18949A1120875C5F002ECEE0 /* FFWeekCollectionView.m in Sources */,
+				18949A0B20875C5F002ECEE0 /* FFWeekCalendarView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

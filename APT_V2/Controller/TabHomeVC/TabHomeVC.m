@@ -74,10 +74,14 @@
     objSch.Delegate = self;
     objStats = [[MyStatsBattingVC alloc] initWithNibName:@"MyStatsBattingVC" bundle:nil];
     objPlayersVC = [TeamMembersVC new];
+    
+    objWell = [[WellnessTrainingBowlingVC alloc] initWithNibName:@"WellnessTrainingBowlingVC" bundle:nil];
+    //objWell.Delegate = self;
+    
     selectedIndex = [NSIndexPath indexPathForItem:0 inSection:0];
     selectedUserArray = [NSMutableArray new];
     
-    titleArray = @[@"Home",([AppCommon isCoach] ? @"My Teams" : @"My Stats")];
+    titleArray = @[@"Home",([AppCommon isCoach] ? @"My Teams" : @"Wellness/Training/Bowling")];
     
     [self FetchvideouploadWebservice];
     [txtVideoDate setInputView:datePickerView];
@@ -293,16 +297,19 @@
     
          else if(index == 1)
         {
-            if ([AppCommon isCoach]) {
-                CGFloat Yposition = objPlayersVC.filterContainerView.frame.origin.y;
-                objPlayersVC.view.frame = CGRectMake(0, -70, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+70);
-                [view addSubview:objPlayersVC.view];
-            }
-            else
-            {
-                objStats.view.frame = CGRectMake(0, -75, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+75);
-                [view addSubview:objStats.view];
-            }
+//            if ([AppCommon isCoach]) {
+//                CGFloat Yposition = objPlayersVC.filterContainerView.frame.origin.y;
+//                objPlayersVC.view.frame = CGRectMake(0, -70, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+70);
+//                [view addSubview:objPlayersVC.view];
+//            }
+//            else
+//            {
+//                objStats.view.frame = CGRectMake(0, -75, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+75);
+//                [view addSubview:objStats.view];
+//            }
+            //CGFloat Yposition = objWell.filterContainerView.frame.origin.y;
+            objWell.view.frame = CGRectMake(0, -70, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+70);
+            [view addSubview:objWell.view];
         }
 
     return view;

@@ -82,15 +82,7 @@
 		04BC4A85208607FF00CEB23E /* DropDownTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BC4A83208607FE00CEB23E /* DropDownTableViewController.xib */; };
 		04BC4A86208607FF00CEB23E /* DropDownTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4A84208607FF00CEB23E /* DropDownTableViewController.m */; };
 		04BC4A89208609CB00CEB23E /* WebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4A88208609CB00CEB23E /* WebService.m */; };
-		04BC4A9120860B9500CEB23E /* ResultsCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BC4A8D20860B9500CEB23E /* ResultsCell_iPad.xib */; };
-		04BC4A9220860B9500CEB23E /* ResultsVc.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4A8E20860B9500CEB23E /* ResultsVc.m */; };
-		04BC4A9320860B9500CEB23E /* ResultsCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BC4A8F20860B9500CEB23E /* ResultsCell_iPhone.xib */; };
-		04BC4A9420860B9500CEB23E /* ResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4A9020860B9500CEB23E /* ResultsCell.m */; };
-		04BC4A9820860F8200CEB23E /* TabbarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4A9720860F8200CEB23E /* TabbarVC.m */; };
 		04BC4A9B208611D300CEB23E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4A99208611D300CEB23E /* AppDelegate.m */; };
-		04BC4A9F2086130700CEB23E /* BPXLUUIDHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4A9E2086130700CEB23E /* BPXLUUIDHandler.m */; };
-		04BC4AAE208615B300CEB23E /* VideoDocumentVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BC4AAC208615B200CEB23E /* VideoDocumentVC.xib */; };
-		04BC4AAF208615B300CEB23E /* VideoDocumentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4AAD208615B300CEB23E /* VideoDocumentVC.m */; };
 		04BC4AB92086167400CEB23E /* SchResStandVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4AB02086167200CEB23E /* SchResStandVC.m */; };
 		04BC4ABA2086167400CEB23E /* ResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4AB12086167200CEB23E /* ResultCell.m */; };
 		04BC4ABB2086167400CEB23E /* SchResStandVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BC4AB32086167300CEB23E /* SchResStandVC.xib */; };
@@ -189,6 +181,14 @@
 		CE3E741820248BF100F10917 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741720248BF100F10917 /* Assets.xcassets */; };
 		CE3E741B20248BF100F10917 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741920248BF100F10917 /* LaunchScreen.storyboard */; };
 		CE3E741E20248BF100F10917 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E741D20248BF100F10917 /* main.m */; };
+		CE60F10020870C8200B74A2C /* ResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60F0F420870C8000B74A2C /* ResultsCell.m */; };
+		CE60F10120870C8200B74A2C /* ResultsCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE60F0F520870C8000B74A2C /* ResultsCell_iPad.xib */; };
+		CE60F10220870C8200B74A2C /* ResultsCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE60F0F620870C8000B74A2C /* ResultsCell_iPhone.xib */; };
+		CE60F10320870C8200B74A2C /* ResultsVc.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60F0F820870C8000B74A2C /* ResultsVc.m */; };
+		CE60F10420870C8200B74A2C /* VideoDocumentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60F0FB20870C8100B74A2C /* VideoDocumentVC.m */; };
+		CE60F10520870C8200B74A2C /* VideoDocumentVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE60F0FC20870C8100B74A2C /* VideoDocumentVC.xib */; };
+		CE60F10620870C8200B74A2C /* TabbarVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60F0FF20870C8100B74A2C /* TabbarVC.m */; };
+		CE60F10A20870C9E00B74A2C /* BPXLUUIDHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60F10920870C9E00B74A2C /* BPXLUUIDHandler.m */; };
 		CE6C160B2045200F00672253 /* PlannerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16092045200F00672253 /* PlannerVC.m */; };
 		CE6C160C2045200F00672253 /* PlannerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6C160A2045200F00672253 /* PlannerVC.xib */; };
 		CE6C161E204520B300672253 /* PlayersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C161B204520B200672253 /* PlayersCell.m */; };
@@ -465,21 +465,8 @@
 		04BC4A84208607FF00CEB23E /* DropDownTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownTableViewController.m; sourceTree = "<group>"; };
 		04BC4A87208609CA00CEB23E /* WebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebService.h; sourceTree = "<group>"; };
 		04BC4A88208609CB00CEB23E /* WebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebService.m; sourceTree = "<group>"; };
-		04BC4A8B20860B9400CEB23E /* ResultsVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsVc.h; sourceTree = "<group>"; };
-		04BC4A8C20860B9400CEB23E /* ResultsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsCell.h; sourceTree = "<group>"; };
-		04BC4A8D20860B9500CEB23E /* ResultsCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultsCell_iPad.xib; sourceTree = "<group>"; };
-		04BC4A8E20860B9500CEB23E /* ResultsVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsVc.m; sourceTree = "<group>"; };
-		04BC4A8F20860B9500CEB23E /* ResultsCell_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultsCell_iPhone.xib; sourceTree = "<group>"; };
-		04BC4A9020860B9500CEB23E /* ResultsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsCell.m; sourceTree = "<group>"; };
-		04BC4A9620860F8200CEB23E /* TabbarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabbarVC.h; sourceTree = "<group>"; };
-		04BC4A9720860F8200CEB23E /* TabbarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabbarVC.m; sourceTree = "<group>"; };
 		04BC4A99208611D300CEB23E /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		04BC4A9A208611D300CEB23E /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		04BC4A9D2086130700CEB23E /* BPXLUUIDHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPXLUUIDHandler.h; sourceTree = "<group>"; };
-		04BC4A9E2086130700CEB23E /* BPXLUUIDHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPXLUUIDHandler.m; sourceTree = "<group>"; };
-		04BC4AAB208615B200CEB23E /* VideoDocumentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDocumentVC.h; sourceTree = "<group>"; };
-		04BC4AAC208615B200CEB23E /* VideoDocumentVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoDocumentVC.xib; sourceTree = "<group>"; };
-		04BC4AAD208615B300CEB23E /* VideoDocumentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDocumentVC.m; sourceTree = "<group>"; };
 		04BC4AB02086167200CEB23E /* SchResStandVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchResStandVC.m; sourceTree = "<group>"; };
 		04BC4AB12086167200CEB23E /* ResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultCell.m; sourceTree = "<group>"; };
 		04BC4AB22086167200CEB23E /* ResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultCell.h; sourceTree = "<group>"; };
@@ -637,6 +624,19 @@
 		CE3E741A20248BF100F10917 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE3E741C20248BF100F10917 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE3E741D20248BF100F10917 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CE60F0F320870C8000B74A2C /* ResultsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsCell.h; sourceTree = "<group>"; };
+		CE60F0F420870C8000B74A2C /* ResultsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsCell.m; sourceTree = "<group>"; };
+		CE60F0F520870C8000B74A2C /* ResultsCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultsCell_iPad.xib; sourceTree = "<group>"; };
+		CE60F0F620870C8000B74A2C /* ResultsCell_iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultsCell_iPhone.xib; sourceTree = "<group>"; };
+		CE60F0F720870C8000B74A2C /* ResultsVc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsVc.h; sourceTree = "<group>"; };
+		CE60F0F820870C8000B74A2C /* ResultsVc.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsVc.m; sourceTree = "<group>"; };
+		CE60F0FA20870C8100B74A2C /* VideoDocumentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoDocumentVC.h; sourceTree = "<group>"; };
+		CE60F0FB20870C8100B74A2C /* VideoDocumentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoDocumentVC.m; sourceTree = "<group>"; };
+		CE60F0FC20870C8100B74A2C /* VideoDocumentVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoDocumentVC.xib; sourceTree = "<group>"; };
+		CE60F0FE20870C8100B74A2C /* TabbarVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabbarVC.h; sourceTree = "<group>"; };
+		CE60F0FF20870C8100B74A2C /* TabbarVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabbarVC.m; sourceTree = "<group>"; };
+		CE60F10820870C9E00B74A2C /* BPXLUUIDHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPXLUUIDHandler.h; sourceTree = "<group>"; };
+		CE60F10920870C9E00B74A2C /* BPXLUUIDHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPXLUUIDHandler.m; sourceTree = "<group>"; };
 		CE6C16082045200F00672253 /* PlannerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlannerVC.h; sourceTree = "<group>"; };
 		CE6C16092045200F00672253 /* PlannerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlannerVC.m; sourceTree = "<group>"; };
 		CE6C160A2045200F00672253 /* PlannerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlannerVC.xib; sourceTree = "<group>"; };
@@ -1063,47 +1063,6 @@
 			path = Charts;
 			sourceTree = "<group>";
 		};
-		04BC4A8A20860B5C00CEB23E /* ResultVC */ = {
-			isa = PBXGroup;
-			children = (
-				04BC4A8D20860B9500CEB23E /* ResultsCell_iPad.xib */,
-				04BC4A8F20860B9500CEB23E /* ResultsCell_iPhone.xib */,
-				04BC4A8C20860B9400CEB23E /* ResultsCell.h */,
-				04BC4A9020860B9500CEB23E /* ResultsCell.m */,
-				04BC4A8B20860B9400CEB23E /* ResultsVc.h */,
-				04BC4A8E20860B9500CEB23E /* ResultsVc.m */,
-			);
-			path = ResultVC;
-			sourceTree = "<group>";
-		};
-		04BC4A9520860F5B00CEB23E /* TabbarVC */ = {
-			isa = PBXGroup;
-			children = (
-				04BC4A9620860F8200CEB23E /* TabbarVC.h */,
-				04BC4A9720860F8200CEB23E /* TabbarVC.m */,
-			);
-			path = TabbarVC;
-			sourceTree = "<group>";
-		};
-		04BC4A9C208612F600CEB23E /* UUID */ = {
-			isa = PBXGroup;
-			children = (
-				04BC4A9D2086130700CEB23E /* BPXLUUIDHandler.h */,
-				04BC4A9E2086130700CEB23E /* BPXLUUIDHandler.m */,
-			);
-			path = UUID;
-			sourceTree = "<group>";
-		};
-		04BC4AAA2086159000CEB23E /* VideoDocumentVC */ = {
-			isa = PBXGroup;
-			children = (
-				04BC4AAB208615B200CEB23E /* VideoDocumentVC.h */,
-				04BC4AAD208615B300CEB23E /* VideoDocumentVC.m */,
-				04BC4AAC208615B200CEB23E /* VideoDocumentVC.xib */,
-			);
-			path = VideoDocumentVC;
-			sourceTree = "<group>";
-		};
 		04BC4B632086396B00CEB23E /* DocumentView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1456,6 +1415,47 @@
 				CE3E741D20248BF100F10917 /* main.m */,
 			);
 			path = APT_V2;
+			sourceTree = "<group>";
+		};
+		CE60F0F220870C8000B74A2C /* ResultVC */ = {
+			isa = PBXGroup;
+			children = (
+				CE60F0F320870C8000B74A2C /* ResultsCell.h */,
+				CE60F0F420870C8000B74A2C /* ResultsCell.m */,
+				CE60F0F520870C8000B74A2C /* ResultsCell_iPad.xib */,
+				CE60F0F620870C8000B74A2C /* ResultsCell_iPhone.xib */,
+				CE60F0F720870C8000B74A2C /* ResultsVc.h */,
+				CE60F0F820870C8000B74A2C /* ResultsVc.m */,
+			);
+			path = ResultVC;
+			sourceTree = "<group>";
+		};
+		CE60F0F920870C8000B74A2C /* VideoDocumentVC */ = {
+			isa = PBXGroup;
+			children = (
+				CE60F0FA20870C8100B74A2C /* VideoDocumentVC.h */,
+				CE60F0FB20870C8100B74A2C /* VideoDocumentVC.m */,
+				CE60F0FC20870C8100B74A2C /* VideoDocumentVC.xib */,
+			);
+			path = VideoDocumentVC;
+			sourceTree = "<group>";
+		};
+		CE60F0FD20870C8100B74A2C /* TabbarVC */ = {
+			isa = PBXGroup;
+			children = (
+				CE60F0FE20870C8100B74A2C /* TabbarVC.h */,
+				CE60F0FF20870C8100B74A2C /* TabbarVC.m */,
+			);
+			path = TabbarVC;
+			sourceTree = "<group>";
+		};
+		CE60F10720870C9E00B74A2C /* UUID */ = {
+			isa = PBXGroup;
+			children = (
+				CE60F10820870C9E00B74A2C /* BPXLUUIDHandler.h */,
+				CE60F10920870C9E00B74A2C /* BPXLUUIDHandler.m */,
+			);
+			path = UUID;
 			sourceTree = "<group>";
 		};
 		CE6C16072045200F00672253 /* PlannerVC */ = {
@@ -2197,7 +2197,7 @@
 		CEB2B9B92025938E00E7D5E4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				04BC4A9C208612F600CEB23E /* UUID */,
+				CE60F10720870C9E00B74A2C /* UUID */,
 				18A590632047C382002BBF64 /* Formatters */,
 				CE367C842046D72300A94B28 /* StepSlider */,
 				CE6C16702045217A00672253 /* PlannerGraphs */,
@@ -2236,10 +2236,10 @@
 		CEB2B9C4202598DB00E7D5E4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CE60F0F220870C8000B74A2C /* ResultVC */,
+				CE60F0FD20870C8100B74A2C /* TabbarVC */,
+				CE60F0F920870C8000B74A2C /* VideoDocumentVC */,
 				04BC4B632086396B00CEB23E /* DocumentView */,
-				04BC4AAA2086159000CEB23E /* VideoDocumentVC */,
-				04BC4A9520860F5B00CEB23E /* TabbarVC */,
-				04BC4A8A20860B5C00CEB23E /* ResultVC */,
 				18E0710E204702920020D8EE /* InjuryAndIllnessVC */,
 				CE6C165A2045216000672253 /* PlaneerAddEvent */,
 				CE6C16632045216000672253 /* PlannerListVC */,
@@ -2587,6 +2587,7 @@
 				04BC4B0220862BC400CEB23E /* TeamMembersVC.xib in Resources */,
 				04534F912037F44400C22717 /* FoodDiaryCell.xib in Resources */,
 				18AC345E203EE50C003EE0F0 /* CoachBowlingLoad.xib in Resources */,
+				CE60F10220870C8200B74A2C /* ResultsCell_iPhone.xib in Resources */,
 				04BC4A85208607FF00CEB23E /* DropDownTableViewController.xib in Resources */,
 				04534F9620383F0C00C22717 /* FoodDescriptionCell.xib in Resources */,
 				04BC4A802086068D00CEB23E /* CustomNavigation.xib in Resources */,
@@ -2595,6 +2596,7 @@
 				CEF38321203D419300FB5838 /* PlayerDetailViewController.xib in Resources */,
 				18E07116204702930020D8EE /* InjuryAndIllnessCell.xib in Resources */,
 				CEB2B99120257BBD00E7D5E4 /* MontserratAlternates-Regular.otf in Resources */,
+				CE60F10120870C8200B74A2C /* ResultsCell_iPad.xib in Resources */,
 				04BC4A332085FE3F00CEB23E /* BattingOverBlockCVC.xib in Resources */,
 				CEB2B97220257BBD00E7D5E4 /* Montserrat-Black.otf in Resources */,
 				CEB2B98020257BBD00E7D5E4 /* Montserrat-SemiBold.otf in Resources */,
@@ -2656,7 +2658,6 @@
 				04BC4B0420862BC400CEB23E /* TeamMemebersCell.xib in Resources */,
 				04BC4A012085FBC900CEB23E /* BowlingOverBlockCVC.xib in Resources */,
 				CE3E741820248BF100F10917 /* Assets.xcassets in Resources */,
-				04BC4A9120860B9500CEB23E /* ResultsCell_iPad.xib in Resources */,
 				04BC4A022085FBC900CEB23E /* BowlingOverBlockView.xib in Resources */,
 				CE6C173B2045217A00672253 /* blackCircle.png in Resources */,
 				18A68ACD20371A7E00EBA479 /* AddWellnessRatingVC.xib in Resources */,
@@ -2672,6 +2673,7 @@
 				04BC4A4D2085FFCD00CEB23E /* MCTeamPlayersCompCell.xib in Resources */,
 				CE6C160C2045200F00672253 /* PlannerVC.xib in Resources */,
 				04B27F1D202D7DD100ECB699 /* illnessTableViewCell.xib in Resources */,
+				CE60F10520870C8200B74A2C /* VideoDocumentVC.xib in Resources */,
 				CE8DE377203FDEC70097BF66 /* InjurySelectionViewController.xib in Resources */,
 				04BC4A112085FCFF00CEB23E /* OverviewBowlingView.xib in Resources */,
 				042699CE2043DB06001AB09F /* IllnessTracker.xib in Resources */,
@@ -2686,7 +2688,6 @@
 				CE6C16492045211400672253 /* BattingTableViewCell.xib in Resources */,
 				04BC4A382085FE7700CEB23E /* OverviewView.xib in Resources */,
 				04BC49F32085FB1900CEB23E /* MCTossAndResultsVC.xib in Resources */,
-				04BC4AAE208615B300CEB23E /* VideoDocumentVC.xib in Resources */,
 				04BC4A3E2085FEB500CEB23E /* BattingView.xib in Resources */,
 				18A68ACF20371A7E00EBA479 /* WellnessTrainingBowlingVC.xib in Resources */,
 				CEB2B98E20257BBD00E7D5E4 /* MontserratAlternates-LightItalic.otf in Resources */,
@@ -2704,7 +2705,6 @@
 				18AC344C203E812C003EE0F0 /* ReportsVC.xib in Resources */,
 				CE6C173D2045217A00672253 /* MonthlyCalendar.png in Resources */,
 				CEB2B97C20257BBD00E7D5E4 /* Montserrat-LightItalic.otf in Resources */,
-				04BC4A9320860B9500CEB23E /* ResultsCell_iPhone.xib in Resources */,
 				04BC4A322085FE3F00CEB23E /* BattingOverBlockView.xib in Resources */,
 				CEB2B98120257BBD00E7D5E4 /* Montserrat-SemiBoldItalic.otf in Resources */,
 				18EF9D1520316C3000CDA268 /* PlayerListCollectionViewCell.xib in Resources */,
@@ -2778,7 +2778,6 @@
 				CE6C166F2045216100672253 /* PlannerListVC.m in Sources */,
 				04BC4A392085FE7700CEB23E /* OverviewView.m in Sources */,
 				04BC4AC12086173200CEB23E /* SwipeView.m in Sources */,
-				04BC4A9420860B9500CEB23E /* ResultsCell.m in Sources */,
 				CE6C17232045217A00672253 /* FFMonthCellForYearCell.m in Sources */,
 				CEAF5B6E20384D3200045C91 /* UITextField+testCode.m in Sources */,
 				18E07117204702930020D8EE /* InjuryAndIllnessVC.m in Sources */,
@@ -2786,13 +2785,13 @@
 				CEB2B9CD2025994F00E7D5E4 /* RearViewController.m in Sources */,
 				CEB2B9C8202598DB00E7D5E4 /* ViewController.m in Sources */,
 				04BC4A812086068D00CEB23E /* CustomNavigation.m in Sources */,
+				CE60F10420870C8200B74A2C /* VideoDocumentVC.m in Sources */,
 				04534F7F2037E63600C22717 /* CRTableViewCell.m in Sources */,
 				04BC4A342085FE3F00CEB23E /* BattingOverBlockView.m in Sources */,
 				04249B7D203D4AF000B13889 /* NutritionCell.m in Sources */,
 				CE6C161F204520B300672253 /* PlayersVC.m in Sources */,
 				04BC4AD920861A5100CEB23E /* MCOverViewVC.m in Sources */,
 				04534F902037F44400C22717 /* FoodDiaryCell.m in Sources */,
-				04BC4A9F2086130700CEB23E /* BPXLUUIDHandler.m in Sources */,
 				18A68ACB20371A7E00EBA479 /* HorizontalXLblFormatter.m in Sources */,
 				04BC4A432085FF4200CEB23E /* MCBattingRootVC.m in Sources */,
 				042542B62028A1110088B87B /* HomeScreenStandingsVC.m in Sources */,
@@ -2822,6 +2821,7 @@
 				04BC4AD520861A5100CEB23E /* MCOverViewResultCVC.m in Sources */,
 				04C1EC4F2084C9410030E358 /* LoginVC.m in Sources */,
 				CE6C162F204520D100672253 /* SessionDayCell.m in Sources */,
+				CE60F10320870C8200B74A2C /* ResultsVc.m in Sources */,
 				CE76ECE02041498D00E183EA /* TTView.m in Sources */,
 				04BC4A512085FFCD00CEB23E /* MCTeamPlayersCompCell.m in Sources */,
 				CE6C16592045213C00672253 /* SACalendarCell.m in Sources */,
@@ -2829,7 +2829,6 @@
 				04BC4A182085FD4400CEB23E /* BowlTypeCell.m in Sources */,
 				CEB2B9E02025E30600E7D5E4 /* LineTextField.m in Sources */,
 				CE6C172A2045217A00672253 /* NSDate+FFDaysCount.m in Sources */,
-				04BC4AAF208615B300CEB23E /* VideoDocumentVC.m in Sources */,
 				CE6C171F2045217A00672253 /* FFWeekCollectionViewFlowLayout.m in Sources */,
 				18EF9D1420316C3000CDA268 /* PlayerListCollectionViewCell.m in Sources */,
 				182D854820342D1F005FFBF8 /* CategoryTableCell.m in Sources */,
@@ -2840,8 +2839,8 @@
 				CE6C17322045217A00672253 /* FFButtonWithHourPopover.m in Sources */,
 				04BC4A2A2085FDCF00CEB23E /* TeamOverviewCell.m in Sources */,
 				CEF38320203D419300FB5838 /* PlayerDetailViewController.m in Sources */,
-				04BC4A9220860B9500CEB23E /* ResultsVc.m in Sources */,
 				18A68ACC20371A7E00EBA479 /* AddWellnessRatingVC.m in Sources */,
+				CE60F10620870C8200B74A2C /* TabbarVC.m in Sources */,
 				CE6C17292045217A00672253 /* FFRedAndWhiteButton.m in Sources */,
 				CE6C172E2045217A00672253 /* FFDateManager.m in Sources */,
 				04BC4B7020863B9200CEB23E /* PlannerAddEvent.m in Sources */,
@@ -2861,6 +2860,7 @@
 				04BC4B4A2086370300CEB23E /* ScorecardBowlCell.m in Sources */,
 				CE6C17382045217A00672253 /* FFSearchBarWithAutoComplete.m in Sources */,
 				CE10281E202DDBFA00FA0B61 /* TestPropertyCollectionViewCell.m in Sources */,
+				CE60F10020870C8200B74A2C /* ResultsCell.m in Sources */,
 				CEB2B9A9202592D900E7D5E4 /* Reachability.m in Sources */,
 				04BC49F72085FB7300CEB23E /* TeamHeadToHead.m in Sources */,
 				04BC4B0120862BC400CEB23E /* TeamMembersVC.m in Sources */,
@@ -2889,10 +2889,10 @@
 				04BC4A9B208611D300CEB23E /* AppDelegate.m in Sources */,
 				CE6C1634204520D100672253 /* FieldSummaryVC.m in Sources */,
 				CE6C16562045213C00672253 /* DateUtil.m in Sources */,
-				04BC4A9820860F8200CEB23E /* TabbarVC.m in Sources */,
 				CE6C172C2045217A00672253 /* UIImage+FFCustomMethods.m in Sources */,
 				04254271202822FC0088B87B /* AssessmentPopupVC.m in Sources */,
 				CE6C17272045217A00672253 /* FFYearCollectionViewFlowLayout.m in Sources */,
+				CE60F10A20870C9E00B74A2C /* BPXLUUIDHandler.m in Sources */,
 				CE6C17192045217A00672253 /* FFWeekHeaderCell.m in Sources */,
 				CE6C1631204520D100672253 /* SessionSummaryVC.m in Sources */,
 				18A5CABA20384F3800586896 /* ProfileVCCell.m in Sources */,

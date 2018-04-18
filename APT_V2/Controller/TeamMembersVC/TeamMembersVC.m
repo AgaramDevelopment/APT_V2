@@ -75,7 +75,7 @@
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    [self customnavigationmethod];
+//    [self customnavigationmethod];
 }
 
 -(void)addRefreshControl

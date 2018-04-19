@@ -27,5 +27,7 @@
 
 @property (strong, nonatomic) IBOutlet UIView *navi_View;
 
+@property (weak, nonatomic) IBOutlet UIView *tapview;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *plannerTblHeight;
 
 @end

@@ -71,9 +71,7 @@
             if (min == 0) {
                 [labelHourMin showText];
                 CGFloat width = [labelHourMin widthThatWouldFit];
-                
-                
-                
+            
                 UIView *view = [[UIView alloc] initWithFrame:CGRectMake(labelHourMin.frame.origin.x+width+10, HEIGHT_CELL_MIN/2., self.frame.size.width-labelHourMin.frame.origin.x-width-20, 1.)];
                 [view setAutoresizingMask:AR_WIDTH_HEIGHT];
                 [view setBackgroundColor:[UIColor lightGrayCustom]];
@@ -130,8 +128,8 @@
             }
             
             FFBlueButton *_button = [[FFBlueButton alloc] initWithFrame:CGRectMake(70., yTimeBegin, self.frame.size.width-95., yTimeEnd-yTimeBegin)];
-//            [_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-//            [_button setTitle:event.stringCustomerName forState:UIControlStateNormal];
+            //[_button addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+            [_button setTitle:event.stringCustomerName forState:UIControlStateNormal];
 //            UIColor *color = [self colorWithHexString:event.color];
             [_button setBackgroundColor:[AppCommon colorWithHexString:event.color]];
             [_button setEvent:event];

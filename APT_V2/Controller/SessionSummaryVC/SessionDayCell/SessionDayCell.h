@@ -16,5 +16,6 @@
 @property (nonatomic,strong) IBOutlet UILabel * runslbl;
 @property (nonatomic,strong) IBOutlet UILabel * runratelbl;
 @property (nonatomic,strong) IBOutlet UILabel * wicketslbl;
+@property (nonatomic,strong) IBOutlet UILabel * dotballslbl;
 
 @end

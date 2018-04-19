@@ -182,7 +182,16 @@
             
             [[NSUserDefaults standardUserDefaults] setObject:self.userTxt.text forKey:@"UserID"];//LogID
 
-                VC = [TabHomeVC new];
+        NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+        NSString *plyRolecode = @"ROL0000002";
+        
+        if([rolecode isEqualToString:plyRolecode])
+        {
+            VC = [TabHomeVC new];
+        } else {
+            VC = [TeamsVC new];
+        }
+        
                 [COMMON getIPLteams];
             
 //            if([objRoleCode isEqualToString:@"ROL0000002"]) // player

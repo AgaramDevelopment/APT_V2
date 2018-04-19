@@ -64,7 +64,7 @@
     
     dictEvents = _dictEvents;
     
-    [collectionViewMonth setDictEvents:_dictEvents];
+    [collectionViewMonth setDictEvents: _dictEvents];
     [collectionViewMonth reloadData];
 }
 

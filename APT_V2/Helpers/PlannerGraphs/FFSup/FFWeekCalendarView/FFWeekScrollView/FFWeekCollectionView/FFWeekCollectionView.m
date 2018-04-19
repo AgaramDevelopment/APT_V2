@@ -13,6 +13,7 @@
 #import "FFWeekCell.h"
 #import "FFWeekCollectionViewFlowLayout.h"
 #import "FFImportantFilesForCalendar.h"
+#import "Config.h"
 
 @interface FFWeekCollectionView () <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, FFWeekCellProtocol>
 @property (nonatomic) CGFloat lastContentOffset;
@@ -80,6 +81,7 @@
     return intDay;
 }
 
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
@@ -122,6 +124,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     return CGSizeMake((self.frame.size.width-7*SPACE_COLLECTIONVIEW_CELL)/7, self.frame.size.height);
+   // return CGSizeMake((self.frame.size.width-7*SPACE_COLLECTIONVIEW_CELL)/7,(self.frame.size.height-24*SPACE_COLLECTIONVIEW_CELL)/24);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {

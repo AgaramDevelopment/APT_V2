@@ -92,24 +92,24 @@
 {
     if(IS_IPHONE_DEVICE) {
         pieChartView1 = [[PieChartView alloc] initWithFrame:CGRectMake(self.yesterdayView.frame.origin.x,self.yesterdayView.frame.origin.y,self.yesterdayView.frame.size.width,self.yesterdayView.frame.size.width)];
-        pieChartView1.delegate = self;
-        pieChartView1.datasource = self;
+        //pieChartView1.delegate = self;
+        //pieChartView1.datasource = self;
         [self.yesterdayMainView addSubview:pieChartView1];
         
         pieChartView2 = [[PieChartView alloc] initWithFrame:CGRectMake(self.todayView.frame.origin.x,self.todayView.frame.origin.y,self.todayView.frame.size.width,self.todayView.frame.size.width)];
-        pieChartView2.delegate = self;
-        pieChartView2.datasource = self;
+        //pieChartView2.delegate = self;
+        //pieChartView2.datasource = self;
         [self.todayMainView addSubview:pieChartView2];
         
     } else {
         pieChartView1 = [[PieChartView alloc] initWithFrame:CGRectMake(self.yesterdayView.frame.origin.x,self.yesterdayView.frame.origin.y,self.yesterdayView.frame.size.width,self.yesterdayView.frame.size.width)];
-        pieChartView1.delegate = self;
-        pieChartView1.datasource = self;
+        //pieChartView1.delegate = self;
+        //pieChartView1.datasource = self;
         [self.yesterdayMainView addSubview:pieChartView1];
         
         pieChartView2 = [[PieChartView alloc] initWithFrame:CGRectMake(self.todayView.frame.origin.x,self.todayView.frame.origin.y,self.todayView.frame.size.width,self.todayView.frame.size.width)];
-        pieChartView2.delegate = self;
-        pieChartView2.datasource = self;
+        //pieChartView2.delegate = self;
+        //pieChartView2.datasource = self;
         [self.todayMainView addSubview:pieChartView2];
     }
 }

@@ -41,6 +41,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *fieldingTypeLbl;
 @property (strong, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) IBOutlet UIImageView *arrowImg;
+@property (strong, nonatomic) IBOutlet UILabel *countLbl;
 
 @end
 

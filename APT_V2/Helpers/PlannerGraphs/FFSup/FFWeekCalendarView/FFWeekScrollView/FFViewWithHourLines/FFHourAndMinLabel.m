@@ -45,6 +45,7 @@
     
     NSDateComponents *comp =  [NSDate componentsOfDate:dateHourAndMin];
     [self setText:[NSString stringWithFormat:@"%02ld:%02ld", (long)comp.hour, (long)comp.minute]];
+    [self setFont:[UIFont fontWithName:@"HelveticaNeue" size:11]];
     
 }
 

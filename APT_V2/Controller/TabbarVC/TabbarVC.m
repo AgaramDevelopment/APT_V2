@@ -92,17 +92,17 @@
     self.viewControllers = [[NSArray alloc] initWithObjects:firstViewController, secondViewController,thirdViewController,fourthVC,fifthVC, nil];
     
     
-    self.tabBar.barTintColor=[UIColor colorWithRed:(24/255.0f) green:(40/255.0f) blue:(126/255.0f) alpha:1.0f];
+//    self.tabBar.barTintColor=[UIColor colorWithRed:(24/255.0f) green:(40/255.0f) blue:(126/255.0f) alpha:1.0f];
     
     // Add this code to change StateNormal text Color,
-    [UITabBarItem.appearance setTitleTextAttributes:
-     @{NSForegroundColorAttributeName : [UIColor grayColor]}
-                                           forState:UIControlStateNormal];
+//    [UITabBarItem.appearance setTitleTextAttributes:
+//     @{NSForegroundColorAttributeName : [UIColor grayColor]}
+//                                           forState:UIControlStateNormal];
     
     // then if StateSelected should be different, you should add this code
-    [UITabBarItem.appearance setTitleTextAttributes:
-     @{NSForegroundColorAttributeName : [UIColor whiteColor]}
-                                           forState:UIControlStateSelected];
+//    [UITabBarItem.appearance setTitleTextAttributes:
+//     @{NSForegroundColorAttributeName : [UIColor whiteColor]}
+//                                           forState:UIControlStateSelected];
     
 }
 

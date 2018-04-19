@@ -49,10 +49,12 @@
         <scene sceneID="Mj5-0Y-fU3">
             <objects>
                 <tabBarController storyboardIdentifier="TabbarVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uNz-1R-Gci" customClass="TabbarVC" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="nw0-o2-spK">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" itemPositioning="centered" id="nw0-o2-spK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="0.48351883559999997" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <outlet property="tabBarCntrlr" destination="nw0-o2-spK" id="fYm-nX-AmM"/>
@@ -3037,10 +3039,7 @@
                                                 <rect key="frame" x="10" y="95" width="758" height="45"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Did not bat :" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p1Q-OY-3ue">
-                                                        <rect key="frame" x="0.0" y="0.0" width="189.5" height="21"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="21" id="eBt-kt-cDy"/>
-                                                        </constraints>
+                                                        <rect key="frame" x="0.0" y="0.0" width="189.5" height="45"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="12"/>
                                                         <nil key="highlightedColor"/>
                                                         <variation key="heightClass=regular-widthClass=regular">
@@ -3060,6 +3059,7 @@
                                                 <constraints>
                                                     <constraint firstItem="p1Q-OY-3ue" firstAttribute="leading" secondItem="6J1-sc-xzQ" secondAttribute="leading" id="0jA-OU-e1S"/>
                                                     <constraint firstItem="bAQ-Ad-wKv" firstAttribute="top" secondItem="6J1-sc-xzQ" secondAttribute="top" id="66l-ok-gfN"/>
+                                                    <constraint firstAttribute="bottom" secondItem="p1Q-OY-3ue" secondAttribute="bottom" id="KKh-L9-9uL"/>
                                                     <constraint firstItem="p1Q-OY-3ue" firstAttribute="top" secondItem="6J1-sc-xzQ" secondAttribute="top" id="P8m-G1-CFz"/>
                                                     <constraint firstAttribute="trailing" secondItem="bAQ-Ad-wKv" secondAttribute="trailing" id="TA0-cb-plS"/>
                                                     <constraint firstAttribute="bottom" secondItem="bAQ-Ad-wKv" secondAttribute="bottom" id="Tkb-8m-QcS"/>
@@ -4877,7 +4877,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cC8-R4-0RE">
-                                                            <rect key="frame" x="359" y="0.0" width="30" height="15"/>
+                                                            <rect key="frame" x="359" y="10" width="30" height="23"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="30" id="1R0-39-qx4"/>
                                                             </constraints>
@@ -4974,13 +4974,13 @@
                                                         <constraint firstItem="M1J-dh-diF" firstAttribute="top" secondItem="Lht-Pv-7T4" secondAttribute="top" constant="10" id="DMf-Du-omB"/>
                                                         <constraint firstItem="vuM-o1-AwE" firstAttribute="leading" secondItem="cC8-R4-0RE" secondAttribute="trailing" id="Dvy-QW-jnc"/>
                                                         <constraint firstItem="EEz-4d-Vuu" firstAttribute="leading" secondItem="936-DN-18N" secondAttribute="trailing" id="Emq-6X-SgT"/>
-                                                        <constraint firstAttribute="bottom" secondItem="cC8-R4-0RE" secondAttribute="bottom" constant="28.5" id="Izh-s6-oiD"/>
                                                         <constraint firstItem="EEz-4d-Vuu" firstAttribute="width" secondItem="936-DN-18N" secondAttribute="width" id="K6w-XI-6dw"/>
-                                                        <constraint firstItem="cC8-R4-0RE" firstAttribute="top" secondItem="Lht-Pv-7T4" secondAttribute="top" id="PKr-gk-eZi"/>
+                                                        <constraint firstItem="cC8-R4-0RE" firstAttribute="height" secondItem="EEz-4d-Vuu" secondAttribute="height" id="N5X-62-h1S"/>
                                                         <constraint firstItem="vuM-o1-AwE" firstAttribute="top" secondItem="Lht-Pv-7T4" secondAttribute="top" constant="10" id="Spm-9W-1eu"/>
                                                         <constraint firstItem="936-DN-18N" firstAttribute="top" secondItem="Lht-Pv-7T4" secondAttribute="top" constant="10" id="Wv4-BQ-Iom"/>
                                                         <constraint firstItem="M1J-dh-diF" firstAttribute="leading" secondItem="vuM-o1-AwE" secondAttribute="trailing" id="YDA-1M-j3m"/>
                                                         <constraint firstItem="936-DN-18N" firstAttribute="leading" secondItem="Lht-Pv-7T4" secondAttribute="leading" id="ZaA-Dv-F1d"/>
+                                                        <constraint firstItem="cC8-R4-0RE" firstAttribute="top" secondItem="EEz-4d-Vuu" secondAttribute="top" id="gk8-Cp-shj"/>
                                                         <constraint firstAttribute="trailing" secondItem="M1J-dh-diF" secondAttribute="trailing" id="iQC-vx-PFd"/>
                                                         <constraint firstItem="cC8-R4-0RE" firstAttribute="leading" secondItem="EEz-4d-Vuu" secondAttribute="trailing" id="tRh-Yt-kqt"/>
                                                     </constraints>
@@ -5961,7 +5961,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cUf-zr-4O0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4144" y="-447"/>
+            <point key="canvasLocation" x="4373" y="-429"/>
         </scene>
         <!--Planner ListVC-->
         <scene sceneID="bv2-xr-OYm">

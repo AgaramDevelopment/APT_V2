@@ -62,7 +62,8 @@
     NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
     NSString *plyRolecode = @"ROL0000002";
     
-    if([rolecode isEqualToString:plyRolecode])
+//    if([rolecode isEqualToString:plyRolecode])
+    if(![AppCommon isCoach])
     {
         arrItems = [NSArray new];
         arrItems = @[@"Home",@"Planner",@"Stats",@"Match Center",@"Food Diary",@"Logout"];
@@ -70,7 +71,9 @@
     else
     {
         arrItems = [NSArray new];
-       arrItems = @[@"Team",@"Planner",@"Assessment",@"Match Center",@"Sync",@"Logout"];
+//       arrItems = @[@"Team",@"Planner",@"Assessment",@"Match Center",@"Sync",@"Logout"];
+        arrItems = @[@"Home",@"Planner",@"Assessment",@"Match Center",@"Sync",@"Logout"];
+
     }
     [self.RearTableView reloadData];
     self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
@@ -127,12 +130,12 @@
     
     if([rolecode isEqualToString:plyRolecode])
     {
-        if(indexPath.row == 0) // Assessment
+        if(indexPath.row == 0)
         {
             newFrontController= [TabHomeVC new];
             
         }
-        if(indexPath.row == 1) // Assessment
+        if(indexPath.row == 1)
         {
             newFrontController= [PlannerVC new];
             
@@ -272,6 +275,7 @@
         UIViewController* newFrontController= [LoginVC new];
 
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
+        appDel.frontNavigationController = navigationController;
         [navigationController setNavigationBarHidden:YES];
         [appDel.revealViewController pushFrontViewController:navigationController animated:YES];
         

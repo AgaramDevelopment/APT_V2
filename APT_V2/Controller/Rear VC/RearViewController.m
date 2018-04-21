@@ -26,35 +26,17 @@
 @end
 
 @implementation RearViewController
-@synthesize arrItems;
+@synthesize arrItems,userImageView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-//    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
-//    NSString *plyRolecode = @"ROL0000002";
-//
-//    if([rolecode isEqualToString:plyRolecode])
-//    {
-//        arrItems = [NSArray new];
-//        arrItems = @[@"Home",@"Stats",@"Match Center",@"Food Diary",@"Logout"];
-//    }
-//    else
-//    {
-//        arrItems = [NSArray new];
-//        arrItems = @[@"Team",@"Assessment",@"Injury",@"Match Center",@"Sync",@"Logout"];
-//    }
-    
-    
-    
-    
-    //    arrItems = @[@"Home",@"Logout"];
     
     PreviouslySelectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];
-    //self.lblName.text = [AppCommon GetUserRoleName];
-    
-    //self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
+
+    //    userImageView.layer.cornerRadius = userImageView.frame.size.height/2;
+//    userImageView.layer.masksToBounds = YES;
     
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -71,10 +53,9 @@
     else
     {
         arrItems = [NSArray new];
-//       arrItems = @[@"Team",@"Planner",@"Assessment",@"Match Center",@"Sync",@"Logout"];
-        arrItems = @[@"Home",@"Planner",@"Assessment",@"Match Center",@"Sync",@"Logout"];
-
+        arrItems = @[@"Team",@"Planner",@"Assessment",@"Match Center",@"Sync",@"Logout"];
     }
+    
     [self.RearTableView reloadData];
     self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
 }
@@ -159,44 +140,29 @@
     
     if([rolecode isEqualToString:plyRolecode])
     {
-        if(indexPath.row == 0)
+        if(indexPath.row == 0) // Assessment
         {
             newFrontController= [TabHomeVC new];
             
         }
-        if(indexPath.row == 1)
+        if(indexPath.row == 1) // Assessment
         {
             newFrontController= [PlannerVC new];
             
         }
         else if(indexPath.row == 2)
         {
-            //        MyStatsBattingVC *msObj = [MyStatsBattingVC new];
-            //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:msObj];
-            //        [navigationController setNavigationBarHidden:YES];
-            //        [appDel.viewController pushFrontViewController:navigationController animated:YES];
-            //        return;
             newFrontController= [MyStatsBattingVC new];
             
         }
         else if(indexPath.row == 3)
         {
-            //        MatchCenterTBC *mcObj = [MatchCenterTBC new];
-            //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
-            //        [navigationController setNavigationBarHidden:YES];
-            //        [appDel.viewController pushFrontViewController:navigationController animated:YES];
-            //        return;
             newFrontController= [MatchCenterTBC new];
             
         }
         
         else if(indexPath.row == 4)
         {
-            //        MatchCenterTBC *mcObj = [MatchCenterTBC new];
-            //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
-            //        [navigationController setNavigationBarHidden:YES];
-            //        [appDel.viewController pushFrontViewController:navigationController animated:YES];
-            //        return;
             newFrontController= [FoodDiaryVC new];
             
         }
@@ -228,11 +194,6 @@
         
         else if(indexPath.row == 3)
         {
-            //        MatchCenterTBC *mcObj = [MatchCenterTBC new];
-            //        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:mcObj];
-            //        [navigationController setNavigationBarHidden:YES];
-            //        [appDel.viewController pushFrontViewController:navigationController animated:YES];
-            //        return;
             newFrontController= [MatchCenterTBC new];
             
         }
@@ -262,7 +223,7 @@
             
         }
     }
-    
+
     
     
     
@@ -318,10 +279,11 @@
 
 -(void)synDataMethod
 {
-    [AppCommon showLoading];
-    if([COMMON isInternetReachable])
-    {
-//        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",synData]];
+    if(![COMMON isInternetReachable])
+        return;
+        
+        [AppCommon showLoading];
+
         NSString *URLString =  URL_FOR_RESOURCE(synData);
 
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -338,10 +300,10 @@
         [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"response ; %@",responseObject);
             
+            DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
+
             if(responseObject >0)
             {
-                NSLog(@"%@",responseObject);
-                
                 NSMutableArray * lstAssessment =[[NSMutableArray alloc]init];
                 NSMutableArray *  lstSession  =[[NSMutableArray alloc]init];
                 NSMutableArray *  lstROM =[[NSMutableArray alloc]init];
@@ -368,7 +330,11 @@
                 NSMutableArray * lstSupportStaff = [[NSMutableArray alloc]init];
                 NSMutableArray * lstAssementEntryArray = [[NSMutableArray alloc]init];
                 
-                lstAssessment =[responseObject valueForKey:@"LstAssessment"];
+                if ([AppCommon checkNull:[responseObject valueForKey:@"LstAssessment"]].length > 0) {
+                    lstAssessment = [responseObject valueForKey:@"LstAssessment"];
+
+                }
+                
                 lstSession =[responseObject valueForKey:@"LstSession"];
                 lstROM =[responseObject valueForKey:@"LstROM"];
                 lstSpecial =[responseObject valueForKey:@"Lstspecial"];
@@ -388,7 +354,10 @@
                 
                 LstUserrolemap =[responseObject valueForKey:@"LstUserrolemap"];
                 
-                AssessmentEntry =[responseObject valueForKey:@"LstAssessmententry"];
+                if ([AppCommon checkNull:[responseObject valueForKey:@"LstAssessmententry"]].length > 0) {
+                    AssessmentEntry =[responseObject valueForKey:@"LstAssessmententry"];
+                }
+
                 lstatheleteinfodetaul =[responseObject valueForKey:@"LstAthleteinfodetails"];
                 lstgameattributemetadata =[responseObject valueForKey:@"LstGameattributemetadata"];
                 lstTestcGoal =[responseObject valueForKey:@"LstTestscgoal"];
@@ -417,8 +386,6 @@
                     NSMutableArray *AssemntValues = [[NSMutableArray alloc] initWithObjects:Clientcode,Modulecode,Assessmentcode,Assessmentname,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];
                     
                     
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
-                    
                     Dbm.Assmnt = AssemntValues;
                     [Dbm SELECTASSESSMENT:Assessmentcode];
                 }
@@ -445,7 +412,6 @@
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Modulecode,Assessmentcode,Testcode,Testname,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];
                     
                     
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                     Dbm.AssmntTestMaster = Values;
                     [Dbm SELECTASSESSMENTTESTMASTER:Testcode];
 
@@ -484,7 +450,6 @@
                     
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Testcode,Joint,Movement,Side,Minimumrange,Maximumrange,Unit,Inputtype,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];
                     
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                     Dbm.RangeOfMotion = Values;
                     [Dbm SELECTRANGEOFMOTION:Testcode];
                     
@@ -511,7 +476,6 @@
                     
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Testcode,Region,Testname,Side,Result,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];
                     
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                     Dbm.TestSplArray = Values;
                     [Dbm TESTSPECIAL:Testcode];
                     
@@ -539,7 +503,6 @@
                     
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Testcode,Joint,Motion,Muscle,Side,Result,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];
                     
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                     Dbm.Testmmt = Values;
                     [Dbm TESTmmt:Testcode];
                     
@@ -569,7 +532,6 @@
                     
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Testcode,Plane,Testname,Side,Units,Result,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];
                     
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                     Dbm.TestgaintArray = Values;
                     [Dbm SELECTTESTGAINT:Testcode];
                     
@@ -598,7 +560,6 @@
                     
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Testcode,View,Region,Side,Units,Result,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];
                     
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                     Dbm.TestpostureArray = Values;
                     [Dbm SELECTTESTPosture:Testcode];
                     
@@ -628,7 +589,6 @@
                     
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Testcode,Component,Testname,Side,Nooftrials,Units,Scoreevaluation,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];
                     
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                     Dbm.TestSCArray = Values;
                     [Dbm SELECTTESTSC:Testcode];
                     
@@ -655,7 +615,6 @@
                     
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Testcode,Kpi,Description,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];
                     
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                     Dbm.TestCoachArray = Values;
                     [Dbm SELECTTESTCoaching:Testcode];
                     
@@ -677,7 +636,6 @@
                     
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Metasubcode,Metadatatypecode,Metadatatypedescription,Metasubcodedescription,Metasubcodevalue, nil];
                     
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                     Dbm.metadataArray = Values;
                     [Dbm SELECTmetadata:Metasubcode];
                     
@@ -705,7 +663,6 @@
                     
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Athletecode,Height,Weight,Allergies,Orthotics,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];
                     
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                     Dbm.SportsInfoArray = Values;
                     [Dbm SELECTSportsInfo:Athletecode];
                     
@@ -736,7 +693,6 @@
                     
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Assessmentregistercode,Modulecode,Assessmentcode,Assessmenttesttypescreencode,Assessmenttestcode,Assessmenttesttypecode,Version,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];
                     
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                     Dbm.AssessmentRegisterArray = Values;
                     [Dbm SELECTAssementRegister:Assessmentregistercode];
                     
@@ -754,7 +710,6 @@
                     
                     //NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Assessmentregistercode,Modulecode,Assessmentcode,Assessmenttesttypescreencode,Assessmenttestcode,Assessmenttesttypecode,Version,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];
                     
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                     Dbm.AtheleteMemRegArray = arr1;
                     [Dbm SELECTAtheleteMemReg:Associationmemberid];
                     
@@ -783,7 +738,6 @@
                     
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Athletecode,Teamcode,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];
                     
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                     Dbm.AtheleteInfoTeamArray = Values;
                     [Dbm SELECTAtheleteInfoTeam:Athletecode];
                     
@@ -809,7 +763,6 @@
                     
                     
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Code,Teamcode,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                     Dbm.SupportStaffInfoArray = Values;
                     [Dbm SELECTSupportStaffInfo:Code:Teamcode];
                     
@@ -832,7 +785,6 @@
                     NSString * Modifieddate =[arr1 valueForKey:@"Modifieddate"];
                     
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Rolecode,Role,Ischecked,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                     Dbm.RoleDetailsArray = Values;
                     [Dbm SELECTRoleDetails:Rolecode];
                     
@@ -850,7 +802,6 @@
                     
                     //NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Assessmentregistercode,Modulecode,Assessmentcode,Assessmenttesttypescreencode,Assessmenttestcode,Assessmenttesttypecode,Version,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];
                     
-                    DBMANAGERSYNC *Dbm =[DBMANAGERSYNC sharedManager];
                     Dbm.UserDetailsArray = arr1;
                     [Dbm SELECTUserDetails:Usercode];
                     
@@ -874,14 +825,12 @@
                     
                     
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Usercode,Rolecode,Isdefaultrole,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate, nil];
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                     Dbm.UserRolemapArray = Values;
                     [Dbm SELECTUserRoleMap:Usercode:Rolecode];
                     
                 }
                 
                 
-                DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                 [Dbm DleteAthleteinfodetails];
                 
                 for(int i= 0;i<lstatheleteinfodetaul.count;i++)
@@ -976,7 +925,6 @@
                     
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Teamcode,TeamName,TeamShortName,Game,RecordStatus,CreatedBy,CreatedDate, nil];
                     
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                     Dbm.TeamListDetailArray = Values;
                     [Dbm SELECTTEAM:Teamcode];
                     
@@ -1000,7 +948,6 @@
                     
                     NSMutableArray *Values = [[NSMutableArray alloc] initWithObjects:Clientcode,Membercode,StaffType,level,recordStatus,CreateBy,CreatedDate,ModifiedBy,ModifiedDate, nil];
                     
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                     Dbm.SupportStaffArray = Values;
                     [Dbm SELECTSupportStaff:Membercode];
                     
@@ -1014,23 +961,22 @@
                     
                     NSString * entrycode =[arr1 valueForKey:@"Assessmententrycode"];
                     
-                    DBMANAGERSYNC *Dbm = [DBMANAGERSYNC sharedManager];
                     Dbm.AssessmentEntyArray = arr1;
                     [Dbm SELECTAssementEntry:entrycode];
                     
                 }
                 [AppCommon showAlertWithMessage:@"Sync Successful"];
-                [AppCommon hideLoading];
                 
             }
             
+            [AppCommon hideLoading];
+
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
             [COMMON webServiceFailureError:error];
             [AppCommon showAlertWithMessage:@"Sync Failed"];
             [AppCommon hideLoading];
         }];
-    }
     
 }
 

@@ -421,15 +421,12 @@ AppCommon *sharedCommon = nil;
 
 +(NSString *)getAppVersion
 {
-    
-    
     NSBundle *bundle = [NSBundle mainBundle];
     NSDictionary *info = [bundle infoDictionary];
 //    NSString *productName = [info objectForKey:@"CFBundleName"];
     NSString *AppVersion = [info objectForKey:@"CFBundleShortVersionString"];
 
     return AppVersion;
-    
 }
 
 +(void)newVersionUpdateAlert

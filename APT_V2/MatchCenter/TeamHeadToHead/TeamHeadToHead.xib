@@ -166,12 +166,12 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Team Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JIs-sU-JYd">
-                                            <rect key="frame" x="5" y="5" width="84" height="13"/>
+                                            <rect key="frame" x="5" y="5" width="97" height="13.5"/>
                                             <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="11"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="heightClass=regular-widthClass=regular">
-                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="13"/>
                                             </variation>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6fE-Xq-nCK">
@@ -280,7 +280,7 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opponent Team Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pX-pj-lCZ">
-                                            <rect key="frame" x="202" y="5" width="111" height="13"/>
+                                            <rect key="frame" x="202" y="5" width="129.5" height="13.5"/>
                                             <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="11"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -310,7 +310,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="365" height="60"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Competetion Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cy-Fr-fae">
-                                            <rect key="frame" x="5" y="5" width="96" height="13"/>
+                                            <rect key="frame" x="5" y="5" width="112" height="13.5"/>
                                             <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="11"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -427,7 +427,7 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tdn-93-GWY">
-                                            <rect key="frame" x="167.5" y="23.5" width="30" height="14"/>
+                                            <rect key="frame" x="167.5" y="23" width="30" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="30" id="Mfw-9T-ewC"/>
                                             </constraints>
@@ -439,7 +439,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ground Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MC4-ex-0wu">
-                                            <rect key="frame" x="202" y="5" width="69.5" height="13"/>
+                                            <rect key="frame" x="202" y="5" width="80" height="13.5"/>
                                             <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="11"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -484,7 +484,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="1436"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C2H-ZE-80P">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="1430"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="1470"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WAX-cg-fmv">
                                                     <rect key="frame" x="5" y="0.0" width="365" height="300"/>
@@ -3601,7 +3601,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="WAX-cg-fmv" secondAttribute="trailing" constant="5" id="FqO-WN-bYD"/>
                                                 <constraint firstItem="WAX-cg-fmv" firstAttribute="leading" secondItem="C2H-ZE-80P" secondAttribute="leading" constant="5" id="OSu-re-hlc"/>
                                                 <constraint firstItem="WAX-cg-fmv" firstAttribute="top" secondItem="C2H-ZE-80P" secondAttribute="top" id="TB6-T8-KZh"/>
-                                                <constraint firstAttribute="height" constant="1430" id="USA-Ku-p1u"/>
+                                                <constraint firstAttribute="height" constant="1470" id="USA-Ku-p1u"/>
                                                 <constraint firstItem="mjp-js-gyG" firstAttribute="leading" secondItem="C2H-ZE-80P" secondAttribute="leading" constant="5" id="ebS-CK-08W"/>
                                                 <constraint firstItem="WPH-6Q-4BR" firstAttribute="leading" secondItem="C2H-ZE-80P" secondAttribute="leading" constant="5" id="yiM-80-1G9"/>
                                                 <constraint firstAttribute="trailing" secondItem="mjp-js-gyG" secondAttribute="trailing" constant="5" id="zMh-ZM-PX0"/>

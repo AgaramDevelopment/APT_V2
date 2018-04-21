@@ -698,14 +698,14 @@ if([_isToday isEqualToString:@"yes"])
             }
             
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+             
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
             [AppCommon hideLoading];
             [COMMON webServiceFailureError:error];
-            [self.view setUserInteractionEnabled:YES];
+             
             
         }];
     }
@@ -781,14 +781,14 @@ if([_isToday isEqualToString:@"yes"])
             }
             
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+             
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
             [AppCommon hideLoading];
             [COMMON webServiceFailureError:error];
-            [self.view setUserInteractionEnabled:YES];
+             
             
         }];
     }

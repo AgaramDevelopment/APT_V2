@@ -57,7 +57,8 @@
 @end
 
 @implementation ViewController
-@synthesize tblAssesments;
+
+@synthesize tblAssesments,btnDate;
 
 @synthesize tblDropDown;
 
@@ -110,8 +111,8 @@
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [txtModule setup];
-    [txtTitle setup];
+//    [txtModule setup];
+//    [txtTitle setup];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -712,6 +713,10 @@
 {
     DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
     dropVC.protocol = self;
+    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+
     
     if ([sender tag] == 0) {
         
@@ -731,7 +736,8 @@
         
         dropVC.array = @[coachdict,physiodict,Sandcdict];
         dropVC.key = @"ModuleName";
-        
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX([sender superview].frame), CGRectGetMaxY([sender superview].frame)+70, CGRectGetWidth([sender frame]), 200)];
+
     }
     else
     {
@@ -741,15 +747,20 @@
         
         dropVC.array = [Db AssessmentTestType:clientCode :userCode :txtModule.selectedCode];
         dropVC.key = @"AssessmentName";
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX([sender superview].frame), CGRectGetMaxY([sender superview].frame)+70, CGRectGetWidth([sender frame]), 300)];
+
         
     }
-    CGFloat yposition = [sender superview].frame.origin.y + CGRectGetMaxY([sender frame]);
-    CGFloat maxHeight = (dropVC.array > 5 ? 44 * 5 : dropVC.array.count * 44);
     
-    dropVC.tblDropDown.frame = CGRectMake([sender frame].origin.x,yposition, 200, maxHeight);
-    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+
+//    CGFloat yposition = [sender frame].origin.y + CGRectGetMaxY([sender frame]);
+//    CGFloat maxHeight = (dropVC.array > 5 ? 44 * 5 : dropVC.array.count * 44);
+    
+//    [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX([sender frame]), CGRectGetMaxY([sender superView]), CGRectGetWidth([sender frame]), maxHeight)];
+    
+
+
+//    dropVC.tblDropDown.frame = CGRectMake([sender frame].origin.x,yposition, 200, maxHeight);
     [self presentViewController:dropVC animated:YES completion:nil];
     
 }
@@ -778,6 +789,7 @@
     currentlySelectedDate = Date;
     NSLog(@"selectedDate %@ ",Date);
     [self tableValuesMethod];
+    [btnDate setTitle:currentlySelectedDate forState:UIControlStateNormal];
 
 }
 

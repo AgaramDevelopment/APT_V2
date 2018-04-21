@@ -644,7 +644,7 @@
         inningsArray = [ResponseDictionary valueForKey:@"lstKPIMatchScoreSummary"];
         [self getInningsCount:[ResponseDictionary valueForKey:@"lstKPIMatchScoreSummary"]];
         [AppCommon hideLoading];
-        [self.view setUserInteractionEnabled:YES];
+         
         
         [self sessionSummaryWebService:[inningsCountArray firstObject]];
         
@@ -697,7 +697,7 @@
         }
         
         [AppCommon hideLoading];
-        [self.view setUserInteractionEnabled:YES];
+         
         
         if(inningsCountArray.count == 1)
         {
@@ -755,7 +755,7 @@
         [self selectFirstDayInFirstInnings:buttonName1];
         [self selectFirstDayInsecondInnings:buttonName2];
         [AppCommon hideLoading];
-        [self.view setUserInteractionEnabled:YES];
+         
         
         
         //        dispatch_async(dispatch_get_main_queue(), ^{

@@ -43,6 +43,7 @@
 @property (strong, nonatomic) IBOutlet UIView *pickerMainView;
 
 - (IBAction)actionCancelDropDown:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *btnDate;
 
 @end
 

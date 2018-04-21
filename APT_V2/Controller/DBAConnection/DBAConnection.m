@@ -82,9 +82,6 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
             
             NSString *query=[NSString stringWithFormat:@"SELECT ASSM.CLIENTCODE, ASSM.MODULECODE, ASSM.ASSESSMENTCODE,ASSM.ASSESSMENTNAME,ASSM.RECORDSTATUS,ASSM.CREATEDBY,ASSM.CREATEDDATE,ASSM.MODIFIEDBY,ASSM.MODIFIEDDATE,MDMODULE.METASUBCODEDESCRIPTION AS MODULENAME FROM  ASSESSMENT ASSM INNER JOIN METADATA MDMODULE  ON MDMODULE.METASUBCODE=ASSM.MODULECODE WHERE ASSM.CLIENTCODE = '%@' AND ASSM.RECORDSTATUS = 'MSC001' AND CREATEDBY = '%@' AND MODULECODE = '%@'",clientCode,userCode,moduleCode];
             
-            
-            
-            
             NSLog(@"%@",query);
             stmt=[query UTF8String];
             if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)

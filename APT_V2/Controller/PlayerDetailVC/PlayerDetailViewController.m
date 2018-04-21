@@ -43,7 +43,7 @@
     
     [self customnavigationmethod];
 
-    [self.txtTestDate setup];
+//    [self.txtTestDate setup];
     
     [self playerDetailWebservice];
     

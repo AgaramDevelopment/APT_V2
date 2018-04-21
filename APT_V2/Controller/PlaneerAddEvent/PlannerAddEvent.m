@@ -1065,13 +1065,13 @@
             }
             
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+             
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+             
             
         }];
     }
@@ -1118,13 +1118,13 @@
             }
             
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+             
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+             
             
         }];
     }
@@ -1200,13 +1200,13 @@
             }
             
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+             
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+             
             
         }];
     }
@@ -1293,13 +1293,13 @@
             }
             
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+             
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+             
             
         }];
     }
@@ -1385,13 +1385,13 @@
             }
             
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+             
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+             
             
         }];
     }
@@ -1443,13 +1443,13 @@
             }
             
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+             
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+             
             
         }];
     }

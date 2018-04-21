@@ -848,7 +848,7 @@
             self.lbl2nd_inn_Balls.text = @"";
 
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+             
 
             return ;
         }
@@ -860,7 +860,7 @@
         //        isSecondInngsCalled = false;
         
         [AppCommon hideLoading];
-        [self.view setUserInteractionEnabled:YES];
+         
         [self sessionSummaryWebService:[inningsCountArray firstObject]];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -905,7 +905,7 @@
         }
         
         [AppCommon hideLoading];
-        [self.view setUserInteractionEnabled:YES];
+         
         
         if(inningsCountArray.count == 1)
         {
@@ -997,7 +997,7 @@
         [self selectFirstDayInFirstInnings:buttonName1];
         [self selectFirstDayInsecondInnings:buttonName2];
         [AppCommon hideLoading];
-        [self.view setUserInteractionEnabled:YES];
+         
         
         //            [self.tblBattingKPI reloadData];
         //        });

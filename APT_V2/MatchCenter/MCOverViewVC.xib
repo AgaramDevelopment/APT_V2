@@ -77,9 +77,9 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="908"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u1r-4u-dnr">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="60" id="MPG-jG-bsI"/>
+                                <constraint firstAttribute="height" constant="70" id="MPG-jG-bsI"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EMu-us-pdc">

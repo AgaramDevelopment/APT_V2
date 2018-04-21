@@ -3089,12 +3089,12 @@
         }
         
         [AppCommon hideLoading];
-        [self.view setUserInteractionEnabled:YES];
+         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
         NSLog(@"failed");
         [COMMON webServiceFailureError:error];
         [AppCommon hideLoading];
-        [self.view setUserInteractionEnabled:YES];
+         
         
     }];
     

@@ -14,4 +14,5 @@
 @property (strong, nonatomic) IBOutlet UIView *navi_View;
 @property (strong, nonatomic) IBOutlet UITableView *teamsTable;
 @property (nonatomic,strong) IBOutlet ProfileVCCell *objProfilecell;
+@property (weak, nonatomic) IBOutlet UILabel *lblNoData;
 @end

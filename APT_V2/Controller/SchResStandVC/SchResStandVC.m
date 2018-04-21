@@ -94,12 +94,6 @@
 //    [self.standingsView addSubview:objStands.view];
     [self changeFormat];
     
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
     if ([AppCommon isKXIP]) {
         
         [self.Nodatalbl setHidden:NO];
@@ -107,28 +101,33 @@
         eventCollectionHeight.constant = 175;
         self.eventsCollectionView.delegate = self;
         self.eventsCollectionView.dataSource = self;
-//        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 1310);
-//        ScrollcontentHeight.constant = 1290;
+        //        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 1310);
+        //        ScrollcontentHeight.constant = 1290;
     }
     else
     {
         self.eventsCollectionView.delegate = nil;
         self.eventsCollectionView.dataSource = nil;
-
+        
         [self.Nodatalbl setHidden:YES];
         eventViewHeight.constant = 0;
         eventCollectionHeight.constant = 0;
-//        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 1105);
-//        ScrollcontentHeight.constant = 1085;
-
+        //        self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, 1105);
+        //        ScrollcontentHeight.constant = 1085;
+        
     }
     
     [self.eventsCollectionView layoutIfNeeded];
     [self.eventsCollectionView updateConstraintsIfNeeded];
-    
-    
 
+    
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+}
+
 
 -(void)changeFormat
 {

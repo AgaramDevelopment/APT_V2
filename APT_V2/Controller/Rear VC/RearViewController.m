@@ -134,18 +134,17 @@
     SWRevealViewController *revealController = appDel.revealViewController;
     UIViewController* newFrontController;
     
+//    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+//    NSString *plyRolecode = @"ROL0000002";
     
-    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
-    NSString *plyRolecode = @"ROL0000002";
-    
-    if([rolecode isEqualToString:plyRolecode])
+    if(![AppCommon isCoach]) // player
     {
-        if(indexPath.row == 0) // Assessment
+        if(indexPath.row == 0)
         {
             newFrontController= [TabHomeVC new];
             
         }
-        if(indexPath.row == 1) // Assessment
+        if(indexPath.row == 1)
         {
             newFrontController= [PlannerVC new];
             
@@ -160,7 +159,6 @@
             newFrontController= [MatchCenterTBC new];
             
         }
-        
         else if(indexPath.row == 4)
         {
             newFrontController= [FoodDiaryVC new];
@@ -209,7 +207,7 @@
                 
                 [AppCommon showAlertWithMessage:@"Try After few seconds"];
                 
-            }else{
+            }else {
                 
                 [self synDataMethod];
                 
@@ -330,11 +328,12 @@
                 NSMutableArray * lstSupportStaff = [[NSMutableArray alloc]init];
                 NSMutableArray * lstAssementEntryArray = [[NSMutableArray alloc]init];
                 
-                if ([AppCommon checkNull:[responseObject valueForKey:@"LstAssessment"]].length > 0) {
-                    lstAssessment = [responseObject valueForKey:@"LstAssessment"];
-
-                }
+//                if ([AppCommon checkNull:[responseObject valueForKey:@"LstAssessment"]].length > 0) {
+//                    lstAssessment = [responseObject valueForKey:@"LstAssessment"];
+//
+//                }
                 
+                lstAssessment = [responseObject valueForKey:@"LstAssessment"];
                 lstSession =[responseObject valueForKey:@"LstSession"];
                 lstROM =[responseObject valueForKey:@"LstROM"];
                 lstSpecial =[responseObject valueForKey:@"Lstspecial"];

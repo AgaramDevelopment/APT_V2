@@ -11,36 +11,36 @@
 @implementation LineTextField
 @synthesize selectedCode,button;
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        [self setup];
-    }
-    
-    return self;
-}
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self setup];
-    }
-    
-    return self;
-}
-
--(id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [self layoutSubviews];
-//        self = [super initWithFrame:[self frame]];
+//- (id)init
+//{
+//    self = [super init];
+//    if (self) {
 //        [self setup];
-    }
-    return self;
-}
+//    }
+//    
+//    return self;
+//}
+//
+//- (id)initWithFrame:(CGRect)frame
+//{
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//        [self setup];
+//    }
+//    
+//    return self;
+//}
+//
+//-(id)initWithCoder:(NSCoder *)aDecoder
+//{
+//    self = [super initWithCoder:aDecoder];
+//    if (self) {
+//        [self layoutSubviews];
+////        self = [super initWithFrame:[self frame]];
+//        [self setup];
+//    }
+//    return self;
+//}
 
 -(void)setup
 {

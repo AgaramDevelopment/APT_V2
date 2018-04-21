@@ -13,10 +13,14 @@
         <array key="Montserrat-Regular.otf">
             <string>Montserrat-Regular</string>
         </array>
+        <array key="Montserrat-Thin.otf">
+            <string>Montserrat-Thin</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TeamsVC">
             <connections>
+                <outlet property="lblNoData" destination="oFR-hn-w3U" id="eDN-HE-hJe"/>
                 <outlet property="navi_View" destination="0kZ-mG-bnY" id="7cH-Af-rUk"/>
                 <outlet property="teamsTable" destination="51x-DZ-PKP" id="Sw8-fY-Ur5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -66,14 +70,22 @@
                         <outlet property="delegate" destination="-1" id="epN-Vf-viU"/>
                     </connections>
                 </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Data found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFR-hn-w3U">
+                    <rect key="frame" x="126.5" y="390.5" width="122.5" height="21"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Thin" family="Montserrat" pointSize="17"/>
+                    <color key="textColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="51x-DZ-PKP" secondAttribute="trailing" constant="5" id="1Qn-AY-lVS"/>
                 <constraint firstItem="0kZ-mG-bnY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="92A-UZ-Wlv"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="0kZ-mG-bnY" secondAttribute="trailing" id="Cd6-jg-foe"/>
+                <constraint firstItem="oFR-hn-w3U" firstAttribute="centerX" secondItem="51x-DZ-PKP" secondAttribute="centerX" id="EvF-Pb-W0N"/>
                 <constraint firstItem="51x-DZ-PKP" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="5" id="GRc-j3-NWV"/>
                 <constraint firstItem="0kZ-mG-bnY" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="PVK-du-N1o"/>
+                <constraint firstItem="oFR-hn-w3U" firstAttribute="centerY" secondItem="51x-DZ-PKP" secondAttribute="centerY" id="SGU-kO-iSx"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="51x-DZ-PKP" secondAttribute="bottom" constant="5" id="YsU-wg-Mw4"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="IrM-nv-kpn" secondAttribute="trailing" constant="5" id="Z54-6E-IVB"/>
                 <constraint firstItem="IrM-nv-kpn" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="5" id="b1x-Q1-KCl"/>

@@ -117,9 +117,11 @@
     [revealController tapGestureRecognizer];
     [self.navBar addSubview:objCustomNavigation.view];
     
-    objCustomNavigation.btn_back.hidden = NO;
-    objCustomNavigation.menu_btn.hidden = YES;
-    [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
+    objCustomNavigation.btn_back.hidden = YES;
+    objCustomNavigation.menu_btn.hidden = NO;
+//    [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+
 }
 
 -(void)actionBack

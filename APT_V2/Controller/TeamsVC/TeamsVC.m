@@ -25,6 +25,8 @@
 
 @implementation TeamsVC
 
+@synthesize lblNoData;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -67,11 +69,13 @@
 -(void)TeamsWebservice
 {
     
-    if([COMMON isInternetReachable])
-    {
+    if(![COMMON isInternetReachable])
+        return;
+        
+        
         [AppCommon showLoading];
         
-        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",TeamsKey]];
+        NSString *URLString =  URL_FOR_RESOURCE(TeamsKey);
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -81,9 +85,6 @@
         
         NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
         NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-        
-        
-        
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(ClientCode)   [dic    setObject:ClientCode     forKey:@"Clientcode"];
@@ -103,17 +104,16 @@
             }
             
             [AppCommon hideLoading];
-            [self.view setUserInteractionEnabled:YES];
+            
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
             [AppCommon hideLoading];
             [COMMON webServiceFailureError:error];
-            [self.view setUserInteractionEnabled:YES];
+            
             
         }];
-    }
     
 }
 
@@ -138,6 +138,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+
+    [lblNoData setHidden:self.teamslist.count];
     return self.teamslist.count;
     
 }

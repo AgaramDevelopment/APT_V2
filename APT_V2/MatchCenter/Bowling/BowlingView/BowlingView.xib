@@ -27,7 +27,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SfD-Sy-xdp">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="768"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="820"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ueH-RG-T5f">
                                             <rect key="frame" x="5" y="5" width="310" height="40"/>
@@ -295,7 +295,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="359" id="OBZ-kk-Yo4"/>
                                             </constraints>
-                                            <collectionViewLayout key="collectionViewLayout" id="Kh3-5H-2xa" customClass="CustomCollectionLayerBowling" customModule="APT_Cricket" customModuleProvider="target"/>
+                                            <collectionViewLayout key="collectionViewLayout" id="Kh3-5H-2xa" customClass="CustomCollectionLayerBowling" customModule="APT_V2" customModuleProvider="target"/>
                                             <connections>
                                                 <outlet property="dataSource" destination="iN0-l3-epB" id="YUm-UY-f58"/>
                                                 <outlet property="delegate" destination="iN0-l3-epB" id="DJd-JY-6kL"/>
@@ -314,7 +314,9 @@
                                         <constraint firstAttribute="trailing" secondItem="Gja-qt-GjI" secondAttribute="trailing" constant="8" id="aGq-eQ-2uU"/>
                                         <constraint firstItem="fjN-Pm-j8F" firstAttribute="top" secondItem="ueH-RG-T5f" secondAttribute="bottom" constant="5" id="ayA-2A-gGb"/>
                                         <constraint firstItem="5cg-pg-XZX" firstAttribute="top" secondItem="fjN-Pm-j8F" secondAttribute="bottom" constant="5" id="bZV-jb-brL"/>
-                                        <constraint firstAttribute="height" constant="768" id="fDu-lT-74m"/>
+                                        <constraint firstAttribute="height" constant="820" id="fDu-lT-74m">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="768"/>
+                                        </constraint>
                                         <constraint firstItem="Gja-qt-GjI" firstAttribute="top" secondItem="5cg-pg-XZX" secondAttribute="bottom" constant="8" id="mMl-i4-alF"/>
                                         <constraint firstAttribute="trailing" secondItem="ueH-RG-T5f" secondAttribute="trailing" constant="5" id="qW4-tw-Ppq"/>
                                         <constraint firstAttribute="trailing" secondItem="5cg-pg-XZX" secondAttribute="trailing" id="vVp-pQ-0Ls"/>

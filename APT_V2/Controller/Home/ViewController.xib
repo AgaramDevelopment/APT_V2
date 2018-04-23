@@ -333,19 +333,25 @@
                                 <rect key="frame" x="10" y="186" width="270" height="74"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remarks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ciq-7n-DFJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="52.5" height="15"/>
+                                        <rect key="frame" x="5" y="0.0" width="52.5" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="52.5" id="Ubf-Kn-Q9O"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Montserrat-Thin" family="Montserrat" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ignore" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g2g-Bd-1Fu">
-                                        <rect key="frame" x="174" y="0.0" width="38" height="15"/>
+                                        <rect key="frame" x="193" y="0.0" width="38" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="38" id="gD6-BG-f0G"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Montserrat-Thin" family="Montserrat" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LI3-WF-avI">
-                                        <rect key="frame" x="5" y="39" width="260" height="30"/>
+                                        <rect key="frame" x="5" y="35" width="260" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -366,15 +372,17 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="LI3-WF-avI" secondAttribute="bottom" constant="5" id="4In-ui-SPC"/>
                                     <constraint firstItem="h0T-be-cP0" firstAttribute="top" secondItem="5Lf-NW-yKu" secondAttribute="top" id="5p0-2h-qtB"/>
                                     <constraint firstAttribute="trailing" secondItem="h0T-be-cP0" secondAttribute="trailing" constant="7" id="A3E-px-REG"/>
-                                    <constraint firstItem="Ciq-7n-DFJ" firstAttribute="top" secondItem="5Lf-NW-yKu" secondAttribute="top" id="EUX-gV-kSC"/>
-                                    <constraint firstItem="h0T-be-cP0" firstAttribute="leading" secondItem="g2g-Bd-1Fu" secondAttribute="trailing" constant="26" id="KWq-MB-KCY"/>
-                                    <constraint firstItem="g2g-Bd-1Fu" firstAttribute="top" secondItem="5Lf-NW-yKu" secondAttribute="top" id="NXb-rH-RXy"/>
-                                    <constraint firstItem="Ciq-7n-DFJ" firstAttribute="leading" secondItem="5Lf-NW-yKu" secondAttribute="leading" id="QwO-oo-pZQ"/>
+                                    <constraint firstItem="g2g-Bd-1Fu" firstAttribute="top" secondItem="h0T-be-cP0" secondAttribute="top" id="K6P-yK-62B"/>
+                                    <constraint firstItem="Ciq-7n-DFJ" firstAttribute="top" secondItem="g2g-Bd-1Fu" secondAttribute="top" id="KiZ-uo-Maf"/>
+                                    <constraint firstItem="Ciq-7n-DFJ" firstAttribute="leading" secondItem="LI3-WF-avI" secondAttribute="leading" id="UDN-Gy-Q8d"/>
                                     <constraint firstAttribute="trailing" secondItem="LI3-WF-avI" secondAttribute="trailing" constant="5" id="XbM-k7-KXe"/>
+                                    <constraint firstItem="LI3-WF-avI" firstAttribute="top" secondItem="h0T-be-cP0" secondAttribute="bottom" constant="10" id="b8M-L8-acI"/>
+                                    <constraint firstItem="g2g-Bd-1Fu" firstAttribute="bottom" secondItem="h0T-be-cP0" secondAttribute="bottom" id="cIk-FE-cxA"/>
+                                    <constraint firstItem="h0T-be-cP0" firstAttribute="leading" secondItem="g2g-Bd-1Fu" secondAttribute="trailing" constant="7" id="f0Z-t7-o69"/>
                                     <constraint firstItem="LI3-WF-avI" firstAttribute="leading" secondItem="5Lf-NW-yKu" secondAttribute="leading" constant="5" id="jMe-iW-vfx"/>
+                                    <constraint firstItem="Ciq-7n-DFJ" firstAttribute="bottom" secondItem="g2g-Bd-1Fu" secondAttribute="bottom" id="l3j-HT-DJ9"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UsG-Gf-m21">

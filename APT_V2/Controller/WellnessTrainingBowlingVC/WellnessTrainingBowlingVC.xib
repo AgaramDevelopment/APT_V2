@@ -802,6 +802,7 @@
                             </constraints>
                         </view>
                     </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="JTK-tk-VIg" secondAttribute="bottom" constant="280" id="BLf-Bq-RO8"/>
                         <constraint firstAttribute="trailing" secondItem="JTK-tk-VIg" secondAttribute="trailing" id="Cn4-dr-Ty2"/>

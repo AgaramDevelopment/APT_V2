@@ -40,7 +40,6 @@
 
 
 @property (nonatomic,strong) NSMutableArray * ObjSelectTestArray;
-//@property BOOL isEdit;
 @property (nonatomic,strong) NSString * usercode;
 @property (nonatomic,strong) NSString * clientCode;
 @property (nonatomic,strong) NSString * selectedPlayerCode;
@@ -142,6 +141,7 @@
     
     
 }
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.view endEditing:YES];
@@ -556,9 +556,9 @@
     {
         cell.imgCheck.image = check;
     }
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
 
     return cell;
-
 }
 
 -(BOOL)isIgnorePlayer:(NSString *)Value
@@ -612,7 +612,9 @@
             CollectionItem = 1;
         }
         
-        lblRangeValue.text = [NSString stringWithFormat:@"%@ - %@",[[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romMinimumRange"],[currentIndexArray.firstObject valueForKey:@"MaximumRange"]];
+//        lblRangeValue.text = [NSString stringWithFormat:@"%@ - %@",[[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romMinimumRange"],[currentIndexArray.firstObject valueForKey:@"MaximumRange"]];
+        lblRangeValue.text = [NSString stringWithFormat:@"%@ - %@",[[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"MinimumRange"],[currentIndexArray.firstObject valueForKey:@"MaximumRange"]];
+
         lblUnitValue.text = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"UnitName"];
     }
     else if ([SCREEN_CODE_SPECIAL isEqualToString:testCode]) {
@@ -679,6 +681,7 @@
     [self presentViewController:popupVC animated:YES completion:^{
         self.bottomConstant.constant = (CGRectGetHeight(self.popupVC.view.frame) - self.Shadowview.frame.size.height) / 2;
         [self.Shadowview updateConstraintsIfNeeded];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.assCollection reloadData];
         });

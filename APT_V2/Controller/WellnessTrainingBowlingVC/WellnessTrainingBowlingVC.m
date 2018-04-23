@@ -80,8 +80,6 @@
 @property (strong, nonatomic) IBOutlet NSMutableArray *todaysLoadArray;
 @property (strong, nonatomic) IBOutlet NSMutableArray *yesterdayLoadArray;
 
-
-
 @end
 
 @implementation WellnessTrainingBowlingVC
@@ -118,6 +116,11 @@
     
 }
 
+-(void)reloaddataVC
+{
+    [self viewDidLoad];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     
@@ -132,13 +135,14 @@
     if(isToday == YES)
     {
         
-        
+        isTraingLoadExpand = YES;
         objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
         objUpdate.TodayLoadArray = self.todaysLoadArray;
         objUpdate.isToday = @"yes";
         objUpdate.view.frame = CGRectMake(0,0, self.RootTrainingView.bounds.size.width, self.RootTrainingView.bounds.size.height);
         [self.RootTrainingView addSubview:objUpdate.view];
         self.traingViewHeight.constant = 600;
+        [self setTotalScroll];
         
     }
 }
@@ -151,12 +155,16 @@
         //[objWell.AddTrainingBtn addTarget:self action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
         //WellnessTrainingBowlingVC *objWell = [[WellnessTrainingBowlingVC alloc] initWithNibName:@"WellnessTrainingBowlingVC" bundle:nil];
         //[objWell.AddTrainingBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
+        
+        isTraingLoadExpand = YES;
+        
         objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
         objUpdate.YesterdayLoadArray = self.yesterdayLoadArray;
         objUpdate.isYesterday = @"yes";
         objUpdate.view.frame = CGRectMake(0,0, self.RootTrainingView.bounds.size.width, self.RootTrainingView.bounds.size.height);
         [self.RootTrainingView addSubview:objUpdate.view];
         self.traingViewHeight.constant = 600;
+        [self setTotalScroll];
     }
 }
 
@@ -185,8 +193,13 @@
 {
     if(isWellnessExpand == YES && isTraingLoadExpand == YES)
     {
-        self.CommonViewHeight.constant = 2000;
+        self.CommonViewHeight.constant = 1500;
     }
+    else if(isWellnessExpand == YES || isTraingLoadExpand == YES)
+    {
+        self.CommonViewHeight.constant = 1200;
+    }
+    
 }
 - (IBAction)FetchBtnAction:(id)sender {
     

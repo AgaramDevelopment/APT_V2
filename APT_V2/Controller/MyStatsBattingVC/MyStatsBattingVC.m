@@ -58,7 +58,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+
         //Get Server Data
     bowlingmatchDetailsArray = [NSMutableArray new];
     bowlingWagonWheelDrawData = [NSMutableArray new];
@@ -115,16 +115,15 @@
     SWRevealViewController *revealController = [self revealViewController];
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
-    [self.navBar addSubview:objCustomNavigation.view];
     
-    objCustomNavigation.btn_back.hidden = YES;
-    objCustomNavigation.menu_btn.hidden = NO;
-//    [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
-    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-
+    [self.navigationView addSubview:objCustomNavigation.view];
+    
+    objCustomNavigation.menu_btn.hidden =YES;
+    objCustomNavigation.btn_back.hidden =NO;
+    [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
 
--(void)actionBack
+-(IBAction)didClickBackBtn:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
 }

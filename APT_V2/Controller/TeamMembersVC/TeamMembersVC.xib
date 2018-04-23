@@ -34,14 +34,14 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nfa-pI-jlF">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nfa-pI-jlF">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="tt6-XN-yDg"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pMc-YD-cSG">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
+                    <rect key="frame" x="0.0" y="60" width="375" height="51"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gvn-Gf-JyK">
                             <rect key="frame" x="5" y="11" width="69" height="30"/>
@@ -149,7 +149,7 @@
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="8rA-Np-f9I">
-                    <rect key="frame" x="5" y="51" width="365" height="611"/>
+                    <rect key="frame" x="5" y="111" width="365" height="551"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="5vh-hr-ghl">
                         <size key="itemSize" width="0.0" height="0.0"/>
@@ -173,7 +173,7 @@
             <constraints>
                 <constraint firstItem="Nfa-pI-jlF" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="0Gr-X2-EQw"/>
                 <constraint firstItem="Ye5-vG-H2e" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="5ni-wS-mkC"/>
-                <constraint firstItem="pMc-YD-cSG" firstAttribute="top" secondItem="Nfa-pI-jlF" secondAttribute="bottom" constant="-60" id="701-zn-yyP"/>
+                <constraint firstItem="pMc-YD-cSG" firstAttribute="top" secondItem="Nfa-pI-jlF" secondAttribute="bottom" id="701-zn-yyP"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="pMc-YD-cSG" secondAttribute="trailing" id="8zC-wf-253"/>
                 <constraint firstItem="8rA-Np-f9I" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="5" id="Cn0-mh-vW4"/>
                 <constraint firstItem="pMc-YD-cSG" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Qzo-B9-1h2"/>

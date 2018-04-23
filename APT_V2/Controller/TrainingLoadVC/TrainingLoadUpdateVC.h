@@ -25,6 +25,7 @@
 
 @property (strong, nonatomic) IBOutlet UIView *ActivityFilterview;
 @property (strong, nonatomic) IBOutlet UIView *RpeFilterview;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *RpeFilterviewWidth;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *countViewHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *countViewWidth;

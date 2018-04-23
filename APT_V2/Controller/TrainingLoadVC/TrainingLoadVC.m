@@ -14,6 +14,7 @@
 #import "AppCommon.h"
 #import "WebService.h"
 //#import "WellnessTrainingBowlingVC.h"
+@import Charts;
 
 
 @interface TrainingLoadVC ()<PieChartViewDelegate,PieChartViewDataSource>
@@ -28,12 +29,16 @@
     BOOL isToday;
     BOOL isYesterday;
     
-     PieChartView *pieChartView1, *pieChartView2;
+    // PieChartView *pieChartView1, *pieChartView2;
 }
 
 @property (strong, nonatomic) IBOutlet NSMutableArray *metaSubcodeArray;
 @property (strong, nonatomic) IBOutlet NSMutableArray *todaysLoadArray;
 @property (strong, nonatomic) IBOutlet NSMutableArray *yesterdayLoadArray;
+
+@property (strong, nonatomic) IBOutlet PieChartView *pieChartView1;
+@property (strong, nonatomic) IBOutlet PieChartView *pieChartView2;
+
 
 
 @end
@@ -47,9 +52,22 @@
    // self.markers = [[NSMutableArray alloc] initWithObjects:@"50.343", @"84.43", @"63.22", @"31.43", nil];
     objWebservice=[[WebService alloc]init];
     
-    isToday =NO;
-    isYesterday = NO;
+    
+    _pieChartView1.delegate = self;
+    _pieChartView1.datasource = self;
+    
+    _pieChartView2.delegate = self;
+    _pieChartView2.datasource = self;
+    
+   // isToday =NO;
+   // isYesterday = NO;
 
+}
+
+-(void)reloadPiechartData
+{
+    [_pieChartView1 reloadData];
+    [_pieChartView2 reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -91,26 +109,26 @@
 -(void)samplePieChart
 {
     if(IS_IPHONE_DEVICE) {
-        pieChartView1 = [[PieChartView alloc] initWithFrame:CGRectMake(self.yesterdayView.frame.origin.x,self.yesterdayView.frame.origin.y,self.yesterdayView.frame.size.width,self.yesterdayView.frame.size.width)];
-        //pieChartView1.delegate = self;
-        //pieChartView1.datasource = self;
-        [self.yesterdayMainView addSubview:pieChartView1];
+        //_pieChartView1 = [[PieChartView alloc] initWithFrame:CGRectMake(self.yesterdayView.frame.origin.x,self.yesterdayView.frame.origin.y,self.yesterdayView.frame.size.width,self.yesterdayView.frame.size.width)];
+        _pieChartView1.delegate = self;
+        _pieChartView1.datasource = self;
+        //[self.yesterdayMainView addSubview:_pieChartView1];
         
-        pieChartView2 = [[PieChartView alloc] initWithFrame:CGRectMake(self.todayView.frame.origin.x,self.todayView.frame.origin.y,self.todayView.frame.size.width,self.todayView.frame.size.width)];
-        //pieChartView2.delegate = self;
-        //pieChartView2.datasource = self;
-        [self.todayMainView addSubview:pieChartView2];
+       // _pieChartView2 = [[PieChartView alloc] initWithFrame:CGRectMake(self.todayView.frame.origin.x,self.todayView.frame.origin.y,self.todayView.frame.size.width,self.todayView.frame.size.width)];
+        _pieChartView2.delegate = self;
+        _pieChartView2.datasource = self;
+        //[self.todayMainView addSubview:_pieChartView2];
         
     } else {
-        pieChartView1 = [[PieChartView alloc] initWithFrame:CGRectMake(self.yesterdayView.frame.origin.x,self.yesterdayView.frame.origin.y,self.yesterdayView.frame.size.width,self.yesterdayView.frame.size.width)];
-        //pieChartView1.delegate = self;
-        //pieChartView1.datasource = self;
-        [self.yesterdayMainView addSubview:pieChartView1];
+        //pieChartView1 = [[PieChartView alloc] initWithFrame:CGRectMake(self.yesterdayView.frame.origin.x,self.yesterdayView.frame.origin.y,self.yesterdayView.frame.size.width,self.yesterdayView.frame.size.width)];
+        _pieChartView1.delegate = self;
+        _pieChartView1.datasource = self;
+       // [self.yesterdayMainView addSubview:pieChartView1];
         
-        pieChartView2 = [[PieChartView alloc] initWithFrame:CGRectMake(self.todayView.frame.origin.x,self.todayView.frame.origin.y,self.todayView.frame.size.width,self.todayView.frame.size.width)];
-        //pieChartView2.delegate = self;
-        //pieChartView2.datasource = self;
-        [self.todayMainView addSubview:pieChartView2];
+        //pieChartView2 = [[PieChartView alloc] initWithFrame:CGRectMake(self.todayView.frame.origin.x,self.todayView.frame.origin.y,self.todayView.frame.size.width,self.todayView.frame.size.width)];
+        _pieChartView2.delegate = self;
+        _pieChartView2.datasource = self;
+        //[self.todayMainView addSubview:pieChartView2];
     }
 }
 - (IBAction)AddtrainingBtnAction:(id)sender {
@@ -171,8 +189,17 @@
 #pragma mark - PieChartViewDataSource
 -(int)numberOfSlicesInPieChartView:(PieChartView *)pieChartView
 {
-    NSUInteger  obj =  self.markers.count;
-    return (int)obj;
+    if(pieChartView == _pieChartView1)
+    {
+    NSUInteger  obj =  self.markers2.count;
+        return (int)obj;
+    }
+    else if(pieChartView == _pieChartView2)
+    {
+        NSUInteger  obj =  self.markers.count;
+        return (int)obj;
+    }
+    return nil;
 }
 -(UIColor *)pieChartView:(PieChartView *)pieChartView colorForSliceAtIndex:(NSUInteger)index
 {
@@ -266,41 +293,53 @@
     return color;
         //return GetRandomUIColor();
 }
-
 -(double)pieChartView:(PieChartView *)pieChartView valueForSliceAtIndex:(NSUInteger)index
 {
-        //        NSUInteger  obj = [self.markers objectAtIndex:index];
-        //        NSString *s= [self.markers objectAtIndex:index];
-    float  obj = [[NSDecimalNumber decimalNumberWithString:[self.markers objectAtIndex:index]]floatValue] ;
+    //        NSUInteger  obj = [self.markers objectAtIndex:index];
+    //        NSString *s= [self.markers objectAtIndex:index];
+    
+    float  obj;
+    if(pieChartView == _pieChartView1)
+    {
+        obj = [[NSDecimalNumber decimalNumberWithString:[self.markers2 objectAtIndex:index]]floatValue];
+        
+    }
+    else if(pieChartView == _pieChartView2)
+    {
+        obj = [[NSDecimalNumber decimalNumberWithString:[self.markers objectAtIndex:index]]floatValue] ;
+        
+    }
     
     
     if(obj==0)
-        {
+    {
         return 0;
-        }
+    }
     else
-        {
+    {
         
         if(index ==0)
-            {
+        {
             return 100/obj;
-            }
-        if(index ==1)
-            {
-            return 100/obj;
-            }
-        if(index ==2)
-            {
-            return 100/obj;
-            }
-        if(index ==3)
-            {
-            return 100/obj;
-            }
         }
+        if(index ==1)
+        {
+            return 100/obj;
+        }
+        if(index ==2)
+        {
+            return 100/obj;
+        }
+        if(index ==3)
+        {
+            return 100/obj;
+        }
+    }
     
     return 0;
 }
+
+
 
 -(NSString *)percentagevalue
 {
@@ -384,6 +423,7 @@
             {
             self.markers = [[NSMutableArray alloc]init];
                 isToday = YES;
+                isYesterday = NO;
              for(int i=0;i<self.todaysLoadArray.count;i++)
              {
                  //today view
@@ -506,15 +546,23 @@
                  [self.markers addObject:[NSString stringWithFormat:@"%d",totalCout]];
                  
              }
-            
-            
-            [pieChartView2 reloadData];
+            [_pieChartView2 reloadData];
+                
+                int total=0;
+                for(int i=0;i<self.markers.count;i++)
+                {
+                    NSString *reqValue = [self.markers objectAtIndex:i];
+                    int value = [reqValue intValue];
+                    total=total+value;
+                }
+                self.totalCountToday.text = [NSString stringWithFormat:@"%d",total];
             }
            
             if(self.yesterdayLoadArray.count>0)
             {
-            self.markers = [[NSMutableArray alloc]init];
+            self.markers2 = [[NSMutableArray alloc]init];
                 isYesterday = YES;
+                isToday = NO;
             
             for(int i=0;i<self.yesterdayLoadArray.count;i++)
             {
@@ -635,11 +683,21 @@
                 int timecount = [timeDuration intValue];
                 
                 int totalCout = RpeCount * timecount;
-                [self.markers addObject:[NSString stringWithFormat:@"%d",totalCout]];
+                [self.markers2 addObject:[NSString stringWithFormat:@"%d",totalCout]];
                 
             }
             
-            [pieChartView1 reloadData];
+            [_pieChartView1 reloadData];
+                //[self setPiechartFromiosCharts];
+             
+                int total=0;
+                for(int i=0;i<self.markers2.count;i++)
+                {
+                    NSString *reqValue = [self.markers2 objectAtIndex:i];
+                    int value = [reqValue intValue];
+                    total=total+value;
+                }
+                self.totalCountYesterday.text = [NSString stringWithFormat:@"%d",total];
             }
         }
         }
@@ -652,6 +710,8 @@
     }];
     
 }
+
+
 
 
 

@@ -86,4 +86,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *yesterdayActivitynamelbl6;
 @property (weak, nonatomic) IBOutlet UILabel *yesterdayActivitynamelbl7;
 
+-(void)reloaddataVC;
+
 @end

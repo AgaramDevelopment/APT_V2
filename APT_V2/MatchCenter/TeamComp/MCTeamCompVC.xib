@@ -48,7 +48,7 @@
                     <rect key="frame" x="0.0" y="70" width="375" height="1430"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tAi-EV-s7t">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="1440"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="1520"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B0D-7J-eY4">
                                     <rect key="frame" x="5" y="10" width="365" height="40"/>
@@ -293,7 +293,7 @@
                                     </constraints>
                                 </view>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ra0-aC-fGH">
-                                    <rect key="frame" x="5" y="630" width="365" height="805"/>
+                                    <rect key="frame" x="5" y="630" width="365" height="885"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3Tb-pN-ckh">
                                         <size key="itemSize" width="300" height="825"/>
@@ -331,7 +331,9 @@
                                 <constraint firstItem="0md-SM-aFE" firstAttribute="leading" secondItem="tAi-EV-s7t" secondAttribute="leading" constant="5" id="JuG-dh-dDC"/>
                                 <constraint firstAttribute="trailing" secondItem="B0D-7J-eY4" secondAttribute="trailing" constant="5" id="LPu-Db-iBn"/>
                                 <constraint firstItem="OBj-FN-SFG" firstAttribute="leading" secondItem="tAi-EV-s7t" secondAttribute="leading" constant="5" id="La9-Fl-cTc"/>
-                                <constraint firstAttribute="height" constant="1440" id="N9p-95-jab"/>
+                                <constraint firstAttribute="height" constant="1520" id="N9p-95-jab">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="1440"/>
+                                </constraint>
                                 <constraint firstAttribute="trailing" secondItem="ra0-aC-fGH" secondAttribute="trailing" constant="5" id="Oyn-1D-wYT"/>
                                 <constraint firstItem="asC-yk-J2e" firstAttribute="top" secondItem="0md-SM-aFE" secondAttribute="bottom" constant="5" id="Qaa-eL-JL4"/>
                                 <constraint firstAttribute="trailing" secondItem="0md-SM-aFE" secondAttribute="trailing" constant="5" id="TZS-AX-Dbz"/>

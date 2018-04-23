@@ -89,7 +89,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="848"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iYv-2o-8sy">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="864"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="940"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jv5-Ws-yCB" userLabel="Drop View">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="57"/>
@@ -1155,7 +1155,9 @@
                                                 <constraint firstAttribute="trailing" secondItem="Msy-jP-Tl3" secondAttribute="trailing" constant="8" id="aeF-k9-aRi"/>
                                                 <constraint firstAttribute="trailing" secondItem="h0O-yt-4Wa" secondAttribute="trailing" constant="8" id="j3U-nq-RFx"/>
                                                 <constraint firstItem="Msy-jP-Tl3" firstAttribute="leading" secondItem="iYv-2o-8sy" secondAttribute="leading" constant="8" id="mLX-dP-axh"/>
-                                                <constraint firstAttribute="height" constant="864" id="wMN-e8-V6G"/>
+                                                <constraint firstAttribute="height" constant="940" id="wMN-e8-V6G">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="864"/>
+                                                </constraint>
                                                 <constraint firstItem="eEt-5m-JeZ" firstAttribute="leading" secondItem="iYv-2o-8sy" secondAttribute="leading" constant="8" id="zQn-Iy-qhI"/>
                                             </constraints>
                                         </view>

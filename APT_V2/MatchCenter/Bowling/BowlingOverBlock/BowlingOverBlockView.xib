@@ -149,7 +149,7 @@
                             <rect key="frame" x="0.0" y="57" width="320" height="1643"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yOM-0Z-kSI">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="1700"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="1720"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JZh-Bq-AsV">
                                             <rect key="frame" x="0.0" y="15" width="320" height="542"/>
@@ -1519,7 +1519,9 @@
                                         <constraint firstItem="tZV-9U-Pb3" firstAttribute="leading" secondItem="yOM-0Z-kSI" secondAttribute="leading" id="0Zr-pp-gzu"/>
                                         <constraint firstItem="JZh-Bq-AsV" firstAttribute="top" secondItem="yOM-0Z-kSI" secondAttribute="top" constant="15" id="5ZU-pc-8Sf"/>
                                         <constraint firstAttribute="trailing" secondItem="tZV-9U-Pb3" secondAttribute="trailing" id="E39-pe-9L6"/>
-                                        <constraint firstAttribute="height" constant="1700" id="Gxp-0u-US4"/>
+                                        <constraint firstAttribute="height" constant="1720" id="Gxp-0u-US4">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="1680"/>
+                                        </constraint>
                                         <constraint firstAttribute="trailing" secondItem="7fb-c2-rhv" secondAttribute="trailing" id="VNk-w4-QC7"/>
                                         <constraint firstItem="tZV-9U-Pb3" firstAttribute="top" secondItem="7fb-c2-rhv" secondAttribute="bottom" constant="15" id="WKO-cd-ozd"/>
                                         <constraint firstItem="7fb-c2-rhv" firstAttribute="top" secondItem="JZh-Bq-AsV" secondAttribute="bottom" constant="15" id="XbC-H6-Xti"/>

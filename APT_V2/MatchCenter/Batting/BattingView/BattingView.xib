@@ -28,7 +28,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="900"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SfD-Sy-xdp">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="900"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="1170"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ueH-RG-T5f">
                                             <rect key="frame" x="5" y="5" width="310" height="40"/>
@@ -275,9 +275,9 @@
                                             </constraints>
                                         </view>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Gja-qt-GjI">
-                                            <rect key="frame" x="8" y="415" width="304" height="477"/>
+                                            <rect key="frame" x="8" y="415" width="304" height="747"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <collectionViewLayout key="collectionViewLayout" id="Kh3-5H-2xa" customClass="CustomCollectionPlayer" customModule="APT_Cricket" customModuleProvider="target"/>
+                                            <collectionViewLayout key="collectionViewLayout" id="Kh3-5H-2xa" customClass="CustomCollectionPlayer" customModule="APT_V2" customModuleProvider="target"/>
                                         </collectionView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5cg-pg-XZX">
                                             <rect key="frame" x="0.0" y="95" width="320" height="310"/>
@@ -307,7 +307,9 @@
                                         <constraint firstAttribute="trailing" secondItem="as1-7r-FmI" secondAttribute="trailing" constant="5" id="Tyt-qs-EVb"/>
                                         <constraint firstItem="ueH-RG-T5f" firstAttribute="centerX" secondItem="SfD-Sy-xdp" secondAttribute="centerX" id="Y4P-GB-hUl"/>
                                         <constraint firstItem="as1-7r-FmI" firstAttribute="leading" secondItem="SfD-Sy-xdp" secondAttribute="leading" constant="5" id="eDw-cU-jyJ"/>
-                                        <constraint firstAttribute="height" constant="900" id="fDu-lT-74m"/>
+                                        <constraint firstAttribute="height" constant="1170" id="fDu-lT-74m">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="920"/>
+                                        </constraint>
                                         <constraint firstItem="Gja-qt-GjI" firstAttribute="leading" secondItem="SfD-Sy-xdp" secondAttribute="leading" constant="8" id="igE-od-M6L"/>
                                         <constraint firstAttribute="trailing" secondItem="ueH-RG-T5f" secondAttribute="trailing" constant="5" id="j0g-kH-nSa"/>
                                         <constraint firstItem="5cg-pg-XZX" firstAttribute="leading" secondItem="SfD-Sy-xdp" secondAttribute="leading" id="m3t-AF-Our"/>
@@ -386,7 +388,7 @@
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Pp9-XN-1Ih">
                             <rect key="frame" x="0.0" y="310" width="320" height="258"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <collectionViewLayout key="collectionViewLayout" id="eyd-Rx-CuQ" customClass="CustomCollectionPlayer" customModule="APT_Cricket" customModuleProvider="target"/>
+                            <collectionViewLayout key="collectionViewLayout" id="eyd-Rx-CuQ" customClass="CustomCollectionPlayer" customModule="APT_V2" customModuleProvider="target"/>
                         </collectionView>
                     </subviews>
                     <color key="backgroundColor" red="0.91363531350000005" green="0.9137886167" blue="0.91361522669999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

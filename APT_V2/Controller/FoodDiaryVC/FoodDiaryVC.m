@@ -35,9 +35,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+        // Do any additional setup after loading the view from its nib.
     [self customnavigationmethod];
-    //MSC412    Supplements
+        //MSC412    Supplements
     [self.saveOrUpdateBtn setTitle:@"Save" forState:UIControlStateNormal];
     foodDescriptionArray = [[NSMutableArray alloc] init];
     foodDiaryCodeArray = [[NSMutableArray alloc] initWithObjects:@"MSC342", @"MSC343", @"MSC344", @"MSC345", @"MSC412", nil];
@@ -76,23 +76,21 @@
         //setting toolbar as inputAccessoryView
     self.dateTF.inputAccessoryView = toolbar;
     self.timeTF.inputAccessoryView = toolbar;
-
-    //Fetch Service Call
+    
+        //Fetch Service Call
     [self foodDiaryFetchDetailsPostMethodWebService];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
     SWRevealViewController *revealController = [self revealViewController];
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
-    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+        // Dispose of any resources that can be recreated.
 }
 
 -(void) doneButtonAction {
@@ -100,7 +98,7 @@
     NSDate *today = [NSDate date];
     result = [today compare:datePicker.date]; // comparing two dates
     
-    if(result==NSOrderedAscending)
+    if(result == NSOrderedAscending)
     {
         [self altermsg:@"Future date is not allowed"];
     } else {
@@ -113,6 +111,17 @@
             }
         }
     
+    [self.view endEditing:true];
+}
+
+-(void) cancelButtonAction {
+    if(isDate==YES) {
+        self.dateTF.text = @"";
+        [self.dateTF resignFirstResponder];
+    } else if(isTime==YES) {
+        self.timeTF.text = @"";
+        [self.timeTF resignFirstResponder];
+    }
     [self.view endEditing:true];
 }
 
@@ -140,17 +149,6 @@
         [self setBorderForLocation:locationCode+1];
         [self.foodTableView reloadData];
     });
-}
-
--(void) cancelButtonAction {
-    if(isDate==YES) {
-        self.dateTF.text = @"";
-        [self.dateTF resignFirstResponder];
-    } else if(isTime==YES) {
-        self.timeTF.text = @"";
-        [self.timeTF resignFirstResponder];
-    }
-    [self.view endEditing:true];
 }
 
 -(void)customnavigationmethod
@@ -182,7 +180,8 @@
 }
 
 - (IBAction)dateButtonTapped:(id)sender {
-    isDate =YES;
+    isDate = YES;
+    isTime = NO;
     [self DisplaydatePicker];
 }
 
@@ -197,8 +196,8 @@
 
 - (IBAction)timeButtonTapped:(id)sender {
     
-    isDate =NO;
-    isTime =YES;
+    isDate = NO;
+    isTime = YES;
     [self DisplayTime];
 }
 
@@ -239,11 +238,11 @@
 }
 
 - (IBAction)mealTypeBreakfastAction:(id)sender {
-        [self setBorderForMealType:1];
+    [self setBorderForMealType:1];
 }
 
 - (IBAction)mealTypeSnacksAction:(id)sender {
-        [self setBorderForMealType:2];
+    [self setBorderForMealType:2];
 }
 
 - (IBAction)mealTypeLunchAction:(id)sender {
@@ -259,13 +258,13 @@
 }
 
 - (IBAction)foodDescriptionButtonTapped:(id)sender {
-   
+    
     if ([self.foodItemTF.text isEqualToString:@""]) {
         [self altermsg:@"Please enter food item"];
     } else if ([self.quantityTF.text isEqualToString:@""]) {
         [self altermsg:@"Please enter food quantity"];
     } else {
-    
+        
         NSMutableDictionary *foodDescriptionDict = [NSMutableDictionary new];
         [foodDescriptionDict setObject:self.foodItemTF.text forKey:@"FOOD"];
         [foodDescriptionDict setObject:self.quantityTF.text forKey:@"FOODQUANTITY"];
@@ -280,22 +279,22 @@
 }
 
 - (IBAction)locationTeamAction:(id)sender { //Team, Restaurant, Home, Other
-//        self.locationTF = @"Team";
-        [self setBorderForLocation:1];
+    //        self.locationTF = @"Team";
+    [self setBorderForLocation:1];
 }
 - (IBAction)locationRestaurantAction:(id)sender {
-//        self.locationTF = @"Restaurant";
-        [self setBorderForLocation:2];
+    //        self.locationTF = @"Restaurant";
+    [self setBorderForLocation:2];
 }
 
 - (IBAction)locationHomeAction:(id)sender {
-//        self.locationTF = @"Home";
-        [self setBorderForLocation:3];
+    //        self.locationTF = @"Home";
+    [self setBorderForLocation:3];
 }
 
 - (IBAction)locationOtherAction:(id)sender {
-//        self.locationTF = @"Other";
-        [self setBorderForLocation:4];
+    //        self.locationTF = @"Other";
+    [self setBorderForLocation:4];
 }
 
 - (IBAction)saveOrUpdateButtonTapped:(id)sender {
@@ -305,10 +304,11 @@
     } else if ([self.timeTF.text isEqualToString:@""]) {
         [self altermsg:@"Please select time"];
     } else if ([self.mealTypeTF isEqualToString:@""]) {
-         [self altermsg:@"Please select Meal Type"];
-    } else if (foodDescriptionArray.count == 0) {
-        [self altermsg:@"Please select Food Description"];
+        [self altermsg:@"Please select Meal Type"];
     }
+//    else if (foodDescriptionArray.count == 0) {
+//        [self altermsg:@"Please select Food Description"];
+//    }
     else if ([self.locationTF isEqualToString:@""]) {
         [self altermsg:@"Please enter Location"];
     }  else {
@@ -318,21 +318,20 @@
         } else {
             [self foodDiaryInsertPostMethodWebService];
         }
-        
     }
 }
-
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    [self.lblNoData setHidden:foodDiaryArray.count];
     return foodDiaryArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     FoodDiaryCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"foodCell" forIndexPath:indexPath];
     
     cell.layer.masksToBounds = NO;
@@ -340,7 +339,7 @@
     cell.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
     cell.layer.shadowRadius = 3;
     cell.layer.shadowOpacity = 0.8f;
-
+    
     if (foodDiaryArray.count) {
         NSMutableArray *foodListArray = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"FOODLIST"];
         
@@ -361,9 +360,10 @@
             cell.food3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
         }
     }
-   
+    
     return cell;
 }
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.saveOrUpdateBtn setTitle:@"Update" forState:UIControlStateNormal];
@@ -373,11 +373,11 @@
     foodDiaryCode = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"FOODDIARYCODE"];
     NSMutableArray *foodListArray = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"FOODLIST"];
     foodDescriptionArray = [NSMutableArray new];
-   
+    
     for (id key in foodListArray) {
-         NSMutableDictionary *foodDescriptionDict = [NSMutableDictionary new];
+        NSMutableDictionary *foodDescriptionDict = [NSMutableDictionary new];
         [foodDescriptionDict setObject:[key valueForKey:@"FOOD"] forKey:@"FOOD"];
-//        [foodDescriptionDict setObject:[[key objectAtIndex:indexPath.row] valueForKey:@"FOOD"] forKey:@"FOOD"];
+        //        [foodDescriptionDict setObject:[[key objectAtIndex:indexPath.row] valueForKey:@"FOOD"] forKey:@"FOOD"];
         [foodDescriptionDict setObject:[key valueForKey:@"FOODQUANTITY"] forKey:@"FOODQUANTITY"];
         [foodDescriptionArray addObject:foodDescriptionDict];
     }
@@ -391,7 +391,7 @@
     });
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     if (IS_IPAD) {
         return CGSizeMake(120, 140);
@@ -434,7 +434,7 @@
         cell.foodItemLbl.text = [[foodDescriptionArray objectAtIndex:indexPath.row] valueForKey:@"FOOD"];
         cell.quantityLbl.text = [[foodDescriptionArray objectAtIndex:indexPath.row] valueForKey:@"FOODQUANTITY"];
     }
-
+    
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -476,7 +476,6 @@
     } else {
         return 35;
     }
-    
 }
 
 - (void)foodDiaryFetchDetailsPostMethodWebService {
@@ -505,7 +504,7 @@
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     manager.requestSerializer = requestSerializer;
-    //CLIENTCODE, PLAYERCODE, DATE
+        //CLIENTCODE, PLAYERCODE, DATE
     clientCode = [AppCommon GetClientCode];
     userRefCode = [AppCommon GetuserReference];
     
@@ -517,24 +516,19 @@
     [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"response ; %@",responseObject);
         
-         if ([[responseObject valueForKey:@"STATUS"] integerValue] == 1) {
-             
-             foodDiaryArray = [NSMutableArray new];
-             foodDiaryArray = [responseObject objectForKey:@"FOODDIARYS"];
-             [self setClearBorderForMealTypeAndLocation];
-             
-         }
+        if ([[responseObject valueForKey:@"STATUS"] integerValue] == 1) {
+            
+            foodDiaryArray = [NSMutableArray new];
+            foodDiaryArray = [responseObject objectForKey:@"FOODDIARYS"];
+            [self setClearBorderForMealTypeAndLocation];
+        }
         
         [AppCommon hideLoading];
-        
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failed");
         [COMMON webServiceFailureError:error];
         [AppCommon hideLoading];
-        
     }];
-    
 }
 
 - (void)foodDiaryFetchDetailsPostMethodWebServiceForNewDate:(NSString *)date {
@@ -565,7 +559,7 @@
         
         if ([[responseObject valueForKey:@"STATUS"] integerValue] == 1) {
             
-//            NSMutableArray *foodDiarys = [responseObject objectForKey:@"FOODDIARYS"];
+                //            NSMutableArray *foodDiarys = [responseObject objectForKey:@"FOODDIARYS"];
             
             NSMutableArray *foodDiarys = [responseObject objectForKey:@"FOODDIARYS"];
             foodDescriptionArray = [NSMutableArray new];
@@ -576,7 +570,7 @@
                     NSString *date = [[foodDiarys objectAtIndex:i] valueForKey:@"DATE"];
                     
                     if ([self.dateTF.text isEqualToString:date]) {
-
+                        
                         [self.saveOrUpdateBtn setTitle:@"Update" forState:UIControlStateNormal];
                         selectedDate = self.dateTF.text;
                         
@@ -585,15 +579,15 @@
                         
                         int mealCode = (int)[foodDiaryCodeArray indexOfObject:[[foodDiarys objectAtIndex:0] valueForKey:@"MEALCODE"]];
                         int locationCode = (int)[locationCodeArray indexOfObject:[[foodDiarys objectAtIndex:0] valueForKey:@"LOCATION"]];
-                            
-                            NSMutableArray *foodListArray = [[foodDiarys objectAtIndex:i] valueForKey:@"FOODLIST"];
-                    
-                            for (id key in foodListArray) {
-                                NSMutableDictionary *foodDescriptionDict = [NSMutableDictionary new];
-                                [foodDescriptionDict setObject:[key valueForKey:@"FOOD"] forKey:@"FOOD"];
-                                [foodDescriptionDict setObject:[key valueForKey:@"FOODQUANTITY"] forKey:@"FOODQUANTITY"];
-                                [foodDescriptionArray addObject:foodDescriptionDict];
-                            }
+                        
+                        NSMutableArray *foodListArray = [[foodDiarys objectAtIndex:i] valueForKey:@"FOODLIST"];
+                        
+                        for (id key in foodListArray) {
+                            NSMutableDictionary *foodDescriptionDict = [NSMutableDictionary new];
+                            [foodDescriptionDict setObject:[key valueForKey:@"FOOD"] forKey:@"FOOD"];
+                            [foodDescriptionDict setObject:[key valueForKey:@"FOODQUANTITY"] forKey:@"FOODQUANTITY"];
+                            [foodDescriptionArray addObject:foodDescriptionDict];
+                        }
                         
                         dispatch_async(dispatch_get_main_queue(), ^{
                             [self setBorderForMealType:mealCode+1];
@@ -602,7 +596,6 @@
                         });
                     }
                 }
-                
             }
         }
         NSLog(@"foodDescriptionArray:%@", foodDescriptionArray);
@@ -612,9 +605,7 @@
         NSLog(@"failed");
         [COMMON webServiceFailureError:error];
         [AppCommon hideLoading];
-        
     }];
-    
 }
 
 - (void)foodDiaryInsertPostMethodWebService {
@@ -636,7 +627,7 @@
     userCode = [AppCommon GetUsercode];
     userRefCode = [AppCommon GetuserReference];
     
-    //CLIENTCODE, PLAYERCODE, DATE, STARTTIME, ENDTIME, MEALCODE, LOCATION, CREATEDBY, FOODLIST(FOOD, FOODQUANTITY)
+        //CLIENTCODE, PLAYERCODE, DATE, STARTTIME, ENDTIME, MEALCODE, LOCATION, CREATEDBY, FOODLIST(FOOD, FOODQUANTITY)
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     if(clientCode)   [dic    setObject:clientCode     forKey:@"CLIENTCODE"];
@@ -648,8 +639,8 @@
     [dic setObject:self.timeTF.text forKey:@"ENDTIME"];
     [dic setObject:self.mealTypeTF forKey:@"MEALCODE"];
     [dic setObject:self.locationTF forKey:@"LOCATION"];
-//    [dic setObject:@"Dinner" forKey:@"MEALCODE"];
-//    [dic setObject:@"Other" forKey:@"LOCATION"];
+        //    [dic setObject:@"Dinner" forKey:@"MEALCODE"];
+        //    [dic setObject:@"Other" forKey:@"LOCATION"];
     [dic setObject:foodDescriptionArray forKey:@"FOODLIST"];
     
     NSLog(@"parameters : %@",dic);
@@ -659,21 +650,15 @@
         if ([[responseObject valueForKey:@"STATUS"] integerValue] == 1) {
             
             [self foodDiaryFetchDetailsPostMethodWebService];
-            
-             [self altermsg:[responseObject valueForKey:@"MESSAGE"]];
-            
+            [self altermsg:[responseObject valueForKey:@"MESSAGE"]];
         }
         
         [AppCommon hideLoading];
-        
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failed");
         [COMMON webServiceFailureError:error];
         [AppCommon hideLoading];
-        
     }];
-    
 }
 
 - (void)foodDiaryUpdatePostMethodWebService {
@@ -716,7 +701,6 @@
         NSLog(@"response ; %@",responseObject);
         
         if ([[responseObject valueForKey:@"STATUS"] integerValue] == 1) {
-            
             [self foodDiaryFetchDetailsPostMethodWebService];
             [self altermsg:[responseObject valueForKey:@"MESSAGE"]];
         }
@@ -726,9 +710,7 @@
         NSLog(@"failed");
         [COMMON webServiceFailureError:error];
         [AppCommon hideLoading];
-        
     }];
-    
 }
 
 -(void)setBorderForMealType:(int)selectedTag
@@ -736,18 +718,14 @@
     NSArray *arr = @[self.breakfastBtn,self.snacksBtn,self.lunchBtn,self.dinnerBtn,self.supplementsBtn];
     
     for (UIButton *btn in arr) {
-        if(btn.tag == selectedTag)
-            {
+        if(btn.tag == selectedTag) {
             self.mealTypeTF = [foodDiaryCodeArray objectAtIndex:selectedTag-1];
             btn.layer.borderWidth = 2.0f;
             btn.layer.borderColor = [UIColor blackColor].CGColor;
-            }
-        else
-            {
+        } else {
             btn.layer.borderWidth = 0.0f;
             btn.layer.borderColor = [UIColor clearColor].CGColor;
-            }
-        
+        }
     }
 }
 
@@ -756,18 +734,14 @@
     NSArray *arr = @[self.teamBtn,self.restaurantBtn,self.homeBtn,self.otherBtn];
     
     for (UIButton *btn in arr) {
-        if(btn.tag == selectedTag)
-            {
+        if(btn.tag == selectedTag) {
             self.locationTF = [locationCodeArray objectAtIndex:selectedTag-1];
             btn.layer.borderWidth = 2.0f;
             btn.layer.borderColor = [UIColor blackColor].CGColor;
-            }
-        else
-            {
+        } else {
             btn.layer.borderWidth = 0.0f;
             btn.layer.borderColor = [UIColor clearColor].CGColor;
-            }
-        
+        }
     }
 }
 
@@ -788,16 +762,15 @@
     
     NSArray *arr = @[self.breakfastBtn,self.snacksBtn,self.lunchBtn,self.dinnerBtn,self.supplementsBtn, self.teamBtn,self.restaurantBtn,self.homeBtn,self.otherBtn];
     for (UIButton *btn in arr) {
-            btn.layer.borderWidth = 0.0f;
-            btn.layer.borderColor = [UIColor blackColor].CGColor;
-            }
+        btn.layer.borderWidth = 0.0f;
+        btn.layer.borderColor = [UIColor blackColor].CGColor;
+    }
 }
 
 - (void)setClearForFoodDiaryDetails {
     
     [self.saveOrUpdateBtn setTitle:@"Save" forState:UIControlStateNormal];
     selectedDate = @"";
-    self.timeTF.text = @"";
     self.mealTypeTF = @"";
     [foodDescriptionArray removeAllObjects];
     self.locationTF = @"";

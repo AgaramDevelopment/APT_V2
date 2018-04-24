@@ -220,7 +220,9 @@
     
     NSString *bowlingStyle = [self checkNull:[[self.CommonArray valueForKey:@"BowlingStyle"]objectAtIndex:indexPath.row]];
     NSLog(@"%ld",(long)indexPath.row);
-    if (![bowlingStyle isEqualToString:@""]) {
+    if ([bowlingStyle isEqualToString:@""]) {
+        cell.BowlingStylelbl.text = @"";
+    } else {
         cell.BowlingStylelbl.text = [NSString stringWithFormat:@"/ %@", bowlingStyle];
     }
     

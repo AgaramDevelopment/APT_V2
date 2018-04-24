@@ -216,27 +216,24 @@
          cell.hsNbdryLbl.text = @"HS";
         
         
-        cell.overallMatchesLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Matches"];
-        cell.overallInningsLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Inns"];
-        cell.overallNOLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"NOs"];
-        cell.overallRunsLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Runs"];
-        cell.overallBallsLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Balls"];
-        cell.overallAvgLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"BatAve"];
-        cell.overallSRLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"BatSR"];
+        cell.overallMatchesLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Matches"]];
+        cell.overallInningsLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Inns"]];
+        cell.overallNOLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"NOs"]];
+        cell.overallRunsLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Runs"]];
+        cell.overallBallsLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Balls"]];
+        cell.overallAvgLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"BatAve"]];
+        cell.overallSRLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"BatSR"]];
         NSLog(@"S:%@", [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"hunderds"]);
-        NSString *hundreds = [self checkNull:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"hunderds"]];
-        if ([hundreds isEqualToString:@""]) {
-            hundreds = @"0";
-        }
-        cell.overallHundredsLbl.text = hundreds;
+        
+        cell.overallHundredsLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"hunderds"]];
         NSLog(@"%@", cell.overallHundredsLbl.text);
-        cell.overallFiftiesLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"fifties"];
-        cell.overallThirtiesLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"thirties"];
-        cell.overallFoursLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Fours"];
-        cell.overallSixsLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Sixs"];
-        cell.overallBDYPercentLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"boundariespercent"];
-        cell.overallDotPercentLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"dotspercent"];
-        cell.overallHSLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"HS"];
+        cell.overallFiftiesLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"fifties"]];
+        cell.overallThirtiesLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"thirties"]];
+        cell.overallFoursLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Fours"]];
+        cell.overallSixsLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Sixs"]];
+        cell.overallBDYPercentLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"boundariespercent"]];
+        cell.overallDotPercentLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"dotspercent"]];
+        cell.overallHSLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"HS"]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
 //        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         return cell;
@@ -265,9 +262,8 @@
         if (IS_IPAD) {
             cell.teamNameiPadLbl.text =  [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"OppTeamName"];
                 //            cell.teamiPadImage.image = nil;
-            cell.teamRunsiPadLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Runs"];
-            NSString *runs = [NSString stringWithFormat:@"(%@)", [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Balls"]];
-            cell.teamBallsiPadLbl.text = runs;
+            cell.teamRunsiPadLbl.text = [self checkNullAndReturnZero:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Runs"]];
+            cell.teamBallsiPadLbl.text = [NSString stringWithFormat:@"(%@)", [self checkNullAndReturnZero:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Balls"]]];
             
                 // Match Date
             NSString *myString = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"MatchDate"];
@@ -306,12 +302,12 @@
                 cell.bdyFeqNdbiPadLbl.text = @"BDY Fq";
                 
                 
-                cell.matchSRiPadLbl.text = [[matchDetailsArray objectAtIndex:0] valueForKey:@"BatSR"];
-                cell.matchDotiPadLbl.text = [[matchDetailsArray objectAtIndex:0] valueForKey:@"dotspercent"];
-                cell.matchBDYiPadLbl.text = [[matchDetailsArray objectAtIndex:0] valueForKey:@"boundariespercent"];
-                cell.matchFoursiPadLbl.text = [[matchDetailsArray objectAtIndex:0] valueForKey:@"Fours"];
-                cell.matchSixsiPadLbl.text = [[matchDetailsArray objectAtIndex:0] valueForKey:@"Sixs"];
-                cell.matchBDYFqiPadLbl.text = [[matchDetailsArray objectAtIndex:0] valueForKey:@"boundaryfrequency"];
+                cell.matchSRiPadLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"BatSR"]];
+                cell.matchDotiPadLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"dotspercent"]];
+                cell.matchBDYiPadLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"boundariespercent"]];
+                cell.matchFoursiPadLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"Fours"]];
+                cell.matchSixsiPadLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"Sixs"]];
+                cell.matchBDYFqiPadLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"boundaryfrequency"]];
                 
                 [cell.onesBtniPad addTarget:self action:@selector(didClickOnesBatting:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.twoBtniPad addTarget:self action:@selector(didClicktwosBatting:) forControlEvents:UIControlEventTouchUpInside];
@@ -808,9 +804,8 @@
             cell.teamNameiPhoneLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"OppTeamName"];
             NSLog(@"OppTeamName:%@", cell.teamNameiPhoneLbl.text);
 //            cell.teamiPhoneImage.image = nil;
-            cell.teamRunsiPhoneLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Runs"];
-            NSString *runs = [NSString stringWithFormat:@"(%@)", [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Balls"]];
-            cell.teamBallsiPhoneLbl.text = runs;
+            cell.teamRunsiPhoneLbl.text = [self checkNullAndReturnZero:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Runs"]];
+            cell.teamBallsiPhoneLbl.text = [NSString stringWithFormat:@"(%@)", [self checkNullAndReturnZero:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Balls"]]];
             
                 // Match Date
             NSString *myString = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"MatchDate"];
@@ -846,12 +841,12 @@
                 cell.sixsNsixsiPhoneLbl.text  = @"6's";
                 cell.bdyFeqNdbiPhoneLbl.text = @"BDY Fq";
                 
-                cell.matchSRiPhoneLbl.text = [[matchDetailsArray objectAtIndex:0] valueForKey:@"BatSR"];
-                cell.matchDotiPhoneLbl.text = [[matchDetailsArray objectAtIndex:0] valueForKey:@"dotspercent"];
-                cell.matchBDYiPhoneLbl.text = [[matchDetailsArray objectAtIndex:0] valueForKey:@"boundariespercent"];
-                cell.matchFoursiPhoneLbl.text = [[matchDetailsArray objectAtIndex:0] valueForKey:@"Fours"];
-                cell.matchSixsiPhoneLbl.text = [[matchDetailsArray objectAtIndex:0] valueForKey:@"Sixs"];
-                cell.matchBDYFqiPhoneLbl.text = [[matchDetailsArray objectAtIndex:0] valueForKey:@"boundaryfrequency"];
+                cell.matchSRiPhoneLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"BatSR"]];
+                cell.matchDotiPhoneLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"dotspercent"]];
+                cell.matchBDYiPhoneLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"boundariespercent"]];
+                cell.matchFoursiPhoneLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"Fours"]];
+                cell.matchSixsiPhoneLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"Sixs"]];
+                cell.matchBDYFqiPhoneLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"boundaryfrequency"]];
                 
                 [cell.onesBtniPhone addTarget:self action:@selector(didClickOnesBatting:) forControlEvents:UIControlEventTouchUpInside];
                 [cell.twoBtniPhone addTarget:self action:@selector(didClicktwosBatting:) forControlEvents:UIControlEventTouchUpInside];
@@ -1377,34 +1372,26 @@
             cell.hsNbdryLbl.text = @"BDRY %";
             
             
-            cell.overallMatchesLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Matches"];
-            cell.overallInningsLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Inns"];
-            cell.overallNOLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Overs"];
-            cell.overallRunsLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"wickets"];
-            cell.overallBallsLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Runs"];
-            cell.overallAvgLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Econ"];
+            cell.overallMatchesLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Matches"]];
+            cell.overallInningsLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Inns"]];
+            cell.overallNOLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Overs"]];
+            cell.overallRunsLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"wickets"]];
+            cell.overallBallsLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Runs"]];
+            cell.overallAvgLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Econ"]];
             
-            cell.overallSRLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"BowlAve"];
+            cell.overallSRLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"BowlAve"]];
             NSLog(@"S:%@", [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"BowlSR"]);
-            cell.overallHundredsLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"BowlSR"];
+            cell.overallHundredsLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"BowlSR"]];
             NSLog(@"%@", cell.overallHundredsLbl.text);
-            NSString *ThreesW = [self checkNull:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Threes"]];
-            if ([ThreesW isEqualToString:@""]) {
-                ThreesW = @"0";
-            }
-            cell.overallFiftiesLbl.text = ThreesW;
             
-            NSString *FivesW = [self checkNull:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Fives"]];
-            if ([FivesW isEqualToString:@""]) {
-                FivesW = @"0";
-            }
-
-            cell.overallThirtiesLbl.text = FivesW;
-            cell.overallFoursLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"BBI"];
-            cell.overallSixsLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Wides"];
-            cell.overallBDYPercentLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Noballs"];
-            cell.overallDotPercentLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"dotspercent"];
-            cell.overallHSLbl.text = [[overAllArray objectAtIndex:indexPath.row] valueForKey:@"boundariespercent"];
+            cell.overallFiftiesLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Threes"]];
+            
+            cell.overallThirtiesLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Fives"]];
+            cell.overallFoursLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"BBI"]];
+            cell.overallSixsLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Wides"]];
+            cell.overallBDYPercentLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"Noballs"]];
+            cell.overallDotPercentLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"dotspercent"]];
+            cell.overallHSLbl.text = [self checkNullAndReturnZero:[[overAllArray objectAtIndex:indexPath.row] valueForKey:@"boundariespercent"]];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 //        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             return cell;
@@ -1433,10 +1420,8 @@
             if (IS_IPAD) {
                 cell.teamNameiPadLbl.text =  [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"OppTeamName"];
                     //            cell.teamiPadImage.image = nil;
-                NSString *runsNwickets = [NSString stringWithFormat:@"%@/%@", [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Wickets"], [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Runs"]];
-                cell.teamRunsiPadLbl.text = runsNwickets;
-                NSString *runs = [NSString stringWithFormat:@"(%@)", [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Overs"]];
-                cell.teamBallsiPadLbl.text = runs;
+                cell.teamRunsiPadLbl.text = [NSString stringWithFormat:@"%@/%@", [self checkNullAndReturnZero:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Wickets"]], [self checkNullAndReturnZero:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Runs"]]];
+                cell.teamBallsiPadLbl.text = [NSString stringWithFormat:@"(%@)", [self checkNullAndReturnZero:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Overs"]]];
                 
                     // Match Date
                 NSString *myString = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"MatchDate"];
@@ -1474,12 +1459,12 @@
                     cell.bdyFeqNdbiPadLbl.text = @"DB %";
                     
                     NSLog(@"matchDetailsArray:%@", matchDetailsArray);
-                    cell.matchSRiPadLbl.text = [self checkNull:[[matchDetailsArray objectAtIndex:0] valueForKey:@"Econ"]];
-                    cell.matchDotiPadLbl.text = [self checkNull:[[matchDetailsArray objectAtIndex:0] valueForKey:@"Noballs"]];
-                    cell.matchBDYiPadLbl.text = [self checkNull:[[matchDetailsArray objectAtIndex:0] valueForKey:@"Wides"]];
-                    cell.matchFoursiPadLbl.text = [self checkNull:[[matchDetailsArray objectAtIndex:0] valueForKey:@"Fours"]];
-                    cell.matchSixsiPadLbl.text = [self checkNull:[[matchDetailsArray objectAtIndex:0] valueForKey:@"Sixs"]];
-                    cell.matchBDYFqiPadLbl.text = [self checkNull:[[matchDetailsArray objectAtIndex:0] valueForKey:@"dotspercent"]];
+                    cell.matchSRiPadLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"Econ"]];
+                    cell.matchDotiPadLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"Noballs"]];
+                    cell.matchBDYiPadLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"Wides"]];
+                    cell.matchFoursiPadLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"Fours"]];
+                    cell.matchSixsiPadLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"Sixs"]];
+                    cell.matchBDYFqiPadLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"dotspercent"]];
                     
 //                    NSLog(@"matchDetailsArray:%@", matchDetailsArray);
 //                    cell.matchSRiPadLbl.text = [matchDetailsArray  valueForKey:@"Econ"];
@@ -1984,10 +1969,8 @@
                 cell.teamNameiPhoneLbl.text = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"OppTeamName"];
                 NSLog(@"OppTeamName:%@", cell.teamNameiPhoneLbl.text);
                     //            cell.teamiPhoneImage.image = nil;
-                NSString *runsNwickets = [NSString stringWithFormat:@"%@/%@", [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Wickets"], [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Runs"]];
-                cell.teamRunsiPhoneLbl.text = runsNwickets;
-                NSString *overs = [NSString stringWithFormat:@"(%@)", [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Overs"]];
-                cell.teamBallsiPhoneLbl.text = overs;
+                cell.teamRunsiPhoneLbl.text = [NSString stringWithFormat:@"%@/%@", [self checkNullAndReturnZero: [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Wickets"]], [self checkNullAndReturnZero:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Runs"]]];
+                cell.teamBallsiPhoneLbl.text = [NSString stringWithFormat:@"(%@)", [self checkNullAndReturnZero:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Overs"]]];
                 
                     // Match Date
                 NSString *myString = [[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"MatchDate"];
@@ -2023,12 +2006,12 @@
                     cell.sixsNsixsiPhoneLbl.text  = @"6's";
                     cell.bdyFeqNdbiPhoneLbl.text = @"DB %";
                     
-                    cell.matchSRiPhoneLbl.text = [[matchDetailsArray objectAtIndex:0] valueForKey:@"Econ"];
-                    cell.matchDotiPhoneLbl.text = [[matchDetailsArray objectAtIndex:0] valueForKey:@"Noballs"];
-                    cell.matchBDYiPhoneLbl.text = [[matchDetailsArray objectAtIndex:0] valueForKey:@"Wides"];
-                    cell.matchFoursiPhoneLbl.text = [[matchDetailsArray objectAtIndex:0] valueForKey:@"Fours"];
-                    cell.matchSixsiPhoneLbl.text = [[matchDetailsArray objectAtIndex:0] valueForKey:@"Sixs"];
-                    cell.matchBDYFqiPhoneLbl.text = [[matchDetailsArray objectAtIndex:0] valueForKey:@"dotspercent"];
+                    cell.matchSRiPhoneLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"Econ"]];
+                    cell.matchDotiPhoneLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"Noballs"]];
+                    cell.matchBDYiPhoneLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"Wides"]];
+                    cell.matchFoursiPhoneLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"Fours"]];
+                    cell.matchSixsiPhoneLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"Sixs"]];
+                    cell.matchBDYFqiPhoneLbl.text = [self checkNullAndReturnZero:[[matchDetailsArray objectAtIndex:0] valueForKey:@"dotspercent"]];
                     
         
                     [cell.onesBtniPhone addTarget:self action:@selector(didClickOnesBatting:) forControlEvents:UIControlEventTouchUpInside];
@@ -3198,6 +3181,13 @@
     return _value;
 }
 
+-(NSString *)checkNullAndReturnZero:(NSString *)_value
+{
+    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"]) {
+        _value=@"0";
+    }
+    return _value;
+}
 -(UIColor*)colorWithHexString:(NSString*)hex
 {
         //-----------------------------------------

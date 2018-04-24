@@ -8,7 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "RGSColorSlider.h"
+@protocol AddWelnessDelegate <NSObject>
+
+-(void)closeWellnessSource;
+
+@end
+
+
+
+
 @interface AddWellnessRatingVC : UIViewController
+@property (strong,nonatomic) id<AddWelnessDelegate> Delegate;
 
 @property (strong, nonatomic) IBOutlet  RGSColorSlider *ColorSlider1;
 @property (strong, nonatomic) IBOutlet  RGSColorSlider *ColorSlider2;
@@ -34,6 +44,7 @@
 @property (strong,nonatomic) IBOutlet UILabel * FatiqueRatinglbl;
 @property (strong,nonatomic) IBOutlet UILabel * MuscleRatinglbl;
 @property (strong,nonatomic) IBOutlet UILabel * StressRatinglbl;
+@property (strong,nonatomic) IBOutlet UILabel * UrineRatinglbl;
 
 @property (strong,nonatomic) IBOutlet UIButton * UrineColorBtn1;
 @property (strong,nonatomic) IBOutlet UIButton * UrineColorBtn2;

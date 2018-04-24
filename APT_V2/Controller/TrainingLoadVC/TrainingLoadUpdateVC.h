@@ -8,12 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol AddTraingDelegate <NSObject>
+
+-(void)closeUpdateTrainingSource;
+
+@end
+
+
 @interface TrainingLoadUpdateVC : UIViewController
 {
     NSMutableArray *sessionArray;
     NSMutableArray *activityArray;
     NSMutableArray *valueArray;
 }
+@property (strong,nonatomic) id<AddTraingDelegate> Delegate;
 @property (strong, nonatomic) IBOutlet UIButton *sessionBtn;
 @property (strong, nonatomic) IBOutlet UIButton *ActivityBtn;
 @property (strong, nonatomic) IBOutlet UIButton *UpdateBtn;
@@ -51,5 +59,7 @@
 @property (strong,nonatomic)  NSMutableArray * YesterdayLoadArray;
 @property (strong,nonatomic)  NSString * isToday;
 @property (strong,nonatomic)  NSString * isYesterday;
+
+@property (strong, nonatomic) IBOutlet UIView *tapView;
 
 @end

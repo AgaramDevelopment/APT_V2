@@ -19,7 +19,7 @@
 #import "TrainingLoadUpdateVC.h"
 #import "TrainingPiechart.h"
 
-@interface WellnessTrainingBowlingVC ()<ChartViewDelegate>
+@interface WellnessTrainingBowlingVC ()<ChartViewDelegate,AddWelnessDelegate,AddTraingDelegate>
 {
     AddWellnessRatingVC * objWell;
     TrainingLoadVC * objtraing;
@@ -87,6 +87,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    self.topviewHeight.constant = 270;
+    self.traingViewHeight.constant = 350;
+    
     objWebservice = [[WebService alloc]init];
     objtraing = [[TrainingLoadVC alloc] initWithNibName:@"TrainingLoadVC" bundle:nil];
     objtraing.view.frame = CGRectMake(0,10, self.trainingview.bounds.size.width, self.trainingview.bounds.size.height);
@@ -118,7 +122,10 @@
 
 -(void)reloaddataVC
 {
-    [self viewDidLoad];
+   // [self viewDidLoad];
+    
+    self.topviewHeight.constant = 270;
+    self.traingViewHeight.constant = 350;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -127,6 +134,8 @@
     SWRevealViewController *revealController = [self revealViewController];
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
+    self.topviewHeight.constant = 270;
+    self.traingViewHeight.constant = 350;
     
 }
 
@@ -139,6 +148,7 @@
         objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
         objUpdate.TodayLoadArray = self.todaysLoadArray;
         objUpdate.isToday = @"yes";
+        objUpdate.Delegate = self;
         objUpdate.view.frame = CGRectMake(0,0, self.RootTrainingView.bounds.size.width, self.RootTrainingView.bounds.size.height);
         [self.RootTrainingView addSubview:objUpdate.view];
         self.traingViewHeight.constant = 600;
@@ -160,6 +170,7 @@
         
         objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
         objUpdate.YesterdayLoadArray = self.yesterdayLoadArray;
+        objUpdate.Delegate = self;
         objUpdate.isYesterday = @"yes";
         objUpdate.view.frame = CGRectMake(0,0, self.RootTrainingView.bounds.size.width, self.RootTrainingView.bounds.size.height);
         [self.RootTrainingView addSubview:objUpdate.view];
@@ -173,6 +184,7 @@
     isTraingLoadExpand = YES;
     objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
     objUpdate.view.frame = CGRectMake(0,0, self.RootTrainingView.bounds.size.width, self.RootTrainingView.bounds.size.height);
+    objUpdate.Delegate = self;
     [self.RootTrainingView addSubview:objUpdate.view];
     self.traingViewHeight.constant = 600;
     [self setTotalScroll];
@@ -182,6 +194,7 @@
     isWellnessExpand = YES;
     
     objWell = [[AddWellnessRatingVC alloc] initWithNibName:@"AddWellnessRatingVC" bundle:nil];
+    objWell.Delegate = self;
     objWell.view.frame = CGRectMake(0,0, self.topView.bounds.size.width, self.topView.bounds.size.height);
     [self.topView addSubview:objWell.view];
     self.topviewHeight.constant = 578;
@@ -197,7 +210,11 @@
     }
     else if(isWellnessExpand == YES || isTraingLoadExpand == YES)
     {
-        self.CommonViewHeight.constant = 1200;
+        self.CommonViewHeight.constant = 1350;
+    }
+    else if(isWellnessExpand == NO && isTraingLoadExpand == NO)
+    {
+        self.CommonViewHeight.constant = 1070;
     }
     
 }
@@ -209,10 +226,13 @@
     
     objWell = [[AddWellnessRatingVC alloc] initWithNibName:@"AddWellnessRatingVC" bundle:nil];
     objWell.isFetch= @"yes";
-        objWell.fetchArray = self.fetchedArray;
+    isWellnessExpand = YES;
+    objWell.Delegate = self;
+    objWell.fetchArray = self.fetchedArray;
     objWell.view.frame = CGRectMake(0,0, self.topView.bounds.size.width, self.topView.bounds.size.height);
     [self.topView addSubview:objWell.view];
     self.topviewHeight.constant = 578;
+        [self setTotalScroll];
     }
     
 }
@@ -519,6 +539,7 @@
     [_chartView setScaleEnabled:YES];
     _chartView.drawGridBackgroundEnabled = NO;
     _chartView.pinchZoomEnabled = YES;
+  
     
     //  _chartView.backgroundColor = [UIColor colorWithWhite:204/255.f alpha:1.f];
     _chartView.backgroundColor = [UIColor whiteColor];
@@ -531,10 +552,11 @@
     l.verticalAlignment = ChartLegendVerticalAlignmentBottom;
     l.orientation = ChartLegendOrientationHorizontal;
     l.drawInside = NO;
+    l.enabled = NO;
     
     
     ChartXAxis *xAxis = _chartView.xAxis;
-    xAxis.labelFont = [UIFont systemFontOfSize:11.f];
+    xAxis.labelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:9.f];
     xAxis.labelTextColor = UIColor.blackColor;
     xAxis.drawGridLinesEnabled = NO;
     xAxis.drawAxisLineEnabled = NO;
@@ -547,7 +569,23 @@
     
     ChartYAxis *leftAxis = _chartView.leftAxis;
     leftAxis.labelTextColor = [UIColor colorWithRed:51/255.f green:181/255.f blue:229/255.f alpha:1.f];
-    leftAxis.axisMaximum = 100.0;
+    
+    
+    
+    NSMutableArray *TotalValuesArr = [[NSMutableArray alloc]init];
+    for (int i = 0; i < self.BowlingloadYArray.count; i++)
+    {
+        //        double mult = range / 2.0;
+        //        double val = (double) (arc4random_uniform(mult)) + 50;
+        
+        int val = [self.BowlingloadYArray[i] intValue];
+        [TotalValuesArr addObject:[NSNumber numberWithInt:val]];
+    }
+    
+    NSNumber *maxNumber = [TotalValuesArr valueForKeyPath:@"@max.self"];
+    NSLog(@"%@", maxNumber);
+    
+    leftAxis.axisMaximum = [maxNumber floatValue]+1;
     leftAxis.axisMinimum = 0.0;
     leftAxis.drawGridLinesEnabled = YES;
     leftAxis.drawZeroLineEnabled = NO;
@@ -1059,7 +1097,21 @@
     
 }
 
+-(void)closeWellnessSource
+{
+    self.topviewHeight.constant = 270;
+    isWellnessExpand = NO;
+    [self setTotalScroll];
+    [self.topView updateConstraintsIfNeeded];
+}
 
+-(void)closeUpdateTrainingSource
+{
+    self.traingViewHeight.constant = 350;
+    isTraingLoadExpand = NO;
+    [self setTotalScroll];
+    [self.RootTrainingView updateConstraintsIfNeeded];
+}
 
 
 

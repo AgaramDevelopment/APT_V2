@@ -77,7 +77,8 @@
     //sessionArray = [[NSMutableArray alloc] initWithObjects:@"Session 1", @"Session 2", @"Session 3", nil];
     //activityArray = [[NSMutableArray alloc] initWithObjects:@"Cardio", @"Strengthening", @"Bowling", nil];
    // valueArray = [[NSMutableArray alloc] initWithObjects:@"245", @"124", @"342", nil];
-     self.popViewtable.hidden = YES;
+    self.popViewtable.hidden = YES;
+    self.tapView.hidden = YES;
     [self samplePieChart];
     [self DropDownWebservice];
     
@@ -139,6 +140,7 @@
     isActivity = YES;
     isRpe = NO;
     self.popViewtable.hidden = NO;
+    self.tapView.hidden = NO;
     self.poptableWidth.constant = self.ActivityFilterview.frame.size.width;
     self.poptableXposition.constant = self.ActivityFilterview.frame.origin.x;
     self.poptableyposition.constant = self.ActivityFilterview.frame.origin.y;
@@ -155,6 +157,7 @@
     isActivity = NO;
     isRpe = YES;
     self.popViewtable.hidden = NO;
+    self.tapView.hidden = NO;
     self.poptableWidth.constant = self.RpeFilterview.frame.size.width;
     self.poptableXposition.constant = self.RpeFilterview.frame.origin.x;
     self.poptableyposition.constant = self.RpeFilterview.frame.origin.y;
@@ -209,6 +212,7 @@
     self.rpelbl.text = @"";
     self.ballslbl.text = @"";
     self.UpdateBtn.hidden = YES;
+    self.sessionBtn.hidden = NO;
     
 }
 
@@ -380,7 +384,7 @@
         {
         self.activitylbl.text = [[self.DropdownDataArray valueForKey:@"MetaSubcodeDescription"] objectAtIndex:indexPath.row];
         ActivityCode = [[self.DropdownDataArray valueForKey:@"MetaSubCode"] objectAtIndex:indexPath.row];
-        //self.popViewtable.hidden = YES;
+        self.tapView.hidden = YES;
             [self removeAnimate];
         }
         
@@ -388,7 +392,7 @@
         {
             self.rpelbl.text = [[self.DropdownDataArray valueForKey:@"MetaSubcodeDescription"] objectAtIndex:indexPath.row];
             rpeCode = [[self.DropdownDataArray valueForKey:@"MetaSubCode"] objectAtIndex:indexPath.row];
-            //self.popViewtable.hidden = YES;
+            self.tapView.hidden = YES;
             [self removeAnimate];
         }
     }
@@ -451,6 +455,18 @@
         {
         color = [UIColor colorWithRed:(165/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:1.0f];
         }
+    if(index==4)
+    {
+        color = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:1.0f];
+    }
+    if(index==5)
+    {
+        color = [UIColor colorWithRed:(255/255.0f) green:(165/255.0f) blue:(42/255.0f) alpha:1.0f];
+    }
+    if(index==6)
+    {
+        color = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(255/255.0f) alpha:1.0f];
+    }
     return color;
         //return GetRandomUIColor();
 }
@@ -485,6 +501,18 @@
             {
             return 100/obj;
             }
+            if(index ==4)
+            {
+                return 100/obj;
+            }
+            if(index ==5)
+            {
+                return 100/obj;
+            }
+            if(index ==6)
+            {
+                return 100/obj;
+            }
         }
     
     return 0;
@@ -514,6 +542,13 @@
         }
     
     return obj;
+}
+
+-(IBAction)closeView:(id)sender
+{
+    self.popViewtable.hidden = YES;
+    self.tapView.hidden = YES;
+    
 }
 
 -(void)DropDownWebservice
@@ -573,7 +608,12 @@ if([_isToday isEqualToString:@"yes"])
         [dic setObject:[NSString stringWithFormat:@"%d",total] forKey:@"Value"];
         [dic setObject:[NSString stringWithFormat:@"%d",rpecount] forKey:@"rpeValue"];
         [dic setObject:[NSString stringWithFormat:@"%d",timecount] forKey:@"timeValue"];
-        [dic setObject:[[self.TodayLoadArray valueForKey:@"BALL"] objectAtIndex:i] forKey:@"ballsValue"];
+        
+        NSString *ball = [[self.TodayLoadArray valueForKey:@"BALL"] objectAtIndex:i];
+        NSArray *arr = [ball componentsSeparatedByString:@"."];
+        [dic setObject:arr[0] forKey:@"ballsValue"];
+        
+       // [dic setObject:[[self.TodayLoadArray valueForKey:@"BALL"] objectAtIndex:i] forKey:@"ballsValue"];
         
         [sessionArray addObject:dic];
     }
@@ -626,7 +666,6 @@ if([_isToday isEqualToString:@"yes"])
             
             NSString *ball = [[self.YesterdayLoadArray valueForKey:@"BALL"] objectAtIndex:i];
             NSArray *arr = [ball componentsSeparatedByString:@"."];
-            
             [dic setObject:arr[0] forKey:@"ballsValue"];
             
             //[dic setObject:[[self.YesterdayLoadArray valueForKey:@"BALL"] objectAtIndex:i] forKey:@"ballsValue"];
@@ -767,6 +806,7 @@ if([_isToday isEqualToString:@"yes"])
                     NSLog(@"success");
                     [self ShowAlterMsg:@"Training Load Inserted Successfully"];
                     [self.view removeFromSuperview];
+                    [self.Delegate closeUpdateTrainingSource];
                     
                     // [self.pieChartRight reloadData];
                 }
@@ -849,16 +889,10 @@ if([_isToday isEqualToString:@"yes"])
                 {
                     NSLog(@"success");
                     [self ShowAlterMsg:@"Training Load Updated Successfully"];
+                   
                     [self.view removeFromSuperview];
-                    
-                    
-                    WellnessTrainingBowlingVC *traingObj = [[WellnessTrainingBowlingVC alloc]init];
-                    traingObj.reloaddataVC;
-                    
-//                    TrainingLoadVC *traingObj = [[TrainingLoadVC alloc]init];
-//                    traingObj.reloadPiechartData;
-                    
-                    // [self.pieChartRight reloadData];
+                    [self.Delegate closeUpdateTrainingSource];
+                  
                 }
                 
             }
@@ -876,6 +910,11 @@ if([_isToday isEqualToString:@"yes"])
         }];
     }
     
+}
+
+- (IBAction)CancelAction:(id)sender {
+    [self.view removeFromSuperview];
+    [self.Delegate closeUpdateTrainingSource];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField

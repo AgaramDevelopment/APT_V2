@@ -29,6 +29,15 @@
     BOOL isToday;
     BOOL isYesterday;
     
+    UIColor * color1;
+    UIColor * color2;
+    UIColor * color3;
+    UIColor * color4;
+    UIColor * color5;
+    UIColor * color6;
+    UIColor * color7;
+    
+    
     // PieChartView *pieChartView1, *pieChartView2;
 }
 
@@ -207,89 +216,108 @@
     if(index==0)
         {
         color = [UIColor colorWithRed:(210/255.0f) green:(105/255.0f) blue:(30/255.0f) alpha:1.0f];
+        color1 = [UIColor colorWithRed:(210/255.0f) green:(105/255.0f) blue:(30/255.0f) alpha:1.0f];
         }
     if(index==1)
         {
         color = [UIColor colorWithRed:(0/255.0f) green:(100/255.0f) blue:(0/255.0f) alpha:1.0f];
+        color2 = [UIColor colorWithRed:(0/255.0f) green:(100/255.0f) blue:(0/255.0f) alpha:1.0f];
         }
     if(index==2)
         {
         color = [UIColor colorWithRed:(0/255.0f) green:(139/255.0f) blue:(139/255.0f) alpha:1.0f];
+        color3 = [UIColor colorWithRed:(0/255.0f) green:(139/255.0f) blue:(139/255.0f) alpha:1.0f];
         }
     if(index==3)
         {
         color = [UIColor colorWithRed:(165/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:1.0f];
+        color4 = [UIColor colorWithRed:(165/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:1.0f];
         }
+    if(index==4)
+    {
+        color = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:1.0f];
+        color5 = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:1.0f];
+    }
+    if(index==5)
+    {
+        color = [UIColor colorWithRed:(255/255.0f) green:(165/255.0f) blue:(42/255.0f) alpha:1.0f];
+        color6 = [UIColor colorWithRed:(255/255.0f) green:(165/255.0f) blue:(42/255.0f) alpha:1.0f];
+    }
+    if(index==6)
+    {
+        color = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(255/255.0f) alpha:1.0f];
+        color7 = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(255/255.0f) alpha:1.0f];
+    }
     
-//    if(pieChartView == pieChartView1)
-//    {
-//    for(int i=0;i<self.yesterdayLoadArray.count;i++)
-//    {
-//        if(i==0)
-//        {
-//        self.yesterdayActivitynamelbl1.backgroundColor = color;
-//        }
-//        else if(i==1)
-//        {
-//            self.yesterdayActivitynamelbl2.backgroundColor = color;
-//        }
-//        else if(i==2)
-//        {
-//            self.yesterdayActivitynamelbl3.backgroundColor = color;
-//        }
-//        else if(i==3)
-//        {
-//            self.yesterdayActivitynamelbl4.backgroundColor = color;
-//        }
-//        else if(i==4)
-//        {
-//            self.yesterdayActivitynamelbl5.backgroundColor = color;
-//        }
-//        else if(i==5)
-//        {
-//            self.yesterdayActivitynamelbl6.backgroundColor = color;
-//        }
-//        else if(i==6)
-//        {
-//            self.yesterdayActivitynamelbl7.backgroundColor = color;
-//        }
-//    }
-//    }
+    if(pieChartView == _pieChartView1)
+    {
+    for(int i=0;i<self.yesterdayLoadArray.count;i++)
+    {
+        if(i==0)
+        {
+        self.yesterdayActivitynamelbl1.backgroundColor = color1;
+        }
+        else if(i==1)
+        {
+            self.yesterdayActivitynamelbl2.backgroundColor = color2;
+        }
+        else if(i==2)
+        {
+            self.yesterdayActivitynamelbl3.backgroundColor = color3;
+        }
+        else if(i==3)
+        {
+            self.yesterdayActivitynamelbl4.backgroundColor = color4;
+        }
+        else if(i==4)
+        {
+            self.yesterdayActivitynamelbl5.backgroundColor = color5;
+        }
+        else if(i==5)
+        {
+            self.yesterdayActivitynamelbl6.backgroundColor = color6;
+        }
+        else if(i==6)
+        {
+            self.yesterdayActivitynamelbl7.backgroundColor = color7;
+        }
+    }
+    }
 
-//    if(pieChartView == pieChartView2)
-//    {
-//    for(int i=0;i<self.todaysLoadArray.count;i++)
-//    {
-//        if(i==0)
-//        {
-//            self.todayActivitynamelbl1.backgroundColor = color;
-//        }
-//        else if(i==1)
-//        {
-//            self.todayActivitynamelbl2.backgroundColor = color;
-//        }
-//        else if(i==2)
-//        {
-//            self.todayActivitynamelbl3.backgroundColor = color;
-//        }
-//        else if(i==3)
-//        {
-//            self.todayActivitynamelbl4.backgroundColor = color;
-//        }
-//        else if(i==4)
-//        {
-//            self.todayActivitynamelbl5.backgroundColor = color;
-//        }
-//        else if(i==5)
-//        {
-//            self.todayActivitynamelbl6.backgroundColor = color;
-//        }
-//        else if(i==6)
-//        {
-//            self.todayActivitynamelbl7.backgroundColor = color;
-//        }
-//    }
-//    }
+    if(pieChartView == _pieChartView2)
+    {
+    for(int i=0;i<self.todaysLoadArray.count;i++)
+    {
+        if(i==0)
+        {
+            self.todayActivitynamelbl1.backgroundColor = color1;
+        }
+        else if(i==1)
+        {
+            self.todayActivitynamelbl2.backgroundColor = color2;
+        }
+        else if(i==2)
+        {
+            self.todayActivitynamelbl3.backgroundColor = color3;
+        }
+        else if(i==3)
+        {
+            self.todayActivitynamelbl4.backgroundColor = color4;
+        }
+        else if(i==4)
+        {
+            self.todayActivitynamelbl5.backgroundColor = color5;
+        }
+        else if(i==5)
+        {
+            self.todayActivitynamelbl6.backgroundColor = color6;
+        }
+        else if(i==6)
+        {
+            self.todayActivitynamelbl7.backgroundColor = color7;
+        }
+    }
+    }
     return color;
         //return GetRandomUIColor();
 }
@@ -331,6 +359,18 @@
             return 100/obj;
         }
         if(index ==3)
+        {
+            return 100/obj;
+        }
+        if(index ==4)
+        {
+            return 100/obj;
+        }
+        if(index ==5)
+        {
+            return 100/obj;
+        }
+        if(index ==6)
         {
             return 100/obj;
         }

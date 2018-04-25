@@ -195,14 +195,14 @@
 }
 //
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-////    if(!IS_IPHONE_DEVICE)
-////    {
-////        return 23.0;
-////    }
-////    else{
-////        return 10.0;
-////    }
-//
+//    if(!IS_IPHONE_DEVICE)
+//    {
+//        return 23.0;
+//    }
+//    else{
+//        return 10.0;
+//    }
+
     return 10.0;
 //
 }

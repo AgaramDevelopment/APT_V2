@@ -228,6 +228,8 @@
 		18AC345E203EE50C003EE0F0 /* CoachBowlingLoad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AC345C203EE50C003EE0F0 /* CoachBowlingLoad.xib */; };
 		18B6D0ED203BDD580003CBA3 /* TrainingLoadGraphVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6D0EB203BDD570003CBA3 /* TrainingLoadGraphVC.m */; };
 		18B6D0EE203BDD580003CBA3 /* TrainingLoadGraphVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B6D0EC203BDD570003CBA3 /* TrainingLoadGraphVC.xib */; };
+		18C57797209076C3001CAE5D /* InjuryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C57794209076C3001CAE5D /* InjuryVC.xib */; };
+		18C57798209076C3001CAE5D /* InjuryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C57796209076C3001CAE5D /* InjuryVC.m */; };
 		18DF185C202B087200AB9DCF /* RGSPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF185A202B087200AB9DCF /* RGSPreviewView.m */; };
 		18DF185D202B087200AB9DCF /* RGSColorSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF185B202B087200AB9DCF /* RGSColorSlider.m */; };
 		18E07115204702930020D8EE /* InjuryAndIllnessCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E07110204702920020D8EE /* InjuryAndIllnessCell.m */; };
@@ -334,8 +336,6 @@
 		CEBD2A81202899BB000AFD1B /* DBMANAGERSYNC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2A7B202899BB000AFD1B /* DBMANAGERSYNC.m */; };
 		CEBD2A82202899BB000AFD1B /* DBAConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2A7E202899BB000AFD1B /* DBAConnection.m */; };
 		CEBD2A8D20289B8C000AFD1B /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEBD2A8C20289B8C000AFD1B /* ViewController.xib */; };
-		CEBD2A9220289C96000AFD1B /* InjuryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBD2A9020289C96000AFD1B /* InjuryVC.m */; };
-		CEBD2A9320289C96000AFD1B /* InjuryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEBD2A9120289C96000AFD1B /* InjuryVC.xib */; };
 		CEC34C352046B2A10058ACC3 /* RecentFitnessGraph.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC34C322046B2A10058ACC3 /* RecentFitnessGraph.xib */; };
 		CEC34C362046B2A10058ACC3 /* RecentFitnessGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC34C332046B2A10058ACC3 /* RecentFitnessGraph.m */; };
 		CEC34C552046B8630058ACC3 /* CustomCollectionLayerBowling.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC34C542046B8630058ACC3 /* CustomCollectionLayerBowling.swift */; };
@@ -717,6 +717,9 @@
 		18B6D0EA203BDD570003CBA3 /* TrainingLoadGraphVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingLoadGraphVC.h; sourceTree = "<group>"; };
 		18B6D0EB203BDD570003CBA3 /* TrainingLoadGraphVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingLoadGraphVC.m; sourceTree = "<group>"; };
 		18B6D0EC203BDD570003CBA3 /* TrainingLoadGraphVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrainingLoadGraphVC.xib; sourceTree = "<group>"; };
+		18C57794209076C3001CAE5D /* InjuryVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InjuryVC.xib; sourceTree = "<group>"; };
+		18C57795209076C3001CAE5D /* InjuryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InjuryVC.h; sourceTree = "<group>"; };
+		18C57796209076C3001CAE5D /* InjuryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InjuryVC.m; sourceTree = "<group>"; };
 		18DF1858202B087100AB9DCF /* RGSColorSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGSColorSlider.h; sourceTree = "<group>"; };
 		18DF1859202B087100AB9DCF /* RGSPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RGSPreviewView.h; sourceTree = "<group>"; };
 		18DF185A202B087200AB9DCF /* RGSPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RGSPreviewView.m; sourceTree = "<group>"; };
@@ -877,9 +880,6 @@
 		CEBD2A7D202899BB000AFD1B /* DBAConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBAConnection.h; sourceTree = "<group>"; };
 		CEBD2A7E202899BB000AFD1B /* DBAConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBAConnection.m; sourceTree = "<group>"; };
 		CEBD2A8C20289B8C000AFD1B /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
-		CEBD2A8F20289C96000AFD1B /* InjuryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InjuryVC.h; sourceTree = "<group>"; };
-		CEBD2A9020289C96000AFD1B /* InjuryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InjuryVC.m; sourceTree = "<group>"; };
-		CEBD2A9120289C96000AFD1B /* InjuryVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InjuryVC.xib; sourceTree = "<group>"; };
 		CEC34C322046B2A10058ACC3 /* RecentFitnessGraph.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecentFitnessGraph.xib; sourceTree = "<group>"; };
 		CEC34C332046B2A10058ACC3 /* RecentFitnessGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentFitnessGraph.m; sourceTree = "<group>"; };
 		CEC34C342046B2A10058ACC3 /* RecentFitnessGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentFitnessGraph.h; sourceTree = "<group>"; };
@@ -2400,9 +2400,9 @@
 		CEBD2A8E20289C96000AFD1B /* InjuryVC */ = {
 			isa = PBXGroup;
 			children = (
-				CEBD2A8F20289C96000AFD1B /* InjuryVC.h */,
-				CEBD2A9020289C96000AFD1B /* InjuryVC.m */,
-				CEBD2A9120289C96000AFD1B /* InjuryVC.xib */,
+				18C57795209076C3001CAE5D /* InjuryVC.h */,
+				18C57796209076C3001CAE5D /* InjuryVC.m */,
+				18C57794209076C3001CAE5D /* InjuryVC.xib */,
 			);
 			path = InjuryVC;
 			sourceTree = "<group>";
@@ -2694,7 +2694,6 @@
 				18E07118204702930020D8EE /* InjuryAndIllnessVC.xib in Resources */,
 				04BC4B3E208632E900CEB23E /* VideoPlayerUploadVC.xib in Resources */,
 				04BC4A0B2085FCBC00CEB23E /* MCBowlingRootVC.xib in Resources */,
-				CEBD2A9320289C96000AFD1B /* InjuryVC.xib in Resources */,
 				CEB2B98920257BBD00E7D5E4 /* MontserratAlternates-ExtraBoldItalic.otf in Resources */,
 				1894996120875A3C002ECEE0 /* PlannerCell.xib in Resources */,
 				04BC4A072085FC4000CEB23E /* BowlingView.xib in Resources */,
@@ -2704,6 +2703,7 @@
 				18949A3220875C5F002ECEE0 /* redCircle_mini.png in Resources */,
 				18AC344C203E812C003EE0F0 /* ReportsVC.xib in Resources */,
 				CEB2B97C20257BBD00E7D5E4 /* Montserrat-LightItalic.otf in Resources */,
+				18C57797209076C3001CAE5D /* InjuryVC.xib in Resources */,
 				04BC4A322085FE3F00CEB23E /* BattingOverBlockView.xib in Resources */,
 				CEB2B98120257BBD00E7D5E4 /* Montserrat-SemiBoldItalic.otf in Resources */,
 				18EF9D1520316C3000CDA268 /* PlayerListCollectionViewCell.xib in Resources */,
@@ -2801,6 +2801,7 @@
 				18A68ACB20371A7E00EBA479 /* HorizontalXLblFormatter.m in Sources */,
 				04BC4A432085FF4200CEB23E /* MCBattingRootVC.m in Sources */,
 				042542B62028A1110088B87B /* HomeScreenStandingsVC.m in Sources */,
+				18C57798209076C3001CAE5D /* InjuryVC.m in Sources */,
 				04BC4B40208632E900CEB23E /* VideoGalleryCell.m in Sources */,
 				18A590682047C4C8002BBF64 /* LargeValueFormatter.swift in Sources */,
 				04BC4B55208637AD00CEB23E /* UIScrollView+APParallaxHeader.m in Sources */,
@@ -2955,7 +2956,6 @@
 				CEB2B9BD2025939F00E7D5E4 /* SWRevealViewController.m in Sources */,
 				04BC4A3D2085FEB500CEB23E /* BattingView.m in Sources */,
 				18AAC6DC2046192B00D5495A /* CustomCollectionStandings.swift in Sources */,
-				CEBD2A9220289C96000AFD1B /* InjuryVC.m in Sources */,
 				04BC4A1F2085FD9100CEB23E /* StandingVC.m in Sources */,
 				CEBD2A82202899BB000AFD1B /* DBAConnection.m in Sources */,
 				18EF9D1320316C3000CDA268 /* CustomCollectionViewLayout.swift in Sources */,

@@ -33,8 +33,9 @@
 @property (nonatomic,weak) IBOutlet UIView * site_view;
 @property (nonatomic,weak) IBOutlet UIView * type_view;
 @property (nonatomic,weak) IBOutlet UIView * casuse_view;
+@property (strong, nonatomic) IBOutlet UIView *fileView;
+@property (weak, nonatomic) IBOutlet UIView *filepopview;
 
-@property (nonatomic,weak)IBOutlet UIView * filepopview;
 @property (nonatomic,weak) IBOutlet UIButton * selectFile;
 @property (nonatomic,strong) NSMutableArray * commonArray;
 @property (nonatomic,strong) NSMutableArray * MainArray;
@@ -45,11 +46,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *sitelbl;
 @property (weak, nonatomic) IBOutlet UILabel *typelbl;
 @property (weak, nonatomic) IBOutlet UILabel *causelbl;
+@property (weak, nonatomic) IBOutlet UIImageView *imgFile1;
 
 
 @property (nonatomic,strong) IBOutlet UIButton * occurranceBtn;
 
 @property (nonatomic,strong) IBOutlet UIView * locationselectview;
+
+@property (nonatomic,strong) IBOutlet UIView * TypeAndCaseView;
 
 
 @end

@@ -84,6 +84,8 @@
 
 @implementation WellnessTrainingBowlingVC
 
+@synthesize navView;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -116,7 +118,7 @@
     
     isWellnessExpand =NO;
     isTraingLoadExpand = NO;
-    
+    [self customnavigationmethod];
     
 }
 
@@ -136,6 +138,52 @@
     [revealController.tapGestureRecognizer setEnabled:YES];
     self.topviewHeight.constant = 270;
     self.traingViewHeight.constant = 350;
+    
+}
+
+-(void)customnavigationmethod
+{
+    CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    
+    //    [self.view addSubview:objCustomNavigation.view];
+    //    objCustomNavigation.tittle_lbl.text=@"";
+    
+    UIView* view= self.view.subviews.firstObject;
+    [view addSubview:objCustomNavigation.view];
+    
+    BOOL isBackEnable = [[NSUserDefaults standardUserDefaults] boolForKey:@"BACK"];
+    
+    if (isBackEnable) {
+        objCustomNavigation.menu_btn.hidden =YES;
+        objCustomNavigation.btn_back.hidden =NO;
+        [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else
+    {
+        objCustomNavigation.menu_btn.hidden =NO;
+        objCustomNavigation.btn_back.hidden =YES;
+        [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    //    objCustomNavigation.btn_back.hidden =isBackEnable;
+    //
+    //    objCustomNavigation.menu_btn.hidden = objCustomNavigation.btn_back.isHidden;
+    //    [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack:) forControlEvents:UIControlEventTouchUpInside];
+    //
+    //    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+}
+
+-(void)actionBack
+{
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"BACK"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [appDel.frontNavigationController popViewControllerAnimated:YES];
     
 }
 

@@ -28,7 +28,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    
+    [self customnavigationmethod];
+
 //    tagArray = @[@""];
     
     
@@ -104,7 +105,6 @@
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-//    [self customnavigationmethod];
 
 //    blueLayer = [[CALayer alloc] init];
 //    blueLayer.frame = CGRectMake(100, 100, 100, 100);
@@ -188,16 +188,16 @@
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
     
-    
-    objCustomNavigation.menu_btn.hidden =YES;
-    objCustomNavigation.btn_back.hidden =NO;
+    UIView* view = self.view.subviews.firstObject;
+    [view addSubview:objCustomNavigation.view];
+
+    objCustomNavigation.menu_btn.hidden = YES;
+    objCustomNavigation.btn_back.hidden = NO;
     [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
 
-    [self.navBarView addSubview:objCustomNavigation.view];
+//    [self.navBarView addSubview:objCustomNavigation.view];
 
 }
-
-
 
 -(void)actionBack
 {
@@ -236,7 +236,7 @@
     
     if (![sender tag]) {
         // show Back side
-        
+        self.BackView.frame = CGRectMake(0, 0, FrontView.frame.size.width, FrontView.frame.size.height);
         [FrontView addSubview:self.BackView];
 
 //        [UIView transitionWithView:self.BackView

@@ -283,14 +283,26 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    MyStatsBattingVC* objStats = [MyStatsBattingVC new];
-    objStats.selectedPlayerCode = [[self.CommonArray objectAtIndex:indexPath.item] valueForKey:@"AthleteCode"];
-    objStats.selectedPlayerName = [[self.CommonArray objectAtIndex:indexPath.item] valueForKey:@"AthleteName"];
-//    [objStats viewDidLoad];
-//    objStats.myStatsViewHeight.constant = 60;
-//    objStats.navViewHeight.constant = 35;
-//    objStats.view.frame = CGRectMake(0, 0, objStats.view.frame.size.width, objStats.view.frame.size.height);
-    [appDel.frontNavigationController pushViewController:objStats animated:YES];
+    if ([AppCommon isCoach]) {
+        
+        PlayerDetailViewController* VC = [PlayerDetailViewController new];
+        VC.selectedPlayerArray = [self.CommonArray objectAtIndex:indexPath.row];
+        [appDel.frontNavigationController pushViewController:VC animated:YES];
+        
+    }
+    else
+    {
+        MyStatsBattingVC* objStats = [MyStatsBattingVC new];
+        objStats.selectedPlayerCode = [[self.CommonArray objectAtIndex:indexPath.item] valueForKey:@"AthleteCode"];
+        objStats.selectedPlayerName = [[self.CommonArray objectAtIndex:indexPath.item] valueForKey:@"AthleteName"];
+        //    [objStats viewDidLoad];
+        //    objStats.myStatsViewHeight.constant = 60;
+        //    objStats.navViewHeight.constant = 35;
+        //    objStats.view.frame = CGRectMake(0, 0, objStats.view.frame.size.width, objStats.view.frame.size.height);
+        [appDel.frontNavigationController pushViewController:objStats animated:YES];
+
+    }
+    
     
 }
 

@@ -70,7 +70,8 @@
     battingPitchData = [NSMutableArray new];
     
     
-    self.PlayerNamelbl.text = self.selectedPlayerName;
+//    self.PlayerNamelbl.text = self.selectedPlayerName;
+    self.PlayerNamelbl.text = [AppCommon GetUserName];
 //    lastIndex = NULL;
 //    selectedIndex = -1;
 //
@@ -107,7 +108,7 @@
     [super viewWillLayoutSubviews];
     [self customnavigationmethod];
 }
-
+/*
 -(void)customnavigationmethod
 {
     CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
@@ -121,6 +122,27 @@
     objCustomNavigation.menu_btn.hidden =YES;
     objCustomNavigation.btn_back.hidden =NO;
     [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
+}
+*/
+
+-(void)customnavigationmethod
+{
+    CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    
+        //    [self.view addSubview:objCustomNavigation.view];
+        //    objCustomNavigation.tittle_lbl.text=@"";
+    
+        //UIView* view= self.navigation_view.subviews.firstObject;
+    [self.navigationView addSubview:objCustomNavigation.view];
+    
+    objCustomNavigation.btn_back.hidden =YES;
+    objCustomNavigation.menu_btn.hidden =NO;
+    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+        //        [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(IBAction)didClickBackBtn:(id)sender
@@ -2570,6 +2592,8 @@
     {
         if (selectedIndex == indexPath.row)
             {
+                [cell.dropDowniPhoneImage setImage:[UIImage imageNamed:@"upArrow"]];
+                [cell.dropDowniPadImage setImage:[UIImage imageNamed:@"upArrow"]];
                 [cell setBackgroundColor:[UIColor lightGrayColor]];
                 [cell setAccessibilityTraits:UIAccessibilityTraitSelected];
                 CGFloat height = MIN(self.view.bounds.size.height, self.batttingTableView.contentSize.height);
@@ -2577,6 +2601,8 @@
                     cell.scoreView.hidden = NO;
                 [self.view layoutIfNeeded];
             } else {
+                [cell.dropDowniPhoneImage setImage:[UIImage imageNamed:@"downArrow"]];
+                [cell.dropDowniPadImage setImage:[UIImage imageNamed:@"downArrow"]];
                 [cell setBackgroundColor:[UIColor clearColor]];
                 [cell setAccessibilityTraits:0];
                     cell.scoreView.hidden = YES;
@@ -3120,6 +3146,8 @@
 
 -(IBAction)didClickDropDownButtonForExpandCell:(id)sender
 {
+    
+    
     UIButton *button = sender;
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag inSection:1];
     MyStatsBattingCell *cell = [self.batttingTableView cellForRowAtIndexPath:indexPath];

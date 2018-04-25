@@ -37,7 +37,7 @@ typedef enum {
     NSString * selectGameCode;
     NSString * selectTeamCode;
     NSString * selectPlayerCode;
-    
+    NSString* selectCauseCode;
     NSString * selectOnsetTypeCode;
     NSString * selectInjuryOccuranceCode;
     NSString * selectInjurySideCode;
@@ -69,6 +69,8 @@ typedef enum {
     BOOL isCT;
     BOOL isMRI;
     BOOL isBlood;
+    
+    NSInteger* dateTag;
 
 }
 
@@ -78,16 +80,10 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UILabel *lblFIle4;
 @property (weak, nonatomic) IBOutlet CustomButton *btnAssment;
 @property (weak, nonatomic) IBOutlet CustomButton *btnOnsetDate;
-//@property (nonatomic,strong)IBOutlet StepSlider * StSlider;
-
-
-
-
 
 @property (nonatomic,strong) NSMutableArray * gameArray;
 @property (nonatomic,strong) NSMutableArray * TeamArray;
 @property (nonatomic,strong) NSMutableArray * playerArray;
-
 
 @property (nonatomic,strong) NSMutableArray * TrainingArray;
 @property (nonatomic,strong) NSMutableArray * competitionArray;
@@ -97,7 +93,6 @@ typedef enum {
 @property (nonatomic,strong) NSMutableArray * injuryTypeArray;
 @property (nonatomic,strong) NSMutableArray * injuryCauseArray;
 @property (nonatomic,strong) NSMutableArray * objSelectInjuryArray;
-
 
 @property (nonatomic,strong) NSMutableArray * SelectOccuranceArray;
 @property (nonatomic,strong) NSMutableArray * SelectLocationArray;
@@ -114,9 +109,7 @@ typedef enum {
     
     objWebservice = [WebService new];
     _MainArray = [NSMutableArray new];
-    [self customnavigationmethod];
     [self setBorderwidthMethod];
-    self.filepopview.hidden = YES;
     
     
     self.Slider1.labels = @[@"1", @"2", @"3", @"4", @"5",@"6",@"7"];
@@ -141,13 +134,11 @@ typedef enum {
     self.TeamArray =[[NSMutableArray alloc]init];
     self.playerArray =[[NSMutableArray alloc]init];
     _commonArray = [NSMutableArray new];
-    [self FetchMetadatawebservice];
     
-    NSDictionary* occurance = @{@"occurance":@[@"Training",@"Competition"]};
-    NSDictionary* location = @{@"location":@[@"Header & Trunk",@"Upper Extremity",@"Lower Extremity"]};
-    NSDictionary* injurySite = @{@"injurysite":@[@"Anterior",@"Posterior",@"Medical",@"Lateral"]};
-
-    
+//    NSDictionary* occurance = @{@"occurance":@[@"Training",@"Competition"]};
+//    NSDictionary* location = @{@"location":@[@"Header & Trunk",@"Upper Extremity",@"Lower Extremity"]};
+//    NSDictionary* injurySite = @{@"injurysite":@[@"Anterior",@"Posterior",@"Medical",@"Lateral"]};
+    [self startFetchTeamPlayerGameService];
 
 }
 
@@ -157,6 +148,11 @@ typedef enum {
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
     
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(NSArray *)getInjurySite
@@ -247,71 +243,102 @@ typedef enum {
 -(IBAction)didClickOccurrencePopBtn:(id)sender
 {
     [self.pop_Tbl setHidden:NO];
-//    self.popviewYposition.constant = self.occurrence_view.frame.origin.y-95;
-//    self.popviewXposition.constant = self.view.frame.size.width - (self.view.frame.size.width/1.25);
-//    self.popviewWidth.constant = self.occurrence_view.frame.size.width-180;
-    
-    self.popviewYposition.constant = CGRectGetMaxY(self.occurrence_view.frame)+5;
-    self.popviewXposition.constant = CGRectGetMinX(self.occurrence_view.frame);
-    self.popviewWidth.constant = CGRectGetWidth(self.occurrence_view.frame);
+    self.popviewYposition.constant = CGRectGetMaxY(self.occurancelbl.frame)-50;
+    self.popviewXposition.constant = CGRectGetMinX(self.occurancelbl.superview.frame);
+    self.popviewWidth.constant = CGRectGetWidth(self.occurancelbl.superview.frame);
     [self.pop_Tbl updateConstraintsIfNeeded];
     
-    self.commonArray =[[NSMutableArray alloc]init];
-    _commonArray = [_MainArray valueForKey:@"Training"];
+    
+    
     
     isOccurrence = YES;
     isCasuse = NO;
-    isLocation = NO;
+    islocation = NO;
     isSite = NO;
     isType = NO;
-
+    
+    self.commonArray =[[NSMutableArray alloc]init];
+    // _commonArray = [_MainArray valueForKey:@"Training"];
+    
+    _commonArray = [_MainArray valueForKey:@"lstInjuryOccurance"];
+    
     [self.pop_Tbl reloadData];
     [self showAnimate];
-
     
 }
 
 -(IBAction)didClickLocationPopBtn:(id)sender
 {
-    self.popviewYposition.constant = self.location_view.frame.origin.y-85;
-    self.popviewXposition.constant = self.view.frame.size.width - (self.view.frame.size.width/1.25);
-    self.popviewWidth.constant = self.location_view.frame.size.width-180;
+    [self.pop_Tbl setHidden:NO];
+    self.popviewYposition.constant = CGRectGetMaxY(self.locationlbl.frame);
+    self.popviewXposition.constant = CGRectGetMinX(self.locationlbl.superview.frame);
+    self.popviewWidth.constant = CGRectGetWidth(self.locationlbl.superview.frame);
+    [self.pop_Tbl updateConstraintsIfNeeded];
+
     
+    islocation = YES;
     isCasuse = NO;
     isOccurrence = NO;
     isSite = NO;
     isType = NO;
-    isLocation = YES;
+    
 
     self.commonArray =[[NSMutableArray alloc]init];
-//    _commonArray = [_MainArray valueForKey:@"Training"];
-    [self.pop_Tbl setHidden:NO];
-    [self.pop_Tbl reloadData];
-    [self showAnimate];
-
+   // _commonArray = [_MainArray valueForKey:@"Training"];
+    _commonArray = [_MainArray valueForKey:@"lstInjuryLocation"];
+    
+        [self.pop_Tbl reloadData];
+        [self showAnimate];
+    
 }
 
 -(IBAction)didClicksitePopBtn:(id)sender
 {
-    self.popviewYposition.constant = CGRectGetMaxY(self.site_view.frame)+5;
-    self.popviewXposition.constant = self.site_view.frame.origin.x;
-    self.popviewWidth.constant = self.site_view.frame.size.width;
+    [self.pop_Tbl setHidden:NO];
+    self.popviewYposition.constant = CGRectGetMaxY(self.sitelbl.frame)+100;
+    self.popviewXposition.constant = CGRectGetMinX(self.sitelbl.superview.frame);
+    self.popviewWidth.constant = CGRectGetWidth(self.sitelbl.superview.frame);
     [self.pop_Tbl updateConstraintsIfNeeded];
+
+   
+    
+    
 
     isSite = YES;
     isCasuse = NO;
     isOccurrence = NO;
-    isLocation = NO;
+    islocation = NO;
     isType = NO;
+    
+    self.commonArray =[[NSMutableArray alloc]init];
+    // _commonArray = [self getInjurySite];
+    
+    _commonArray = [_MainArray valueForKey:@"lstInjurySite"];
+    
+    [self.pop_Tbl reloadData];
+    [self showAnimate];
 }
+
+
+
 -(IBAction)didClickTypeBtn:(id)sender
 {
-    [self.pop_Tbl setHidden:NO];
-    self.popviewYposition.constant = CGRectGetMaxY(self.type_view.superview.frame)+5;
-    self.popviewXposition.constant = self.type_view.frame.origin.x;
-    self.popviewWidth.constant = self.type_view.frame.size.width;
-    [self.pop_Tbl updateConstraintsIfNeeded];
     
+    [self.pop_Tbl setHidden:NO];
+//    self.popviewYposition.constant = CGRectGetMaxY(self.type_view.frame);
+    self.popviewYposition.constant = self.TypeAndCaseView.frame.origin.y-100;
+    self.popviewXposition.constant = CGRectGetMinX(self.typelbl.superview.frame);
+    self.popviewWidth.constant = CGRectGetWidth(self.typelbl.superview.frame);
+    
+    [self.pop_Tbl updateConstraintsIfNeeded];
+//    [self.pop_Tbl.topAnchor constraintEqualToAnchor:self.typelbl.bottomAnchor constant:0];
+//    [self.pop_Tbl.leadingAnchor constraintEqualToAnchor:self.typelbl.superview.leadingAnchor];
+//    [self.pop_Tbl.widthAnchor constraintEqualToAnchor:self.typelbl.superview.widthAnchor];
+//    [self.pop_Tbl.heightAnchor constraintEqualToConstant:200];
+//    [self.pop_Tbl setTranslatesAutoresizingMaskIntoConstraints:YES];
+    
+    
+
 //    self.popviewYposition.constant = CGRectGetMaxY(self.occurrence_view.frame)+5;
 //    self.popviewXposition.constant = CGRectGetMinX(self.occurrence_view.frame);
 //    self.popviewWidth.constant = CGRectGetWidth(self.occurrence_view.frame);
@@ -321,12 +348,13 @@ typedef enum {
     isType = YES;
     isCasuse = NO;
     isOccurrence = NO;
-    isLocation = NO;
+    islocation = NO;
     isSite = NO;
     
     self.commonArray =[[NSMutableArray alloc]init];
-    _commonArray = [_MainArray valueForKey:@"InjuryType"];
-
+   // _commonArray = [_MainArray valueForKey:@"InjuryType"];
+     _commonArray = [_MainArray valueForKey:@"lstInjuryType"];
+    
     [self.pop_Tbl reloadData];
     [self showAnimate];
     
@@ -334,23 +362,25 @@ typedef enum {
 -(IBAction)didClickCasuseBtn:(id)sender
 {
     [self.pop_Tbl setHidden:NO];
-    self.popviewYposition.constant = CGRectGetMaxY(self.casuse_view.superview.frame)+5;
-    self.popviewXposition.constant = self.casuse_view.frame.origin.x;
-    self.popviewWidth.constant = self.casuse_view.frame.size.width;
+   // self.popviewYposition.constant = CGRectGetMaxY(self.casuse_view.frame);
+    self.popviewYposition.constant = self.TypeAndCaseView.frame.origin.y-100;
+    self.popviewXposition.constant = CGRectGetMinX(self.causelbl.superview.frame);
+    self.popviewWidth.constant = CGRectGetWidth(self.causelbl.superview.frame);
     [self.pop_Tbl updateConstraintsIfNeeded];
 
 
     isCasuse = YES;
     isType = NO;
     isOccurrence = NO;
-    isLocation = NO;
+    islocation = NO;
     isSite = NO;
     self.commonArray =[[NSMutableArray alloc]init];
-    _commonArray = [_MainArray valueForKey:@"InjuryCause"];
-
+//    _commonArray = [_MainArray valueForKey:@"InjuryCause"];
+    _commonArray = [_MainArray valueForKey:@"lstInjuryCase"];
+    
     [self.pop_Tbl reloadData];
     [self showAnimate];
-
+    
 }
 
 -(IBAction)didClickDelayBtn:(id)sender
@@ -382,22 +412,27 @@ typedef enum {
 -(IBAction)didClickfilePopview:(id)sender
 {
     
-//    if(isSelectPop == NO)
-//    {
-//        self.filepopview.hidden = NO;
-//        isSelectPop = YES;
-//        [self showAnimate];
-//    }
-//    else
-//    {
-//        self.filepopview.hidden = YES;
-//        isSelectPop = NO;
-//        [self removeAnimate];
-//    }
+    self.fileView.frame = self.view.frame;
+    self.filepopview.frame = CGRectMake(self.filepopview.frame.origin.x, self.view.frame.size.height+self.filepopview.frame.size.height, self.fileView.frame.size.height, self.filepopview.frame.size.height);
     
-    [self.view bringSubviewToFront:self.filepopview];
-    [self.filepopview setHidden:NO];
-    
+    [self.view addSubview:self.fileView];
+
+    [self animationB2T];
+}
+
+-(void)animationB2T
+{
+    [UIView animateWithDuration:1.0f
+                          delay:0.0f
+                        options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                            
+                            self.filepopview.frame = CGRectMake(self.filepopview.frame.origin.x, self.view.frame.size.height-self.filepopview.frame.size.height, self.fileView.frame.size.height, self.fileView.frame.size.height);
+                            
+                            
+                        } completion:^(BOOL finished) {
+                            
+                        }];
+
 }
 
 - (void)showAnimate
@@ -559,12 +594,16 @@ typedef enum {
             
             if(responseObject >0)
             {
-                self.InjuryListArray =[[NSMutableArray alloc] init];
-                self.InjuryListArray =[responseObject valueForKey:@"InjuryWebs"];
-                if(self.InjuryListArray.count>0)
-                {
-//                    [self.injuryTbl reloadData];
-                }
+                
+                _MainArray = responseObject;
+//                self.InjuryListArray =[[NSMutableArray alloc] init];
+//                self.InjuryListArray =[responseObject valueForKey:@"InjuryWebs"];
+//                if(self.InjuryListArray.count>0)
+//                {
+////                    [self.injuryTbl reloadData];
+//                    
+//                    
+//                }
             }
             
             [AppCommon hideLoading];
@@ -630,18 +669,31 @@ typedef enum {
     objTabVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     objTabVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [objTabVC.view setBackgroundColor:[UIColor clearColor]];
-    [self presentViewController:objTabVC animated:YES completion:nil];
+    
+    [self presentViewController:objTabVC animated:YES completion:^{
+        dateTag = [sender tag];
+    }];
     
 }
 
 -(void)selectedDate:(NSString *)Date
 {
-    self.date_lbl.text = Date;
+    if (dateTag == 0) {
+//        NSString* str_date = [NSString stringWithFormat:@"Assessment Date \n %@",Date];
+        _btnAssment.titleLabel.text = Date;
+    }
+    else if(dateTag == 1)
+    {
+//        NSString* str_date = [NSString stringWithFormat:@"Onset Date \n %@",Date];
+        _btnOnsetDate.titleLabel.text = Date;
+    }
+    else
+    {
+        self.date_lbl.text = Date;
+
+    }
     
-//    currentlySelectedDate = Date;
     NSLog(@"selectedDate %@ ",Date);
-//    [self tableValuesMethod];
-    
 }
 
 - (NSString *)encodeToBase64String:(UIImage *)image {
@@ -652,6 +704,7 @@ typedef enum {
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc]init];
     imagePickerController.delegate = self;
     imagePickerController.sourceType =  UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePickerController.allowsEditing = YES;
     [self presentViewController:imagePickerController animated:YES completion:nil];
 }
 - (void)imagePickerController:(UIImagePickerController *)picker
@@ -666,6 +719,7 @@ typedef enum {
     if(isXray ==YES)
     {
 //        self.xrayLbl.text =savedImagePath;
+        self.imgFile1.image = image;
         xrData = [self encodeToBase64String:imageToPost];
     }
     else if (isCT ==YES)
@@ -687,6 +741,65 @@ typedef enum {
     [picker dismissViewControllerAnimated:YES completion:nil];
     
 }
+
+-(void)loadData:(NSArray *)array
+{
+    /*
+     BloodTestName = "";
+     CTScansName = "";
+     ChiefCompliant = "p[op[o";
+     ClientCode = "<null>";
+     CreatedBy = USM0000002;
+     DateOfAssessment = "09/01/2017";
+     ExpectedDateOfRecovery = "09/16/2017";
+     ExpertOptionTakenCode = MSC215;
+     GameCode = "";
+     InjuaryLocationCode = "<null>";
+     InjuaryOccuranceCode = MSC130;
+     InjuaryOccuranceSubCode = MSC133;
+     InjuryCaseCode1 = "<null>";
+     InjuryCauseCode = MSC213;
+     InjuryCode = INJ0000002;
+     InjuryLocationCode = MSC138;
+     InjuryLocationSubCode = MSC141;
+     InjuryLocationSubCode1 = "<null>";
+     InjuryName = "oip[o";
+     InjurySide1 = "<null>";
+     InjurySideCode = MSC170;
+     InjurySite1 = "<null>";
+     InjurySiteCode = MSC168;
+     InjuryTypeCode = MSC187;
+     InjuryTypeCode1 = "<null>";
+     Message = "<null>";
+     MriScansName = "";
+     MultiInjury = No;
+     OnSetDate = "09/08/2017";
+     OnSetType = MSC128;
+     PlayerCode = AMR0000010;
+     PlayerName = RohanKunnummal;
+     Status = 0;
+     TeamCode = "";
+     Vas = 3;
+     XRaysName = "";
+     */
+    NSString* str_ass_date = [NSString stringWithFormat:@"Assessment Date %@",[array valueForKey:@"DateOfAssessment"]];
+    NSString* str_onSet_date = [NSString stringWithFormat:@"OnSet Date %@",[array valueForKey:@"OnSetDate"]];
+    NSString* str_chiefComplaint = [NSString stringWithFormat:@"%@",[array valueForKey:@"ChiefCompliant"]];
+    NSString* str_onsetType = [NSString stringWithFormat:@"%@",[array valueForKey:@"OnSetType"]];
+    NSString* str_occurance = [NSString stringWithFormat:@"%@",[array valueForKey:@"InjuaryOccuranceCode"]];
+    NSString* str_location = [NSString stringWithFormat:@"%@",[array valueForKey:@"InjuryLocationCode"]];
+    NSString* str_side = [NSString stringWithFormat:@"%@",[array valueForKey:@"InjurySideCode"]];
+    NSString* str_site = [NSString stringWithFormat:@"%@",[array valueForKey:@"InjurySiteCode"]];
+    NSString* str_VAS = [NSString stringWithFormat:@"%@",[array valueForKey:@"Vas"]];
+    NSString* str_type = [NSString stringWithFormat:@"%@",[array valueForKey:@"InjuryTypeCode"]];
+    NSString* str_cause = [NSString stringWithFormat:@"%@",[array valueForKey:@"InjuryCauseCode"]];
+    NSString* str_export_option = [NSString stringWithFormat:@"%@",[array valueForKey:@"ExpertOptionTakenCode"]];
+    NSString* str_DOR = [NSString stringWithFormat:@"%@",[array valueForKey:@"ExpectedDateOfRecovery"]];
+
+    
+}
+
+
 
 -(void)InsertWebservice
 {
@@ -714,59 +827,61 @@ typedef enum {
             [dic setObject:@"" forKey:@"PLAYERCODE"];
         }
     
+//    NSString*
+    
 //        if(self.assessmentLbl.text)   [dic    setObject:self.assessmentLbl.text     forKey:@"DATEOFASSESSMENT"];
 //        if(self.onSetLbl.text)   [dic    setObject:self.onSetLbl.text     forKey:@"ONSETDATE"];
-//        if(selectOnsetTypeCode)   [dic    setObject:selectOnsetTypeCode     forKey:@"ONSETTYPE"];
+        if(selectOnsetTypeCode)   [dic    setObject:selectOnsetTypeCode     forKey:@"ONSETTYPE"];
 //        if(self.injuryNameTxt.text)   [dic    setObject:self.injuryNameTxt.text    forKey:@"INJURYNAME"];
     
         if(self.compliant_Txt.hasText)   [dic    setObject:self.compliant_Txt.text     forKey:@"CHIEFCOMPLIANT"];
     
         if(selectsliderValue)   [dic    setObject:selectsliderValue     forKey:@"VAS"];
-//        if(selectInjuryOccuranceCode)   [dic    setObject:selectInjuryOccuranceCode     forKey:@"INJURYOCCURANCECODE"];
-//        if(selectoccurancecode)   [dic    setObject:selectoccurancecode     forKey:@"INJURYOCCURANCESUBCODE"];
-//        if(selectInjuryLocationCode)   [dic    setObject:selectInjuryLocationCode     forKey:@"INJURYLOCATIONCODE"];
-//        if(selectlocationCode)   [dic    setObject:selectlocationCode     forKey:@"INJURYLOCATIONSUBCODE"];
-//        if(selectInjurySiteCode)   [dic    setObject:selectInjurySiteCode     forKey:@"INJURYSITECODE"];
-//        if(selectInjurySideCode)   [dic    setObject:selectInjurySideCode     forKey:@"INJURYSIDECODE"];
-//        if(injuryTypeCode)   [dic    setObject:injuryTypeCode     forKey:@"INJURYTYPECODE"];
-//        if(injuryCausecode)   [dic    setObject:injuryCausecode     forKey:@"INJURYCAUSECODE"];
-//        if(selectExpertOpinionCode)   [dic    setObject:selectExpertOpinionCode     forKey:@"EXPERTOPTIONTAKENCODE"];
+        if(selectInjuryOccuranceCode)   [dic    setObject:selectInjuryOccuranceCode     forKey:@"INJURYOCCURANCECODE"];
+        if(selectoccurancecode)   [dic    setObject:selectoccurancecode     forKey:@"INJURYOCCURANCESUBCODE"];
+        if(selectInjuryLocationCode)   [dic    setObject:selectInjuryLocationCode     forKey:@"INJURYLOCATIONCODE"];
+        if(selectlocationCode)   [dic    setObject:selectlocationCode     forKey:@"INJURYLOCATIONSUBCODE"];
+        if(selectInjurySiteCode)   [dic    setObject:selectInjurySiteCode     forKey:@"INJURYSITECODE"];
+        if(selectInjurySideCode)   [dic    setObject:selectInjurySideCode     forKey:@"INJURYSIDECODE"];
+        if(injuryTypeCode)   [dic    setObject:injuryTypeCode     forKey:@"INJURYTYPECODE"];
+        if(injuryCausecode)   [dic    setObject:injuryCausecode     forKey:@"INJURYCAUSECODE"];
+        if(selectExpertOpinionCode)   [dic    setObject:selectExpertOpinionCode     forKey:@"EXPERTOPTIONTAKENCODE"];
     
     
-//        if(xrData==nil)
-//        {
-//            [dic    setObject:@""     forKey:@"XRAYSFILE"];
-//        }
-//        else{
-//            [dic    setObject:xrData     forKey:@"XRAYSFILE"];
-//        }
-//        [dic    setObject:@"Xray.png"     forKey:@"XRAYSFILENAME"];
-//
-//
-//
-//        if(ctData==nil)
-//        {
-//            [dic    setObject:@""     forKey:@"CTSCANSFILE"];
-//        }
-//        else
-//        {
-//            [dic    setObject:ctData     forKey:@"CTSCANSFILE"];
-//        }
-//        [dic    setObject:@"Ctscan.png"     forKey:@"CTSCANSFILENAME"];
-//
-//
-//
-//        if(mrData==nil)
-//        {
-//            [dic    setObject:@""     forKey:@"MRISCANSFILE"];
-//        }
-//        else
-//        {
-//            [dic    setObject:mrData     forKey:@"MRISCANSFILE"];;
-//        }
-//        [dic    setObject:@"Mriscan.png"     forKey:@"MRISCANSFILENAME"];
-//
-//
+        if(xrData==nil)
+        {
+            [dic    setObject:@""     forKey:@"XRAYSFILE"];
+        }
+        else{
+            [dic    setObject:xrData     forKey:@"XRAYSFILE"];
+        }
+        [dic    setObject:@"Xray.png"     forKey:@"XRAYSFILENAME"];
+
+
+
+        if(ctData==nil)
+        {
+            [dic    setObject:@""     forKey:@"CTSCANSFILE"];
+        }
+        else
+        {
+            [dic    setObject:ctData     forKey:@"CTSCANSFILE"];
+        }
+        [dic    setObject:@"Ctscan.png"     forKey:@"CTSCANSFILENAME"];
+
+
+
+        if(mrData==nil)
+        {
+            [dic    setObject:@""     forKey:@"MRISCANSFILE"];
+        }
+        else
+        {
+            [dic    setObject:mrData     forKey:@"MRISCANSFILE"];;
+        }
+        [dic    setObject:@"Mriscan.png"     forKey:@"MRISCANSFILENAME"];
+
+
 //        if(bloodData==nil)
 //        {
 //            [dic    setObject:@""     forKey:@"BLOODTESTFILE"];
@@ -776,9 +891,9 @@ typedef enum {
 //            [dic    setObject:bloodData     forKey:@"BLOODTESTFILE"];;
 //        }
 //        [dic    setObject:@"Bloodtest.png"     forKey:@"BLOODTESTFILENAME"];
-//
-//        if(self.expectedLbl.text)   [dic    setObject:self.expectedLbl.text     forKey:@"EXPECTEDDATEOFRECOVERY"];
-//        if(usercode)   [dic    setObject:usercode     forKey:@"CREATEDBY"];
+
+        if(self.date_lbl.text)   [dic    setObject:self.date_lbl.text     forKey:@"EXPECTEDDATEOFRECOVERY"];
+        if(usercode)   [dic    setObject:usercode     forKey:@"CREATEDBY"];
     
     
         NSLog(@"parameters : %@",dic);
@@ -912,23 +1027,23 @@ typedef enum {
 
 
 
-//                    self.assessmentLbl.text =[self.objSelectInjuryArray valueForKey:@"DateOfAssessment"];
+                    self.btnAssment.titleLabel.text =[self.objSelectInjuryArray valueForKey:@"DateOfAssessment"];
 //
-//                    self.onSetLbl.text =[self.objSelectInjuryArray valueForKey:@"OnSetDate"];
+                    self.btnOnsetDate.titleLabel.text =[self.objSelectInjuryArray valueForKey:@"OnSetDate"];
                     
                     //self.injurytypeLbl.text =[self.objSelectInjuryArray valueForKey:@"mainSymptomName"];
                     //self.injuryCauseLbl.text =[self.objSelectInjuryArray valueForKey:@"causeOfIllnessName"];
                     
-//                    self.expectedLbl.text =[self.objSelectInjuryArray valueForKey:@"ExpectedDateOfRecovery"];
+                    self.date_lbl.text =[self.objSelectInjuryArray valueForKey:@"ExpectedDateOfRecovery"];
 //                    self.injuryNameTxt.text =[self.objSelectInjuryArray valueForKey:@"InjuryName"];
-//                    self.cheifcomplientTxt.text =[self.objSelectInjuryArray valueForKey:@"ChiefCompliant"];
-//                    selectGameCode =[self.objSelectInjuryArray valueForKey:@"GameCode"];
-//                    selectTeamCode =[self.objSelectInjuryArray valueForKey:@"TeamCode"];
-//                    selectPlayerCode =[self.objSelectInjuryArray valueForKey:@"PlayerCode"];
-//                    injuryTypeCode =[self.objSelectInjuryArray valueForKey:@"InjuryTypeCode"] ;
-//                    injuryCausecode =[self.objSelectInjuryArray valueForKey:@"InjuryCauseCode"];
+                    self.compliant_Txt.text =[self.objSelectInjuryArray valueForKey:@"ChiefCompliant"];
+                    selectGameCode =[self.objSelectInjuryArray valueForKey:@"GameCode"];
+                    selectTeamCode =[self.objSelectInjuryArray valueForKey:@"TeamCode"];
+                    selectPlayerCode =[self.objSelectInjuryArray valueForKey:@"PlayerCode"];
+                    injuryTypeCode =[self.objSelectInjuryArray valueForKey:@"InjuryTypeCode"] ;
+                    injuryCausecode =[self.objSelectInjuryArray valueForKey:@"InjuryCauseCode"];
                     
-                    //selectCauseCode =[self.objSelectInjuryArray valueForKey:@"causeOfIllnessCode"];
+                    selectCauseCode =[self.objSelectInjuryArray valueForKey:@"causeOfIllnessCode"];
                     
                     selectExpertOpinionCode =[self.objSelectInjuryArray valueForKey:@"ExpertOptionTakenCode"];
                     selectOnsetTypeCode =[self.objSelectInjuryArray valueForKey:@"OnSetType"];
@@ -943,13 +1058,14 @@ typedef enum {
 
                     int a = [VasValue intValue];
                     self.Slider1.index = a-1;
-//                    [self didChandeslidervalue:0];
+                    [self getSliderValue_VAS:@0];
                     
                     
                     
                 }
                 
-                [self FetchMetadatawebservice];
+                //[self FetchMetadatawebservice];
+                [self FetchInjuryListWebService];
                 
             }
             [AppCommon hideLoading];
@@ -971,18 +1087,6 @@ typedef enum {
             
             if(responseObject)
             {
-                
-//                NSDictionary* occurance = @{@"occurance":@[@"Training",@"Competition"]};
-//                NSDictionary* location = @{@"location":@[@"Header & Trunk",@"Upper Extremity",@"Lower Extremity"]};
-//                NSDictionary* injurySite = @{@"injurysite":@[@"Anterior",@"Posterior",@"Medical",@"Lateral"]};
-//
-//                NSMutableDictionary* dict = responseObject;
-//                [dict addEntriesFromDictionary:occurance];
-//                [dict addEntriesFromDictionary:location];
-//                [dict addEntriesFromDictionary:injurySite];
-//
-//                _commonArray = dict;
-                
                 _MainArray = responseObject;
                 
                 self.TrainingArray =[responseObject valueForKey:@"Training"];
@@ -1007,7 +1111,8 @@ typedef enum {
                     injuryCausecode =[self.objSelectInjuryArray valueForKey:@"InjuryCauseCode"];
                     
                     selectoccurancecode=[self.objSelectInjuryArray valueForKey:@"InjuaryOccuranceSubCode"];
-                    selectlocationCode = [self.objSelectInjuryArray valueForKey:@"InjuryLocationSubCode"];
+                    
+//                    selectlocationCode = [self.objSelectInjuryArray valueForKey:@"InjuryLocationSubCode"];
                     
 //                    if([[self.objSelectInjuryArray valueForKey:@"MultiInjury"] isEqualToString:@"Yes"])
 //                    {
@@ -1847,37 +1952,39 @@ typedef enum {
     }
     else if (isType)
     {
-        Cell.textLabel.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
+//        Cell.textLabel.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
+        
+        Cell.textLabel.text =[[self.commonArray valueForKey:@"InjuryTypeName"] objectAtIndex:indexPath.row];
+        
         
     }
     else if (isCasuse)
     {
-        Cell.textLabel.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
+        //Cell.textLabel.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
+        Cell.textLabel.text =[[self.commonArray valueForKey:@"InjuryCaseName"] objectAtIndex:indexPath.row];
         
     }
     else if (isOccurrence)
     {
-        Cell.textLabel.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
+       // Cell.textLabel.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
+        Cell.textLabel.text =[[self.commonArray valueForKey:@"MetaSubCodeDescription"] objectAtIndex:indexPath.row];
         
     }
     else if (islocation)
     {
-        Cell.textLabel.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
+        //Cell.textLabel.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
+        
+        Cell.textLabel.text =[[self.commonArray valueForKey:@"MetaSubCodeDescription"] objectAtIndex:indexPath.row];
         
     }
+    else if(isSite)
+    {
+        //Cell.textLabel.text =[[self.commonArray valueForKey:@"name"] objectAtIndex:indexPath.row];
+        Cell.textLabel.text =[[self.commonArray valueForKey:@"InjurySiteName1"] objectAtIndex:indexPath.row];
+
+    }
     
-//    dataSize =[COMMON getControlHeight:Cell.textLabel.text withFontName:@"Helvetica" ofSize:10.0 withSize:CGSizeMake(150,tableView.frame.size.height+60)];
     Cell.selectionStyle=UITableViewCellSelectionStyleNone;
-//    if(self.popview_Tbl.contentSize.height < 150)
-//    {
-//        self.popViewheight.constant = self.popview_Tbl.contentSize.height+20;
-//    }
-//    else
-//    {
-//        self.popViewheight.constant = 200;
-//
-//    }
-    
     return Cell;
     
     
@@ -1900,27 +2007,52 @@ typedef enum {
 //        self.playerLbl.text =[[self.commonArray valueForKey:@"athleteName"] objectAtIndex:indexPath.row];
 //        selectPlayerCode = [[self.commonArray valueForKey:@"athleteCode"] objectAtIndex:indexPath.row];
     }
-    else if (isType ==YES)
+    else if (isType)
     {
-//        self.injurytypeLbl.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
-        injuryTypeCode =[[self.commonArray valueForKey:@"InjuryMetaSubCode"] objectAtIndex:indexPath.row];
+//        self.typelbl.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
+//        injuryTypeCode =[[self.commonArray valueForKey:@"InjuryMetaSubCode"] objectAtIndex:indexPath.row];
+        
+        self.typelbl.text =[[self.commonArray valueForKey:@"InjuryTypeName"] objectAtIndex:indexPath.row];
+        injuryTypeCode =[[self.commonArray valueForKey:@"InjuryTypeCode"] objectAtIndex:indexPath.row];
     }
-    else if (isCasuse ==YES)
+    else if (isCasuse)
     {
-//        self.injuryCauseLbl.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
-        injuryCausecode=[[self.commonArray valueForKey:@"InjuryMetaSubCode"] objectAtIndex:indexPath.row];
+//        self.causelbl.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
+//        injuryCausecode=[[self.commonArray valueForKey:@"InjuryMetaSubCode"] objectAtIndex:indexPath.row];
+        
+        self.causelbl.text =[[self.commonArray valueForKey:@"InjuryCaseName"] objectAtIndex:indexPath.row];
+        injuryCausecode=[[self.commonArray valueForKey:@"InjuryCaseCode"] objectAtIndex:indexPath.row];
     }
-    else if (isOccurrence ==YES)
+    else if (isOccurrence)
     {
-        self.occurancelbl.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
-        selectoccurancecode=[[self.commonArray valueForKey:@"InjuryMetaSubCode"] objectAtIndex:indexPath.row];
+//        self.occurancelbl.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
+//        selectoccurancecode=[[self.commonArray valueForKey:@"InjuryMetaSubCode"] objectAtIndex:indexPath.row];
+        self.occurancelbl.text =[[self.commonArray valueForKey:@"MetaSubCodeDescription"] objectAtIndex:indexPath.row];
+        selectoccurancecode=[[self.commonArray valueForKey:@"InjuryOccuranceCode"] objectAtIndex:indexPath.row];
     }
-    else if (islocation ==YES)
+    else if (islocation)
     {
-        self.locationlbl.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
-        selectlocationCode=[[self.commonArray valueForKey:@"InjuryMetaSubCode"] objectAtIndex:indexPath.row];
+//        self.locationlbl.text =[[self.commonArray valueForKey:@"InjuryMetaDataTypeCode"] objectAtIndex:indexPath.row];
+//        selectlocationCode=[[self.commonArray valueForKey:@"InjuryMetaSubCode"] objectAtIndex:indexPath.row];
+        self.locationlbl.text =[[self.commonArray valueForKey:@"MetaSubCodeDescription"] objectAtIndex:indexPath.row];
+        selectlocationCode=[[self.commonArray valueForKey:@"InjuryLocationCode"] objectAtIndex:indexPath.row];
+    }
+    else if (isSite)
+    {
+//        self.sitelbl.text =[[self.commonArray valueForKey:@"name"] objectAtIndex:indexPath.row];
+//        selectInjurySiteCode=[[self.commonArray valueForKey:@"code"] objectAtIndex:indexPath.row];
+        
+        self.sitelbl.text =[[self.commonArray valueForKey:@"InjurySiteName1"] objectAtIndex:indexPath.row];
+        selectInjurySiteCode=[[self.commonArray valueForKey:@"InjurySite"] objectAtIndex:indexPath.row];
+        
+        
     }
     
+    isOccurrence = NO;
+    isCasuse = NO;
+    isLocation = NO;
+    isSite = NO;
+    isType = NO;
     self.pop_Tbl.hidden=YES;
     
 }
@@ -1931,9 +2063,10 @@ typedef enum {
     return YES;
 }
 - (IBAction)actionFileUpload:(id)sender {
+    
     if ([sender tag] == 0) { // File type 1
-        isXray =NO;
-        isCT =YES;
+        isXray =YES;
+        isCT =NO;
         isMRI =NO;
         isBlood =NO;
         
@@ -1970,7 +2103,24 @@ typedef enum {
 
 -(IBAction)hideFileView:(id)sender
 {
-    [self.filepopview setHidden:YES];
+    [UIView animateWithDuration:1.0f
+                          delay:0.0f
+                        options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                            
+                            self.filepopview.frame = CGRectMake(self.filepopview.frame.origin.x, self.view.frame.size.height+self.filepopview.frame.size.height, self.fileView.frame.size.height, self.fileView.frame.size.height);
+                            
+                            
+                        } completion:^(BOOL finished) {
+                            [self.fileView removeFromSuperview];
+                        }];
+
+    
 }
+-(IBAction)showCloseButton:(id)sender
+{
+    
+}
+
+
 @end
 

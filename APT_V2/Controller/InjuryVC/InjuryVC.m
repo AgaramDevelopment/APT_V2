@@ -304,6 +304,7 @@ typedef enum {
     isLocation = NO;
     isType = NO;
 }
+
 -(IBAction)didClickTypeBtn:(id)sender
 {
     [self.pop_Tbl setHidden:NO];

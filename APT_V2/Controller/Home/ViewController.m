@@ -783,6 +783,7 @@
         
     }
     
+    
     [self tableValuesMethod];
 
 }
@@ -1417,7 +1418,6 @@
             {
                 cell.lblBottom.text = @"Right";
                 cell.txtField.strParamName = @"right";
-                
             }
             else
             {
@@ -1513,7 +1513,7 @@
         for (NSInteger i = 0; i< CollectionItem; i++) {
             TestPropertyCollectionViewCell* cell = (TestPropertyCollectionViewCell *)[assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
             
-            [dict setValue:cell.txtField.text forKey:cell.txtField.strParamName];
+            [dict setValue:cell.txtField.text forKey:[cell.lblBottom.text lowercaseString]];
             
         }
         if (![dict.allKeys containsObject:@"left"]) {
@@ -1536,12 +1536,15 @@
     }
     else if([currentlySelectedTest isEqualToString:SCREEN_CODE_SPECIAL])
     {
-        NSMutableDictionary* dict = [NSMutableDictionary new];
+//        NSMutableDictionary* dict = [NSMutableDictionary new];
 
         for (NSInteger i = 0; i< CollectionItem; i++) {
             TestPropertyCollectionViewCell* cell = (TestPropertyCollectionViewCell *)[assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
         
-            [dict setValue:cell.txtDropDown.text forKey:cell.txtDropDown.strParamName];
+//            if (cell.txtDropDown.text.length == 0) {
+//                cell.txtDropDown.text = @"";
+//            }
+            [dict setValue:cell.txtDropDown.text forKey:[cell.lblBottom.text lowercaseString]];
             
         }
         if (![dict.allKeys containsObject:@"left"]) {
@@ -1557,6 +1560,7 @@
         }
         
         [dict setValue:txtRemarks.text forKey:@"remark"];
+//        NSNumber* num = [NSNumber numberWithInteger:btnIgnore.tag];
         NSString* ignoreValue = [NSString stringWithFormat:@"%ld",(long)btnIgnore.tag];
         [dict setValue:ignoreValue forKey:@"ignore"];
         
@@ -1566,7 +1570,9 @@
         for (NSInteger i = 0; i< CollectionItem; i++) {
             TestPropertyCollectionViewCell* cell = [assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
             
-            [dict setValue:cell.txtDropDown.text forKey:cell.txtDropDown.strParamName];
+//            [dict setValue:cell.txtDropDown.text forKey:cell.txtDropDown.strParamName];
+            [dict setObject:cell.txtDropDown.text forKey:[cell.lblBottom.text lowercaseString]];
+
 
 //            NSString* trail = [NSString stringWithFormat:@"%@ - %@",cell.txt1_SC.text,cell.txt2_SC.text];
 //            [dict setValue:trail forKey:arr[i]];
@@ -1595,7 +1601,9 @@
         for (NSInteger i = 0; i< CollectionItem; i++) {
             TestPropertyCollectionViewCell* cell = [assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
             
-            [dict setValue:cell.txtDropDown.text forKey:cell.txtDropDown.strParamName];
+//            [dict setValue:cell.txtDropDown.text forKey:cell.txtDropDown.strParamName];
+            [dict setObject:cell.txtDropDown.text forKey:[cell.lblBottom.text lowercaseString]];
+
 
 //            NSString* trail = [NSString stringWithFormat:@"%@ - %@",cell.txt1_SC.text,cell.txt2_SC.text];
 //            [dict setValue:trail forKey:arr[i]];
@@ -1624,7 +1632,9 @@
         for (NSInteger i = 0; i< CollectionItem; i++) {
             TestPropertyCollectionViewCell* cell = [assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
             
-            [dict setValue:cell.txtDropDown.text forKey:cell.txtDropDown.strParamName];
+//            [dict setValue:cell.txtDropDown.text forKey:cell.txtDropDown.strParamName];
+            [dict setObject:cell.txtDropDown.text forKey:[cell.lblBottom.text lowercaseString]];
+
 
             
 //            NSString* trail = [NSString stringWithFormat:@"%@ - %@",cell.txt1_SC.text,cell.txt2_SC.text];
@@ -1706,7 +1716,7 @@
         
     }
     
-    
+//    NSDictionary* result = dict;
     return dict;
 }
 
@@ -1743,7 +1753,7 @@
     
     if ([sender tag]) // Done
     {
-        
+//        ping [-AaDdfLnoQqRrv] [-c count] [-I iface] [-i wait]
     }
     
     [self.popupVC.view endEditing:YES];

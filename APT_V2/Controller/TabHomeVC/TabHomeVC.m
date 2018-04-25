@@ -308,7 +308,7 @@
 //                [view addSubview:objStats.view];
 //            }
             //CGFloat Yposition = objWell.filterContainerView.frame.origin.y;
-            objWell.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+70);
+            objWell.view.frame = CGRectMake(0, -70, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+70);
             [view addSubview:objWell.view];
         }
 
@@ -332,10 +332,6 @@
 {
    // self.page_control.currentPage = self.swipeView.currentItemIndex;
 }
-
-
-
-
 
 
 

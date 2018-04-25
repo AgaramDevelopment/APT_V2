@@ -36,7 +36,7 @@
     [super viewDidLoad];
         // Do any additional setup after loading the view from its nib.
     
-    [self customnavigationmethod];
+//    [self customnavigationmethod];
     
     [self.nutritionCollectionView registerNib:[UINib nibWithNibName:@"NutritionCell" bundle:nil] forCellWithReuseIdentifier:@"nutritionCell"];
     /*
@@ -59,6 +59,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
         // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod

@@ -33,10 +33,10 @@
 @property (strong, nonatomic) IBOutlet UITableView *batttingTableView;
 @property (nonatomic,strong) IBOutlet MyStatsBattingCell * StatsBattingCell;
 @property (nonatomic,strong) IBOutlet MyStatsBattingCell * StatsBattingCellIphone;
-@property (strong, nonatomic) IBOutlet UIView *navigationView;
+//@property (strong, nonatomic) IBOutlet UIView *navigationView;
 @property (strong, nonatomic) IBOutlet UIButton *battingBtn;
 @property (strong, nonatomic) IBOutlet UIButton *bowlingBtn;
-@property (weak, nonatomic) IBOutlet UIView *navBar;
+@property (weak, nonatomic) IBOutlet UIView *navigationView;
 @property (weak, nonatomic) IBOutlet UIView *myStats;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *navViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *myStatsViewHeight;

@@ -14,7 +14,8 @@
 #import "WebService.h"
 #import "AppCommon.h"
 #import "CategoryTableCell.h"
-//#import "WellnessTrainingBowlingVC.h"
+#import "WellnessTrainingBowlingVC.h"
+#import "TrainingLoadVC.h"
 
 @interface TrainingLoadUpdateVC ()<PieChartViewDelegate,PieChartViewDataSource>
 {
@@ -27,7 +28,9 @@
     BOOL isActivity;
     BOOL isRpe;
     
-    PieChartView *pieChartView;
+    int selectedActivity;
+    
+    //PieChartView *pieChartView;
     
     WebService *objWebservice;
     
@@ -39,6 +42,8 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *poptableXposition;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *poptableyposition;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *poptableWidth;
+
+@property (strong, nonatomic) IBOutlet PieChartView *pieChartView;;
 
 @property (strong, nonatomic)  NSMutableArray *DropdownDataArray;
 @property (strong, nonatomic)  NSMutableArray *RpeDataArray;
@@ -63,12 +68,18 @@
     self.SaveBtn.hidden = NO;
     self.FetchedUpdateBtn.hidden = YES;
     
+    _pieChartView.delegate = self;
+     _pieChartView.datasource = self;
+    self.RpeFilterviewWidth.constant = self.ActivityFilterview.frame.size.width;
+    
    // rpeCode = @"MSC062";
     
     //sessionArray = [[NSMutableArray alloc] initWithObjects:@"Session 1", @"Session 2", @"Session 3", nil];
     //activityArray = [[NSMutableArray alloc] initWithObjects:@"Cardio", @"Strengthening", @"Bowling", nil];
    // valueArray = [[NSMutableArray alloc] initWithObjects:@"245", @"124", @"342", nil];
-     self.popViewtable.hidden = YES;
+    self.popViewtable.hidden = YES;
+    self.tapView.hidden = YES;
+    [self samplePieChart];
     [self DropDownWebservice];
     
     
@@ -89,6 +100,8 @@
     self.countview.layer.borderWidth = 1;
     self.countview.layer.borderColor =[UIColor whiteColor].CGColor;
     self.countview.clipsToBounds = true;
+    
+    self.RpeFilterviewWidth.constant = self.ActivityFilterview.frame.size.width;
 
     
 }
@@ -127,6 +140,7 @@
     isActivity = YES;
     isRpe = NO;
     self.popViewtable.hidden = NO;
+    self.tapView.hidden = NO;
     self.poptableWidth.constant = self.ActivityFilterview.frame.size.width;
     self.poptableXposition.constant = self.ActivityFilterview.frame.origin.x;
     self.poptableyposition.constant = self.ActivityFilterview.frame.origin.y;
@@ -143,6 +157,7 @@
     isActivity = NO;
     isRpe = YES;
     self.popViewtable.hidden = NO;
+    self.tapView.hidden = NO;
     self.poptableWidth.constant = self.RpeFilterview.frame.size.width;
     self.poptableXposition.constant = self.RpeFilterview.frame.origin.x;
     self.poptableyposition.constant = self.RpeFilterview.frame.origin.y;
@@ -150,6 +165,55 @@
     self.DropdownDataArray = self.RpeDataArray;
     [self showAnimate];
     [self.popViewtable reloadData];
+}
+
+
+- (IBAction)UpdateSessionAction:(id)sender {
+    
+    
+    int timecount = [self.timelbl.text intValue];
+    int rpecount =  [self.rpelbl.text intValue];
+    int total = timecount * rpecount;
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+    [dic setObject:self.activitylbl.text forKey:@"ActivityName"];
+    [dic setObject:ActivityCode forKey:@"ActivityCode"];
+    [dic setObject:[NSString stringWithFormat:@"%d",total] forKey:@"Value"];
+    [dic setObject:[NSString stringWithFormat:@"%d",rpecount] forKey:@"rpeValue"];
+    [dic setObject:rpeCode forKey:@"RpeCode"];
+    [dic setObject:[NSString stringWithFormat:@"%d",timecount] forKey:@"timeValue"];
+    [dic setObject:self.ballslbl.text forKey:@"ballsValue"];
+    
+    [sessionArray replaceObjectAtIndex:selectedActivity withObject:dic];
+    
+    [self.SessionTable reloadData];
+    
+    if(sessionArray.count >0)
+    {
+        self.markers = [[NSMutableArray alloc]init];
+        for(int i=0;i<sessionArray.count;i++)
+        {
+            [self.markers addObject:[[sessionArray valueForKey:@"Value"] objectAtIndex:i]];
+        }
+        //[self samplePieChart];
+        [_pieChartView reloadData];
+        
+        int total=0;
+        for(int i=0;i<self.markers.count;i++)
+        {
+            NSString *reqValue = [self.markers objectAtIndex:i];
+            int value = [reqValue intValue];
+            total=total+value;
+        }
+        self.totalCountlbl.text = [NSString stringWithFormat:@"%d",total];
+    }
+    
+    self.activitylbl.text = @"";
+    self.timelbl.text =@"";
+    self.rpelbl.text = @"";
+    self.ballslbl.text = @"";
+    self.UpdateBtn.hidden = YES;
+    self.sessionBtn.hidden = NO;
+    
 }
 
 - (IBAction)AddSessionAction:(id)sender {
@@ -201,8 +265,8 @@
         {
             [self.markers addObject:[[sessionArray valueForKey:@"Value"] objectAtIndex:i]];
         }
-        [self samplePieChart];
-         [pieChartView reloadData];
+        //[self samplePieChart];
+         [_pieChartView reloadData];
         
         int total=0;
         for(int i=0;i<self.markers.count;i++)
@@ -217,6 +281,7 @@
     self.activitylbl.text = @"";
     self.timelbl.text =@"";
     self.rpelbl.text = @"";
+    self.ballslbl.text = @"";
     
 }
 - (IBAction)SaveAction:(id)sender {
@@ -244,17 +309,17 @@
 {
     if(IS_IPHONE_DEVICE) {
         
-        pieChartView = [[PieChartView alloc] initWithFrame:CGRectMake(self.countview.frame.origin.x,self.countview.frame.origin.y,self.countview.frame.size.width,self.countview.frame.size.width)];
-        pieChartView.delegate = self;
-        pieChartView.datasource = self;
-        [self.todayMainView addSubview:pieChartView];
+        //pieChartView = [[PieChartView alloc] initWithFrame:CGRectMake(self.countview.frame.origin.x,self.countview.frame.origin.y,self.countview.frame.size.width,self.countview.frame.size.width)];
+        _pieChartView.delegate = self;
+        _pieChartView.datasource = self;
+        //[self.todayMainView addSubview:pieChartView];
         
     } else {
         
-        pieChartView = [[PieChartView alloc] initWithFrame:CGRectMake(self.countview.frame.origin.x,self.countview.frame.origin.y,self.countview.frame.size.width,self.countview.frame.size.width)];
-        pieChartView.delegate = self;
-        pieChartView.datasource = self;
-        [self.todayMainView addSubview:pieChartView];
+        //pieChartView = [[PieChartView alloc] initWithFrame:CGRectMake(self.countview.frame.origin.x,self.countview.frame.origin.y,self.countview.frame.size.width,self.countview.frame.size.width)];
+        _pieChartView.delegate = self;
+        _pieChartView.datasource = self;
+        //[self.todayMainView addSubview:pieChartView];
     }
 }
 
@@ -319,7 +384,7 @@
         {
         self.activitylbl.text = [[self.DropdownDataArray valueForKey:@"MetaSubcodeDescription"] objectAtIndex:indexPath.row];
         ActivityCode = [[self.DropdownDataArray valueForKey:@"MetaSubCode"] objectAtIndex:indexPath.row];
-        //self.popViewtable.hidden = YES;
+        self.tapView.hidden = YES;
             [self removeAnimate];
         }
         
@@ -327,7 +392,7 @@
         {
             self.rpelbl.text = [[self.DropdownDataArray valueForKey:@"MetaSubcodeDescription"] objectAtIndex:indexPath.row];
             rpeCode = [[self.DropdownDataArray valueForKey:@"MetaSubCode"] objectAtIndex:indexPath.row];
-            //self.popViewtable.hidden = YES;
+            self.tapView.hidden = YES;
             [self removeAnimate];
         }
     }
@@ -336,9 +401,15 @@
         self.sessionBtn.hidden = YES;
         self.UpdateBtn.hidden = NO;
         
+        selectedActivity = indexPath.row;
+        
         self.activitylbl.text = [[sessionArray valueForKey:@"ActivityName"] objectAtIndex:indexPath.row];
+        
         self.rpelbl.text = [[sessionArray valueForKey:@"rpeValue"] objectAtIndex:indexPath.row];
         self.timelbl.text = [[sessionArray valueForKey:@"timeValue"] objectAtIndex:indexPath.row];
+        
+        ActivityCode = [[sessionArray valueForKey:@"ActivityCode"] objectAtIndex:indexPath.row];
+        rpeCode = [[sessionArray valueForKey:@"RpeCode"] objectAtIndex:indexPath.row];
     }
 }
 
@@ -384,6 +455,18 @@
         {
         color = [UIColor colorWithRed:(165/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:1.0f];
         }
+    if(index==4)
+    {
+        color = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:1.0f];
+    }
+    if(index==5)
+    {
+        color = [UIColor colorWithRed:(255/255.0f) green:(165/255.0f) blue:(42/255.0f) alpha:1.0f];
+    }
+    if(index==6)
+    {
+        color = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(255/255.0f) alpha:1.0f];
+    }
     return color;
         //return GetRandomUIColor();
 }
@@ -418,6 +501,18 @@
             {
             return 100/obj;
             }
+            if(index ==4)
+            {
+                return 100/obj;
+            }
+            if(index ==5)
+            {
+                return 100/obj;
+            }
+            if(index ==6)
+            {
+                return 100/obj;
+            }
         }
     
     return 0;
@@ -447,6 +542,13 @@
         }
     
     return obj;
+}
+
+-(IBAction)closeView:(id)sender
+{
+    self.popViewtable.hidden = YES;
+    self.tapView.hidden = YES;
+    
 }
 
 -(void)DropDownWebservice
@@ -506,7 +608,12 @@ if([_isToday isEqualToString:@"yes"])
         [dic setObject:[NSString stringWithFormat:@"%d",total] forKey:@"Value"];
         [dic setObject:[NSString stringWithFormat:@"%d",rpecount] forKey:@"rpeValue"];
         [dic setObject:[NSString stringWithFormat:@"%d",timecount] forKey:@"timeValue"];
-        [dic setObject:[[self.TodayLoadArray valueForKey:@"BALL"] objectAtIndex:i] forKey:@"ballsValue"];
+        
+        NSString *ball = [[self.TodayLoadArray valueForKey:@"BALL"] objectAtIndex:i];
+        NSArray *arr = [ball componentsSeparatedByString:@"."];
+        [dic setObject:arr[0] forKey:@"ballsValue"];
+        
+       // [dic setObject:[[self.TodayLoadArray valueForKey:@"BALL"] objectAtIndex:i] forKey:@"ballsValue"];
         
         [sessionArray addObject:dic];
     }
@@ -518,8 +625,8 @@ if([_isToday isEqualToString:@"yes"])
         {
             [self.markers addObject:[[sessionArray valueForKey:@"Value"] objectAtIndex:i]];
         }
-        [self samplePieChart];
-        [pieChartView reloadData];
+        //[self samplePieChart];
+        [_pieChartView reloadData];
         
         int total=0;
         for(int i=0;i<self.markers.count;i++)
@@ -547,13 +654,21 @@ if([_isToday isEqualToString:@"yes"])
             [dic setObject:[[self.YesterdayLoadArray valueForKey:@"ACTIVITYTYPENAME"] objectAtIndex:i] forKey:@"ActivityName"];
             [dic setObject:[[self.YesterdayLoadArray valueForKey:@"ACTIVITYTYPECODE"] objectAtIndex:i] forKey:@"ActivityCode"];
             
+           [dic setObject:[[self.YesterdayLoadArray valueForKey:@"WORKLOADCODE"] objectAtIndex:i] forKey:@"WorkloadCode"];
+            [dic setObject:[[self.YesterdayLoadArray valueForKey:@"RATEPERCEIVEDEXERTION"] objectAtIndex:i] forKey:@"RpeCode"];
+            
             int timecount = [[[self.YesterdayLoadArray valueForKey:@"DURATION"] objectAtIndex:i] intValue];
             int rpecount =  [[[self.YesterdayLoadArray valueForKey:@"RPE"] objectAtIndex:i] intValue];
             int total = timecount * rpecount;
             [dic setObject:[NSString stringWithFormat:@"%d",total] forKey:@"Value"];
             [dic setObject:[NSString stringWithFormat:@"%d",rpecount] forKey:@"rpeValue"];
             [dic setObject:[NSString stringWithFormat:@"%d",timecount] forKey:@"timeValue"];
-            [dic setObject:[[self.YesterdayLoadArray valueForKey:@"BALL"] objectAtIndex:i] forKey:@"ballsValue"];
+            
+            NSString *ball = [[self.YesterdayLoadArray valueForKey:@"BALL"] objectAtIndex:i];
+            NSArray *arr = [ball componentsSeparatedByString:@"."];
+            [dic setObject:arr[0] forKey:@"ballsValue"];
+            
+            //[dic setObject:[[self.YesterdayLoadArray valueForKey:@"BALL"] objectAtIndex:i] forKey:@"ballsValue"];
             
             [sessionArray addObject:dic];
         }
@@ -566,8 +681,8 @@ if([_isToday isEqualToString:@"yes"])
             {
                 [self.markers addObject:[[sessionArray valueForKey:@"Value"] objectAtIndex:i]];
             }
-            [self samplePieChart];
-            [pieChartView reloadData];
+            //[self samplePieChart];
+            [_pieChartView reloadData];
             
             int total=0;
             for(int i=0;i<self.markers.count;i++)
@@ -691,6 +806,7 @@ if([_isToday isEqualToString:@"yes"])
                     NSLog(@"success");
                     [self ShowAlterMsg:@"Training Load Inserted Successfully"];
                     [self.view removeFromSuperview];
+                    [self.Delegate closeUpdateTrainingSource];
                     
                     // [self.pieChartRight reloadData];
                 }
@@ -773,9 +889,10 @@ if([_isToday isEqualToString:@"yes"])
                 {
                     NSLog(@"success");
                     [self ShowAlterMsg:@"Training Load Updated Successfully"];
+                   
                     [self.view removeFromSuperview];
-                    
-                    // [self.pieChartRight reloadData];
+                    [self.Delegate closeUpdateTrainingSource];
+                  
                 }
                 
             }
@@ -793,6 +910,11 @@ if([_isToday isEqualToString:@"yes"])
         }];
     }
     
+}
+
+- (IBAction)CancelAction:(id)sender {
+    [self.view removeFromSuperview];
+    [self.Delegate closeUpdateTrainingSource];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField

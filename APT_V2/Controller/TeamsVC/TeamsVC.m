@@ -31,7 +31,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    [self customnavigationmethod];
+//    [self customnavigationmethod];
     [self TeamsWebservice];
 }
 
@@ -43,6 +43,10 @@
     [revealController.tapGestureRecognizer setEnabled:YES];
 }
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
 
 -(void)customnavigationmethod
 {
@@ -60,7 +64,6 @@
     
     objCustomNavigation.btn_back.hidden =YES;
     objCustomNavigation.menu_btn.hidden =NO;
-    //        [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
     [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
     //        [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -185,17 +188,18 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//    self.navi_View.hidden = YES;
     objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
     objPlayersVC.teamCode = [[self.teamslist valueForKey:@"Teamcode"] objectAtIndex:indexPath.row];
     objPlayersVC.teamname = [[self.teamslist valueForKey:@"Teamname"] objectAtIndex:indexPath.row];
-    objPlayersVC.view.frame = CGRectMake(0, 70, self.view.bounds.size.width, self.view.bounds.size.height);
-    [self.view addSubview:objPlayersVC.view];
+//    objPlayersVC.view.frame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+//    [self.view addSubview:objPlayersVC.view];
     
 //    TeamMembersVC* VC = [TeamMembersVC new];
 //    VC.teamCode = [[self.teamslist valueForKey:@"Teamcode"] objectAtIndex:indexPath.row];
 //    VC.teamname = [[self.teamslist valueForKey:@"Teamname"] objectAtIndex:indexPath.row];
 //    [self.navigationController pushViewController:VC animated:YES];
-//    [appDel.frontNavigationController pushViewController:VC animated:YES];
+    [appDel.frontNavigationController pushViewController:objPlayersVC animated:YES];
 }
 
 

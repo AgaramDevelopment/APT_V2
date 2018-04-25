@@ -161,6 +161,7 @@ NSString *metaSubCode4;
     self.UrineColorBtn5.tag =0;
     self.UrineColorBtn6.tag =0;
     self.UrineColorBtn7.tag =0;
+    self.UrineRatinglbl.text = [NSString stringWithFormat:@"%@/7",urineColorNum];
     [self setborder];
     
 //    self.UrineColorBtn1.layer.borderWidth = 2.0f;
@@ -178,6 +179,7 @@ NSString *metaSubCode4;
     self.UrineColorBtn5.tag =0;
     self.UrineColorBtn6.tag =0;
     self.UrineColorBtn7.tag =0;
+    self.UrineRatinglbl.text = [NSString stringWithFormat:@"%@/7",urineColorNum];
     [self setborder];
     
 //    self.UrineColorBtn1.layer.borderWidth = 2.0f;
@@ -195,6 +197,7 @@ NSString *metaSubCode4;
     self.UrineColorBtn5.tag =0;
     self.UrineColorBtn6.tag =0;
     self.UrineColorBtn7.tag =0;
+    self.UrineRatinglbl.text = [NSString stringWithFormat:@"%@/7",urineColorNum];
     [self setborder];
 }
 
@@ -208,6 +211,7 @@ NSString *metaSubCode4;
     self.UrineColorBtn5.tag =0;
     self.UrineColorBtn6.tag =0;
     self.UrineColorBtn7.tag =0;
+    self.UrineRatinglbl.text = [NSString stringWithFormat:@"%@/7",urineColorNum];
     [self setborder];
 }
 
@@ -221,6 +225,7 @@ NSString *metaSubCode4;
     self.UrineColorBtn5.tag =1;
     self.UrineColorBtn6.tag =0;
     self.UrineColorBtn7.tag =0;
+    self.UrineRatinglbl.text = [NSString stringWithFormat:@"%@/7",urineColorNum];
     [self setborder];
 }
 
@@ -234,6 +239,7 @@ NSString *metaSubCode4;
     self.UrineColorBtn5.tag =0;
     self.UrineColorBtn6.tag =1;
     self.UrineColorBtn7.tag =0;
+    self.UrineRatinglbl.text = [NSString stringWithFormat:@"%@/7",urineColorNum];
     [self setborder];
 }
 
@@ -247,7 +253,19 @@ NSString *metaSubCode4;
     self.UrineColorBtn5.tag =0;
     self.UrineColorBtn6.tag =0;
     self.UrineColorBtn7.tag =1;
+    self.UrineRatinglbl.text = [NSString stringWithFormat:@"%@/7",urineColorNum];
     [self setborder];
+}
+
+
+- (IBAction)CancelAction:(id)sender {
+    
+//    objWell=[[WellnessTrainingBowlingVC alloc]init];
+//    //[objWell reloaddataVC];
+//    objWell.topviewHeight.constant = 270;
+//    objWell.traingViewHeight.constant = 350;
+    [self.view removeFromSuperview];
+    [self.Delegate closeWellnessSource];
 }
 
 -(void)setborder
@@ -287,9 +305,10 @@ NSString *metaSubCode4;
             {
                 NSLog(@"success");
                 [self ShowAlterMsg:@"Wellness Rating Inserted Successfully"];
-                objWell = [[WellnessTrainingBowlingVC alloc] init];
-                objWell.topviewHeight.constant = 280;
+                //objWell = [[WellnessTrainingBowlingVC alloc] init];
+                //objWell.topviewHeight.constant = 280;
                 [self.view removeFromSuperview];
+                [self.Delegate closeWellnessSource];
                 
                 // [self.pieChartRight reloadData];
             }
@@ -394,8 +413,7 @@ NSString *metaSubCode4;
                 NSLog(@"success");
                 [self ShowAlterMsg:@"Wellness Rating Updated Successfully"];
                 [self.view removeFromSuperview];
-                objWell = [[WellnessTrainingBowlingVC alloc] init];
-                [objWell setHeight];
+                [self.Delegate closeWellnessSource];
                 
             }
             

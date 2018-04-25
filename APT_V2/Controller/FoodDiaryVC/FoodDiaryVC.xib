@@ -21,6 +21,7 @@
                 <outlet property="foodItemTF" destination="0Ed-Al-zYY" id="04X-Kd-UwA"/>
                 <outlet property="foodTableView" destination="tqd-9Q-kKT" id="Ftx-ao-ka1"/>
                 <outlet property="homeBtn" destination="vaU-w4-Mna" id="6gY-jy-SMv"/>
+                <outlet property="lblNoData" destination="qLV-nT-8o7" id="WcN-D6-SD9"/>
                 <outlet property="lunchBtn" destination="U6F-ot-lh0" id="gno-BB-EUW"/>
                 <outlet property="navi_View" destination="SZf-N8-6z3" id="qcc-JO-Hnp"/>
                 <outlet property="otherBtn" destination="f9M-m3-reK" id="04o-75-rgy"/>
@@ -106,6 +107,12 @@
                                                 <action selector="addFoodDiaryButtonTapped:" destination="-1" eventType="touchUpInside" id="Qbn-64-BzN"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Data Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qLV-nT-8o7">
+                                            <rect key="frame" x="130" y="69" width="115" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
@@ -117,6 +124,8 @@
                                         <constraint firstAttribute="height" constant="160" id="g7N-pC-AmO"/>
                                         <constraint firstItem="Ah9-02-FXV" firstAttribute="leading" secondItem="FTr-aK-mAY" secondAttribute="leading" id="gTQ-Qw-KFz"/>
                                         <constraint firstAttribute="bottom" secondItem="Ah9-02-FXV" secondAttribute="bottom" id="qta-7C-4Wc"/>
+                                        <constraint firstItem="qLV-nT-8o7" firstAttribute="centerX" secondItem="FTr-aK-mAY" secondAttribute="centerX" id="wfg-nI-ma2"/>
+                                        <constraint firstItem="qLV-nT-8o7" firstAttribute="centerY" secondItem="FTr-aK-mAY" secondAttribute="centerY" id="xk7-bE-fa5"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DIV-yB-z8H">

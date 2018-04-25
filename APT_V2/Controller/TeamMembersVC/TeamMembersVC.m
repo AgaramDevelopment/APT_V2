@@ -75,7 +75,7 @@
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-//    [self customnavigationmethod];
+    [self customnavigationmethod];
 }
 
 -(void)addRefreshControl
@@ -102,9 +102,9 @@
     
     [navView addSubview:objCustomNavigation.view];
     
-    objCustomNavigation.btn_back.hidden =YES;
-    objCustomNavigation.menu_btn.hidden =NO;
-    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    objCustomNavigation.menu_btn.hidden =YES;
+                objCustomNavigation.btn_back.hidden =NO;
+                [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -115,6 +115,10 @@
     [revealController.tapGestureRecognizer setEnabled:YES];
 }
 
+-(IBAction)didClickBackBtn:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -214,13 +218,18 @@
     
     cell.playernamelbl.text = playername;
     
-    NSString *bowlingStyle = [self checkNull:[[self.CommonArray valueForKey:@"BowlingStyle"]objectAtIndex:indexPath.row]];
-    NSLog(@"%ld",(long)indexPath.row);
-    cell.BowlingStylelbl.text = [NSString stringWithFormat:@"/%@", bowlingStyle];
-    
     NSString *battingStyle = [self checkNull:[[self.CommonArray valueForKey:@"BattingStyle"]objectAtIndex:indexPath.row]];
-    NSLog(@"%ld",(long)indexPath.row);
-    cell.BattingStylelbl.text = battingStyle;
+//    NSLog(@"%ld",(long)indexPath.row);
+//    cell.BattingStylelbl.text = battingStyle;
+    
+    NSString *bowlingStyle = [self checkNull:[[self.CommonArray valueForKey:@"BowlingStyle"]objectAtIndex:indexPath.row]];
+//    NSLog(@"%ld",(long)indexPath.row);
+    if ([bowlingStyle isEqualToString:@""]) {
+        cell.battingBowlingStyleLbl.text = battingStyle;
+    } else {
+        cell.battingBowlingStyleLbl.text = [NSString stringWithFormat:@"%@ / %@", battingStyle, bowlingStyle];
+    }
+
     
     NSString *age = [self checkNull:[[self.CommonArray valueForKey:@"Age"]objectAtIndex:indexPath.row]];
     NSLog(@"%ld",(long)indexPath.row);

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface TrainingLoadVC : UIViewController
 @property (strong, nonatomic) IBOutlet UIView *yesterdayView;
 @property (strong, nonatomic) IBOutlet UIView *todayView;
@@ -22,6 +23,7 @@
 
 //Donar Charts
 @property (strong, nonatomic) IBOutlet NSMutableArray *markers;
+@property (strong, nonatomic) IBOutlet NSMutableArray *markers2;
 
 @property (strong, nonatomic) IBOutlet UIButton *AddBtn;
 
@@ -42,5 +44,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *yesterdayActivitynamelbl6;
 @property (weak, nonatomic) IBOutlet UILabel *yesterdayActivitynamelbl7;
 
+@property (weak, nonatomic) IBOutlet UILabel *totalCountToday;
+@property (weak, nonatomic) IBOutlet UILabel *totalCountYesterday;
+
+-(void)reloadPiechartData;
 
 @end

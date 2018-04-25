@@ -52,5 +52,6 @@
 @property (strong,nonatomic) NSString* selectedPlayerCode;
 @property (strong,nonatomic) NSString* selectedPlayerName;
 @property (strong,nonatomic)IBOutlet UILabel* PlayerNamelbl;
+@property (strong, nonatomic) IBOutlet UILabel *lblNoData;
 
 @end

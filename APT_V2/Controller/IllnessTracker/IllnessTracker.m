@@ -69,7 +69,7 @@
     dropDownTblView.delegate = self;
     
         //Navigation View
-    [self customnavigationmethod];
+//    [self customnavigationmethod];
     [self allViewSetBorderMethod];
     
     clientCode = [AppCommon GetClientCode];
@@ -118,6 +118,10 @@
 }
 */
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
 
 -(void)customnavigationmethod
 {

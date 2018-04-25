@@ -16,6 +16,7 @@
                 <outlet property="battingBtn" destination="SUj-T3-4tx" id="Pji-LH-fJx"/>
                 <outlet property="batttingTableView" destination="XPT-Xj-oAx" id="RcD-KJ-qdg"/>
                 <outlet property="bowlingBtn" destination="daN-fB-lgl" id="kRf-gK-rHu"/>
+                <outlet property="lblNoData" destination="b4D-tN-uTB" id="Vbo-qs-VDt"/>
                 <outlet property="mainContentview" destination="ByI-lI-0ms" id="E8O-hf-NeF"/>
                 <outlet property="myStats" destination="EfY-rn-sXy" id="2xw-8J-eT4"/>
                 <outlet property="myStatsViewHeight" destination="gL3-Nd-ozU" id="pEz-Gy-hPw"/>
@@ -114,11 +115,19 @@
                                         <outlet property="delegate" destination="-1" id="yZI-LI-UaZ"/>
                                     </connections>
                                 </tableView>
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Data Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4D-tN-uTB">
+                                    <rect key="frame" x="102" y="211.5" width="115" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="XPT-Xj-oAx" secondAttribute="bottom" id="11b-Vn-2T3"/>
                                 <constraint firstItem="UfX-OB-Z5j" firstAttribute="leading" secondItem="ByI-lI-0ms" secondAttribute="leading" id="6dE-59-lLl"/>
+                                <constraint firstItem="b4D-tN-uTB" firstAttribute="centerY" secondItem="ByI-lI-0ms" secondAttribute="centerY" id="ACi-iH-oVv"/>
+                                <constraint firstItem="b4D-tN-uTB" firstAttribute="centerX" secondItem="ByI-lI-0ms" secondAttribute="centerX" id="Ktd-A1-XDF"/>
                                 <constraint firstItem="UfX-OB-Z5j" firstAttribute="top" secondItem="ByI-lI-0ms" secondAttribute="top" id="OPV-o2-mdO"/>
                                 <constraint firstItem="XPT-Xj-oAx" firstAttribute="top" secondItem="UfX-OB-Z5j" secondAttribute="bottom" id="RNK-2j-E2W"/>
                                 <constraint firstItem="XPT-Xj-oAx" firstAttribute="leading" secondItem="ByI-lI-0ms" secondAttribute="leading" id="ZaO-BK-OK0"/>

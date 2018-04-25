@@ -15,5 +15,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *injuryTableView;
 @property (strong, nonatomic) IBOutlet UITableView *illnessTableView;
 @property (strong, nonatomic) IBOutlet UIView *navigationView;
+@property (strong, nonatomic) IBOutlet UILabel *lblNoInjuryData;
+@property (strong, nonatomic) IBOutlet UILabel *lblNoIllnessData;
 
 @end

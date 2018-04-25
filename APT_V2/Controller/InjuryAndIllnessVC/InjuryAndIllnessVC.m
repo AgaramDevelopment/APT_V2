@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self customnavigationmethod];
+//    [self customnavigationmethod];
     // Do any additional setup after loading the view from its nib.
     
     clientCode = [AppCommon GetClientCode];
@@ -45,6 +45,11 @@
     [super viewWillAppear:animated];
         //FETCHLOADINJURYWEB
     [self fetchLoadInjuryPostMethodService];
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod
@@ -109,12 +114,10 @@
             
             injuryArray = [NSMutableArray new];
             injuryArray = [responseObject objectForKey:@"InjuryWebs"];
-    
-            [self fetchLoadIllnessPostMethodService];
         }
         
         [AppCommon hideLoading];
-        
+        [self fetchLoadIllnessPostMethodService];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failed");
@@ -179,10 +182,12 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (tableView == self.injuryTableView) {
+        [self.lblNoInjuryData setHidden:illnessArray.count];
         return injuryArray.count;
     }
     
     if (tableView == self.illnessTableView) {
+        [self.lblNoIllnessData setHidden:illnessArray.count];
         return illnessArray.count;
     }
     return 0;
@@ -251,7 +256,7 @@
         NSArray *arr = [[NSBundle mainBundle] loadNibNamed:@"InjuryAndIllnessCell" owner:self options:nil];
         cell = arr[1];
 //        NSArray *commonArray = [illnessArray objectAtIndex:indexPath.row];
-        if (injuryArray.count) {
+        if (illnessArray.count) {
             cell.illnessLbl.text = [[illnessArray objectAtIndex:indexPath.row] valueForKey:@"IllnessName"];
             
             

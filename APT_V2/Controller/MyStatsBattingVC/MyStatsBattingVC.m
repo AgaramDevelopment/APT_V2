@@ -2914,6 +2914,9 @@
 
 - (IBAction)battingAction:(id)sender {
     
+    self.batttingTableView.hidden = NO;
+    self.lblNoData.hidden = YES;
+    
     [self setInningsButtonSelect:self.battingBtn];
     [self setInningsButtonUnselect:self.bowlingBtn];
         
@@ -2948,10 +2951,16 @@
             //Get Match Batting Performance
             
             [self getMatchBattingPerformanceGetMethodWebServiceMatchCode:matchCode inningsNo:innigs andPlayerCode:playerCode:0: (int)battingRecentMatchesArray.count];
+    } else {
+        self.batttingTableView.hidden = YES;
+        self.lblNoData.hidden = NO;
     }
 }
 
 - (IBAction)bowlingAction:(id)sender {
+    
+    self.batttingTableView.hidden = NO;
+    self.lblNoData.hidden = YES;
     
     [self setInningsButtonSelect:self.bowlingBtn];
     [self setInningsButtonUnselect:self.battingBtn];
@@ -2987,8 +2996,10 @@
             //Get Match Batting Performance
         
         [self getMatchBattingPerformanceGetMethodWebServiceMatchCode:matchCode inningsNo:innigs andPlayerCode:playerCode:0: (int)bowlingRecentMatchesArray.count];
+    } else {
+        self.batttingTableView.hidden = YES;
+        self.lblNoData.hidden = NO;
     }
-   
 }
 
 

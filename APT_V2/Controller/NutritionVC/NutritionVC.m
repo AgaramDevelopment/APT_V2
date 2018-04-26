@@ -15,7 +15,7 @@
 #import "WebService.h"
 #import "PopOverVC.h"
 
-@interface NutritionVC () {
+@interface NutritionVC () <UIPopoverPresentationControllerDelegate>{
     NSString *clientCode;
     NSString *userCode;
     NSString *userRefCode;
@@ -414,7 +414,7 @@
 
 - (void)popOverViewFuction:(NSMutableArray *)array andSender:(id)sender
 {
-    
+    /*
     NSLog(@"array:%@", array);
     NSLog(@"array:tag:%@", array [[sender tag]]);
     PopOverVC *popOverObj = [[PopOverVC alloc] init];
@@ -429,6 +429,36 @@
     [popOver setPopoverContentSize:size];
     [popOver setBackgroundColor:[UIColor whiteColor]];
     [popOver presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+     */
+    
+    PopOverVC *popOverObj = [[PopOverVC alloc] initWithNibName:@"PopOverVC" bundle:nil]; // 12
+   popOverObj.listArray = array [[sender tag]];
+    popOverObj.modalPresentationStyle = UIModalPresentationPopover; // 13
+    UIPopoverPresentationController *popPC = popOverObj.popoverPresentationController; // 14
+    CGRect size;
+    int arrayCount = [array [[sender tag]] count];
+    if (IS_IPAD) {
+//        size = CGRectMake(0, 0, 150, array.count > 5 ? 200 : array.count*45);
+        popOverObj.preferredContentSize = CGSizeMake(200, arrayCount > 5 ? 300 : array.count*45);
+    } else {
+        popOverObj.preferredContentSize = CGSizeMake(150, arrayCount > 5 ? 250 : array.count*40);
+//        size = CGRectMake(0, 0, 100, array.count > 5 ? 200 : array.count*45);
+//        size = CGSizeMake(200, array.count > 5 ? 200 : array.count*45);
+    }
+    
+//    popOverObj.popoverPresentationController.sourceRect = [sender bounds]; // 15
+    
+    popOverObj.popoverPresentationController.sourceRect = CGRectMake(0, 0, 0, 0);
+//    CGRect( 0, y: 0, width: sender.frame.size.width, height: sender.frame.size.height)
+    popOverObj.popoverPresentationController.sourceView = sender; // 16
+    popPC.permittedArrowDirections = UIPopoverArrowDirectionAny; // 17
+    popPC.delegate = self; //18
+    [popPC setBackgroundColor:[UIColor whiteColor]];
+    [self presentViewController:popOverObj animated:YES completion:nil]; // 19
+    
+//    [popPC setBackgroundColor:[UIColor colorWithRed:36/255.0 green:52/255.0 blue:75/255.0 alpha:1.0]];
+//    [appDel.frontNavigationController presentViewController:popOverObj animated:YES completion:nil];
+    
 }
 
 - (void)foodDiaryFetchDetailsPostMethodWebService {

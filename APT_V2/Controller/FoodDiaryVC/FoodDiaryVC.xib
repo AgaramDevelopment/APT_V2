@@ -81,7 +81,7 @@
                                     <rect key="frame" x="0.0" y="35" width="375" height="160"/>
                                     <subviews>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Ah9-02-FXV">
-                                            <rect key="frame" x="0.0" y="0.0" width="315" height="160"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="325" height="160"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="8" minimumInteritemSpacing="8" id="R9q-xd-1YS">
                                                 <size key="itemSize" width="50" height="50"/>
@@ -95,10 +95,10 @@
                                             </connections>
                                         </collectionView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="trB-GE-oAV">
-                                            <rect key="frame" x="320" y="8" width="50" height="144"/>
+                                            <rect key="frame" x="330" y="8" width="40" height="144"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="50" id="80i-qc-Q5e">
+                                                <constraint firstAttribute="width" constant="40" id="80i-qc-Q5e">
                                                     <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                                                 </constraint>
                                             </constraints>

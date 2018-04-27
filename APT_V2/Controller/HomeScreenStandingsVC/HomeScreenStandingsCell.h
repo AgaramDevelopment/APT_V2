@@ -18,5 +18,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lostLbl;
 @property (strong, nonatomic) IBOutlet UILabel *nrrLbl;
 @property (strong, nonatomic) IBOutlet UILabel *pointsLbl;
+@property (weak, nonatomic) IBOutlet UILabel *tiedLbl;
+@property (weak, nonatomic) IBOutlet UILabel *NRLbl;
 
 @end

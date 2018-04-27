@@ -40,7 +40,7 @@
     int runOutMissCount;
     int throwaatStumpsCount;
     int selectedTab;
-    
+
 }
 @end
 
@@ -88,23 +88,23 @@ int headdingCount = 0;
     
     [self.odiInn1Btn setTitle:appDel.TeamB forState:UIControlStateNormal];
     [self.odiInn2Btn setTitle:appDel.TeamA forState:UIControlStateNormal];
-    
+
     self.tblView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+
     _tblView.hidden = true;
     self.rootVideoView.hidden = YES;
     
     objWebservice = [[WebService alloc]init];
+
     
-    
-    [self loadFieldSummary];
+   [self loadFieldSummary];
     
     if(_isTest){
         self.testInnsView.clipsToBounds = NO;
         self.testInnsView.layer.shadowColor = [[UIColor blackColor] CGColor];
         self.testInnsView.layer.shadowOffset = CGSizeMake(0,5);
         self.testInnsView.layer.shadowOpacity = 0.5;
-        
+
     }else{
         self.odiInnsView.clipsToBounds = NO;
         self.odiInnsView.layer.shadowColor = [[UIColor blackColor] CGColor];
@@ -112,6 +112,11 @@ int headdingCount = 0;
         self.odiInnsView.layer.shadowOpacity = 0.5;
         
     }
+    
+    lastIndex = NULL;
+    selectedIndex = -1;
+    selectedTab = 1;
+
     [self setTabView];
 }
 
@@ -172,15 +177,13 @@ int headdingCount = 0;
     selectedIndex = -1;
     selectedTab = 1;
     [self setTabView];
-    
+
     if(innsOne == NULL){
         _tblView.hidden = true;
         [self loadFieldSummary];
     }else{
         [self setDataDictInTableView:innsOne];
     }
-    
-    
     
 }
 - (IBAction)onClickSecInns:(id)sender {
@@ -196,7 +199,7 @@ int headdingCount = 0;
     }else{
         [self setDataDictInTableView:innsTwo];
     }
-    
+
 }
 - (IBAction)onClickThirdInns:(id)sender {
     
@@ -217,7 +220,7 @@ int headdingCount = 0;
     selectedIndex = -1;
     selectedTab = 4;
     [self setTabView];
-    
+
     if(innsFour == NULL){
         _tblView.hidden = true;
         [self loadFieldSummary];
@@ -227,11 +230,13 @@ int headdingCount = 0;
 }
 
 -(UIView *) getLineView : (UIButton *) btn{
-    
+
     CGFloat Xvalue = (btn.frame.size.width/4);
-    
+
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(Xvalue, btn.frame.size.height-5, btn.frame.size.width/2, 5)];
-    
+    [UIView animateWithDuration:0.3 animations:^{
+        [lineView layoutIfNeeded];
+    }];
     lineView.backgroundColor =[UIColor colorWithRed:37.0f/255.0f
                                               green:176.0f/255.0f
                                                blue:240.0f/255.0f
@@ -261,18 +266,30 @@ int headdingCount = 0;
         [self clearBtnSubView:_testInn2Btn];
         [self clearBtnSubView:_testInn3Btn];
         [self clearBtnSubView:_testInn4Btn];
-        
+
         if(selectedTab ==  1){
-            [_testInn1Btn addSubview: [self getLineView:_testInn1Btn]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_testInn1Btn addSubview: [self getLineView:_testInn1Btn]];
+            });
+
         }else if(selectedTab ==  2){
-            [_testInn2Btn addSubview: [self getLineView:_testInn2Btn]];
-            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_testInn2Btn addSubview: [self getLineView:_testInn2Btn]];
+            });
+
+
         }else if(selectedTab ==  3){
-            [_testInn3Btn addSubview: [self getLineView:_testInn3Btn]];
-            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_testInn3Btn addSubview: [self getLineView:_testInn3Btn]];
+            });
+
+
         }else if(selectedTab ==  4){
-            [_testInn4Btn addSubview: [self getLineView:_testInn4Btn]];
-            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_testInn4Btn addSubview: [self getLineView:_testInn4Btn]];
+            });
+
+
         }
         
     }else{
@@ -287,11 +304,17 @@ int headdingCount = 0;
         [self clearBtnSubView:_odiInn2Btn];
         
         if(selectedTab ==  1){
-            [_odiInn1Btn addSubview: [self getLineView:_odiInn1Btn]];
-            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_odiInn1Btn addSubview: [self getLineView:_odiInn1Btn]];
+            });
+
+
         }else if(selectedTab ==  2){
-            [_odiInn2Btn addSubview: [self getLineView:_odiInn2Btn]];
-            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_odiInn2Btn addSubview: [self getLineView:_odiInn2Btn]];
+            });
+
+
         }
         
     }
@@ -321,7 +344,7 @@ int headdingCount = 0;
         cell.headdingLbl.text = @"Dropped Catches";
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
-        
+
     } else if( indexPath.row > dropCatchStartPostion && indexPath.row <= dropCatchEndPostion) { // Drop Catch
         
         FieldSummaryDroppedCatches *cell = [tableView dequeueReusableCellWithIdentifier:@"fs_dropcatch"];
@@ -335,16 +358,16 @@ int headdingCount = 0;
         cell.fielderNameLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"FielderName"];
         cell.fieldRegionLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"Region"];
         cell.batsmanTotalScoreLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"BScoreFinal"];
-        
-        //        cell.dropOverLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"DropOverNo"];
-        //        cell.dropBowerLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"BowlerName"];
-        //        cell.dropTeamScoreLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"TeamScoreOnDrop"];
-        //        cell.dropRunLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"BScoreOnDrop"];
-        //
-        //        cell.dismissRunLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"BScoreFinal"];
-        //        cell.dismissOverLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"WicketNo"];
-        //        cell.dismissTeamScoreLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"FOW"];
-        //        cell.dismissPartnerShipLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"Partnership"];
+
+//        cell.dropOverLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"DropOverNo"];
+//        cell.dropBowerLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"BowlerName"];
+//        cell.dropTeamScoreLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"TeamScoreOnDrop"];
+//        cell.dropRunLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"BScoreOnDrop"];
+//
+//        cell.dismissRunLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"BScoreFinal"];
+//        cell.dismissOverLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"WicketNo"];
+//        cell.dismissTeamScoreLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"FOW"];
+//        cell.dismissPartnerShipLbl.text = [[catchDropedArray objectAtIndex: postion] valueForKey:@"Partnership"];
         
         
         if(selectedIndex == indexPath.row){
@@ -368,7 +391,7 @@ int headdingCount = 0;
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
-        
+
     }else if( indexPath.row == positivesStartPostion) { // Positives headding
         
         FieldSummaryHeading *cell = [tableView dequeueReusableCellWithIdentifier:@"fs_headding"];
@@ -386,13 +409,13 @@ int headdingCount = 0;
         cell = self.filedingSumTVC;
         
         long postion = indexPath.row - (positivesStartPostion  + 1);
-        
+
         long loop = 0;
         
         for (id key in positiveTypeDict) {
             
             if(loop == postion){
-                
+
                 if([key isEqualToString:@"Caught"]){
                     [self loadFieldPlayer: cell :key : @"Caught":positiveTypeDict:indexPath];
                     cell.countLbl.text = [NSString stringWithFormat:@"%d",caughtCount];
@@ -426,7 +449,7 @@ int headdingCount = 0;
             }
             loop ++;
         }
-        
+
         if(selectedIndex == indexPath.row){
             cell.arrowImg.image = [UIImage imageNamed:@"upArrow"];
         }else{
@@ -518,42 +541,42 @@ int headdingCount = 0;
     CGFloat negativeNormalHeight = 58;
     
     CGFloat subCellHeight = 35;
+
     
     
-    
-    if( indexPath.row > dropCatchStartPostion && indexPath.row <= dropCatchEndPostion) { // Drop Catch
-        
-        if(indexPath.row ==  selectedIndex){
-            return dropCatchExpandHeight;
-        }else{
-            return dropCatchNormalHeight;
-        }
-        
-        
-        
-        
-    }else if( indexPath.row > positivesStartPostion && indexPath.row <= positivesEndPostion) { // Positive
-        
-        
-        if(indexPath.row ==  selectedIndex){
-            
-            long postion = indexPath.row - (positivesStartPostion  + 1);
-            
-            long loop = 0;
-            
-            for (id key in positiveTypeDict) {
-                
-                if(loop == postion){
-                    long playerSize = [[positiveTypeDict objectForKey:key] count];
-                    return  (subCellHeight * playerSize)+positiveNormalHeight;
-                }
-                loop ++;
-            }
-        }
-        else{
-            return positiveNormalHeight;
-        }
-        
+   if( indexPath.row > dropCatchStartPostion && indexPath.row <= dropCatchEndPostion) { // Drop Catch
+       
+       if(indexPath.row ==  selectedIndex){
+           return dropCatchExpandHeight;
+       }else{
+           return dropCatchNormalHeight;
+       }
+
+       
+       
+       
+   }else if( indexPath.row > positivesStartPostion && indexPath.row <= positivesEndPostion) { // Positive
+       
+       
+       if(indexPath.row ==  selectedIndex){
+           
+           long postion = indexPath.row - (positivesStartPostion  + 1);
+           
+           long loop = 0;
+           
+           for (id key in positiveTypeDict) {
+               
+               if(loop == postion){
+                   long playerSize = [[positiveTypeDict objectForKey:key] count];
+                   return  (subCellHeight * playerSize)+positiveNormalHeight;
+               }
+               loop ++;
+           }
+       }
+       else{
+           return positiveNormalHeight;
+       }
+       
     }else if(indexPath.row > negativeStartPostion && indexPath.row <= negativeEndPostion) { // Negative
         
         
@@ -576,16 +599,16 @@ int headdingCount = 0;
         else{
             return negativeNormalHeight;
         }
-        
+
     }
     
     return _tblView.rowHeight;
-    
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    // NSLog(@"%ld",indexPath.row);
+   // NSLog(@"%ld",indexPath.row);
     
     [self.tblView beginUpdates];
     if(indexPath.row == selectedIndex)
@@ -619,14 +642,14 @@ int headdingCount = 0;
 //Load fieding type sub players
 -(void) loadFieldPlayer : (FieldSummaryTVC *) cell : (id) key : (NSString *) typeName : (NSMutableDictionary *) dict : (NSIndexPath *)indexPath
 {
-    
+
     NSMutableArray *players = [dict objectForKey:key];
-    
+
     cell.fieldingTypeLbl.text = typeName;
     
     
     if(selectedIndex == indexPath.row){
-        
+    
         int playerCount = 0;
         for (NSMutableDictionary *player in players) {
             
@@ -642,7 +665,7 @@ int headdingCount = 0;
             fieldSummarySubTVC.clickBtn.tag = playerCount;
             
             [fieldSummarySubTVC.clickBtn addTarget:self action:@selector(didClickVideoBatting:) forControlEvents:UIControlEventTouchUpInside];
-            
+
             
             [cell.containerView addSubview: fieldSummarySubTVC];
             
@@ -650,7 +673,7 @@ int headdingCount = 0;
             playerCount ++;
         }
     }
-    
+
     
 }
 
@@ -659,21 +682,21 @@ int headdingCount = 0;
 {
     
     [AppCommon showLoading];
+
     
-    
-    [objWebservice LoadFieldingSummaryByInnins :LoadFieldSummary  :matchResult :self.matchcode :[NSString stringWithFormat:@"%d", selectedTab]  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        // NSLog(@"responseObject=%@",responseObject);
+     [objWebservice LoadFieldingSummaryByInnins :LoadFieldSummary  :matchResult :self.matchcode :[NSString stringWithFormat:@"%d", selectedTab]  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+       // NSLog(@"responseObject=%@",responseObject);
         if(responseObject >0)
         {
             
             NSMutableDictionary *dic1 = [[NSMutableDictionary alloc]init];
             [dic1 setDictionary:responseObject];
             [self setDataDictInTableView: dic1];
-            
+         
         }
         
-        [AppCommon hideLoading];
-        self.view.userInteractionEnabled = true;
+         [AppCommon hideLoading];
+         self.view.userInteractionEnabled = true;
     } failure:^(AFHTTPRequestOperation *operation, id error) {
         //NSLog(@"failed");
         [COMMON webServiceFailureError:error];
@@ -704,7 +727,7 @@ int headdingCount = 0;
     NSMutableArray *relayThrow = [[NSMutableArray alloc] init];
     NSMutableArray *slideStop = [[NSMutableArray alloc] init];
     NSMutableArray *wellKept = [[NSMutableArray alloc] init];
-    
+
     
     for (NSDictionary *positiveDic in positiveFielderArray){
         
@@ -825,9 +848,9 @@ int headdingCount = 0;
             totalCount=totalCount+value;
         }
         
-        caughtCount = totalCount;
+         caughtCount = totalCount;
     }
-    
+
     if(chaseStop.count > 0){
         [positiveTypeDict setObject:chaseStop forKey:@"ChaseStop"];
         
@@ -837,7 +860,7 @@ int headdingCount = 0;
             int value = [[[chaseStop valueForKey:@"count"] objectAtIndex:i] intValue];
             totalCount=totalCount+value;
         }
-        chaseStopCount = totalCount;
+         chaseStopCount = totalCount;
     }
     
     if(directHit.count > 0){
@@ -910,7 +933,7 @@ int headdingCount = 0;
             int value = [[[slideStop valueForKey:@"count"] objectAtIndex:i] intValue];
             totalCount=totalCount+value;
         }
-        slideStopCount = totalCount;
+         slideStopCount = totalCount;
     }
     
     if(wellKept.count > 0){
@@ -921,17 +944,17 @@ int headdingCount = 0;
             int value = [[[wellKept valueForKey:@"count"] objectAtIndex:i] intValue];
             totalCount=totalCount+value;
         }
-        wellKeptCount = totalCount;
+         wellKeptCount = totalCount;
     }
     
     
-    //     positiveCount = caught.count+chaseStop.count+directHit.count+diveStop.count+goodThrow.count+pickThrow.count+relayThrow.count+slideStop.count+wellKept.count;
+//     positiveCount = caught.count+chaseStop.count+directHit.count+diveStop.count+goodThrow.count+pickThrow.count+relayThrow.count+slideStop.count+wellKept.count;
     
     
     
     //-------- Negatives
     
-    NSMutableArray *negativeFielderArray = [[NSMutableArray alloc] init];
+   NSMutableArray *negativeFielderArray = [[NSMutableArray alloc] init];
     negativeFielderArray =  [dic1 valueForKey:@"lstFieldingNegative"];
     
     
@@ -1015,7 +1038,7 @@ int headdingCount = 0;
             
         }
         
-        
+       
     }
     
     
@@ -1079,7 +1102,7 @@ int headdingCount = 0;
             int value = [[[runOutMiss valueForKey:@"count"] objectAtIndex:i] intValue];
             totalCount=totalCount+value;
         }
-        runOutMissCount = totalCount;
+         runOutMissCount = totalCount;
     }
     
     if(throwaatStumps.count > 0){
@@ -1093,13 +1116,13 @@ int headdingCount = 0;
         throwaatStumpsCount = totalCount;
     }
     
-    
+   
     //------ Catch Dropped
     catchDropedArray = [[NSMutableArray alloc] init];
     catchDropedArray =  [dic1 valueForKey:@"lstFieldingCatchDrop"];
     
     
-    //  NSLog(@"%@",dic1);
+  //  NSLog(@"%@",dic1);
     
     if(selectedTab == 1 ){
         innsOne = dic1;
@@ -1114,7 +1137,7 @@ int headdingCount = 0;
     [self generatePostionForTblView];
     _tblView.hidden = false;
     [_tblView reloadData];
-    
+   
 }
 
 -(void) generatePostionForTblView {
@@ -1124,7 +1147,7 @@ int headdingCount = 0;
         dropCatchStartPostion = 0;
         headdingCount = 1;
         dropCatchEndPostion = (int) catchDropedArray.count;
-        
+
     }else{
         dropCatchStartPostion = -1;
         dropCatchEndPostion = -1;
@@ -1139,7 +1162,7 @@ int headdingCount = 0;
         positivesStartPostion = 0;
         headdingCount = 1;
         positivesEndPostion = (int) (positiveTypeDict.count);
-        
+
     }else{
         positivesStartPostion = -1;
         positivesEndPostion = -1;
@@ -1149,7 +1172,7 @@ int headdingCount = 0;
         negativeStartPostion = (int) (catchDropedArray.count + positiveTypeDict.count + 1 + 1) ;
         headdingCount = 3;
         negativeEndPostion = (int) (catchDropedArray.count + positiveTypeDict.count + negativeTypeDict.count + 2) ;
-        
+
     }else if(catchDropedArray.count >0){
         negativeStartPostion = (int) catchDropedArray.count + 1;
         headdingCount = 2;
@@ -1158,12 +1181,12 @@ int headdingCount = 0;
         negativeStartPostion = (int) positiveTypeDict.count + 1;
         headdingCount = 2;
         negativeEndPostion = (int) (positiveTypeDict.count + negativeTypeDict.count + 1) ;
-        
+
     }else if(negativeTypeDict.count>0){
         negativeStartPostion = 0;
         headdingCount = 1;
         negativeEndPostion = (int) ( negativeTypeDict.count ) ;
-        
+
     }else{
         negativeStartPostion = -1;
         negativeEndPostion = -1;
@@ -1184,7 +1207,7 @@ int headdingCount = 0;
     
     _rootVideoView.hidden = YES;
     
-    
+   
     
 }
 
@@ -1195,16 +1218,16 @@ int headdingCount = 0;
     NSMutableArray *players = [dict objectForKey:key];
     NSMutableDictionary *player =  [players objectAtIndex: playerPos];
     
-    ;
-    
+     ;
+
     if( ![[player valueForKey:@"count"] isEqualToString:@"0"]){
         
-        //     [self loadVideoPaths:[player valueForKey:@"FielderCode"] : typeName : @"FIELDING" ];
+   //     [self loadVideoPaths:[player valueForKey:@"FielderCode"] : typeName : @"FIELDING" ];
         
         [self loadVideoPlayer: [player valueForKey:@"FielderCode"] : typeName: @"FIELDING"  innings: [NSString stringWithFormat:@"%d", selectedTab]];
         
     }
-    
+
     
     
 }
@@ -1221,78 +1244,78 @@ int headdingCount = 0;
         if ([sender isKindOfClass:[UIButton class]]){
             
             int playerPos = (int)((UIButton *)sender).tag;
-            // NSLog(@"%li", (long)((UIButton *)sender).tag);
+           // NSLog(@"%li", (long)((UIButton *)sender).tag);
             
             
-            if( selectedIndex > positivesStartPostion && selectedIndex <= positivesEndPostion) {// Positives
+       if( selectedIndex > positivesStartPostion && selectedIndex <= positivesEndPostion) {// Positives
+           
+           long position = selectedIndex - (positivesStartPostion  + 1);
+
+           
+           long loop = 0;
+           
+           for (id key in positiveTypeDict) {
+               
+               if(loop == position){
+                   
+                   
+                   
+                   if([key isEqualToString:@"Caught"]){
+                       [self loadVideoFieldPlayer :key : @"CAUGHT":positiveTypeDict:playerPos];
+                   }else if([key isEqualToString:@"ChaseStop"]){
+                       [self loadVideoFieldPlayer :key : @"CANDS":positiveTypeDict:playerPos];
+                   }else if([key isEqualToString:@"DirectHit"]){
+                       [self loadVideoFieldPlayer:key : @"DHIT":positiveTypeDict:playerPos];
+                   }else if([key isEqualToString:@"DiveStop"]){
+                       [self loadVideoFieldPlayer:key : @"DANDS":positiveTypeDict:playerPos];
+                   }else if([key isEqualToString:@"GoodThrow"]){
+                       [self loadVideoFieldPlayer:key : @"GOODT":positiveTypeDict:playerPos];
+                   }else if([key isEqualToString:@"PickThrow"]){
+                       [self loadVideoFieldPlayer:key : @"PANDT":positiveTypeDict:playerPos];
+                   }else if([key isEqualToString:@"RelayThrow"]){
+                       [self loadVideoFieldPlayer:key : @"RELAYT":positiveTypeDict:playerPos];
+                   }else if([key isEqualToString:@"SlideStop"]){
+                       [self loadVideoFieldPlayer:key : @"SANDS":positiveTypeDict:playerPos];
+                   }else if([key isEqualToString:@"WellKept"]){
+                       [self loadVideoFieldPlayer:key : @"WELLK":positiveTypeDict:playerPos];
+                   }
+                   
+                   break;
+               }
+               loop ++;
+           }
+           
+            
+        }else if(selectedIndex > negativeStartPostion && selectedIndex <= negativeEndPostion) {// Negatives
+            
+            long position = selectedIndex - (negativeStartPostion  + 1);
+            
+            long loop = 0;
+            
+            for (id key in negativeTypeDict) {
                 
-                long position = selectedIndex - (positivesStartPostion  + 1);
-                
-                
-                long loop = 0;
-                
-                for (id key in positiveTypeDict) {
+                if(loop == position){
                     
-                    if(loop == position){
-                        
-                        
-                        
-                        if([key isEqualToString:@"Caught"]){
-                            [self loadVideoFieldPlayer :key : @"CAUGHT":positiveTypeDict:playerPos];
-                        }else if([key isEqualToString:@"ChaseStop"]){
-                            [self loadVideoFieldPlayer :key : @"CANDS":positiveTypeDict:playerPos];
-                        }else if([key isEqualToString:@"DirectHit"]){
-                            [self loadVideoFieldPlayer:key : @"DHIT":positiveTypeDict:playerPos];
-                        }else if([key isEqualToString:@"DiveStop"]){
-                            [self loadVideoFieldPlayer:key : @"DANDS":positiveTypeDict:playerPos];
-                        }else if([key isEqualToString:@"GoodThrow"]){
-                            [self loadVideoFieldPlayer:key : @"GOODT":positiveTypeDict:playerPos];
-                        }else if([key isEqualToString:@"PickThrow"]){
-                            [self loadVideoFieldPlayer:key : @"PANDT":positiveTypeDict:playerPos];
-                        }else if([key isEqualToString:@"RelayThrow"]){
-                            [self loadVideoFieldPlayer:key : @"RELAYT":positiveTypeDict:playerPos];
-                        }else if([key isEqualToString:@"SlideStop"]){
-                            [self loadVideoFieldPlayer:key : @"SANDS":positiveTypeDict:playerPos];
-                        }else if([key isEqualToString:@"WellKept"]){
-                            [self loadVideoFieldPlayer:key : @"WELLK":positiveTypeDict:playerPos];
-                        }
-                        
-                        break;
+                    if([key isEqualToString:@"CatchDrop"]){
+                        [self loadVideoFieldPlayer:key : @"CATD":negativeTypeDict:playerPos];
+
+                    }else if([key isEqualToString:@"DiveMiss"]){
+                        [self loadVideoFieldPlayer:key : @"DANDM":negativeTypeDict:playerPos];
+                    }else if([key isEqualToString:@"Fumble"]){
+                        [self loadVideoFieldPlayer:key : @"FUMB":negativeTypeDict:playerPos];
+                    }else if([key isEqualToString:@"MisField"]){
+                        [self loadVideoFieldPlayer:key : @"MISSF":negativeTypeDict:playerPos];
+                    }else if([key isEqualToString:@"RunOutMiss"]){
+                        [self loadVideoFieldPlayer:key : @"ROM":negativeTypeDict:playerPos];
+                    }else if([key isEqualToString:@"ThrowaatStumps"]){
+                        [self loadVideoFieldPlayer:key : @"TATS":negativeTypeDict:playerPos];
                     }
-                    loop ++;
+                    break;
                 }
-                
-                
-            }else if(selectedIndex > negativeStartPostion && selectedIndex <= negativeEndPostion) {// Negatives
-                
-                long position = selectedIndex - (negativeStartPostion  + 1);
-                
-                long loop = 0;
-                
-                for (id key in negativeTypeDict) {
-                    
-                    if(loop == position){
-                        
-                        if([key isEqualToString:@"CatchDrop"]){
-                            [self loadVideoFieldPlayer:key : @"CATD":negativeTypeDict:playerPos];
-                            
-                        }else if([key isEqualToString:@"DiveMiss"]){
-                            [self loadVideoFieldPlayer:key : @"DANDM":negativeTypeDict:playerPos];
-                        }else if([key isEqualToString:@"Fumble"]){
-                            [self loadVideoFieldPlayer:key : @"FUMB":negativeTypeDict:playerPos];
-                        }else if([key isEqualToString:@"MisField"]){
-                            [self loadVideoFieldPlayer:key : @"MISSF":negativeTypeDict:playerPos];
-                        }else if([key isEqualToString:@"RunOutMiss"]){
-                            [self loadVideoFieldPlayer:key : @"ROM":negativeTypeDict:playerPos];
-                        }else if([key isEqualToString:@"ThrowaatStumps"]){
-                            [self loadVideoFieldPlayer:key : @"TATS":negativeTypeDict:playerPos];
-                        }
-                        break;
-                    }
-                    loop ++;
-                }
-                
+                loop ++;
             }
+
+        }
             
         }
         
@@ -1312,7 +1335,7 @@ int headdingCount = 0;
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     
-    
+   
     
     BallsInVideosCVC *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ballsInVideosCVC" forIndexPath:indexPath];
     
@@ -1321,7 +1344,7 @@ int headdingCount = 0;
     cell.ballLbl.layer.cornerRadius = cell.ballLbl.frame.size.width/2;
     
     
-    
+   
     cell.ballLbl.text = [NSString stringWithFormat:@"%ld",((long)indexPath.row+1)];
     
     if(selectedVideo == indexPath.row){
@@ -1357,7 +1380,7 @@ int headdingCount = 0;
     [self.avPlayerViewController.view removeFromSuperview];
     self.avPlayer = NULL;
     
-    
+
     self.avPlayer = [AVPlayer playerWithURL:videoURL];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:_avPlayerViewController.player ];
@@ -1367,7 +1390,7 @@ int headdingCount = 0;
     self.avPlayerViewController.player = self.avPlayer;
     self.avPlayerViewController.view.frame = _videoView.bounds;
     [_videoView addSubview:self.avPlayerViewController.view];
-    
+
     [self.avPlayer play];
     
     [self.ballsColView reloadData];
@@ -1409,7 +1432,7 @@ int headdingCount = 0;
             videoURLArray =  [dic1 valueForKey:@"lstScoreCardVideoFilePathValuesRuns"];
             
             if(videoURLArray.count >0){
-                selectedVideo = 0;
+                 selectedVideo = 0;
                 self.rootVideoView.hidden = NO;
                 
                 [self.ballsColView reloadData];
@@ -1430,7 +1453,7 @@ int headdingCount = 0;
                 self.avPlayer = [AVPlayer playerWithURL:videoURL];
                 
                 [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:_avPlayerViewController.player ];
-                
+
                 
                 self.avPlayerViewController = [AVPlayerViewController new];
                 self.avPlayerViewController.player = self.avPlayer;
@@ -1493,4 +1516,3 @@ int headdingCount = 0;
 
 
 @end
-

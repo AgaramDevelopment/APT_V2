@@ -17,6 +17,7 @@
 #import "TeamHeadToHead.h"
 #import "TeamOverviewVC.h"
 #import "Config.h"
+#import "HomeScreenStandingsVC.h"
 
 @interface MatchCenterTBC ()
 
@@ -42,14 +43,14 @@
     
     //MCOverViewVC
     MCOverViewVC *firstViewController = [[MCOverViewVC alloc]init];
-    if(IS_IPHONE_DEVICE)
-    {
-    firstViewController.title = @"";
-    }
-    else
-    {
+//    if(IS_IPHONE_DEVICE)
+//    {
+//    firstViewController.title = @"";
+//    }
+//    else
+//    {
         firstViewController.title = @"Overview";
-    }
+//    }
     firstViewController.tabBarItem = self.overviewBarItem;
     
     firstViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Overview_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
@@ -62,14 +63,14 @@
     MCTossAndResultsVC *secondViewController = [[MCTossAndResultsVC alloc]init];
     
     
-    if(IS_IPHONE_DEVICE)
-    {
-        secondViewController.title = @"";
-    }
-    else
-    {
+//    if(IS_IPHONE_DEVICE)
+//    {
+//        secondViewController.title = @"";
+//    }
+//    else
+//    {
         secondViewController.title = @"Toss & Result";
-    }
+//    }
     
     secondViewController.tabBarItem = self.tossAndResultBarItem;
     
@@ -81,14 +82,14 @@
     
     //MCTeamCompVC
     MCTeamCompVC *thirdViewController = [[MCTeamCompVC alloc]init];
-    if(IS_IPHONE_DEVICE)
-    {
-        thirdViewController.title = @"";
-    }
-    else
-    {
+//    if(IS_IPHONE_DEVICE)
+//    {
+//        thirdViewController.title = @"";
+//    }
+//    else
+//    {
         thirdViewController.title = @"Team Composition";
-    }
+//    }
     
     thirdViewController.tabBarItem = self.tossAndResultBarItem;
     
@@ -99,14 +100,14 @@
     //BattingVC
     MCBattingRootVC *fourthViewController = [[MCBattingRootVC alloc]init];
     
-    if(IS_IPHONE_DEVICE)
-    {
-        fourthViewController.title = @"";
-    }
-    else
-    {
+//    if(IS_IPHONE_DEVICE)
+//    {
+//        fourthViewController.title = @"";
+//    }
+//    else
+//    {
         fourthViewController.title = @"Batting";
-    }
+//    }
     fourthViewController.tabBarItem = self.tossAndResultBarItem;
     fourthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Batting_Select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     fourthViewController.tabBarItem.image = [[UIImage imageNamed:@"Batting_UnSelect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
@@ -114,14 +115,14 @@
     //BowlingVC
     MCBowlingRootVC *bowlingViewController = [[MCBowlingRootVC alloc]init];
     
-    if(IS_IPHONE_DEVICE)
-    {
-        bowlingViewController.title = @"";
-    }
-    else
-    {
+//    if(IS_IPHONE_DEVICE)
+//    {
+//        bowlingViewController.title = @"";
+//    }
+//    else
+//    {
         bowlingViewController.title = @"Bowling";
-    }
+//    }
     bowlingViewController.tabBarItem = self.tossAndResultBarItem;
     bowlingViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Bowling_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
     bowlingViewController.tabBarItem.image = [[UIImage imageNamed:@"Bowling_Unselect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
@@ -130,14 +131,14 @@
     //GroundVC
     GroundVC *fifthViewController = [[GroundVC alloc]init];
     
-    if(IS_IPHONE_DEVICE)
-    {
-        fifthViewController.title = @"";
-    }
-    else
-    {
+//    if(IS_IPHONE_DEVICE)
+//    {
+//        fifthViewController.title = @"";
+//    }
+//    else
+//    {
         fifthViewController.title = @"Ground";
-    }
+//    }
     fifthViewController.tabBarItem = self.tossAndResultBarItem;
     
     fifthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Ground_select"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
@@ -145,16 +146,17 @@
     
     
     //Standings
-    StandingVC *sixthViewController = [[StandingVC alloc]init];
-    
-    if(IS_IPHONE_DEVICE)
-    {
-        sixthViewController.title = @"";
-    }
-    else
-    {
+//    StandingVC *sixthViewController = [[StandingVC alloc]init];
+    HomeScreenStandingsVC* sixthViewController = [HomeScreenStandingsVC new];
+
+//    if(IS_IPHONE_DEVICE)
+//    {
+//        sixthViewController.title = @"";
+//    }
+//    else
+//    {
         sixthViewController.title = @"Standings";
-    }
+//    }
     sixthViewController.tabBarItem = self.tossAndResultBarItem;
     
     sixthViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"Standings_selected"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];
@@ -164,14 +166,14 @@
     //H2H
     TeamHeadToHead *headtoheadController = [[TeamHeadToHead alloc]init];
     
-    if(IS_IPHONE_DEVICE)
-    {
-        headtoheadController.title = @"";
-    }
-    else
-    {
+//    if(IS_IPHONE_DEVICE)
+//    {
+//        headtoheadController.title = @"";
+//    }
+//    else
+//    {
         headtoheadController.title = @"H2H";
-    }
+//    }
     headtoheadController.tabBarItem = self.tossAndResultBarItem;
     
     headtoheadController.tabBarItem.selectedImage = [[UIImage imageNamed:@"H2HBlue"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal ];

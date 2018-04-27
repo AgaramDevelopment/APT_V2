@@ -54,6 +54,9 @@
 @property (nonatomic, strong) UIColor *textColor; //Default is [UIColor blackColor]
 @property (nonatomic) CGFloat textFontSize; //Default is 12
 
+@property (nonatomic) float minY;
+@property (nonatomic) float maxY;
+
 //show GRID with the graph
 @property (nonatomic) BOOL drawGridX; //Default is TRUE
 @property (nonatomic) BOOL drawGridY; //Default is TRUE

@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong) IBOutlet UIView *barfilterView;
 @property (nonatomic, strong) IBOutlet UIView *linefilterView;
+@property (nonatomic, strong) IBOutlet UIView *navigationView;
 
 @property (nonatomic, strong) IBOutlet UILabel *linefilterlbl;
 @property (nonatomic, strong) IBOutlet UILabel *barfilterlbl;

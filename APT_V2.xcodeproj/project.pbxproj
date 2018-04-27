@@ -100,7 +100,6 @@
 		04BC4AD820861A5100CEB23E /* MCOverViewResultCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BC4AD220861A5000CEB23E /* MCOverViewResultCVC.xib */; };
 		04BC4AD920861A5100CEB23E /* MCOverViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4AD320861A5000CEB23E /* MCOverViewVC.m */; };
 		04BC4ADA20861A5100CEB23E /* MatchCenterTBC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4AD420861A5000CEB23E /* MatchCenterTBC.m */; };
-		04BC4ADD20861AE500CEB23E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04BC4ADB20861AE500CEB23E /* Main.storyboard */; };
 		04BC4B0120862BC400CEB23E /* TeamMembersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4AFB20862BC300CEB23E /* TeamMembersVC.m */; };
 		04BC4B0220862BC400CEB23E /* TeamMembersVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BC4AFE20862BC300CEB23E /* TeamMembersVC.xib */; };
 		04BC4B0320862BC400CEB23E /* TeamMemebersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4AFF20862BC400CEB23E /* TeamMemebersCell.m */; };
@@ -118,10 +117,6 @@
 		04BC4B47208636AA00CEB23E /* ScoreCardVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4B46208636AA00CEB23E /* ScoreCardVideoPlayer.m */; };
 		04BC4B4A2086370300CEB23E /* ScorecardBowlCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4B482086370200CEB23E /* ScorecardBowlCell.m */; };
 		04BC4B4D2086373C00CEB23E /* ScoreCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4B4B2086373B00CEB23E /* ScoreCardCell.m */; };
-		04BC4B55208637AD00CEB23E /* UIScrollView+APParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4B50208637AB00CEB23E /* UIScrollView+APParallaxHeader.m */; };
-		04BC4B56208637AD00CEB23E /* ScoreCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4B51208637AB00CEB23E /* ScoreCardVC.m */; };
-		04BC4B57208637AD00CEB23E /* ScoreCardHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4B52208637AC00CEB23E /* ScoreCardHeader.m */; };
-		04BC4B58208637AD00CEB23E /* ScoreCardHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BC4B53208637AC00CEB23E /* ScoreCardHeader.xib */; };
 		04BC4B5F2086387B00CEB23E /* MyStatsBattingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BC4B5A2086387A00CEB23E /* MyStatsBattingCell.xib */; };
 		04BC4B602086387B00CEB23E /* MyStatsBattingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4B5B2086387A00CEB23E /* MyStatsBattingVC.m */; };
 		04BC4B612086387B00CEB23E /* MyStatsBattingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4B5C2086387B00CEB23E /* MyStatsBattingCell.m */; };
@@ -200,8 +195,6 @@
 		18949A3220875C5F002ECEE0 /* redCircle_mini.png in Resources */ = {isa = PBXBuildFile; fileRef = 189499F620875C5E002ECEE0 /* redCircle_mini.png */; };
 		18949A3320875C5F002ECEE0 /* WeeklyCalendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 189499F720875C5E002ECEE0 /* WeeklyCalendar.png */; };
 		18949A3420875C5F002ECEE0 /* YearlyCalendar.png in Resources */ = {isa = PBXBuildFile; fileRef = 189499F820875C5E002ECEE0 /* YearlyCalendar.png */; };
-		18949A3820876767002ECEE0 /* FieldSummaryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18949A3520876767002ECEE0 /* FieldSummaryTVC.m */; };
-		18949A3920876767002ECEE0 /* FieldSummaryTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18949A3620876767002ECEE0 /* FieldSummaryTVC.xib */; };
 		18A2E712203D49CA00F91E73 /* TrainingPiechart.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A2E710203D49CA00F91E73 /* TrainingPiechart.xib */; };
 		18A590682047C4C8002BBF64 /* LargeValueFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A590672047C4C8002BBF64 /* LargeValueFormatter.swift */; };
 		18A5CAB520383FAD00586896 /* TeamsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A5CAB320383FAD00586896 /* TeamsVC.m */; };
@@ -219,6 +212,15 @@
 		18A68ACD20371A7E00EBA479 /* AddWellnessRatingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A68AC720371A7D00EBA479 /* AddWellnessRatingVC.xib */; };
 		18A68ACE20371A7E00EBA479 /* WellnessTrainingBowlingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A68AC820371A7D00EBA479 /* WellnessTrainingBowlingVC.m */; };
 		18A68ACF20371A7E00EBA479 /* WellnessTrainingBowlingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A68AC920371A7D00EBA479 /* WellnessTrainingBowlingVC.xib */; };
+		18AA1B952092FCC2009634A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18AA1B932092FCC2009634A3 /* Main.storyboard */; };
+		18AA1B982092FD17009634A3 /* SessionSummaryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AA1B962092FD16009634A3 /* SessionSummaryVC.m */; };
+		18AA1B9E2092FD64009634A3 /* FieldSummaryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AA1B9A2092FD63009634A3 /* FieldSummaryTVC.m */; };
+		18AA1B9F2092FD64009634A3 /* FieldSummaryTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AA1B9B2092FD63009634A3 /* FieldSummaryTVC.xib */; };
+		18AA1BA02092FD64009634A3 /* FieldSummaryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AA1B9C2092FD64009634A3 /* FieldSummaryVC.m */; };
+		18AA1BA82092FDFC009634A3 /* ScoreCardHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AA1BA22092FDFB009634A3 /* ScoreCardHeader.xib */; };
+		18AA1BA92092FDFC009634A3 /* UIScrollView+APParallaxHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AA1BA32092FDFB009634A3 /* UIScrollView+APParallaxHeader.m */; };
+		18AA1BAA2092FDFC009634A3 /* ScoreCardHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AA1BA62092FDFB009634A3 /* ScoreCardHeader.m */; };
+		18AA1BAB2092FDFC009634A3 /* ScoreCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AA1BA72092FDFB009634A3 /* ScoreCardVC.m */; };
 		18AAC6DC2046192B00D5495A /* CustomCollectionStandings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AAC6DB2046192B00D5495A /* CustomCollectionStandings.swift */; };
 		18AC344B203E812C003EE0F0 /* ReportsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AC3449203E812C003EE0F0 /* ReportsVC.m */; };
 		18AC344C203E812C003EE0F0 /* ReportsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AC344A203E812C003EE0F0 /* ReportsVC.xib */; };
@@ -261,8 +263,6 @@
 		CE6C161F204520B300672253 /* PlayersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C161D204520B200672253 /* PlayersVC.m */; };
 		CE6C162F204520D100672253 /* SessionDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C1623204520D000672253 /* SessionDayCell.m */; };
 		CE6C1630204520D100672253 /* SessionPartCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C1626204520D000672253 /* SessionPartCell.m */; };
-		CE6C1631204520D100672253 /* SessionSummaryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C1628204520D000672253 /* SessionSummaryVC.m */; };
-		CE6C1634204520D100672253 /* FieldSummaryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C162E204520D000672253 /* FieldSummaryVC.m */; };
 		CE6C16462045211300672253 /* BowlingKPIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C163B2045211300672253 /* BowlingKPIViewController.m */; };
 		CE6C16472045211300672253 /* BattingKPIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C163E2045211300672253 /* BattingKPIViewController.m */; };
 		CE6C16482045211300672253 /* BattingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16412045211300672253 /* BattingTableViewCell.m */; };
@@ -493,7 +493,6 @@
 		04BC4AD220861A5000CEB23E /* MCOverViewResultCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCOverViewResultCVC.xib; sourceTree = "<group>"; };
 		04BC4AD320861A5000CEB23E /* MCOverViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCOverViewVC.m; sourceTree = "<group>"; };
 		04BC4AD420861A5000CEB23E /* MatchCenterTBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchCenterTBC.m; sourceTree = "<group>"; };
-		04BC4ADC20861AE500CEB23E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		04BC4AFB20862BC300CEB23E /* TeamMembersVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamMembersVC.m; sourceTree = "<group>"; };
 		04BC4AFC20862BC300CEB23E /* TeamMemebersCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamMemebersCell.h; sourceTree = "<group>"; };
 		04BC4AFD20862BC300CEB23E /* TeamMembersVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamMembersVC.h; sourceTree = "<group>"; };
@@ -520,13 +519,6 @@
 		04BC4B492086370200CEB23E /* ScorecardBowlCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScorecardBowlCell.h; sourceTree = "<group>"; };
 		04BC4B4B2086373B00CEB23E /* ScoreCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCardCell.m; sourceTree = "<group>"; };
 		04BC4B4C2086373C00CEB23E /* ScoreCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreCardCell.h; sourceTree = "<group>"; };
-		04BC4B4E208637AA00CEB23E /* ScoreCardHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreCardHeader.h; sourceTree = "<group>"; };
-		04BC4B4F208637AB00CEB23E /* UIScrollView+APParallaxHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+APParallaxHeader.h"; sourceTree = "<group>"; };
-		04BC4B50208637AB00CEB23E /* UIScrollView+APParallaxHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+APParallaxHeader.m"; sourceTree = "<group>"; };
-		04BC4B51208637AB00CEB23E /* ScoreCardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCardVC.m; sourceTree = "<group>"; };
-		04BC4B52208637AC00CEB23E /* ScoreCardHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCardHeader.m; sourceTree = "<group>"; };
-		04BC4B53208637AC00CEB23E /* ScoreCardHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreCardHeader.xib; sourceTree = "<group>"; };
-		04BC4B54208637AC00CEB23E /* ScoreCardVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreCardVC.h; sourceTree = "<group>"; };
 		04BC4B592086387A00CEB23E /* MyStatsBattingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyStatsBattingCell.h; sourceTree = "<group>"; };
 		04BC4B5A2086387A00CEB23E /* MyStatsBattingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyStatsBattingCell.xib; sourceTree = "<group>"; };
 		04BC4B5B2086387A00CEB23E /* MyStatsBattingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyStatsBattingVC.m; sourceTree = "<group>"; };
@@ -672,9 +664,6 @@
 		189499F720875C5E002ECEE0 /* WeeklyCalendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeeklyCalendar.png; sourceTree = "<group>"; };
 		189499F820875C5E002ECEE0 /* YearlyCalendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YearlyCalendar.png; sourceTree = "<group>"; };
 		189499F920875C5E002ECEE0 /* DateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateProtocol.h; sourceTree = "<group>"; };
-		18949A3520876767002ECEE0 /* FieldSummaryTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldSummaryTVC.m; sourceTree = "<group>"; };
-		18949A3620876767002ECEE0 /* FieldSummaryTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FieldSummaryTVC.xib; sourceTree = "<group>"; };
-		18949A3720876767002ECEE0 /* FieldSummaryTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldSummaryTVC.h; sourceTree = "<group>"; };
 		18A2E70E203D49CA00F91E73 /* TrainingPiechart.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrainingPiechart.h; sourceTree = "<group>"; };
 		18A2E70F203D49CA00F91E73 /* TrainingPiechart.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrainingPiechart.m; sourceTree = "<group>"; };
 		18A2E710203D49CA00F91E73 /* TrainingPiechart.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrainingPiechart.xib; sourceTree = "<group>"; };
@@ -704,6 +693,21 @@
 		18A68AC820371A7D00EBA479 /* WellnessTrainingBowlingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WellnessTrainingBowlingVC.m; sourceTree = "<group>"; };
 		18A68AC920371A7D00EBA479 /* WellnessTrainingBowlingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WellnessTrainingBowlingVC.xib; sourceTree = "<group>"; };
 		18A68ACA20371A7D00EBA479 /* HorizontalXLblFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorizontalXLblFormatter.h; sourceTree = "<group>"; };
+		18AA1B942092FCC2009634A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		18AA1B962092FD16009634A3 /* SessionSummaryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionSummaryVC.m; sourceTree = "<group>"; };
+		18AA1B972092FD17009634A3 /* SessionSummaryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionSummaryVC.h; sourceTree = "<group>"; };
+		18AA1B992092FD63009634A3 /* FieldSummaryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldSummaryVC.h; sourceTree = "<group>"; };
+		18AA1B9A2092FD63009634A3 /* FieldSummaryTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldSummaryTVC.m; sourceTree = "<group>"; };
+		18AA1B9B2092FD63009634A3 /* FieldSummaryTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FieldSummaryTVC.xib; sourceTree = "<group>"; };
+		18AA1B9C2092FD64009634A3 /* FieldSummaryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldSummaryVC.m; sourceTree = "<group>"; };
+		18AA1B9D2092FD64009634A3 /* FieldSummaryTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldSummaryTVC.h; sourceTree = "<group>"; };
+		18AA1BA12092FDFA009634A3 /* UIScrollView+APParallaxHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+APParallaxHeader.h"; sourceTree = "<group>"; };
+		18AA1BA22092FDFB009634A3 /* ScoreCardHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreCardHeader.xib; sourceTree = "<group>"; };
+		18AA1BA32092FDFB009634A3 /* UIScrollView+APParallaxHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+APParallaxHeader.m"; sourceTree = "<group>"; };
+		18AA1BA42092FDFB009634A3 /* ScoreCardVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreCardVC.h; sourceTree = "<group>"; };
+		18AA1BA52092FDFB009634A3 /* ScoreCardHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreCardHeader.h; sourceTree = "<group>"; };
+		18AA1BA62092FDFB009634A3 /* ScoreCardHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCardHeader.m; sourceTree = "<group>"; };
+		18AA1BA72092FDFB009634A3 /* ScoreCardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCardVC.m; sourceTree = "<group>"; };
 		18AAC6DB2046192B00D5495A /* CustomCollectionStandings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionStandings.swift; sourceTree = "<group>"; };
 		18AC3448203E812C003EE0F0 /* ReportsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportsVC.h; sourceTree = "<group>"; };
 		18AC3449203E812C003EE0F0 /* ReportsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportsVC.m; sourceTree = "<group>"; };
@@ -774,10 +778,6 @@
 		CE6C1623204520D000672253 /* SessionDayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionDayCell.m; sourceTree = "<group>"; };
 		CE6C1625204520D000672253 /* SessionPartCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionPartCell.h; sourceTree = "<group>"; };
 		CE6C1626204520D000672253 /* SessionPartCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionPartCell.m; sourceTree = "<group>"; };
-		CE6C1627204520D000672253 /* SessionSummaryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionSummaryVC.h; sourceTree = "<group>"; };
-		CE6C1628204520D000672253 /* SessionSummaryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionSummaryVC.m; sourceTree = "<group>"; };
-		CE6C162D204520D000672253 /* FieldSummaryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldSummaryVC.h; sourceTree = "<group>"; };
-		CE6C162E204520D000672253 /* FieldSummaryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldSummaryVC.m; sourceTree = "<group>"; };
 		CE6C163A2045211300672253 /* BowlingKPIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlingKPIViewController.h; sourceTree = "<group>"; };
 		CE6C163B2045211300672253 /* BowlingKPIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowlingKPIViewController.m; sourceTree = "<group>"; };
 		CE6C163D2045211300672253 /* BattingKPIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattingKPIViewController.h; sourceTree = "<group>"; };
@@ -1791,7 +1791,7 @@
 			children = (
 				04BC4A9A208611D300CEB23E /* AppDelegate.h */,
 				04BC4A99208611D300CEB23E /* AppDelegate.m */,
-				04BC4ADB20861AE500CEB23E /* Main.storyboard */,
+				18AA1B932092FCC2009634A3 /* Main.storyboard */,
 				18EF9D0920316C2D00CDA268 /* CustomButton */,
 				18EF9D0C20316C2E00CDA268 /* FreezCollectionViewLayout */,
 				18BAE2982028335E0088178A /* MatchCenter */,
@@ -1863,13 +1863,13 @@
 		CE6C160D2045205400672253 /* ScoreCardVC */ = {
 			isa = PBXGroup;
 			children = (
-				04BC4B4E208637AA00CEB23E /* ScoreCardHeader.h */,
-				04BC4B52208637AC00CEB23E /* ScoreCardHeader.m */,
-				04BC4B53208637AC00CEB23E /* ScoreCardHeader.xib */,
-				04BC4B54208637AC00CEB23E /* ScoreCardVC.h */,
-				04BC4B51208637AB00CEB23E /* ScoreCardVC.m */,
-				04BC4B4F208637AB00CEB23E /* UIScrollView+APParallaxHeader.h */,
-				04BC4B50208637AB00CEB23E /* UIScrollView+APParallaxHeader.m */,
+				18AA1BA52092FDFB009634A3 /* ScoreCardHeader.h */,
+				18AA1BA62092FDFB009634A3 /* ScoreCardHeader.m */,
+				18AA1BA22092FDFB009634A3 /* ScoreCardHeader.xib */,
+				18AA1BA42092FDFB009634A3 /* ScoreCardVC.h */,
+				18AA1BA72092FDFB009634A3 /* ScoreCardVC.m */,
+				18AA1BA12092FDFA009634A3 /* UIScrollView+APParallaxHeader.h */,
+				18AA1BA32092FDFB009634A3 /* UIScrollView+APParallaxHeader.m */,
 			);
 			path = ScoreCardVC;
 			sourceTree = "<group>";
@@ -1908,8 +1908,8 @@
 			children = (
 				CE6C1621204520D000672253 /* SessionDayCell */,
 				CE6C1624204520D000672253 /* SessionPartCell */,
-				CE6C1627204520D000672253 /* SessionSummaryVC.h */,
-				CE6C1628204520D000672253 /* SessionSummaryVC.m */,
+				18AA1B972092FD17009634A3 /* SessionSummaryVC.h */,
+				18AA1B962092FD16009634A3 /* SessionSummaryVC.m */,
 			);
 			path = SessionSummaryVC;
 			sourceTree = "<group>";
@@ -1935,11 +1935,11 @@
 		CE6C1629204520D000672253 /* FieldSumary */ = {
 			isa = PBXGroup;
 			children = (
-				18949A3720876767002ECEE0 /* FieldSummaryTVC.h */,
-				18949A3520876767002ECEE0 /* FieldSummaryTVC.m */,
-				18949A3620876767002ECEE0 /* FieldSummaryTVC.xib */,
-				CE6C162D204520D000672253 /* FieldSummaryVC.h */,
-				CE6C162E204520D000672253 /* FieldSummaryVC.m */,
+				18AA1B9D2092FD64009634A3 /* FieldSummaryTVC.h */,
+				18AA1B9A2092FD63009634A3 /* FieldSummaryTVC.m */,
+				18AA1B9B2092FD63009634A3 /* FieldSummaryTVC.xib */,
+				18AA1B992092FD63009634A3 /* FieldSummaryVC.h */,
+				18AA1B9C2092FD64009634A3 /* FieldSummaryVC.m */,
 			);
 			path = FieldSumary;
 			sourceTree = "<group>";
@@ -2611,12 +2611,13 @@
 				04BC4A422085FF4200CEB23E /* MCBattingRootVC.xib in Resources */,
 				CEB2B9CE2025994F00E7D5E4 /* RearViewController.xib in Resources */,
 				04BC4B6E20863B9200CEB23E /* AddParticipantCell.xib in Resources */,
-				18949A3920876767002ECEE0 /* FieldSummaryTVC.xib in Resources */,
+				18AA1B9F2092FD64009634A3 /* FieldSummaryTVC.xib in Resources */,
 				CEB2B98620257BBD00E7D5E4 /* MontserratAlternates-Bold.otf in Resources */,
 				CEB2B97720257BBD00E7D5E4 /* Montserrat-ExtraBoldItalic.otf in Resources */,
 				CE6C164B2045211400672253 /* BowlingTableViewCell.xib in Resources */,
 				18949A3320875C5F002ECEE0 /* WeeklyCalendar.png in Resources */,
 				04BC4A202085FD9100CEB23E /* StandingVC.xib in Resources */,
+				18AA1BA82092FDFC009634A3 /* ScoreCardHeader.xib in Resources */,
 				18949A3120875C5F002ECEE0 /* redCircle.png in Resources */,
 				CEB2B99620257BBD00E7D5E4 /* SIL Open Font License.txt in Resources */,
 				CEA42108203161A900B2DAB5 /* CalendarViewController.xib in Resources */,
@@ -2639,6 +2640,7 @@
 				CEB2B99320257BBD00E7D5E4 /* MontserratAlternates-SemiBoldItalic.otf in Resources */,
 				CEA42106203161A800B2DAB5 /* VideoPlayerViewController.xib in Resources */,
 				CEB2B98F20257BBD00E7D5E4 /* MontserratAlternates-Medium.otf in Resources */,
+				18AA1B952092FCC2009634A3 /* Main.storyboard in Resources */,
 				04B27F18202D784600ECB699 /* illnessVC.xib in Resources */,
 				CEB2B98A20257BBD00E7D5E4 /* MontserratAlternates-ExtraLight.otf in Resources */,
 				04BC4ABC2086167400CEB23E /* ScheduleCell.xib in Resources */,
@@ -2646,7 +2648,6 @@
 				04249B7E203D4AF000B13889 /* NutritionCell.xib in Resources */,
 				CEB2B97920257BBD00E7D5E4 /* Montserrat-ExtraLightItalic.otf in Resources */,
 				04BC4A4F2085FFCD00CEB23E /* MCTeamCompVC.xib in Resources */,
-				04BC4ADD20861AE500CEB23E /* Main.storyboard in Resources */,
 				CE10281F202DDBFA00FA0B61 /* TestPropertyCollectionViewCell.xib in Resources */,
 				CEB2B97820257BBD00E7D5E4 /* Montserrat-ExtraLight.otf in Resources */,
 				04B27F23202DA48E00ECB699 /* PlayerProfileChartsVC.xib in Resources */,
@@ -2680,7 +2681,6 @@
 				04BC4B682086398D00CEB23E /* DocumentViewController.xib in Resources */,
 				18A2E712203D49CA00F91E73 /* TrainingPiechart.xib in Resources */,
 				CEB2B97320257BBD00E7D5E4 /* Montserrat-BlackItalic.otf in Resources */,
-				04BC4B58208637AD00CEB23E /* ScoreCardHeader.xib in Resources */,
 				04BC4B41208632E900CEB23E /* VideoGalleryCell.xib in Resources */,
 				CE6C16492045211400672253 /* BattingTableViewCell.xib in Resources */,
 				04BC4A382085FE7700CEB23E /* OverviewView.xib in Resources */,
@@ -2797,6 +2797,7 @@
 				04BC4AD920861A5100CEB23E /* MCOverViewVC.m in Sources */,
 				04534F902037F44400C22717 /* FoodDiaryCell.m in Sources */,
 				18949A1320875C5F002ECEE0 /* FFWeekScrollView.m in Sources */,
+				18AA1B982092FD17009634A3 /* SessionSummaryVC.m in Sources */,
 				18949A2420875C5F002ECEE0 /* FFDatePopoverController.m in Sources */,
 				18A68ACB20371A7E00EBA479 /* HorizontalXLblFormatter.m in Sources */,
 				04BC4A432085FF4200CEB23E /* MCBattingRootVC.m in Sources */,
@@ -2804,7 +2805,6 @@
 				18C57798209076C3001CAE5D /* InjuryVC.m in Sources */,
 				04BC4B40208632E900CEB23E /* VideoGalleryCell.m in Sources */,
 				18A590682047C4C8002BBF64 /* LargeValueFormatter.swift in Sources */,
-				04BC4B55208637AD00CEB23E /* UIScrollView+APParallaxHeader.m in Sources */,
 				18949A0020875C5F002ECEE0 /* FFDayHeaderCollectionView.m in Sources */,
 				043C2F30202AF59E00EB3F8C /* XYPieChart.m in Sources */,
 				18949A0320875C5F002ECEE0 /* FFDayCollectionViewFlowLayout.m in Sources */,
@@ -2856,11 +2856,13 @@
 				18949A0420875C5F002ECEE0 /* FFDayScrollView.m in Sources */,
 				04BC4A2A2085FDCF00CEB23E /* TeamOverviewCell.m in Sources */,
 				CEF38320203D419300FB5838 /* PlayerDetailViewController.m in Sources */,
+				18AA1B9E2092FD64009634A3 /* FieldSummaryTVC.m in Sources */,
 				18A68ACC20371A7E00EBA479 /* AddWellnessRatingVC.m in Sources */,
 				CE60F10620870C8200B74A2C /* TabbarVC.m in Sources */,
 				04BC4B7020863B9200CEB23E /* PlannerAddEvent.m in Sources */,
 				04BC4B47208636AA00CEB23E /* ScoreCardVideoPlayer.m in Sources */,
 				04BC4A062085FC4000CEB23E /* BowlingView.m in Sources */,
+				18AA1BAB2092FDFC009634A3 /* ScoreCardVC.m in Sources */,
 				04BC4A102085FCFF00CEB23E /* OverviewBowlingView.m in Sources */,
 				042542B52028A1110088B87B /* HomeScreenStandingsCell.m in Sources */,
 				18949A1E20875C5F002ECEE0 /* UIColor+FFMoreColors.m in Sources */,
@@ -2892,12 +2894,9 @@
 				CE6C16482045211300672253 /* BattingTableViewCell.m in Sources */,
 				04BC4B3D208632E900CEB23E /* VideoPlayerUploadVC.m in Sources */,
 				04BC4A9B208611D300CEB23E /* AppDelegate.m in Sources */,
-				CE6C1634204520D100672253 /* FieldSummaryVC.m in Sources */,
 				CE6C16562045213C00672253 /* DateUtil.m in Sources */,
 				04254271202822FC0088B87B /* AssessmentPopupVC.m in Sources */,
-				18949A3820876767002ECEE0 /* FieldSummaryTVC.m in Sources */,
 				CE60F10A20870C9E00B74A2C /* BPXLUUIDHandler.m in Sources */,
-				CE6C1631204520D100672253 /* SessionSummaryVC.m in Sources */,
 				18A5CABA20384F3800586896 /* ProfileVCCell.m in Sources */,
 				18A68AC220371A2C00EBA479 /* TrainingLoadUpdateCell.m in Sources */,
 				CE6C16462045211300672253 /* BowlingKPIViewController.m in Sources */,
@@ -2909,10 +2908,9 @@
 				04BC4A1B2085FD4400CEB23E /* GroundVC.m in Sources */,
 				18AC3452203EC0D9003EE0F0 /* CoachTraingLoad.m in Sources */,
 				18949A2920875C5F002ECEE0 /* FFGuestsTableView.m in Sources */,
-				04BC4B56208637AD00CEB23E /* ScoreCardVC.m in Sources */,
 				04BC4B43208632E900CEB23E /* VideoGalleryVC.m in Sources */,
 				189499FF20875C5F002ECEE0 /* FFDayHeaderCell.m in Sources */,
-				04BC4B57208637AD00CEB23E /* ScoreCardHeader.m in Sources */,
+				18AA1BAA2092FDFC009634A3 /* ScoreCardHeader.m in Sources */,
 				CE6C1630204520D100672253 /* SessionPartCell.m in Sources */,
 				18A5CAB520383FAD00586896 /* TeamsVC.m in Sources */,
 				18949A0920875C5F002ECEE0 /* FFMonthCollectionViewFlowLayout.m in Sources */,
@@ -2946,6 +2944,7 @@
 				04BC4B0320862BC400CEB23E /* TeamMemebersCell.m in Sources */,
 				CEBD2A7420289999000AFD1B /* SKSTableViewCellIndicator.m in Sources */,
 				04BC4A312085FE3F00CEB23E /* BattingOverBlockCVC.m in Sources */,
+				18AA1BA92092FDFC009634A3 /* UIScrollView+APParallaxHeader.m in Sources */,
 				18A68AC020371A2C00EBA479 /* TrainingLoadVC.m in Sources */,
 				18949A1520875C5F002ECEE0 /* FFHeaderMonthForYearCell.m in Sources */,
 				04BC4B6F20863B9200CEB23E /* AddParticipantCell.m in Sources */,
@@ -2955,6 +2954,7 @@
 				042381CD204173F900212684 /* PopOverVC.m in Sources */,
 				CEB2B9BD2025939F00E7D5E4 /* SWRevealViewController.m in Sources */,
 				04BC4A3D2085FEB500CEB23E /* BattingView.m in Sources */,
+				18AA1BA02092FD64009634A3 /* FieldSummaryVC.m in Sources */,
 				18AAC6DC2046192B00D5495A /* CustomCollectionStandings.swift in Sources */,
 				04BC4A1F2085FD9100CEB23E /* StandingVC.m in Sources */,
 				CEBD2A82202899BB000AFD1B /* DBAConnection.m in Sources */,
@@ -2969,10 +2969,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		04BC4ADB20861AE500CEB23E /* Main.storyboard */ = {
+		18AA1B932092FCC2009634A3 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				04BC4ADC20861AE500CEB23E /* Base */,
+				18AA1B942092FCC2009634A3 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -3101,7 +3101,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LZ7UNGW43T;
 				INFOPLIST_FILE = APT_V2/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.contus.APT-V2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3120,7 +3120,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LZ7UNGW43T;
 				INFOPLIST_FILE = APT_V2/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.contus.APT-V2";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -68,7 +68,7 @@
     
     [self.Innings1 setTitle:appDel.TeamA forState:UIControlStateNormal];
     [self.Innings2 setTitle:appDel.TeamB forState:UIControlStateNormal];
-    
+
     matchstatus = @"MSC215";
     
     objWebservice = [[WebService alloc]init];
@@ -97,6 +97,12 @@
     }
     [self setTabView];
     
+    CGRect contentRect = CGRectZero;
+    for (UIView *view in self.scrollView.subviews) {
+        contentRect = CGRectUnion(contentRect, view.frame);
+    }
+    self.scrollView.contentSize = contentRect.size;
+
 }
 
 - (void)viewWillLayoutSubviews {
@@ -177,7 +183,7 @@
             }
             
             //[self.day1 sendActionsForControlEvents:UIControlEventTouchUpInside];
-            
+          
             [AppCommon hideLoading];
         }
         
@@ -232,10 +238,25 @@
                 
             }
             
+            CGFloat height1 = MIN(self.view.bounds.size.height, self.partnrshpTbl.contentSize.height);
+            self.partnrTblHeight.constant = height1;
+            [self.view layoutIfNeeded];
             
+            self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
             
+            CGRect contentRect = CGRectZero;
+            for (UIView *view in self.scrollView.subviews) {
+                contentRect = CGRectUnion(contentRect, view.frame);
+            }
+            self.scrollView.contentSize = contentRect.size;
+
+            
+            [self.view updateConstraintsIfNeeded];
             NSLog(@"%@", day1Sessionarray);
             
+            
+            
+
             [AppCommon hideLoading];
         }
         
@@ -290,9 +311,25 @@
                 
             }
             
+            CGFloat height1 = MIN(self.view.bounds.size.height, self.partnrshpTbl.contentSize.height);
+            self.partnrTblHeight.constant = height1;
+            [self.view layoutIfNeeded];
+            
+            self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+            
+            CGRect contentRect = CGRectZero;
+            for (UIView *view in self.scrollView.subviews) {
+                contentRect = CGRectUnion(contentRect, view.frame);
+            }
+            self.scrollView.contentSize = contentRect.size;
+
+            
+            [self.view updateConstraintsIfNeeded];
+            
+            
             
             NSLog(@"%@", day1Sessionarray);
-            [AppCommon hideLoading];
+           [AppCommon hideLoading];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -335,9 +372,9 @@
             
             //            commonArray = [[NSMutableArray alloc]init];
             //            commonArray = day1Sessionarray;
-            
+        
             [self.dayTbl reloadData];
-            
+        
             CGFloat height = MIN(self.view.bounds.size.height, self.dayTbl.contentSize.height);
             self.TblHeight.constant = height;
             [self.view layoutIfNeeded];
@@ -357,16 +394,24 @@
             }
             
             [self.session1 sendActionsForControlEvents:UIControlEventTouchUpInside];
-            
+        
             [self.partnrshpTbl reloadData];
-            
+        
             CGFloat height1 = MIN(self.view.bounds.size.height, self.partnrshpTbl.contentSize.height);
             self.partnrTblHeight.constant = height1;
             [self.view layoutIfNeeded];
             
             
+            self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
             
-            [AppCommon hideLoading];
+            CGRect contentRect = CGRectZero;
+            for (UIView *view in self.scrollView.subviews) {
+                contentRect = CGRectUnion(contentRect, view.frame);
+            }
+            self.scrollView.contentSize = contentRect.size;
+            
+            [self.view updateConstraintsIfNeeded];
+           [AppCommon hideLoading];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -426,13 +471,27 @@
                 
             }
             
+            CGFloat height1 = MIN(self.view.bounds.size.height, self.partnrshpTbl.contentSize.height);
+            self.partnrTblHeight.constant = height1;
+            [self.view layoutIfNeeded];
+            
+            
+            self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+            
+            CGRect contentRect = CGRectZero;
+            for (UIView *view in self.scrollView.subviews) {
+                contentRect = CGRectUnion(contentRect, view.frame);
+            }
+            self.scrollView.contentSize = contentRect.size;
+            
+            [self.view updateConstraintsIfNeeded];
             
             
             NSLog(@"%@", day1Sessionarray);
             
             
             // day1Session1array = [responseObject valueForKey:@"lstSessionTeamSummary"];
-            [AppCommon hideLoading];
+           [AppCommon hideLoading];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -489,9 +548,22 @@
                 
             }
             
+            CGFloat height1 = MIN(self.view.bounds.size.height, self.partnrshpTbl.contentSize.height);
+            self.partnrTblHeight.constant = height1;
+            [self.view layoutIfNeeded];
+            
+            self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+            
+            CGRect contentRect = CGRectZero;
+            for (UIView *view in self.scrollView.subviews) {
+                contentRect = CGRectUnion(contentRect, view.frame);
+            }
+            self.scrollView.contentSize = contentRect.size;
+            
+            [self.view updateConstraintsIfNeeded];
             
             NSLog(@"%@", day1Sessionarray);
-            [AppCommon hideLoading];
+           [AppCommon hideLoading];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -537,9 +609,9 @@
             
             //            commonArray = [[NSMutableArray alloc]init];
             //            commonArray = day1Sessionarray;
-            
+        
             [self.dayTbl reloadData];
-            
+        
             CGFloat height = MIN(self.view.bounds.size.height, self.dayTbl.contentSize.height);
             self.TblHeight.constant = height;
             [self.view layoutIfNeeded];
@@ -557,14 +629,24 @@
             }
             
             [self.session1 sendActionsForControlEvents:UIControlEventTouchUpInside];
-            
+        
             [self.partnrshpTbl reloadData];
-            
+        
             CGFloat height1 = MIN(self.view.bounds.size.height, self.partnrshpTbl.contentSize.height);
             self.partnrTblHeight.constant = height1;
             [self.view layoutIfNeeded];
             
-            [AppCommon hideLoading];
+            self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+            
+            CGRect contentRect = CGRectZero;
+            for (UIView *view in self.scrollView.subviews) {
+                contentRect = CGRectUnion(contentRect, view.frame);
+            }
+            self.scrollView.contentSize = contentRect.size;
+            
+            [self.view updateConstraintsIfNeeded];
+            
+           [AppCommon hideLoading];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -580,7 +662,7 @@
     
     [self setSessionsBySelection:@"1"];
     commonArray = [[NSMutableArray alloc]init];
-    //    commonArray = Session1array;
+//    commonArray = Session1array;
     [commonArray addObjectsFromArray:Session1array];
     
     //Pace
@@ -632,7 +714,7 @@
     NSString* firstBit6 = [foo6 objectAtIndex: 0];
     float x6 = [firstBit6 floatValue];
     self.EconPrgPace.progress = 1-(x6/100);
-    
+
     
     
     
@@ -693,7 +775,14 @@
     self.partnrTblHeight.constant = height1;
     [self.view layoutIfNeeded];
     
-    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+self.partnrshpTbl.contentSize.height+600;
+    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+    
+    CGRect contentRect = CGRectZero;
+    for (UIView *view in self.scrollView.subviews) {
+        contentRect = CGRectUnion(contentRect, view.frame);
+    }
+    self.scrollView.contentSize = contentRect.size;
+    [self.view updateConstraintsIfNeeded];
     
 }
 -(IBAction)Session2Action:(id)sender
@@ -701,9 +790,9 @@
     
     [self setSessionsBySelection:@"2"];
     commonArray = [[NSMutableArray alloc]init];
-    //    commonArray = Session2array;
+//    commonArray = Session2array;
     [commonArray addObjectsFromArray:Session2array];
-    
+
     
     //Pace
     self.OversPacelbl.text = [self checkNull:[[pacearrS2 valueForKey:@"PaceOvers"] objectAtIndex:0]];
@@ -814,16 +903,23 @@
     self.partnrTblHeight.constant = height1;
     [self.view layoutIfNeeded];
     
-    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+self.partnrshpTbl.contentSize.height+600;
+    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+    
+    CGRect contentRect = CGRectZero;
+    for (UIView *view in self.scrollView.subviews) {
+        contentRect = CGRectUnion(contentRect, view.frame);
+    }
+    self.scrollView.contentSize = contentRect.size;
+    [self.view updateConstraintsIfNeeded];
 }
 -(IBAction)Session3Action:(id)sender
 {
     
     [self setSessionsBySelection:@"3"];
     commonArray = [[NSMutableArray alloc]init];
-    //    commonArray = Session3array;
+//    commonArray = Session3array;
     [commonArray addObjectsFromArray:Session3array];
-    
+
     
     //Pace
     self.OversPacelbl.text = [self checkNull:[[pacearrS3 valueForKey:@"PaceOvers"] objectAtIndex:0]];
@@ -934,14 +1030,21 @@
     self.partnrTblHeight.constant = height1;
     [self.view layoutIfNeeded];
     
-    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+self.partnrshpTbl.contentSize.height+600;
+    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+    
+    CGRect contentRect = CGRectZero;
+    for (UIView *view in self.scrollView.subviews) {
+        contentRect = CGRectUnion(contentRect, view.frame);
+    }
+    self.scrollView.contentSize = contentRect.size;
+    [self.view updateConstraintsIfNeeded];
 }
 
 
 -(IBAction)Innings1Action:(id)sender
 {
     //[self setInningsBySelection:@"1"];
-    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+self.partnrshpTbl.contentSize.height+600;
+    
     selectedTab =1;
     [self setTabView];
     day1Sessionarray = [[NSMutableArray alloc]init];
@@ -952,12 +1055,24 @@
     //self.day1.backgroundColor = [UIColor blueColor];
     [self OdiService1];
     
+    CGFloat height1 = MIN(self.view.bounds.size.height, self.partnrshpTbl.contentSize.height);
+    self.partnrTblHeight.constant = height1;
+    [self.view layoutIfNeeded];
+    
+    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+    
+    CGRect contentRect = CGRectZero;
+    for (UIView *view in self.scrollView.subviews) {
+        contentRect = CGRectUnion(contentRect, view.frame);
+    }
+    self.scrollView.contentSize = contentRect.size;
+    [self.view updateConstraintsIfNeeded];
 }
 -(IBAction)Innings2Action:(id)sender
 {
     //[self setInningsBySelection:@"2"];
     
-    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+self.partnrshpTbl.contentSize.height+600;
+    
     
     selectedTab =2;
     [self setTabView];
@@ -968,6 +1083,19 @@
     sessionNo = @"1";
     //self.day1.backgroundColor = [UIColor blueColor];
     [self OdiService1];
+    
+    CGFloat height1 = MIN(self.view.bounds.size.height, self.partnrshpTbl.contentSize.height);
+    self.partnrTblHeight.constant = height1;
+    [self.view layoutIfNeeded];
+    
+    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+    
+    CGRect contentRect = CGRectZero;
+    for (UIView *view in self.scrollView.subviews) {
+        contentRect = CGRectUnion(contentRect, view.frame);
+    }
+    self.scrollView.contentSize = contentRect.size;
+    [self.view updateConstraintsIfNeeded];
 }
 
 -(void) setTabView{
@@ -983,6 +1111,7 @@
         [self clearBtnSubView:self.day4];
         
         if(selectedTab ==  1){
+            
             [self.day1 addSubview: [self getLineView:self.day1]];
         }else if(selectedTab ==  2){
             [self.day2 addSubview: [self getLineView:self.day2]];
@@ -1004,10 +1133,16 @@
         [self clearBtnSubView:self.Innings2];
         
         if(selectedTab ==  1){
-            [self.Innings1 addSubview: [self getLineView:self.Innings1]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.Innings1 addSubview: [self getLineView:self.Innings1]];
+            });
             
         }else if(selectedTab ==  2){
-            [self.Innings2 addSubview: [self getLineView:self.Innings2]];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.Innings2 addSubview: [self getLineView:self.Innings2]];
+            });
+
             
         }
         
@@ -1016,9 +1151,9 @@
 }
 
 -(UIView *) getLineView : (UIButton *) btn{
-    //    [btn setBackgroundColor:[UIColor redColor]];
+//    [btn setBackgroundColor:[UIColor redColor]];
     CGFloat Xvalue = (btn.frame.size.width/4);
-    
+
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(Xvalue, btn.frame.size.height-5, btn.frame.size.width/2, 5)];
     lineView.backgroundColor =[UIColor colorWithRed:37.0f/255.0f
                                               green:176.0f/255.0f
@@ -1042,7 +1177,7 @@
 {
     //[self setDayBySelection:@"1"];
     
-    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+self.partnrshpTbl.contentSize.height+600;
+    
     selectedTab =1;
     day1Sessionarray = [[NSMutableArray alloc]init];
     matchstatus = @"MSC215";
@@ -1052,12 +1187,25 @@
     //self.day1.backgroundColor = [UIColor blueColor];
     [self SessionWebservice1];
     
+    CGFloat height1 = MIN(self.view.bounds.size.height, self.partnrshpTbl.contentSize.height);
+    self.partnrTblHeight.constant = height1;
+    [self.view layoutIfNeeded];
+    
+    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+    
+    CGRect contentRect = CGRectZero;
+    for (UIView *view in self.scrollView.subviews) {
+        contentRect = CGRectUnion(contentRect, view.frame);
+    }
+    self.scrollView.contentSize = contentRect.size;
+    [self.view updateConstraintsIfNeeded];
+    
     
 }
 -(IBAction)day2Action:(id)sender
 {
     [self setDayBySelection:@"2"];
-    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+self.partnrshpTbl.contentSize.height+600;
+    
     day1Sessionarray = [[NSMutableArray alloc]init];
     matchstatus = @"MSC215";
     dayno= @"2";
@@ -1066,6 +1214,17 @@
     // self.day1.backgroundColor = [UIColor blueColor];
     [self SessionWebservice1];
     
+    CGFloat height1 = MIN(self.view.bounds.size.height, self.partnrshpTbl.contentSize.height);
+    self.partnrTblHeight.constant = height1;
+    [self.view layoutIfNeeded];
+    self.ScrollHeight.constant = self.ODIview.frame.size.height+50+self.dayTbl.contentSize.height+self.SessionsView.frame.size.height+height1+900;
+    
+    CGRect contentRect = CGRectZero;
+    for (UIView *view in self.scrollView.subviews) {
+        contentRect = CGRectUnion(contentRect, view.frame);
+    }
+    self.scrollView.contentSize = contentRect.size;
+    [self.view updateConstraintsIfNeeded];
 }
 -(IBAction)day3Action:(id)sender
 {
@@ -1345,4 +1504,3 @@
 }
 
 @end
-

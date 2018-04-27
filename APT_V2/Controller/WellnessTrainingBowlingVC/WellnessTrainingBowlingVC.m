@@ -1149,6 +1149,9 @@
 {
     self.topviewHeight.constant = 270;
     isWellnessExpand = NO;
+    [self FetchWebservice];
+    [self FetchTrainingWebservice];
+
     [self setTotalScroll];
     [self.topView updateConstraintsIfNeeded];
 }
@@ -1157,6 +1160,7 @@
 {
     self.traingViewHeight.constant = 350;
     isTraingLoadExpand = NO;
+    [self viewDidLoad];
     [self setTotalScroll];
     [self.RootTrainingView updateConstraintsIfNeeded];
 }

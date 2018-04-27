@@ -144,7 +144,6 @@
     _chartView.drawValueAboveBarEnabled = NO;
     _chartView.highlightFullBarEnabled = NO;
     
-    
     NSNumberFormatter *leftAxisFormatter = [[NSNumberFormatter alloc] init];
     leftAxisFormatter.maximumFractionDigits = 1;
     leftAxisFormatter.negativeSuffix = @"";
@@ -408,6 +407,7 @@
 }
 
 -(void) setInningsButtonSelect : (UIButton*) innsBtn{
+    
     // innsBtn.layer.cornerRadius = 25;
     UIColor *extrasBrushBG = [self colorWithHexString : @"#1C1A44"];
     
@@ -417,6 +417,7 @@
 }
 
 -(void) setInningsButtonUnselect : (UIButton*) innsBtn{
+    
     //  innsBtn.layer.cornerRadius = 25;
     UIColor *extrasBrushBG = [self colorWithHexString : @"#C8C8C8"];
     

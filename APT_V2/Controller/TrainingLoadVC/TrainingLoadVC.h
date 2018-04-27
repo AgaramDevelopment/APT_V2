@@ -21,6 +21,9 @@
 @property (strong, nonatomic) IBOutlet UIView *todayMainView;
 @property (weak, nonatomic) IBOutlet UIView *traingView;
 
+@property (strong, nonatomic) IBOutlet UILabel *yesterdayPieNodataView;
+@property (strong, nonatomic) IBOutlet UILabel *todayPieNodataView;
+
 //Donar Charts
 @property (strong, nonatomic) IBOutlet NSMutableArray *markers;
 @property (strong, nonatomic) IBOutlet NSMutableArray *markers2;

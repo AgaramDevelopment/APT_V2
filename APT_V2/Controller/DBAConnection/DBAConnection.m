@@ -1899,8 +1899,9 @@ NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO ASSESSMENTENTRY(C
         NSMutableArray *assessment = [[NSMutableArray alloc]init];
         if(retVal ==0){
             
-//            NSString *query=[NSString stringWithFormat:@"SELECT  * FROM ASSESSMENTENTRY WHERE ASSESSMENTCODE = '%@' AND CREATEDBY = '%@' AND DATE(ASSESSMENTENTRYDATE) = DATE('%@') AND ASSESSMENTTESTTYPECODE = '%@' AND ASSESSMENTTESTCODE = '%@' AND MODULECODE = '%@' AND CLIENTCODE = '%@' AND RECORDSTATUS = 'MSC001'",assessmentCode,userCode,date,testTypeCode,testCode,moduleCode,clientCode];
-            NSString *query=[NSString stringWithFormat:@"SELECT  * FROM ASSESSMENTENTRY WHERE ASSESSMENTCODE = '%@' AND CREATEDBY = '%@' AND ASSESSMENTENTRYDATE = '%@' AND ASSESSMENTTESTTYPECODE = '%@' AND ASSESSMENTTESTCODE = '%@' AND MODULECODE = '%@' AND CLIENTCODE = '%@' AND RECORDSTATUS = 'MSC001'",assessmentCode,userCode,date,testTypeCode,testCode,moduleCode,clientCode];
+            NSString *query1=[NSString stringWithFormat:@"SELECT  * FROM ASSESSMENTENTRY WHERE ASSESSMENTCODE = '%@' AND CREATEDBY = '%@' AND DATE(ASSESSMENTENTRYDATE) = DATE('%@') AND ASSESSMENTTESTTYPECODE = '%@' AND ASSESSMENTTESTCODE = '%@' AND MODULECODE = '%@' AND CLIENTCODE = '%@' AND RECORDSTATUS = 'MSC001'",assessmentCode,userCode,date,testTypeCode,testCode,moduleCode,clientCode];
+            
+            NSString *query=[NSString stringWithFormat:@"SELECT * FROM ASSESSMENTENTRY WHERE ASSESSMENTCODE = '%@' AND CREATEDBY = '%@' AND ASSESSMENTENTRYDATE = '%@' AND ASSESSMENTTESTTYPECODE = '%@' AND ASSESSMENTTESTCODE = '%@' AND MODULECODE = '%@' AND CLIENTCODE = '%@' AND RECORDSTATUS = 'MSC001'",assessmentCode,userCode,date,testTypeCode,testCode,moduleCode,clientCode];
 
             
             NSLog(@"%@",query);

@@ -1111,6 +1111,7 @@
         [self clearBtnSubView:self.day4];
         
         if(selectedTab ==  1){
+            
             [self.day1 addSubview: [self getLineView:self.day1]];
         }else if(selectedTab ==  2){
             [self.day2 addSubview: [self getLineView:self.day2]];
@@ -1132,7 +1133,6 @@
         [self clearBtnSubView:self.Innings2];
         
         if(selectedTab ==  1){
-            
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.Innings1 addSubview: [self getLineView:self.Innings1]];
             });
@@ -1142,6 +1142,7 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.Innings2 addSubview: [self getLineView:self.Innings2]];
             });
+
             
         }
         

@@ -130,5 +130,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *stickyWicketsLbl;
 @property (strong, nonatomic) IBOutlet UILabel *stickyEconomyLbl;
 @property (strong, nonatomic) IBOutlet UILabel *stickyBowlingDotBallsLbl;
+@property (weak, nonatomic) IBOutlet UIButton *btnAllWkts;
+@property (weak, nonatomic) IBOutlet UIButton *btnAllOvers;
+@property (weak, nonatomic) IBOutlet UIButton *btnLB;
+@property (weak, nonatomic) IBOutlet UIButton *btnWD;
 
 @end

@@ -74,9 +74,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxX-iC-LhD">
-                                        <rect key="frame" x="121" y="2" width="60" height="18"/>
+                                        <rect key="frame" x="121" y="2" width="70" height="18"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="5Wa-jc-h2Y"/>
+                                            <constraint firstAttribute="width" constant="70" id="5Wa-jc-h2Y">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                            </constraint>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="textColor"/>
@@ -144,9 +146,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmK-pz-nXv">
-                                        <rect key="frame" x="121" y="2" width="60" height="18"/>
+                                        <rect key="frame" x="121" y="2" width="70" height="18"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="7so-JW-6vH"/>
+                                            <constraint firstAttribute="width" constant="70" id="7so-JW-6vH">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                            </constraint>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="textColor"/>
@@ -213,9 +217,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dus-vW-XOx">
-                                        <rect key="frame" x="121" y="2" width="60" height="18"/>
+                                        <rect key="frame" x="121" y="2" width="70" height="18"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="kLv-6C-Spg"/>
+                                            <constraint firstAttribute="width" constant="70" id="kLv-6C-Spg">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                            </constraint>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="textColor"/>
@@ -282,9 +288,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0lV-5F-Fol">
-                                        <rect key="frame" x="121" y="2" width="60" height="18"/>
+                                        <rect key="frame" x="121" y="2" width="70" height="18"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="peg-3A-Pld"/>
+                                            <constraint firstAttribute="width" constant="70" id="peg-3A-Pld">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                            </constraint>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="textColor"/>
@@ -351,9 +359,11 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caS-nx-oRy">
-                                        <rect key="frame" x="121" y="2" width="60" height="18"/>
+                                        <rect key="frame" x="121" y="2" width="70" height="18"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="zww-VT-e0E"/>
+                                            <constraint firstAttribute="width" constant="70" id="zww-VT-e0E">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                                            </constraint>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <nil key="textColor"/>

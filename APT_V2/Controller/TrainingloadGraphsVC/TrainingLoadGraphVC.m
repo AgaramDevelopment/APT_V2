@@ -10,6 +10,7 @@
 #import "AppCommon.h"
 #import "WebService.h"
 #import "Config.h"
+#import "CustomNavigation.h"
 
 #define ITEM_COUNT 12
 @interface TrainingLoadGraphVC ()<ChartViewDelegate, IChartAxisValueFormatter>
@@ -50,7 +51,7 @@
     
     self.PoplistTable.hidden = YES;
     self.title = @"Combined Chart";
-    
+    [self customnavigationmethod];
 
 //   // months = @[
 //               @"Jan", @"Feb", @"Mar",
@@ -112,6 +113,26 @@
     [self updateChartData];
     
     [self BarAndLineFilterWebservice];
+}
+
+-(void)customnavigationmethod
+{
+    CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    
+    //    [self.view addSubview:objCustomNavigation.view];
+    //    objCustomNavigation.tittle_lbl.text=@"";
+    
+    //UIView* view= self.navigation_view.subviews.firstObject;
+    [self.navigationView addSubview:objCustomNavigation.view];
+    
+    objCustomNavigation.btn_back.hidden =YES;
+    objCustomNavigation.menu_btn.hidden =NO;
+    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    //        [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)didReceiveMemoryWarning

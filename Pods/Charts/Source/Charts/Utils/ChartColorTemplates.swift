@@ -77,10 +77,17 @@ open class ChartColorTemplates: NSObject
     @objc open class func material () -> [NSUIColor]
     {
         return [
-            NSUIColor(red: 46/255.0, green: 204/255.0, blue: 113/255.0, alpha: 1.0),
-            NSUIColor(red: 241/255.0, green: 196/255.0, blue: 15/255.0, alpha: 1.0),
-            NSUIColor(red: 231/255.0, green: 76/255.0, blue: 60/255.0, alpha: 1.0),
-            NSUIColor(red: 52/255.0, green: 152/255.0, blue: 219/255.0, alpha: 1.0)
+//            NSUIColor(red: 46/255.0, green: 204/255.0, blue: 113/255.0, alpha: 1.0),
+//            NSUIColor(red: 241/255.0, green: 196/255.0, blue: 15/255.0, alpha: 1.0),
+//            NSUIColor(red: 231/255.0, green: 76/255.0, blue: 60/255.0, alpha: 1.0),
+//            NSUIColor(red: 52/255.0, green: 152/255.0, blue: 219/255.0, alpha: 1.0),
+//            NSUIColor(red: 219/255.0, green: 129/255.0, blue: 121/255.0, alpha: 1.0)
+            
+            NSUIColor(red: 0/255.0, green: 199/255.0, blue: 200/255.0, alpha: 1.0),
+            NSUIColor(red: 183/255.0, green: 163/255.0, blue: 217/255.0, alpha: 1.0),
+            NSUIColor(red: 83/255.0, green: 178/255.0, blue: 234/255.0, alpha: 1.0),
+            NSUIColor(red: 255/255.0, green: 184/255.0, blue: 136/255.0, alpha: 1.0),
+            NSUIColor(red: 219/255.0, green: 129/255.0, blue: 121/255.0, alpha: 1.0)
         ]
     }
     

@@ -15,7 +15,7 @@
 #import "WebService.h"
 #import "PopOverVC.h"
 
-@interface NutritionVC () {
+@interface NutritionVC () <UIPopoverPresentationControllerDelegate>{
     NSString *clientCode;
     NSString *userCode;
     NSString *userRefCode;
@@ -36,7 +36,7 @@
     [super viewDidLoad];
         // Do any additional setup after loading the view from its nib.
     
-    [self customnavigationmethod];
+//    [self customnavigationmethod];
     
     [self.nutritionCollectionView registerNib:[UINib nibWithNibName:@"NutritionCell" bundle:nil] forCellWithReuseIdentifier:@"nutritionCell"];
     /*
@@ -59,6 +59,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
         // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod
@@ -409,7 +414,7 @@
 
 - (void)popOverViewFuction:(NSMutableArray *)array andSender:(id)sender
 {
-    
+    /*
     NSLog(@"array:%@", array);
     NSLog(@"array:tag:%@", array [[sender tag]]);
     PopOverVC *popOverObj = [[PopOverVC alloc] init];
@@ -424,7 +429,52 @@
     [popOver setPopoverContentSize:size];
     [popOver setBackgroundColor:[UIColor whiteColor]];
     [popOver presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+     */
+    
+    PopOverVC *popOverObj = [[PopOverVC alloc] initWithNibName:@"PopOverVC" bundle:nil]; // 12
+   popOverObj.listArray = array [[sender tag]];
+    popOverObj.modalPresentationStyle = UIModalPresentationPopover; // 13
+    UIPopoverPresentationController *popPC = popOverObj.popoverPresentationController; // 14
+   
+    int arrayCount = [array [[sender tag]] count];
+    
+        popOverObj.preferredContentSize = CGSizeMake(200, arrayCount > 5 ? 300 : array.count*45);
+        popOverObj.popoverPresentationController.sourceRect = CGRectMake(0, 0, 0, 0);
+        popOverObj.popoverPresentationController.sourceView = sender; // 16
+        popPC.permittedArrowDirections = UIPopoverArrowDirectionAny; // 17
+        popPC.delegate = self; //18
+        [popPC setBackgroundColor:[UIColor whiteColor]];
+        [self presentViewController:popOverObj animated:YES completion:nil]; // 19
 }
+
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller traitCollection:(UITraitCollection *)traitCollection {
+    return UIModalPresentationNone; // 20
+}
+
+- (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
+    
+        // return YES if the Popover should be dismissed
+        // return NO if the Popover should not be dismissed
+    return YES;
+}
+
+- (UIViewController *)presentationController:(UIPresentationController *)controller viewControllerForAdaptivePresentationStyle:(UIModalPresentationStyle)style {
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller.presentedViewController];
+    return navController; // 21
+}
+
+# pragma mark - Popover Presentation Controller Delegate
+
+- (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
+    
+        // called when a Popover is dismissed
+}
+
+- (void)popoverPresentationController:(UIPopoverPresentationController *)popoverPresentationController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView *__autoreleasing  _Nonnull *)view {
+    
+        // called when the Popover changes position
+}
+
 
 - (void)foodDiaryFetchDetailsPostMethodWebService {
     

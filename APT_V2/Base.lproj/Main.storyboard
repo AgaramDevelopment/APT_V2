@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2a4-KK-7LK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2a4-KK-7LK">
     <device id="ipad9_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+            <string>HelveticaNeue-Bold</string>
+        </array>
         <array key="Montserrat-Bold.otf">
             <string>Montserrat-Bold</string>
         </array>
@@ -45,12 +49,10 @@
         <scene sceneID="Mj5-0Y-fU3">
             <objects>
                 <tabBarController storyboardIdentifier="TabbarVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uNz-1R-Gci" customClass="TabbarVC" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" itemPositioning="centered" id="nw0-o2-spK">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" itemPositioning="fill" id="nw0-o2-spK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="barTintColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="0.48351883559999997" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <outlet property="tabBarCntrlr" destination="nw0-o2-spK" id="fYm-nX-AmM"/>
@@ -1995,7 +1997,7 @@
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ReT-G5-NRa">
                                                 <rect key="frame" x="768" y="170" width="0.0" height="30"/>
-                                                <color key="backgroundColor" red="0.08235294118" green="0.10980392160000001" blue="0.043137254899999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.0" green="0.56904578210000001" blue="0.57461684940000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="MNT-w8-T9h"/>
                                                 </constraints>
@@ -3010,7 +3012,42 @@
                                                             <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="17"/>
                                                         </variation>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8I-sj-1Ub">
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="pv6-aN-8i1">
+                                                        <rect key="frame" x="0.0" y="20" width="130" height="20"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxH-FQ-EYC" userLabel="btnLB">
+                                                                <rect key="frame" x="0.0" y="0.0" width="65" height="20"/>
+                                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
+                                                                <state key="normal">
+                                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="actionWickets:" destination="EaG-58-Zdd" eventType="touchUpInside" id="VPt-Zs-X7J"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6V-wg-evh" userLabel="btnWD">
+                                                                <rect key="frame" x="65" y="0.0" width="65" height="20"/>
+                                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
+                                                                <state key="normal">
+                                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="actionOvers:" destination="EaG-58-Zdd" eventType="touchUpInside" id="66a-VE-4e4"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" red="0.58105844259999995" green="0.12855249639999999" blue="0.57453137639999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="130" id="0pc-0b-o4k"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3kx-JR-uth">
+                                                        <rect key="frame" x="190" y="0.0" width="96" height="20"/>
+                                                        <connections>
+                                                            <action selector="actionTotal:" destination="EaG-58-Zdd" eventType="touchUpInside" id="KSv-e1-vFC"/>
+                                                        </connections>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8I-sj-1Ub">
                                                         <rect key="frame" x="0.0" y="20" width="758" height="20"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                         <nil key="highlightedColor"/>
@@ -3024,9 +3061,16 @@
                                                     <constraint firstAttribute="trailing" secondItem="v8I-sj-1Ub" secondAttribute="trailing" id="9wZ-rw-NqL"/>
                                                     <constraint firstItem="v8I-sj-1Ub" firstAttribute="top" secondItem="kjA-a6-T5G" secondAttribute="bottom" id="BFh-c3-eh3"/>
                                                     <constraint firstItem="sJp-9I-jTX" firstAttribute="leading" secondItem="kjA-a6-T5G" secondAttribute="trailing" id="Fyz-N3-Jpw"/>
+                                                    <constraint firstItem="3kx-JR-uth" firstAttribute="leading" secondItem="sJp-9I-jTX" secondAttribute="leading" id="IxB-R7-giq"/>
+                                                    <constraint firstItem="pv6-aN-8i1" firstAttribute="leading" secondItem="v8I-sj-1Ub" secondAttribute="leading" id="MQm-NM-a3r"/>
                                                     <constraint firstItem="sJp-9I-jTX" firstAttribute="top" secondItem="kjA-a6-T5G" secondAttribute="top" id="OaL-j2-2Fy"/>
                                                     <constraint firstItem="v8I-sj-1Ub" firstAttribute="height" secondItem="kjA-a6-T5G" secondAttribute="height" id="RWy-Q4-s7n"/>
+                                                    <constraint firstItem="pv6-aN-8i1" firstAttribute="top" secondItem="v8I-sj-1Ub" secondAttribute="top" id="aaJ-II-lT4"/>
                                                     <constraint firstItem="kjA-a6-T5G" firstAttribute="top" secondItem="L4n-6L-AnZ" secondAttribute="top" id="do3-Ze-edF"/>
+                                                    <constraint firstItem="3kx-JR-uth" firstAttribute="bottom" secondItem="sJp-9I-jTX" secondAttribute="bottom" id="eEY-Dq-vq3"/>
+                                                    <constraint firstItem="3kx-JR-uth" firstAttribute="trailing" secondItem="sJp-9I-jTX" secondAttribute="trailing" constant="1.5" id="g8d-B5-08p"/>
+                                                    <constraint firstItem="3kx-JR-uth" firstAttribute="top" secondItem="sJp-9I-jTX" secondAttribute="top" id="hyQ-vo-mPT"/>
+                                                    <constraint firstItem="pv6-aN-8i1" firstAttribute="bottom" secondItem="v8I-sj-1Ub" secondAttribute="bottom" id="qga-O6-omm"/>
                                                     <constraint firstItem="sJp-9I-jTX" firstAttribute="height" secondItem="kjA-a6-T5G" secondAttribute="height" id="tAC-P3-wXh"/>
                                                     <constraint firstItem="v8I-sj-1Ub" firstAttribute="leading" secondItem="kjA-a6-T5G" secondAttribute="leading" id="tzw-d3-dJe"/>
                                                 </constraints>
@@ -3055,7 +3099,7 @@
                                                 <constraints>
                                                     <constraint firstItem="p1Q-OY-3ue" firstAttribute="leading" secondItem="6J1-sc-xzQ" secondAttribute="leading" id="0jA-OU-e1S"/>
                                                     <constraint firstItem="bAQ-Ad-wKv" firstAttribute="top" secondItem="6J1-sc-xzQ" secondAttribute="top" id="66l-ok-gfN"/>
-                                                    <constraint firstAttribute="bottom" secondItem="p1Q-OY-3ue" secondAttribute="bottom" id="KKh-L9-9uL"/>
+                                                    <constraint firstAttribute="bottom" secondItem="p1Q-OY-3ue" secondAttribute="bottom" id="75b-mR-4eg"/>
                                                     <constraint firstItem="p1Q-OY-3ue" firstAttribute="top" secondItem="6J1-sc-xzQ" secondAttribute="top" id="P8m-G1-CFz"/>
                                                     <constraint firstAttribute="trailing" secondItem="bAQ-Ad-wKv" secondAttribute="trailing" id="TA0-cb-plS"/>
                                                     <constraint firstAttribute="bottom" secondItem="bAQ-Ad-wKv" secondAttribute="bottom" id="Tkb-8m-QcS"/>
@@ -4263,6 +4307,8 @@
                         <outlet property="bowlingLbl" destination="WaH-Ze-gOY" id="WDJ-b2-EeV"/>
                         <outlet property="bowlingRunsLbl" destination="Uxg-Z4-oRn" id="tQa-UO-Lus"/>
                         <outlet property="bowlingTbl" destination="Z5X-Mn-KDc" id="f7h-zf-h0R"/>
+                        <outlet property="btnAllOvers" destination="f6V-wg-evh" id="ftY-TL-LE8"/>
+                        <outlet property="btnAllWkts" destination="fxH-FQ-EYC" id="hck-CK-2hN"/>
                         <outlet property="commonScroll" destination="P9M-o3-hgN" id="Sae-cn-PS3"/>
                         <outlet property="competitionTypelbl" destination="QDF-KF-LgU" id="mNH-zE-oqR"/>
                         <outlet property="containerUIView" destination="ZgP-3a-kQZ" id="u2K-VJ-u3E"/>
@@ -4324,7 +4370,7 @@
                         <viewControllerLayoutGuide type="bottom" id="GG1-OR-6Pd"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="hPR-p6-Wcx">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1400"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcb-4z-EMR">
@@ -4335,7 +4381,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiE-8x-4mW">
-                                <rect key="frame" x="0.0" y="70" width="768" height="1300"/>
+                                <rect key="frame" x="0.0" y="70" width="768" height="1310"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tOh-d2-nmm">
                                         <rect key="frame" x="10" y="10" width="748" height="40"/>
@@ -4499,10 +4545,10 @@
                                         <rect key="frame" x="10" y="60" width="748" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Block" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5Z-jJ-MWy">
-                                                <rect key="frame" x="0.0" y="10" width="30" height="30"/>
+                                                <rect key="frame" x="0.0" y="10" width="40" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="FoK-Oq-FIH"/>
-                                                    <constraint firstAttribute="width" constant="30" id="Tsg-Ek-35R"/>
+                                                    <constraint firstAttribute="width" constant="40" id="Tsg-Ek-35R"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -4512,7 +4558,7 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z3h-kA-dxK">
-                                                <rect key="frame" x="35" y="10" width="100" height="30"/>
+                                                <rect key="frame" x="45" y="10" width="100" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="6xo-MU-EDi"/>
                                                     <constraint firstAttribute="height" constant="30" id="MDp-Fk-mWS"/>
@@ -4525,7 +4571,7 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ov" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5iC-Rx-KmS">
-                                                <rect key="frame" x="135" y="10" width="122.5" height="30"/>
+                                                <rect key="frame" x="145" y="10" width="120.5" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="mqb-FB-Y7A"/>
                                                 </constraints>
@@ -4537,7 +4583,7 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sy8-hn-K7s">
-                                                <rect key="frame" x="257.5" y="10" width="122.5" height="30"/>
+                                                <rect key="frame" x="265.5" y="10" width="120.5" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="mYh-IT-okH"/>
                                                 </constraints>
@@ -4549,7 +4595,7 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RR" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnF-oP-vUs">
-                                                <rect key="frame" x="380" y="10" width="123" height="30"/>
+                                                <rect key="frame" x="386" y="10" width="121" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="tMc-N4-bqX"/>
                                                 </constraints>
@@ -4561,7 +4607,7 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DB" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOe-oc-T9u">
-                                                <rect key="frame" x="625.5" y="10" width="122.5" height="30"/>
+                                                <rect key="frame" x="627.5" y="10" width="120.5" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="TmT-lf-lc1"/>
                                                 </constraints>
@@ -4573,7 +4619,7 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wkts" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYY-j7-y74">
-                                                <rect key="frame" x="503" y="10" width="122.5" height="30"/>
+                                                <rect key="frame" x="507" y="10" width="120.5" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="ZvN-6V-owR"/>
                                                 </constraints>
@@ -4910,7 +4956,7 @@
                                                             <subviews>
                                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="X28-dk-ABN">
                                                                     <rect key="frame" x="0.0" y="5" width="179.5" height="13"/>
-                                                                    <color key="progressTintColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="progressTintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="trackTintColor" red="0.14117647059999999" green="0.3294117647" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 </progressView>
                                                             </subviews>
@@ -4950,7 +4996,7 @@
                                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="WbN-WM-Pv1">
                                                                     <rect key="frame" x="0.0" y="5" width="179.5" height="13"/>
                                                                     <color key="progressTintColor" red="0.66244167089999995" green="0.043201826509999999" blue="0.0040530124679999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                    <color key="trackTintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </progressView>
                                                             </subviews>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -4971,12 +5017,12 @@
                                                         <constraint firstItem="vuM-o1-AwE" firstAttribute="leading" secondItem="cC8-R4-0RE" secondAttribute="trailing" id="Dvy-QW-jnc"/>
                                                         <constraint firstItem="EEz-4d-Vuu" firstAttribute="leading" secondItem="936-DN-18N" secondAttribute="trailing" id="Emq-6X-SgT"/>
                                                         <constraint firstItem="EEz-4d-Vuu" firstAttribute="width" secondItem="936-DN-18N" secondAttribute="width" id="K6w-XI-6dw"/>
-                                                        <constraint firstItem="cC8-R4-0RE" firstAttribute="height" secondItem="EEz-4d-Vuu" secondAttribute="height" id="N5X-62-h1S"/>
                                                         <constraint firstItem="vuM-o1-AwE" firstAttribute="top" secondItem="Lht-Pv-7T4" secondAttribute="top" constant="10" id="Spm-9W-1eu"/>
                                                         <constraint firstItem="936-DN-18N" firstAttribute="top" secondItem="Lht-Pv-7T4" secondAttribute="top" constant="10" id="Wv4-BQ-Iom"/>
                                                         <constraint firstItem="M1J-dh-diF" firstAttribute="leading" secondItem="vuM-o1-AwE" secondAttribute="trailing" id="YDA-1M-j3m"/>
                                                         <constraint firstItem="936-DN-18N" firstAttribute="leading" secondItem="Lht-Pv-7T4" secondAttribute="leading" id="ZaA-Dv-F1d"/>
-                                                        <constraint firstItem="cC8-R4-0RE" firstAttribute="top" secondItem="EEz-4d-Vuu" secondAttribute="top" id="gk8-Cp-shj"/>
+                                                        <constraint firstItem="cC8-R4-0RE" firstAttribute="top" secondItem="EEz-4d-Vuu" secondAttribute="top" id="ggF-8I-4cu"/>
+                                                        <constraint firstItem="cC8-R4-0RE" firstAttribute="height" secondItem="EEz-4d-Vuu" secondAttribute="height" id="iLf-Rs-c3r"/>
                                                         <constraint firstAttribute="trailing" secondItem="M1J-dh-diF" secondAttribute="trailing" id="iQC-vx-PFd"/>
                                                         <constraint firstItem="cC8-R4-0RE" firstAttribute="leading" secondItem="EEz-4d-Vuu" secondAttribute="trailing" id="tRh-Yt-kqt"/>
                                                     </constraints>
@@ -5020,7 +5066,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6dd-ZN-D0b">
                                                 <rect key="frame" x="0.0" y="43" width="748" height="44"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="req-GO-gjd">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="req-GO-gjd">
                                                         <rect key="frame" x="344" y="10" width="60" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="8eg-yk-O5o"/>
@@ -5038,7 +5084,7 @@
                                                                 <rect key="frame" x="0.0" y="5" width="172" height="14"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                                <color key="progressTintColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="progressTintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="trackTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
                                                         </subviews>
@@ -5079,7 +5125,7 @@
                                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FoT-JR-SdO">
                                                                 <rect key="frame" x="0.0" y="5" width="172" height="14"/>
                                                                 <color key="progressTintColor" red="0.66244167089999995" green="0.043201826509999999" blue="0.0040530124679999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <color key="trackTintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -5137,7 +5183,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ift-9l-Zml">
                                                 <rect key="frame" x="0.0" y="97" width="748" height="44"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Runs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XR4-qI-40N">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Runs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XR4-qI-40N">
                                                         <rect key="frame" x="344" y="10" width="60" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="GEh-De-Xu3"/>
@@ -5153,7 +5199,7 @@
                                                         <subviews>
                                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="czV-nB-ykq">
                                                                 <rect key="frame" x="0.0" y="5" width="172" height="14"/>
-                                                                <color key="progressTintColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="progressTintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="trackTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
                                                         </subviews>
@@ -5194,7 +5240,7 @@
                                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yOK-ue-E55">
                                                                 <rect key="frame" x="0.0" y="5" width="172" height="14"/>
                                                                 <color key="progressTintColor" red="0.66244167089999995" green="0.043201826509999999" blue="0.0040530124679999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <color key="trackTintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -5252,7 +5298,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A2q-Oc-CYN">
                                                 <rect key="frame" x="0.0" y="151" width="748" height="44"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wickets" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5md-yX-fcU">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wickets" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5md-yX-fcU">
                                                         <rect key="frame" x="344" y="10" width="60" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="PAC-b8-ozT"/>
@@ -5268,7 +5314,7 @@
                                                         <subviews>
                                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="L2b-Jo-022">
                                                                 <rect key="frame" x="0.0" y="5" width="172" height="14"/>
-                                                                <color key="progressTintColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="progressTintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="trackTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
                                                         </subviews>
@@ -5309,7 +5355,7 @@
                                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="PpG-Bk-0Te">
                                                                 <rect key="frame" x="0.0" y="5" width="172" height="14"/>
                                                                 <color key="progressTintColor" red="0.66244167089999995" green="0.043201826509999999" blue="0.0040530124679999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <color key="trackTintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -5367,7 +5413,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YGW-Te-ojq">
                                                 <rect key="frame" x="0.0" y="205" width="748" height="44"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dot Balls" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7D-ah-dVY">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dot Balls" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="F7D-ah-dVY">
                                                         <rect key="frame" x="344" y="10" width="60" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="UL2-hi-KHh"/>
@@ -5383,7 +5429,7 @@
                                                         <subviews>
                                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="YX5-nM-ifv">
                                                                 <rect key="frame" x="0.0" y="5" width="172" height="14"/>
-                                                                <color key="progressTintColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="progressTintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="trackTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
                                                         </subviews>
@@ -5424,7 +5470,7 @@
                                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BuA-2h-Uvf">
                                                                 <rect key="frame" x="0.0" y="5" width="172" height="14"/>
                                                                 <color key="progressTintColor" red="0.66244167089999995" green="0.043201826509999999" blue="0.0040530124679999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <color key="trackTintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -5482,7 +5528,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Na-dr-6ow">
                                                 <rect key="frame" x="0.0" y="259" width="748" height="44"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="StrikeRate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTk-Cg-CmH">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="StrikeRate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="qTk-Cg-CmH">
                                                         <rect key="frame" x="344" y="10" width="60" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="e4m-yx-7fA"/>
@@ -5498,7 +5544,7 @@
                                                         <subviews>
                                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="XUv-GR-XCj">
                                                                 <rect key="frame" x="0.0" y="5" width="172" height="14"/>
-                                                                <color key="progressTintColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="progressTintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="trackTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
                                                         </subviews>
@@ -5539,7 +5585,7 @@
                                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Jyi-FF-Sty">
                                                                 <rect key="frame" x="0.0" y="5" width="172" height="14"/>
                                                                 <color key="progressTintColor" red="0.66244167089999995" green="0.043201826509999999" blue="0.0040530124679999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <color key="trackTintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -5597,7 +5643,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8b8-K8-5Tm">
                                                 <rect key="frame" x="0.0" y="313" width="748" height="44"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKA-27-yF7">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Average" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fKA-27-yF7">
                                                         <rect key="frame" x="344" y="10" width="60" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="pCl-nL-w29"/>
@@ -5613,7 +5659,7 @@
                                                         <subviews>
                                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="NNd-jM-hje">
                                                                 <rect key="frame" x="0.0" y="5" width="172" height="14"/>
-                                                                <color key="progressTintColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="progressTintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="trackTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
                                                         </subviews>
@@ -5654,7 +5700,7 @@
                                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="h65-Ji-dNJ">
                                                                 <rect key="frame" x="0.0" y="5" width="172" height="14"/>
                                                                 <color key="progressTintColor" red="0.66244167089999995" green="0.043201826509999999" blue="0.0040530124679999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <color key="trackTintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -5712,7 +5758,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kSN-fN-cBO">
                                                 <rect key="frame" x="0.0" y="367" width="748" height="44"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Economy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLT-Xy-lLg">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Economy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="iLT-Xy-lLg">
                                                         <rect key="frame" x="344" y="10" width="60" height="24"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="60" id="41f-TM-HzQ"/>
@@ -5728,7 +5774,7 @@
                                                         <subviews>
                                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ehe-1i-KuL">
                                                                 <rect key="frame" x="0.0" y="5" width="172" height="14"/>
-                                                                <color key="progressTintColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <color key="progressTintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <color key="trackTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
                                                         </subviews>
@@ -5769,7 +5815,7 @@
                                                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lcE-I6-ZIb">
                                                                 <rect key="frame" x="0.0" y="5" width="172" height="14"/>
                                                                 <color key="progressTintColor" red="0.66244167089999995" green="0.043201826509999999" blue="0.0040530124679999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <color key="trackTintColor" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </progressView>
                                                         </subviews>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -5880,12 +5926,11 @@
                                     <constraint firstItem="WyI-b6-XbD" firstAttribute="top" secondItem="2xf-pz-acz" secondAttribute="bottom" constant="5" id="T7T-eE-9eC"/>
                                     <constraint firstItem="mxh-lZ-bq7" firstAttribute="top" secondItem="e2x-Y8-Oa1" secondAttribute="bottom" constant="5" id="TPt-rS-Euf"/>
                                     <constraint firstAttribute="trailing" secondItem="Rex-GC-aUl" secondAttribute="trailing" constant="10" id="V5r-Pq-fHF"/>
-                                    <constraint firstAttribute="height" constant="1300" id="Vdz-Zt-q9U"/>
                                     <constraint firstAttribute="trailing" secondItem="e2x-Y8-Oa1" secondAttribute="trailing" constant="10" id="W3l-5S-IZ5"/>
                                     <constraint firstItem="0gq-bU-699" firstAttribute="leading" secondItem="eiE-8x-4mW" secondAttribute="leading" constant="10" id="aSo-bn-aK7"/>
                                     <constraint firstItem="0gq-bU-699" firstAttribute="centerX" secondItem="eiE-8x-4mW" secondAttribute="centerX" id="dIA-ZC-9W3"/>
                                     <constraint firstItem="Rex-GC-aUl" firstAttribute="top" secondItem="eiE-8x-4mW" secondAttribute="top" constant="10" id="gt5-a9-axu"/>
-                                    <constraint firstAttribute="bottom" secondItem="Rex-GC-aUl" secondAttribute="bottom" constant="1380" id="i4G-CE-zHe"/>
+                                    <constraint firstAttribute="bottom" secondItem="Rex-GC-aUl" secondAttribute="bottom" constant="1423" id="i4G-CE-zHe"/>
                                     <constraint firstAttribute="trailing" secondItem="mxh-lZ-bq7" secondAttribute="trailing" constant="10" id="oX3-P2-YQI"/>
                                     <constraint firstAttribute="trailing" secondItem="WyI-b6-XbD" secondAttribute="trailing" constant="10" id="qRY-hN-0Ta"/>
                                     <constraint firstItem="tOh-d2-nmm" firstAttribute="top" secondItem="eiE-8x-4mW" secondAttribute="top" constant="10" id="s62-Jy-NSR"/>
@@ -5895,6 +5940,7 @@
                         <color key="backgroundColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="eiE-8x-4mW" firstAttribute="leading" secondItem="hPR-p6-Wcx" secondAttribute="leading" id="CyY-Td-OXj"/>
+                            <constraint firstAttribute="bottom" secondItem="eiE-8x-4mW" secondAttribute="bottom" constant="20" id="Hpo-IS-jfj"/>
                             <constraint firstAttribute="trailing" secondItem="eiE-8x-4mW" secondAttribute="trailing" id="RhR-cs-UGg"/>
                             <constraint firstItem="QJa-rP-9RC" firstAttribute="trailing" secondItem="gcb-4z-EMR" secondAttribute="trailing" id="TOC-Ce-1sy"/>
                             <constraint firstItem="gcb-4z-EMR" firstAttribute="top" secondItem="hPR-p6-Wcx" secondAttribute="top" id="UZd-2z-JzQ"/>
@@ -5905,7 +5951,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Sessions" id="2LO-4j-szF"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="768" height="1600"/>
+                    <size key="freeformSize" width="768" height="1400"/>
                     <connections>
                         <outlet property="AvgPacelbl" destination="GN5-TN-Hy3" id="ttp-fU-dph"/>
                         <outlet property="AvgPrgPace" destination="NNd-jM-hje" id="3Qc-x2-TlZ"/>
@@ -5950,6 +5996,7 @@
                         <outlet property="navi_View" destination="gcb-4z-EMR" id="O0L-uZ-Wnn"/>
                         <outlet property="partnrTblHeight" destination="dAB-Zi-SjS" id="W8H-z2-S3m"/>
                         <outlet property="partnrshpTbl" destination="WyI-b6-XbD" id="vw9-yj-f3J"/>
+                        <outlet property="scrollView" destination="eiE-8x-4mW" id="X5p-xc-iMo"/>
                         <outlet property="session1" destination="Bhb-M4-daX" id="Zil-CN-vOd"/>
                         <outlet property="session2" destination="yua-6W-E5T" id="iub-Ih-MsT"/>
                         <outlet property="session3" destination="xcn-8F-VJX" id="nTr-vg-bRA"/>
@@ -5957,7 +6004,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cUf-zr-4O0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4373" y="-429"/>
+            <point key="canvasLocation" x="4143.75" y="-447.07031249999994"/>
         </scene>
         <!--Planner ListVC-->
         <scene sceneID="bv2-xr-OYm">
@@ -7170,7 +7217,7 @@
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qIs-Wa-8Gm">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="qIs-Wa-8Gm">
                                                 <rect key="frame" x="10" y="39" width="205.5" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="ti0-oa-ruz"/>
@@ -7241,7 +7288,7 @@
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIv-ny-FvB">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AIv-ny-FvB">
                                                 <rect key="frame" x="10" y="39" width="206" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="KT5-5a-6he"/>
@@ -7312,7 +7359,7 @@
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sst-AA-c4S">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Sst-AA-c4S">
                                                 <rect key="frame" x="10" y="39" width="205.5" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="mQM-Jw-6EZ"/>

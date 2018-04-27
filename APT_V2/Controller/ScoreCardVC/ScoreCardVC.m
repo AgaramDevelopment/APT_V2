@@ -328,6 +328,7 @@
 
 @implementation ScoreCardVC
 
+@synthesize btnAllWkts,btnAllOvers;
 
 
 - (void)viewDidLoad {
@@ -1087,6 +1088,29 @@
 //    dict = [self WagonWheelWebservice];
     
 }
+- (IBAction)actionLB:(id)sender {
+    
+}
+- (IBAction)actionWD:(id)sender {
+    
+}
+
+- (IBAction)actionOvers:(id)sender {
+    [self loadVideoPlayer:@"0" :@"BALLS" :@"ALL" innings:innno];
+
+}
+
+- (IBAction)actionWickets:(id)sender {
+    [self loadVideoPlayer:@"0" :@"WICKETS" :@"ALL" innings:innno];
+
+}
+- (IBAction)actionTotal:(id)sender {
+
+    [self loadVideoPlayer:@"0" :@"RUNS" :@"ALL" innings:innno];
+//    -(void)loadVideoPlayer: (NSString *) playercode : (NSString *) value: (NSString *) batOrBowl innings:(NSString*)innNo
+
+    
+}
 
 -(IBAction)myExtras:(id)sender
 {
@@ -1095,13 +1119,11 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:button.tag inSection:0];
     ScoreCardCell * cell = [self.listTbl cellForRowAtIndexPath:indexPath];
     NSString * Batsmancode =[[CommonArray valueForKey:@"Batsmencode"] objectAtIndex:indexPath.row];
-    //[self loadVideoPlayer1:@"" :self.matchCode :innno : @"":@"EXTRAS"];
-    //[self loadVideoPlayer:@"0":self.matchCode:innno:@"0":@"EXTRAS"];
+
     [self loadVideoPlayer:@"0" :@"0" :@"EXTRAS" innings:innno];
     
-    
-   // http://13.126.151.253:9001/AGAPTService.svc/GETSCORECARDVIDEOSFILEPATH/0/DMSC11600224DB2663B20170414152400012/1/0/EXTRAS
 }
+
 -(IBAction)myActionRuns:(id)sender
 {
     
@@ -1581,6 +1603,7 @@
 //
 //    NSLog(@"%f",scrollOffset);
 //}
+
 -(IBAction)Inn1Action:(id)sender
 {
     
@@ -1671,7 +1694,13 @@
     self.extrastypelbl.text = [ExtrasArray objectAtIndex:0];
     self.extraslbl.text = [ExtrasArray objectAtIndex:1];
     self.totallbl.text = [ExtrasArray objectAtIndex:2];
-    self.wktsOverslbl.text = [ExtrasArray objectAtIndex:4];
+    NSString* wkts = [[self separateWktsOvers:[ExtrasArray objectAtIndex:4]] objectAtIndex:0];
+    NSString* Overs = [[self separateWktsOvers:[ExtrasArray objectAtIndex:4]] objectAtIndex:1];
+    
+    [btnAllWkts setTitle:[@"(" stringByAppendingString:wkts] forState:UIControlStateNormal];
+    [btnAllOvers setTitle:[Overs stringByAppendingString:@")"] forState:UIControlStateNormal];
+
+//    self.wktsOverslbl.text = [ExtrasArray objectAtIndex:4];
     self.fallofWicketslbl.text = [fallOfWicketArray1 objectAtIndex:0];
     self.didNotbatlbl.text = [[didNotbatArray1 valueForKey:@"PlayerName"] objectAtIndex:0];
     
@@ -1802,7 +1831,14 @@
     self.extrastypelbl.text = [ExtrasArray2 objectAtIndex:0];
     self.extraslbl.text = [ExtrasArray2 objectAtIndex:1];
     self.totallbl.text = [ExtrasArray2 objectAtIndex:2];
-    self.wktsOverslbl.text = [ExtrasArray2 objectAtIndex:4];
+    
+    NSString* wkts = [[self separateWktsOvers:[ExtrasArray2 objectAtIndex:4]] objectAtIndex:0];
+    NSString* Overs = [[self separateWktsOvers:[ExtrasArray2 objectAtIndex:4]] objectAtIndex:1];
+    
+    [btnAllWkts setTitle:[@"(" stringByAppendingString:wkts] forState:UIControlStateNormal];
+    [btnAllOvers setTitle:[Overs stringByAppendingString:@")"] forState:UIControlStateNormal];
+
+//    self.wktsOverslbl.text = [ExtrasArray2 objectAtIndex:4];
     self.fallofWicketslbl.text = [fallOfWicketArray2 objectAtIndex:0];
     self.didNotbatlbl.text = [[didNotbatArray2 valueForKey:@"PlayerName"] objectAtIndex:0];
     
@@ -1929,7 +1965,14 @@
     self.extrastypelbl.text = [ExtrasArray3 objectAtIndex:0];
     self.extraslbl.text = [ExtrasArray3 objectAtIndex:1];
     self.totallbl.text = [ExtrasArray3 objectAtIndex:2];
-    self.wktsOverslbl.text = [ExtrasArray3 objectAtIndex:4];
+    
+    NSString* wkts = [[self separateWktsOvers:[ExtrasArray3 objectAtIndex:4]] objectAtIndex:0];
+    NSString* Overs = [[self separateWktsOvers:[ExtrasArray3 objectAtIndex:4]] objectAtIndex:1];
+    
+    [btnAllWkts setTitle:[@"(" stringByAppendingString:wkts] forState:UIControlStateNormal];
+    [btnAllOvers setTitle:[Overs stringByAppendingString:@")"] forState:UIControlStateNormal];
+
+//    self.wktsOverslbl.text = [ExtrasArray3 objectAtIndex:4];
     self.fallofWicketslbl.text = [fallOfWicketArray3 objectAtIndex:0];
     self.didNotbatlbl.text = [[didNotbatArray3 valueForKey:@"PlayerName"] objectAtIndex:0];
     
@@ -2056,7 +2099,14 @@
     self.extrastypelbl.text = [ExtrasArray4 objectAtIndex:0];
     self.extraslbl.text = [ExtrasArray4 objectAtIndex:1];
     self.totallbl.text = [ExtrasArray4 objectAtIndex:2];
-    self.wktsOverslbl.text = [ExtrasArray4 objectAtIndex:4];
+    
+    NSString* wkts = [[self separateWktsOvers:[ExtrasArray4 objectAtIndex:4]] objectAtIndex:0];
+    NSString* Overs = [[self separateWktsOvers:[ExtrasArray4 objectAtIndex:4]] objectAtIndex:1];
+    
+    [btnAllWkts setTitle:[@"(" stringByAppendingString:wkts] forState:UIControlStateNormal];
+    [btnAllOvers setTitle:[Overs stringByAppendingString:@")"] forState:UIControlStateNormal];
+
+//    self.wktsOverslbl.text = [ExtrasArray4 objectAtIndex:4];
     self.fallofWicketslbl.text = [fallOfWicketArray4 objectAtIndex:0];
     self.didNotbatlbl.text = [[didNotbatArray4 valueForKey:@"PlayerName"] objectAtIndex:0];
     
@@ -2101,6 +2151,14 @@
     //[self.listTbl reloadData];
 }
 
+-(NSArray *)separateWktsOvers:(NSString *)str
+{
+    NSArray* arr;
+    
+    arr = [str componentsSeparatedByString:@";"];
+    
+    return arr;
+}
 
 
 
@@ -2122,7 +2180,13 @@
     self.extrastypelbl.text = [ExtrasArray objectAtIndex:0];
     self.extraslbl.text = [ExtrasArray objectAtIndex:1];
     self.totallbl.text = [ExtrasArray objectAtIndex:2];
-    self.wktsOverslbl.text = [ExtrasArray objectAtIndex:4];
+    NSString* wkts = [[self separateWktsOvers:[ExtrasArray objectAtIndex:4]] objectAtIndex:0];
+    NSString* Overs = [[self separateWktsOvers:[ExtrasArray objectAtIndex:4]] objectAtIndex:1];
+    
+    [btnAllWkts setTitle:[@"(" stringByAppendingString:wkts] forState:UIControlStateNormal];
+    [btnAllOvers setTitle:[Overs stringByAppendingString:@")"] forState:UIControlStateNormal];
+
+//    self.wktsOverslbl.text = [ExtrasArray objectAtIndex:4];
     self.fallofWicketslbl.text = [fallOfWicketArray1 objectAtIndex:0];
     self.didNotbatlbl.text = [[didNotbatArray1 valueForKey:@"PlayerName"] objectAtIndex:0];
     
@@ -2174,7 +2238,14 @@
     self.extrastypelbl.text = [ExtrasArray2 objectAtIndex:0];
     self.extraslbl.text = [ExtrasArray2 objectAtIndex:1];
     self.totallbl.text = [ExtrasArray2 objectAtIndex:2];
-    self.wktsOverslbl.text = [ExtrasArray2 objectAtIndex:4];
+    
+    NSString* wkts = [[self separateWktsOvers:[ExtrasArray2 objectAtIndex:4]] objectAtIndex:0];
+    NSString* Overs = [[self separateWktsOvers:[ExtrasArray2 objectAtIndex:4]] objectAtIndex:1];
+    
+    [btnAllWkts setTitle:[@"(" stringByAppendingString:wkts] forState:UIControlStateNormal];
+    [btnAllOvers setTitle:[Overs stringByAppendingString:@")"] forState:UIControlStateNormal];
+
+//    self.wktsOverslbl.text = [ExtrasArray2 objectAtIndex:4];
     
     self.didNotbatlbl.text = [[didNotbatArray2 valueForKey:@"PlayerName"] objectAtIndex:0];
     self.fallofWicketslbl.text = [fallOfWicketArray2 objectAtIndex:0];
@@ -3089,12 +3160,12 @@
         }
         
         [AppCommon hideLoading];
-         
+        [self.view setUserInteractionEnabled:YES];
     } failure:^(AFHTTPRequestOperation *operation, id error) {
         NSLog(@"failed");
         [COMMON webServiceFailureError:error];
         [AppCommon hideLoading];
-         
+        [self.view setUserInteractionEnabled:YES];
         
     }];
     

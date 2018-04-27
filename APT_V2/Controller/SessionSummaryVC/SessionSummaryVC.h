@@ -78,5 +78,6 @@
 
 @property (nonatomic,strong) IBOutlet UILabel * EconPacelbl;
 @property (nonatomic,strong) IBOutlet UILabel * EconSpinlbl;
+@property (nonatomic,strong) IBOutlet UIScrollView * scrollView;
 
 @end

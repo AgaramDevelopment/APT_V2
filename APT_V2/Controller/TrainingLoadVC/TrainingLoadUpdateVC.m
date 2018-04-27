@@ -407,6 +407,7 @@
         
         self.rpelbl.text = [[sessionArray valueForKey:@"rpeValue"] objectAtIndex:indexPath.row];
         self.timelbl.text = [[sessionArray valueForKey:@"timeValue"] objectAtIndex:indexPath.row];
+        self.ballslbl.text = [[sessionArray valueForKey:@"ballsValue"] objectAtIndex:indexPath.row];
         
         ActivityCode = [[sessionArray valueForKey:@"ActivityCode"] objectAtIndex:indexPath.row];
         rpeCode = [[sessionArray valueForKey:@"RpeCode"] objectAtIndex:indexPath.row];
@@ -440,32 +441,39 @@
 {
     UIColor * color;
     if(index==0)
-        {
-        color = [UIColor colorWithRed:(210/255.0f) green:(105/255.0f) blue:(30/255.0f) alpha:1.0f];
-        }
+    {
+        color = [UIColor colorWithRed:(210/255.0f) green:(105/255.0f) blue:(30/255.0f) alpha:0.5f];
+        
+    }
     if(index==1)
-        {
-        color = [UIColor colorWithRed:(0/255.0f) green:(100/255.0f) blue:(0/255.0f) alpha:1.0f];
-        }
+    {
+        color = [UIColor colorWithRed:(0/255.0f) green:(100/255.0f) blue:(0/255.0f) alpha:0.5f];
+        
+    }
     if(index==2)
-        {
-        color = [UIColor colorWithRed:(0/255.0f) green:(139/255.0f) blue:(139/255.0f) alpha:1.0f];
-        }
+    {
+        color = [UIColor colorWithRed:(0/255.0f) green:(139/255.0f) blue:(139/255.0f) alpha:0.5f];
+       
+    }
     if(index==3)
-        {
-        color = [UIColor colorWithRed:(165/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:1.0f];
-        }
+    {
+        color = [UIColor colorWithRed:(165/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:0.5f];
+        
+    }
     if(index==4)
     {
-        color = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:1.0f];
+        color = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:0.5f];
+       
     }
     if(index==5)
     {
-        color = [UIColor colorWithRed:(255/255.0f) green:(165/255.0f) blue:(42/255.0f) alpha:1.0f];
+        color = [UIColor colorWithRed:(255/255.0f) green:(165/255.0f) blue:(42/255.0f) alpha:0.5f];
+        
     }
     if(index==6)
     {
-        color = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(255/255.0f) alpha:1.0f];
+        color = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(255/255.0f) alpha:0.5f];
+        
     }
     return color;
         //return GetRandomUIColor();

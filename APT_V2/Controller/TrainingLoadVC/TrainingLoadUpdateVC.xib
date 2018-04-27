@@ -585,17 +585,17 @@
                                     </constraints>
                                 </view>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cancel_BlackColor" translatesAutoresizingMaskIntoConstraints="NO" id="a9h-Gf-xOs">
-                                    <rect key="frame" x="350" y="5" width="20" height="20"/>
+                                    <rect key="frame" x="345" y="5" width="25" height="25"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="20" id="Xea-0j-bzf"/>
-                                        <constraint firstAttribute="width" constant="20" id="nG3-6Z-0Pn"/>
+                                        <constraint firstAttribute="height" constant="25" id="Xea-0j-bzf"/>
+                                        <constraint firstAttribute="width" constant="25" id="nG3-6Z-0Pn"/>
                                     </constraints>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v9X-JB-9TI">
-                                    <rect key="frame" x="350" y="5" width="20" height="20"/>
+                                    <rect key="frame" x="345" y="5" width="25" height="25"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="20" id="XgC-8T-6Ye"/>
-                                        <constraint firstAttribute="width" constant="20" id="juy-R5-3KE"/>
+                                        <constraint firstAttribute="height" constant="25" id="XgC-8T-6Ye"/>
+                                        <constraint firstAttribute="width" constant="25" id="juy-R5-3KE"/>
                                     </constraints>
                                     <connections>
                                         <action selector="CancelAction:" destination="-1" eventType="touchUpInside" id="lkM-Kd-8Al"/>

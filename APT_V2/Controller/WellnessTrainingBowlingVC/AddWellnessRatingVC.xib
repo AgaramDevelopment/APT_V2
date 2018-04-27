@@ -443,17 +443,17 @@
                             </constraints>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cancel_BlackColor" translatesAutoresizingMaskIntoConstraints="NO" id="Acl-rK-Ud0">
-                            <rect key="frame" x="350" y="5" width="20" height="20"/>
+                            <rect key="frame" x="345" y="5" width="25" height="25"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="20" id="MAT-Xk-e5u"/>
-                                <constraint firstAttribute="width" constant="20" id="thJ-wk-mBT"/>
+                                <constraint firstAttribute="height" constant="25" id="MAT-Xk-e5u"/>
+                                <constraint firstAttribute="width" constant="25" id="thJ-wk-mBT"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0zm-GD-usL">
-                            <rect key="frame" x="350" y="5" width="20" height="20"/>
+                            <rect key="frame" x="345" y="5" width="25" height="25"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="20" id="Ag0-Jh-xzD"/>
-                                <constraint firstAttribute="width" constant="20" id="M8g-7P-iSF"/>
+                                <constraint firstAttribute="height" constant="25" id="Ag0-Jh-xzD"/>
+                                <constraint firstAttribute="width" constant="25" id="M8g-7P-iSF"/>
                             </constraints>
                             <connections>
                                 <action selector="CancelAction:" destination="-1" eventType="touchUpInside" id="Rhq-yc-5W1"/>

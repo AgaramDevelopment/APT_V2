@@ -18,7 +18,6 @@
 @property (nonatomic, strong) NSString *graphName;
 @property (nonatomic) CGFloat barWidth;
 
-
 @end
 
 @interface BarChart()<UIScrollViewDelegate>{

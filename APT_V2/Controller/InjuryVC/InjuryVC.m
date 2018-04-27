@@ -697,6 +697,7 @@ typedef enum {
 - (NSString *)encodeToBase64String:(UIImage *)image {
     return [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 }
+
 -(void)opengallery
 {
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc]init];
@@ -705,6 +706,7 @@ typedef enum {
     imagePickerController.allowsEditing = YES;
     [self presentViewController:imagePickerController animated:YES completion:nil];
 }
+
 - (void)imagePickerController:(UIImagePickerController *)picker
         didFinishPickingImage:(UIImage *)image
                   editingInfo:(NSDictionary *)editingInfo

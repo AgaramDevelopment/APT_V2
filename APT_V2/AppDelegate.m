@@ -89,8 +89,6 @@
     [frontNavigationController setNavigationBarHidden:YES];
     [rearNavigationController setNavigationBarHidden:YES];
     [revealViewController setFrontViewPosition:FrontViewPositionLeftSide animated:YES];
-    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"BACK"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 
     window.rootViewController = revealViewController;
     

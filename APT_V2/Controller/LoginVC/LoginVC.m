@@ -61,6 +61,8 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    self.lblAppVersion.text = [AppCommon getAppVersion];
+    
     if(!IS_IPHONE_DEVICE)
     {
 //        self.commonViewHeight.constant =self.view.frame.size.height/2;

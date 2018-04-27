@@ -435,31 +435,46 @@
    popOverObj.listArray = array [[sender tag]];
     popOverObj.modalPresentationStyle = UIModalPresentationPopover; // 13
     UIPopoverPresentationController *popPC = popOverObj.popoverPresentationController; // 14
-    CGRect size;
+   
     int arrayCount = [array [[sender tag]] count];
-    if (IS_IPAD) {
-//        size = CGRectMake(0, 0, 150, array.count > 5 ? 200 : array.count*45);
+    
         popOverObj.preferredContentSize = CGSizeMake(200, arrayCount > 5 ? 300 : array.count*45);
-    } else {
-        popOverObj.preferredContentSize = CGSizeMake(150, arrayCount > 5 ? 250 : array.count*40);
-//        size = CGRectMake(0, 0, 100, array.count > 5 ? 200 : array.count*45);
-//        size = CGSizeMake(200, array.count > 5 ? 200 : array.count*45);
-    }
-    
-//    popOverObj.popoverPresentationController.sourceRect = [sender bounds]; // 15
-    
-    popOverObj.popoverPresentationController.sourceRect = CGRectMake(0, 0, 0, 0);
-//    CGRect( 0, y: 0, width: sender.frame.size.width, height: sender.frame.size.height)
-    popOverObj.popoverPresentationController.sourceView = sender; // 16
-    popPC.permittedArrowDirections = UIPopoverArrowDirectionAny; // 17
-    popPC.delegate = self; //18
-    [popPC setBackgroundColor:[UIColor whiteColor]];
-    [self presentViewController:popOverObj animated:YES completion:nil]; // 19
-    
-//    [popPC setBackgroundColor:[UIColor colorWithRed:36/255.0 green:52/255.0 blue:75/255.0 alpha:1.0]];
-//    [appDel.frontNavigationController presentViewController:popOverObj animated:YES completion:nil];
-    
+        popOverObj.popoverPresentationController.sourceRect = CGRectMake(0, 0, 0, 0);
+        popOverObj.popoverPresentationController.sourceView = sender; // 16
+        popPC.permittedArrowDirections = UIPopoverArrowDirectionAny; // 17
+        popPC.delegate = self; //18
+        [popPC setBackgroundColor:[UIColor whiteColor]];
+        [self presentViewController:popOverObj animated:YES completion:nil]; // 19
 }
+
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller traitCollection:(UITraitCollection *)traitCollection {
+    return UIModalPresentationNone; // 20
+}
+
+- (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
+    
+        // return YES if the Popover should be dismissed
+        // return NO if the Popover should not be dismissed
+    return YES;
+}
+
+- (UIViewController *)presentationController:(UIPresentationController *)controller viewControllerForAdaptivePresentationStyle:(UIModalPresentationStyle)style {
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller.presentedViewController];
+    return navController; // 21
+}
+
+# pragma mark - Popover Presentation Controller Delegate
+
+- (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
+    
+        // called when a Popover is dismissed
+}
+
+- (void)popoverPresentationController:(UIPopoverPresentationController *)popoverPresentationController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView *__autoreleasing  _Nonnull *)view {
+    
+        // called when the Popover changes position
+}
+
 
 - (void)foodDiaryFetchDetailsPostMethodWebService {
     

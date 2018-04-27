@@ -231,11 +231,9 @@ int headdingCount = 0;
     CGFloat Xvalue = (btn.frame.size.width/4);
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(Xvalue, btn.frame.size.height-5, btn.frame.size.width/2, 5)];
-    
     [UIView animateWithDuration:0.3 animations:^{
         [lineView layoutIfNeeded];
     }];
-
     lineView.backgroundColor =[UIColor colorWithRed:37.0f/255.0f
                                               green:176.0f/255.0f
                                                blue:240.0f/255.0f

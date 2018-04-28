@@ -424,7 +424,7 @@ AppCommon *sharedCommon = nil;
     NSBundle *bundle = [NSBundle mainBundle];
     NSDictionary *info = [bundle infoDictionary];
 //    NSString *productName = [info objectForKey:@"CFBundleName"];
-    NSString *AppVersion = [info objectForKey:@"CFBundleShortVersionString"];
+    NSString *AppVersion = [@"Version " stringByAppendingString:[info objectForKey:@"CFBundleShortVersionString"]];
 
     return AppVersion;
 }

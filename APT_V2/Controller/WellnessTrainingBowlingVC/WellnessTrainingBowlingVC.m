@@ -246,6 +246,7 @@
     
     isWellnessExpand = YES;
     
+    self.NoDataView.hidden = YES;
     objWell = [[AddWellnessRatingVC alloc] initWithNibName:@"AddWellnessRatingVC" bundle:nil];
     objWell.Delegate = self;
     objWell.view.frame = CGRectMake(0,0, self.topView.bounds.size.width, self.topView.bounds.size.height);
@@ -356,10 +357,12 @@
     [objWebservice fetchWellness :FetchrecordWellness : playerCode :actualDate success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         
+        self.NoDataView.hidden = YES;
         NSMutableArray *arr = [[NSMutableArray alloc]init];
         arr = responseObject;
         if(arr.count >0)
         {
+            self.NoDataView.hidden = YES;
             if( ![[[responseObject valueForKey:@"BodyWeight"] objectAtIndex:0] isEqual:[NSNull null]])
             {
                 self.bodyWeightlbl.text = [[responseObject valueForKey:@"BodyWeight"] objectAtIndex:0];
@@ -519,6 +522,10 @@
         }
            
             
+        }
+        else
+        {
+            self.NoDataView.hidden = NO;
         }
         [AppCommon hideLoading];
         

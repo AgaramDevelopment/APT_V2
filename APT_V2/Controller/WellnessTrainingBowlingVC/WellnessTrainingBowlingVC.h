@@ -78,6 +78,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *todayActivitynamelbl6;
 @property (weak, nonatomic) IBOutlet UILabel *todayActivitynamelbl7;
 @property (weak, nonatomic) IBOutlet UIView *navView;
+@property (weak, nonatomic) IBOutlet UIView *NoDataView;
 
 @property (weak, nonatomic) IBOutlet UILabel *yesterdayActivitynamelbl1;
 @property (weak, nonatomic) IBOutlet UILabel *yesterdayActivitynamelbl2;

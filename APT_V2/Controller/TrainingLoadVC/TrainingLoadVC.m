@@ -37,6 +37,7 @@
     UIColor * color6;
     UIColor * color7;
     
+    NSString *ActivityName;
     
     // PieChartView *pieChartView1, *pieChartView2;
 }
@@ -215,40 +216,41 @@
     UIColor * color;
     if(index==0)
         {
-        color = [UIColor colorWithRed:(210/255.0f) green:(105/255.0f) blue:(30/255.0f) alpha:1.0f];
-        color1 = [UIColor colorWithRed:(210/255.0f) green:(105/255.0f) blue:(30/255.0f) alpha:1.0f];
+        color = [UIColor colorWithRed:(210/255.0f) green:(105/255.0f) blue:(30/255.0f) alpha:0.5f];
+        color1 = [UIColor colorWithRed:(210/255.0f) green:(105/255.0f) blue:(30/255.0f) alpha:0.5f];
         }
     if(index==1)
         {
-        color = [UIColor colorWithRed:(0/255.0f) green:(100/255.0f) blue:(0/255.0f) alpha:1.0f];
-        color2 = [UIColor colorWithRed:(0/255.0f) green:(100/255.0f) blue:(0/255.0f) alpha:1.0f];
+        color = [UIColor colorWithRed:(0/255.0f) green:(100/255.0f) blue:(0/255.0f) alpha:0.5f];
+        color2 = [UIColor colorWithRed:(0/255.0f) green:(100/255.0f) blue:(0/255.0f) alpha:0.5f];
         }
     if(index==2)
         {
-        color = [UIColor colorWithRed:(0/255.0f) green:(139/255.0f) blue:(139/255.0f) alpha:1.0f];
-        color3 = [UIColor colorWithRed:(0/255.0f) green:(139/255.0f) blue:(139/255.0f) alpha:1.0f];
+        color = [UIColor colorWithRed:(0/255.0f) green:(139/255.0f) blue:(139/255.0f) alpha:0.5f];
+        color3 = [UIColor colorWithRed:(0/255.0f) green:(139/255.0f) blue:(139/255.0f) alpha:0.5f];
         }
     if(index==3)
         {
-        color = [UIColor colorWithRed:(165/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:1.0f];
-        color4 = [UIColor colorWithRed:(165/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:1.0f];
+        color = [UIColor colorWithRed:(165/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:0.5f];
+        color4 = [UIColor colorWithRed:(165/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:0.5f];
         }
     if(index==4)
     {
-        color = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:1.0f];
-        color5 = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:1.0f];
+        color = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:0.5f];
+        color5 = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:0.5f];
     }
     if(index==5)
     {
-        color = [UIColor colorWithRed:(255/255.0f) green:(165/255.0f) blue:(42/255.0f) alpha:1.0f];
-        color6 = [UIColor colorWithRed:(255/255.0f) green:(165/255.0f) blue:(42/255.0f) alpha:1.0f];
+        color = [UIColor colorWithRed:(255/255.0f) green:(165/255.0f) blue:(42/255.0f) alpha:0.5f];
+        color6 = [UIColor colorWithRed:(255/255.0f) green:(165/255.0f) blue:(42/255.0f) alpha:0.5f];
     }
     if(index==6)
     {
-        color = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(255/255.0f) alpha:1.0f];
-        color7 = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(255/255.0f) alpha:1.0f];
+        color = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(255/255.0f) alpha:0.5f];
+        color7 = [UIColor colorWithRed:(255/255.0f) green:(42/255.0f) blue:(255/255.0f) alpha:0.5f];
     }
     
+
     if(pieChartView == _pieChartView1)
     {
     for(int i=0;i<self.yesterdayLoadArray.count;i++)
@@ -459,15 +461,18 @@
                 
             }
            
+                self.todayPieNodataView.hidden = YES;
+                self.yesterdayPieNodataView.hidden = YES;
             if(self.todaysLoadArray.count>0)
             {
+                self.todayPieNodataView.hidden = YES;
             self.markers = [[NSMutableArray alloc]init];
                 isToday = YES;
                 isYesterday = NO;
              for(int i=0;i<self.todaysLoadArray.count;i++)
              {
                  //today view
-                 NSString *ActivityName;
+                // NSString *ActivityName;
                  NSString *ActivityNameCode = [[self.todaysLoadArray valueForKey:@"ACTIVITYTYPECODE"] objectAtIndex:i];
                  if([ActivityNameCode isEqualToString:@"MSC053"])
                  {
@@ -597,9 +602,14 @@
                 }
                 self.totalCountToday.text = [NSString stringWithFormat:@"%d",total];
             }
+                else
+                {
+                    self.todayPieNodataView.hidden = NO;
+                }
            
             if(self.yesterdayLoadArray.count>0)
             {
+                self.yesterdayPieNodataView.hidden = YES;
             self.markers2 = [[NSMutableArray alloc]init];
                 isYesterday = YES;
                 isToday = NO;
@@ -607,7 +617,7 @@
             for(int i=0;i<self.yesterdayLoadArray.count;i++)
             {
                 //today view
-                NSString *ActivityName;
+                //NSString *ActivityName;
                 NSString *ActivityNameCode = [[self.yesterdayLoadArray valueForKey:@"ACTIVITYTYPECODE"] objectAtIndex:i];
                 if([ActivityNameCode isEqualToString:@"MSC053"])
                 {
@@ -739,6 +749,10 @@
                 }
                 self.totalCountYesterday.text = [NSString stringWithFormat:@"%d",total];
             }
+                else
+                {
+                    self.yesterdayPieNodataView.hidden = NO;
+                }
         }
         }
         [AppCommon hideLoading];

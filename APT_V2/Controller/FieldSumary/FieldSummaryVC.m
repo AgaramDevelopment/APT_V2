@@ -277,7 +277,6 @@ int headdingCount = 0;
                 [_testInn2Btn addSubview: [self getLineView:_testInn2Btn]];
             });
 
-
         }else if(selectedTab ==  3){
             dispatch_async(dispatch_get_main_queue(), ^{
                 [_testInn3Btn addSubview: [self getLineView:_testInn3Btn]];

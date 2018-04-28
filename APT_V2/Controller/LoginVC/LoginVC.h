@@ -11,6 +11,7 @@
 @interface LoginVC : UIViewController
 @property (nonatomic,strong)IBOutlet UISwitch *swt;
 
+@property (weak, nonatomic) IBOutlet UILabel *lblAppVersion;
 @property (nonatomic,strong)IBOutlet UIImageView *securityImage;
 @property (weak, nonatomic) IBOutlet UIView *teamview;
 @end

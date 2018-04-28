@@ -907,6 +907,142 @@
 {
     NSLog(@"FINAL DATE %@",selectedDate);
     
+    if(![selectedDate isEqual:[NSNull null]])
+    {
+        
+        //selected date
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:selectedDate];
+        NSLog(@"%ld ",[components day]);
+       
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+       
+        NSString * selectdate1 =[NSString stringWithFormat:@"%02ld/%02ld/%ld",(long)[components day],(long)[components month],(long)[components year]];
+        NSDate *datess = [dateFormatter dateFromString:selectdate1];
+        
+        
+        
+        //today
+        NSDate *today = [NSDate date];
+        
+        NSDateComponents *components1 = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:today];
+        
+        NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
+        [dateFormatter1 setDateFormat:@"dd/MM/yyyy"];
+        
+        NSString * selectdate2 =[NSString stringWithFormat:@"%02ld/%02ld/%ld",(long)[components1 day],(long)[components1 month],(long)[components1 year]];
+       
+    
+    
+    if([selectdate2 isEqualToString:selectdate1])
+    {
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:selectedDate];
+        NSLog(@"%ld ",[components day]);
+        
+        NSString * selectdate =[NSString stringWithFormat:@"%02ld/%02ld/%ld",(long)[components day],(long)[components month],(long)[components year]];
+        
+        //NSString *finalDate = @"2017-10-15";
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+        //NSDate *datess = [dateFormatter dateFromString:selectdate];
+        
+        //    NSString * selectdate1 =[NSString stringWithFormat:@"%02d/%02d/%d",day+1,month,year];
+        NSString * selectdate1 =[NSString stringWithFormat:@"%02ld/%02ld/%ld",(long)[components day]+1,(long)[components month],(long)[components year]];
+        
+        NSDate *datess = [dateFormatter dateFromString:selectdate1];
+        
+        NSDate *today = [NSDate date]; // it will give you current date
+        
+        NSMutableArray * ojAddPlannerArray =[[NSMutableArray alloc]init];
+        for(int i=0; self.AllEventDetailListArray.count>i;i++)
+        {
+            NSDictionary * objDic =[self.AllEventDetailListArray objectAtIndex:i];
+            NSString * startdate =[objDic valueForKey:@"startdatetime"];
+            NSDateFormatter *dateFormatters = [[NSDateFormatter alloc] init];
+            [dateFormatters setDateFormat:@"dd/MM/yyyy hh:mm a"];
+            NSDate *dates = [dateFormatters dateFromString:startdate];
+            
+            NSDateFormatter* dfs = [[NSDateFormatter alloc]init];
+            [dfs setDateFormat:@"dd/MM/yyyy"];
+            NSString * endDateStr = [dfs stringFromDate:dates];
+            
+            if([endDateStr isEqualToString:selectdate])
+            {
+                [ojAddPlannerArray addObject:objDic];
+            }
+        }
+        
+        NSComparisonResult result;
+        //has three possible values: NSOrderedSame,NSOrderedDescending, NSOrderedAscending
+        
+        result = [today compare:datess]; // comparing two dates
+        
+        if(result==NSOrderedAscending)
+        {
+            NSLog(@"today is less");
+            
+            if(ojAddPlannerArray.count>0)
+            {
+                PlannerListVC  * objPlannerlist=[[PlannerListVC alloc]init];
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+                objPlannerlist = (PlannerListVC *)[storyboard instantiateViewControllerWithIdentifier:@"PlannerList"];
+                objPlannerlist.objPlannerArray =ojAddPlannerArray;
+                [self.navigationController pushViewController:objPlannerlist animated:YES];
+                
+                
+                //           PlannerListVC *objPlannerlist = [[PlannerListVC alloc] initWithNibName:@"PlannerListVC" bundle:nil];
+                //            objPlannerlist.objPlannerArray =ojAddPlannerArray;
+                //            objPlannerlist.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
+                //            [self.view addSubview:objPlannerlist.view];
+            }
+            
+            else
+            {
+                // if([AppCommon isCoach])
+                //{
+                PlannerAddEvent  * objaddEvent=[[PlannerAddEvent alloc]init];
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+                objaddEvent = (PlannerAddEvent *)[storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
+                objaddEvent.selectDateStr =selectdate;
+                objaddEvent.isEdit =NO;
+                objaddEvent.ListeventTypeArray = [self.PlannerResponseArray valueForKey:@"ListEventTypeDetails"];
+                objaddEvent.ListeventStatusArray = [self.PlannerResponseArray valueForKey:@"ListEventStatusDetails"];
+                objaddEvent.ListparticipantTypeArray = [self.PlannerResponseArray valueForKey:@"ListParticipantsTypeDetails"];
+                
+                [self.navigationController pushViewController:objaddEvent animated:YES];
+                //}
+                
+                //            PlannerAddEvent *objaddEvent = [[PlannerAddEvent alloc] initWithNibName:@"PlannerAddEvent" bundle:nil];
+                //            objaddEvent.selectDateStr =selectdate;
+                //            objaddEvent.isEdit =NO;
+                //            objaddEvent.ListeventTypeArray = [self.PlannerResponseArray valueForKey:@"ListEventTypeDetails"];
+                //            objaddEvent.ListeventStatusArray = [self.PlannerResponseArray valueForKey:@"ListEventStatusDetails"];
+                //            objaddEvent.ListparticipantTypeArray = [self.PlannerResponseArray valueForKey:@"ListParticipantsTypeDetails"];
+                //            objaddEvent.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
+                //            [self.view addSubview:objaddEvent.view];
+            }
+        }
+        else if(result==NSOrderedDescending)
+        {
+            if(ojAddPlannerArray.count>0)
+            {
+                PlannerListVC  * objPlannerlist=[[PlannerListVC alloc]init];
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+                objPlannerlist = (PlannerListVC *)[storyboard instantiateViewControllerWithIdentifier:@"PlannerList"];
+                objPlannerlist.objPlannerArray =ojAddPlannerArray;
+                [self.navigationController pushViewController:objPlannerlist animated:YES];
+            }
+            else{
+                
+                [AppCommon showAlertWithMessage:@"Past date not allowed!!"];
+            }
+        }
+        else
+            NSLog(@"Both dates are same");
+    }
+   else
+    {
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:selectedDate];
     NSLog(@"%ld ",[components day]);
     
@@ -919,9 +1055,10 @@
     //NSDate *datess = [dateFormatter dateFromString:selectdate];
     
 //    NSString * selectdate1 =[NSString stringWithFormat:@"%02d/%02d/%d",day+1,month,year];
-    NSString * selectdate1 =[NSString stringWithFormat:@"%02ld/%02ld/%ld",(long)[components day]+1,(long)[components month],(long)[components year]];
+    NSString * selectdate1 =[NSString stringWithFormat:@"%02ld/%02ld/%ld",(long)[components day],(long)[components month],(long)[components year]];
 
     NSDate *datess = [dateFormatter dateFromString:selectdate1];
+       
     NSDate *today = [NSDate date]; // it will give you current date
     
     NSMutableArray * ojAddPlannerArray =[[NSMutableArray alloc]init];
@@ -942,77 +1079,77 @@
             [ojAddPlannerArray addObject:objDic];
         }
     }
-    
-    
-    
-    NSComparisonResult result;
-    //has three possible values: NSOrderedSame,NSOrderedDescending, NSOrderedAscending
-    
-    result = [today compare:datess]; // comparing two dates
-    
-    if(result==NSOrderedAscending)
-    {
-        NSLog(@"today is less");
         
-        if(ojAddPlannerArray.count>0)
+        NSComparisonResult result;
+        //has three possible values: NSOrderedSame,NSOrderedDescending, NSOrderedAscending
+        
+        result = [today compare:datess]; // comparing two dates
+        
+        if(result==NSOrderedAscending)
         {
-            PlannerListVC  * objPlannerlist=[[PlannerListVC alloc]init];
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-            objPlannerlist = (PlannerListVC *)[storyboard instantiateViewControllerWithIdentifier:@"PlannerList"];
-            objPlannerlist.objPlannerArray =ojAddPlannerArray;
-            [self.navigationController pushViewController:objPlannerlist animated:YES];
+            NSLog(@"today is less");
             
+            if(ojAddPlannerArray.count>0)
+            {
+                PlannerListVC  * objPlannerlist=[[PlannerListVC alloc]init];
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+                objPlannerlist = (PlannerListVC *)[storyboard instantiateViewControllerWithIdentifier:@"PlannerList"];
+                objPlannerlist.objPlannerArray =ojAddPlannerArray;
+                [self.navigationController pushViewController:objPlannerlist animated:YES];
+                
+                
+                //           PlannerListVC *objPlannerlist = [[PlannerListVC alloc] initWithNibName:@"PlannerListVC" bundle:nil];
+                //            objPlannerlist.objPlannerArray =ojAddPlannerArray;
+                //            objPlannerlist.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
+                //            [self.view addSubview:objPlannerlist.view];
+            }
             
-//           PlannerListVC *objPlannerlist = [[PlannerListVC alloc] initWithNibName:@"PlannerListVC" bundle:nil];
-//            objPlannerlist.objPlannerArray =ojAddPlannerArray;
-//            objPlannerlist.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
-//            [self.view addSubview:objPlannerlist.view];
+            else
+            {
+                // if([AppCommon isCoach])
+                //{
+                PlannerAddEvent  * objaddEvent=[[PlannerAddEvent alloc]init];
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+                objaddEvent = (PlannerAddEvent *)[storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
+                objaddEvent.selectDateStr =selectdate;
+                objaddEvent.isEdit =NO;
+                objaddEvent.ListeventTypeArray = [self.PlannerResponseArray valueForKey:@"ListEventTypeDetails"];
+                objaddEvent.ListeventStatusArray = [self.PlannerResponseArray valueForKey:@"ListEventStatusDetails"];
+                objaddEvent.ListparticipantTypeArray = [self.PlannerResponseArray valueForKey:@"ListParticipantsTypeDetails"];
+                
+                [self.navigationController pushViewController:objaddEvent animated:YES];
+                //}
+                
+                //            PlannerAddEvent *objaddEvent = [[PlannerAddEvent alloc] initWithNibName:@"PlannerAddEvent" bundle:nil];
+                //            objaddEvent.selectDateStr =selectdate;
+                //            objaddEvent.isEdit =NO;
+                //            objaddEvent.ListeventTypeArray = [self.PlannerResponseArray valueForKey:@"ListEventTypeDetails"];
+                //            objaddEvent.ListeventStatusArray = [self.PlannerResponseArray valueForKey:@"ListEventStatusDetails"];
+                //            objaddEvent.ListparticipantTypeArray = [self.PlannerResponseArray valueForKey:@"ListParticipantsTypeDetails"];
+                //            objaddEvent.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
+                //            [self.view addSubview:objaddEvent.view];
+            }
         }
-        
+        else if(result==NSOrderedDescending)
+        {
+            if(ojAddPlannerArray.count>0)
+            {
+                PlannerListVC  * objPlannerlist=[[PlannerListVC alloc]init];
+                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+                objPlannerlist = (PlannerListVC *)[storyboard instantiateViewControllerWithIdentifier:@"PlannerList"];
+                objPlannerlist.objPlannerArray =ojAddPlannerArray;
+                [self.navigationController pushViewController:objPlannerlist animated:YES];
+            }
+            else{
+                
+                [AppCommon showAlertWithMessage:@"Past date not allowed!!"];
+            }
+        }
         else
-        {
-           // if([AppCommon isCoach])
-            //{
-            PlannerAddEvent  * objaddEvent=[[PlannerAddEvent alloc]init];
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-            objaddEvent = (PlannerAddEvent *)[storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
-            objaddEvent.selectDateStr =selectdate;
-            objaddEvent.isEdit =NO;
-            objaddEvent.ListeventTypeArray = [self.PlannerResponseArray valueForKey:@"ListEventTypeDetails"];
-            objaddEvent.ListeventStatusArray = [self.PlannerResponseArray valueForKey:@"ListEventStatusDetails"];
-            objaddEvent.ListparticipantTypeArray = [self.PlannerResponseArray valueForKey:@"ListParticipantsTypeDetails"];
-
-            [self.navigationController pushViewController:objaddEvent animated:YES];
-            //}
-            
-//            PlannerAddEvent *objaddEvent = [[PlannerAddEvent alloc] initWithNibName:@"PlannerAddEvent" bundle:nil];
-//            objaddEvent.selectDateStr =selectdate;
-//            objaddEvent.isEdit =NO;
-//            objaddEvent.ListeventTypeArray = [self.PlannerResponseArray valueForKey:@"ListEventTypeDetails"];
-//            objaddEvent.ListeventStatusArray = [self.PlannerResponseArray valueForKey:@"ListEventStatusDetails"];
-//            objaddEvent.ListparticipantTypeArray = [self.PlannerResponseArray valueForKey:@"ListParticipantsTypeDetails"];
-//            objaddEvent.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
-//            [self.view addSubview:objaddEvent.view];
-        }
+            NSLog(@"Both dates are same");
     }
-    else if(result==NSOrderedDescending)
-    {
-        if(ojAddPlannerArray.count>0)
-        {
-            PlannerListVC  * objPlannerlist=[[PlannerListVC alloc]init];
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-            objPlannerlist = (PlannerListVC *)[storyboard instantiateViewControllerWithIdentifier:@"PlannerList"];
-            objPlannerlist.objPlannerArray =ojAddPlannerArray;
-            [self.navigationController pushViewController:objPlannerlist animated:YES];
-        }
-        else{
-            
-            [AppCommon showAlertWithMessage:@"Past date not allowed!!"];
-        }
     }
-    else
-        NSLog(@"Both dates are same");
-
+    
 }
 
 ///yes

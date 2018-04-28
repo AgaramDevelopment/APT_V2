@@ -9,6 +9,7 @@
 #import "PlayerDetailViewController.h"
 #import "Header.h"
 #import "InjuryAndIllnessVC.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface PlayerDetailViewController () <ChartViewDelegate, IChartAxisValueFormatter>
 {
@@ -61,9 +62,14 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     self.lblAvailability.backgroundColor = self.availableColor;
-    self.lblTeamName.text = [self TeamName];
+   // self.lblTeamName.text = [self TeamName];
     
     NSString* age = [NSString stringWithFormat:@"%@ Years Old",[self.selectedPlayerArray valueForKey:@"Age"]];
+    
+    self.lblTeamName.text = [self checkNull:[self.selectedPlayerArray valueForKey:@"AthleteName"]];
+    
+    
+    [self.imgViewPlayer sd_setImageWithURL:[NSURL URLWithString: [self checkNull:[self.selectedPlayerArray  valueForKey:@"AthletePhoto"]]] placeholderImage:[UIImage imageNamed:@"no-image"]];
     
     self.lblPlayerAge.text = age;
     

@@ -35,6 +35,10 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 #define BASE_Image_URL @"http://192.168.0.154:8029/bcciapp/"
 
 
+//LIVE
+//#define BASE_URL    @"http://service.alphaprotracker.com/AGAPTService.svc/"
+
+
 #define URL_FOR_RESOURCE(RESOURCE) [NSString stringWithFormat:@"%@%@",BASE_URL,RESOURCE]
 
 @interface WebService : AFHTTPRequestOperationManager

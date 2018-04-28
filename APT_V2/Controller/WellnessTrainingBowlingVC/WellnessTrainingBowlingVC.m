@@ -118,7 +118,7 @@
     
     isWellnessExpand =NO;
     isTraingLoadExpand = NO;
-    [self customnavigationmethod];
+//    [self customnavigationmethod];
     
 }
 
@@ -139,6 +139,11 @@
     self.topviewHeight.constant = 270;
     self.traingViewHeight.constant = 350;
     
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod

@@ -41,7 +41,7 @@
 //    [contentView.bottomAnchor constraintEqualToAnchor:scrollView.bottomAnchor];
 //    contentView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [self customnavigationmethod];
+//    [self customnavigationmethod];
 
 //    [self.txtTestDate setup];
     
@@ -51,6 +51,12 @@
     graphDict = [NSMutableDictionary new];
 
 }
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
+
 
 -(void)viewWillAppear:(BOOL)animated
 {

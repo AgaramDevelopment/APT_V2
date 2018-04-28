@@ -36,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
         // Do any additional setup after loading the view from its nib.
-    [self customnavigationmethod];
+//    [self customnavigationmethod];
         //MSC412    Supplements
     [self.saveOrUpdateBtn setTitle:@"Save" forState:UIControlStateNormal];
     foodDescriptionArray = [[NSMutableArray alloc] init];
@@ -149,6 +149,11 @@
         [self setBorderForLocation:locationCode+1];
         [self.foodTableView reloadData];
     });
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod
@@ -325,6 +330,7 @@
 {
     return 1;
 }
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     [self.lblNoData setHidden:foodDiaryArray.count];
     return foodDiaryArray.count;
@@ -343,24 +349,24 @@
     if (foodDiaryArray.count) {
         NSMutableArray *foodListArray = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"FOODLIST"];
         
-        cell.timeLbl.text = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"STARTTIME"];
-        cell.mealNameLbl.text = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"MEALNAME"];
+            cell.timeLbl.text = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"STARTTIME"];
+            cell.mealNameLbl.text = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"MEALNAME"];
+            
+            if (foodListArray.count == 1) {
+                cell.food1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.food2Lbl.text = @"";
+                cell.food3Lbl.text = @"";
+            } else if (foodListArray.count == 2) {
+                cell.food1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.food2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+                cell.food3Lbl.text = @"";
+            } else {
+                cell.food1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.food2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+                cell.food3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
+            }
         
-        if (foodListArray.count == 1) {
-            cell.food1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
-            cell.food2Lbl.text = @"";
-            cell.food3Lbl.text = @"";
-        } else if (foodListArray.count == 2) {
-            cell.food1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
-            cell.food2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
-            cell.food3Lbl.text = @"";
-        } else {
-            cell.food1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
-            cell.food2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
-            cell.food3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
-        }
     }
-    
     return cell;
 }
 
@@ -519,7 +525,18 @@
         if ([[responseObject valueForKey:@"STATUS"] integerValue] == 1) {
             
             foodDiaryArray = [NSMutableArray new];
-            foodDiaryArray = [responseObject objectForKey:@"FOODDIARYS"];
+            NSMutableArray *FOODDIARYSArray = [NSMutableArray new];
+            FOODDIARYSArray = [responseObject objectForKey:@"FOODDIARYS"];
+            for (id key in FOODDIARYSArray) {
+               
+                if ([[key valueForKey:@"FOODLIST"] count]) {
+                    if ([date isEqualToString:[key valueForKey:@"DATE"]]) {
+                         [foodDiaryArray addObject:key];
+                    }
+                }
+            }
+            NSLog(@"Count:%ld", foodDiaryArray.count);
+            
             [self setClearBorderForMealTypeAndLocation];
         }
         

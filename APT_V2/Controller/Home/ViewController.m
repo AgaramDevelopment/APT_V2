@@ -90,7 +90,7 @@
     usercode = [AppCommon GetUsercode];
     clientCode = [AppCommon GetClientCode];
     
-    [self customnavigationmethod];
+//    [self customnavigationmethod];
     currentlySelectedHeader = -1;
     
     [assCollection registerNib:[UINib nibWithNibName:@"TestPropertyCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"AssessmentCell"];
@@ -117,6 +117,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification

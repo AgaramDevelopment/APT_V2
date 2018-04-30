@@ -42,6 +42,7 @@
                 <outlet property="UrineColorBtn6" destination="QJB-f8-bYj" id="inc-R9-po3"/>
                 <outlet property="UrineColorBtn7" destination="S2v-df-faY" id="Bd2-Kw-F36"/>
                 <outlet property="UrineRatinglbl" destination="yvA-wc-765" id="Usy-hG-1Wt"/>
+                <outlet property="ViewMain" destination="9gG-Fw-3Kh" id="bFn-B7-e8R"/>
                 <outlet property="bodyWeightTxt" destination="6lM-ej-AAZ" id="0Ih-Nb-JvX"/>
                 <outlet property="datelbl" destination="d5T-eK-4wy" id="g7v-rq-DE9"/>
                 <outlet property="fatTxt" destination="tvQ-dy-cPp" id="y72-58-yRO"/>
@@ -1053,6 +1054,7 @@
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="Tbr-2Q-03h" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="1UM-aa-TvY"/>
                 <constraint firstItem="XjE-9E-tfb" firstAttribute="top" secondItem="9gG-Fw-3Kh" secondAttribute="bottom" constant="10" id="1rT-zi-Sqp"/>
@@ -1068,6 +1070,7 @@
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="44.5" y="54"/>
         </view>
+        <tapGestureRecognizer id="h0M-GJ-Mgd"/>
     </objects>
     <resources>
         <image name="Cancel_BlackColor" width="338" height="338"/>

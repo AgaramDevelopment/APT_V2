@@ -309,6 +309,7 @@
 //            }
             //CGFloat Yposition = objWell.filterContainerView.frame.origin.y;
             objWell.view.frame = CGRectMake(0, -70, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+70);
+            
             [view addSubview:objWell.view];
         }
 
@@ -323,7 +324,10 @@
 - (void)swipeViewDidScroll:(SwipeView *)swipeView
 {
     selectedIndex = [NSIndexPath indexPathForItem:swipeView.currentItemIndex inSection:0];
-    
+   if(selectedIndex ==1)
+   {
+       [self.swipeView setScrollEnabled:NO];
+   }
     [self.Titlecollview reloadData];
    
 }

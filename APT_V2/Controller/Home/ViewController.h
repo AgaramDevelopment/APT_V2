@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblRangeValue;
 @property (weak, nonatomic) IBOutlet UILabel *lblRangeName;
 @property (weak, nonatomic) IBOutlet UILabel *lblUnitValue;
+@property (weak, nonatomic) IBOutlet UILabel *lblUnitName;
 @property (weak, nonatomic) IBOutlet UIButton *btnIgnore;
 @property (weak, nonatomic) IBOutlet UITextField *txtRemarks;
 @property (weak, nonatomic) IBOutlet UIView *Shadowview;

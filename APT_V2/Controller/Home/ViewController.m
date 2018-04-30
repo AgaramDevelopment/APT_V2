@@ -65,7 +65,7 @@
 
 @synthesize assCollection,lblRangeName,lblRangeValue;
 
-@synthesize lblAssessmentName,lblUnitValue;
+@synthesize lblAssessmentName,lblUnitValue,lblUnitName;
 
 @synthesize txtRemarks,popupVC,lblNOData;
 
@@ -599,7 +599,9 @@
     NSMutableArray* array = [NSMutableArray new];
     
     currentlySelectedTestType = indexPath;
-    
+//    [lblRangeValue setHidden:YES];
+//    [lblUnitValue setHidden:YES];
+
     NSString* ignore_str = @"";
     if ([SCREEN_CODE_Rom isEqualToString:testCode]) {
         
@@ -613,9 +615,9 @@
             CollectionItem = 1;
         }
         
-        //        lblRangeValue.text = [NSString stringWithFormat:@"%@ - %@",[[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romMinimumRange"],[currentIndexArray.firstObject valueForKey:@"MaximumRange"]];
+        lblRangeName.text = @"Normal Range";
         lblRangeValue.text = [NSString stringWithFormat:@"%@ - %@",[[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"MinimumRange"],[currentIndexArray.firstObject valueForKey:@"MaximumRange"]];
-        
+        lblUnitName.text =@"Unit";
         lblUnitValue.text = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"UnitName"];
     }
     else if ([SCREEN_CODE_SPECIAL isEqualToString:testCode]) {
@@ -630,6 +632,12 @@
             CollectionItem = 1;
         }
         
+        lblRangeName.text = @"Region";
+        lblRangeValue.text = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"Region"];
+        
+        lblUnitName.text = @"Unit";
+        lblUnitValue.text = @"-";
+
         
     }
     else if ([SCREEN_CODE_MMT isEqualToString:testCode]) {
@@ -637,17 +645,35 @@
         
         CollectionItem = 1;
         
+        lblRangeName.text = @"Muscle";
+        lblRangeValue.text = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"Muscle"];
+        
+        lblUnitName.text = @"Motion";
+        lblUnitValue.text = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"Motion"];
+
+        
     }
     else if ([SCREEN_CODE_GAIT isEqualToString:testCode]) {
         
         
         CollectionItem = 1;
+        lblRangeName.text = @"Plane";
+        lblRangeValue.text = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"Plane"];
+        
+        lblUnitName.text = @"Unit";
+        lblUnitValue.text = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"UnitName"];
+
         
     }
     else if ([SCREEN_CODE_POSTURE isEqualToString:testCode]) {
         
         CollectionItem = 1;
+        lblRangeName.text = @"Region";
+        lblRangeValue.text = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"Region"];
         
+        lblUnitName.text = @"Unit";
+        lblUnitValue.text = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"UnitName"];
+
     }
     else if ([SCREEN_CODE_S_C isEqualToString:testCode]) {
         
@@ -655,8 +681,16 @@
         NSString* romSideName = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"SideName"];
         CollectionItem = [[[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"Nooftrials"] integerValue];
         
-        lblRangeValue.text = [NSString stringWithFormat:@"%@ - %@",[[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"romMinimumRange"],[currentIndexArray.firstObject valueForKey:@"romMaximumRange"]];
-        lblUnitValue.text = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"UnitsName"];
+
+//        lblRangeValue.text = [NSString stringWithFormat:@"%@ - %@",[[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"MinimumRange"],[currentIndexArray.firstObject valueForKey:@"MaximumRange"]];
+//        lblUnitValue.text = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"UnitsName"];
+        
+        lblRangeName.text = @"NO of trials";
+        lblRangeValue.text = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"Nooftrials"];
+        
+        lblUnitName.text = @"Unit";
+        lblUnitValue.text = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"UnitName"];
+
         
         
     }
@@ -664,7 +698,18 @@
         
         CollectionItem = 1;
         
+        lblRangeName.text = @"Normal Range";
+        lblRangeValue.text = @"-";
+        
+        lblUnitName.text = @"Unit";
+        lblUnitValue.text = @"-";
+
+        
     }
+    
+//    lblRangeValue.text = [NSString stringWithFormat:@"%@ - %@",[[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"MinimumRange"],[currentIndexArray.firstObject valueForKey:@"MaximumRange"]];
+//    lblUnitValue.text = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"UnitName"];
+
     
     ignore_str = [[currentIndexArray objectAtIndex:indexPath.row] valueForKey:@"Ignore"];
     

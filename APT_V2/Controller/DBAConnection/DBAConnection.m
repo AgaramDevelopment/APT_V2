@@ -913,7 +913,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
                     [dic setObject:Units forKey:@"Unit"];
                     [dic setObject:Scoreevaluation forKey:@"ScoreEvaluation"];
                     [dic setObject:RecordStatus forKey:@"RecordStatus"];
-                    [dic setObject:UnitsName forKey:@"UnitsName"];
+                    [dic setObject:UnitsName forKey:@"UnitName"];
                     [dic setObject:CreatedBy forKey:@"CreatedBy"];
                     [dic setObject:CreatedDate forKey:@"CreatedDate"];
                     [dic setObject:ModifiedBy forKey:@"ModifiedBy"];

@@ -12,12 +12,15 @@
 #import "Config.h"
 #import "WellnessTrainingBowlingVC.h"
 #import "SWRevealViewController.h"
+#import "SwipeView.h"
+#import "TabHomeVC.h"
 
 
 @interface AddWellnessRatingVC ()
 {
     WebService *objWebservice;
     WellnessTrainingBowlingVC *objWell;
+    TabHomeVC *tab;
     NSString *fetchedDate;
     NSString *FetchedWorkLoadCode;
 float num1;
@@ -77,7 +80,6 @@ NSString *metaSubCode4;
     
     NSString * actualDate = [dateFormat stringFromDate:matchdate];
     self.datelbl.text = actualDate;
-    
     [self metacodeWebservice];
     
    
@@ -85,19 +87,16 @@ NSString *metaSubCode4;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    
     SWRevealViewController *revealController = [self revealViewController];
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
-    
 }
 
 -(IBAction)sliderDidChange:(RGSColorSlider *)sender{
     //self.colorView.backgroundColor = sender.color;
-    
     sender.showPreview = NO;
-
 }
+
 
 - (CGRect)trackRectForBounds:(CGRect)bounds {
     CGRect rect = CGRectMake(0, 0, 100, 30);//change it to any size you want
@@ -110,7 +109,10 @@ NSString *metaSubCode4;
     
 }
 
-
+- (IBAction)sliderGesture:(id)sender {
+    
+    [tab.swipeView setScrollEnabled:NO];
+}
 -(void)DisplaydatePicker
 {
     if(datePicker!= nil)

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RGSColorSlider.h"
+#import "StepSlider.h"
 @protocol AddWelnessDelegate <NSObject>
 
 -(void)closeWellnessSource;
@@ -24,9 +25,12 @@
 @property (strong, nonatomic) IBOutlet  RGSColorSlider *ColorSlider2;
 @property (strong, nonatomic) IBOutlet  RGSColorSlider *ColorSlider3;
 @property (strong, nonatomic) IBOutlet  RGSColorSlider *ColorSlider4;
+
+
 - (IBAction)sliderDidChange:(RGSColorSlider *)sender;
 
 @property (strong,nonatomic) IBOutlet UIView * view_datepicker;
+@property (strong,nonatomic) IBOutlet UIView * ViewMain;
 
 @property (strong,nonatomic) IBOutlet UIButton * DateBtn;
 @property (strong,nonatomic) IBOutlet UILabel * datelbl;

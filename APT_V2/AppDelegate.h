@@ -60,6 +60,7 @@
 - (void)scheduleLocalNotifications:(NSArray *)array;
 - (void)scheduleLocalNotificationImage;
 - (void)scheduleLocalNotificationVideo;
+-(void)PushWebservice :(NSMutableDictionary *)reqdic;
 
 
 @end

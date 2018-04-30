@@ -47,6 +47,11 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>StepSlider.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
 		<key>drCharts.xcscheme</key>
 		<dict>
 			<key>orderHint</key>

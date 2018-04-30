@@ -1402,7 +1402,7 @@
             NSMutableArray *reqList = [[NSMutableArray alloc]init];
             reqList = [dic valueForKey:@"LstAssessmententry"];
             if(reqList.count>0 ){
-                [self PushWebservice:dic];
+                [appDel PushWebservice:dic];
             }
     }];
     

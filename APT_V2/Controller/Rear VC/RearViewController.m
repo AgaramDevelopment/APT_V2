@@ -48,12 +48,25 @@
     if(![AppCommon isCoach])
     {
         arrItems = [NSArray new];
-        arrItems = @[@"Home",@"Planner",@"Stats",@"Match Center",@"Food Diary",@"Logout"];
+//        arrItems = @[@"Home",@"Planner",@"Stats",@"Match Center",@"Food Diary",@"Logout"];
+        arrItems = @[@{@"name":@"Home",@"img":@"APT_Home"},
+                     @{@"name":@"Planner",@"img":@"APT_Planner"},
+                     @{@"name":@"Stats",@"img":@"APT_Stats"},
+                     @{@"name":@"Match Center",@"img":@"APT_ Match centre"},
+                     @{@"name":@"Food Diary",@"img":@"APT_Food Dairy"},
+                     @{@"name":@"Logout",@"img":@"APT_Logout"}];
     }
     else
     {
         arrItems = [NSArray new];
-        arrItems = @[@"Team",@"Planner",@"Match Center",@"Sync",@"Logout"];
+//        arrItems = @[@"Team",@"Planner",@"Assessment",@"Match Center",@"Sync",@"Logout"];
+        arrItems = @[@{@"name":@"Team",@"img":@"APT_Team"},
+                     @{@"name":@"Planner",@"img":@"APT_Planner"},
+                     @{@"name":@"Assessment",@"img":@"APT_Assessment"},
+                     @{@"name":@"Match Center",@"img":@"APT_ Match centre"},
+                     @{@"name":@"Sync",@"img":@"APT_Sync"},
+                     @{@"name":@"Logout",@"img":@"APT_Logout"}];
+
     }
     
     [self.RearTableView reloadData];
@@ -76,6 +89,10 @@
  */
 #pragma mark - UITableView Data Source
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return (IS_IPAD ? 60.0 : 50.0);
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return arrItems.count;
@@ -86,24 +103,22 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if (nil == cell)
-        {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
-        }
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
     
-    cell.textLabel.text = arrItems[indexPath.row];
+    cell.textLabel.text = [[arrItems objectAtIndex:indexPath.row] valueForKey:@"name"];
+    cell.imageView.image = [UIImage imageNamed:[[arrItems objectAtIndex:indexPath.row] valueForKey:@"img"]];
     
     if (indexPath == PreviouslySelectedIndex) {
         cell.textLabel.textColor = [UIColor cyanColor];
-            //        cell.textLabel.font = [UIFont boldSystemFontOfSize:(IS_IPAD ? 17 : 15)];
         [cell.textLabel setFont:[UIFont fontWithName:@"Montserrat light" size:(IS_IPAD ? 19 : 17)]];
     }
-    else
-        {
+    else{
         cell.textLabel.textColor = [UIColor lightGrayColor];
-            //        cell.textLabel.font = [UIFont boldSystemFontOfSize:(IS_IPAD ? 15 : 12)];
         [cell.textLabel setFont:[UIFont fontWithName:@"Montserrat Regular" size:(IS_IPAD ? 17 : 15)]];
         
-        }
+    }
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
     
@@ -184,18 +199,18 @@
             newFrontController= [PlannerVC new];
             
         }
-//        else if(indexPath.row == 2) // Assessment
-//        {
-//            newFrontController= [ViewController new];
-//
-//        }
+        else if(indexPath.row == 2) // Assessment
+        {
+            newFrontController= [ViewController new];
+
+        }
         
-        else if(indexPath.row == 2)
+        else if(indexPath.row == 3)
         {
             newFrontController= [MatchCenterTBC new];
             
         }
-        else if(indexPath.row == 3)
+        else if(indexPath.row == 4)
         {
             DBMANAGERSYNC * objCaptransactions = [DBMANAGERSYNC sharedManager];
             
@@ -235,19 +250,6 @@
     [revealController pushFrontViewController:navigationController animated:YES];
     PreviouslySelectedIndex = indexPath;
     
-}
-
--(void)pushView:(UIViewController*)VC
-{
-    for (UIViewController* VC in appDel.frontNavigationController) {
-        
-    }
-    
-    
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:VC];
-    [navigationController setNavigationBarHidden:YES];
-    [appDel.revealViewController pushFrontViewController:navigationController animated:YES];
-
 }
 
 -(void)actionLogOut

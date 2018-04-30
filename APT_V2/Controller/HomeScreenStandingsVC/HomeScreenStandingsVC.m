@@ -62,7 +62,16 @@
     // number of row in the section, I assume there is only 1 row
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-
+    if (resultArray.count > 10) {
+        self.tblHeight.constant = 45* 10;
+    }
+    else if (resultArray.count > 0)
+    {
+        self.tblHeight.constant = 45* resultArray.count;
+    }
+    
+    [self.standingsTableView updateConstraintsIfNeeded];
+    
     return resultArray.count;
 }
     // the cell will be returned to the tableView

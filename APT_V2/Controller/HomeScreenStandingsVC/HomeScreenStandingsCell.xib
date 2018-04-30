@@ -48,7 +48,7 @@
                         </variation>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Won" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LrW-uE-Wwp">
-                        <rect key="frame" x="120" y="7" width="40" height="20"/>
+                        <rect key="frame" x="120" y="7" width="40.5" height="20"/>
                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                         <nil key="highlightedColor"/>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -56,7 +56,7 @@
                         </variation>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lost" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="7CH-5j-eBT">
-                        <rect key="frame" x="160" y="7" width="40" height="20"/>
+                        <rect key="frame" x="160.5" y="7" width="39.5" height="20"/>
                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                         <nil key="highlightedColor"/>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -71,7 +71,7 @@
                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="rx7-af-EDo">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NRR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="rx7-af-EDo">
                         <rect key="frame" x="240" y="7" width="40" height="20"/>
                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                         <nil key="highlightedColor"/>
@@ -79,7 +79,7 @@
                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NRR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fLW-6C-J84">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fLW-6C-J84">
                         <rect key="frame" x="200" y="7" width="40" height="20"/>
                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                         <nil key="highlightedColor"/>
@@ -126,9 +126,9 @@
             <connections>
                 <outlet property="NRLbl" destination="zCw-4Y-sQ1" id="XRA-6Q-hwE"/>
                 <outlet property="lostLbl" destination="7CH-5j-eBT" id="Nc9-5u-O9Y"/>
-                <outlet property="nrrLbl" destination="fLW-6C-J84" id="UBZ-33-UGi"/>
+                <outlet property="nrrLbl" destination="rx7-af-EDo" id="9tq-2G-Tby"/>
                 <outlet property="playedLbl" destination="DlC-wL-r2g" id="J6g-VS-sFl"/>
-                <outlet property="pointsLbl" destination="rx7-af-EDo" id="qUN-QN-Tea"/>
+                <outlet property="pointsLbl" destination="fLW-6C-J84" id="jKc-ba-6ub"/>
                 <outlet property="rankLbl" destination="o1D-Wc-ArL" id="zU9-4y-mNc"/>
                 <outlet property="teamLbl" destination="nwt-V4-TBV" id="K1o-fv-936"/>
                 <outlet property="wonLbl" destination="LrW-uE-Wwp" id="Mh4-jd-VOY"/>

@@ -19,6 +19,7 @@
             <connections>
                 <outlet property="shadowView" destination="y7r-lK-GyZ" id="hSl-FF-xFt"/>
                 <outlet property="standingsTableView" destination="Fzp-N5-uGo" id="pNu-gx-eQt"/>
+                <outlet property="tblHeight" destination="gMh-oZ-kbj" id="Lrr-Qd-Lph"/>
                 <outlet property="view" destination="m5c-ya-d0x" id="snJ-G1-C2i"/>
             </connections>
         </placeholder>
@@ -90,13 +91,13 @@
                             <rect key="frame" x="5" y="45" width="365" height="532"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y7r-lK-GyZ">
-                                    <rect key="frame" x="8" y="8" width="349" height="516"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="365" height="524"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mSD-1Z-0aV">
-                                            <rect key="frame" x="0.0" y="0.0" width="349" height="25"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="365" height="25"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="Pos" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="0zG-yA-SRl">
-                                                    <rect key="frame" x="0.0" y="0.0" width="43.5" height="25"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="45.5" height="25"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -105,7 +106,7 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="X64-ug-N4J">
-                                                    <rect key="frame" x="43.5" y="0.0" width="43.5" height="25"/>
+                                                    <rect key="frame" x="45.5" y="0.0" width="45.5" height="25"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -114,7 +115,7 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mat" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="hxH-oK-gOZ">
-                                                    <rect key="frame" x="87" y="0.0" width="44" height="25"/>
+                                                    <rect key="frame" x="91" y="0.0" width="46" height="25"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -123,7 +124,7 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Won" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="rse-t8-6fj">
-                                                    <rect key="frame" x="131" y="0.0" width="44" height="25"/>
+                                                    <rect key="frame" x="137" y="0.0" width="46" height="25"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -132,7 +133,7 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lost" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="3ed-tO-1Ax">
-                                                    <rect key="frame" x="175" y="0.0" width="43.5" height="25"/>
+                                                    <rect key="frame" x="183" y="0.0" width="45.5" height="25"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -141,7 +142,7 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="N/R" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="evv-yx-8td">
-                                                    <rect key="frame" x="305.5" y="0.0" width="43.5" height="25"/>
+                                                    <rect key="frame" x="319.5" y="0.0" width="45.5" height="25"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -150,7 +151,7 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="ADd-Kh-YBS">
-                                                    <rect key="frame" x="218.5" y="0.0" width="43.5" height="25"/>
+                                                    <rect key="frame" x="228.5" y="0.0" width="45.5" height="25"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -159,7 +160,7 @@
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NRR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="yp1-oc-Otb">
-                                                    <rect key="frame" x="262" y="0.0" width="43.5" height="25"/>
+                                                    <rect key="frame" x="274" y="0.0" width="45.5" height="25"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -208,35 +209,35 @@
                                             </constraints>
                                         </view>
                                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Fzp-N5-uGo">
-                                            <rect key="frame" x="0.0" y="25" width="349" height="491"/>
+                                            <rect key="frame" x="0.0" y="25" width="365" height="200"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="200" id="gMh-oZ-kbj"/>
+                                            </constraints>
                                             <connections>
                                                 <outlet property="dataSource" destination="-1" id="J6U-Lu-DgC"/>
                                                 <outlet property="delegate" destination="-1" id="iah-gc-FcL"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="mSD-1Z-0aV" secondAttribute="trailing" id="3Ta-gb-f5L"/>
                                         <constraint firstItem="Fzp-N5-uGo" firstAttribute="top" secondItem="mSD-1Z-0aV" secondAttribute="bottom" id="EBw-6m-3Bg"/>
                                         <constraint firstAttribute="trailing" secondItem="Fzp-N5-uGo" secondAttribute="trailing" id="Ggc-Rc-TDW"/>
                                         <constraint firstItem="mSD-1Z-0aV" firstAttribute="top" secondItem="y7r-lK-GyZ" secondAttribute="top" id="XBY-Zv-PRx"/>
                                         <constraint firstItem="Fzp-N5-uGo" firstAttribute="leading" secondItem="y7r-lK-GyZ" secondAttribute="leading" id="jq4-E8-BYN"/>
-                                        <constraint firstAttribute="bottom" secondItem="Fzp-N5-uGo" secondAttribute="bottom" id="lTa-vA-pdA"/>
                                         <constraint firstItem="mSD-1Z-0aV" firstAttribute="leading" secondItem="y7r-lK-GyZ" secondAttribute="leading" id="rIx-I9-zJV"/>
                                     </constraints>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="y7r-lK-GyZ" firstAttribute="top" secondItem="dc0-QV-DPn" secondAttribute="top" constant="8" id="0ZI-X4-TIZ">
+                                <constraint firstItem="y7r-lK-GyZ" firstAttribute="top" secondItem="dc0-QV-DPn" secondAttribute="top" id="0ZI-X4-TIZ">
                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                 </constraint>
-                                <constraint firstItem="y7r-lK-GyZ" firstAttribute="leading" secondItem="dc0-QV-DPn" secondAttribute="leading" constant="8" id="G1e-hK-k5P">
+                                <constraint firstItem="y7r-lK-GyZ" firstAttribute="leading" secondItem="dc0-QV-DPn" secondAttribute="leading" id="G1e-hK-k5P">
                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                 </constraint>
-                                <constraint firstAttribute="trailing" secondItem="y7r-lK-GyZ" secondAttribute="trailing" constant="8" id="OGX-o5-hKz">
+                                <constraint firstAttribute="trailing" secondItem="y7r-lK-GyZ" secondAttribute="trailing" id="OGX-o5-hKz">
                                     <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                 </constraint>
                                 <constraint firstAttribute="bottom" secondItem="y7r-lK-GyZ" secondAttribute="bottom" constant="8" id="mZH-O6-Eak">

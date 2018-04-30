@@ -222,7 +222,7 @@
                     </connections>
                 </tableView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is No Assessment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9k-bb-RKJ">
-                    <rect key="frame" x="62.5" y="351" width="195.5" height="21"/>
+                    <rect key="frame" x="63" y="351" width="195.5" height="21"/>
                     <fontDescription key="fontDescription" name="Montserrat-Thin" family="Montserrat" pointSize="17"/>
                     <color key="textColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>

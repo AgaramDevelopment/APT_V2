@@ -27,6 +27,9 @@
     NSString *selectedDate;
     NSMutableArray *mealsTitleArray;
     NSString  *foodDiaryCode;
+    NSMutableArray *mealLocationArray;
+    NSMutableArray *foodArray;
+    NSMutableArray *mealCodeArray;
 }
 
 @end
@@ -77,6 +80,7 @@
     self.dateTF.inputAccessoryView = toolbar;
     self.timeTF.inputAccessoryView = toolbar;
     
+    mealCodeArray = [NSMutableArray new];
         //Fetch Service Call
     [self foodDiaryFetchDetailsPostMethodWebService];
 }
@@ -319,7 +323,21 @@
     }  else {
         
         if ([self.dateTF.text isEqualToString:selectedDate]) {
-            [self foodDiaryUpdatePostMethodWebService];
+            
+            for (id key in mealLocationArray) {
+                for (NSString *mealCode in mealCodeArray) {
+                
+                    if ([mealCode isEqualToString:[key valueForKey:@"MEALCODE"]]) {
+                        foodArray = [NSMutableArray new];
+                        NSMutableDictionary *foodDescriptionDict = [NSMutableDictionary new];
+                        [foodDescriptionDict setObject:[key valueForKey:@"FOOD"] forKey:@"FOOD"];
+                        [foodDescriptionDict setObject:[key valueForKey:@"FOODQUANTITY"] forKey:@"FOODQUANTITY"];
+                        [foodArray addObject:foodDescriptionDict];
+                        [self foodDiaryUpdatePostMethodWebService];
+                    }
+                }
+            }
+            [mealCodeArray removeAllObjects];
         } else {
             [self foodDiaryInsertPostMethodWebService];
         }
@@ -452,7 +470,32 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
         NSLog(@"foodDescriptionArray1:%@", foodDescriptionArray);
+        NSString *mealCode = [[mealLocationArray objectAtIndex:indexPath.row] valueForKey:@"MEALCODE"];
+        [mealCodeArray addObject:mealCode];
+        NSLog(@"mealCode:%@", mealCode);
+        
         [foodDescriptionArray removeObjectAtIndex:indexPath.row];
+        [mealLocationArray removeObjectAtIndex:indexPath.row];
+        
+//        foodArray = [NSMutableArray new];
+//        for (id key in mealLocationArray) {
+//            if ([mealCode isEqualToString:[key valueForKey:@"MEALCODE"]]) {
+//                NSMutableDictionary *foodDescriptionDict = [NSMutableDictionary new];
+//                [foodDescriptionDict setObject:[key valueForKey:@"FOOD"] forKey:@"FOOD"];
+//                [foodDescriptionDict setObject:[key valueForKey:@"FOODQUANTITY"] forKey:@"FOODQUANTITY"];
+//                [foodArray addObject:foodDescriptionDict];
+//            }
+//        }
+        
+        /*
+        //Remove MealCode and LocationCode
+        int mealCode = (int)[foodDiaryCodeArray indexOfObject:[[mealLocationArray objectAtIndex:indexPath.row] valueForKey:@"MEALCODE"]];
+        int locationCode = (int)[locationCodeArray indexOfObject:[[mealLocationArray objectAtIndex:indexPath.row] valueForKey:@"LOCATION"]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self setBorderForMealType:mealCode+1];
+            [self setBorderForLocation:locationCode+1];
+        });
+        */
         NSLog(@"foodDescriptionArray2:%@", foodDescriptionArray);
         
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
@@ -576,11 +619,9 @@
         
         if ([[responseObject valueForKey:@"STATUS"] integerValue] == 1) {
             
-                //            NSMutableArray *foodDiarys = [responseObject objectForKey:@"FOODDIARYS"];
-            
             NSMutableArray *foodDiarys = [responseObject objectForKey:@"FOODDIARYS"];
             foodDescriptionArray = [NSMutableArray new];
-            
+            mealLocationArray = [NSMutableArray new];
             if (foodDiarys.count) {
                 for (int i=0; i<foodDiarys.count; i++) {
                     
@@ -588,34 +629,53 @@
                     
                     if ([self.dateTF.text isEqualToString:date]) {
                         
-                        [self.saveOrUpdateBtn setTitle:@"Update" forState:UIControlStateNormal];
                         selectedDate = self.dateTF.text;
-                        
-                        self.timeTF.text = [[foodDiarys objectAtIndex:0] valueForKey:@"STARTTIME"];
-                        foodDiaryCode = [[foodDiarys objectAtIndex:0] valueForKey:@"FOODDIARYCODE"];
-                        
-                        int mealCode = (int)[foodDiaryCodeArray indexOfObject:[[foodDiarys objectAtIndex:0] valueForKey:@"MEALCODE"]];
-                        int locationCode = (int)[locationCodeArray indexOfObject:[[foodDiarys objectAtIndex:0] valueForKey:@"LOCATION"]];
-                        
+                        [self.saveOrUpdateBtn setTitle:@"Update" forState:UIControlStateNormal];
                         NSMutableArray *foodListArray = [[foodDiarys objectAtIndex:i] valueForKey:@"FOODLIST"];
                         
-                        for (id key in foodListArray) {
-                            NSMutableDictionary *foodDescriptionDict = [NSMutableDictionary new];
-                            [foodDescriptionDict setObject:[key valueForKey:@"FOOD"] forKey:@"FOOD"];
-                            [foodDescriptionDict setObject:[key valueForKey:@"FOODQUANTITY"] forKey:@"FOODQUANTITY"];
-                            [foodDescriptionArray addObject:foodDescriptionDict];
+                        if (foodListArray.count) {
+
+                            for (id key in foodListArray) {
+                                
+                                 NSMutableDictionary *mealLocationDict = [NSMutableDictionary new];
+                                
+                                [mealLocationDict setObject:[[foodDiarys objectAtIndex:i] valueForKey:@"STARTTIME"] forKey:@"STARTTIME"];
+                                [mealLocationDict setObject:[[foodDiarys objectAtIndex:i] valueForKey:@"FOODDIARYCODE"] forKey:@"FOODDIARYCODE"];
+                                [mealLocationDict setObject:[[foodDiarys objectAtIndex:i] valueForKey:@"MEALCODE"] forKey:@"MEALCODE"];
+                                [mealLocationDict setObject:[[foodDiarys objectAtIndex:i] valueForKey:@"LOCATION"] forKey:@"LOCATION"];
+                                [mealLocationDict setObject:[key valueForKey:@"FOOD"] forKey:@"FOOD"];
+                                [mealLocationDict setObject:[key valueForKey:@"FOODQUANTITY"] forKey:@"FOODQUANTITY"];
+                                
+                                [mealLocationArray addObject:mealLocationDict];
+                            }
                         }
-                        
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self setBorderForMealType:mealCode+1];
-                            [self setBorderForLocation:locationCode+1];
-                            [self.foodTableView reloadData];
-                        });
                     }
                 }
             }
+            
+            if (mealLocationArray.count) {
+                for (id key in mealLocationArray) {
+                    NSMutableDictionary *foodDescriptionDict = [NSMutableDictionary new];
+                    [foodDescriptionDict setObject:[key valueForKey:@"FOOD"] forKey:@"FOOD"];
+                    [foodDescriptionDict setObject:[key valueForKey:@"FOODQUANTITY"] forKey:@"FOODQUANTITY"];
+                    [foodDescriptionArray addObject:foodDescriptionDict];
+                }
+            }
+            
+            self.timeTF.text = [[mealLocationArray objectAtIndex:0] valueForKey:@"STARTTIME"];
+            foodDiaryCode = [[mealLocationArray objectAtIndex:0] valueForKey:@"FOODDIARYCODE"];
+            int mealCode = (int)[foodDiaryCodeArray indexOfObject:[[mealLocationArray objectAtIndex:0] valueForKey:@"MEALCODE"]];
+            int locationCode = (int)[locationCodeArray indexOfObject:[[mealLocationArray objectAtIndex:0] valueForKey:@"LOCATION"]];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self setBorderForMealType:mealCode+1];
+                [self setBorderForLocation:locationCode+1];
+                [self.foodTableView reloadData];
+            });
+            
         }
         NSLog(@"foodDescriptionArray:%@", foodDescriptionArray);
+        NSLog(@"mealLocationArray:%@", mealLocationArray);
         [AppCommon hideLoading];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -666,8 +726,8 @@
         
         if ([[responseObject valueForKey:@"STATUS"] integerValue] == 1) {
             
-            [self foodDiaryFetchDetailsPostMethodWebService];
             [self altermsg:[responseObject valueForKey:@"MESSAGE"]];
+            [self foodDiaryFetchDetailsPostMethodWebService];
         }
         
         [AppCommon hideLoading];
@@ -711,15 +771,15 @@
     [dic setObject:self.locationTF forKey:@"LOCATION"];
     [dic setObject:foodDiaryCode forKey:@"FOODDIARYCODE"];
         //    [dic setObject:@"Other" forKey:@"LOCATION"];
-    [dic setObject:foodDescriptionArray forKey:@"FOODLIST"];
-    
+//    [dic setObject:foodDescriptionArray forKey:@"FOODLIST"];
+     [dic setObject:foodArray forKey:@"FOODLIST"];
     NSLog(@"parameters : %@",dic);
     [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"response ; %@",responseObject);
         
         if ([[responseObject valueForKey:@"STATUS"] integerValue] == 1) {
-            [self foodDiaryFetchDetailsPostMethodWebService];
             [self altermsg:[responseObject valueForKey:@"MESSAGE"]];
+            [self foodDiaryFetchDetailsPostMethodWebService];
         }
         [AppCommon hideLoading];
         

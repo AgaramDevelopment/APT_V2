@@ -9,6 +9,7 @@
 #import "PlayerDetailViewController.h"
 #import "Header.h"
 #import "InjuryAndIllnessVC.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface PlayerDetailViewController () <ChartViewDelegate, IChartAxisValueFormatter>
 {
@@ -41,7 +42,7 @@
 //    [contentView.bottomAnchor constraintEqualToAnchor:scrollView.bottomAnchor];
 //    contentView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [self customnavigationmethod];
+//    [self customnavigationmethod];
 
 //    [self.txtTestDate setup];
     
@@ -52,12 +53,23 @@
 
 }
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
+
+
 -(void)viewWillAppear:(BOOL)animated
 {
     self.lblAvailability.backgroundColor = self.availableColor;
-    self.lblTeamName.text = [self TeamName];
+   // self.lblTeamName.text = [self TeamName];
     
     NSString* age = [NSString stringWithFormat:@"%@ Years Old",[self.selectedPlayerArray valueForKey:@"Age"]];
+    
+    self.lblTeamName.text = [self checkNull:[self.selectedPlayerArray valueForKey:@"AthleteName"]];
+    
+    
+    [self.imgViewPlayer sd_setImageWithURL:[NSURL URLWithString: [self checkNull:[self.selectedPlayerArray  valueForKey:@"AthletePhoto"]]] placeholderImage:[UIImage imageNamed:@"no-image"]];
     
     self.lblPlayerAge.text = age;
     

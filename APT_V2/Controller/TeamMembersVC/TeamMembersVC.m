@@ -355,7 +355,9 @@
         NSString *UserrefCode = [AppCommon GetuserReference];
 //        NSString *TeamCode = [AppCommon getCurrentTeamCode]; // APT teamcode
 
-        NSString *TeamCode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"APTTeamcode"];
+        //NSString *TeamCode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"APTTeamcode"];
+    
+       NSString *TeamCode = self.teamCode ;
 
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];

@@ -53,7 +53,7 @@
     else
     {
         arrItems = [NSArray new];
-        arrItems = @[@"Team",@"Planner",@"Assessment",@"Match Center",@"Sync",@"Logout"];
+        arrItems = @[@"Team",@"Planner",@"Match Center",@"Sync",@"Logout"];
     }
     
     [self.RearTableView reloadData];
@@ -184,18 +184,18 @@
             newFrontController= [PlannerVC new];
             
         }
-        else if(indexPath.row == 2) // Assessment
-        {
-            newFrontController= [ViewController new];
-            
-        }
+//        else if(indexPath.row == 2) // Assessment
+//        {
+//            newFrontController= [ViewController new];
+//
+//        }
         
-        else if(indexPath.row == 3)
+        else if(indexPath.row == 2)
         {
             newFrontController= [MatchCenterTBC new];
             
         }
-        else if(indexPath.row == 4)
+        else if(indexPath.row == 3)
         {
             DBMANAGERSYNC * objCaptransactions = [DBMANAGERSYNC sharedManager];
             
@@ -203,15 +203,15 @@
             dic = [objCaptransactions AssessmentEntrySyncBackground];
             NSMutableArray *reqList = [[NSMutableArray alloc]init];
             reqList = [dic valueForKey:@"LstAssessmententry"];
-            if(reqList.count>0 ){
+            //if(reqList.count>0 ){
                 
-                [AppCommon showAlertWithMessage:@"Try After few seconds"];
+               // [AppCommon showAlertWithMessage:@"Try After few seconds"];
                 
-            }else {
+           // }else {
                 
                 [self synDataMethod];
                 
-            }
+           // }
             
         }
         else if (indexPath.row == arrItems.count -1)

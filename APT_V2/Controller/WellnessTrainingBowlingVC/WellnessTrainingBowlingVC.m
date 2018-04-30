@@ -18,6 +18,7 @@
 #import "SWRevealViewController.h"
 #import "TrainingLoadUpdateVC.h"
 #import "TrainingPiechart.h"
+#import "TabHomeVC.h"
 
 @interface WellnessTrainingBowlingVC ()<ChartViewDelegate,AddWelnessDelegate,AddTraingDelegate>
 {
@@ -28,6 +29,7 @@
     
     TrainingLoadGraphVC *objTrGraph;
     TrainingPiechart *objpie;
+    TabHomeVC *Tab;
     
 //    float num1;
 //    float num2;
@@ -110,14 +112,14 @@
     
     [self.BowlingDailyBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
     
-    
+    [self setTotalScroll];
     //traing load
     
     isToday =NO;
     isYesterday = NO;
     
-    isWellnessExpand =NO;
-    isTraingLoadExpand = NO;
+    //isWellnessExpand =NO;
+    //isTraingLoadExpand = NO;
 //    [self customnavigationmethod];
     
 }
@@ -136,14 +138,17 @@
     SWRevealViewController *revealController = [self revealViewController];
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
-    self.topviewHeight.constant = 270;
-    self.traingViewHeight.constant = 350;
+     [self setTotalScroll];
+    [self.view updateConstraintsIfNeeded];
     
 }
 
 - (void)viewWillLayoutSubviews {
+    
+    
     [super viewWillLayoutSubviews];
     [self customnavigationmethod];
+    
 }
 
 -(void)customnavigationmethod
@@ -253,6 +258,7 @@
     [self.topView addSubview:objWell.view];
     self.topviewHeight.constant = 578;
     [self setTotalScroll];
+    [self.view updateConstraintsIfNeeded];
     
 }
 

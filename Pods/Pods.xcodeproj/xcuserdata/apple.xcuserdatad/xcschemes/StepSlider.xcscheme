@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '22498736B2FFF83F130FAA7818D0BD50'
-               BlueprintName = 'SDWebImage'
+               BlueprintIdentifier = '8D170645CD046C2499086C0A9491BC0C'
+               BlueprintName = 'StepSlider'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SDWebImage.framework'>
+               BuildableName = 'StepSlider.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

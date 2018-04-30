@@ -902,7 +902,6 @@
 {
   // [COMMON ShowsideMenuView];
 }
-
 -(void)didSelectEventOfCell:(NSDate *)selectedDate
 {
     NSLog(@"FINAL DATE %@",selectedDate);

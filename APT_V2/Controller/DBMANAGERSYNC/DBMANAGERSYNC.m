@@ -3435,7 +3435,6 @@ static dispatch_once_t onceToken;
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
                     return YES;
-                    
                 }
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);

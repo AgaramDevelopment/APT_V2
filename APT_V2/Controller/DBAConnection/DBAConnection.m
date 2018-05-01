@@ -127,9 +127,9 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         if(retVal ==0){
     
 //            (CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)
-            NSString *query=[NSString stringWithFormat:@"SELECT TESTCODE, TESTNAME FROM ASSESSMENTTESTMASTER WHERE CLIENTCODE = '%@' AND MODULECODE = '%@' AND ASSESSMENTCODE = '%@'",clientCode,moduleCode,AssessmentCode];
+//            NSString *query=[NSString stringWithFormat:@"SELECT TESTCODE, TESTNAME FROM ASSESSMENTTESTMASTER WHERE CLIENTCODE = '%@' AND MODULECODE = '%@' AND ASSESSMENTCODE = '%@'",clientCode,moduleCode,AssessmentCode];
             
-//            NSString *query=[NSString stringWithFormat:@"SELECT TESTCODE, TESTNAME FROM ASSESSMENTTESTMASTER WHERE CLIENTCODE = '%@' AND MODULECODE = '%@' AND ASSESSMENTCODE = '%@' AND CREATEDDATE = '%@'",clientCode,moduleCode,AssessmentCode,SelectedDate];
+            NSString *query=[NSString stringWithFormat:@"SELECT TESTCODE, TESTNAME FROM ASSESSMENTTESTMASTER WHERE CLIENTCODE = '%@' AND MODULECODE = '%@' AND ASSESSMENTCODE = '%@' AND CREATEDDATE = '%@'",clientCode,moduleCode,AssessmentCode,SelectedDate];
 
             NSLog(@"%@",query);
             stmt=[query UTF8String];

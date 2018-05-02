@@ -71,6 +71,9 @@
     
    // isToday =NO;
    // isYesterday = NO;
+    
+    [self samplePieChart];
+    [self FetchWebservice];
 
 }
 
@@ -111,8 +114,7 @@
     self.todayView.layer.borderColor = [UIColor whiteColor].CGColor;
     self.todayView.clipsToBounds = true;
     
-    [self samplePieChart];
-    [self FetchWebservice];
+    
     
 }
 
@@ -414,7 +416,18 @@
 {
     [AppCommon showLoading ];
     
-    NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+   // NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    
+    NSString *playerCode;
+    if([AppCommon isCoach])
+    {
+        
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    }
+    else
+    {
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    }
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     NSDate *matchdate = [NSDate date];

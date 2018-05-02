@@ -96,9 +96,7 @@
     self.traingViewHeight.constant = 350;
     
     objWebservice = [[WebService alloc]init];
-    objtraing = [[TrainingLoadVC alloc] initWithNibName:@"TrainingLoadVC" bundle:nil];
-    objtraing.view.frame = CGRectMake(0,10, self.trainingview.bounds.size.width, self.trainingview.bounds.size.height);
-    [self.trainingview addSubview:objtraing.view];
+    
     
 //        objpie = [[TrainingPiechart alloc] initWithNibName:@"TrainingPiechart" bundle:nil];
 //        objpie.view.frame = CGRectMake(0,10, self.trainingview.bounds.size.width, self.trainingview.bounds.size.height);
@@ -121,6 +119,11 @@
     //isWellnessExpand =NO;
     //isTraingLoadExpand = NO;
 //    [self customnavigationmethod];
+    
+    
+    objtraing = [[TrainingLoadVC alloc] initWithNibName:@"TrainingLoadVC" bundle:nil];
+    objtraing.view.frame = CGRectMake(0,10, self.trainingview.bounds.size.width, self.trainingview.bounds.size.height);
+    [self.trainingview addSubview:objtraing.view];
     
 }
 
@@ -352,7 +355,17 @@
 {
     [AppCommon showLoading ];
     
-    NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    NSString *playerCode;
+    if([AppCommon isCoach])
+    {
+        
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    }
+    else
+    {
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    }
+   // NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     NSDate *matchdate = [NSDate date];
@@ -548,7 +561,17 @@
 {
     [AppCommon showLoading ];
     
-    NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    NSString *playerCode;
+    if([AppCommon isCoach])
+    {
+        
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    }
+    else
+    {
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    }
     NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     
     objWebservice = [[WebService alloc]init];
@@ -842,7 +865,18 @@
 {
     [AppCommon showLoading ];
     
-    NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    
+    NSString *playerCode;
+    if([AppCommon isCoach])
+    {
+        
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    }
+    else
+    {
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    }
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     NSDate *matchdate = [NSDate date];

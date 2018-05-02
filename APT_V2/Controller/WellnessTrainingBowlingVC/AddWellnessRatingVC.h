@@ -25,6 +25,7 @@
 @property (strong, nonatomic) IBOutlet  RGSColorSlider *ColorSlider2;
 @property (strong, nonatomic) IBOutlet  RGSColorSlider *ColorSlider3;
 @property (strong, nonatomic) IBOutlet  RGSColorSlider *ColorSlider4;
+@property (strong, nonatomic) IBOutlet  StepSlider *step1;
 
 
 - (IBAction)sliderDidChange:(RGSColorSlider *)sender;

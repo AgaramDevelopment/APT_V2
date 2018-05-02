@@ -18,6 +18,7 @@
 #import "ReportsVC.h"
 #import "PlannerVC.h"
 #import "RearTableViewCell.h"
+#import "ChangePasswordVC.h"
 
 @interface RearViewController ()
 {
@@ -27,26 +28,29 @@
 @end
 
 @implementation RearViewController
-@synthesize arrItems,userImageView;
+@synthesize arrItems,userImageView,lblimgBackground;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    
     PreviouslySelectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];
 
     userImageView.layer.cornerRadius = userImageView.frame.size.height/2;
+//    userImageView.layer.borderWidth = 2.0;
+//    userImageView.layer.borderColor = [UIColor colorWithRed:37.0/255.0 green:176.0/255.0 blue:240.0/255.0 alpha:1.0].CGColor;
+//    userImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     userImageView.layer.masksToBounds = YES;
     
-//    userImageView.layer.masksToBounds = NO;
-    userImageView.layer.shadowColor = [UIColor blackColor].CGColor;
-    userImageView.layer.shadowOffset = CGSizeZero;
-    userImageView.layer.shadowRadius = 10.0f;
-    userImageView.layer.shadowOpacity = 1.0f;
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:lblimgBackground.bounds byRoundingCorners:(UIRectCornerTopLeft | UIRectCornerBottomLeft) cornerRadii:lblimgBackground.frame.size];
 
-    
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = lblimgBackground.bounds;
+    maskLayer.path  = maskPath.CGPath;
+    userImageView.layer.mask = maskLayer;
+
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
@@ -62,6 +66,7 @@
                      @{@"name":@"Stats",@"img":@"APT_Stats"},
                      @{@"name":@"Match Center",@"img":@"APT_ Match centre"},
                      @{@"name":@"Food Diary",@"img":@"APT_Food Dairy"},
+                     @{@"name":@"Change Password",@"img":@"APT_Change Password"},
                      @{@"name":@"Logout",@"img":@"APT_Logout"}];
     }
     else
@@ -73,6 +78,7 @@
                      @{@"name":@"Assessment",@"img":@"APT_Assessment"},
                      @{@"name":@"Match Center",@"img":@"APT_ Match centre"},
                      @{@"name":@"Sync",@"img":@"APT_Sync"},
+                     @{@"name":@"Change Password",@"img":@"APT_Change Password"},
                      @{@"name":@"Logout",@"img":@"APT_Logout"}];
 
     }
@@ -192,6 +198,11 @@
             newFrontController= [FoodDiaryVC new];
             
         }
+        else if(indexPath.row == 5)
+        {
+            newFrontController= [ChangePasswordVC new];
+        }
+
         else if (indexPath.row == arrItems.count -1)
         {
             [self actionLogOut];
@@ -207,17 +218,16 @@
             newFrontController= [TeamsVC new];
             
         }
-        else if(indexPath.row == 1) // Assessment
+        else if(indexPath.row == 1)
         {
             newFrontController= [PlannerVC new];
             
         }
-        else if(indexPath.row == 2) // Assessment
+        else if(indexPath.row == 2)
         {
             newFrontController= [ViewController new];
 
         }
-        
         else if(indexPath.row == 3)
         {
             newFrontController= [MatchCenterTBC new];
@@ -226,22 +236,19 @@
         else if(indexPath.row == 4)
         {
             DBMANAGERSYNC * objCaptransactions = [DBMANAGERSYNC sharedManager];
-            
             NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
             dic = [objCaptransactions AssessmentEntrySyncBackground];
             NSMutableArray *reqList = [[NSMutableArray alloc]init];
             reqList = [dic valueForKey:@"LstAssessmententry"];
-            //if(reqList.count>0 ){
-                
-               // [AppCommon showAlertWithMessage:@"Try After few seconds"];
-                
-           // }else {
-                
-                [self synDataMethod];
-                
-           // }
+            [self synDataMethod];
             
         }
+        else if(indexPath.row == 5)
+        {
+            newFrontController= [ChangePasswordVC new];
+        }
+        
+
         else if (indexPath.row == arrItems.count -1)
         {
             
@@ -343,12 +350,11 @@
                 NSMutableArray * lstSupportStaff = [[NSMutableArray alloc]init];
                 NSMutableArray * lstAssementEntryArray = [[NSMutableArray alloc]init];
                 
-//                if ([AppCommon checkNull:[responseObject valueForKey:@"LstAssessment"]].length > 0) {
-//                    lstAssessment = [responseObject valueForKey:@"LstAssessment"];
-//
-//                }
+                if (![[AppCommon checkNull:[responseObject valueForKey:@"LstAssessment"]] isKindOfClass:[NSString class]]) {
+                    lstAssessment = [responseObject valueForKey:@"LstAssessment"];
+                }
                 
-                lstAssessment = [responseObject valueForKey:@"LstAssessment"];
+//                lstAssessment = [responseObject valueForKey:@"LstAssessment"];
                 lstSession =[responseObject valueForKey:@"LstSession"];
                 lstROM =[responseObject valueForKey:@"LstROM"];
                 lstSpecial =[responseObject valueForKey:@"Lstspecial"];
@@ -368,7 +374,7 @@
                 
                 LstUserrolemap =[responseObject valueForKey:@"LstUserrolemap"];
                 
-                if ([AppCommon checkNull:[responseObject valueForKey:@"LstAssessmententry"]].length > 0) {
+                if (![[AppCommon checkNull:[responseObject valueForKey:@"LstAssessmententry"]] isKindOfClass:[NSString class]]) {
                     AssessmentEntry =[responseObject valueForKey:@"LstAssessmententry"];
                 }
 

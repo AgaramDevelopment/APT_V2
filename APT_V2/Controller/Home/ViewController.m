@@ -38,6 +38,7 @@
     UIImage* check;
     UIImage* uncheck;
     UIColor* red,* orange,* green;
+    BOOL ifSaveBtnClicked;
     
 }
 
@@ -109,11 +110,23 @@
     version = @"1";
     self.objDBconnection = [[DBAConnection alloc]init];
     _ObjSelectTestArray = [NSMutableArray new];
-    _selectedPlayerCode = @"AMR0000010";
+    
+//    [[NSUserDefaults standardUserDefaults] setObject:athletCode forKey:@"SelectedPlayerCode"];
+
+//    _selectedPlayerCode = @"AMR0000010";
+    
     
     check = [UIImage imageNamed:@"check"];
     uncheck = [UIImage imageNamed:@"uncheck"];
     [self customnavigationmethod];
+    ifSaveBtnClicked = NO;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.selectedPlayerCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedPlayerCode"];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -229,12 +242,27 @@
         return;
     }
     
+    
+//    -(NSMutableArray *)AssessmentEntryByDate: (NSString *) AssessmentCode :(NSString *) Usercode:(NSString *) moduleCode:(NSString *) date:(NSString *) Clientcode{
+
+    NSMutableArray * AssessmentEntry =  [self.objDBconnection AssessmentEntryByDate :txtTitle.selectedCode  :usercode :txtModule.selectedCode:currentlySelectedDate:clientCode];
+    
+    NSMutableArray * TestAsseementArray;
     self.objContenArray =[[NSMutableArray alloc]init];
     NSMutableArray * ComArray = [[NSMutableArray alloc]init];
     
-    //    NSMutableArray * TestAsseementArray =  [self.objDBconnection TestByAssessment:clientCode :txtTitle.selectedCode :txtModule.selectedCode]; AssessmentTestType
+    if (AssessmentEntry.count) {
+        
+        TestAsseementArray =  [self.objDBconnection TestByAssessment:clientCode :txtTitle.selectedCode :txtModule.selectedCode:currentlySelectedDate];
+    }
+    else {
+        
+        TestAsseementArray = [self.objDBconnection TestByAssessmentAll:clientCode:txtTitle.selectedCode :txtModule.selectedCode];
+
+    }
     
-    NSMutableArray * TestAsseementArray =  [self.objDBconnection TestByAssessment:clientCode :txtTitle.selectedCode :txtModule.selectedCode:currentlySelectedDate];
+    
+    
     
     
     NSLog(@"%@", TestAsseementArray);
@@ -311,6 +339,21 @@
     
     [tblAssesments reloadData];
     
+    if (ifSaveBtnClicked) {
+        
+        DBMANAGERSYNC * objCaptransactions = [DBMANAGERSYNC sharedManager];
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+        dic = [objCaptransactions AssessmentEntrySyncBackground];
+        NSMutableArray *reqList = [[NSMutableArray alloc]init];
+        reqList = [dic valueForKey:@"LstAssessmententry"];
+        if(reqList.count>0 ){
+            [appDel PushWebservice:dic];
+            ifSaveBtnClicked = NO;
+            
+        }
+    }
+
 }
 
 -(NSMutableDictionary *)getTestAttributesForScreenID:(NSDictionary *)infoDictionary
@@ -505,10 +548,10 @@
 //    }];
 
     if (currentlySelectedHeader == section) {
-        return 70;
+        return IS_IPAD ? 90 :  70;
     }
     else {
-        return 45;
+        return IS_IPAD ? 50 : 45;
     }
 }
 
@@ -547,7 +590,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = 35;
+    CGFloat height = IS_IPAD ? 40 : 35;
     
     return height;
 }
@@ -835,16 +878,7 @@
         
     }
     
-    
-    //    CGFloat yposition = [sender frame].origin.y + CGRectGetMaxY([sender frame]);
-    //    CGFloat maxHeight = (dropVC.array > 5 ? 44 * 5 : dropVC.array.count * 44);
-    
-    //    [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX([sender frame]), CGRectGetMaxY([sender superView]), CGRectGetWidth([sender frame]), maxHeight)];
-    
-    
-    
-    //    dropVC.tblDropDown.frame = CGRectMake([sender frame].origin.x,yposition, 200, maxHeight);
-    [self presentViewController:dropVC animated:YES completion:nil];
+        [self presentViewController:dropVC animated:YES completion:nil];
     
 }
 
@@ -860,7 +894,8 @@
     {
         txtModule.text = [[array objectAtIndex:Index.row] valueForKey:key];
         txtModule.selectedCode = [[array objectAtIndex:Index.row] valueForKey:@"ModuleCode"];
-        
+        txtTitle.text = @"";
+
     }
     
     
@@ -890,6 +925,8 @@
     
 }
 - (IBAction)actionAssessmentSave:(id)sender {
+    
+    ifSaveBtnClicked = YES;
     
     NSDictionary* collectionValues = [self collectEnteredValues];
     NSMutableDictionary* dict = [NSMutableDictionary new];
@@ -1402,15 +1439,6 @@
     
     [self dismissViewControllerAnimated:YES completion:^{
         [self tableValuesMethod];
-        DBMANAGERSYNC * objCaptransactions = [DBMANAGERSYNC sharedManager];
-        
-            NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-            dic = [objCaptransactions AssessmentEntrySyncBackground];
-            NSMutableArray *reqList = [[NSMutableArray alloc]init];
-            reqList = [dic valueForKey:@"LstAssessmententry"];
-            if(reqList.count>0 ){
-                [appDel PushWebservice:dic];
-            }
     }];
     
 }

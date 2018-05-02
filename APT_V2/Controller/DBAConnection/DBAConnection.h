@@ -13,6 +13,8 @@
 -(NSMutableArray *)AssessmentTestType: (NSString *) clientCode :(NSString *) userCode:(NSString *) moduleCode;
 //-(NSMutableArray *)TestByAssessment: (NSString *) clientCode :(NSString *) AssessmentCode:(NSString *) moduleCode;
 -(NSMutableArray *)TestByAssessment: (NSString *) clientCode :(NSString *) AssessmentCode:(NSString *) moduleCode:(NSString *)SelectedDate;
+-(NSMutableArray *)TestByAssessmentAll: (NSString *) clientCode :(NSString *) AssessmentCode:(NSString *) moduleCode;
+
 
 -(NSMutableArray *)AssessmentEntryByDate: (NSString *) AssessmentCode :(NSString *) Usercode:(NSString *) moduleCode:(NSString *) date:(NSString *) Clientcode;
 

@@ -114,6 +114,52 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
     }
 }
 
+-(NSMutableArray *)TestByAssessmentAll: (NSString *) clientCode :(NSString *) AssessmentCode:(NSString *) moduleCode {
+    
+    @synchronized ([AppCommon syncId])  {
+        int retVal;
+        NSString *dbPath = [self getDBPath];
+        sqlite3 *dataBase;
+        const char *stmt;
+        sqlite3_stmt *statement;
+        retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+        NSMutableArray *assessment = [[NSMutableArray alloc]init];
+        if(retVal ==0){
+            
+            //            (CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)
+            //            NSString *query=[NSString stringWithFormat:@"SELECT TESTCODE, TESTNAME FROM ASSESSMENTTESTMASTER WHERE CLIENTCODE = '%@' AND MODULECODE = '%@' AND ASSESSMENTCODE = '%@'",clientCode,moduleCode,AssessmentCode];
+            
+            NSString *query=[NSString stringWithFormat:@"SELECT TESTCODE, TESTNAME FROM ASSESSMENTTESTMASTER WHERE CLIENTCODE = '%@' AND MODULECODE = '%@' AND ASSESSMENTCODE = '%@'",clientCode,moduleCode,AssessmentCode];
+            
+            NSLog(@"%@",query);
+            stmt=[query UTF8String];
+            if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL) == SQLITE_OK)
+            {
+                while(sqlite3_step(statement)==SQLITE_ROW){
+                    NSLog(@"Success");
+                    
+                    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+                    
+                    NSString *    setTestCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *    setTestName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                    
+                    
+                    [dic setObject:setTestCode forKey:@"TestCode"];
+                    [dic setObject:setTestName forKey:@"TestName"];
+                    
+                    [assessment addObject:dic];
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+            }
+            sqlite3_close(dataBase);
+        }
+        NSLog(@"%@", assessment);
+        
+        return assessment;
+    }
+}
+
 -(NSMutableArray *)TestByAssessment: (NSString *) clientCode :(NSString *) AssessmentCode:(NSString *) moduleCode:(NSString *)SelectedDate{
     
     @synchronized ([AppCommon syncId])  {
@@ -133,7 +179,7 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
 
             NSLog(@"%@",query);
             stmt=[query UTF8String];
-            if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+            if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL) == SQLITE_OK)
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     NSLog(@"Success");
@@ -177,22 +223,19 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
             //NSString * rd = @"MSC001";
             
             //(CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)
-            NSString *query=[NSString stringWithFormat:@"SELECT * FROM ASSESSMENTENTRY WHERE ASSESSMENTCODE = '%@' AND CREATEDBY = '%@' AND  DATE(ASSESSMENTENTRYDATE) = DATE('%@') AND  MODULECODE = '%@' AND CLIENTCODE = '%@' AND RECORDSTATUS = 'MSC001'",AssessmentCode,Usercode,date,moduleCode,Clientcode];
+//            NSString *query=[NSString stringWithFormat:@"SELECT * FROM ASSESSMENTENTRY WHERE ASSESSMENTCODE = '%@' AND CREATEDBY = '%@' AND  DATE(ASSESSMENTENTRYDATE) = DATE('%@') AND  MODULECODE = '%@' AND CLIENTCODE = '%@' AND RECORDSTATUS = 'MSC001'",AssessmentCode,Usercode,date,moduleCode,Clientcode];
             
+            NSString *query=[NSString stringWithFormat:@"SELECT * FROM ASSESSMENTENTRY WHERE ASSESSMENTCODE = '%@' AND CREATEDBY = '%@' AND  ASSESSMENTENTRYDATE = '%@' AND  MODULECODE = '%@' AND CLIENTCODE = '%@' AND RECORDSTATUS = 'MSC001'",AssessmentCode,Usercode,date,moduleCode,Clientcode];
             
+//            TestAsseementArray =  [self.objDBconnection TestByAssessment:clientCode :txtTitle.selectedCode :txtModule.selectedCode:currentlySelectedDate];
+
             NSLog(@"%@",query);
             stmt=[query UTF8String];
             if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     NSLog(@"Success");
-                    
-                    
-                    
-                    //                    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-                    //                    f.numberStyle = NSNumberFormatterDecimalStyle;
-                    //                    // [f numberFromString:
-                    
+            
                     NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
                     
                     NSString *	setAssessmentCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];

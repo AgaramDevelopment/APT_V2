@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *RearTableView;
 @property (weak, nonatomic) IBOutlet UIImageView *userImageView;
 @property (weak, nonatomic) IBOutlet UILabel *lblName;
+@property (weak, nonatomic) IBOutlet UILabel *lblimgBackground;
 
 @end

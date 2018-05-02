@@ -253,6 +253,9 @@
 		CE3E741E20248BF100F10917 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E741D20248BF100F10917 /* main.m */; };
 		CE54E702209994A20019A558 /* RearTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE54E700209994A10019A558 /* RearTableViewCell.m */; };
 		CE54E703209994A20019A558 /* RearTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE54E701209994A10019A558 /* RearTableViewCell.xib */; };
+		CE54E70A2099C74E0019A558 /* ChangePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE54E7062099C74D0019A558 /* ChangePasswordVC.m */; };
+		CE54E70B2099C74E0019A558 /* ChangePasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE54E7072099C74D0019A558 /* ChangePasswordVC.xib */; };
+		CE54E70C2099C74E0019A558 /* CustomTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = CE54E7092099C74D0019A558 /* CustomTextField.m */; };
 		CE60F10020870C8200B74A2C /* ResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60F0F420870C8000B74A2C /* ResultsCell.m */; };
 		CE60F10120870C8200B74A2C /* ResultsCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE60F0F520870C8000B74A2C /* ResultsCell_iPad.xib */; };
 		CE60F10220870C8200B74A2C /* ResultsCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE60F0F620870C8000B74A2C /* ResultsCell_iPhone.xib */; };
@@ -762,6 +765,11 @@
 		CE54E6FF209994A10019A558 /* RearTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RearTableViewCell.h; sourceTree = "<group>"; };
 		CE54E700209994A10019A558 /* RearTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RearTableViewCell.m; sourceTree = "<group>"; };
 		CE54E701209994A10019A558 /* RearTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RearTableViewCell.xib; sourceTree = "<group>"; };
+		CE54E7052099C74D0019A558 /* ChangePasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordVC.h; sourceTree = "<group>"; };
+		CE54E7062099C74D0019A558 /* ChangePasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordVC.m; sourceTree = "<group>"; };
+		CE54E7072099C74D0019A558 /* ChangePasswordVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChangePasswordVC.xib; sourceTree = "<group>"; };
+		CE54E7082099C74D0019A558 /* CustomTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTextField.h; sourceTree = "<group>"; };
+		CE54E7092099C74D0019A558 /* CustomTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTextField.m; sourceTree = "<group>"; };
 		CE60F0F320870C8000B74A2C /* ResultsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsCell.h; sourceTree = "<group>"; };
 		CE60F0F420870C8000B74A2C /* ResultsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsCell.m; sourceTree = "<group>"; };
 		CE60F0F520870C8000B74A2C /* ResultsCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultsCell_iPad.xib; sourceTree = "<group>"; };
@@ -1814,6 +1822,18 @@
 			path = APT_V2;
 			sourceTree = "<group>";
 		};
+		CE54E7042099C74D0019A558 /* ChangePasswordVC */ = {
+			isa = PBXGroup;
+			children = (
+				CE54E7052099C74D0019A558 /* ChangePasswordVC.h */,
+				CE54E7062099C74D0019A558 /* ChangePasswordVC.m */,
+				CE54E7072099C74D0019A558 /* ChangePasswordVC.xib */,
+				CE54E7082099C74D0019A558 /* CustomTextField.h */,
+				CE54E7092099C74D0019A558 /* CustomTextField.m */,
+			);
+			path = ChangePasswordVC;
+			sourceTree = "<group>";
+		};
 		CE60F0F220870C8000B74A2C /* ResultVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -2241,6 +2261,7 @@
 		CEB2B9C4202598DB00E7D5E4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CE54E7042099C74D0019A558 /* ChangePasswordVC */,
 				CE60F0F220870C8000B74A2C /* ResultVC */,
 				CE60F0FD20870C8100B74A2C /* TabbarVC */,
 				CE60F0F920870C8000B74A2C /* VideoDocumentVC */,
@@ -2609,6 +2630,7 @@
 				04BC4A332085FE3F00CEB23E /* BattingOverBlockCVC.xib in Resources */,
 				CEB2B97220257BBD00E7D5E4 /* Montserrat-Black.otf in Resources */,
 				CEB2B98020257BBD00E7D5E4 /* Montserrat-SemiBold.otf in Resources */,
+				CE54E70B2099C74E0019A558 /* ChangePasswordVC.xib in Resources */,
 				04BC4B5F2086387B00CEB23E /* MyStatsBattingCell.xib in Resources */,
 				CEB2B99220257BBD00E7D5E4 /* MontserratAlternates-SemiBold.otf in Resources */,
 				04BC49F82085FB7300CEB23E /* TeamHeadToHead.xib in Resources */,
@@ -2852,6 +2874,7 @@
 				18949A1F20875C5F002ECEE0 /* UIImage+FFCustomMethods.m in Sources */,
 				18949A1820875C5F002ECEE0 /* FFYearCell.m in Sources */,
 				18949A2020875C5F002ECEE0 /* UILabel+FFCustomMethods.m in Sources */,
+				CE54E70A2099C74E0019A558 /* ChangePasswordVC.m in Sources */,
 				18949A0620875C5F002ECEE0 /* FFButtonWithEditAndDetailPopoversForMonthCell.m in Sources */,
 				04BC49F22085FB1900CEB23E /* MCTossAndResultsVC.m in Sources */,
 				04BC4AC9208618A200CEB23E /* TabHomeCell.m in Sources */,
@@ -2972,6 +2995,7 @@
 				04BC4B0320862BC400CEB23E /* TeamMemebersCell.m in Sources */,
 				CEBD2A7420289999000AFD1B /* SKSTableViewCellIndicator.m in Sources */,
 				04BC4A312085FE3F00CEB23E /* BattingOverBlockCVC.m in Sources */,
+				CE54E70C2099C74E0019A558 /* CustomTextField.m in Sources */,
 				18AA1BA92092FDFC009634A3 /* UIScrollView+APParallaxHeader.m in Sources */,
 				18A68AC020371A2C00EBA479 /* TrainingLoadVC.m in Sources */,
 				18949A1520875C5F002ECEE0 /* FFHeaderMonthForYearCell.m in Sources */,

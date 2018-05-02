@@ -13,6 +13,9 @@
 #define  SCREEN_CODE_POSTURE  @"ASTT005"
 #define  SCREEN_CODE_S_C  @"ASTT006"
 #define  SCREEN_CODE_COACHING  @"ASTT007"
+//#define  green [UIColor colorWithRed:0.0 green:144.0/255.0 blue:81.0/255.0 alpha:1.0];
+//#define  orange  [UIColor colorWithRed:255.0/255.0 green:147.0/255.0 blue:0.0 alpha:1.0];
+//#define  red  [UIColor colorWithRed:255.0/255.0 green:38.0/255.0 blue:0.0 alpha:1.0];
 
 
 #import "ViewController.h"
@@ -34,6 +37,7 @@
     NSIndexPath* currentlySelectedTestType;
     UIImage* check;
     UIImage* uncheck;
+    UIColor* red,* orange,* green;
     
 }
 
@@ -76,6 +80,10 @@
     
     //    tblAssesments.SKSTableViewDelegate = self;
     
+  green = [UIColor colorWithRed:0.0 green:144.0/255.0 blue:81.0/255.0 alpha:1.0];
+  orange  = [UIColor colorWithRed:255.0/255.0 green:147.0/255.0 blue:0.0 alpha:1.0];
+  red  = [UIColor colorWithRed:255.0/255.0 green:38.0/255.0 blue:0.0 alpha:1.0];
+
     arrayTestName = @[
                       @{@"TestName":@"Rom",@"TestCode":@"ASTT001"},
                       @{@"TestName":@"Special",@"TestCode":@"ASTT002"},
@@ -105,6 +113,7 @@
     
     check = [UIImage imageNamed:@"check"];
     uncheck = [UIImage imageNamed:@"uncheck"];
+    [self customnavigationmethod];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -489,6 +498,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+    
+//    self.plannerTblHeight.constant = (self.plannerTblHeight.constant == 0 ? 175 : 0);
+//    [UIView animateWithDuration:0.3 animations:^{
+//        [self.eventTbl layoutIfNeeded];
+//    }];
+
     if (currentlySelectedHeader == section) {
         return 70;
     }
@@ -771,6 +786,7 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [tblAssesments reloadData];
+//        [tblAssesments reloadSections:[NSIndexSet indexSetWithIndex:sender.tag] withRowAnimation:UITableViewRowAnimationAutomatic];
     });
 }
 
@@ -1426,7 +1442,10 @@
     cell.txt2_SC.text = @"";
     cell.txtField.text = @"";
     cell.txtDropDown.text = @"";
-    
+    cell.txtDropDown.tag = indexPath.item;
+    cell.txtField.tag = indexPath.item;
+    cell.txt1_SC.tag = indexPath.item;
+    cell.txt2_SC.tag = indexPath.item;
     
     if ([currentlySelectedTest isEqualToString:SCREEN_CODE_S_C])
     {
@@ -1451,7 +1470,6 @@
         [cell.txtField setHidden:YES];
         cell.txtDropDown.delegate = self;
         [cell.txtDropDown setInputView:_pickerMainView];
-        cell.txtDropDown.tag = indexPath.row;
         
         if ([currentlySelectedTest isEqualToString:SCREEN_CODE_Rom]) {
             //                [cell.SC_view setHidden:YES];
@@ -1556,12 +1574,14 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     
-    UIColor* green = [UIColor colorWithRed:0 green:144/255 blue:81/255 alpha:1.0];
-    UIColor* orange = [UIColor colorWithRed:255/255 green:147/255 blue:0 alpha:1.0];
-    UIColor* red = [UIColor colorWithRed:255/255 green:38/255 blue:0 alpha:1.0];
 
-
-        TestPropertyCollectionViewCell* cell = (TestPropertyCollectionViewCell *)[assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:textFieldIndexPath inSection:0]];
+    TestPropertyCollectionViewCell* cell = (TestPropertyCollectionViewCell *)[assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:textFieldIndexPath inSection:0]];
+    
+    NSInteger value = [[textField.text stringByAppendingString:string] integerValue];
+    
+    if (textField.text.length == 1 && string.length == 0) {
+        value = 0;
+    }
     
     if ([currentlySelectedTest isEqualToString:SCREEN_CODE_Rom])
     {
@@ -1571,19 +1591,18 @@
             
             if (minMaxValue.count) {
                 
-                if ([textField.text integerValue] < [[minMaxValue firstObject] integerValue]) // Below Normal
+                if (value < [[minMaxValue firstObject] integerValue]) // Below Normal
                 {
                     cell.lblTopIndicator.backgroundColor = [UIColor lightGrayColor];
                 }
-                else if ([textField.text integerValue] >= [[minMaxValue firstObject] integerValue] && [textField.text integerValue] <= [[minMaxValue objectAtIndex:1] integerValue]) // Normal
+                else if (value >= [[minMaxValue firstObject] integerValue] && value <= [[minMaxValue objectAtIndex:1] integerValue]) // Normal
                 {
-                    cell.lblTopIndicator.backgroundColor = orange;
+                    [cell.lblTopIndicator setBackgroundColor:orange];
 
                 }
-                else if ([textField.text integerValue] >= [[minMaxValue objectAtIndex:1] integerValue]) // Above normal
+                else if (value >= [[minMaxValue objectAtIndex:1] integerValue]) // Above normal
                 {
                     cell.lblTopIndicator.backgroundColor = green;
-
                 }
             }
         }
@@ -1594,9 +1613,6 @@
     else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_SPECIAL])
     {
         dropdownArray =[self.objDBconnection getPositiveNegative];
-//        if () {
-//            <#statements#>
-//        }
     }
     else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_MMT])
     {
@@ -1614,8 +1630,6 @@
     {
         
     }
-
-    
     
         if ([currentlySelectedTest isEqualToString:SCREEN_CODE_Rom])
         {
@@ -1939,9 +1953,6 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    UIColor* green = [UIColor colorWithRed:0 green:144/255 blue:81/255 alpha:1.0];
-    UIColor* orange = [UIColor colorWithRed:255/255 green:147/255 blue:0 alpha:1.0];
-    UIColor* red = [UIColor colorWithRed:255/255 green:38/255 blue:0 alpha:1.0];
 
     NSLog(@"%@\n %@",[[dropdownArray objectAtIndex:row] valueForKey:@"Result"],[[dropdownArray objectAtIndex:row] valueForKey:@"ResultName"]);
     
@@ -1961,7 +1972,7 @@
         }
         else
         {
-            cell.lblTopIndicator.backgroundColor = orange;
+            [cell.lblTopIndicator setBackgroundColor:orange];
 
         }
     }

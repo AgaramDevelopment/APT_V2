@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
-        </array>
         <array key="Montserrat-Regular.otf">
             <string>Montserrat-Regular</string>
         </array>
@@ -44,14 +41,14 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9px-ZJ-M7d" userLabel="nav View">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="60" id="Cdf-4B-DOW"/>
+                                <constraint firstAttribute="height" constant="70" id="Cdf-4B-DOW"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bmL-4M-TFy" userLabel="Drop View">
-                            <rect key="frame" x="0.0" y="60" width="375" height="45"/>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bmL-4M-TFy" userLabel="Drop View">
+                            <rect key="frame" x="0.0" y="70" width="375" height="0.0"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WWJ-df-TSk" userLabel="Competetion View">
                                     <rect key="frame" x="10" y="0.0" width="172.5" height="30"/>
@@ -164,19 +161,19 @@
                                 <constraint firstItem="IYG-hZ-K3f" firstAttribute="top" secondItem="bmL-4M-TFy" secondAttribute="top" id="6du-cO-SIG"/>
                                 <constraint firstItem="IYG-hZ-K3f" firstAttribute="width" secondItem="WWJ-df-TSk" secondAttribute="width" id="DFk-KP-DmL"/>
                                 <constraint firstAttribute="trailing" secondItem="IYG-hZ-K3f" secondAttribute="trailing" constant="10" id="Ikx-yb-85m"/>
-                                <constraint firstAttribute="height" constant="45" id="Mv8-Y2-b74"/>
+                                <constraint firstAttribute="height" id="Mv8-Y2-b74"/>
                                 <constraint firstItem="WWJ-df-TSk" firstAttribute="leading" secondItem="bmL-4M-TFy" secondAttribute="leading" constant="10" id="acl-Kj-X0f"/>
                                 <constraint firstItem="IYG-hZ-K3f" firstAttribute="leading" secondItem="WWJ-df-TSk" secondAttribute="trailing" constant="10" id="brx-vN-tNE"/>
                                 <constraint firstItem="WWJ-df-TSk" firstAttribute="top" secondItem="bmL-4M-TFy" secondAttribute="top" id="gUf-LH-rwz"/>
                             </constraints>
                         </view>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="PDk-cx-4jW">
-                            <rect key="frame" x="8" y="105" width="359" height="522"/>
+                            <rect key="frame" x="8" y="75" width="359" height="592"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <collectionViewLayout key="collectionViewLayout" id="hJP-Ec-PS4" customClass="CustomCollectionStandings" customModule="APT_Cricket" customModuleProvider="target"/>
                         </collectionView>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fIf-VA-1Um">
-                            <rect key="frame" x="10" y="106" width="240" height="128"/>
+                            <rect key="frame" x="10" y="71" width="240" height="128"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="240" id="KMq-Yq-Lfw"/>
@@ -197,9 +194,9 @@
                         <constraint firstAttribute="trailing" secondItem="9px-ZJ-M7d" secondAttribute="trailing" id="EZt-Qw-knn"/>
                         <constraint firstItem="9px-ZJ-M7d" firstAttribute="leading" secondItem="58x-Qh-hQu" secondAttribute="leading" id="FnK-mq-rJA"/>
                         <constraint firstItem="bmL-4M-TFy" firstAttribute="top" secondItem="9px-ZJ-M7d" secondAttribute="bottom" id="J64-aE-6i2"/>
-                        <constraint firstAttribute="bottom" secondItem="PDk-cx-4jW" secondAttribute="bottom" constant="40" id="Ka1-qR-47O"/>
+                        <constraint firstAttribute="bottom" secondItem="PDk-cx-4jW" secondAttribute="bottom" id="Ka1-qR-47O"/>
                         <constraint firstAttribute="trailing" secondItem="PDk-cx-4jW" secondAttribute="trailing" constant="8" id="cxu-wC-MmB"/>
-                        <constraint firstItem="PDk-cx-4jW" firstAttribute="top" secondItem="bmL-4M-TFy" secondAttribute="bottom" id="fwr-cF-k0l"/>
+                        <constraint firstItem="PDk-cx-4jW" firstAttribute="top" secondItem="bmL-4M-TFy" secondAttribute="bottom" constant="5" id="fwr-cF-k0l"/>
                         <constraint firstAttribute="trailing" secondItem="bmL-4M-TFy" secondAttribute="trailing" id="nJ5-7f-lIr"/>
                         <constraint firstItem="PDk-cx-4jW" firstAttribute="leading" secondItem="58x-Qh-hQu" secondAttribute="leading" constant="8" id="qSL-7g-bVW"/>
                     </constraints>

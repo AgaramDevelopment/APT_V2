@@ -1051,7 +1051,7 @@ NSMutableArray *bowlMonths;
         
         dropVC.array = arr;
         dropVC.key = @"Xvalue";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(barView.frame), CGRectGetMaxY(barView.superview.frame)+60+50, CGRectGetWidth(barView.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(barView.frame), CGRectGetMaxY(barView.superview.frame)+70+50, CGRectGetWidth(barView.frame), 300)];
         
     }
     else if ([sender tag] == 1) // Y Axis value
@@ -1068,21 +1068,21 @@ NSMutableArray *bowlMonths;
         
         dropVC.array = arr;
         dropVC.key = @"Yvalue";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(lineView.frame), CGRectGetMaxY(lineView.superview.frame)+60+50, CGRectGetWidth(lineView.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(lineView.frame), CGRectGetMaxY(lineView.superview.frame)+70+50, CGRectGetWidth(lineView.frame), 300)];
         
     }
     else if ([sender tag] == 2) // Competitions
     {
         dropVC.array = appDel.ArrayCompetition;
         dropVC.key = @"CompetitionName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(competView.frame), CGRectGetMaxY(competView.superview.frame)+60+50, CGRectGetWidth(competView.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(competView.frame), CGRectGetMaxY(competView.superview.frame)+70+50, CGRectGetWidth(competView.frame), 300)];
         
     }
     else if ([sender tag] == 3) // Teams
     {
         dropVC.array = [COMMON getCorrespondingTeamName:lblCompetetion.text];
         dropVC.key = @"TeamName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(teamView.frame), CGRectGetMaxY(teamView.superview.frame)+60+50, CGRectGetWidth(teamView.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(teamView.frame), CGRectGetMaxY(teamView.superview.frame)+70+50, CGRectGetWidth(teamView.frame), 300)];
         
     }
 

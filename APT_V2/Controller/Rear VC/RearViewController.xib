@@ -10,8 +10,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Montserrat-Regular.otf">
-            <string>Montserrat-Regular</string>
+        <array key="Montserrat-SemiBold.otf">
+            <string>Montserrat-SemiBold</string>
         </array>
     </customFonts>
     <objects>
@@ -44,35 +44,37 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default_userimage" translatesAutoresizingMaskIntoConstraints="NO" id="9f6-gj-BpT">
-                            <rect key="frame" x="25" y="44" width="100" height="100"/>
+                            <rect key="frame" x="25" y="50" width="100" height="100"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="gql-YI-Fcq"/>
                                 <constraint firstAttribute="height" constant="100" id="zj6-op-xix"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSQ-3p-Ile">
-                            <rect key="frame" x="25" y="164" width="245" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dSQ-3p-Ile">
+                            <rect key="frame" x="25" y="160" width="100" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="MBy-kV-WL6"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                            <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="15"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="17"/>
+                            </variation>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.10980392160000001" green="0.1019607843" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="T61-SR-6d3" firstAttribute="leading" secondItem="gX7-q3-OzD" secondAttribute="leading" id="0RX-Ge-tdW"/>
                         <constraint firstItem="9f6-gj-BpT" firstAttribute="leading" secondItem="gX7-q3-OzD" secondAttribute="leading" constant="25" id="6lO-gF-nVj"/>
                         <constraint firstAttribute="trailing" secondItem="T61-SR-6d3" secondAttribute="trailing" id="70n-5l-gOU"/>
                         <constraint firstItem="dSQ-3p-Ile" firstAttribute="leading" secondItem="9f6-gj-BpT" secondAttribute="leading" id="9t7-m5-AN4"/>
                         <constraint firstAttribute="height" constant="200" id="LsS-Ds-WFn"/>
+                        <constraint firstItem="dSQ-3p-Ile" firstAttribute="trailing" secondItem="9f6-gj-BpT" secondAttribute="trailing" id="NGf-57-2lV"/>
+                        <constraint firstItem="dSQ-3p-Ile" firstAttribute="top" secondItem="9f6-gj-BpT" secondAttribute="bottom" constant="10" id="QoD-bj-7DI"/>
                         <constraint firstItem="T61-SR-6d3" firstAttribute="top" secondItem="gX7-q3-OzD" secondAttribute="top" id="UaO-jh-FDK"/>
-                        <constraint firstAttribute="bottom" secondItem="dSQ-3p-Ile" secondAttribute="bottom" constant="15" id="nOq-aZ-DaC"/>
-                        <constraint firstItem="dSQ-3p-Ile" firstAttribute="top" secondItem="9f6-gj-BpT" secondAttribute="bottom" constant="20" id="r8p-l7-dbC"/>
+                        <constraint firstItem="9f6-gj-BpT" firstAttribute="centerY" secondItem="gX7-q3-OzD" secondAttribute="centerY" id="pDe-Mn-Qb5"/>
                         <constraint firstAttribute="bottom" secondItem="T61-SR-6d3" secondAttribute="bottom" id="sDk-mU-9dk"/>
-                        <constraint firstAttribute="trailing" secondItem="dSQ-3p-Ile" secondAttribute="trailing" constant="50" id="xNe-V3-od7"/>
-                        <constraint firstItem="dSQ-3p-Ile" firstAttribute="top" secondItem="9f6-gj-BpT" secondAttribute="bottom" constant="20" id="zfI-Yu-VbL"/>
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AgaramImage2" translatesAutoresizingMaskIntoConstraints="NO" id="e0Z-Vl-M7e">

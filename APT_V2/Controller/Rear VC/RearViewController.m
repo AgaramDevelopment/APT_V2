@@ -17,6 +17,7 @@
 #import "FoodDiaryVC.h"
 #import "ReportsVC.h"
 #import "PlannerVC.h"
+#import "RearTableViewCell.h"
 
 @interface RearViewController ()
 {
@@ -35,8 +36,15 @@
     
     PreviouslySelectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];
 
-    //    userImageView.layer.cornerRadius = userImageView.frame.size.height/2;
-//    userImageView.layer.masksToBounds = YES;
+    userImageView.layer.cornerRadius = userImageView.frame.size.height/2;
+    userImageView.layer.masksToBounds = YES;
+    
+//    userImageView.layer.masksToBounds = NO;
+    userImageView.layer.shadowColor = [UIColor blackColor].CGColor;
+    userImageView.layer.shadowOffset = CGSizeZero;
+    userImageView.layer.shadowRadius = 10.0f;
+    userImageView.layer.shadowOpacity = 1.0f;
+
     
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -100,23 +108,28 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
-    if (nil == cell)
+    RearTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    NSArray *arrCell;
+    if (!cell)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        arrCell = [[NSBundle mainBundle] loadNibNamed:@"RearTableViewCell" owner:self options:nil];
     }
     
-    cell.textLabel.text = [[arrItems objectAtIndex:indexPath.row] valueForKey:@"name"];
-    cell.imageView.image = [UIImage imageNamed:[[arrItems objectAtIndex:indexPath.row] valueForKey:@"img"]];
+    cell = arrCell[0];
+
+    cell.lblName.text = [[arrItems objectAtIndex:indexPath.row] valueForKey:@"name"];
+    cell.img.image = [UIImage imageNamed:[[arrItems objectAtIndex:indexPath.row] valueForKey:@"img"]];
     
     if (indexPath == PreviouslySelectedIndex) {
-        cell.textLabel.textColor = [UIColor cyanColor];
-        [cell.textLabel setFont:[UIFont fontWithName:@"Montserrat light" size:(IS_IPAD ? 19 : 17)]];
+        cell.lblName.textColor = [UIColor colorWithRed:(37.0/255.0) green:(176.0/255.0) blue:(240.0/255.0) alpha:1.0];
+        [cell.lblName setFont:[UIFont fontWithName:@"Montserrat-SemiBold" size:(IS_IPAD ? 19 : 17)]];
     }
     else{
-        cell.textLabel.textColor = [UIColor lightGrayColor];
-        [cell.textLabel setFont:[UIFont fontWithName:@"Montserrat Regular" size:(IS_IPAD ? 17 : 15)]];
+        cell.lblName.textColor = [UIColor lightGrayColor];
+        [cell.lblName setFont:[UIFont fontWithName:@"Montserrat-light" size:(IS_IPAD ? 17 : 15)]];
         
     }
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];

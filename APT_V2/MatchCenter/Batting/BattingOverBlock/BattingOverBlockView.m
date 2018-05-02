@@ -567,14 +567,14 @@
         
         dropVC.array = [COMMON getCorrespondingTeamName:lblCompetetion.text];
         dropVC.key = @"TeamName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(teamView.frame), CGRectGetMaxY(teamView.superview.frame)+60, CGRectGetWidth(teamView.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(teamView.frame), CGRectGetMaxY(teamView.superview.frame)+70, CGRectGetWidth(teamView.frame), 300)];
         
     }
     else // COMPETETION
     {
         dropVC.array = appDel.ArrayCompetition;
         dropVC.key = @"CompetitionName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(competView.frame), CGRectGetMaxY(competView.superview.frame)+60, CGRectGetWidth(competView.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(competView.frame), CGRectGetMaxY(competView.superview.frame)+70, CGRectGetWidth(competView.frame), 300)];
         
     }
     

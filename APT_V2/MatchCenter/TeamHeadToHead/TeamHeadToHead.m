@@ -55,7 +55,7 @@
 
 @synthesize viewTeamOvers,viewTeamWin,btnInnsAll;
 
-@synthesize btnAllOvers,btnAllWinTeams;
+@synthesize btnAllOvers,btnAllWinTeams,viewTeamWidth;
 
 - (void)viewDidLoad
 {
@@ -82,6 +82,11 @@
     [btnAllOvers setImage:[UIImage imageNamed:@"check"] forState:UIControlStateNormal];
 
     [self headToHeadPageLoadGetService];
+    
+    if (IS_IPHONE4 || IS_IPHONE5) {
+        viewTeamWidth.constant = 50;
+        [self.view layoutIfNeeded];
+    }
 }
 
 - (void)viewWillLayoutSubviews {
@@ -890,11 +895,10 @@
                                @"Ground": @"All"
                                };
         [arr insertObject:temp atIndex:0];
-        
         dropVC.array = arr;
 
         
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(competitionView.frame), CGRectGetMaxY(competitionView.superview.frame)+60, CGRectGetWidth(competitionView.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(competitionView.frame), CGRectGetMaxY(competitionView.superview.frame)+70, CGRectGetWidth(competitionView.frame), 300)];
         
     }
     else if ([sender tag] == 3) // Ground
@@ -927,7 +931,7 @@
         dropVC.array = arr;
         dropVC.key = @"GroundName";
         
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(groundView.frame), CGRectGetMaxY(groundView.superview.frame)+60, CGRectGetWidth(groundView.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(groundView.frame), CGRectGetMaxY(groundView.superview.frame)+70, CGRectGetWidth(groundView.frame), 300)];
         
         
     }
@@ -937,7 +941,7 @@
         
         dropVC.key = @"TeamBName";
         
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(team1View.frame), CGRectGetMaxY(team1View.superview.frame)+60, CGRectGetWidth(team1View.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(team1View.frame), CGRectGetMaxY(team1View.superview.frame)+70, CGRectGetWidth(team1View.frame), 300)];
         
     }
     else if ([sender tag] == 1) // Teams 2
@@ -961,7 +965,7 @@
         //        dropVC.array = self.commonArray1;
         dropVC.key = @"TeamBName";
         
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(team2View.frame), CGRectGetMaxY(team2View.superview.frame)+60, CGRectGetWidth(team2View.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(team2View.frame), CGRectGetMaxY(team2View.superview.frame)+70, CGRectGetWidth(team2View.frame), 300)];
         
     }
     

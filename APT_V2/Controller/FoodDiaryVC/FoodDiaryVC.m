@@ -672,6 +672,18 @@
                                 [mealLocationArray addObject:mealLocationDict];
                             }
                             self.saveOrUpdateBtn.hidden = YES;
+                        } else {
+                            self.timeTF.text = [[foodDiarys objectAtIndex:i] valueForKey:@"STARTTIME"];
+                            foodDiaryCode = [[foodDiarys objectAtIndex:i] valueForKey:@"FOODDIARYCODE"];
+                            int mealCode = (int)[foodDiaryCodeArray indexOfObject:[[foodDiarys objectAtIndex:i] valueForKey:@"MEALCODE"]];
+                            int locationCode = (int)[locationCodeArray indexOfObject:[[foodDiarys objectAtIndex:i] valueForKey:@"LOCATION"]];
+                            
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self setBorderForMealType:mealCode+1];
+                                [self setBorderForLocation:locationCode+1];
+                                [self.foodTableView reloadData];
+                            });
+
                         }
                     }
                 }

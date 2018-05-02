@@ -52,17 +52,17 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="782"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tuh-8v-uDv">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="70" id="22S-Di-6lp"/>
+                                <constraint firstAttribute="height" constant="60" id="22S-Di-6lp"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RjT-QX-z2I">
-                            <rect key="frame" x="0.0" y="70" width="320" height="712"/>
+                            <rect key="frame" x="0.0" y="60" width="320" height="722"/>
                             <subviews>
                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mtz-NM-aTL">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="712"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="722"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Che-7W-Z3b">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="900"/>
@@ -687,7 +687,7 @@
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="xAS-Pb-QR2">
                                                     <rect key="frame" x="8" y="392" width="304" height="478"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <collectionViewLayout key="collectionViewLayout" id="ISf-9C-UXC" customClass="CustomCollectionViewLayout" customModule="APT_V2" customModuleProvider="target"/>
+                                                    <collectionViewLayout key="collectionViewLayout" id="ISf-9C-UXC" customClass="CustomCollectionViewLayout" customModule="APT_Cricket" customModuleProvider="target"/>
                                                     <connections>
                                                         <outlet property="dataSource" destination="-1" id="L7h-aK-sev"/>
                                                         <outlet property="delegate" destination="-1" id="XbH-qP-0P5"/>

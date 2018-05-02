@@ -201,7 +201,6 @@
     if(collectionView == self.resultCollectionView){
         
         
-        
         MCOverViewResultCVC* cell = [self.resultCollectionView dequeueReusableCellWithReuseIdentifier:@"mcResultCVC" forIndexPath:indexPath];
         
         cell.Teamname1lbl.text = [[recentMatchesArray valueForKey:@"ATName"] objectAtIndex:indexPath.row];
@@ -223,9 +222,13 @@
         cell.runrate2lbl.text = BTRR;
         
         NSString *matchdate = [[recentMatchesArray valueForKey:@"ATMatchDate"] objectAtIndex:indexPath.row];
-        NSArray *arr = [matchdate componentsSeparatedByString:@" "];
+//        NSArray *arr = [matchdate componentsSeparatedByString:@" "];
         cell.Datelbl.text = matchdate;
         
+//        MatchResult
+        if ([[[recentMatchesArray objectAtIndex:indexPath.row] allKeys] containsObject:@"MatchResult"]) {
+            cell.lblOwnStats.text = [[recentMatchesArray valueForKey:@"MatchResult"] objectAtIndex:indexPath.row];
+        }
         
 //        NSString * photourl = [NSString stringWithFormat:@"%@%@",IMAGE_URL,[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:0]];
         NSString * photourl = [NSString stringWithFormat:@"%@",[[recentMatchesArray valueForKey:@"ATPhoto"] objectAtIndex:indexPath.row]];
@@ -307,16 +310,13 @@
         
         [scoreArray addObject:dic];
         
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-        objtab = (TabbarVC *)[storyboard instantiateViewControllerWithIdentifier:@"TabbarVC"];
+//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+        objtab = (TabbarVC *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"TabbarVC"];
         appDel.Currentmatchcode = displayMatchCode;
         appDel.Scorearray = scoreArray;
         //objtab.backkey = @"yes";
         //[self.navigationController pushViewController:objFix animated:YES];
         [appDel.frontNavigationController pushViewController:objtab animated:YES];
-        
-        
-    
     
 }
 
@@ -437,7 +437,6 @@
             self.nextBtn.hidden = NO;
             self.prevBtn.hidden = YES;
             [self.nextBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
-            
            
         }
         else{
@@ -669,14 +668,14 @@
         
         dropVC.array = [COMMON getCorrespondingTeamName:lblCompetetion.text];
         dropVC.key = @"TeamName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewTeam.frame), CGRectGetMaxY(viewTeam.superview.frame)+60, CGRectGetWidth(viewTeam.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewTeam.frame), CGRectGetMaxY(viewTeam.superview.frame)+70, CGRectGetWidth(viewTeam.frame), 300)];
         
     }
     else // COMPETETION
     {
         dropVC.array = appDel.ArrayCompetition;
         dropVC.key = @"CompetitionName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewCompetetion.frame), CGRectGetMaxY(viewCompetetion.superview.frame)+60, CGRectGetWidth(viewCompetetion.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewCompetetion.frame), CGRectGetMaxY(viewCompetetion.superview.frame)+70, CGRectGetWidth(viewCompetetion.frame), 300)];
         
     }
     

@@ -251,6 +251,8 @@
 		CE3E741820248BF100F10917 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741720248BF100F10917 /* Assets.xcassets */; };
 		CE3E741B20248BF100F10917 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741920248BF100F10917 /* LaunchScreen.storyboard */; };
 		CE3E741E20248BF100F10917 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3E741D20248BF100F10917 /* main.m */; };
+		CE54E702209994A20019A558 /* RearTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE54E700209994A10019A558 /* RearTableViewCell.m */; };
+		CE54E703209994A20019A558 /* RearTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE54E701209994A10019A558 /* RearTableViewCell.xib */; };
 		CE60F10020870C8200B74A2C /* ResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE60F0F420870C8000B74A2C /* ResultsCell.m */; };
 		CE60F10120870C8200B74A2C /* ResultsCell_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE60F0F520870C8000B74A2C /* ResultsCell_iPad.xib */; };
 		CE60F10220870C8200B74A2C /* ResultsCell_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE60F0F620870C8000B74A2C /* ResultsCell_iPhone.xib */; };
@@ -757,6 +759,9 @@
 		CE3E741A20248BF100F10917 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE3E741C20248BF100F10917 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE3E741D20248BF100F10917 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CE54E6FF209994A10019A558 /* RearTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RearTableViewCell.h; sourceTree = "<group>"; };
+		CE54E700209994A10019A558 /* RearTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RearTableViewCell.m; sourceTree = "<group>"; };
+		CE54E701209994A10019A558 /* RearTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RearTableViewCell.xib; sourceTree = "<group>"; };
 		CE60F0F320870C8000B74A2C /* ResultsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultsCell.h; sourceTree = "<group>"; };
 		CE60F0F420870C8000B74A2C /* ResultsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultsCell.m; sourceTree = "<group>"; };
 		CE60F0F520870C8000B74A2C /* ResultsCell_iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultsCell_iPad.xib; sourceTree = "<group>"; };
@@ -2305,6 +2310,9 @@
 				CEB2B9CA2025994F00E7D5E4 /* RearViewController.h */,
 				CEB2B9CB2025994F00E7D5E4 /* RearViewController.m */,
 				CEB2B9CC2025994F00E7D5E4 /* RearViewController.xib */,
+				CE54E6FF209994A10019A558 /* RearTableViewCell.h */,
+				CE54E700209994A10019A558 /* RearTableViewCell.m */,
+				CE54E701209994A10019A558 /* RearTableViewCell.xib */,
 			);
 			name = "Rear VC";
 			path = "APT_V2/Controller/Rear VC";
@@ -2674,6 +2682,7 @@
 				0425429C20289EE70088B87B /* AssessmentPopupVC.xib in Resources */,
 				04BC4A4D2085FFCD00CEB23E /* MCTeamPlayersCompCell.xib in Resources */,
 				04B27F1D202D7DD100ECB699 /* illnessTableViewCell.xib in Resources */,
+				CE54E703209994A20019A558 /* RearTableViewCell.xib in Resources */,
 				CE60F10520870C8200B74A2C /* VideoDocumentVC.xib in Resources */,
 				CE8DE377203FDEC70097BF66 /* InjurySelectionViewController.xib in Resources */,
 				04BC4A112085FCFF00CEB23E /* OverviewBowlingView.xib in Resources */,
@@ -2905,6 +2914,7 @@
 				18949A2120875C5F002ECEE0 /* FFDateManager.m in Sources */,
 				18EF9D1220316C3000CDA268 /* CustomButton.m in Sources */,
 				043C2F2F202AF59E00EB3F8C /* PieChartView.m in Sources */,
+				CE54E702209994A20019A558 /* RearTableViewCell.m in Sources */,
 				18949A1720875C5F002ECEE0 /* FFMonthCollectionViewForYearCell.m in Sources */,
 				04BC49FF2085FBC900CEB23E /* BowlingOverBlockView.m in Sources */,
 				04BC4A002085FBC900CEB23E /* BowlingOverBlockCVC.m in Sources */,

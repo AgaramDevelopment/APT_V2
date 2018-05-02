@@ -295,7 +295,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="359" id="OBZ-kk-Yo4"/>
                                             </constraints>
-                                            <collectionViewLayout key="collectionViewLayout" id="Kh3-5H-2xa" customClass="CustomCollectionLayerBowling" customModule="APT_V2" customModuleProvider="target"/>
+                                            <collectionViewLayout key="collectionViewLayout" id="Kh3-5H-2xa" customClass="CustomCollectionLayerBowling" customModule="APT_Cricket" customModuleProvider="target"/>
                                             <connections>
                                                 <outlet property="dataSource" destination="iN0-l3-epB" id="YUm-UY-f58"/>
                                                 <outlet property="delegate" destination="iN0-l3-epB" id="DJd-JY-6kL"/>

@@ -19,8 +19,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *runrate1lbl;
 @property (strong, nonatomic) IBOutlet UILabel *runrate2lbl;
 @property (strong, nonatomic) IBOutlet UILabel *Datelbl;
-
 @property (strong, nonatomic) IBOutlet UIImageView *team1Img;
 @property (strong, nonatomic) IBOutlet UIImageView *team2Img;
+@property (weak, nonatomic) IBOutlet UILabel *lblOwnStats;
 
 @end

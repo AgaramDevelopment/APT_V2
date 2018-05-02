@@ -45,15 +45,16 @@
     self.PoplistTable.hidden = YES;
     
     
-    //headingKeyArray =  @[@"Rank",@"Team",@"Played",@"Won",@"Lost",@"Tied",@"N/R",@"Net RR",@"For",@"Against",@"Pts"];
+//    headingKeyArray =  @[@"Rank",@"TeamName",@"Played",@"Won",@"Lost",@"Tied",@"NoResults",@"NETRUNRESULT",@"For",@"Against",@"Points"];
+//
+//
+//    headingButtonNames = @[@"Rank",@"Team",@"Played",@"Won",@"Lost",@"Tied",@"N/R",@"Net RR",@"For",@"Against",@"Pts"];
     
-    headingKeyArray =  @[@"Rank",@"TeamName",@"Played",@"Won",@"Lost",@"Tied",@"NoResults",@"NETRUNRESULT",@"For",@"Against",@"Points"];
+    headingKeyArray =  @[@"Rank",@"TeamName",@"Played",@"Won",@"Lost",@"Tied",@"NoResults",@"NETRUNRESULT",@"Points"];
     
-    
-    headingButtonNames = @[@"Rank",@"Team",@"Played",@"Won",@"Lost",@"Tied",@"N/R",@"Net RR",@"For",@"Against",@"Pts"];
-    
+    headingButtonNames = @[@"Rank",@"Team",@"Played",@"Won",@"Lost",@"Tied",@"N/R",@"Net RR",@"Pts"];
+
     [self.standingsCollectionView registerNib:[UINib nibWithNibName:@"PlayerListCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"ContentCellIdentifier"];
-    
     
     self.standingsCollectionView.delegate = self;
     self.standingsCollectionView.dataSource = self;
@@ -232,23 +233,27 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    if(IS_IPHONE_DEVICE)
-    {
-        if(!IS_IPHONE5)
-        {
-            return CGSizeMake(130, 35);
-        }
-        else
-        {
-            
-            return CGSizeMake(150, 40);
-        }
-    }
-    else
-    {
-        
-        return CGSizeMake(200, 50);
-    }
+    
+//    if(IS_IPHONE_DEVICE)
+//    {
+//        if(!IS_IPHONE5)
+//        {
+//            return CGSizeMake(130, 35);
+//        }
+//        else
+//        {
+//
+//            return CGSizeMake(150, 40);
+//        }
+//    }
+//    else
+//    {
+//
+//        return CGSizeMake(200, 50);
+//    }
+    
+    return CGSizeMake(80, 50);
+
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -288,13 +293,16 @@
             [self setShadow:cell.lblRightShadow.layer];
         }
         
-        if (indexPath.section % 2 != 0) {
-            cell.backgroundColor = [UIColor colorWithRed:238.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1.0];
-            
-        }else
-        {
-            cell.backgroundColor = [UIColor whiteColor];
-        }
+//        if (indexPath.section % 2 != 0) {
+//            cell.backgroundColor = [UIColor colorWithRed:238.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1.0];
+//
+//        }else
+//        {
+//            cell.backgroundColor = [UIColor whiteColor];
+//        }
+        
+        cell.backgroundColor = [UIColor colorWithRed:238.0/255.0 green:238.0/255.0 blue:238.0/255.0 alpha:1.0];
+
         [cell.btnName setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
         
         cell.btnName.userInteractionEnabled = NO;
@@ -314,17 +322,20 @@
                 {
                     str = [self checkNull:[[DetailsArray objectAtIndex:indexPath.section-1]valueForKey:temp]];
                 }
-                if([temp isEqualToString:@"Rank"])
-                {
-                    cell.btnName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-                    cell.btnName.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
-                    //NSLog(@"Player Name %@ ",str);
-                }
-                else
-                {
-                    cell.btnName.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-                    cell.btnName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-                }
+//                if([temp isEqualToString:@"Rank"])
+//                {
+//                    cell.btnName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//                    cell.btnName.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+//                    //NSLog(@"Player Name %@ ",str);
+//                }
+//                else
+//                {
+//                    cell.btnName.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+//                    cell.btnName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+//                }
+                cell.btnName.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+                cell.btnName.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+
                 //[cell.btnName setTitle:[NSString stringWithFormat:@"T %ld",indexPath.section-1] forState:UIControlStateNormal];
                 
                     [cell.btnName setTitle:str forState:UIControlStateNormal];
@@ -383,10 +394,22 @@
     [AppCommon showLoading ];
     
     
-    NSString *CompetitionCode = [AppCommon getCurrentCompetitionCode];
-    self.yearlbl.text = [AppCommon getCurrentCompetitionName];
+    
+    NSString *CompetitionCode ;// = [AppCommon getCurrentCompetitionCode];
+//    self.yearlbl.text = [AppCommon getCurrentCompetitionName];
     objWebservice = [[WebService alloc]init];
     
+    
+    
+    if (appDel.ArrayCompetition.count) {
+        CompetitionCode = [[appDel.ArrayCompetition firstObject] valueForKey:@"CompetitionCode"];
+        NSLog(@"%@",[appDel.ArrayCompetition firstObject]);
+    }
+    else
+    {
+        CompetitionCode = @"UCC0000274";
+    }
+
     
     [objWebservice TeamStandings:StandingsKey :CompetitionCode success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
@@ -407,8 +430,8 @@
         
     }
     failure:^(AFHTTPRequestOperation *operation, id error) {
-    NSLog(@"failed");
-    [COMMON webServiceFailureError:error];
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
     }];
     
 }
@@ -426,14 +449,14 @@
     {
         dropVC.array = appDel.ArrayCompetition;
         dropVC.key = @"CompetitionName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewCompetetion.frame), CGRectGetMaxY(viewCompetetion.superview.frame)+60, CGRectGetWidth(viewCompetetion.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewCompetetion.frame), CGRectGetMaxY(viewCompetetion.superview.frame)+70, CGRectGetWidth(viewCompetetion.frame), 300)];
 
     }
     else // TEAM
     {
         dropVC.array = appDel.ArrayTeam;
         dropVC.key = @"TeamName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewTeam.frame), CGRectGetMaxY(viewTeam.superview.frame)+60, CGRectGetWidth(viewTeam.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(viewTeam.frame), CGRectGetMaxY(viewTeam.superview.frame)+70, CGRectGetWidth(viewTeam.frame), 300)];
 
     }
     

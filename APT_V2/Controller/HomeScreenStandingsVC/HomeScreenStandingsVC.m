@@ -34,8 +34,6 @@
 //    headingKeyArray =  @[@"Rank",@"TeamName",@"Played",@"Won",@"Lost",@"Tied",@"NoResults",@"NETRUNRESULT",@"Points"];
 //
 //    headingButtonNames = @[@"Rank",@"Team",@"Played",@"Won",@"Lost",@"Tied",@"N/R",@"Net RR",@"Pts"];
-
-    
 //    rankArray = [[NSMutableArray alloc] initWithObjects:@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", nil];
 //    teamArray = [[NSMutableArray alloc] initWithObjects:@"CKS", @"RR", @"MI", @"KXIP", @"SRH", @"DD", @"KKR", @"RCB", nil];
 //    playedArray = [[NSMutableArray alloc] initWithObjects:@"14", @"14", @"14", @"14", @"14", @"14", @"14", @"14", nil];
@@ -45,6 +43,7 @@
 //    pointsArray = [[NSMutableArray alloc] initWithObjects:@"12", @"12", @"12", @"12", @"12", @"12", @"12", @"12", nil];
     
     [self StandingsWebservice];
+    [self customnavigationmethod];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,22 +51,59 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)customnavigationmethod
+{
+    CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    
+    [self.navigationView addSubview:objCustomNavigation.view];
+    
+    BOOL isBackEnable = [[NSUserDefaults standardUserDefaults] boolForKey:@"BACK"];
+    
+    if (isBackEnable) {
+        objCustomNavigation.menu_btn.hidden =YES;
+        objCustomNavigation.btn_back.hidden =NO;
+        [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else
+    {
+        objCustomNavigation.menu_btn.hidden =NO;
+        objCustomNavigation.btn_back.hidden =YES;
+        [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+}
+
+-(void)actionBack
+{
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"BACK"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [appDel.frontNavigationController popViewControllerAnimated:YES];
+    
+}
 
 #pragma mark - UITableViewDataSource
-    // number of section(s), now I assume there is only 1 section
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return IS_IPAD ? 50 : 45;
 }
     // number of row in the section, I assume there is only 1 row
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (resultArray.count > 10) {
-        self.tblHeight.constant = 45* 10;
+        self.tblHeight.constant = (IS_IPAD ? 50 : 45) * 10;
     }
-    else if (resultArray.count > 0)
+    else //if (resultArray.count > 0)
     {
-        self.tblHeight.constant = 45* resultArray.count;
+        self.tblHeight.constant = (IS_IPAD ? 50 : 45) * resultArray.count;
     }
     
     [self.standingsTableView updateConstraintsIfNeeded];
@@ -96,7 +132,7 @@
     
     if (indexPath.row >= 0 && indexPath.row <= 3) {
         
-        cell.backgroundColor = [UIColor yellowColor];
+        cell.backgroundColor = [UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:81.0/255.0 alpha:0.5];
     }
     else
     {
@@ -104,7 +140,7 @@
 
     }
 
-    
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;
 }
 

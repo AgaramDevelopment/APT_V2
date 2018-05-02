@@ -56,12 +56,17 @@
 {
     [super viewWillAppear:animated];
     
-    selctedTabLeading.constant = [self.battingBtn frame].origin.x +[self.battingBtn frame].size.width/4;
-    selectedTabWidth.constant = [self.battingBtn frame].size.width/2;
+    dispatch_async(dispatch_get_main_queue(), ^{
+       
+        selctedTabLeading.constant = [self.battingBtn frame].origin.x +[self.battingBtn frame].size.width/4;
+        selectedTabWidth.constant = [self.battingBtn frame].size.width/2;
+        
+        [UIView animateWithDuration:0.1 animations:^{
+            [self.lblSelectedTab layoutIfNeeded];
+        }];
+
+    });
     
-    [UIView animateWithDuration:0.1 animations:^{
-        [self.lblSelectedTab layoutIfNeeded];
-    }];
 
 }
 
@@ -232,12 +237,18 @@
 }
 - (IBAction)onClickBatting:(id)sender {
     
-    selctedTabLeading.constant = [sender frame].origin.x +[sender frame].size.width/4;
-    selectedTabWidth.constant = [sender frame].size.width/2;
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        [self.lblSelectedTab layoutIfNeeded];
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        selctedTabLeading.constant = [sender frame].origin.x +[sender frame].size.width/4;
+        selectedTabWidth.constant = [sender frame].size.width/2;
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.lblSelectedTab layoutIfNeeded];
+        }];
+
+    });
+
+        
 
 //    [self setInningsBySelection:@"1"];
     [self loadContainerView : @"1"];
@@ -246,12 +257,18 @@
 }
 - (IBAction)onClickOverView:(id)sender {
     
-    selctedTabLeading.constant = [sender frame].origin.x +[sender frame].size.width/4;
-    selectedTabWidth.constant = [sender frame].size.width/2;
     
-    [UIView animateWithDuration:0.3 animations:^{
-        [self.lblSelectedTab layoutIfNeeded];
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        selctedTabLeading.constant = [sender frame].origin.x +[sender frame].size.width/4;
+        selectedTabWidth.constant = [sender frame].size.width/2;
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.lblSelectedTab layoutIfNeeded];
+        }];
+
+    });
+
     
 //    [self setInningsBySelection:@"2"];
     [self loadContainerView : @"2"];
@@ -260,18 +277,23 @@
 
 - (IBAction)onClickOverBlock:(id)sender {
     
-    selctedTabLeading.constant = [sender frame].origin.x +[sender frame].size.width/4;
-    selectedTabWidth.constant = [sender frame].size.width/2;
     
-    [UIView animateWithDuration:0.3 animations:^{
-        [self.lblSelectedTab layoutIfNeeded];
-    }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        selctedTabLeading.constant = [sender frame].origin.x +[sender frame].size.width/4;
+        selectedTabWidth.constant = [sender frame].size.width/2;
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.lblSelectedTab layoutIfNeeded];
+        }];
+
+    });
+
 
 //    [self setInningsBySelection:@"3"];
     [self loadContainerView : @"3"];
     
 }
-
 
 
 @end

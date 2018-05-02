@@ -185,7 +185,7 @@
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xUS-Uu-l4P">
                             <rect key="frame" x="233" y="45" width="82" height="30"/>
-                            <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                             <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                             <inset key="imageEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -480,13 +480,14 @@
                 </toolbar>
                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aaB-XF-FuC">
                     <rect key="frame" x="0.0" y="44" width="297" height="162"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="g8f-tM-4PO"/>
                         <outlet property="delegate" destination="-1" id="eGQ-bX-4Kg"/>
                     </connections>
                 </pickerView>
             </subviews>
-            <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.80000000000000004" green="0.90196078430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="aaB-XF-FuC" firstAttribute="bottom" secondItem="8qF-6p-3OQ" secondAttribute="bottom" id="7qR-LC-7RL"/>
                 <constraint firstItem="5vv-mR-XHB" firstAttribute="leading" secondItem="8qF-6p-3OQ" secondAttribute="leading" id="IDl-GX-F8y"/>

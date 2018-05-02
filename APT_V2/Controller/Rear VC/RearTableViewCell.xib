@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-SemiBold.otf">
+            <string>Montserrat-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="RearTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfe-Je-VGh">
+                        <rect key="frame" x="51" y="6" width="264" height="31"/>
+                        <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="17"/>
+                        <color key="textColor" red="0.27450980390000002" green="0.68627450980000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fGs-GG-w3z">
+                        <rect key="frame" x="10" y="6" width="31" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="31" id="KRu-eP-IKs"/>
+                            <constraint firstAttribute="height" constant="31" id="ZSf-WF-cM6"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lzc-sQ-T3f">
+                        <rect key="frame" x="0.0" y="42.5" width="320" height="0.5"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.90196078430000004" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="jhG-ov-5eT"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="fGs-GG-w3z" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="79o-VI-YfJ"/>
+                    <constraint firstItem="cfe-Je-VGh" firstAttribute="leading" secondItem="fGs-GG-w3z" secondAttribute="trailing" constant="10" id="A0e-7Q-SEj"/>
+                    <constraint firstItem="fGs-GG-w3z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="KYf-xP-bIf"/>
+                    <constraint firstItem="cfe-Je-VGh" firstAttribute="top" secondItem="fGs-GG-w3z" secondAttribute="top" id="WsX-E0-3Bl"/>
+                    <constraint firstAttribute="trailing" secondItem="Lzc-sQ-T3f" secondAttribute="trailing" id="acw-V1-pmR"/>
+                    <constraint firstAttribute="bottom" secondItem="Lzc-sQ-T3f" secondAttribute="bottom" constant="1" id="jHQ-D7-s7w"/>
+                    <constraint firstAttribute="trailing" secondItem="cfe-Je-VGh" secondAttribute="trailing" constant="5" id="kiJ-C5-8q9"/>
+                    <constraint firstItem="cfe-Je-VGh" firstAttribute="bottom" secondItem="fGs-GG-w3z" secondAttribute="bottom" id="lMY-oK-q5f"/>
+                    <constraint firstItem="Lzc-sQ-T3f" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mn7-L4-z3N"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="img" destination="fGs-GG-w3z" id="4un-cq-XDQ"/>
+                <outlet property="lblName" destination="cfe-Je-VGh" id="dtt-Lu-I8w"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

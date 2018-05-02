@@ -165,6 +165,7 @@
 @property (weak, nonatomic) IBOutlet UIView *viewTeamOvers;
 @property (weak, nonatomic) IBOutlet UIButton *btnAllOvers;
 @property (weak, nonatomic) IBOutlet UIButton *btnAllWinTeams;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *viewTeamWidth;
 
 
 @end

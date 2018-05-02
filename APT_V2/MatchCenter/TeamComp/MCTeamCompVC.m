@@ -9,7 +9,6 @@
 #import "MCTeamCompVC.h"
 #import "MCTeamCompCVC.h"
 #import "CustomNavigation.h"
-//#import "CustomNavigation.h"
 #import "SWRevealViewController.h"
 #import "MCTeamPlayersCompCell.h"
 #import "AppCommon.h"
@@ -2328,7 +2327,7 @@
         
         dropVC.array = [COMMON getCorrespondingTeamName:Competitionlbl.text];
         dropVC.key = @"TeamName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropviewComp2.frame), CGRectGetMaxY(dropviewComp2.superview.frame)+60, CGRectGetWidth(dropviewComp2.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropviewComp2.frame), CGRectGetMaxY(dropviewComp2.superview.frame)+70, CGRectGetWidth(dropviewComp2.frame), 300)];
         
         
     }
@@ -2336,7 +2335,7 @@
     {
         dropVC.array = appDel.ArrayCompetition;
         dropVC.key = @"CompetitionName";
-        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropviewComp1.frame), CGRectGetMaxY(dropviewComp1.superview.frame)+60, CGRectGetWidth(dropviewComp1.frame), 300)];
+        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropviewComp1.frame), CGRectGetMaxY(dropviewComp1.superview.frame)+70, CGRectGetWidth(dropviewComp1.frame), 300)];
         
     }
     

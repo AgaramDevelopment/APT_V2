@@ -76,7 +76,7 @@
         if (IS_IPAD) {
             dropDownTblView.frame = CGRectMake(self.selectTeamView.frame.origin.x, self.selectTeamView.frame.origin.y+self.selectTeamView.frame.size.height+80, self.selectTeamView.frame.size.width, teamArray.count >= 5 ? 150 : teamArray.count*45);
         } else {
-            dropDownTblView.frame = CGRectMake(self.selectTeamView.frame.origin.x, self.selectTeamView.frame.origin.y+self.selectTeamView.frame.size.height+60, self.selectTeamView.frame.size.width, teamArray.count >= 5 ? 150 : teamArray.count*45);
+            dropDownTblView.frame = CGRectMake(self.selectTeamView.frame.origin.x, self.selectTeamView.frame.origin.y+self.selectTeamView.frame.size.height+70, self.selectTeamView.frame.size.width, teamArray.count >= 5 ? 150 : teamArray.count*45);
         }
         
         

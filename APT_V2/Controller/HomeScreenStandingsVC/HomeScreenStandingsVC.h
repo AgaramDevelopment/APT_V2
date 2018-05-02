@@ -21,5 +21,6 @@
 @property (strong, nonatomic) IBOutlet UIView *shadowView;
 @property (strong, nonatomic) IBOutlet UITableView *standingsTableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tblHeight;
+@property (weak, nonatomic) IBOutlet UIView *navigationView;
 
 @end

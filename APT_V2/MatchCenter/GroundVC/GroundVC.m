@@ -933,13 +933,16 @@
         [dateFormatters setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
         NSDate *dates = [dateFormatters dateFromString:currentDate];
         
+
         NSDateFormatter* dfs = [[NSDateFormatter alloc]init];
-        [dfs setDateFormat:@"dd MMM yyyy"];
+//        [dfs setDateFormat:@"dd MMM yyyy"];
+        [dfs setDateFormat:@"dd MMM''yy"];
         NSString * ondateStr = [dfs stringFromDate:dates];
 
         NSString *dateNvenue = [NSString stringWithFormat:@"%@ @ %@", ondateStr, [self checkNull:[[recentMatchesArray objectAtIndex:indexPath.row] valueForKey:@"Venue"]]];
-        cell.Datelbl.text = dateNvenue;
-        
+//        cell.Datelbl.text = dateNvenue;
+        cell.lblOwnStats.text = dateNvenue;
+
         return cell;
         
     }
@@ -1696,7 +1699,7 @@
 //
 //        dropVC.array = arr;
 //        dropVC.key = @"Yvalue";
-//        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(lineView.frame), CGRectGetMaxY(lineView.superview.frame)+60+50, CGRectGetWidth(lineView.frame), 300)];
+//        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(lineView.frame), CGRectGetMaxY(lineView.superview.frame)+70+50, CGRectGetWidth(lineView.frame), 300)];
 //
 //    }
     

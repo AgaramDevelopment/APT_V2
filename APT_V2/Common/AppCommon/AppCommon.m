@@ -278,13 +278,7 @@ AppCommon *sharedCommon = nil;
 
 +(void)showLoading
 {
-//    if (appDel.window.subviews containsObject:) {
-//
-//    }
     NSLog(@"%@ ",appDel.window.subviews);
-    
-//    [MBProgressHUD showHUDAddedTo:appDel.window animated:YES];
-//    [MBProgressHUD]
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:appDel.window animated:YES];
     [hud setMode:MBProgressHUDModeIndeterminate];

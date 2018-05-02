@@ -563,7 +563,17 @@
 {
     [AppCommon showLoading ];
     
-    NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    NSString *playerCode;
+    if([AppCommon isCoach])
+    {
+        
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    }
+    else
+    {
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    }
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     NSDate *matchdate = [NSDate date];
     [dateFormat setDateFormat:@"MM-dd-yyyy"];
@@ -781,7 +791,17 @@ if([_isToday isEqualToString:@"yes"])
         
        
         NSString *usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
-        NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+        //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+        NSString *playerCode;
+        if([AppCommon isCoach])
+        {
+            
+            playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+        }
+        else
+        {
+            playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+        }
         
         NSMutableArray *traininglist = [[NSMutableArray alloc]init];
         for(int i=0;i<sessionArray.count;i++)
@@ -853,7 +873,17 @@ if([_isToday isEqualToString:@"yes"])
         
         
         NSString *usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
-        NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+       // NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+        NSString *playerCode;
+        if([AppCommon isCoach])
+        {
+            
+            playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+        }
+        else
+        {
+            playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+        }
         
         NSMutableArray *traininglist = [[NSMutableArray alloc]init];
         for(int i=0;i<sessionArray.count;i++)
@@ -941,7 +971,17 @@ if([_isToday isEqualToString:@"yes"])
 {
     [AppCommon showLoading ];
     
-    NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    NSString *playerCode;
+    if([AppCommon isCoach])
+    {
+        
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    }
+    else
+    {
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    }
     
     
 //    NSString *selectedDate = self.datelbl.text;

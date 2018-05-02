@@ -1030,11 +1030,11 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tbr-2Q-03h">
                     <rect key="frame" x="10" y="184" width="355" height="200"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pnw-cn-F1O">
-                            <rect key="frame" x="282" y="5" width="70" height="40"/>
+                        <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pnw-cn-F1O">
+                            <rect key="frame" x="265" y="0.0" width="90" height="50"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="70" id="Em8-CG-65R"/>
-                                <constraint firstAttribute="height" constant="40" id="P8V-hU-wP9"/>
+                                <constraint firstAttribute="width" constant="90" id="Sog-Fy-f8d"/>
+                                <constraint firstAttribute="height" constant="50" id="q7j-J1-GCM"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                             <state key="normal" title="Done">
@@ -1047,9 +1047,9 @@
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Pnw-cn-F1O" secondAttribute="trailing" id="LyO-gV-b73"/>
+                        <constraint firstItem="Pnw-cn-F1O" firstAttribute="top" secondItem="Tbr-2Q-03h" secondAttribute="top" id="Rdn-bP-XES"/>
                         <constraint firstAttribute="height" constant="200" id="Srv-pZ-HB3"/>
-                        <constraint firstItem="Pnw-cn-F1O" firstAttribute="top" secondItem="Tbr-2Q-03h" secondAttribute="top" constant="5" id="med-5Z-rbm"/>
-                        <constraint firstAttribute="trailing" secondItem="Pnw-cn-F1O" secondAttribute="trailing" constant="3" id="w02-Rm-bHv"/>
                     </constraints>
                 </view>
             </subviews>

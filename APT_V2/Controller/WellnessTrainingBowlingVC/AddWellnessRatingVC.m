@@ -62,6 +62,11 @@ NSString *metaSubCode4;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController.panGestureRecognizer setEnabled:NO];
+    [revealController.tapGestureRecognizer setEnabled:NO];
+    
     objWebservice = [[WebService alloc] init];
     [self.view_datepicker setHidden:YES];
     
@@ -74,6 +79,8 @@ NSString *metaSubCode4;
     self.SaveBtn.hidden = NO;
     self.UpdateBtn.hidden = YES;
     
+    [tab.swipeView setScrollEnabled:NO];
+    
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     NSDate *matchdate = [NSDate date];
     [dateFormat setDateFormat:@"MM-dd-yyyy"];
@@ -81,15 +88,24 @@ NSString *metaSubCode4;
     NSString * actualDate = [dateFormat stringFromDate:matchdate];
     self.datelbl.text = actualDate;
     [self metacodeWebservice];
+    [self DateWebservice];
+    
     
    
 }
 
+- (void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
+//    if (myTextField) {
+//        if ([myTextField canResignFirstResponder]) [myTextField resignFirstResponder];
+//    }
+//    [super touchesBegan: touches withEvent: event];
+}
 -(void)viewWillAppear:(BOOL)animated
 {
     SWRevealViewController *revealController = [self revealViewController];
-    [revealController.panGestureRecognizer setEnabled:YES];
-    [revealController.tapGestureRecognizer setEnabled:YES];
+    [revealController.panGestureRecognizer setEnabled:NO];
+    [revealController.tapGestureRecognizer setEnabled:NO];
+    [tab.swipeView setScrollEnabled:NO];
 }
 
 -(IBAction)sliderDidChange:(RGSColorSlider *)sender{
@@ -127,7 +143,7 @@ NSString *metaSubCode4;
     //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"dd-MM-yyyy"];
     
-    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,self.view_datepicker.frame.origin.y-180,self.view.frame.size.width,100)];
+    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,self.view_datepicker.frame.origin.y-140,self.view.frame.size.width,100)];
     
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     [datePicker setLocale:locale];
@@ -295,8 +311,54 @@ NSString *metaSubCode4;
     
     NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-    NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     NSString *usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
+    
+    NSString *playerCode;
+    if([AppCommon isCoach])
+    {
+        
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    }
+    else
+    {
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    }
+    
+    if([self.bodyWeightTxt.text isEqualToString:@""] || [self.bodyWeightTxt.text isEqual:[NSNull null]])
+    {
+        self.bodyWeightTxt.text =@"0";
+    }
+    
+    if([self.sleepHrTxt.text isEqualToString:@""] || [self.sleepHrTxt.text isEqual:[NSNull null]])
+    {
+        self.sleepHrTxt.text =@"0";
+    }
+    
+    if([self.fatTxt.text isEqualToString:@""] || [self.fatTxt.text isEqual:[NSNull null]] )
+    {
+        self.fatTxt.text =@"0";
+    }
+    
+    if([self.restingHrTxt.text isEqualToString:@""] || [self.restingHrTxt.text isEqual:[NSNull null]])
+    {
+        self.restingHrTxt.text =@"0";
+    }
+    
+    if([self.restingBpMaxTxt.text isEqualToString:@""] || [self.restingBpMaxTxt.text isEqual:[NSNull null]])
+    {
+        self.restingBpMaxTxt.text =@"0";
+    }
+    
+    if([self.restingBpMinTxt.text isEqualToString:@""] || [self.restingBpMinTxt.text isEqual:[NSNull null]])
+    {
+        self.restingBpMinTxt.text =@"0";
+    }
+    
+    if([urineColorNum isEqualToString:@""] || [urineColorNum isEqual:[NSNull null]])
+    {
+        urineColorNum =@"0";
+    }
     
     [objWebservice submit  :recordInsert :ClientCode :usercode:self.datelbl.text:playerCode:metaSubCode1:metaSubCode2:metaSubCode3:metaSubCode4 :self.bodyWeightTxt.text : self.sleepHrTxt.text : self.fatTxt.text : self.restingHrTxt.text : self.restingBpMaxTxt.text :self.restingBpMinTxt.text:urineColorNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
@@ -333,8 +395,17 @@ NSString *metaSubCode4;
 {
     [AppCommon showLoading ];
     
-    NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-    
+    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    NSString *playerCode;
+    if([AppCommon isCoach])
+    {
+        
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    }
+    else
+    {
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    }
     
     // NSString *urinecolor= @"0";
     
@@ -402,8 +473,20 @@ NSString *metaSubCode4;
     
     NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-    NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     NSString *usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
+    
+    
+    NSString *playerCode;
+    if([AppCommon isCoach])
+    {
+        
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    }
+    else
+    {
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    }
     
     [objWebservice UpdateWellness  :updateRecord :ClientCode :usercode :FetchedWorkLoadCode :fetchedDate:playerCode:metaSubCode1:metaSubCode2:metaSubCode3:metaSubCode4 :self.bodyWeightTxt.text : self.sleepHrTxt.text : self.fatTxt.text : self.restingHrTxt.text : self.restingBpMaxTxt.text :self.restingBpMinTxt.text:urineColorNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
@@ -729,12 +812,73 @@ NSString *metaSubCode4;
             [self.UrineColorBtn7 sendActionsForControlEvents:UIControlEventTouchUpInside];
         }
         
+        if(![[self.fetchArray valueForKey:@"BodyWeight"] isEqualToString:@"0"])
+        {
         self.bodyWeightTxt.text = [self.fetchArray valueForKey:@"BodyWeight"];
-        self.sleepHrTxt.text = [self.fetchArray valueForKey:@"SleepHours"];
-        self.fatTxt.text = [self.fetchArray valueForKey:@"Fat"];
-        self.restingHrTxt.text = [self.fetchArray valueForKey:@"RestingGHR"];
-        self.restingBpMaxTxt.text = [self.fetchArray valueForKey:@"RestingBPMAX"];
-        self.restingBpMinTxt.text = [self.fetchArray valueForKey:@"RestingBPMIN"];
+        }
+        else
+        {
+            self.bodyWeightTxt.text = @"";
+        }
+        
+        
+        
+        if(![[self.fetchArray valueForKey:@"SleepHours"] isEqualToString:@"0"])
+        {
+            self.sleepHrTxt.text = [self.fetchArray valueForKey:@"SleepHours"];
+        }
+        else
+        {
+            self.sleepHrTxt.text = @"";
+        }
+        
+        
+        
+        if(![[self.fetchArray valueForKey:@"Fat"] isEqualToString:@"0"])
+        {
+            self.fatTxt.text = [self.fetchArray valueForKey:@"Fat"];
+        }
+        else
+        {
+            self.fatTxt.text = @"";
+        }
+        
+        
+        
+        if(![[self.fetchArray valueForKey:@"RestingGHR"] isEqualToString:@"0"])
+        {
+            self.restingHrTxt.text = [self.fetchArray valueForKey:@"RestingGHR"];
+        }
+        else
+        {
+            self.restingHrTxt.text = @"";
+        }
+        
+        
+        if(![[self.fetchArray valueForKey:@"RestingBPMAX"] isEqualToString:@"0"])
+        {
+            self.restingBpMaxTxt.text = [self.fetchArray valueForKey:@"RestingBPMAX"];
+        }
+        else
+        {
+            self.restingBpMaxTxt.text = @"";
+        }
+        
+        if(![[self.fetchArray valueForKey:@"RestingBPMIN"] isEqualToString:@"0"])
+        {
+            self.restingBpMinTxt.text = [self.fetchArray valueForKey:@"RestingBPMIN"];
+        }
+        else
+        {
+            self.restingBpMinTxt.text = @"";
+        }
+        
+        
+//        self.sleepHrTxt.text = [self.fetchArray valueForKey:@"SleepHours"];
+//        self.fatTxt.text = [self.fetchArray valueForKey:@"Fat"];
+//        self.restingHrTxt.text = [self.fetchArray valueForKey:@"RestingGHR"];
+//        self.restingBpMaxTxt.text = [self.fetchArray valueForKey:@"RestingBPMAX"];
+//        self.restingBpMinTxt.text = [self.fetchArray valueForKey:@"RestingBPMIN"];
         
         
         NSString *datee = [self.fetchArray valueForKey:@"WorkLoadDate"];
@@ -1113,6 +1257,8 @@ NSString *metaSubCode4;
      self.StressRatinglbl.text = [NSString stringWithFormat:@"%d/7",(int)self.stressSlider.value];
     
 }
+
+
 
 
 @end

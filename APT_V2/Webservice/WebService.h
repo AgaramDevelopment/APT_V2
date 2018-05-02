@@ -29,14 +29,14 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 //#define BASE_URL    @"http://13.126.151.253:9001/AGAPTService.svc/"
 
 //Local Dev - URL Path
-#define BASE_URL   @"http://192.168.0.154:8029/AGAPTService.svc/"
+//#define BASE_URL   @"http://192.168.0.154:8029/AGAPTService.svc/"
 #define IMAGE_URL   @"http://192.168.0.154:8030/"
 #define Video_URL   @"http://192.168.0.154:8029/"
 #define BASE_Image_URL @"http://192.168.0.154:8029/bcciapp/"
 
 
 //LIVE
-//#define BASE_URL    @"http://service.alphaprotracker.com/AGAPTService.svc/"
+#define BASE_URL    @"http://service.alphaprotracker.com/AGAPTService.svc/"
 
 
 #define URL_FOR_RESOURCE(RESOURCE) [NSString stringWithFormat:@"%@%@",BASE_URL,RESOURCE]

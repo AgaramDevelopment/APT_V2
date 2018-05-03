@@ -1212,7 +1212,9 @@
 {
     self.traingViewHeight.constant = 350;
     isTraingLoadExpand = NO;
-    [self viewDidLoad];
+   // [self viewDidLoad];
+    [self FetchWebservice];
+    [self FetchTrainingWebservice];
     [self setTotalScroll];
     [self.RootTrainingView updateConstraintsIfNeeded];
 }

@@ -39,6 +39,9 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *countViewWidth;
 @property (strong, nonatomic) IBOutlet UIView *todayMainView;
 
+@property (strong, nonatomic) IBOutlet UIView *ballsView;
+@property (strong, nonatomic) IBOutlet UILabel *bowledlblname;
+
     //Donar Charts
 @property (strong, nonatomic) IBOutlet NSMutableArray *markers;
 

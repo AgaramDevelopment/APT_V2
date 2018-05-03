@@ -125,6 +125,11 @@ NSString *metaSubCode4;
     
 }
 
+-(BOOL) textFieldShouldReturn:(UITextField*) theTextField{
+    [theTextField resignFirstResponder];
+    return NO;
+}
+
 - (IBAction)sliderGesture:(id)sender {
     
     [tab.swipeView setScrollEnabled:NO];

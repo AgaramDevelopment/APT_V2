@@ -16,6 +16,7 @@
 #import "CategoryTableCell.h"
 #import "WellnessTrainingBowlingVC.h"
 #import "TrainingLoadVC.h"
+@import drCharts;
 
 @interface TrainingLoadUpdateVC ()<PieChartViewDelegate,PieChartViewDataSource>
 {
@@ -36,6 +37,9 @@
     
     NSString *ActivityCode;
     NSString *rpeCode;
+    NSString *TodayTotalCount;
+    
+    CircularChart *circleChart;
     
 }
 
@@ -181,7 +185,14 @@
     [dic setObject:[NSString stringWithFormat:@"%d",rpecount] forKey:@"rpeValue"];
     [dic setObject:rpeCode forKey:@"RpeCode"];
     [dic setObject:[NSString stringWithFormat:@"%d",timecount] forKey:@"timeValue"];
-    [dic setObject:self.ballslbl.text forKey:@"ballsValue"];
+    //[dic setObject:self.ballslbl.text forKey:@"ballsValue"];
+    if(![self.ballslbl.text isEqualToString:@""] || ![self.ballslbl.text isEqual:[NSNull null]])
+    {
+        [dic setObject:self.ballslbl.text forKey:@"ballsValue"];
+    }
+    else{
+        [dic setObject:@"0" forKey:@"ballsValue"];
+    }
     
     [sessionArray replaceObjectAtIndex:selectedActivity withObject:dic];
     
@@ -195,7 +206,7 @@
             [self.markers addObject:[[sessionArray valueForKey:@"Value"] objectAtIndex:i]];
         }
         //[self samplePieChart];
-        [_pieChartView reloadData];
+       // [_pieChartView reloadData];
         
         int total=0;
         for(int i=0;i<self.markers.count;i++)
@@ -205,6 +216,9 @@
             total=total+value;
         }
         self.totalCountlbl.text = [NSString stringWithFormat:@"%d",total];
+        
+        //[self TodayCircularChart];
+        //[circleChart reloadCircularChart];
     }
     
     self.activitylbl.text = @"";
@@ -230,7 +244,14 @@
     [dic setObject:[NSString stringWithFormat:@"%d",rpecount] forKey:@"rpeValue"];
     [dic setObject:rpeCode forKey:@"RpeCode"];
     [dic setObject:[NSString stringWithFormat:@"%d",timecount] forKey:@"timeValue"];
+    
+    if(![self.ballslbl.text isEqualToString:@""] || ![self.ballslbl.text isEqual:[NSNull null]])
+    {
     [dic setObject:self.ballslbl.text forKey:@"ballsValue"];
+    }
+    else{
+        [dic setObject:@"0" forKey:@"ballsValue"];
+    }
    if(sessionArray.count >0)
    {
        BOOL keyValue1=NO;
@@ -266,7 +287,7 @@
             [self.markers addObject:[[sessionArray valueForKey:@"Value"] objectAtIndex:i]];
         }
         //[self samplePieChart];
-         [_pieChartView reloadData];
+         //[_pieChartView reloadData];
         
         int total=0;
         for(int i=0;i<self.markers.count;i++)
@@ -276,6 +297,10 @@
             total=total+value;
         }
         self.totalCountlbl.text = [NSString stringWithFormat:@"%d",total];
+        
+        [circleChart removeFromSuperview];
+        [self TodayCircularChart];
+        //[circleChart reloadCircularChart];
     }
     
     self.activitylbl.text = @"";
@@ -382,10 +407,24 @@
     {
         if(isActivity==YES)
         {
+            if(indexPath.row == 6)
+            {
+                self.bowledlblname.hidden = NO;
+                self.ballsView.hidden = NO;
+                self.activitylbl.text = [[self.DropdownDataArray valueForKey:@"MetaSubcodeDescription"] objectAtIndex:indexPath.row];
+                ActivityCode = [[self.DropdownDataArray valueForKey:@"MetaSubCode"] objectAtIndex:indexPath.row];
+                self.tapView.hidden = YES;
+                [self removeAnimate];
+            }
+            else
+            {
+                self.bowledlblname.hidden = YES;
+                self.ballsView.hidden = YES;
         self.activitylbl.text = [[self.DropdownDataArray valueForKey:@"MetaSubcodeDescription"] objectAtIndex:indexPath.row];
         ActivityCode = [[self.DropdownDataArray valueForKey:@"MetaSubCode"] objectAtIndex:indexPath.row];
         self.tapView.hidden = YES;
             [self removeAnimate];
+            }
         }
         
         if(isRpe==YES)
@@ -407,7 +446,17 @@
         
         self.rpelbl.text = [[sessionArray valueForKey:@"rpeValue"] objectAtIndex:indexPath.row];
         self.timelbl.text = [[sessionArray valueForKey:@"timeValue"] objectAtIndex:indexPath.row];
+        if([self.activitylbl.text isEqualToString:@"Bowling"])
+        {
+            self.bowledlblname.hidden = NO;
+            self.ballsView.hidden = NO;
         self.ballslbl.text = [[sessionArray valueForKey:@"ballsValue"] objectAtIndex:indexPath.row];
+        }
+        else
+        {
+            self.bowledlblname.hidden = YES;
+            self.ballsView.hidden = YES;
+        }
         
         ActivityCode = [[sessionArray valueForKey:@"ActivityCode"] objectAtIndex:indexPath.row];
         rpeCode = [[sessionArray valueForKey:@"RpeCode"] objectAtIndex:indexPath.row];
@@ -644,7 +693,7 @@ if([_isToday isEqualToString:@"yes"])
             [self.markers addObject:[[sessionArray valueForKey:@"Value"] objectAtIndex:i]];
         }
         //[self samplePieChart];
-        [_pieChartView reloadData];
+        //[_pieChartView reloadData];
         
         int total=0;
         for(int i=0;i<self.markers.count;i++)
@@ -654,6 +703,8 @@ if([_isToday isEqualToString:@"yes"])
             total=total+value;
         }
         self.totalCountlbl.text = [NSString stringWithFormat:@"%d",total];
+        [self TodayCircularChart];
+        //[circleChart reloadCircularChart];
     }
     
     
@@ -700,7 +751,7 @@ if([_isToday isEqualToString:@"yes"])
                 [self.markers addObject:[[sessionArray valueForKey:@"Value"] objectAtIndex:i]];
             }
             //[self samplePieChart];
-            [_pieChartView reloadData];
+            //[_pieChartView reloadData];
             
             int total=0;
             for(int i=0;i<self.markers.count;i++)
@@ -710,6 +761,8 @@ if([_isToday isEqualToString:@"yes"])
                 total=total+value;
             }
             self.totalCountlbl.text = [NSString stringWithFormat:@"%d",total];
+            [self TodayCircularChart];
+            //[circleChart reloadCircularChart];
         }
     }
 }
@@ -1052,6 +1105,95 @@ if([_isToday isEqualToString:@"yes"])
      }];
     
 }
+
+
+-(void)TodayCircularChart
+{
+    circleChart = [[CircularChart alloc] initWithFrame:CGRectMake(0,0,self.todayMainView.frame.size.width+20,self.todayMainView.frame.size.height+20)];
+    //yesterdayChart = [[CircularChart alloc] initWithFrame:CGRectMake(0,0,self.yesterdayMainView.frame.size.width,self.yesterdayMainView.frame.size.height)];
+    
+    [circleChart setDataSource:self];
+    [circleChart setDelegate:self];
+    [circleChart setLegendViewType:LegendTypeHorizontal];
+    [circleChart setShowCustomMarkerView:TRUE];
+    [circleChart drawCircularChart];
+    [self.todayMainView addSubview:circleChart];
+    
+//    UILabel *label = [[UILabel alloc] init];
+//    [label setFont:[UIFont systemFontOfSize:12]];
+//    [label setTextAlignment:NSTextAlignmentCenter];
+//    [label setText:yesterdayTotalCount];
+//    [label setFrame:CGRectMake(0, 0, 100, 30)];
+//    [label setAdjustsFontSizeToFitWidth:TRUE];
+//    [label setCenter:yesterdayChart.center];
+//    [yesterdayChart addSubview:label];
+}
+
+#pragma mark CircularChartDataSource
+- (CGFloat)strokeWidthForCircularChart{
+    return 20;
+}
+
+- (NSInteger)numberOfValuesForCircularChart{
+    
+        return self.markers.count;
+}
+
+- (UIColor *)colorForValueInCircularChartWithIndex:(NSInteger)lineNumber{
+    NSInteger aRedValue = arc4random()%255;
+    NSInteger aGreenValue = arc4random()%255;
+    NSInteger aBlueValue = arc4random()%255;
+    UIColor *randColor = [UIColor colorWithRed:aRedValue/255.0f green:aGreenValue/255.0f blue:aBlueValue/255.0f alpha:1.0f];
+    return randColor;
+}
+
+- (NSString *)titleForValueInCircularChartWithIndex:(NSInteger)index{
+    //return [NSString stringWithFormat:@"",[[self.todaysLoadArray valueForKey:@"ACTIVITYTYPENAME"] objectAtIndex:index]];
+   
+//    if(_isToday)
+//    {
+//        return [[self.TodayLoadArray valueForKey:@"ACTIVITYTYPENAME"] objectAtIndex:index];
+//    }
+//    else
+//    {
+//        return [[self.YesterdayLoadArray valueForKey:@"ACTIVITYTYPENAME"] objectAtIndex:index];
+//    }
+    
+     return [[sessionArray valueForKey:@"ActivityName"] objectAtIndex:index];
+}
+
+- (NSNumber *)valueInCircularChartWithIndex:(NSInteger)index{
+        int value = [[self.markers objectAtIndex:index] intValue];
+        return [NSNumber numberWithInt:value];
+}
+
+- (UIView *)customViewForCircularChartTouchWithValue:(NSNumber *)value{
+    UIView *view = [[UIView alloc] init];
+    [view setBackgroundColor:[UIColor whiteColor]];
+    [view.layer setCornerRadius:4.0F];
+    [view.layer setBorderWidth:1.0F];
+    [view.layer setBorderColor:[[UIColor lightGrayColor] CGColor]];
+    [view.layer setShadowColor:[[UIColor blackColor] CGColor]];
+    [view.layer setShadowRadius:2.0F];
+    [view.layer setShadowOpacity:0.3F];
+    
+    UILabel *label = [[UILabel alloc] init];
+    [label setFont:[UIFont systemFontOfSize:12]];
+    [label setTextAlignment:NSTextAlignmentCenter];
+    [label setText:[NSString stringWithFormat:@"Circular Data: %@", value]];
+    [label setFrame:CGRectMake(0, 0, 100, 30)];
+    [label setAdjustsFontSizeToFitWidth:TRUE];
+    [view addSubview:label];
+    
+    [view setFrame:label.frame];
+    return view;
+}
+
+#pragma mark CircularChartDelegate
+- (void)didTapOnCircularChartWithValue:(NSString *)value{
+    NSLog(@"Circular Chart: %@",value);
+}
+
 
 
 

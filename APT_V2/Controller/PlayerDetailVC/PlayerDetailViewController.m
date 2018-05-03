@@ -552,9 +552,18 @@
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"BACK"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
+    NSString *athletCode = [self.selectedPlayerArray valueForKey:@"AthleteCode"];
+    [[NSUserDefaults standardUserDefaults] setObject:athletCode forKey:@"SelectedPlayerCode"];
+    NSString *userRefCode =  [[NSUserDefaults standardUserDefaults]
+                              stringForKey:@"SelectedPlayerCode"];
+    NSLog(@"userRefCode:%@", userRefCode);
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
     if ([sender tag] == 0) { // Assessment
         
         selectedVC = [ViewController new];
+        ViewController* VC = selectedVC;
+        VC.selectedPlayerCode = athletCode;
     }
     else if ([sender tag] == 1) // Illness
     {
@@ -573,12 +582,6 @@
         selectedVC = [WellnessTrainingBowlingVC new];
     }
     
-    NSString *athletCode = [self.selectedPlayerArray valueForKey:@"AthleteCode"];
-    [[NSUserDefaults standardUserDefaults] setObject:athletCode forKey:@"SelectedPlayerCode"];
-    NSString *userRefCode =  [[NSUserDefaults standardUserDefaults]
-                              stringForKey:@"SelectedPlayerCode"];
-    NSLog(@"userRefCode:%@", userRefCode);
-    [[NSUserDefaults standardUserDefaults] synchronize];
     [appDel.frontNavigationController pushViewController:selectedVC animated:YES];
 }
 

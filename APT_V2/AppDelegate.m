@@ -62,24 +62,22 @@
     tabHome = [TabHomeVC new];
     tabHome.protocol = self;
     
-//    // ***** UUID for installed Devices Checking in Server side ***** //
-//    NSString *UDID = [BPXLUUIDHandler UUID];
-//    NSLog(@"UDID:%@", UDID);
-
     
     UIViewController *frontViewController;
     [COMMON getIPLteams];
     
-    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
-    NSString *plyRolecode = @"ROL0000002";
+//    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
+//    NSString *plyRolecode = @"ROL0000002";
     
-    if([rolecode isEqualToString:plyRolecode])
+    if(![AppCommon isCoach])
     {
         frontViewController = (isLogin ? [TabHomeVC new] : [LoginVC new] );
     } else {
         frontViewController = (isLogin ? [TeamsVC new] : [LoginVC new] );
     }
     
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"BACK"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     rearViewController = [[RearViewController alloc] init];
     frontNavigationController = [[UINavigationController alloc] initWithRootViewController:frontViewController];
@@ -286,10 +284,10 @@
 -(void)PushWebservice :(NSMutableDictionary *)reqdic
 {
     
-    if([COMMON isInternetReachable])
-    {
-        
-        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",pushServiceKey]];
+    if(![COMMON isInternetReachable])
+        return;
+    
+        NSString *URLString =  URL_FOR_RESOURCE(pushServiceKey);
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -302,7 +300,6 @@
             
             if(responseObject >0)
             {
-                //if([[responseObject valueForKey:@"Message"] isEqualToString:@"PSUCCESS"])
                 BOOL status = [responseObject valueForKey:@"Status"];
                 if(status == 1)
                 {
@@ -322,7 +319,6 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"failed");
         }];
-    }
     
 }
 

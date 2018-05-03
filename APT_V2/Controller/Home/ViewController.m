@@ -46,7 +46,6 @@
 @property (nonatomic,strong) NSMutableArray * ObjSelectTestArray;
 @property (nonatomic,strong) NSString * usercode;
 @property (nonatomic,strong) NSString * clientCode;
-@property (nonatomic,strong) NSString * selectedPlayerCode;
 
 @property (nonatomic,strong) NSMutableArray * objContenArray;
 @property (nonatomic,strong) NSString * SelectScreenId;
@@ -73,7 +72,7 @@
 
 @synthesize txtRemarks,popupVC,lblNOData;
 
-@synthesize btnIgnore;
+@synthesize btnIgnore,selectedPlayerCode;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -125,19 +124,19 @@
     [self customnavigationmethod];
     ifSaveBtnClicked = NO;
     
-    if (!currentlySelectedDate) {
-        NSDateFormatter* format = [NSDateFormatter new];
-        [format setDateFormat:@"dd/MM/yyy"];
-        currentlySelectedDate = [format stringFromDate:[NSDate date]];
-        [btnDate setTitle:currentlySelectedDate forState:UIControlStateNormal];
-    }
+//    if (!currentlySelectedDate) {
+//        NSDateFormatter* format = [NSDateFormatter new];
+//        [format setDateFormat:@"dd/MM/yyy"];
+//        currentlySelectedDate = [format stringFromDate:[NSDate date]];
+//        [btnDate setTitle:currentlySelectedDate forState:UIControlStateNormal];
+//    }
 
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.selectedPlayerCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedPlayerCode"];
+//    self.selectedPlayerCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedPlayerCode"];
 
 }
 
@@ -179,7 +178,6 @@
     }
     
     [self.Shadowview updateConstraintsIfNeeded];
-    
     
 }
 
@@ -234,15 +232,97 @@
     
 }
 
+-(void)tableValuesMethodForEdit:(NSMutableArray *)TodayAsseementEntry
+{
+    NSLog(@"%@", TodayAsseementEntry);
+    
+    NSMutableArray * AssessmentTypeTest;
+    NSMutableArray * AssessmentNameArray;
+    NSMutableDictionary * MainDic = [[NSMutableDictionary alloc]init];
+    NSMutableArray * TestAsseementArray;
+
+    TestAsseementArray =  [self.objDBconnection TestByAssessment:clientCode :txtTitle.selectedCode :txtModule.selectedCode:currentlySelectedDate];
+
+    for (int i = 0; i <TestAsseementArray.count; i++)
+    {
+        NSMutableDictionary * tempDict = [[NSMutableDictionary alloc]init];
+        
+        AssessmentNameArray =[[NSMutableArray alloc]init];
+        [tempDict setValue:[[TestAsseementArray valueForKey:@"TestCode"] objectAtIndex:i] forKey:@"TestCode"];
+        [tempDict setValue:[[TestAsseementArray valueForKey:@"TestName"] objectAtIndex:i] forKey:@"TestName"];
+        [tempDict setValue:[[TestAsseementArray valueForKey:@"TestCode"] objectAtIndex:i] forKey:@"AssessmentTestCode"];
+        
+        NSString *assessmentTestCode = [[TestAsseementArray valueForKey:@"TestCode"] objectAtIndex:i];
+        NSDictionary * Screenid =  [self.objDBconnection ScreenId:txtTitle.selectedCode :assessmentTestCode];
+        NSLog(@" ScreenID %@", Screenid);
+        [tempDict setValue:Screenid[@"ScreenID"] forKey:@"ScreenID"];
+        [tempDict setValue:Screenid[@"version"] forKey:@"version"];
+        
+        NSString * Screencount =  [self.objDBconnection ScreenCount :txtTitle.selectedCode :assessmentTestCode];
+        
+        int count = [Screencount intValue];
+        
+        AssessmentTypeTest = [[NSMutableArray alloc]init];
+        if(count>0)
+        {
+            
+            AssessmentTypeTest = [self.objDBconnection AssementForm :Screenid[@"ScreenID"] :clientCode:txtModule.selectedCode:txtTitle.selectedCode :assessmentTestCode ];
+        }
+        
+        for(int j=0;j<AssessmentTypeTest.count;j++)
+        {
+            NSMutableDictionary* infoDictionary = [NSMutableDictionary new];
+            NSMutableDictionary * objDic = [[NSMutableDictionary alloc]init];
+            
+            [objDic setValue:[[AssessmentTypeTest valueForKey:@"TestTypeCode"] objectAtIndex:j] forKey:@"TestTypeCode"];
+            [objDic setValue:[[AssessmentTypeTest valueForKey:@"TestTypeName"] objectAtIndex:j] forKey:@"TestTypeName"];
+            [objDic setValue:Screenid[@"ScreenID"] forKey:@"ScreenID"];
+            [objDic setValue:Screenid[@"version"] forKey:@"version"];
+            
+            //            [infoDictionary addEntriesFromDictionary:objDic];
+            [infoDictionary setObject:[tempDict valueForKey:@"TestCode"] forKey:@"TestCode"];
+            [infoDictionary setObject:[objDic valueForKey:@"TestTypeCode"] forKey:@"TestTypeCode"];
+            [infoDictionary setObject:[objDic valueForKey:@"ScreenID"] forKey:@"ScreenID"];
+            [infoDictionary setObject:[objDic valueForKey:@"version"] forKey:@"version"];
+            
+            
+            NSDictionary* temp1 = [self getTestAttributesForScreenID:infoDictionary];
+            
+            if(temp1.count)
+            {
+                [objDic addEntriesFromDictionary:temp1];
+            }
+            
+            [objDic setValue:[tempDict valueForKey:@"AssessmentTestCode"] forKey:@"AssessmentTestCode"];
+            
+            
+            [AssessmentNameArray addObject:objDic];
+            
+        }
+        [tempDict setObject:AssessmentNameArray forKey:@"TestValues"];
+        [self.objContenArray addObject:tempDict];
+        
+    }
+
+}
+
 
 -(void)tableValuesMethod
 {
     
+    if (!currentlySelectedDate) {
+        NSDateFormatter* format = [NSDateFormatter new];
+        [format setDateFormat:@"dd/MM/yyy"];
+        currentlySelectedDate = [format stringFromDate:[NSDate date]];
+        [btnDate setTitle:currentlySelectedDate forState:UIControlStateNormal];
+    }
+
     if (!txtTitle.hasText || !txtModule.hasText) {
         
         NSLog(@"input required");
         return;
     }
+    
     
 //    [self.objDBconnection];
     
@@ -254,20 +334,28 @@
     self.objContenArray =[[NSMutableArray alloc]init];
     NSMutableArray * ComArray = [[NSMutableArray alloc]init];
     
+    
     if (AssessmentEntry.count) {
-        
+
+//        if (!self.selectedPlayerCode) {
+//            [AppCommon showAlertWithMessage:@"Please select Any player to Retrive Data"];
+//            return;
+//        }
+//
         TestAsseementArray =  [self.objDBconnection TestByAssessment:clientCode :txtTitle.selectedCode :txtModule.selectedCode:currentlySelectedDate];
-        
-        if (!self.selectedPlayerCode) {
-            [AppCommon showAlertWithMessage:@"Please select Any player to Retrive Data"];
-            return;
-        }
+//        isEdit = YES;
+//        [self tableValuesMethodForEdit:AssessmentEntry];
+//        return;
     }
     else {
-        
+
         TestAsseementArray = [self.objDBconnection TestByAssessmentAll:clientCode:txtTitle.selectedCode :txtModule.selectedCode];
+//        isEdit = NO;
 
     }
+    
+//    TestAsseementArray = [self.objDBconnection TestByAssessmentAll:clientCode:txtTitle.selectedCode :txtModule.selectedCode];
+
     
     NSLog(@"%@", TestAsseementArray);
     
@@ -328,11 +416,6 @@
             [objDic setValue:[tempDict valueForKey:@"AssessmentTestCode"] forKey:@"AssessmentTestCode"];
 
             
-            //            NSMutableArray * objArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:[self.SelectDetailDic valueForKey:@"AssessmentCode"] :usercode :self.ModuleCodeStr :[self.SelectDetailDic valueForKey:@"SelectDate"] :clientCode :TestTypeCode : self.SelectTestCodeStr];
-            
-            //            currentlySelectedDate = [currentlySelectedDate stringByAppendingString:@" 12:00:00 AM"];
-            //            NSMutableArray * objArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:txtTitle.selectedCode :usercode :txtModule.selectedCode : currentlySelectedDate:currentlySelectedDate :[tempDict valueForKey:@"TestTypeCode"] : [objDic valueForKey:@"TestTypeCode"]];
-            
             [AssessmentNameArray addObject:objDic];
             
         }
@@ -364,9 +447,6 @@
 -(NSMutableDictionary *)getTestAttributesForScreenID:(NSDictionary *)infoDictionary
 {
     
-    //    NSMutableArray * objArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:txtTitle.selectedCode :usercode :txtModule.selectedCode : currentlySelectedDate:currentlySelectedDate :[tempDict valueForKey:@"TestTypeCode"] : [objDic valueForKey:@"TestTypeCode"]];
-    
-    
     NSMutableArray* tempArray = [NSMutableArray new];
     
     NSString* AssTestCode = [infoDictionary valueForKey:@"TestCode"];
@@ -374,15 +454,16 @@
     NSString* ScreenID = [infoDictionary valueForKey:@"ScreenID"];
     NSString* testVersion = [infoDictionary valueForKey:@"version"];
     
-    isEdit = NO;
     
-    //    -(NSMutableArray *)getAssessmentEnrtyByDateTestType:(NSString *) assessmentCode:(NSString *) userCode:(NSString *) moduleCode :(NSString *) date:(NSString *) clientCode:(NSString *) testTypeCode:(NSString *) testCode
-    
-    
+//    NSMutableArray * AssessmentEntry =  [self.objDBconnection AssessmentEntryByDate :txtTitle.selectedCode  :usercode :txtModule.selectedCode:currentlySelectedDate:clientCode];
+
     NSMutableArray* isEditArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:txtTitle.selectedCode :usercode :txtModule.selectedCode :currentlySelectedDate :clientCode :AssTestTypeCode :AssTestCode];
-    
+
     if (isEditArray.count) {
         isEdit = YES;
+    }
+    else {
+        isEdit = NO;
     }
     
     if ([SCREEN_CODE_Rom isEqualToString:ScreenID]) {
@@ -392,7 +473,7 @@
             
             //            self.ObjSelectTestArray =[self.objDBConnection GetRomWithEntry:self.version :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :self.ModuleStr : self.SectionTestCodeStr :clientCode :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"] :self.SelectTestTypecode];
             
-            tempArray = [self.objDBconnection GetRomWithEntry: testVersion : txtTitle.selectedCode :txtModule.selectedCode :AssTestCode :clientCode :usercode :_selectedPlayerCode :currentlySelectedDate :AssTestTypeCode];
+            tempArray = [self.objDBconnection GetRomWithEntry: testVersion : txtTitle.selectedCode :txtModule.selectedCode :AssTestCode :clientCode :usercode :selectedPlayerCode :currentlySelectedDate :AssTestTypeCode];
             
             
         }
@@ -410,7 +491,7 @@
             
             //            -(NSMutableArray *) getSpecWithEnrty:(NSString*) version:(NSString*) assessmentCode:(NSString*) moduleCode:(NSString*) assessmentTestCode:(NSString *) clientCode: (NSString*) createdBy:(NSString*) player:(NSString*) assessmentDate:(NSString*) testTypeCode {
             
-            tempArray = [self.objDBconnection getSpecWithEnrty:testVersion : txtTitle.selectedCode :txtModule.selectedCode :AssTestCode :clientCode :usercode :_selectedPlayerCode :currentlySelectedDate :AssTestTypeCode];
+            tempArray = [self.objDBconnection getSpecWithEnrty:testVersion : txtTitle.selectedCode :txtModule.selectedCode :AssTestCode :clientCode :usercode :selectedPlayerCode :currentlySelectedDate :AssTestTypeCode];
             
         }else
         {
@@ -427,7 +508,7 @@
             
             //            -(NSMutableArray *) getMMTWithEnrty:(NSString *) version:(NSString *) moduleCode:(NSString*) assessmentTestCode:(NSString *) clientCode:(NSString *) assessmentCode:(NSString *) createdBy:(NSString *)  player:(NSString *) assessmentDate:(NSString *) testTypeCode
             
-            tempArray = [self.objDBconnection getMMTWithEnrty:testVersion : txtModule.selectedCode :AssTestCode :clientCode :txtTitle.selectedCode :usercode :_selectedPlayerCode :currentlySelectedDate :AssTestTypeCode];
+            tempArray = [self.objDBconnection getMMTWithEnrty:testVersion : txtModule.selectedCode :AssTestCode :clientCode :txtTitle.selectedCode :usercode :selectedPlayerCode :currentlySelectedDate :AssTestTypeCode];
             
         }
         else
@@ -446,7 +527,7 @@
             
             //            -(NSMutableArray *) getGaintWithEnrty:(NSString*) version:(NSString*) moduleCode:(NSString*) assessmentTestCode: (NSString*) clientCode:(NSString*) assessmentCode:(NSString*) createdBy:(NSString*) assessmentDate:(NSString*) player:(NSString*) testTypeCode
             
-            tempArray = [self.objDBconnection getGaintWithEnrty:testVersion  :txtModule.selectedCode :AssTestCode :clientCode : txtTitle.selectedCode :usercode :currentlySelectedDate :_selectedPlayerCode :AssTestTypeCode];
+            tempArray = [self.objDBconnection getGaintWithEnrty:testVersion  :txtModule.selectedCode :AssTestCode :clientCode : txtTitle.selectedCode :usercode :currentlySelectedDate :selectedPlayerCode :AssTestTypeCode];
             
         }
         else
@@ -465,7 +546,7 @@
             
             //            -(NSMutableArray *) getPostureWithEnrty:(NSString*) version:(NSString*) moduleCode:(NSString*) assessmentTestCode:(NSString*) clientCode:(NSString*) assessmentCode:(NSString*) createdBy:(NSString*) player:(NSString*) assessmentDate:(NSString*) testTypeCode
             
-            tempArray = [self.objDBconnection getPostureWithEnrty:testVersion  :txtModule.selectedCode :AssTestCode :clientCode : txtTitle.selectedCode:usercode :_selectedPlayerCode :currentlySelectedDate :AssTestTypeCode];
+            tempArray = [self.objDBconnection getPostureWithEnrty:testVersion  :txtModule.selectedCode :AssTestCode :clientCode : txtTitle.selectedCode:usercode :selectedPlayerCode :currentlySelectedDate :AssTestTypeCode];
         }
         else
         {
@@ -486,7 +567,7 @@
             //            self.ObjSelectTestArray = [self.objDBConnection getSCWithEnrty:self.version :self.ModuleStr :self.SectionTestCodeStr :clientCode :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :usercode :[self.selectAllValueDic valueForKey:@"SelectDate"] :[self.selectAllValueDic valueForKey:@"PlayerCode"] :self.SelectTestTypecode];
             
             
-            tempArray = [self.objDBconnection getSCWithEnrty:testVersion :txtModule.selectedCode :AssTestCode :clientCode :txtTitle.selectedCode :usercode :currentlySelectedDate :_selectedPlayerCode :AssTestTypeCode];
+            tempArray = [self.objDBconnection getSCWithEnrty:testVersion :txtModule.selectedCode :AssTestCode :clientCode :txtTitle.selectedCode :usercode :currentlySelectedDate :selectedPlayerCode :AssTestTypeCode];
             
         }else
         {
@@ -507,7 +588,7 @@
             //            self.ObjSelectTestArray =[self.objDBConnection getTestCoachWithEnrty:self.version :self.ModuleStr :self.SectionTestCodeStr :clientCode :[self.selectAllValueDic valueForKey:@"AssessmentCode"] :usercode :[self.selectAllValueDic valueForKey:@"PlayerCode"] :[self.selectAllValueDic valueForKey:@"SelectDate"]:self.SelectTestTypecode];
             
             
-            tempArray = [self.objDBconnection getTestCoachWithEnrty:testVersion : txtModule.selectedCode :AssTestCode :clientCode :txtTitle.selectedCode :usercode :_selectedPlayerCode :currentlySelectedDate :AssTestTypeCode];
+            tempArray = [self.objDBconnection getTestCoachWithEnrty:testVersion : txtModule.selectedCode :AssTestCode :clientCode :txtTitle.selectedCode :usercode :selectedPlayerCode :currentlySelectedDate :AssTestTypeCode];
             
         }
         else
@@ -527,12 +608,6 @@
     return resultDict;
 }
 
--(void)assmentValues:(NSString *)TestTypeCode
-{
-    //    NSString * TestTypeCode =[objDic valueForKey:@"TestTypeCode"];
-    //    NSMutableArray * objArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:[self.SelectDetailDic valueForKey:@"AssessmentCode"] :usercode :self.ModuleCodeStr :[self.SelectDetailDic valueForKey:@"SelectDate"] :clientCode :TestTypeCode : self.SelectTestCodeStr];
-    
-}
 
 
 #pragma mark - UITableView Data Source
@@ -624,7 +699,7 @@
     
     NSString* ignore_str = [[[[self.objContenArray objectAtIndex:indexPath.section] valueForKey:@"TestValues"] objectAtIndex:indexPath.row] valueForKey:@"Ignore"];
     
-    if ([ignore_str.lowercaseString isEqualToString:@"false"] || ignore_str.length == 0) {
+    if ([ignore_str.lowercaseString isEqualToString:@"false"] || ignore_str.length == 0 || [ignore_str.lowercaseString isEqualToString:@"0"]) {
         cell.imgCheck.image = uncheck;
     }
     else
@@ -952,7 +1027,7 @@
         [dict setValue:currentIndexArray[@"ScreenID"] forKey:@"Assessmenttesttypescreencode"];
         [dict setValue:currentIndexArray[@"version"] forKey:@"Version"];
         [dict setValue:usercode forKey:@"Assessor"];
-        [dict setValue:_selectedPlayerCode forKey:@"Playercode"];
+        [dict setValue:selectedPlayerCode forKey:@"Playercode"];
         [dict setValue:currentlySelectedDate forKey:@"Assessmententrydate"];
         
         [dict setValue:collectionValues[@"left"] forKey:@"Left"];
@@ -1023,7 +1098,7 @@
         [dict setValue:currentIndexArray[@"ScreenID"] forKey:@"Assessmenttesttypescreencode"];
         [dict setValue:currentIndexArray[@"version"] forKey:@"Version"];
         [dict setValue:usercode forKey:@"Assessor"];
-        [dict setValue:_selectedPlayerCode forKey:@"Playercode"];
+        [dict setValue:selectedPlayerCode forKey:@"Playercode"];
         [dict setValue:currentlySelectedDate forKey:@"Assessmententrydate"];
         
         
@@ -1094,7 +1169,7 @@
         [dict setValue:currentIndexArray[@"ScreenID"] forKey:@"Assessmenttesttypescreencode"];
         [dict setValue:currentIndexArray[@"version"] forKey:@"Version"];
         [dict setValue:usercode forKey:@"Assessor"];
-        [dict setValue:_selectedPlayerCode forKey:@"Playercode"];
+        [dict setValue:selectedPlayerCode forKey:@"Playercode"];
         [dict setValue:currentlySelectedDate forKey:@"Assessmententrydate"];
         
         
@@ -1168,7 +1243,7 @@
         [dict setValue:currentIndexArray[@"ScreenID"] forKey:@"Assessmenttesttypescreencode"];
         [dict setValue:currentIndexArray[@"version"] forKey:@"Version"];
         [dict setValue:usercode forKey:@"Assessor"];
-        [dict setValue:_selectedPlayerCode forKey:@"Playercode"];
+        [dict setValue:selectedPlayerCode forKey:@"Playercode"];
         [dict setValue:currentlySelectedDate forKey:@"Assessmententrydate"];
 
         
@@ -1239,7 +1314,7 @@
         [dict setValue:currentIndexArray[@"ScreenID"] forKey:@"Assessmenttesttypescreencode"];
         [dict setValue:currentIndexArray[@"version"] forKey:@"Version"];
         [dict setValue:usercode forKey:@"Assessor"];
-        [dict setValue:_selectedPlayerCode forKey:@"Playercode"];
+        [dict setValue:selectedPlayerCode forKey:@"Playercode"];
         [dict setValue:currentlySelectedDate forKey:@"Assessmententrydate"];
         
         
@@ -1310,7 +1385,7 @@
         [dict setValue:currentIndexArray[@"ScreenID"] forKey:@"Assessmenttesttypescreencode"];
         [dict setValue:currentIndexArray[@"version"] forKey:@"Version"];
         [dict setValue:usercode forKey:@"Assessor"];
-        [dict setValue:_selectedPlayerCode forKey:@"Playercode"];
+        [dict setValue:selectedPlayerCode forKey:@"Playercode"];
         [dict setValue:currentlySelectedDate forKey:@"Assessmententrydate"];
         
         
@@ -1382,7 +1457,7 @@
         [dict setValue:currentIndexArray[@"ScreenID"] forKey:@"Assessmenttesttypescreencode"];
         [dict setValue:currentIndexArray[@"version"] forKey:@"Version"];
         [dict setValue:usercode forKey:@"Assessor"];
-        [dict setValue:_selectedPlayerCode forKey:@"Playercode"];
+        [dict setValue:selectedPlayerCode forKey:@"Playercode"];
         [dict setValue:currentlySelectedDate forKey:@"Assessmententrydate"];
         
         
@@ -1766,7 +1841,8 @@
         
         for (id keys in arr) {
             
-            if ([[dict valueForKey:keys] isEqualToString:@""]) {
+            if ([[dict valueForKey:keys] isEqualToString:@""] || ![dict.allKeys containsObject:keys])
+            {
                 [dict setValue:@"0" forKey:keys];
             }
             
@@ -1806,7 +1882,8 @@
         
         for (id keys in arr) {
             
-            if ([[dict valueForKey:keys] isEqualToString:@""]) {
+            if ([[dict valueForKey:keys] isEqualToString:@""] || ![dict.allKeys containsObject:keys])
+            {
                 [dict setValue:@"0" forKey:keys];
             }
             
@@ -1847,7 +1924,8 @@
         
         for (id keys in arr) {
             
-            if ([[dict valueForKey:keys] isEqualToString:@""]) {
+            if ([[dict valueForKey:keys] isEqualToString:@""] || ![dict.allKeys containsObject:keys])
+            {
                 [dict setValue:@"0" forKey:keys];
             }
             
@@ -1887,7 +1965,8 @@
         }
         for (id keys in arr) {
             
-            if ([[dict valueForKey:keys] isEqualToString:@""]) {
+            if ([[dict valueForKey:keys] isEqualToString:@""] || ![dict.allKeys containsObject:keys])
+            {
                 [dict setValue:@"0" forKey:keys];
             }
             
@@ -1927,7 +2006,8 @@
         
         for (id keys in arr) {
             
-            if ([[dict valueForKey:keys] isEqualToString:@""]) {
+            if ([[dict valueForKey:keys] isEqualToString:@""] || ![dict.allKeys containsObject:keys])
+            {
                 [dict setValue:@"0" forKey:keys];
             }
         }
@@ -1949,7 +2029,8 @@
         }
         for (id keys in arr) {
             
-            if ([[dict valueForKey:keys] isEqualToString:@""]) {
+            if ([[dict valueForKey:keys] isEqualToString:@""] || ![dict.allKeys containsObject:keys])
+            {
                 [dict setValue:@"0" forKey:keys];
             }
             

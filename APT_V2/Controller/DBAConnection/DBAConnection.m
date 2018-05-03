@@ -143,7 +143,6 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
                     NSString *    setTestCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                     NSString *    setTestName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                     
-                    
                     [dic setObject:setTestCode forKey:@"TestCode"];
                     [dic setObject:setTestName forKey:@"TestName"];
                     
@@ -172,6 +171,8 @@ static NSString *SQLITE_FILE_NAME = @"agapt_database.sqlite";
         NSMutableArray *assessment = [[NSMutableArray alloc]init];
         if(retVal ==0){
     
+//            NSString *query=[NSString stringWithFormat:@"SELECT TESTCODE, TESTNAME FROM ASSESSMENTTESTMASTER WHERE CLIENTCODE = '%@' AND MODULECODE = '%@' AND ASSESSMENTCODE = '%@'",clientCode,moduleCode,AssessmentCode];
+
 //            (CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)
 //            NSString *query=[NSString stringWithFormat:@"SELECT TESTCODE, TESTNAME FROM ASSESSMENTTESTMASTER WHERE CLIENTCODE = '%@' AND MODULECODE = '%@' AND ASSESSMENTCODE = '%@'",clientCode,moduleCode,AssessmentCode];
             
@@ -1943,7 +1944,7 @@ NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO ASSESSMENTENTRY(C
         NSMutableArray *assessment = [[NSMutableArray alloc]init];
         if(retVal ==0){
             
-            NSString *query1=[NSString stringWithFormat:@"SELECT  * FROM ASSESSMENTENTRY WHERE ASSESSMENTCODE = '%@' AND CREATEDBY = '%@' AND DATE(ASSESSMENTENTRYDATE) = DATE('%@') AND ASSESSMENTTESTTYPECODE = '%@' AND ASSESSMENTTESTCODE = '%@' AND MODULECODE = '%@' AND CLIENTCODE = '%@' AND RECORDSTATUS = 'MSC001'",assessmentCode,userCode,date,testTypeCode,testCode,moduleCode,clientCode];
+//            NSString *query1=[NSString stringWithFormat:@"SELECT  * FROM ASSESSMENTENTRY WHERE ASSESSMENTCODE = '%@' AND CREATEDBY = '%@' AND DATE(ASSESSMENTENTRYDATE) = DATE('%@') AND ASSESSMENTTESTTYPECODE = '%@' AND ASSESSMENTTESTCODE = '%@' AND MODULECODE = '%@' AND CLIENTCODE = '%@' AND RECORDSTATUS = 'MSC001'",assessmentCode,userCode,date,testTypeCode,testCode,moduleCode,clientCode];
             
             NSString *query=[NSString stringWithFormat:@"SELECT * FROM ASSESSMENTENTRY WHERE ASSESSMENTCODE = '%@' AND CREATEDBY = '%@' AND ASSESSMENTENTRYDATE = '%@' AND ASSESSMENTTESTTYPECODE = '%@' AND ASSESSMENTTESTCODE = '%@' AND MODULECODE = '%@' AND CLIENTCODE = '%@' AND RECORDSTATUS = 'MSC001'",assessmentCode,userCode,date,testTypeCode,testCode,moduleCode,clientCode];
 

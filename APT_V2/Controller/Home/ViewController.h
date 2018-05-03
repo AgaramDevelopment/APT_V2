@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnIgnore;
 @property (weak, nonatomic) IBOutlet UITextField *txtRemarks;
 @property (weak, nonatomic) IBOutlet UIView *Shadowview;
+@property (nonatomic,strong) NSString * selectedPlayerCode;
 
 - (IBAction)actionAssessmentSave:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *lblNOData;

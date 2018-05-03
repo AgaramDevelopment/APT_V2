@@ -23,6 +23,7 @@
     TabHomeVC *tab;
     NSString *fetchedDate;
     NSString *FetchedWorkLoadCode;
+    NSString * SelectedDate;
 float num1;
 float num2;
 float num3;
@@ -83,14 +84,16 @@ NSString *metaSubCode4;
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     NSDate *matchdate = [NSDate date];
-    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+    
+    NSDateFormatter *dateFormat1 = [[NSDateFormatter alloc] init];
+    [dateFormat1 setDateFormat:@"MM-dd-yyyy"];
+    SelectedDate = [dateFormat1 stringFromDate:matchdate];
     
     NSString * actualDate = [dateFormat stringFromDate:matchdate];
     self.datelbl.text = actualDate;
     [self metacodeWebservice];
     [self DateWebservice];
-    
-    
    
 }
 
@@ -164,7 +167,11 @@ NSString *metaSubCode4;
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     NSDate *matchdate = [NSDate date];
-    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+    
+    NSDateFormatter *dateFormat1 = [[NSDateFormatter alloc] init];
+    [dateFormat1 setDateFormat:@"MM-dd-yyyy"];
+    SelectedDate = [dateFormat1 stringFromDate:datePicker.date];
  
     NSString * actualDate = [dateFormat stringFromDate:datePicker.date];
     self.datelbl.text = actualDate;
@@ -365,7 +372,7 @@ NSString *metaSubCode4;
         urineColorNum =@"0";
     }
     
-    [objWebservice submit  :recordInsert :ClientCode :usercode:self.datelbl.text:playerCode:metaSubCode1:metaSubCode2:metaSubCode3:metaSubCode4 :self.bodyWeightTxt.text : self.sleepHrTxt.text : self.fatTxt.text : self.restingHrTxt.text : self.restingBpMaxTxt.text :self.restingBpMinTxt.text:urineColorNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [objWebservice submit  :recordInsert :ClientCode :usercode:SelectedDate:playerCode:metaSubCode1:metaSubCode2:metaSubCode3:metaSubCode4 :self.bodyWeightTxt.text : self.sleepHrTxt.text : self.fatTxt.text : self.restingHrTxt.text : self.restingBpMaxTxt.text :self.restingBpMinTxt.text:urineColorNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         if(responseObject >0)
         {
@@ -414,7 +421,7 @@ NSString *metaSubCode4;
     
     // NSString *urinecolor= @"0";
     
-    [objWebservice fetchWellness :FetchrecordWellness : playerCode :self.datelbl.text success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [objWebservice fetchWellness :FetchrecordWellness : playerCode :SelectedDate success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         NSMutableArray *arr = [[NSMutableArray alloc]init];
         arr=responseObject;
@@ -459,6 +466,9 @@ NSString *metaSubCode4;
             self.UrineColorBtn5.tag =0;
             self.UrineColorBtn6.tag =0;
             self.UrineColorBtn7.tag =0;
+            
+            self.SaveBtn.hidden = NO;
+            self.UpdateBtn.hidden = YES;
             [self setborder];
             
         }
@@ -493,7 +503,46 @@ NSString *metaSubCode4;
         playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     }
     
-    [objWebservice UpdateWellness  :updateRecord :ClientCode :usercode :FetchedWorkLoadCode :fetchedDate:playerCode:metaSubCode1:metaSubCode2:metaSubCode3:metaSubCode4 :self.bodyWeightTxt.text : self.sleepHrTxt.text : self.fatTxt.text : self.restingHrTxt.text : self.restingBpMaxTxt.text :self.restingBpMinTxt.text:urineColorNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+    
+    
+    if([self.bodyWeightTxt.text isEqualToString:@""] || [self.bodyWeightTxt.text isEqual:[NSNull null]])
+    {
+        self.bodyWeightTxt.text =@"0";
+    }
+    
+    if([self.sleepHrTxt.text isEqualToString:@""] || [self.sleepHrTxt.text isEqual:[NSNull null]])
+    {
+        self.sleepHrTxt.text =@"0";
+    }
+    
+    if([self.fatTxt.text isEqualToString:@""] || [self.fatTxt.text isEqual:[NSNull null]] )
+    {
+        self.fatTxt.text =@"0";
+    }
+    
+    if([self.restingHrTxt.text isEqualToString:@""] || [self.restingHrTxt.text isEqual:[NSNull null]])
+    {
+        self.restingHrTxt.text =@"0";
+    }
+    
+    if([self.restingBpMaxTxt.text isEqualToString:@""] || [self.restingBpMaxTxt.text isEqual:[NSNull null]])
+    {
+        self.restingBpMaxTxt.text =@"0";
+    }
+    
+    if([self.restingBpMinTxt.text isEqualToString:@""] || [self.restingBpMinTxt.text isEqual:[NSNull null]])
+    {
+        self.restingBpMinTxt.text =@"0";
+    }
+    
+    if([urineColorNum isEqualToString:@""] || [urineColorNum isEqual:[NSNull null]])
+    {
+        urineColorNum =@"0";
+    }
+    
+    
+    [objWebservice UpdateWellness  :updateRecord :ClientCode :usercode :FetchedWorkLoadCode :SelectedDate:playerCode:metaSubCode1:metaSubCode2:metaSubCode3:metaSubCode4 :self.bodyWeightTxt.text : self.sleepHrTxt.text : self.fatTxt.text : self.restingHrTxt.text : self.restingBpMaxTxt.text :self.restingBpMinTxt.text:urineColorNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         if(responseObject >0)
         {

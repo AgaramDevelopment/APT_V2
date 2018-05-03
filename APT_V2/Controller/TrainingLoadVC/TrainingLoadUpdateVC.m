@@ -245,7 +245,7 @@
     [dic setObject:rpeCode forKey:@"RpeCode"];
     [dic setObject:[NSString stringWithFormat:@"%d",timecount] forKey:@"timeValue"];
     
-    if(![self.ballslbl.text isEqualToString:@""] || ![self.ballslbl.text isEqual:[NSNull null]])
+    if([self.activitylbl.text isEqualToString:@"Bowling"])
     {
     [dic setObject:self.ballslbl.text forKey:@"ballsValue"];
     }

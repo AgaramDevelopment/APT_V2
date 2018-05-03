@@ -103,9 +103,13 @@
     
     [assCollection registerNib:[UINib nibWithNibName:@"TestPropertyCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"AssessmentCell"];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillHideNotification object:nil];
+    if (!IS_IPAD) {
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillHideNotification object:nil];
+
+    }
     
     version = @"1";
     self.objDBconnection = [[DBAConnection alloc]init];
@@ -120,6 +124,14 @@
     uncheck = [UIImage imageNamed:@"uncheck"];
     [self customnavigationmethod];
     ifSaveBtnClicked = NO;
+    
+    if (!currentlySelectedDate) {
+        NSDateFormatter* format = [NSDateFormatter new];
+        [format setDateFormat:@"dd/MM/yyy"];
+        currentlySelectedDate = [format stringFromDate:[NSDate date]];
+        [btnDate setTitle:currentlySelectedDate forState:UIControlStateNormal];
+    }
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -133,6 +145,9 @@
 {
     //    [txtModule setup];
     //    [txtTitle setup];
+    
+    [[NSNotificationCenter defaultCenter]removeObserver:UIKeyboardWillShowNotification];
+    [[NSNotificationCenter defaultCenter]removeObserver:UIKeyboardWillHideNotification];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -223,25 +238,13 @@
 -(void)tableValuesMethod
 {
     
-    //    if (!txtTitle.hasText || !txtModule.hasText || !currentlySelectedDate.length) {
-    //
-    //        NSLog(@"input required");
-    //        return;
-    //    }
-    
-    if (!currentlySelectedDate) {
-        NSDateFormatter* format = [NSDateFormatter new];
-        [format setDateFormat:@"dd/MM/yyy"];
-        currentlySelectedDate = [format stringFromDate:[NSDate date]];
-    }
-    
-    
     if (!txtTitle.hasText || !txtModule.hasText) {
         
         NSLog(@"input required");
         return;
     }
     
+//    [self.objDBconnection];
     
 //    -(NSMutableArray *)AssessmentEntryByDate: (NSString *) AssessmentCode :(NSString *) Usercode:(NSString *) moduleCode:(NSString *) date:(NSString *) Clientcode{
 
@@ -254,16 +257,17 @@
     if (AssessmentEntry.count) {
         
         TestAsseementArray =  [self.objDBconnection TestByAssessment:clientCode :txtTitle.selectedCode :txtModule.selectedCode:currentlySelectedDate];
+        
+        if (!self.selectedPlayerCode) {
+            [AppCommon showAlertWithMessage:@"Please select Any player to Retrive Data"];
+            return;
+        }
     }
     else {
         
         TestAsseementArray = [self.objDBconnection TestByAssessmentAll:clientCode:txtTitle.selectedCode :txtModule.selectedCode];
 
     }
-    
-    
-    
-    
     
     NSLog(@"%@", TestAsseementArray);
     
@@ -349,9 +353,10 @@
         reqList = [dic valueForKey:@"LstAssessmententry"];
         if(reqList.count>0 ){
             [appDel PushWebservice:dic];
-            ifSaveBtnClicked = NO;
-            
         }
+        
+        ifSaveBtnClicked = NO; // whatever it may be we have to reset value
+
     }
 
 }
@@ -546,6 +551,10 @@
 //    [UIView animateWithDuration:0.3 animations:^{
 //        [self.eventTbl layoutIfNeeded];
 //    }];
+    
+    [UIView animateWithDuration:0.6 animations:^{
+        
+    }];
 
     if (currentlySelectedHeader == section) {
         return IS_IPAD ? 90 :  70;
@@ -691,7 +700,7 @@
         if ([romSideName isEqualToString:@"RIGHT & LEFT"]) {
             CollectionItem = 2;
         }
-        else if([romSideName isEqualToString:@"CENTER"])
+        else if([romSideName isEqualToString:@"CENTRAL"])
         {
             CollectionItem = 1;
         }
@@ -799,15 +808,13 @@
         [btnIgnore setTag:1];
     }
     
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.assCollection reloadData];
+    });
+
     [self presentViewController:popupVC animated:YES completion:^{
         self.bottomConstant.constant = (CGRectGetHeight(self.popupVC.view.frame) - self.Shadowview.frame.size.height) / 2;
         [self.Shadowview updateConstraintsIfNeeded];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.assCollection reloadData];
-        });
-        
     }];
     
 }
@@ -818,18 +825,19 @@
 }
 -(void)AssmentHeaderHeight:(UIButton *)sender
 {
+    
     if (currentlySelectedHeader == sender.tag) {
         currentlySelectedHeader = -1;
+        
     }
-    else
-    {
+    else {
         currentlySelectedHeader = sender.tag;
     }
-    
+
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [tblAssesments reloadData];
-//        [tblAssesments reloadSections:[NSIndexSet indexSetWithIndex:sender.tag] withRowAnimation:UITableViewRowAnimationAutomatic];
+//        [tblAssesments reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, _objContenArray.count)] withRowAnimation:UITableViewRowAnimationTop];
     });
 }
 
@@ -1457,6 +1465,13 @@
 {
     return CollectionItem;
 }
+
+//- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+//
+//    // 120, 100
+//
+//    return UIEdgeInsetsMake(10, 10, 10, 10);
+//}
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -2625,6 +2625,48 @@ static dispatch_once_t onceToken;
     }
 }
 
+-(BOOL)DeleteTableNameWise:(NSString *)TableName
+{
+    
+    @synchronized ([AppCommon syncId])  {
+        
+        
+        
+        NSString *databasePath = [self getDBPath];
+        sqlite3_stmt *statement;
+        sqlite3 *dataBase;
+        const char *dbPath = [DBPath UTF8String];
+        if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+        {
+            
+            
+            NSString *INSERTSQL = [NSString stringWithFormat:@"DELETE FROM %@",TableName];
+
+            const char *update_stmt = [INSERTSQL UTF8String];
+            if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                if (sqlite3_step(statement) == SQLITE_DONE)
+                {
+                    sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
+                    return YES;
+                    
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+            }
+            
+            NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
+            
+            sqlite3_close(dataBase);
+        }
+        return NO;
+    }
+}
+
+
 -(BOOL)DleteAthleteinfodetails{
     
     @synchronized ([AppCommon syncId])  {

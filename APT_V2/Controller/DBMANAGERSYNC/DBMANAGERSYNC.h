@@ -85,7 +85,7 @@
 -(BOOL)SELECTSupportStaff:(NSString *)MemberCode;
 
 -(BOOL)SELECTAssementEntry:(NSString *)AssessementEntryCode;
-
+-(BOOL)DeleteTableNameWise:(NSString *)TableName;
 
 //fetch the image
 -(NSMutableArray *)getPlayerCode;

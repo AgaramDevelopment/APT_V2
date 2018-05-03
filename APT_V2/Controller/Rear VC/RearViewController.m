@@ -34,7 +34,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    PreviouslySelectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];
 
     userImageView.layer.cornerRadius = userImageView.frame.size.height/2;
 //    userImageView.layer.borderWidth = 2.0;
@@ -85,6 +84,8 @@
     
     [self.RearTableView reloadData];
     self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
+    PreviouslySelectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -288,8 +289,8 @@
         appDel.frontNavigationController = navigationController;
         [navigationController setNavigationBarHidden:YES];
         [appDel.revealViewController pushFrontViewController:navigationController animated:YES];
-        
-    }];
+        NSArray* tblName = @[@"ASSESSMENT",@"ASSESSMENTENTRY",@"ASSESSMENTENTRYACTIONPLAN",@"ASSESSMENTENTRYKEYFINDINGS",@"ASSESSMENTREGISTER",@"ASSESSMENTTESTMASTER",@"ASSOCIATIONGAMEMASTER",@"ASSOCIATIONMASTER",@"ASSOCIATIONMEMBERQUALIFICATIONS",@"ASSOCIATIONMEMBERREGISTRATION",@"ATHLETEINFO",@"ATHLETEINFODETAILS",@"ATHLETEINFOGAME",@"ATHLETEINFOTEAM",@"CLIENTGAMES",@"CLIENTMASTER",@"CLIENTMODULES",@"DASHBOARD",@"DASHBOARDMETADATA",@"DASHBOARDWIDGETS",@"DOCUMENT",@"DOCUMENTNOTIFICATION",@"DOCUMENTSETTING",@"DOCUMENTTEMPLATE",@"EVENTPARTICIPANTSDETAILS",@"EVENTTEMPLATEDETAILS",@"EVENTTEMPLATEPARTICIPANTSDETAILS",@"EXERCISEMASTER",@"EXERCISEPARAMETER",@"GAMEATTRIBUTEMETADATA",@"ILLNESSDETAILS",@""];
+            }];
     
     [alert addAction:actionYes];
     [alert addAction:actionNo];

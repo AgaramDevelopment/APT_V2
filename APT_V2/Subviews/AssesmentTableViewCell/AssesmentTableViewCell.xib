@@ -49,7 +49,9 @@
                                     <constraint firstItem="UgH-fT-MjU" firstAttribute="top" secondItem="Tuv-TR-PHu" secondAttribute="top" id="AZF-gt-o3j"/>
                                     <constraint firstAttribute="trailing" secondItem="UgH-fT-MjU" secondAttribute="trailing" id="LgP-8J-Tlt"/>
                                     <constraint firstAttribute="bottom" secondItem="UgH-fT-MjU" secondAttribute="bottom" id="ZS0-wh-KVb"/>
-                                    <constraint firstAttribute="height" constant="45" id="h6M-rv-ueB"/>
+                                    <constraint firstAttribute="height" constant="45" id="h6M-rv-ueB">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="50"/>
+                                    </constraint>
                                     <constraint firstItem="UgH-fT-MjU" firstAttribute="leading" secondItem="Tuv-TR-PHu" secondAttribute="leading" constant="10" id="oQH-HU-iEH"/>
                                 </constraints>
                             </view>
@@ -265,7 +267,7 @@
                                     <constraint firstItem="U1G-ok-028" firstAttribute="top" secondItem="S4c-wW-bnw" secondAttribute="top" id="yhi-zW-nna"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test Name" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TF6-4y-MbJ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Test Name" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TF6-4y-MbJ">
                                 <rect key="frame" x="44" y="0.0" width="100.5" height="31.5"/>
                                 <fontDescription key="fontDescription" name="MontserratAlternates-Regular" family="Montserrat Alternates" pointSize="12"/>
                                 <nil key="textColor"/>
@@ -319,7 +321,7 @@
                 <outlet property="lblInjured" destination="m79-Pu-WNr" id="vWv-VH-0pv"/>
                 <outlet property="lblTestName" destination="TF6-4y-MbJ" id="s25-x9-0bj"/>
             </connections>
-            <point key="canvasLocation" x="21" y="420"/>
+            <point key="canvasLocation" x="20.5" y="419.5"/>
         </tableViewCell>
     </objects>
     <resources>

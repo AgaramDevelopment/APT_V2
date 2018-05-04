@@ -33,5 +33,5 @@
 @property (strong, nonatomic) IBOutlet UIView *navi_View;
 @property (strong, nonatomic) IBOutlet UIButton *saveOrUpdateBtn;
 @property (strong, nonatomic) IBOutlet UILabel *lblNoData;
-
+@property (nonatomic, strong) NSArray *searchResult;
 @end

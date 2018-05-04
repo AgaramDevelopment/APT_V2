@@ -87,7 +87,19 @@
     
     ChartYAxis *leftAxis = _chartView.leftAxis;
     leftAxis.labelTextColor = [UIColor colorWithRed:51/255.f green:181/255.f blue:229/255.f alpha:1.f];
-    leftAxis.axisMaximum = 100.0;
+    
+    
+    NSMutableArray *values = self.ChartValuesArray;
+    NSNumber *reqnum = [[values objectAtIndex:0] valueForKey:@"RPE"];
+    for (int i = 1; i < values.count; i++) {
+        reqnum = ([[[values objectAtIndex:i] valueForKey:@"RPE"]floatValue] > [reqnum floatValue] ? [[values objectAtIndex:i] valueForKey:@"RPE"]:reqnum);
+    }
+    NSLog(@"Largest = %@\n",l);
+    // _minY = 0;
+    int roundedUp = ceil([reqnum floatValue]);
+    
+    
+    leftAxis.axisMaximum = roundedUp+10;
     leftAxis.axisMinimum = 0.0;
     leftAxis.drawGridLinesEnabled = YES;
     leftAxis.drawZeroLineEnabled = NO;

@@ -813,7 +813,7 @@ if([_isToday isEqualToString:@"yes"])
     //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"dd-MM-yyyy"];
     
-    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,self.view_datepicker.frame.origin.y-180,self.view.frame.size.width,100)];
+    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,self.view_datepicker.frame.origin.y-140,self.view.frame.size.width,100)];
     
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     [datePicker setLocale:locale];

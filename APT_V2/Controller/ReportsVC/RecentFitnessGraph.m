@@ -286,6 +286,18 @@
             {
                 self.testArray = [[NSMutableArray alloc]init];
                 self.testArray = [responseObject valueForKey:@"testsList"];
+                
+                if(self.testArray.count>0)
+                {
+                    barValue = [[self.testArray valueForKey:@"testCode"] objectAtIndex:0];
+                    lineValue = [[self.testArray valueForKey:@"testCode"] objectAtIndex:1];
+                    
+                    self.barlbl.text = [[self.testArray valueForKey:@"testName"] objectAtIndex:0];
+                    self.linelbl.text = [[self.testArray valueForKey:@"testName"] objectAtIndex:1];
+                    self.datelbl.text = @"1";
+                    
+                    [self chartGetValues];
+                }
             }
             
             [AppCommon hideLoading];

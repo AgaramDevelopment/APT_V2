@@ -633,9 +633,12 @@
     self.dateTF.text = selectedDate;
     self.timeTF.text = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"STARTTIME"];
     foodDiaryCode = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"FOODDIARYCODE"];
-    NSMutableArray *foodListArray = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"FOODLIST"];
-    foodDescriptionArray = [NSMutableArray new];
     
+    
+    
+    NSMutableArray *foodArray = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"FOODLIST"];
+    FOODDIARYSSSSS = [NSMutableArray new];
+    /*
     for (id key in foodListArray) {
         NSMutableDictionary *foodDescriptionDict = [NSMutableDictionary new];
         [foodDescriptionDict setObject:[key valueForKey:@"FOOD"] forKey:@"FOOD"];
@@ -643,6 +646,34 @@
         [foodDescriptionDict setObject:[key valueForKey:@"FOODQUANTITY"] forKey:@"FOODQUANTITY"];
         [foodDescriptionArray addObject:foodDescriptionDict];
     }
+    */
+    
+    
+    if (foodArray.count) {
+        for (id key in foodArray) {
+            
+            NSMutableDictionary *mealLocationDict = [NSMutableDictionary new];
+            
+            [mealLocationDict setObject:[[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"DATE"] forKey:@"DATE"];
+            [mealLocationDict setObject:[[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"STARTTIME"] forKey:@"STARTTIME"];
+            [mealLocationDict setObject:[[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"FOODDIARYCODE"] forKey:@"FOODDIARYCODE"];
+            [mealLocationDict setObject:[[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"MEALCODE"] forKey:@"MEALCODE"];
+            [mealLocationDict setObject:[[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"LOCATION"] forKey:@"LOCATION"];
+            
+            
+            NSMutableDictionary *foodDescriptionDict = [NSMutableDictionary new];
+            [foodDescriptionDict setObject:[key valueForKey:@"FOOD"] forKey:@"FOOD"];
+            [foodDescriptionDict setObject:[key valueForKey:@"FOODQUANTITY"] forKey:@"FOODQUANTITY"];
+            
+            NSMutableArray *arrayy = [NSMutableArray new];
+            [arrayy addObject:foodDescriptionDict];
+            [mealLocationDict setObject:arrayy forKey:@"FOODLIST"];
+            
+            [FOODDIARYSSSSS addObject:mealLocationDict];
+            
+        }
+    }
+    
     
     int mealCode = (int)[foodDiaryCodeArray indexOfObject:[[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"MEALCODE"]];
     int locationCode = (int)[locationCodeArray indexOfObject:[[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"LOCATION"]];
@@ -822,16 +853,19 @@
             foodDiaryArray = [NSMutableArray new];
             NSMutableArray *FOODDIARYSArray = [NSMutableArray new];
             FOODDIARYSArray = [responseObject objectForKey:@"FOODDIARYS"];
-            for (id key in FOODDIARYSArray) {
-               
-                if ([[key valueForKey:@"FOODLIST"] count]) {
-                    if ([date isEqualToString:[key valueForKey:@"DATE"]]) {
-                         [foodDiaryArray addObject:key];
+            
+            if (FOODDIARYSArray.count) {
+                for (id key in FOODDIARYSArray) {
+                    
+                    if ([[key valueForKey:@"FOODLIST"] count]) {
+                        if ([date isEqualToString:[key valueForKey:@"DATE"]]) {
+                            [foodDiaryArray addObject:key];
+                        }
                     }
                 }
             }
-            NSLog(@"Count:%ld", foodDiaryArray.count);
             
+            NSLog(@"Count:%ld", foodDiaryArray.count);
             [self setClearBorderForMealTypeAndLocation];
         }
         

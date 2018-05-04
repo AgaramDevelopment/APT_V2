@@ -41,6 +41,9 @@
     
     CircularChart *circleChart;
     
+    
+    NSString *WorkloadCode;
+    
 }
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *poptableXposition;
@@ -184,9 +187,10 @@
     [dic setObject:[NSString stringWithFormat:@"%d",total] forKey:@"Value"];
     [dic setObject:[NSString stringWithFormat:@"%d",rpecount] forKey:@"rpeValue"];
     [dic setObject:rpeCode forKey:@"RpeCode"];
+    [dic setObject:WorkloadCode forKey:@"WorkloadCode"];
     [dic setObject:[NSString stringWithFormat:@"%d",timecount] forKey:@"timeValue"];
     //[dic setObject:self.ballslbl.text forKey:@"ballsValue"];
-    if(![self.ballslbl.text isEqualToString:@""] || ![self.ballslbl.text isEqual:[NSNull null]])
+    if(![self.ballslbl.text isEqualToString:@""] && ![self.ballslbl.text isEqual:[NSNull null]])
     {
         [dic setObject:self.ballslbl.text forKey:@"ballsValue"];
     }
@@ -217,7 +221,8 @@
         }
         self.totalCountlbl.text = [NSString stringWithFormat:@"%d",total];
         
-        //[self TodayCircularChart];
+        [circleChart removeFromSuperview];
+        [self TodayCircularChart];
         //[circleChart reloadCircularChart];
     }
     
@@ -460,6 +465,7 @@
         
         ActivityCode = [[sessionArray valueForKey:@"ActivityCode"] objectAtIndex:indexPath.row];
         rpeCode = [[sessionArray valueForKey:@"RpeCode"] objectAtIndex:indexPath.row];
+        WorkloadCode = [[sessionArray valueForKey:@"WorkloadCode"] objectAtIndex:indexPath.row];
     }
 }
 
@@ -676,9 +682,18 @@ if([_isToday isEqualToString:@"yes"])
         [dic setObject:[NSString stringWithFormat:@"%d",rpecount] forKey:@"rpeValue"];
         [dic setObject:[NSString stringWithFormat:@"%d",timecount] forKey:@"timeValue"];
         
+        
+        if( ![[[self.TodayLoadArray valueForKey:@"BALL"] objectAtIndex:i] isEqualToString:@""] && ![[[self.TodayLoadArray valueForKey:@"BALL"] objectAtIndex:i] isEqual:[NSNull null]] )
+        {
+        
         NSString *ball = [[self.TodayLoadArray valueForKey:@"BALL"] objectAtIndex:i];
         NSArray *arr = [ball componentsSeparatedByString:@"."];
         [dic setObject:arr[0] forKey:@"ballsValue"];
+        }
+        else
+        {
+            [dic setObject:@"0" forKey:@"ballsValue"];
+        }
         
        // [dic setObject:[[self.TodayLoadArray valueForKey:@"BALL"] objectAtIndex:i] forKey:@"ballsValue"];
         
@@ -703,6 +718,7 @@ if([_isToday isEqualToString:@"yes"])
             total=total+value;
         }
         self.totalCountlbl.text = [NSString stringWithFormat:@"%d",total];
+        [circleChart removeFromSuperview];
         [self TodayCircularChart];
         //[circleChart reloadCircularChart];
     }
@@ -732,10 +748,18 @@ if([_isToday isEqualToString:@"yes"])
             [dic setObject:[NSString stringWithFormat:@"%d",total] forKey:@"Value"];
             [dic setObject:[NSString stringWithFormat:@"%d",rpecount] forKey:@"rpeValue"];
             [dic setObject:[NSString stringWithFormat:@"%d",timecount] forKey:@"timeValue"];
+           
             
+            if( ![[[self.YesterdayLoadArray valueForKey:@"BALL"] objectAtIndex:i] isEqualToString:@""] && ![[[self.YesterdayLoadArray valueForKey:@"BALL"] objectAtIndex:i] isEqual:[NSNull null]] )
+            {
             NSString *ball = [[self.YesterdayLoadArray valueForKey:@"BALL"] objectAtIndex:i];
             NSArray *arr = [ball componentsSeparatedByString:@"."];
             [dic setObject:arr[0] forKey:@"ballsValue"];
+            }
+            else
+            {
+                [dic setObject:@"0" forKey:@"ballsValue"];
+            }
             
             //[dic setObject:[[self.YesterdayLoadArray valueForKey:@"BALL"] objectAtIndex:i] forKey:@"ballsValue"];
             
@@ -761,6 +785,7 @@ if([_isToday isEqualToString:@"yes"])
                 total=total+value;
             }
             self.totalCountlbl.text = [NSString stringWithFormat:@"%d",total];
+            [circleChart removeFromSuperview];
             [self TodayCircularChart];
             //[circleChart reloadCircularChart];
         }
@@ -949,7 +974,7 @@ if([_isToday isEqualToString:@"yes"])
             [traininglist addObject:dic];
         }
         
-        NSString *WorkloadCode = [[sessionArray valueForKey:@"WorkloadCode"] objectAtIndex:0];
+        WorkloadCode = [[sessionArray valueForKey:@"WorkloadCode"] objectAtIndex:0];
         NSString *datee = self.datelbl.text;
         
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];

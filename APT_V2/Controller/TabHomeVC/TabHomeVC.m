@@ -335,6 +335,13 @@
 - (void)swipeViewCurrentItemIndexDidChange:(SwipeView *)swipeView
 {
    // self.page_control.currentPage = self.swipeView.currentItemIndex;
+    
+    selectedIndex = [NSIndexPath indexPathForItem:swipeView.currentItemIndex inSection:0];
+    if(selectedIndex ==1)
+    {
+        [self.swipeView setScrollEnabled:NO];
+    }
+    [self.Titlecollview reloadData];
 }
 
 

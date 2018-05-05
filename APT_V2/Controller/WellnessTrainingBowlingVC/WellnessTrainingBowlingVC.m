@@ -121,9 +121,9 @@
 //    [self customnavigationmethod];
     
     
-    objtraing = [[TrainingLoadVC alloc] initWithNibName:@"TrainingLoadVC" bundle:nil];
-    objtraing.view.frame = CGRectMake(0,10, self.trainingview.bounds.size.width, self.trainingview.bounds.size.height);
-    [self.trainingview addSubview:objtraing.view];
+//    objtraing = [[TrainingLoadVC alloc] initWithNibName:@"TrainingLoadVC" bundle:nil];
+//    objtraing.view.frame = CGRectMake(0,10, self.trainingview.bounds.size.width, self.trainingview.bounds.size.height);
+//    [self.trainingview addSubview:objtraing.view];
     
 }
 
@@ -1185,6 +1185,10 @@
                     
                 }
                 //[self trainingloadTodayChart];
+                
+                objtraing = [[TrainingLoadVC alloc] initWithNibName:@"TrainingLoadVC" bundle:nil];
+                objtraing.view.frame = CGRectMake(0,10, self.trainingview.bounds.size.width, self.trainingview.bounds.size.height);
+                [self.trainingview addSubview:objtraing.view];
             }
         }
         [AppCommon hideLoading];

@@ -830,13 +830,8 @@ if([_isToday isEqualToString:@"yes"])
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     NSDate *matchdate = [NSDate date];
     [dateFormat setDateFormat:@"MM-dd-yyyy"];
-    
-    
-    
+ 
     //self.datelbl.text=[dateFormat stringFromDate:datePicker.date];
-    
-    
-    
     NSString * actualDate = [dateFormat stringFromDate:datePicker.date];
     
     

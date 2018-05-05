@@ -64,9 +64,9 @@ NSString *metaSubCode4;
     // Do any additional setup after loading the view from its nib.
     
     
-    SWRevealViewController *revealController = [self revealViewController];
-    [revealController.panGestureRecognizer setEnabled:NO];
-    [revealController.tapGestureRecognizer setEnabled:NO];
+    //SWRevealViewController *revealController = [self revealViewController];
+    //[revealController.panGestureRecognizer setEnabled:NO];
+    //[revealController.tapGestureRecognizer setEnabled:NO];
     
     objWebservice = [[WebService alloc] init];
     [self.view_datepicker setHidden:YES];

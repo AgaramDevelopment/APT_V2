@@ -43,12 +43,17 @@
 //    pointsArray = [[NSMutableArray alloc] initWithObjects:@"12", @"12", @"12", @"12", @"12", @"12", @"12", @"12", nil];
     
     [self StandingsWebservice];
-    [self customnavigationmethod];
+//    [self customnavigationmethod];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
 }
 
 -(void)customnavigationmethod

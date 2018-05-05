@@ -10,6 +10,8 @@
 
 @interface DBAConnection : NSObject
 
++ (id)sharedManager;
+
 -(NSMutableArray *)AssessmentTestType: (NSString *) clientCode :(NSString *) userCode:(NSString *) moduleCode;
 //-(NSMutableArray *)TestByAssessment: (NSString *) clientCode :(NSString *) AssessmentCode:(NSString *) moduleCode;
 -(NSMutableArray *)TestByAssessment: (NSString *) clientCode :(NSString *) AssessmentCode:(NSString *) moduleCode:(NSString *)SelectedDate;
@@ -18,14 +20,14 @@
 
 -(NSMutableArray *)AssessmentEntryByDate: (NSString *) AssessmentCode :(NSString *) Usercode:(NSString *) moduleCode:(NSString *) date:(NSString *) Clientcode;
 
--(NSMutableArray *)getAssessmentEnrtyByDateTestType:(NSString *) assessmentCode:(NSString *) userCode:(NSString *) moduleCode :(NSString *) date:(NSString *) clientCode:(NSString *) testTypeCode:(NSString *) testCode;
+-(NSMutableArray *)getAssessmentEnrtyByDateTestType:(NSString *) assessmentCode:(NSString *) userCode:(NSString *) moduleCode :(NSString *) date:(NSString *) clientCode:(NSString *) testTypeCode:(NSString *) testCode andVersion:(NSString *)version andPlayerCode:(NSString*)playerCode;
 
 -(NSMutableArray *)PlayersByCoach:(NSString *) Clientcode:(NSString *) Usercode;
 
 -(NSDictionary *)ScreenId:(NSString *) AssessmentCode:(NSString *) AssessmentTestCode;
 -(NSString *)ScreenCount:(NSString *) AssessmentCode:(NSString *) AssessmentTestCode;
 
--(NSMutableArray *)AssementForm:(NSString *) ScreenId:(NSString *) clientcode :(NSString *) modulecode:(NSString *) AssessmentCode :(NSString *) AssessmentTestCode;
+-(NSMutableArray *)AssementForm:(NSString *) ScreenId:(NSString *) clientcode :(NSString *) modulecode:(NSString *) AssessmentCode :(NSString *) AssessmentTestCode  andVersion:(NSString *)version;
 -(NSMutableArray *)AssessmentTeamListDetail :(NSString *) membercode;
 -(NSMutableArray *)AssessmentPlayerListDetail :(NSString *) clientCode :(NSString *)userCode;
 -(NSMutableArray *)GetAssessmentByCoach:(NSString *)clientCode : (NSString *) ModuleCode;

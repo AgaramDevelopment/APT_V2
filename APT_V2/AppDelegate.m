@@ -25,8 +25,6 @@
     BOOL isCoach;
     UNUserNotificationCenter *center;
     TabHomeVC* tabHome;
-
-    
 }
 
 @end
@@ -43,8 +41,12 @@
 
 @synthesize ArrayIPL_teamplayers,MainArray,LocalNotificationUserInfoArray;
 
+@synthesize DBManSyn,DBCon;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    DBManSyn = [DBMANAGERSYNC sharedManager];
+    DBCon = [DBAConnection sharedManager];
     
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLater"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -235,6 +237,18 @@
     
 }
 
+-(void)triggerPush{
+    
+    DBMANAGERSYNC * objCaptransactions = [DBMANAGERSYNC sharedManager];
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+    dic = [objCaptransactions AssessmentEntrySyncBackground];
+    NSMutableArray *reqList = [[NSMutableArray alloc]init];
+    reqList = [dic valueForKey:@"LstAssessmententry"];
+    if(reqList.count>0 ){
+        [self PushWebservice:dic];
+    }
+}
+
 -(void)methodRunAfterBackground
 {
     
@@ -254,13 +268,7 @@
                             
                             if(![SequenceNo isEqualToString:@""] && ![SequenceNo isEqualToString:@"(null)"] ){
                                 
-                                NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-                                dic = [objCaptransactions AssessmentEntrySyncBackground];
-                                NSMutableArray *reqList = [[NSMutableArray alloc]init];
-                                reqList = [dic valueForKey:@"LstAssessmententry"];
-                                if(reqList.count>0 ){
-                                    [self PushWebservice:dic];
-                                }
+                                [self triggerPush];
                             }
                         });
                     });
@@ -294,30 +302,27 @@
         
         manager.requestSerializer = requestSerializer;
         
-        NSLog(@"response ; %@",reqdic);
+        NSLog(@"pushServiceKey request %@",reqdic);
         [manager POST:URLString parameters:reqdic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"response ; %@",responseObject);
+            NSLog(@"pushServiceKey response %@",responseObject);
             
-            if(responseObject >0)
-            {
+            if(responseObject >0) {
+                
                 BOOL status = [responseObject valueForKey:@"Status"];
-                if(status == 1)
-                {
+                if(status == 1) {
+                    
                     NSMutableArray *Assessmentlist = [responseObject valueForKey:@"LstAssessmententry"];
-                    for(int i = 0;i<Assessmentlist.count;i++)
-                    {
+                    for(int i = 0;i<Assessmentlist.count;i++) {
+                        
                         DBMANAGERSYNC * dbConnect = [DBMANAGERSYNC sharedManager];
                         [dbConnect UPDATESyncStatus:[Assessmentlist objectAtIndex:i]];
                     }
                     
                 }
-               
             }
             
-            
-            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"failed");
+            NSLog(@"pushServiceKey failed %@",[error description]);
         }];
     
 }

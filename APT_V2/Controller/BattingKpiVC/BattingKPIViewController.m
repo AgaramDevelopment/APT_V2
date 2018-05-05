@@ -1056,7 +1056,7 @@
     self.lblPlayerName.text = [dictionary valueForKey:@"PlayerName"];
     self.lblPlayerDesignation.text = [dictionary valueForKey:@"PlayerRole"];
     self.lblPlayerSpeciality.text = [dictionary valueForKey:@"BatStyle"];
-    [self.imgviewPlayer sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_Image_URL, [dictionary valueForKey:@"PlayerPhoto"]]]
+    [self.imgviewPlayer sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", BASE_URL, [dictionary valueForKey:@"PlayerPhoto"]]]
                         placeholderImage:[UIImage imageNamed:@"Default_image"]];
 }
 -(void)setInningsDetails:(NSArray *)arrayResponse

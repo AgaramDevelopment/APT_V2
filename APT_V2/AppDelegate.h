@@ -10,6 +10,8 @@
 #import "Header.h"
 #import "RearViewController.h"
 #import <UserNotifications/UserNotifications.h>
+#import "DBAConnection.h"
+#import "DBMANAGERSYNC.h"
 @class SWRevealViewController;
 
 
@@ -48,6 +50,8 @@
 @property (strong, nonatomic) NSMutableArray *MainArray;
 @property (strong, nonatomic) NSMutableArray *LocalNotificationUserInfoArray;
 
+@property (strong,nonatomic)DBAConnection* DBCon;
+@property (strong,nonatomic)DBMANAGERSYNC* DBManSyn;
 
 
 //FieldingKPI
@@ -61,6 +65,7 @@
 - (void)scheduleLocalNotificationImage;
 - (void)scheduleLocalNotificationVideo;
 -(void)PushWebservice :(NSMutableDictionary *)reqdic;
+-(void)triggerPush;
 
 
 @end

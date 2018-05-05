@@ -13,10 +13,6 @@
 #define  SCREEN_CODE_POSTURE  @"ASTT005"
 #define  SCREEN_CODE_S_C  @"ASTT006"
 #define  SCREEN_CODE_COACHING  @"ASTT007"
-//#define  green [UIColor colorWithRed:0.0 green:144.0/255.0 blue:81.0/255.0 alpha:1.0];
-//#define  orange  [UIColor colorWithRed:255.0/255.0 green:147.0/255.0 blue:0.0 alpha:1.0];
-//#define  red  [UIColor colorWithRed:255.0/255.0 green:38.0/255.0 blue:0.0 alpha:1.0];
-
 
 #import "ViewController.h"
 #import "TestPropertyCollectionViewCell.h"
@@ -27,7 +23,7 @@
     NSString *clientCode;
     BOOL isEdit;
     NSInteger currentlySelectedHeader;
-    NSString* currentlySelectedDate;
+    NSString* currentlySelectedDate,* todayDate;
     NSArray* arrayTestName;
     NSString* version;
     NSString* currentlySelectedTest;
@@ -79,6 +75,9 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     //    tblAssesments.SKSTableViewDelegate = self;
+    if (!selectedPlayerCode) {
+        selectedPlayerCode = @"";
+    }
     
   green = [UIColor colorWithRed:0.0 green:144.0/255.0 blue:81.0/255.0 alpha:1.0];
   orange  = [UIColor colorWithRed:255.0/255.0 green:147.0/255.0 blue:0.0 alpha:1.0];
@@ -111,7 +110,9 @@
     }
     
     version = @"1";
-    self.objDBconnection = [[DBAConnection alloc]init];
+//    self.objDBconnection = [DBAConnection sharedManager];
+    self.objDBconnection = appDel.DBCon;
+
     _ObjSelectTestArray = [NSMutableArray new];
     
 //    [[NSUserDefaults standardUserDefaults] setObject:athletCode forKey:@"SelectedPlayerCode"];
@@ -130,6 +131,7 @@
 //        currentlySelectedDate = [format stringFromDate:[NSDate date]];
 //        [btnDate setTitle:currentlySelectedDate forState:UIControlStateNormal];
 //    }
+    
 
 }
 
@@ -263,10 +265,9 @@
         int count = [Screencount intValue];
         
         AssessmentTypeTest = [[NSMutableArray alloc]init];
-        if(count>0)
-        {
+        if(count>0) {
             
-            AssessmentTypeTest = [self.objDBconnection AssementForm :Screenid[@"ScreenID"] :clientCode:txtModule.selectedCode:txtTitle.selectedCode :assessmentTestCode ];
+            AssessmentTypeTest = [self.objDBconnection AssementForm:Screenid[@"ScreenID"] :clientCode :txtModule.selectedCode :txtTitle.selectedCode :assessmentTestCode andVersion:Screenid[@"version"]];
         }
         
         for(int j=0;j<AssessmentTypeTest.count;j++)
@@ -309,12 +310,13 @@
 
 -(void)tableValuesMethod
 {
-    
     if (!currentlySelectedDate) {
         NSDateFormatter* format = [NSDateFormatter new];
+//        [format setDateFormat:@"yyy/MM/dd"];
         [format setDateFormat:@"dd/MM/yyy"];
         currentlySelectedDate = [format stringFromDate:[NSDate date]];
-        [btnDate setTitle:currentlySelectedDate forState:UIControlStateNormal];
+        todayDate = [format stringFromDate:[NSDate date]];
+//        [btnDate setTitle:currentlySelectedDate forState:UIControlStateNormal];
     }
 
     if (!txtTitle.hasText || !txtModule.hasText) {
@@ -335,7 +337,7 @@
     NSMutableArray * ComArray = [[NSMutableArray alloc]init];
     
     
-    if (AssessmentEntry.count) {
+    if (txtTitle.hasText && txtModule.hasText && [btnDate.titleLabel.text isEqualToString:currentlySelectedDate]) {
 
 //        if (!self.selectedPlayerCode) {
 //            [AppCommon showAlertWithMessage:@"Please select Any player to Retrive Data"];
@@ -386,7 +388,9 @@
         if(count>0)
         {
             
-            AssessmentTypeTest = [self.objDBconnection AssementForm :Screenid[@"ScreenID"] :clientCode:txtModule.selectedCode:txtTitle.selectedCode :assessmentTestCode ];
+//            AssessmentTypeTest = [self.objDBconnection AssementForm :Screenid[@"ScreenID"] :clientCode:txtModule.selectedCode:txtTitle.selectedCode :assessmentTestCode ];
+            
+            AssessmentTypeTest = [self.objDBconnection AssementForm:Screenid[@"ScreenID"] :clientCode :txtModule.selectedCode :txtTitle.selectedCode :assessmentTestCode andVersion:Screenid[@"version"]];
         }
         
         for(int j=0;j<AssessmentTypeTest.count;j++)
@@ -426,20 +430,12 @@
     
     [tblAssesments reloadData];
     
-    if (ifSaveBtnClicked) {
-        
-        DBMANAGERSYNC * objCaptransactions = [DBMANAGERSYNC sharedManager];
-        
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-        dic = [objCaptransactions AssessmentEntrySyncBackground];
-        NSMutableArray *reqList = [[NSMutableArray alloc]init];
-        reqList = [dic valueForKey:@"LstAssessmententry"];
-        if(reqList.count>0 ){
-            [appDel PushWebservice:dic];
-        }
-        
-        ifSaveBtnClicked = NO; // whatever it may be we have to reset value
-
+    if(ifSaveBtnClicked)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [appDel triggerPush];
+            ifSaveBtnClicked = NO;
+        });
     }
 
 }
@@ -455,12 +451,15 @@
     NSString* testVersion = [infoDictionary valueForKey:@"version"];
     
     
-//    NSMutableArray * AssessmentEntry =  [self.objDBconnection AssessmentEntryByDate :txtTitle.selectedCode  :usercode :txtModule.selectedCode:currentlySelectedDate:clientCode];
+    
+    NSMutableArray* isEditArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:txtTitle.selectedCode :usercode :txtModule.selectedCode :currentlySelectedDate :clientCode :AssTestTypeCode :AssTestCode andVersion:testVersion andPlayerCode:selectedPlayerCode];
 
-    NSMutableArray* isEditArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:txtTitle.selectedCode :usercode :txtModule.selectedCode :currentlySelectedDate :clientCode :AssTestTypeCode :AssTestCode];
 
     if (isEditArray.count) {
         isEdit = YES;
+//        if (![selectedPlayerCode isEqualToString:[[isEditArray firstObject]valueForKey:@"playerCode"]]) {
+//            selectedPlayerCode = @"";
+//        }
     }
     else {
         isEdit = NO;
@@ -722,6 +721,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (selectedPlayerCode.length) {
+        
+        [self.saveBtn setUserInteractionEnabled:YES];
+        [self.saveBtn setAlpha:1.0];
+
+    }
+    else{
+            [self.saveBtn setUserInteractionEnabled:NO];
+            [self.saveBtn setAlpha:0.2];
+        }
+    
     lblUnitName.text = @"";
     lblUnitValue.text = @"";
     lblRangeName.text = @"";
@@ -740,7 +750,8 @@
     
     currentlySelectedTest = ScreenID;
     
-    NSMutableArray* isEditArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:txtTitle.selectedCode :usercode :txtModule.selectedCode :currentlySelectedDate :clientCode :TestTypeCode :TestCode];
+    
+    NSMutableArray* isEditArray = [self.objDBconnection getAssessmentEnrtyByDateTestType:txtTitle.selectedCode :usercode :txtModule.selectedCode :currentlySelectedDate :clientCode :TestTypeCode :TestCode andVersion:[[currentIndexArray firstObject] valueForKey:@"version"] andPlayerCode:selectedPlayerCode];
     
     if (isEditArray.count) {
         isEdit = YES;
@@ -950,11 +961,11 @@
     }
     else
     {
-        DBAConnection *Db = [[DBAConnection alloc]init];
+        DBAConnection *Db = [DBAConnection sharedManager];
         NSString *clientCode = [AppCommon GetClientCode];
         NSString *userCode = [AppCommon GetUsercode];
         
-        dropVC.array = [Db AssessmentTestType:clientCode :userCode :txtModule.selectedCode];
+        dropVC.array = [appDel.DBCon AssessmentTestType:clientCode :userCode :txtModule.selectedCode];
         dropVC.key = @"AssessmentName";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX([sender superview].frame), CGRectGetMaxY([sender superview].frame)+70, CGRectGetWidth([sender frame]), 300)];
         
@@ -978,7 +989,8 @@
         txtModule.text = [[array objectAtIndex:Index.row] valueForKey:key];
         txtModule.selectedCode = [[array objectAtIndex:Index.row] valueForKey:@"ModuleCode"];
         txtTitle.text = @"";
-
+        [self.objContenArray removeAllObjects];
+        [tblAssesments reloadData];
     }
     
     
@@ -990,7 +1002,14 @@
 {
     currentlySelectedDate = Date;
     NSLog(@"selectedDate %@ ",Date);
-    [self tableValuesMethod];
+    
+    [self.objContenArray removeAllObjects];
+    [tblAssesments reloadData];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self tableValuesMethod];
+    });
+    
     [btnDate setTitle:currentlySelectedDate forState:UIControlStateNormal];
     
 }
@@ -999,7 +1018,9 @@
     
     CalendarViewController  * objTabVC = [CalendarViewController new];
     //    objTabVC.datePickerFormat = @"yyy-MM-dd"; // 2/9/2018 12:00:00 AM
+//    objTabVC.datePickerFormat = @"yyy/MM/dd";
     objTabVC.datePickerFormat = @"dd/MM/yyy";
+
     objTabVC.datePickerDelegate = self;
     objTabVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     objTabVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -1021,7 +1042,7 @@
         [dict setValue:clientCode forKey:@"Clientcode"];
         [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
         [dict setValue:txtTitle.selectedCode forKey:@"Assessmentcode"];
-        [dict setValue:currentIndexArray[@"AssessmentEntrycode"] forKey:@"AssessmentEntrycode"];
+        [dict setValue:currentIndexArray[@"AssessmentEntryCode"] forKey:@"AssessmentEntrycode"];
         [dict setValue:currentIndexArray[@"AssessmentTestCode"] forKey:@"Assessmenttestcode"];
         [dict setValue:currentIndexArray[@"TestTypeCode"] forKey:@"Assessmenttesttypecode"];
         [dict setValue:currentIndexArray[@"ScreenID"] forKey:@"Assessmenttesttypescreencode"];
@@ -1037,7 +1058,9 @@
         [dict setValue:currentIndexArray[@"UnitName"] forKey:@"Units"];
         
         [dict setValue:currentIndexArray[@"Inference"] forKey:@"Inference"];
-        [dict setValue:currentIndexArray[@"Value"] forKey:@"Value"];
+//        [dict setValue:currentIndexArray[@"Value"] forKey:@"Value"];
+        [dict setValue:@"" forKey:@"Value"];
+
         [dict setValue:@"" forKey:@"Description"];
         [dict setValue:@"MSC001" forKey:@"Recordstatus"];
         [dict setValue:usercode forKey:@"Createdby"];
@@ -1092,7 +1115,7 @@
         [dict setValue:clientCode forKey:@"Clientcode"];
         [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
         [dict setValue:txtTitle.selectedCode forKey:@"Assessmentcode"];
-        [dict setValue:currentIndexArray[@"AssessmentEntrycode"] forKey:@"AssessmentEntrycode"];
+        [dict setValue:currentIndexArray[@"AssessmentEntryCode"] forKey:@"AssessmentEntrycode"];
         [dict setValue:currentIndexArray[@"AssessmentTestCode"] forKey:@"Assessmenttestcode"];
         [dict setValue:currentIndexArray[@"TestTypeCode"] forKey:@"Assessmenttesttypecode"];
         [dict setValue:currentIndexArray[@"ScreenID"] forKey:@"Assessmenttesttypescreencode"];
@@ -1163,7 +1186,7 @@
         [dict setValue:clientCode forKey:@"Clientcode"];
         [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
         [dict setValue:txtTitle.selectedCode forKey:@"Assessmentcode"];
-        [dict setValue:currentIndexArray[@"AssessmentEntrycode"] forKey:@"AssessmentEntrycode"];
+        [dict setValue:currentIndexArray[@"AssessmentEntryCode"] forKey:@"AssessmentEntrycode"];
         [dict setValue:currentIndexArray[@"AssessmentTestCode"] forKey:@"Assessmenttestcode"];
         [dict setValue:currentIndexArray[@"TestTypeCode"] forKey:@"Assessmenttesttypecode"];
         [dict setValue:currentIndexArray[@"ScreenID"] forKey:@"Assessmenttesttypescreencode"];
@@ -1237,7 +1260,7 @@
         [dict setValue:clientCode forKey:@"Clientcode"];
         [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
         [dict setValue:txtTitle.selectedCode forKey:@"Assessmentcode"];
-        [dict setValue:currentIndexArray[@"AssessmentEntrycode"] forKey:@"AssessmentEntrycode"];
+        [dict setValue:currentIndexArray[@"AssessmentEntryCode"] forKey:@"AssessmentEntrycode"];
         [dict setValue:currentIndexArray[@"AssessmentTestCode"] forKey:@"Assessmenttestcode"];
         [dict setValue:currentIndexArray[@"TestTypeCode"] forKey:@"Assessmenttesttypecode"];
         [dict setValue:currentIndexArray[@"ScreenID"] forKey:@"Assessmenttesttypescreencode"];
@@ -1308,7 +1331,7 @@
         [dict setValue:clientCode forKey:@"Clientcode"];
         [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
         [dict setValue:txtTitle.selectedCode forKey:@"Assessmentcode"];
-        [dict setValue:currentIndexArray[@"AssessmentEntrycode"] forKey:@"AssessmentEntrycode"];
+        [dict setValue:currentIndexArray[@"AssessmentEntryCode"] forKey:@"AssessmentEntrycode"];
         [dict setValue:currentIndexArray[@"AssessmentTestCode"] forKey:@"Assessmenttestcode"];
         [dict setValue:currentIndexArray[@"TestTypeCode"] forKey:@"Assessmenttesttypecode"];
         [dict setValue:currentIndexArray[@"ScreenID"] forKey:@"Assessmenttesttypescreencode"];
@@ -1379,7 +1402,7 @@
         [dict setValue:clientCode forKey:@"Clientcode"];
         [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
         [dict setValue:txtTitle.selectedCode forKey:@"Assessmentcode"];
-        [dict setValue:currentIndexArray[@"AssessmentEntrycode"] forKey:@"AssessmentEntrycode"];
+        [dict setValue:currentIndexArray[@"AssessmentEntryCode"] forKey:@"AssessmentEntrycode"];
         [dict setValue:currentIndexArray[@"AssessmentTestCode"] forKey:@"Assessmenttestcode"];
         [dict setValue:currentIndexArray[@"TestTypeCode"] forKey:@"Assessmenttesttypecode"];
         [dict setValue:currentIndexArray[@"ScreenID"] forKey:@"Assessmenttesttypescreencode"];
@@ -1392,7 +1415,9 @@
         [dict setValue:collectionValues[@"left"] forKey:@"Left"];
         [dict setValue:collectionValues[@"right"] forKey:@"Right"];
         [dict setValue:collectionValues[@"center"] forKey:@"Central"];
-        [dict setValue:currentIndexArray[@"romValue"] forKey:@"Value"];
+//        [dict setValue:currentIndexArray[@"Value"] forKey:@"Value"];
+        [dict setValue:@"" forKey:@"Value"];
+
         [dict setValue:collectionValues[@"remark"] forKey:@"Remarks"];
         [dict setValue:@"" forKey:@"Inference"];
         [dict setValue:currentIndexArray[@"UnitName"] forKey:@"Units"];
@@ -1412,30 +1437,30 @@
         [dict setValue:collectionValues[@"center1"]  forKey:@"Central1"];
         [dict setValue:collectionValues[@"left2"]  forKey:@"Left2"];
         [dict setValue:collectionValues[@"right2"]  forKey:@"Right2"];
-        [dict setValue:collectionValues[@"central2"]  forKey:@"Central2"];
+        [dict setValue:collectionValues[@"center2"]  forKey:@"Central2"];
         [dict setValue:collectionValues[@"left3"]  forKey:@"Left3"];
         [dict setValue:collectionValues[@"right3"]  forKey:@"Right3"];
-        [dict setValue:collectionValues[@"central3"]  forKey:@"Central3"];
+        [dict setValue:collectionValues[@"center3"]  forKey:@"Central3"];
         
         [dict setValue:collectionValues[@"left4"]  forKey:@"Left4"];
         [dict setValue:collectionValues[@"right4"]  forKey:@"Right4"];
-        [dict setValue:collectionValues[@"central4"]  forKey:@"Central4"];
+        [dict setValue:collectionValues[@"center4"]  forKey:@"Central4"];
         [dict setValue:collectionValues[@"left5"]  forKey:@"Left5"];
         [dict setValue:collectionValues[@"right5"]  forKey:@"Right5"];
-        [dict setValue:collectionValues[@"central5"]  forKey:@"Central5"];
+        [dict setValue:collectionValues[@"center5"]  forKey:@"Central5"];
         [dict setValue:collectionValues[@"left6"]  forKey:@"Left6"];
         [dict setValue:collectionValues[@"right6"]  forKey:@"Right6"];
-        [dict setValue:collectionValues[@"central6"]  forKey:@"Central6"];
+        [dict setValue:collectionValues[@"center6"]  forKey:@"Central6"];
         
         [dict setValue:collectionValues[@"left7"]  forKey:@"Left7"];
         [dict setValue:collectionValues[@"right7"]  forKey:@"Right7"];
-        [dict setValue:collectionValues[@"central7"]  forKey:@"Central7"];
+        [dict setValue:collectionValues[@"center7"]  forKey:@"Central7"];
         [dict setValue:collectionValues[@"left8"]  forKey:@"Left8"];
         [dict setValue:collectionValues[@"right8"]  forKey:@"Right8"];
-        [dict setValue:collectionValues[@"central8"]  forKey:@"Central8"];
+        [dict setValue:collectionValues[@"center8"]  forKey:@"Central8"];
         [dict setValue:collectionValues[@"left9"]  forKey:@"Left9"];
         [dict setValue:collectionValues[@"right9"]  forKey:@"Right9"];
-        [dict setValue:collectionValues[@"central9"]  forKey:@"Central9"];
+        [dict setValue:collectionValues[@"center9"]  forKey:@"Central9"];
         [dict setValue:@"0"  forKey:@"issync"];
 
         
@@ -1451,7 +1476,7 @@
         [dict setValue:clientCode forKey:@"Clientcode"];
         [dict setValue:txtModule.selectedCode forKey:@"Modulecode"];
         [dict setValue:txtTitle.selectedCode forKey:@"Assessmentcode"];
-        [dict setValue:currentIndexArray[@"AssessmentEntrycode"] forKey:@"AssessmentEntrycode"];
+        [dict setValue:currentIndexArray[@"AssessmentEntryCode"] forKey:@"AssessmentEntrycode"];
         [dict setValue:currentIndexArray[@"AssessmentTestCode"] forKey:@"Assessmenttestcode"];
         [dict setValue:currentIndexArray[@"TestTypeCode"] forKey:@"Assessmenttesttypecode"];
         [dict setValue:currentIndexArray[@"ScreenID"] forKey:@"Assessmenttesttypescreencode"];
@@ -1550,7 +1575,6 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     TestPropertyCollectionViewCell* cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"AssessmentCell" forIndexPath:indexPath];
     
     cell.txtField.delegate = self;
@@ -1564,6 +1588,7 @@
     cell.txtField.tag = indexPath.item;
     cell.txt1_SC.tag = indexPath.item;
     cell.txt2_SC.tag = indexPath.item;
+    cell.lblTopIndicator.backgroundColor = [UIColor lightGrayColor];
     
     if ([currentlySelectedTest isEqualToString:SCREEN_CODE_S_C])
     {
@@ -1574,11 +1599,12 @@
         cell.txt2_SC.tag = indexPath.row;
         cell.txt1_SC.keyboardType = UIKeyboardTypeNumberPad;
         cell.txt2_SC.keyboardType = UIKeyboardTypeNumberPad;
-        //            SideCode = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"Side"];
         
-        cell.txt1_SC.placeholder = [NSString stringWithFormat:@"left%ld",(long)indexPath.item+1];
-        cell.txt2_SC.placeholder = [NSString stringWithFormat:@"right%ld",(long)indexPath.item+1];
+        cell.txt1_SC.placeholder = [NSString stringWithFormat:@"Left%ld",(long)indexPath.item+1];
+        cell.txt2_SC.placeholder = [NSString stringWithFormat:@"Right%ld",(long)indexPath.item+1];
         cell.lblBottom.text = [NSString stringWithFormat:@"Trail %ld",(long)indexPath.item+1];
+        cell.txt1_SC.text = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:cell.txt1_SC.placeholder];
+        cell.txt2_SC.text = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:cell.txt2_SC.placeholder];
         
     }
     else
@@ -1629,21 +1655,21 @@
         {
             cell.lblBottom.text = @"Center";
             cell.txtField.strParamName = @"center";
-            cell.txtField.text = [[currentIndexArray firstObject] valueForKey:@"Center"];
+            cell.txtField.text = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"Center"];
             
         }
         else if([SideCode isEqualToString:@"MSC003"] && indexPath.item == 0)
         {
             cell.lblBottom.text = @"Right";
             cell.txtField.strParamName = @"right";
-            cell.txtField.text = [[currentIndexArray firstObject] valueForKey:@"Right"];
+            cell.txtField.text = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"Right"];
 
         }
         else
         {
             cell.lblBottom.text = @"Left";
             cell.txtField.strParamName = @"left";
-            cell.txtField.text = [[currentIndexArray firstObject] valueForKey:@"Left"];
+            cell.txtField.text = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"Left"];
         }
         
         
@@ -1692,6 +1718,9 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     
+//    if ([textField.text isEqualToString:@""] && [string isEqualToString:@" "]) {
+//        return NO;
+//    }
 
     TestPropertyCollectionViewCell* cell = (TestPropertyCollectionViewCell *)[assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:textFieldIndexPath inSection:0]];
     
@@ -1703,6 +1732,12 @@
     
     if ([currentlySelectedTest isEqualToString:SCREEN_CODE_Rom])
     {
+        NSCharacterSet *set = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789 "] invertedSet];
+        
+        if ([string rangeOfCharacterFromSet:set].location != NSNotFound || textField.text.length > 4) {
+            return NO;
+        }
+        
         NSArray* minMaxValue;
         if ([lblRangeName.text isEqualToString:@"Normal Range"]) {
             minMaxValue = [lblRangeValue.text componentsSeparatedByString:@"-"];
@@ -1730,19 +1765,19 @@
     }
     else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_SPECIAL])
     {
-        dropdownArray =[self.objDBconnection getPositiveNegative];
+//        dropdownArray =[self.objDBconnection getPositiveNegative];
     }
     else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_MMT])
     {
-        dropdownArray =[self.objDBconnection getWithMmtCombo];
+//        dropdownArray =[self.objDBconnection getWithMmtCombo];
     }
     else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_GAIT])
     {
-        dropdownArray =[self.objDBconnection getResultCombo];
+//        dropdownArray =[self.objDBconnection getResultCombo];
     }
     else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_POSTURE])
     {
-        dropdownArray =[self.objDBconnection getwithPostureRESULTS];
+//        dropdownArray =[self.objDBconnection getwithPostureRESULTS];
     }
     else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_COACHING])
     {
@@ -1808,18 +1843,6 @@
         }
         
         
-//        if (![dict.allKeys containsObject:@"left"]) {
-//            [dict setValue:@"" forKey:@"left"];
-//        }
-//
-//        if (![dict.allKeys containsObject:@"right"]) {
-//            [dict setValue:@"" forKey:@"right"];
-//        }
-//
-//        if (![dict.allKeys containsObject:@"center"]) {
-//            [dict setValue:@"" forKey:@"center"];
-//        }
-        
         [dict setValue:txtRemarks.text forKey:@"remark"];
         NSString* ignoreValue = [NSString stringWithFormat:@"%ld",(long)btnIgnore.tag];
         [dict setValue:ignoreValue forKey:@"ignore"];
@@ -1828,13 +1851,9 @@
     }
     else if([currentlySelectedTest isEqualToString:SCREEN_CODE_SPECIAL])
     {
-        //        NSMutableDictionary* dict = [NSMutableDictionary new];
         for (NSInteger i = 0; i< CollectionItem; i++) {
             TestPropertyCollectionViewCell* cell = (TestPropertyCollectionViewCell *)[assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
             
-            //            if (cell.txtDropDown.text.length == 0) {
-            //                cell.txtDropDown.text = @"";
-            //            }
             [dict setValue:cell.txtDropDown.text forKey:[cell.lblBottom.text lowercaseString]];
             
         }
@@ -1848,17 +1867,6 @@
             
         }
 
-//        if (![dict.allKeys containsObject:@"left"]) {
-//            [dict setValue:@"" forKey:@"left"];
-//        }
-//
-//        if (![dict.allKeys containsObject:@"right"]) {
-//            [dict setValue:@"" forKey:@"right"];
-//        }
-//
-//        if (![dict.allKeys containsObject:@"center"]) {
-//            [dict setValue:@"" forKey:@"center"];
-//        }
         
         [dict setValue:txtRemarks.text forKey:@"remark"];
         //        NSNumber* num = [NSNumber numberWithInteger:btnIgnore.tag];
@@ -1871,13 +1879,7 @@
         for (NSInteger i = 0; i< CollectionItem; i++) {
             TestPropertyCollectionViewCell* cell = (TestPropertyCollectionViewCell *)[assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
             
-            //            [dict setValue:cell.txtDropDown.text forKey:cell.txtDropDown.strParamName];
             [dict setObject:cell.txtDropDown.text forKey:[cell.lblBottom.text lowercaseString]];
-            
-            
-            //            NSString* trail = [NSString stringWithFormat:@"%@ - %@",cell.txt1_SC.text,cell.txt2_SC.text];
-            //            [dict setValue:trail forKey:arr[i]];
-            
         }
         
         for (id keys in arr) {
@@ -1888,18 +1890,6 @@
             }
             
         }
-
-//        if (![dict.allKeys containsObject:@"left"]) {
-//            [dict setValue:@"" forKey:@"left"];
-//        }
-//
-//        if (![dict.allKeys containsObject:@"right"]) {
-//            [dict setValue:@"" forKey:@"right"];
-//        }
-//
-//        if (![dict.allKeys containsObject:@"center"]) {
-//            [dict setValue:@"" forKey:@"center"];
-//        }
         
         [dict setValue:txtRemarks.text forKey:@"remark"];
         NSString* ignoreValue = [NSString stringWithFormat:@"%ld",(long)btnIgnore.tag];
@@ -1912,13 +1902,7 @@
         for (NSInteger i = 0; i< CollectionItem; i++) {
             TestPropertyCollectionViewCell* cell =(TestPropertyCollectionViewCell *) [assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
             
-            //            [dict setValue:cell.txtDropDown.text forKey:cell.txtDropDown.strParamName];
             [dict setObject:cell.txtDropDown.text forKey:[cell.lblBottom.text lowercaseString]];
-            
-            
-            //            NSString* trail = [NSString stringWithFormat:@"%@ - %@",cell.txt1_SC.text,cell.txt2_SC.text];
-            //            [dict setValue:trail forKey:arr[i]];
-            
             
         }
         
@@ -1931,17 +1915,6 @@
             
         }
 
-//        if (![dict.allKeys containsObject:@"left"]) {
-//            [dict setValue:@"" forKey:@"left"];
-//        }
-//
-//        if (![dict.allKeys containsObject:@"right"]) {
-//            [dict setValue:@"" forKey:@"right"];
-//        }
-//
-//        if (![dict.allKeys containsObject:@"center"]) {
-//            [dict setValue:@"" forKey:@"center"];
-//        }
         
         [dict setValue:txtRemarks.text forKey:@"remark"];
         NSString* ignoreValue = [NSString stringWithFormat:@"%ld",(long)btnIgnore.tag];
@@ -1954,13 +1927,7 @@
         for (NSInteger i = 0; i< CollectionItem; i++) {
             TestPropertyCollectionViewCell* cell = (TestPropertyCollectionViewCell *)[assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
             
-            //            [dict setValue:cell.txtDropDown.text forKey:cell.txtDropDown.strParamName];
             [dict setObject:cell.txtDropDown.text forKey:[cell.lblBottom.text lowercaseString]];
-            
-            
-            
-            //            NSString* trail = [NSString stringWithFormat:@"%@ - %@",cell.txt1_SC.text,cell.txt2_SC.text];
-            //            [dict setValue:trail forKey:arr[i]];
             
         }
         for (id keys in arr) {
@@ -1971,18 +1938,6 @@
             }
             
         }
-
-//        if (![dict.allKeys containsObject:@"left"]) {
-//            [dict setValue:@"" forKey:@"left"];
-//        }
-//
-//        if (![dict.allKeys containsObject:@"right"]) {
-//            [dict setValue:@"" forKey:@"right"];
-//        }
-//
-//        if (![dict.allKeys containsObject:@"center"]) {
-//            [dict setValue:@"" forKey:@"center"];
-//        }
         
         [dict setValue:txtRemarks.text forKey:@"remark"];
         NSString* ignoreValue = [NSString stringWithFormat:@"%ld",(long)btnIgnore.tag];
@@ -1993,16 +1948,16 @@
     {
         for (NSInteger i = 0; i< CollectionItem; i++) {
 
-            TestPropertyCollectionViewCell* cell = [assCollection.dataSource collectionView:assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
-            
+            TestPropertyCollectionViewCell* cell = (TestPropertyCollectionViewCell *)[assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+
             NSLog(@"indexpath %ld",(long)i);
             
-            [dict setValue:cell.txt1_SC.text forKey:cell.txt1_SC.placeholder];
-            [dict setValue:cell.txt2_SC.text forKey:cell.txt2_SC.placeholder];
+            [dict setValue:cell.txt1_SC.text forKey:cell.txt1_SC.placeholder.lowercaseString];
+            [dict setValue:cell.txt2_SC.text forKey:cell.txt2_SC.placeholder.lowercaseString];
             
         }
         
-        NSArray* arr = @[@"left1",@"right1",@"left2",@"right2",@"right3",@"left3",@"left4",@"right4",@"left5",@"right5",@"left6",@"right6",@"left7",@"right7",@"left8",@"right8"];
+        NSArray* arr = @[@"left",@"right",@"center",@"left1",@"right1",@"center1",@"left2",@"right2",@"center2",@"left3",@"right3",@"center3",@"left4",@"right4",@"center4",@"left5",@"right5",@"center5",@"left6",@"right6",@"center6",@"left7",@"right7",@"center7",@"left8",@"right8",@"center8",@"left9",@"right9",@"center9"];
         
         for (id keys in arr) {
             
@@ -2035,18 +1990,6 @@
             }
             
         }
-
-//        if (![dict.allKeys containsObject:@"left"]) {
-//            [dict setValue:@"" forKey:@"left"];
-//        }
-//
-//        if (![dict.allKeys containsObject:@"right"]) {
-//            [dict setValue:@"" forKey:@"right"];
-//        }
-//
-//        if (![dict.allKeys containsObject:@"center"]) {
-//            [dict setValue:@"" forKey:@"center"];
-//        }
         
         [dict setValue:txtRemarks.text forKey:@"remark"];
         NSString* ignoreValue = [NSString stringWithFormat:@"%ld",(long)btnIgnore.tag];
@@ -2054,7 +1997,6 @@
         
     }
     
-    //    NSDictionary* result = dict;
     return dict;
 }
 

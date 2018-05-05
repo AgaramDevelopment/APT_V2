@@ -247,6 +247,7 @@
 		CE102813202DDB7500FA0B61 /* AssesmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE102811202DDB7500FA0B61 /* AssesmentTableViewCell.xib */; };
 		CE10281E202DDBFA00FA0B61 /* TestPropertyCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE10281C202DDBF900FA0B61 /* TestPropertyCollectionViewCell.m */; };
 		CE10281F202DDBFA00FA0B61 /* TestPropertyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE10281D202DDBF900FA0B61 /* TestPropertyCollectionViewCell.xib */; };
+		CE19EDD5209CC87800F9F233 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE19EDD4209CC87700F9F233 /* libsqlite3.0.tbd */; };
 		CE367C872046D72300A94B28 /* StepSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = CE367C862046D72300A94B28 /* StepSlider.m */; };
 		CE3E741820248BF100F10917 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741720248BF100F10917 /* Assets.xcassets */; };
 		CE3E741B20248BF100F10917 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE3E741920248BF100F10917 /* LaunchScreen.storyboard */; };
@@ -283,6 +284,7 @@
 		CE76ECE52041715D00E183EA /* shape1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE76ECE42041715B00E183EA /* shape1.png */; };
 		CE8DE376203FDEC70097BF66 /* InjurySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8DE374203FDEC70097BF66 /* InjurySelectionViewController.m */; };
 		CE8DE377203FDEC70097BF66 /* InjurySelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8DE375203FDEC70097BF66 /* InjurySelectionViewController.xib */; };
+		CE956094209D904F0086D2C9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE956093209D904E0086D2C9 /* libsqlite3.tbd */; };
 		CEA42104203161A800B2DAB5 /* BallsInVideosCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA420EF203161A800B2DAB5 /* BallsInVideosCVC.m */; };
 		CEA42105203161A800B2DAB5 /* VideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA420F1203161A800B2DAB5 /* VideoPlayerViewController.m */; };
 		CEA42106203161A800B2DAB5 /* VideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA420F2203161A800B2DAB5 /* VideoPlayerViewController.xib */; };
@@ -755,6 +757,7 @@
 		CE10281B202DDBF900FA0B61 /* TestPropertyCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestPropertyCollectionViewCell.h; sourceTree = "<group>"; };
 		CE10281C202DDBF900FA0B61 /* TestPropertyCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestPropertyCollectionViewCell.m; sourceTree = "<group>"; };
 		CE10281D202DDBF900FA0B61 /* TestPropertyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestPropertyCollectionViewCell.xib; sourceTree = "<group>"; };
+		CE19EDD4209CC87700F9F233 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		CE367C852046D72300A94B28 /* StepSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepSlider.h; sourceTree = "<group>"; };
 		CE367C862046D72300A94B28 /* StepSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepSlider.m; sourceTree = "<group>"; };
 		CE3E740B20248BF100F10917 /* APT_V2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APT_V2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -818,6 +821,7 @@
 		CE8DE373203FDEC70097BF66 /* InjurySelectionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InjurySelectionViewController.h; sourceTree = "<group>"; };
 		CE8DE374203FDEC70097BF66 /* InjurySelectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InjurySelectionViewController.m; sourceTree = "<group>"; };
 		CE8DE375203FDEC70097BF66 /* InjurySelectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InjurySelectionViewController.xib; sourceTree = "<group>"; };
+		CE956093209D904E0086D2C9 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		CEA420EE203161A800B2DAB5 /* BallsInVideosCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BallsInVideosCVC.h; sourceTree = "<group>"; };
 		CEA420EF203161A800B2DAB5 /* BallsInVideosCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BallsInVideosCVC.m; sourceTree = "<group>"; };
 		CEA420F0203161A800B2DAB5 /* VideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewController.h; sourceTree = "<group>"; };
@@ -912,6 +916,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE956094209D904F0086D2C9 /* libsqlite3.tbd in Frameworks */,
+				CE19EDD5209CC87800F9F233 /* libsqlite3.0.tbd in Frameworks */,
 				04BC4B0820862DF100CEB23E /* AVFoundation.framework in Frameworks */,
 				04BC4B0620862C6A00CEB23E /* UserNotifications.framework in Frameworks */,
 				DA12ABDAE57C81EC118D504C /* Pods_APT_V2.framework in Frameworks */,
@@ -1735,6 +1741,8 @@
 		285A0A2B20B2888F702E8C82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE956093209D904E0086D2C9 /* libsqlite3.tbd */,
+				CE19EDD4209CC87700F9F233 /* libsqlite3.0.tbd */,
 				04BC4B0720862DF100CEB23E /* AVFoundation.framework */,
 				04BC4B0520862C6A00CEB23E /* UserNotifications.framework */,
 				A341C632E084798C93714773 /* Pods_APT_V2.framework */,

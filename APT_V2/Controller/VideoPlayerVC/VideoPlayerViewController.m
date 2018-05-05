@@ -50,11 +50,9 @@
     [self.view removeFromSuperview];
 }
 -(void)staticvideo
-
-
 {
     
-        NSString * url = [NSString stringWithFormat:@"%@%@",Video_URL,self.objSelectVideoLink];
+        NSString * url = [NSString stringWithFormat:@"%@%@",BASE_URL,self.objSelectVideoLink];
 //
         NSURL *videoURL = [NSURL URLWithString:url];
         AVPlayer *player = [AVPlayer playerWithURL:videoURL];

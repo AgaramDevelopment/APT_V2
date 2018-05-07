@@ -22,6 +22,7 @@
             <connections>
                 <outlet property="commonview" destination="tpc-nu-YBa" id="g99-BV-exv"/>
                 <outlet property="lblAppVersion" destination="cHF-pT-GZN" id="egc-Pk-MaE"/>
+                <outlet property="lblCopyRight" destination="U5B-xc-Son" id="FRh-Cy-kfi"/>
                 <outlet property="passwordTxt" destination="WJG-YQ-Hpk" id="Pjq-ok-GXI"/>
                 <outlet property="passwordview" destination="pHB-9H-9GG" id="hMe-ce-vDX"/>
                 <outlet property="securityImage" destination="oog-SD-dqC" id="8Ye-wg-qv0"/>
@@ -290,14 +291,26 @@
                         <fontDescription key="fontDescription" name="Montserrat-Thin" family="Montserrat" pointSize="13"/>
                     </variation>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Agaram InfoTech Pvt Ltd. ® " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5B-xc-Son">
+                    <rect key="frame" x="0.0" y="623" width="375" height="15"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Thin" family="Montserrat" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" name="Montserrat-Thin" family="Montserrat" pointSize="14"/>
+                    </variation>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.054901960780000002" green="0.16862745100000001" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="u2w-zC-DKb" firstAttribute="trailing" secondItem="2u4-Yi-0eh" secondAttribute="trailing" id="1Mv-mt-9Om"/>
+                <constraint firstItem="U5B-xc-Son" firstAttribute="leading" secondItem="2u4-Yi-0eh" secondAttribute="leading" id="3Y4-iY-OSa"/>
                 <constraint firstItem="cHF-pT-GZN" firstAttribute="centerX" secondItem="dnz-e3-FeI" secondAttribute="centerX" id="6BJ-9i-dT6"/>
                 <constraint firstItem="u2w-zC-DKb" firstAttribute="bottom" secondItem="2u4-Yi-0eh" secondAttribute="bottom" id="9bB-sq-eOu"/>
                 <constraint firstItem="swW-xL-sAl" firstAttribute="top" secondItem="dnz-e3-FeI" secondAttribute="top" id="KIA-IN-VV4"/>
                 <constraint firstItem="swW-xL-sAl" firstAttribute="bottom" secondItem="2u4-Yi-0eh" secondAttribute="bottom" id="Pj6-6F-6gz"/>
+                <constraint firstItem="2u4-Yi-0eh" firstAttribute="trailing" secondItem="U5B-xc-Son" secondAttribute="trailing" id="XBc-EH-bdH"/>
+                <constraint firstItem="cHF-pT-GZN" firstAttribute="top" secondItem="U5B-xc-Son" secondAttribute="bottom" constant="5" id="Xl3-zd-QAz"/>
                 <constraint firstItem="u2w-zC-DKb" firstAttribute="leading" secondItem="2u4-Yi-0eh" secondAttribute="leading" id="Y0y-cg-aqA"/>
                 <constraint firstItem="swW-xL-sAl" firstAttribute="trailing" secondItem="2u4-Yi-0eh" secondAttribute="trailing" id="cfa-gi-XOq"/>
                 <constraint firstItem="2u4-Yi-0eh" firstAttribute="bottom" secondItem="cHF-pT-GZN" secondAttribute="bottom" constant="10" id="igC-rx-T7P"/>

@@ -1052,7 +1052,7 @@
     }
     else
     {
-        return 30;
+        return 40;
     }
     
     

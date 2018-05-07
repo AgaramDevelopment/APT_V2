@@ -760,7 +760,7 @@
 		CE19EDD4209CC87700F9F233 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		CE367C852046D72300A94B28 /* StepSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StepSlider.h; sourceTree = "<group>"; };
 		CE367C862046D72300A94B28 /* StepSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StepSlider.m; sourceTree = "<group>"; };
-		CE3E740B20248BF100F10917 /* APT_V2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = APT_V2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE3E740B20248BF100F10917 /* APT TNPL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "APT TNPL.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3E741720248BF100F10917 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE3E741A20248BF100F10917 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE3E741C20248BF100F10917 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1802,7 +1802,7 @@
 		CE3E740C20248BF100F10917 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CE3E740B20248BF100F10917 /* APT_V2.app */,
+				CE3E740B20248BF100F10917 /* APT TNPL.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2567,7 +2567,7 @@
 			);
 			name = APT_V2;
 			productName = APT_V2;
-			productReference = CE3E740B20248BF100F10917 /* APT_V2.app */;
+			productReference = CE3E740B20248BF100F10917 /* APT TNPL.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -3164,7 +3164,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.contus.APT-V2";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "APT TNPL";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3183,7 +3183,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.contus.APT-V2";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "APT TNPL";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

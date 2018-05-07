@@ -53,54 +53,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
-//    NSString *plyRolecode = @"ROL0000002";
-//
-//    if([rolecode isEqualToString:plyRolecode])
-//    {
-//        self.viewTeam.hidden = YES;
-//    }
-//    else
-//    {
-//        self.viewTeam.hidden = NO;
-//    }
-//
-   // [self.viewTeam setHidden:![AppCommon isCoach]];
 
     [[NSUserDefaults standardUserDefaults] setInteger: 13 forKey:@"requiredColumn"];
-    
-//    markers = [[NSMutableArray alloc] initWithObjects:@"50.343", @"84.43", nil];
     _mainArray = [NSMutableArray new];
-    
-    
-    /*
-     "TeamCode": "TEA0000004",
-     "Opponent": "RCB",
-     "TossWon": "RCB",
-     "ElectedTo": "Field",
-     "Condition": "HOME",
-     "Venue": "Kolkatta",
-     "BatperScore": "154.151515",
-     "BatFirstScore": 178,
-     "BatFirstwicket": 6,
-     "BatFirstTeam": "KKR",
-     "BatsecondTeam": "RCB",
-     "BatsecondScore": 179,
-     "Batsecondwicket": 7,
-     "WonTeam": "RCB",
-     "Margin": "WON BY 3 WICKETS",
-     "Points": 2,
-     "Ground": null
-     */
-    
     headingKeyArray =  @[@"Opponent",@"TossWon",@"ElectedTo",@"Condition",@"Venue",@"BatperScore",@"BatFirstTeam",@"BatFirstScore",@"BatsecondTeam",@"BatsecondScore",@"WonTeam",@"Margin",@"Points"];
     
     headingButtonNames = @[@"Opponent",@"Toss Won",@"Elected To",@"Condition",@"Venue",@"Bat 1st Par\nScore",@"Bat 1st - Team",@"Bat 1st \nScore",@"Bat 2nd \nTeam",@"Bat 2nd \nScore",@"Won Team",@"Margin",@"Points"];
     
-    
 
      [self.resultCollectionView registerNib:[UINib nibWithNibName:@"PlayerListCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"ContentCellIdentifier"];
-    
     
     
     self.battingFstPie.delegate = self;
@@ -351,15 +312,15 @@
     {
         color = [UIColor colorWithRed:(0/255.0f) green:(178/255.0f) blue:(235/255.0f) alpha:1.0f];
     }
-    if(index==1)
+    else if(index==1)
     {
         color = [UIColor colorWithRed:(204/255.0f) green:(204/255.0f) blue:(204/255.0f) alpha:1.0f];
     }
-    if(index==2)
+    else if(index==2)
     {
         color = [UIColor colorWithRed:(0/255.0f) green:(139/255.0f) blue:(139/255.0f) alpha:1.0f];
     }
-    if(index==3)
+    else if(index==3)
     {
         color = [UIColor colorWithRed:(165/255.0f) green:(42/255.0f) blue:(42/255.0f) alpha:1.0f];
     }

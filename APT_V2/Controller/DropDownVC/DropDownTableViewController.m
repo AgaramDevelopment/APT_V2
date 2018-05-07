@@ -10,6 +10,9 @@
 #import "Header.h"
 
 @interface DropDownTableViewController ()
+{
+    BOOL IfNoData;
+}
 
 @end
 
@@ -49,12 +52,19 @@
 
 -(void)addshadow
 {
-    self.tblDropDown.layer.shadowColor = [UIColor darkGrayColor].CGColor;
-    self.tblDropDown.layer.shadowOffset = CGSizeMake(0, 2.0f);
+    self.tblDropDown.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.tblDropDown.layer.shadowOffset = CGSizeZero;
     self.tblDropDown.layer.shadowRadius = 2.0f;
     self.tblDropDown.layer.shadowOpacity = 1.0f;
     self.tblDropDown.layer.masksToBounds = NO;
     self.tblDropDown.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:self.tblDropDown.bounds cornerRadius:self.tblDropDown.layer.cornerRadius].CGPath;
+    
+//    self.Shadowview.layer.masksToBounds = NO;
+//    self.Shadowview.layer.shadowColor = [UIColor blackColor].CGColor;
+//    self.Shadowview.layer.shadowOffset = CGSizeZero;
+//    self.Shadowview.layer.shadowRadius = 10.0f;
+//    self.Shadowview.layer.shadowOpacity = 1.0f;
+
 
 }
 
@@ -67,6 +77,19 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 //#warning Incomplete implementation, return the number of rows
+    
+    if (array.count == 0) {
+        IfNoData = YES;
+        array = @[@{@"DATA":@"NO Data Found"}];
+        key = @"DATA";
+    }
+    CGFloat height = 45 * 5;
+    if (array.count < 5) {
+        height = array.count * 45;
+    }
+
+    tableView.frame = CGRectMake(tableView.frame.origin.x, tableView.frame.origin.y, tableView.frame.size.width,height);
+
     return array.count;
 }
 
@@ -101,7 +124,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //    [protocol selectedValue:[[array objectAtIndex:indexPath.row] valueForKey:key]andKey:key];
-    [protocol selectedValue:array andKey:key andIndex:indexPath];
+    if (!IfNoData) {
+        [protocol selectedValue:array andKey:key andIndex:indexPath];
+    }
     NSLog(@"Selected Name and code %@",[array objectAtIndex:indexPath.row]);
 
     [self close:nil];

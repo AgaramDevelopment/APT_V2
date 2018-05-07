@@ -103,11 +103,13 @@
                         <constraint firstItem="U8i-My-uph" firstAttribute="leading" secondItem="gX7-q3-OzD" secondAttribute="leading" constant="69" id="xgj-5O-tAY"/>
                     </constraints>
                 </view>
-                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AgaramImage2" translatesAutoresizingMaskIntoConstraints="NO" id="e0Z-Vl-M7e">
-                    <rect key="frame" x="25" y="458" width="200" height="100"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AgaramImage2" translatesAutoresizingMaskIntoConstraints="NO" id="e0Z-Vl-M7e">
+                    <rect key="frame" x="25" y="558" width="200" height="0.0"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="200" id="3u4-1S-sdL"/>
-                        <constraint firstAttribute="height" constant="100" id="HPS-Ws-ugC"/>
+                        <constraint firstAttribute="height" id="HPS-Ws-ugC">
+                            <variation key="heightClass=regular-widthClass=regular" constant="100"/>
+                        </constraint>
                     </constraints>
                 </imageView>
             </subviews>

@@ -10,8 +10,9 @@
 #import "Header.h"
 #import "InjuryAndIllnessVC.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "DropDownTableViewController.h"
 
-@interface PlayerDetailViewController () <ChartViewDelegate, IChartAxisValueFormatter>
+@interface PlayerDetailViewController () <ChartViewDelegate, IChartAxisValueFormatter, selectedDropDown>
 {
     NSMutableArray* TableArray;
     NSArray<NSString *> *activities;
@@ -522,9 +523,7 @@
                 [self chatConfiguration];
                 [graphDict setValue:[responseObject valueForKey:@"homeFitness"] forKey:@"set2"];
                 [self setChartData:graphDict];
-
             }
-
             
         }
         
@@ -591,5 +590,30 @@
         _value=@"";
     }
     return _value;
+}
+
+
+-(IBAction)openDropDown:(id)sender
+{
+    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+    dropVC.protocol = self;
+    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+    
+    
+    dropVC.array = [TableArray valueForKey:@"testDates"];
+    dropVC.key = @"ModuleName";
+    [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX([sender superview].frame), CGRectGetMaxY([sender superview].frame)+170, CGRectGetWidth([sender frame]), 200)];
+    
+    [self presentViewController:dropVC animated:YES completion:nil];
+    
+}
+
+-(void)selectedValue:(NSMutableArray *)array andKey:(NSString *)key andIndex:(NSIndexPath *)Index
+{
+    NSLog(@"Selected Date %@ ",[[array objectAtIndex:Index.row]valueForKey:key]);
+    [self fitnessGraphWebservicebyDate:[[array objectAtIndex:Index.row]valueForKey:key]];
+
 }
 @end

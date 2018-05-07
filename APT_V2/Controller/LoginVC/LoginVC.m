@@ -56,7 +56,11 @@
     self.passwordTxt.secureTextEntry= !_isVisible;
     
     [self teamCodeGetService];
-
+    
+//    NSAttributedString* str = [NSAttributedString attributedStringWithAttachment:(nonnull NSTextAttachment *)]
+    
+    self.lblCopyRight.text = @"Agaram InfoTech Pvt Ltd. ®";
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -300,14 +304,21 @@
     dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [dropVC.view setBackgroundColor:[UIColor clearColor]];
     
-        dropVC.array = teamArray;
+        dropVC.array = @[teamArray.lastObject];
         dropVC.key = @"Teamname";
+    
+//    CGFloat height = 45 * 5;
+//    if (dropVC.array.count < 5) {
+//        height = dropVC.array.count * 45;
+//    }
     
     CGFloat xValue = CGRectGetMinX(teamview.superview.frame) + CGRectGetMinX(teamview.frame);
     CGFloat yValue = CGRectGetMinY(teamview.superview.frame) + CGRectGetMaxY(teamview.frame)+5;
 
     [dropVC.tblDropDown setFrame:CGRectMake(xValue, yValue, CGRectGetWidth(teamview.frame), (IS_IPAD ? 200 : 150))];
-        
+//    [dropVC.tblDropDown setFrame:CGRectMake(xValue, yValue, CGRectGetWidth(teamview.frame), height)];
+
+    
     [appDel.frontNavigationController presentViewController:dropVC animated:YES completion:^{
         NSLog(@"DropDown loaded");
     }];

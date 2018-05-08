@@ -304,7 +304,7 @@
     dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [dropVC.view setBackgroundColor:[UIColor clearColor]];
     
-        dropVC.array = @[teamArray.lastObject];
+        dropVC.array = teamArray;
         dropVC.key = @"Teamname";
     
 //    CGFloat height = 45 * 5;

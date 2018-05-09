@@ -46,7 +46,10 @@
 
 - (IBAction)actionCancelDropDown:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *btnDate;
+@property (strong, nonatomic) IBOutlet UIToolbar *doneToolbar;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneBtn;
 
+- (IBAction)actionDoneForNumberPad:(id)sender;
 @end
 
 

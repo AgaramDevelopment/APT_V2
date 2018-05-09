@@ -177,7 +177,7 @@
     
     //and create new timer with async call:
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:YES];
+        NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:NO];
         [[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
         [[NSRunLoop currentRunLoop] run];
     });
@@ -186,56 +186,9 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    
-//    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"isLater"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
 
 }
 
--(void)SynenableanddisbleMethod
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if([defaults boolForKey:@"onlineSyn"])
-    {
-        IsTimer=YES;
-        UIApplication *app = [UIApplication sharedApplication];
-        
-        //create new uiBackgroundTask
-        __block UIBackgroundTaskIdentifier bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
-            [app endBackgroundTask:bgTask];
-            bgTask = UIBackgroundTaskInvalid;
-        }];
-        
-        
-        //and create new timer with async call:
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:YES];
-            [[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
-            [[NSRunLoop currentRunLoop] run];
-        });
-    }
-    else
-    {
-        
-        UIApplication *app = [UIApplication sharedApplication];
-        //create new uiBackgroundTask
-        __block UIBackgroundTaskIdentifier bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
-            [app endBackgroundTask:bgTask];
-            bgTask = UIBackgroundTaskInvalid;
-        }];
-        
-        //and create new timer with async call:
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSTimer * t = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:NO];
-            //[[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
-            //[[NSRunLoop currentRunLoop] run];
-        });
-        IsTimer=NO;
-        
-    }
-    
-}
 
 -(void)triggerPush{
     

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CE3E740A20248BF100F10917"
-               BuildableName = "APT TNPL.app"
+               BuildableName = "APT V2.app"
                BlueprintName = "APT_V2"
                ReferencedContainer = "container:APT_V2.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE3E740A20248BF100F10917"
-            BuildableName = "APT TNPL.app"
+            BuildableName = "APT V2.app"
             BlueprintName = "APT_V2"
             ReferencedContainer = "container:APT_V2.xcodeproj">
          </BuildableReference>
@@ -56,7 +56,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE3E740A20248BF100F10917"
-            BuildableName = "APT TNPL.app"
+            BuildableName = "APT V2.app"
             BlueprintName = "APT_V2"
             ReferencedContainer = "container:APT_V2.xcodeproj">
          </BuildableReference>
@@ -75,7 +75,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CE3E740A20248BF100F10917"
-            BuildableName = "APT TNPL.app"
+            BuildableName = "APT V2.app"
             BlueprintName = "APT_V2"
             ReferencedContainer = "container:APT_V2.xcodeproj">
          </BuildableReference>

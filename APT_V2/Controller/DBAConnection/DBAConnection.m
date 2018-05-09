@@ -458,8 +458,9 @@ static dispatch_once_t onceToken;
                     NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
                     
                     NSString *	setTestTypeCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    setTestTypeCode = [AppCommon checkNull:setTestTypeCode];
                     NSString *	setTestTypeName = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-
+                    setTestTypeName = [AppCommon checkNull:setTestTypeName];
                     
                     [dic setObject:setTestTypeCode forKey:@"TestTypeCode"];
                     [dic setObject:setTestTypeName forKey:@"TestTypeName"];
@@ -745,7 +746,7 @@ static dispatch_once_t onceToken;
                     [dic setObject:@"" forKey:@"Value"];
                     [dic setObject:@"" forKey:@"Remarks"];
                     [dic setObject:@"" forKey:@"Inference"];
-                    [dic setObject:@"" forKey:@"Ignore"];
+                    [dic setObject:@"False" forKey:@"Ignore"];
                     [dic setObject:version forKey:@"Version"];
 
                     
@@ -971,7 +972,7 @@ static dispatch_once_t onceToken;
                     [dic setObject:ScoreevaluationName forKey:@"ScoreEvaluationName"];
                     [dic setObject:@"" forKey:@"Inference"];
                     [dic setObject:@"" forKey:@"Remarks"];
-                    [dic setObject:@"" forKey:@"Ignore"];
+                    [dic setObject:@"False" forKey:@"Ignore"];
                     [dic setObject:@"0" forKey:@"Left"];
                     [dic setObject:@"0" forKey:@"Right"];
                     [dic setObject:@"0" forKey:@"Center"];
@@ -1240,7 +1241,7 @@ static dispatch_once_t onceToken;
                     [dic setObject:@"" forKey:@"Remarks"];
                     [dic setObject:@"" forKey:@"Version"];
                     [dic setObject:@"" forKey:@"Inference"];
-                    [dic setObject:@"" forKey:@"Ignore"];
+                    [dic setObject:@"False" forKey:@"Ignore"];
 
                     [assessment addObject:dic];
                 }
@@ -1404,7 +1405,7 @@ static dispatch_once_t onceToken;
                     [dic setObject:@"" forKey:@"Values"];
                     [dic setObject:@"" forKey:@"Remarks"];
                     [dic setObject:@"" forKey:@"Inference"];
-                    [dic setObject:@"" forKey:@"Ignore"];
+                    [dic setObject:@"False" forKey:@"Ignore"];
                     
                     
                     [assessment addObject:dic];
@@ -1650,7 +1651,8 @@ static dispatch_once_t onceToken;
                     [dic setObject:SideName forKey:@"SideName"];
                     [dic setObject:UnitsName forKey:@"UnitName"];
                     [dic setObject:ResultName forKey:@"ResultName"];
-                    
+                    [dic setObject:@"False" forKey:@"Ignore"];
+
                     [assessment addObject:dic];
                 }
                 sqlite3_reset(statement);
@@ -1761,7 +1763,8 @@ static dispatch_once_t onceToken;
                     [dic setObject:@"" forKey:@"Description"];
                     [dic setObject:@"" forKey:@"Remarks"];
                     [dic setObject:@"" forKey:@"Inference"];
-                    
+                    [dic setObject:@"False" forKey:@"Ignore"];
+
                     
                     [assessment addObject:dic];
                 }
@@ -2060,27 +2063,13 @@ NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO ASSESSMENTENTRY(C
         NSMutableArray *assessment = [[NSMutableArray alloc]init];
         if(retVal == 0){
             
-//            NSString* query = [NSString stringWithFormat:@"SELECT * FROM ASSESSMENTENTRY"];
-//            const char *stmt = "SELECT  SPEC.CLIENTCODE,SPEC.TESTCODE,SPEC.REGION,SPEC.TESTNAME,SPEC.SIDE,SPEC.RESULT,SPEC.RECORDSTATUS,SPEC.CREATEDBY,SPEC.CREATEDDATE,SPEC.MODIFIEDBY,SPEC.MODIFIEDDATE, MDSIDE.METASUBCODEDESCRIPTION AS SIDENAME,AE.INFERENCE,MDRESULT.METASUBCODEDESCRIPTION AS RESULTNAME,AE.[LEFT],AE.[RIGHT],AE.[CENTRAL],AE.REMARKS,AE.VERSION,AE.ASSESSMENTENTRYCODE,AE.IGNORED FROM TESTSPECIAL SPEC INNER JOIN METADATA MDSIDE ON MDSIDE.METASUBCODE = SPEC.SIDE INNER JOIN METADATA MDRESULT ON MDRESULT.METASUBCODE = SPEC.RESULT INNER JOIN  ASSESSMENTREGISTER ASREG ON ASREG.CLIENTCODE = ? AND ASREG.MODULECODE = ? AND ASREG.ASSESSMENTCODE = '%@'   AND ASREG.CREATEDBY = ? AND ASREG.ASSESSMENTTESTCODE = ? AND ASREG.VERSION = ? AND ASREG.RECORDSTATUS = 'MSC001' INNER JOIN ASSESSMENTENTRY AE ON AE.ASSESSMENTTESTTYPECODE = ASREG.ASSESSMENTTESTTYPECODE AND AE.ASSESSMENTTESTTYPECODE = ? AND AE.CLIENTCODE = ASREG.CLIENTCODE AND AE.MODULECODE = ASREG.MODULECODE AND SPEC.TESTCODE = AE.ASSESSMENTTESTTYPECODE AND AE.CREATEDBY = ASREG.CREATEDBY AND AE.ASSESSMENTTESTCODE = ASREG.ASSESSMENTTESTCODE AND (? = '' OR AE.PLAYERCODE = ?) AND (? = '' OR  AE.ASSESSMENTENTRYDATE = ?) AND AE.VERSION = ? WHERE SPEC.RECORDSTATUS = 'MSC001' AND SPEC.CLIENTCODE = ? AND SPEC.TESTCODE IN (SELECT  ASSESSMENTTESTTYPECODE FROM ASSESSMENTREGISTER ASREG WHERE ASREG.CLIENTCODE = ? AND ASREG.MODULECODE = ? AND ASREG.ASSESSMENTCODE = ? AND ASREG.ASSESSMENTTESTCODE = ? AND ASREG.VERSION = ?  AND ASREG.CREATEDBY = ? AND ASREG.RECORDSTATUS = 'MSC001')";
-            
-            NSString *query=[NSString stringWithFormat:@"SELECT  SPEC.CLIENTCODE,SPEC.TESTCODE,SPEC.REGION,SPEC.TESTNAME,SPEC.SIDE,SPEC.RESULT,SPEC.RECORDSTATUS,SPEC.CREATEDBY,SPEC.CREATEDDATE,SPEC.MODIFIEDBY,SPEC.MODIFIEDDATE,        MDSIDE.METASUBCODEDESCRIPTION AS SIDENAME,AE.INFERENCE,MDRESULT.METASUBCODEDESCRIPTION AS RESULTNAME,                      AE.[LEFT],AE.[RIGHT],AE.[CENTRAL],AE.REMARKS,AE.VERSION      ,AE.ASSESSMENTENTRYCODE,AE.IGNORED    FROM TESTSPECIAL SPEC INNER JOIN METADATA MDSIDE ON MDSIDE.METASUBCODE=SPEC.SIDE                         INNER JOIN METADATA MDRESULT ON MDRESULT.METASUBCODE=SPEC.RESULT INNER JOIN  ASSESSMENTREGISTER ASREG ON ASREG.CLIENTCODE=\"%@\" AND ASREG.MODULECODE=\"%@\" AND ASREG.ASSESSMENTCODE=\"%@\"   AND ASREG.CREATEDBY = \"%@\" AND ASREG.ASSESSMENTTESTCODE=\"%@\" AND ASREG.VERSION =\"%@\" AND ASREG.RECORDSTATUS='MSC001' INNER JOIN ASSESSMENTENTRY AE ON AE.ASSESSMENTTESTTYPECODE = ASREG.ASSESSMENTTESTTYPECODE AND        AE.ASSESSMENTTESTTYPECODE = \"%@\" AND AE.CLIENTCODE = ASREG.CLIENTCODE AND AE.MODULECODE = ASREG.MODULECODE AND SPEC.TESTCODE=AE.ASSESSMENTTESTTYPECODE AND AE.CREATEDBY = ASREG.CREATEDBY AND AE.ASSESSMENTTESTCODE = ASREG.ASSESSMENTTESTCODE AND (\"%@\" = \"\" OR AE.PLAYERCODE = \"%@\") AND (\"%@\" = \"\" OR  AE.ASSESSMENTENTRYDATE = \"%@\") AND AE.VERSION =\"%@\" WHERE SPEC.RECORDSTATUS='MSC001' AND SPEC.CLIENTCODE=\"%@\" AND SPEC.TESTCODE IN (SELECT  ASSESSMENTTESTTYPECODE FROM    ASSESSMENTREGISTER ASREG WHERE  ASREG.CLIENTCODE=\"%@\" AND ASREG.MODULECODE=\"%@\" AND ASREG.ASSESSMENTCODE=\"%@\" AND ASREG.ASSESSMENTTESTCODE=\"%@\" AND ASREG.VERSION = \"%@\"  AND ASREG.CREATEDBY = \"%@\" AND ASREG.RECORDSTATUS=\"MSC001\")",clientCode,moduleCode,assessmentCode,createdBy,assessmentTestCode,version,testTypeCode,player,player,assessmentDate,assessmentDate,version,clientCode,clientCode,moduleCode,assessmentCode,assessmentTestCode,version,createdBy];
+            NSString *query=[NSString stringWithFormat:@"SELECT  SC.CLIENTCODE,SC.TESTCODE,SC.COMPONENT,SC.TESTNAME,SC.SIDE,SC.NOOFTRIALS,                         SC.UNITS,SC.SCOREEVALUATION,SC.RECORDSTATUS,AE.INFERENCE,SC.CREATEDBY,SC.CREATEDDATE,SC.MODIFIEDBY,SC.MODIFIEDDATE,MDSIDE.METASUBCODEDESCRIPTION AS SIDENAME,MDUNITS.METASUBCODEDESCRIPTION AS UNITSNAME,MDSCOREEVALUATION.METASUBCODEDESCRIPTION AS SCOREEVALUATIONNAME,AE.REMARKS,AE.LEFT , RIGHT,AE.CENTRAL , LEFT1,AE.RIGHT1 , CENTRAL1, AE.LEFT2, RIGHT2,AE.CENTRAL2, AE.LEFT3, RIGHT3,AE.CENTRAL3,AE.LEFT4, RIGHT4,AE.CENTRAL4,AE.LEFT5, RIGHT5,AE.CENTRAL5,AE.LEFT6 , RIGHT6,AE.LEFT7, RIGHT7,AE.CENTRAL7,AE.LEFT8 , RIGHT8,AE.CENTRAL8,AE.LEFT9 , RIGHT9,AE.CENTRAL9,AE.CENTRAL6,AE.VERSION  ,AE.ASSESSMENTENTRYCODE ,AE.IGNORED FROM    TESTSC SC INNER JOIN METADATA MDUNITS ON MDUNITS.METASUBCODE=SC.UNITS INNER JOIN  ASSESSMENTREGISTER ASREG ON ASREG.CLIENTCODE='%@' AND ASREG.MODULECODE='%@' AND ASREG.ASSESSMENTCODE='%@' AND ASREG.ASSESSMENTTESTCODE='%@' AND ASREG.VERSION ='%@' AND ASREG.RECORDSTATUS='MSC001' INNER JOIN ASSESSMENTENTRY AE ON AE.ASSESSMENTTESTTYPECODE = ASREG.ASSESSMENTTESTTYPECODE AND AE.ASSESSMENTTESTTYPECODE = '%@' AND AE.CLIENTCODE = ASREG.CLIENTCODE AND AE.MODULECODE = ASREG.MODULECODE AND SC.TESTCODE=AE.ASSESSMENTTESTTYPECODE AND AE.ASSESSMENTTESTCODE = ASREG.ASSESSMENTTESTCODE AND ('%@' = '' OR AE.PLAYERCODE ='%@') AND ('%@' = '' OR  AE.ASSESSMENTENTRYDATE = '%@') AND AE.VERSION ='%@' INNER JOIN METADATA MDSIDE ON MDSIDE.METASUBCODE=SC.SIDE INNER JOIN METADATA MDSCOREEVALUATION ON MDSCOREEVALUATION.METASUBCODE=SC.SCOREEVALUATION WHERE   SC.RECORDSTATUS='MSC001'  AND SC.CLIENTCODE='%@' AND SC.TESTCODE IN (SELECT  ASSESSMENTTESTTYPECODE FROM    ASSESSMENTREGISTER ASREG WHERE  ASREG.CLIENTCODE='%@' AND ASREG.MODULECODE='%@' AND ASREG.ASSESSMENTCODE='%@' AND ASREG.ASSESSMENTTESTCODE='%@' AND ASREG.VERSION ='%@'AND ASREG.RECORDSTATUS='MSC001')",clientCode,moduleCode,assessmentCode,assessmentTestCode,version,testTypeCode,player,player,assessmentDate,assessmentDate,version,clientCode,clientCode,moduleCode,assessmentCode,assessmentTestCode,version];
 
-            
-//            NSString *query=[NSString stringWithFormat:@"SELECT  SPEC.CLIENTCODE,SPEC.TESTCODE,SPEC.REGION,SPEC.TESTNAME,SPEC.SIDE,SPEC.RESULT,SPEC.RECORDSTATUS,SPEC.CREATEDBY,SPEC.CREATEDDATE,SPEC.MODIFIEDBY,SPEC.MODIFIEDDATE, MDSIDE.METASUBCODEDESCRIPTION AS SIDENAME,AE.INFERENCE,MDRESULT.METASUBCODEDESCRIPTION AS RESULTNAME,AE.[LEFT],AE.[RIGHT],AE.[CENTRAL],AE.REMARKS,AE.VERSION,AE.ASSESSMENTENTRYCODE,AE.IGNORED FROM TESTSPECIAL SPEC INNER JOIN METADATA MDSIDE ON MDSIDE.METASUBCODE = SPEC.SIDE INNER JOIN METADATA MDRESULT ON MDRESULT.METASUBCODE = SPEC.RESULT INNER JOIN  ASSESSMENTREGISTER ASREG ON ASREG.CLIENTCODE = \"%@\" AND ASREG.MODULECODE = \"%@\" AND ASREG.ASSESSMENTCODE = \"%@\"   AND ASREG.CREATEDBY = \"%@\" AND ASREG.ASSESSMENTTESTCODE = \"%@\" AND ASREG.VERSION = \"%@\" AND ASREG.RECORDSTATUS = \"MSC001\" INNER JOIN ASSESSMENTENTRY AE ON AE.ASSESSMENTTESTTYPECODE = ASREG.ASSESSMENTTESTTYPECODE AND AE.ASSESSMENTTESTTYPECODE = \"%@\" AND AE.CLIENTCODE = ASREG.CLIENTCODE AND AE.MODULECODE = ASREG.MODULECODE AND SPEC.TESTCODE = AE.ASSESSMENTTESTTYPECODE AND AE.CREATEDBY = ASREG.CREATEDBY AND AE.ASSESSMENTTESTCODE = ASREG.ASSESSMENTTESTCODE AND (\"%@\" = AE.PLAYERCODE = \"%@\" AND (\"%@\" = "" OR  AE.ASSESSMENTENTRYDATE = \"%@\") AND AE.VERSION = \"%@\" WHERE SPEC.RECORDSTATUS = \"MSC001\" AND SPEC.CLIENTCODE = '%@' AND SPEC.TESTCODE IN (SELECT  ASSESSMENTTESTTYPECODE FROM ASSESSMENTREGISTER ASREG WHERE ASREG.CLIENTCODE = \"%@\" AND ASREG.MODULECODE = \"%@\" AND ASREG.ASSESSMENTCODE = \"%@\" AND ASREG.ASSESSMENTTESTCODE = \"%@\" AND ASREG.VERSION = \"%@\"  AND ASREG.CREATEDBY = \"%@\" AND ASREG.RECORDSTATUS = 'MSC001')",clientCode,moduleCode,assessmentCode,createdBy,assessmentTestCode,version,testTypeCode,player,assessmentDate,assessmentDate,version,clientCode,clientCode,moduleCode,assessmentCode,assessmentTestCode,version,createdBy];
-            
-
-//            query = [query stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-//            const char *updateSQL = "UPDATE ShopProduct set column_shop_Product_quantity=? WHERE column_shop_Product_id=?";
-//            NSLog(@"%@",query);
             stmt=[query UTF8String];
-//            if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK) // sqlite3_prepare_v2
-//                    if (sqlite3_prepare_v2(database, updateSQL, -1, &statement, NULL) == SQLITE_OK)
-            if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
-//            if(sqlite3_prepare16_v2(dataBase, stmt, -1, &statement, NULL) == SQLITE_OK)
+            if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK) // sqlite3_prepare_v2
             {
                 NSString* str = [NSString stringWithFormat:@"%d",sqlite3_step(statement)];
                 
-//                NSLog(@"SQLITE_ROW condition %d",sqlite3_step(statement));
                 if (sqlite3_step(statement) == SQLITE_DONE)
                 {
                     NSLog(@"SQLITE_DONE");

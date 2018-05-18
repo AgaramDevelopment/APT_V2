@@ -468,7 +468,6 @@
 {
     
     /*
-     API URL        :
      API NAME       : MOBILE_RECENTDETAILS
      METHOD         : POST
      INPUT FORMAT   : JSON
@@ -476,15 +475,10 @@
      {
      "ClientCode":"CLI0000001",
      "UserrefCode":"AMR0000016",
-     "PlayerCode": "PYC0000002"
+     "PlayerCode": "PYC0000002",
+     "AssessmentEntryDate":"07-04-2017"
      }
-     
-     
-     MOBILE_RECENTDETAILSFITNESS
-     
-     ClientCode
-     UserrefCode
-     AssessmentEntryDate
+    
      */
     
     

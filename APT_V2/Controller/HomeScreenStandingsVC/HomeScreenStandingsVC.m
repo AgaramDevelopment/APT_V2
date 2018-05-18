@@ -118,7 +118,6 @@
     // the cell will be returned to the tableView
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     static NSString *cellIdentifier = @"standingsCell";
     
     HomeScreenStandingsCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -153,8 +152,7 @@
 {
     NSString* str;
     
-    if([[[resultArray objectAtIndex:indexPath.row]valueForKey:Key] isKindOfClass:[NSNumber class]])
-    {
+    if([[[resultArray objectAtIndex:indexPath.row]valueForKey:Key] isKindOfClass:[NSNumber class]]) {
         
         NSNumber *vv = [AppCommon checkNull:[[resultArray objectAtIndex:indexPath.row]valueForKey:Key]];
         str = [vv stringValue];

@@ -392,11 +392,11 @@
                     [dic setObject:foodList forKey:@"FOODLIST"];
                     [FOODDIARYS addObject:dic];
                 }
-            }
-            
-            if (emptyFoodArray.count) {
-                for (id key in emptyFoodArray) {
-                    [FOODDIARYS addObject:key];
+            } else {
+                if (emptyFoodArray.count) {
+                    for (id key in emptyFoodArray) {
+                        [FOODDIARYS addObject:key];
+                    }
                 }
             }
             

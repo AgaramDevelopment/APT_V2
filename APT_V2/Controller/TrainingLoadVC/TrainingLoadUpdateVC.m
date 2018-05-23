@@ -37,7 +37,7 @@
     
     NSString *ActivityCode;
     NSString *rpeCode;
-    NSString *TodayTotalCount;
+    NSString *TotalCount;
     
     CircularChart *circleChart;
     
@@ -672,8 +672,38 @@ if([_isToday isEqualToString:@"yes"])
     {
         NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
         [dic setObject:[[self.TodayLoadArray valueForKey:@"WORKLOADCODE"] objectAtIndex:i] forKey:@"WorkloadCode"];
-        [dic setObject:[[self.TodayLoadArray valueForKey:@"ACTIVITYTYPENAME"] objectAtIndex:i] forKey:@"ActivityName"];
+       // [dic setObject:[[self.TodayLoadArray valueForKey:@"ACTIVITYTYPENAME"] objectAtIndex:i] forKey:@"ActivityName"];
         [dic setObject:[[self.TodayLoadArray valueForKey:@"ACTIVITYTYPECODE"] objectAtIndex:i] forKey:@"ActivityCode"];
+        NSString *actCode = [[self.TodayLoadArray valueForKey:@"ACTIVITYTYPECODE"] objectAtIndex:i];
+        if([actCode isEqualToString:@"MSC053"])
+        {
+            [dic setObject:@"Match" forKey:@"ActivityName"];
+        }
+        else if([actCode isEqualToString:@"MSC054"])
+        {
+            [dic setObject:@"Strengthening" forKey:@"ActivityName"];
+        }
+        else if([actCode isEqualToString:@"MSC055"])
+        {
+            [dic setObject:@"Conditioning" forKey:@"ActivityName"];
+        }
+        else if([actCode isEqualToString:@"MSC056"])
+        {
+            [dic setObject:@"Cardio" forKey:@"ActivityName"];
+        }
+        else if([actCode isEqualToString:@"MSC057"])
+        {
+            [dic setObject:@"Net Session" forKey:@"ActivityName"];
+        }
+        else if([actCode isEqualToString:@"MSC058"])
+        {
+            [dic setObject:@"Recovery" forKey:@"ActivityName"];
+        }
+        else if([actCode isEqualToString:@"MSC059"])
+        {
+            [dic setObject:@"Bowling" forKey:@"ActivityName"];
+        }
+        
         [dic setObject:[[self.TodayLoadArray valueForKey:@"RATEPERCEIVEDEXERTION"] objectAtIndex:i] forKey:@"RpeCode"];
         int timecount = [[[self.TodayLoadArray valueForKey:@"DURATION"] objectAtIndex:i] intValue];
         int rpecount =  [[[self.TodayLoadArray valueForKey:@"RPE"] objectAtIndex:i] intValue];
@@ -718,6 +748,7 @@ if([_isToday isEqualToString:@"yes"])
             total=total+value;
         }
         self.totalCountlbl.text = [NSString stringWithFormat:@"%d",total];
+        TotalCount = [NSString stringWithFormat:@"%d",total];
         [circleChart removeFromSuperview];
         [self TodayCircularChart];
         //[circleChart reloadCircularChart];
@@ -736,8 +767,37 @@ if([_isToday isEqualToString:@"yes"])
         for(int i=0;i<self.YesterdayLoadArray.count;i++)
         {
             NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-            [dic setObject:[[self.YesterdayLoadArray valueForKey:@"ACTIVITYTYPENAME"] objectAtIndex:i] forKey:@"ActivityName"];
+            //[dic setObject:[[self.YesterdayLoadArray valueForKey:@"ACTIVITYTYPENAME"] objectAtIndex:i] forKey:@"ActivityName"];
             [dic setObject:[[self.YesterdayLoadArray valueForKey:@"ACTIVITYTYPECODE"] objectAtIndex:i] forKey:@"ActivityCode"];
+            NSString *actCode = [[self.YesterdayLoadArray valueForKey:@"ACTIVITYTYPECODE"] objectAtIndex:i];
+            if([actCode isEqualToString:@"MSC053"])
+            {
+                [dic setObject:@"Match" forKey:@"ActivityName"];
+            }
+            else if([actCode isEqualToString:@"MSC054"])
+            {
+                [dic setObject:@"Strengthening" forKey:@"ActivityName"];
+            }
+            else if([actCode isEqualToString:@"MSC055"])
+            {
+                [dic setObject:@"Conditioning" forKey:@"ActivityName"];
+            }
+            else if([actCode isEqualToString:@"MSC056"])
+            {
+                [dic setObject:@"Cardio" forKey:@"ActivityName"];
+            }
+            else if([actCode isEqualToString:@"MSC057"])
+            {
+                [dic setObject:@"Net Session" forKey:@"ActivityName"];
+            }
+            else if([actCode isEqualToString:@"MSC058"])
+            {
+                [dic setObject:@"Recovery" forKey:@"ActivityName"];
+            }
+            else if([actCode isEqualToString:@"MSC059"])
+            {
+                [dic setObject:@"Bowling" forKey:@"ActivityName"];
+            }
             
            [dic setObject:[[self.YesterdayLoadArray valueForKey:@"WORKLOADCODE"] objectAtIndex:i] forKey:@"WorkloadCode"];
             [dic setObject:[[self.YesterdayLoadArray valueForKey:@"RATEPERCEIVEDEXERTION"] objectAtIndex:i] forKey:@"RpeCode"];
@@ -1080,18 +1140,18 @@ if([_isToday isEqualToString:@"yes"])
     NSString *newDateString = [dateFormatter stringFromDate:date];
     
     
-    [objWebservice fetchTrainingLoad :fetchTrainingLoadKey : playerCode success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [objWebservice fetchTrainingLoadDate :fetchTrainingLoadDateKey : playerCode :dateString success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         
         NSMutableArray *arr = [[NSMutableArray alloc]init];
         arr = responseObject;
         if(arr.count >0)
         {
-            if(![[responseObject valueForKey:@"WorkloadTraingDetails"] isEqual:[NSNull null]])
+            if(![[responseObject valueForKey:@"WorkloadTrainingDetails"] isEqual:[NSNull null]])
             {
                 
                 NSMutableArray *reqArray = [[NSMutableArray alloc]init];
-                reqArray = [responseObject valueForKey:@"WorkloadTraingDetails"];
+                reqArray = [responseObject valueForKey:@"WorkloadTrainingDetails"];
                 
                 self.TodayLoadArray = [[NSMutableArray alloc]init];
                 self.YesterdayLoadArray = [[NSMutableArray alloc]init];
@@ -1109,11 +1169,38 @@ if([_isToday isEqualToString:@"yes"])
                         self.SaveBtn.hidden = YES;
                         self.FetchedUpdateBtn.hidden = NO;
                         _isToday = @"yes";
-                        [self setValuesUpdate];
+                        
                     }
 
                 }
+                if(self.TodayLoadArray.count>0)
+                {
+                [self setValuesUpdate];
+                }
+                else
+                {
+                    [sessionArray removeAllObjects];
+                    self.SaveBtn.hidden = NO;
+                    self.FetchedUpdateBtn.hidden = YES;
+                    [self.SessionTable reloadData];
+                    [self.markers removeAllObjects];
+                    [circleChart removeFromSuperview];
+                    [self TodayCircularChart];
+                    
+                }
      
+                [AppCommon hideLoading];
+            }
+            else
+            {
+                [sessionArray removeAllObjects];
+                self.SaveBtn.hidden = NO;
+                self.FetchedUpdateBtn.hidden = YES;
+                [self.SessionTable reloadData];
+                [self.markers removeAllObjects];
+                [circleChart removeFromSuperview];
+                [self TodayCircularChart];
+                
             }
         }
         [AppCommon hideLoading];
@@ -1139,14 +1226,16 @@ if([_isToday isEqualToString:@"yes"])
     [circleChart drawCircularChart];
     [self.todayMainView addSubview:circleChart];
     
-//    UILabel *label = [[UILabel alloc] init];
-//    [label setFont:[UIFont systemFontOfSize:12]];
-//    [label setTextAlignment:NSTextAlignmentCenter];
-//    [label setText:yesterdayTotalCount];
-//    [label setFrame:CGRectMake(0, 0, 100, 30)];
-//    [label setAdjustsFontSizeToFitWidth:TRUE];
-//    [label setCenter:yesterdayChart.center];
-//    [yesterdayChart addSubview:label];
+    UILabel *label = [[UILabel alloc] init];
+    [label setFont:[UIFont systemFontOfSize:12]];
+    [label setTextAlignment:NSTextAlignmentCenter];
+    [label setText:TotalCount];
+    [label setFrame:CGRectMake(0, 0, 100, 30)];
+    [label setAdjustsFontSizeToFitWidth:TRUE];
+    [label setCenter:circleChart.center];
+    [circleChart addSubview:label];
+    
+
 }
 
 #pragma mark CircularChartDataSource

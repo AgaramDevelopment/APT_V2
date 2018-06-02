@@ -446,9 +446,9 @@
                 
         }
             dispatch_async(dispatch_get_main_queue(), ^{
-                [_tblHistory reloadData];
-                [_tblRecentPerformance reloadData];
-                [tblDateDropDown reloadData];
+                [self.tblHistory reloadData];
+                [self.tblRecentPerformance reloadData];
+                [self.tblDateDropDown reloadData];
             });
             
             [AppCommon hideLoading];

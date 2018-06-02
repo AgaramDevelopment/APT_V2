@@ -1086,6 +1086,10 @@
     TestPropertyCollectionViewCell* cell =[collectionView dequeueReusableCellWithReuseIdentifier:@"AssessmentCell" forIndexPath:indexPath];
     
     cell.txtField.delegate = self;
+    cell.txtDropDown.delegate = self;
+    cell.txt1_SC.delegate = self;
+    cell.txt2_SC.delegate = self;
+    
     NSString* SideCode = @"";
     NSArray* currentIndexArray = [[self.objContenArray objectAtIndex:currentlySelectedTestType.section] valueForKey:@"TestValues"];
     cell.txt1_SC.text = @"";
@@ -1098,22 +1102,42 @@
     cell.txt2_SC.tag = indexPath.item;
     cell.lblTopIndicator.backgroundColor = [UIColor lightGrayColor];
     
+    cell.txt1_SC.keyboardType = UIKeyboardTypeASCIICapableNumberPad;
+    cell.txt2_SC.keyboardType = UIKeyboardTypeASCIICapableNumberPad;
+    cell.txtField.keyboardType = UIKeyboardTypeASCIICapableNumberPad;
+    
+    cell.txt1_SC.inputAccessoryView = self.doneToolbar;
+    cell.txt2_SC.inputAccessoryView = self.doneToolbar;
+    cell.txtField.inputAccessoryView = self.doneToolbar;
+    [self.doneToolbar sizeToFit];
+
+    SideCode = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"Side"];
+
     if ([currentlySelectedTest isEqualToString:SCREEN_CODE_S_C])
     {
-        [cell.SC_view setHidden:NO];
-        [cell.txtDropDown setHidden:YES];
-        [cell.txtField setHidden:YES];
-        cell.txt1_SC.tag = indexPath.row;
-        cell.txt2_SC.tag = indexPath.row;
-        cell.txt1_SC.keyboardType = UIKeyboardTypeNumberPad;
-        cell.txt2_SC.keyboardType = UIKeyboardTypeNumberPad;
         
-        cell.txt1_SC.placeholder = [NSString stringWithFormat:@"Left%ld",(long)indexPath.item+1];
-        cell.txt2_SC.placeholder = [NSString stringWithFormat:@"Right%ld",(long)indexPath.item+1];
+        if([SideCode isEqualToString:@"MSC004"]){ // CENTRAL
+            [cell.SC_view setHidden:YES];
+            [cell.txtField setHidden:NO];
+            cell.txtField.placeholder = [NSString stringWithFormat:@"Center%ld",(long)indexPath.item+1];
+            cell.txtField.text = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:cell.txtField.placeholder];
+
+            
+        }
+        else if([SideCode isEqualToString:@"MSC003"]){ // RIGHT & LEFT
+            [cell.SC_view setHidden:NO];
+            [cell.txtField setHidden:YES];
+            
+            cell.txt1_SC.placeholder = [NSString stringWithFormat:@"Left%ld",(long)indexPath.item+1];
+            cell.txt2_SC.placeholder = [NSString stringWithFormat:@"Right%ld",(long)indexPath.item+1];
+
+            cell.txt1_SC.text = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:cell.txt1_SC.placeholder];
+            cell.txt2_SC.text = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:cell.txt2_SC.placeholder];
+            
+        }
+        
+        [cell.txtDropDown setHidden:YES];
         cell.lblBottom.text = [NSString stringWithFormat:@"Trail %ld",(long)indexPath.item+1];
-        cell.txt1_SC.text = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:cell.txt1_SC.placeholder];
-        cell.txt2_SC.text = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:cell.txt2_SC.placeholder];
-        cell.txtField.inputAccessoryView = self.doneToolbar;
         [self.doneToolbar sizeToFit];
 
         
@@ -1123,18 +1147,12 @@
         [cell.SC_view setHidden:YES];
         [cell.txtDropDown setHidden:NO];
         [cell.txtField setHidden:YES];
-        cell.txtDropDown.delegate = self;
         
         if ([currentlySelectedTest isEqualToString:SCREEN_CODE_Rom]) {
 
             [cell.txtDropDown setHidden:YES];
             [cell.txtField setHidden:NO];
-            cell.txtField.keyboardType = UIKeyboardTypeNumberPad;
-            cell.txtField.inputAccessoryView = self.doneToolbar;
-            [self.doneToolbar sizeToFit];
             
-            
-            SideCode = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"Side"];
             
             if([SideCode isEqualToString:@"MSC004"])
             {
@@ -1160,8 +1178,7 @@
         }
         else {
             
-            [cell.txtDropDown setInputView:_pickerMainView];
-            SideCode = [[currentIndexArray objectAtIndex:currentlySelectedTestType.item] valueForKey:@"Side"];
+            [cell.txtDropDown setInputView:self.pickerMainView];
             
             if([SideCode isEqualToString:@"MSC004"])
             {
@@ -1235,9 +1252,20 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     
-//    if ([textField.text isEqualToString:@""] && [string isEqualToString:@" "]) {
-//        return NO;
-//    }
+    if (textField == txtRemarks) {
+        
+//        NSMutableCharacterSet *set = [[NSMutableCharacterSet new] init];
+//        set i
+//
+//            if ([string rangeOfCharacterFromSet:set].location != NSNotFound) {
+//                return NO;
+//            }
+//            else if (textField.text.length > 250 && ![string isEqualToString:@""]){
+//                return NO;
+//            }
+     
+        return YES;
+    }
 
     TestPropertyCollectionViewCell* cell = (TestPropertyCollectionViewCell *)[assCollection cellForItemAtIndexPath:[NSIndexPath indexPathForItem:textFieldIndexPath inSection:0]];
     
@@ -1247,14 +1275,22 @@
         value = 0;
     }
     
+    NSCharacterSet *set = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789. "] invertedSet];
+    if ([currentlySelectedTest isEqualToString:SCREEN_CODE_Rom] || [currentlySelectedTest isEqualToString:SCREEN_CODE_S_C]){
+        
+        if ([string rangeOfCharacterFromSet:set].location != NSNotFound) {
+            return NO;
+        }
+        else if (textField.text.length > 6 && ![string isEqualToString:@""]){
+            return NO;
+        }
+        
+    }
+    
+    
+
     if ([currentlySelectedTest isEqualToString:SCREEN_CODE_Rom])
     {
-//        NSCharacterSet *set = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789 "] invertedSet];
-//
-//        if ([string rangeOfCharacterFromSet:set].location != NSNotFound) {
-//            return NO;
-//        }
-        
         NSArray* minMaxValue;
         if ([lblRangeName.text isEqualToString:@"Normal Range"]) {
             minMaxValue = [lblRangeValue.text componentsSeparatedByString:@"-"];
@@ -1280,38 +1316,39 @@
         //        dropdownArray =[self.objDBconnection getPositiveNegative];
         //        cell.txtField.text = textField.text;
     }
-    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_SPECIAL])
-    {
-//        dropdownArray =[self.objDBconnection getPositiveNegative];
-    }
-    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_MMT])
-    {
-//        dropdownArray =[self.objDBconnection getWithMmtCombo];
-    }
-    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_GAIT])
-    {
-//        dropdownArray =[self.objDBconnection getResultCombo];
-    }
-    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_POSTURE])
-    {
-//        dropdownArray =[self.objDBconnection getwithPostureRESULTS];
-    }
-    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_COACHING])
-    {
-        
-    }
+//    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_SPECIAL])
+//    {
+//
+////        dropdownArray =[self.objDBconnection getPositiveNegative];
+//    }
+//    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_MMT])
+//    {
+////        dropdownArray =[self.objDBconnection getWithMmtCombo];
+//    }
+//    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_GAIT])
+//    {
+////        dropdownArray =[self.objDBconnection getResultCombo];
+//    }
+//    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_POSTURE])
+//    {
+////        dropdownArray =[self.objDBconnection getwithPostureRESULTS];
+//    }
+//    else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_COACHING])
+//    {
+//
+//    }
     
-        if ([currentlySelectedTest isEqualToString:SCREEN_CODE_Rom])
-        {
-    //        dropdownArray =[self.objDBconnection getPositiveNegative];
-    //        cell.txtField.text = textField.text;
-    
-        }
-        else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_S_C])
-        {
-    //        dropdownArray =[self.objDBconnection getWithMmtCombo];
-    //        cell.txt1_SC.text = textField.text;
-        }
+//        if ([currentlySelectedTest isEqualToString:SCREEN_CODE_Rom])
+//        {
+//    //        dropdownArray =[self.objDBconnection getPositiveNegative];
+//    //        cell.txtField.text = textField.text;
+//
+//        }
+//        else if ([currentlySelectedTest isEqualToString:SCREEN_CODE_S_C])
+//        {
+//    //        dropdownArray =[self.objDBconnection getWithMmtCombo];
+//    //        cell.txt1_SC.text = textField.text;
+//        }
     
     return YES;
 }
@@ -1350,9 +1387,13 @@
 
             NSLog(@"indexpath %ld",(long)i);
             
+//            if ([cell.txtField.placeholder isEqualToString:@""]) {
+//
+//            }
+            
             [dict setValue:cell.txt1_SC.text forKey:cell.txt1_SC.placeholder.lowercaseString];
             [dict setValue:cell.txt2_SC.text forKey:cell.txt2_SC.placeholder.lowercaseString];
-            
+            [dict setValue:cell.txtField.text forKey:cell.txtField.placeholder.lowercaseString];
         }
         
         arr = @[@"left",@"right",@"center",@"left1",@"right1",@"center1",@"left2",@"right2",@"center2",@"left3",@"right3",@"center3",@"left4",@"right4",@"center4",@"left5",@"right5",@"center5",@"left6",@"right6",@"center6",@"left7",@"right7",@"center7",@"left8",@"right8",@"center8",@"left9",@"right9",@"center9"];

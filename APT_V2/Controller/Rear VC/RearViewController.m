@@ -53,14 +53,9 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
-    NSString *plyRolecode = @"ROL0000002";
-    
-//    if([rolecode isEqualToString:plyRolecode])
     if(![AppCommon isCoach])
     {
         arrItems = [NSArray new];
-//        arrItems = @[@"Home",@"Planner",@"Stats",@"Match Center",@"Food Diary",@"Logout"];
         arrItems = @[@{@"name":@"Home",@"img":@"APT_Home"},
                      @{@"name":@"Planner",@"img":@"APT_Planner"},
                      @{@"name":@"Stats",@"img":@"APT_Stats"},
@@ -72,7 +67,6 @@
     else
     {
         arrItems = [NSArray new];
-//        arrItems = @[@"Team",@"Planner",@"Assessment",@"Match Center",@"Sync",@"Logout"];
         arrItems = @[@{@"name":@"Team",@"img":@"APT_Team"},
                      @{@"name":@"Planner",@"img":@"APT_Planner"},
                      @{@"name":@"Assessment",@"img":@"APT_Assessment"},
@@ -168,8 +162,6 @@
     SWRevealViewController *revealController = appDel.revealViewController;
     UIViewController* newFrontController;
     
-//    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
-//    NSString *plyRolecode = @"ROL0000002";
     
     if(![AppCommon isCoach]) // player
     {

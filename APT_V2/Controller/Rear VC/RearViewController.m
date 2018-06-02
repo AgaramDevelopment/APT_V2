@@ -19,6 +19,7 @@
 #import "PlannerVC.h"
 #import "RearTableViewCell.h"
 #import "ChangePasswordVC.h"
+#import "TeamsReportsHistoryVC.h"
 
 @interface RearViewController ()
 {
@@ -73,6 +74,7 @@
                      @{@"name":@"Match Center",@"img":@"APT_ Match centre"},
                      @{@"name":@"Sync",@"img":@"APT_Sync"},
                      @{@"name":@"Change Password",@"img":@"APT_Change Password"},
+                     @{@"name":@"TeamReportsHistory",@"img":@"APT_Team"},
                      @{@"name":@"Logout",@"img":@"APT_Logout"}];
 
     }
@@ -237,6 +239,10 @@
         else if(indexPath.row == 5)
         {
             newFrontController= [ChangePasswordVC new];
+        }
+        else if(indexPath.row == 6)
+        {
+            newFrontController= [TeamsReportsHistoryVC new];
         }
         
 

@@ -16,6 +16,7 @@
 #import "BPXLUUIDHandler.h"
 #import "DocumentViewController.h"
 #import "PlannerAddEvent.h"
+#import "TeamsReportsHistoryVC.h"
 
 @interface AppDelegate ()<SharedNotificationDelegate>
 {

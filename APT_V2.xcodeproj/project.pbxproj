@@ -1520,6 +1520,13 @@
 			path = TeamsVC;
 			sourceTree = "<group>";
 		};
+		18A6ADAD20C2BD98000F342E /* NewDesignControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NewDesignControllers;
+			sourceTree = "<group>";
+		};
 		18AC3447203E812C003EE0F0 /* ReportsVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1822,6 +1829,7 @@
 				CEB2B9B92025938E00E7D5E4 /* Helpers */,
 				CEB2B99B202592D900E7D5E4 /* Common */,
 				CEB2B9C4202598DB00E7D5E4 /* Controller */,
+				18A6ADAD20C2BD98000F342E /* NewDesignControllers */,
 				CE3E741720248BF100F10917 /* Assets.xcassets */,
 				CE3E741920248BF100F10917 /* LaunchScreen.storyboard */,
 				CE3E741C20248BF100F10917 /* Info.plist */,

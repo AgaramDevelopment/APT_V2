@@ -1298,6 +1298,71 @@
     [objaltert show];
 }
 
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    if (textField==self.foodItemTF){
+        
+        NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"];
+        for (int i = 0; i < [string length]; i++)
+            {
+            unichar c = [string characterAtIndex:i];
+            if (![myCharSet characterIsMember:c])
+                {
+                [self alertStatus:@"Food Item allows only letters and numbers" :@"Food Diary Failed" :0];
+                return NO;
+                }
+            }
+        
+        if (textField==self.foodItemTF){
+            
+            if (newString.length>25) {
+                [self alertStatus:@"Food Name must be minimum of 1-25 alpha numeric" :@"Food Diary Failed" :0];
+                return NO;
+            }
+        }
+    }
+    
+    if (textField==self.quantityTF){
+        
+        NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+        for (int i = 0; i < [string length]; i++)
+            {
+            unichar c = [string characterAtIndex:i];
+            if (![myCharSet characterIsMember:c])
+                {
+                [self alertStatus:@"Food Quantity allows only numbers" :@"Food Diary Failed" :0];
+                return NO;
+                }
+            }
+        
+        if (textField==self.quantityTF){
+            
+            if (newString.length>6) {
+                [self alertStatus:@"Food Quantity must be minimum of 1-6 digits" :@"Food Diary Failed" :0];
+                return NO;
+            }
+        }
+    }
+    
+    return YES;
+}
+
+#pragma mark - UIAlertView Delegate Method
+- (void) alertStatus:(NSString *)msg :(NSString *)title :(int) tag
+{
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:msg  delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    alertView.tag = tag;
+    dispatch_async(dispatch_get_main_queue(), ^(void)
+                   {
+                   [alertView show];
+                   });
+}
+
 #pragma mark - UITextField Delegate Methods
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     if (textField == self.foodItemTF) {

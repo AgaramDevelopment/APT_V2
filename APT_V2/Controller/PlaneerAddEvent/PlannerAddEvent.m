@@ -239,6 +239,59 @@
     [textField resignFirstResponder];
     return YES;
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if(textField == self.eventnameTxt)
+    {
+   
+        NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"];
+        for (int i = 0; i < [string length]; i++)
+        {
+            unichar c = [string characterAtIndex:i];
+            if (![myCharSet characterIsMember:c])
+            {
+                return NO;
+            }
+        }
+        
+    if(range.length + range.location > textField.text.length)
+    {
+        return NO;
+    }
+    
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+        if(newLength>25)
+        {
+            [AppCommon showAlertWithMessage:@"Maximum length should be 25 only"];
+        }
+    return newLength <= 25;
+    }
+    else if(textField == self.commentTxt)
+    {
+        NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"];
+        for (int i = 0; i < [string length]; i++)
+        {
+            unichar c = [string characterAtIndex:i];
+            if (![myCharSet characterIsMember:c])
+            {
+                return NO;
+            }
+        }
+        if(range.length + range.location > textField.text.length)
+        {
+            return NO;
+        }
+        
+        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+        if(newLength>50)
+        {
+            [AppCommon showAlertWithMessage:@"Maximum length should be 50 only"];
+        }
+        return newLength <= 50;
+    }
+    return nil;
+}
 -(void)setBorderwithView
 {
     self.eventnameView.layer.borderWidth=0.5;

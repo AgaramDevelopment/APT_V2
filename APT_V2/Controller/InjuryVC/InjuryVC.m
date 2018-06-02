@@ -2121,6 +2121,73 @@ typedef enum {
     
 }
 
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    if (textField==self.compliant_Txt || textField==self.comfirmatory_Txt || textField==self.diagnosis_Txt){
+        
+        NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,_-# "];
+        for (int i = 0; i < [string length]; i++)
+            {
+            unichar c = [string characterAtIndex:i];
+            if (![myCharSet characterIsMember:c])
+                {
+                if (textField==self.compliant_Txt) {
+                    [self alertStatus:@"Chief Compliant allows only Alpha Numeric and Special Characters" :@"Injury Failed" :0];
+                }
+                if (textField==self.comfirmatory_Txt) {
+                    [self alertStatus:@"Confirmatory Test allows only Alpha Numeric and Special Characters" :@"Injury Failed" :0];
+                }
+                if (textField==self.diagnosis_Txt) {
+                    [self alertStatus:@"Diagnosis allows only Alpha Numeric and Special Characters" :@"Injury Failed" :0];
+                }
+                return NO;
+                }
+            }
+        
+        if (textField==self.compliant_Txt){
+            
+            if (newString.length>250) {
+                [self alertStatus:@"Chief Compliant must be minimum of 1-250 Alpha Numeric and Special Characters" :@"Injury Failed" :0];
+                return NO;
+            }
+        }
+        
+        
+        if (textField==self.comfirmatory_Txt){
+            
+            if (newString.length>250) {
+                [self alertStatus:@"Confirmatory Test must be minimum of 1-250 Alpha Numeric and Special Characters" :@"Injury Failed" :0];
+                return NO;
+            }
+        }
+        
+        if (textField==self.diagnosis_Txt){
+            
+            if (newString.length>250) {
+                [self alertStatus:@"Diagnosis must be minimum of 1-250 Alpha Numeric and Special Characters" :@"Injury Failed" :0];
+                return NO;
+            }
+        }
+    }
+    
+    return YES;
+}
+
+#pragma mark - UIAlertView Delegate Method
+- (void) alertStatus:(NSString *)msg :(NSString *)title :(int) tag
+{
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:msg  delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    alertView.tag = tag;
+    dispatch_async(dispatch_get_main_queue(), ^(void)
+                   {
+                   [alertView show];
+                   });
+}
+
 
 @end
 

@@ -1046,4 +1046,59 @@
     return _value;
 }
 
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    if (textField==self.illnessNameTF || textField==self.chiefCompliantTF){
+        
+        NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.,_-# "];
+        for (int i = 0; i < [string length]; i++)
+            {
+            unichar c = [string characterAtIndex:i];
+            if (![myCharSet characterIsMember:c])
+                {
+                if (textField==self.illnessNameTF) {
+                    [self alertStatus:@"Illness Name allows only Alpha Numeric and Special Characters" :@"Ilness Failed" :0];
+                }
+                if (textField==self.chiefCompliantTF) {
+                    [self alertStatus:@"Chief Compliant allows only Alpha Numeric and Special Characters" :@"Illness Failed" :0];
+                }
+                return NO;
+                }
+            }
+        
+        if (textField==self.illnessNameTF){
+            
+            if (newString.length>250) {
+                [self alertStatus:@"Illness Name must be minimum of 1-250 Alpha Numeric and Special Characters" :@"Illness Failed" :0];
+                return NO;
+            }
+        }
+        
+        if (textField==self.chiefCompliantTF){
+            
+            if (newString.length>250) {
+                [self alertStatus:@"Chief Compliant must be minimum of 1-250 Alpha Numeric and Special Characters" :@"Illness Failed" :0];
+                return NO;
+            }
+        }
+    }
+    
+    return YES;
+}
+
+#pragma mark - UIAlertView Delegate Method
+- (void) alertStatus:(NSString *)msg :(NSString *)title :(int) tag
+{
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title message:msg  delegate:self  cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    alertView.tag = tag;
+    dispatch_async(dispatch_get_main_queue(), ^(void)
+                   {
+                   [alertView show];
+                   });
+}
+
 @end

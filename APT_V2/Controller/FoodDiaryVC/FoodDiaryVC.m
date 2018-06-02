@@ -10,6 +10,7 @@
 #import "FoodDiaryCell.h"
 #import "FoodDescriptionCell.h"
 #import "Header.h"
+#import "FoodDiaryUpdateVC.h"
 
 @interface FoodDiaryVC () {
     NSString *clientCode;
@@ -167,10 +168,14 @@
 }
 
 - (IBAction)addFoodDiaryButtonTapped:(id)sender {
-    
+    /*
     dispatch_async(dispatch_get_main_queue(), ^{
         [self setClearBorderForMealTypeAndLocation];
     });
+    */
+    FoodDiaryUpdateVC *objresult = (FoodDiaryUpdateVC *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"FoodDiaryUpdateVC"];
+    
+     [appDel.frontNavigationController pushViewController:objresult animated:YES];
 }
 
 - (IBAction)dateButtonTapped:(id)sender {

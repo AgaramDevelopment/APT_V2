@@ -129,6 +129,8 @@
 		04BC4B7320863BC700CEB23E /* EventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4B7220863BC700CEB23E /* EventRecord.m */; };
 		04C1EC4F2084C9410030E358 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C1EC4D2084C9410030E358 /* LoginVC.m */; };
 		04C1EC502084C9410030E358 /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C1EC4E2084C9410030E358 /* LoginVC.xib */; };
+		04CC004420C2CDD8004C7696 /* FoodDiaryUpdateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CC004220C2CDD8004C7696 /* FoodDiaryUpdateVC.m */; };
+		04CC004520C2CDD8004C7696 /* FoodDiaryUpdateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CC004320C2CDD8004C7696 /* FoodDiaryUpdateVC.xib */; };
 		182D854820342D1F005FFBF8 /* CategoryTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182D854620342D1F005FFBF8 /* CategoryTableCell.m */; };
 		182D854920342D1F005FFBF8 /* CategoryTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182D854720342D1F005FFBF8 /* CategoryTableCell.xib */; };
 		1894995A208759F8002ECEE0 /* PlannerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18949957208759F7002ECEE0 /* PlannerVC.m */; };
@@ -547,6 +549,9 @@
 		04C1EC4C2084C9410030E358 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		04C1EC4D2084C9410030E358 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
 		04C1EC4E2084C9410030E358 /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginVC.xib; sourceTree = "<group>"; };
+		04CC004120C2CDD8004C7696 /* FoodDiaryUpdateVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoodDiaryUpdateVC.h; sourceTree = "<group>"; };
+		04CC004220C2CDD8004C7696 /* FoodDiaryUpdateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoodDiaryUpdateVC.m; sourceTree = "<group>"; };
+		04CC004320C2CDD8004C7696 /* FoodDiaryUpdateVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodDiaryUpdateVC.xib; sourceTree = "<group>"; };
 		182D854520342D1F005FFBF8 /* CategoryTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CategoryTableCell.h; path = CategoryTableCell/CategoryTableCell.h; sourceTree = "<group>"; };
 		182D854620342D1F005FFBF8 /* CategoryTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CategoryTableCell.m; path = CategoryTableCell/CategoryTableCell.m; sourceTree = "<group>"; };
 		182D854720342D1F005FFBF8 /* CategoryTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CategoryTableCell.xib; path = CategoryTableCell/CategoryTableCell.xib; sourceTree = "<group>"; };
@@ -1097,6 +1102,16 @@
 			path = DocumentView;
 			sourceTree = "<group>";
 		};
+		04CC004020C2CD8C004C7696 /* FoodDiaryUpdateVc */ = {
+			isa = PBXGroup;
+			children = (
+				04CC004120C2CDD8004C7696 /* FoodDiaryUpdateVC.h */,
+				04CC004220C2CDD8004C7696 /* FoodDiaryUpdateVC.m */,
+				04CC004320C2CDD8004C7696 /* FoodDiaryUpdateVC.xib */,
+			);
+			path = FoodDiaryUpdateVc;
+			sourceTree = "<group>";
+		};
 		1850ECA32029E0D700B48BA1 /* TabHomeVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1528,6 +1543,7 @@
 		18A6ADAD20C2BD98000F342E /* NewDesignControllers */ = {
 			isa = PBXGroup;
 			children = (
+				04CC004020C2CD8C004C7696 /* FoodDiaryUpdateVc */,
 				18A6ADAE20C2BE57000F342E /* TeamsReportsHistoryVC */,
 			);
 			path = NewDesignControllers;
@@ -2733,6 +2749,7 @@
 				18A5CAB620383FAD00586896 /* TeamsVC.xib in Resources */,
 				CEC34C352046B2A10058ACC3 /* RecentFitnessGraph.xib in Resources */,
 				04BC4ABB2086167400CEB23E /* SchResStandVC.xib in Resources */,
+				04CC004520C2CDD8004C7696 /* FoodDiaryUpdateVC.xib in Resources */,
 				0425429C20289EE70088B87B /* AssessmentPopupVC.xib in Resources */,
 				04BC4A4D2085FFCD00CEB23E /* MCTeamPlayersCompCell.xib in Resources */,
 				04B27F1D202D7DD100ECB699 /* illnessTableViewCell.xib in Resources */,
@@ -3037,6 +3054,7 @@
 				1894995A208759F8002ECEE0 /* PlannerVC.m in Sources */,
 				18A68ACE20371A7E00EBA479 /* WellnessTrainingBowlingVC.m in Sources */,
 				18949A2520875C5F002ECEE0 /* FFButtonWithHourPopover.m in Sources */,
+				04CC004420C2CDD8004C7696 /* FoodDiaryUpdateVC.m in Sources */,
 				042381CD204173F900212684 /* PopOverVC.m in Sources */,
 				CEB2B9BD2025939F00E7D5E4 /* SWRevealViewController.m in Sources */,
 				04BC4A3D2085FEB500CEB23E /* BattingView.m in Sources */,

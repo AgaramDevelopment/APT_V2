@@ -37,6 +37,7 @@
 @property (strong,nonatomic) IBOutlet UILabel * datelbl;
 @property (strong,nonatomic) IBOutlet UITextField * bodyWeightTxt;
 @property (strong,nonatomic) IBOutlet UITextField * sleepHrTxt;
+@property (strong,nonatomic) IBOutlet UITextField * sleepMinTxt;
 @property (strong,nonatomic) IBOutlet UITextField * fatTxt;
 @property (strong,nonatomic) IBOutlet UITextField * restingHrTxt;
 @property (strong,nonatomic) IBOutlet UITextField * restingBpMaxTxt;

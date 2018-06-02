@@ -1088,16 +1088,43 @@ if([_isToday isEqualToString:@"yes"])
     [self.Delegate closeUpdateTrainingSource];
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-    
-}
+
 
 -(BOOL) textFieldShouldReturn: (UITextField *) textField
 {
     [textField resignFirstResponder];
     
     return YES;
+}
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+     if(textField == self.timelbl || textField == self.ballslbl)
+    {
+        NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+        for (int i = 0; i < [string length]; i++)
+        {
+            unichar c = [string characterAtIndex:i];
+            if (![myCharSet characterIsMember:c])
+            {
+                return NO;
+            }
+        }
+        if(range.length + range.location > textField.text.length)
+        {
+            return NO;
+        }
+        
+        NSUInteger newLength = [textField.text length] + [string length] - range.length;
+        if(newLength>3)
+        {
+            [AppCommon showAlertWithMessage:@"Maximum length should be 3 only"];
+        }
+        return newLength <= 3;
+    }
+    
+    return nil;
 }
 
 -(void)DateWebservice

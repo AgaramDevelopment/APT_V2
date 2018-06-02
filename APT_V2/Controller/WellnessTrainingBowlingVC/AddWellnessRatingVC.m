@@ -15,7 +15,6 @@
 #import "SwipeView.h"
 #import "TabHomeVC.h"
 
-
 @interface AddWellnessRatingVC ()
 {
     WebService *objWebservice;
@@ -133,6 +132,56 @@ NSString *metaSubCode4;
     return NO;
 }
 
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+   
+    if(textField == self.bodyWeightTxt || textField == self.fatTxt)
+    {
+        NSCharacterSet *myCharSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
+    
+        if ([string rangeOfCharacterFromSet:myCharSet].location != NSNotFound) {
+            return NO;
+        }
+        else if(textField.text.length>=6 && ![string isEqualToString:@""])
+        {
+            [AppCommon showAlertWithMessage:@"Maximum length should be 6 only"];
+            return NO;
+        }
+    }
+    else if(textField == self.sleepMinTxt || textField == self.sleepHrTxt)
+    {
+        NSCharacterSet *myCharSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
+        
+        if ([string rangeOfCharacterFromSet:myCharSet].location != NSNotFound) {
+            return NO;
+        }
+        else if(textField.text.length>=2 && ![string isEqualToString:@""])
+        {
+            [AppCommon showAlertWithMessage:@"Maximum length should be 2 only"];
+            return NO;
+        }
+    }
+    else if(textField == self.restingHrTxt || textField == self.restingBpMaxTxt || textField == self.restingBpMinTxt)
+    {
+        NSCharacterSet *myCharSet = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
+        
+        if ([string rangeOfCharacterFromSet:myCharSet].location != NSNotFound) {
+            return NO;
+        }
+        else if(textField.text.length>=3 && ![string isEqualToString:@""])
+        {
+            [AppCommon showAlertWithMessage:@"Maximum length should be 3 only"];
+            return NO;
+        }
+    }
+    
+
+    
+    
+    return YES;
+}
+
 - (IBAction)sliderGesture:(id)sender {
     
     [tab.swipeView setScrollEnabled:NO];
@@ -169,14 +218,24 @@ NSString *metaSubCode4;
     NSDate *matchdate = [NSDate date];
     [dateFormat setDateFormat:@"dd/MM/yyyy"];
     
-    NSDateFormatter *dateFormat1 = [[NSDateFormatter alloc] init];
-    [dateFormat1 setDateFormat:@"MM-dd-yyyy"];
-    SelectedDate = [dateFormat1 stringFromDate:datePicker.date];
- 
-    NSString * actualDate = [dateFormat stringFromDate:datePicker.date];
-    self.datelbl.text = actualDate;
-    [self.view_datepicker setHidden:YES];
-    [self DateWebservice];
+    if([datePicker.date compare:matchdate] == NSOrderedAscending)
+    {
+        NSDateFormatter *dateFormat1 = [[NSDateFormatter alloc] init];
+        [dateFormat1 setDateFormat:@"MM-dd-yyyy"];
+        SelectedDate = [dateFormat1 stringFromDate:datePicker.date];
+        
+        NSString * actualDate = [dateFormat stringFromDate:datePicker.date];
+        self.datelbl.text = actualDate;
+        [self.view_datepicker setHidden:YES];
+        [self DateWebservice];
+    }
+    else
+    {
+        [AppCommon showAlertWithMessage:@"Feature Dates Not allowed"];
+        [self.view_datepicker setHidden:YES];
+    }
+    
+   
     
 }
 
@@ -346,6 +405,10 @@ NSString *metaSubCode4;
     {
         self.sleepHrTxt.text =@"0";
     }
+    if([self.sleepMinTxt.text isEqualToString:@""] || [self.sleepMinTxt.text isEqual:[NSNull null]])
+    {
+        self.sleepMinTxt.text =@"0";
+    }
     
     if([self.fatTxt.text isEqualToString:@""] || [self.fatTxt.text isEqual:[NSNull null]] )
     {
@@ -372,7 +435,14 @@ NSString *metaSubCode4;
         urineColorNum =@"0";
     }
     
-    [objWebservice submit  :recordInsert :ClientCode :usercode:SelectedDate:playerCode:metaSubCode1:metaSubCode2:metaSubCode3:metaSubCode4 :self.bodyWeightTxt.text : self.sleepHrTxt.text : self.fatTxt.text : self.restingHrTxt.text : self.restingBpMaxTxt.text :self.restingBpMinTxt.text:urineColorNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    int sleepHour = [self.sleepHrTxt.text intValue];
+    int sleepMintues = [self.sleepMinTxt.text intValue];
+    
+    int totalSleepCount = (sleepHour*60)+sleepMintues;
+    
+    NSString *sleepHRtotalSting = [NSString stringWithFormat:@"%d",totalSleepCount];
+    
+    [objWebservice submit  :recordInsert :ClientCode :usercode:SelectedDate:playerCode:metaSubCode1:metaSubCode2:metaSubCode3:metaSubCode4 :self.bodyWeightTxt.text : sleepHRtotalSting : self.fatTxt.text : self.restingHrTxt.text : self.restingBpMaxTxt.text :self.restingBpMinTxt.text:urineColorNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         if(responseObject >0)
         {
@@ -453,6 +523,7 @@ NSString *metaSubCode4;
             
             self.bodyWeightTxt.text = @"";
             self.sleepHrTxt.text = @"";
+            self.sleepMinTxt.text = @"";
             self.fatTxt.text = @"";
             self.restingHrTxt.text = @"";
             self.restingBpMaxTxt.text = @"";
@@ -510,10 +581,14 @@ NSString *metaSubCode4;
     {
         self.bodyWeightTxt.text =@"0";
     }
-    
     if([self.sleepHrTxt.text isEqualToString:@""] || [self.sleepHrTxt.text isEqual:[NSNull null]])
     {
         self.sleepHrTxt.text =@"0";
+    }
+    
+    if([self.sleepMinTxt.text isEqualToString:@""] || [self.sleepMinTxt.text isEqual:[NSNull null]])
+    {
+        self.sleepMinTxt.text =@"0";
     }
     
     if([self.fatTxt.text isEqualToString:@""] || [self.fatTxt.text isEqual:[NSNull null]] )
@@ -541,8 +616,14 @@ NSString *metaSubCode4;
         urineColorNum =@"0";
     }
     
+    int sleepHour = [self.sleepHrTxt.text intValue];
+    int sleepMintues = [self.sleepMinTxt.text intValue];
     
-    [objWebservice UpdateWellness  :updateRecord :ClientCode :usercode :FetchedWorkLoadCode :SelectedDate:playerCode:metaSubCode1:metaSubCode2:metaSubCode3:metaSubCode4 :self.bodyWeightTxt.text : self.sleepHrTxt.text : self.fatTxt.text : self.restingHrTxt.text : self.restingBpMaxTxt.text :self.restingBpMinTxt.text:urineColorNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    int totalSleepCount = (sleepHour*60)+sleepMintues;
+    
+    NSString *sleepHRtotalSting = [NSString stringWithFormat:@"%d",totalSleepCount];
+    
+    [objWebservice UpdateWellness  :updateRecord :ClientCode :usercode :FetchedWorkLoadCode :SelectedDate:playerCode:metaSubCode1:metaSubCode2:metaSubCode3:metaSubCode4 :self.bodyWeightTxt.text : sleepHRtotalSting : self.fatTxt.text : self.restingHrTxt.text : self.restingBpMaxTxt.text :self.restingBpMinTxt.text:urineColorNum success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
         if(responseObject >0)
         {
@@ -875,18 +956,41 @@ NSString *metaSubCode4;
             self.bodyWeightTxt.text = @"";
         }
         
+        int sleepHour = [[self.fetchArray valueForKey:@"SleepHours"] intValue];
         
-        
-        if(![[self.fetchArray valueForKey:@"SleepHours"] isEqualToString:@"0"])
+        if(sleepHour >60 && sleepHour != 0)
         {
-            self.sleepHrTxt.text = [self.fetchArray valueForKey:@"SleepHours"];
+            
+            float splittedvalue = sleepHour/60;
+            
+            NSString *totalTime = [NSString stringWithFormat:@"%f.",splittedvalue];
+            NSArray *arr = [totalTime componentsSeparatedByString:@"."];
+            self.sleepHrTxt.text = arr[0];
+            
+            int hoursCount = [arr[0] intValue];
+            int totalhours = hoursCount*60;
+            int minutes = sleepHour-totalhours;
+            NSString *totalMinutes = [NSString stringWithFormat:@"%d",minutes];
+            self.sleepMinTxt.text = totalMinutes;
+            
+            
+            
         }
         else
         {
-            self.sleepHrTxt.text = @"";
+            if(![[self.fetchArray valueForKey:@"SleepHours"] isEqualToString:@"0"])
+            {
+                self.sleepMinTxt.text = [self.fetchArray valueForKey:@"SleepHours"];
+                self.sleepHrTxt.text = @"0";
+            }
+            else
+            {
+                self.sleepHrTxt.text = @"0";
+            }
+            
         }
         
-        
+    
         
         if(![[self.fetchArray valueForKey:@"Fat"] isEqualToString:@"0"])
         {

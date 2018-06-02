@@ -52,6 +52,7 @@
                 <outlet property="restingBpMinTxt" destination="aoO-Rd-zna" id="v9J-1i-lhr"/>
                 <outlet property="restingHrTxt" destination="ceo-5G-6Zf" id="DfH-eL-6KE"/>
                 <outlet property="sleepHrTxt" destination="3gW-ns-C7r" id="Wqi-Ta-Org"/>
+                <outlet property="sleepMinTxt" destination="sxg-Ug-TWx" id="k3V-al-Nvi"/>
                 <outlet property="sleepSlider" destination="Q4R-kS-TJU" id="dqs-oo-gmb"/>
                 <outlet property="stressSlider" destination="M1e-PO-thA" id="bag-L2-Swx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -571,8 +572,11 @@
                                                 <constraint firstAttribute="width" constant="55" id="Ynk-cJ-g0M"/>
                                             </constraints>
                                             <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                            </variation>
                                             <connections>
                                                 <outlet property="delegate" destination="-1" id="nvv-tm-J7k"/>
                                             </connections>
@@ -631,24 +635,44 @@
                                     <rect key="frame" x="190" y="0.0" width="180" height="30"/>
                                     <subviews>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3gW-ns-C7r">
-                                            <rect key="frame" x="10" y="0.0" width="55" height="30"/>
+                                            <rect key="frame" x="10" y="0.0" width="40" height="30"/>
                                             <color key="backgroundColor" red="0.90561580659999996" green="0.90203398469999996" blue="0.90181511640000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="55" id="D6B-6u-1q6"/>
+                                                <constraint firstAttribute="width" constant="40" id="D6B-6u-1q6"/>
                                                 <constraint firstAttribute="height" constant="30" id="nbg-ZC-85n"/>
                                             </constraints>
                                             <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                            </variation>
                                             <connections>
                                                 <outlet property="delegate" destination="-1" id="9oY-GI-Rld"/>
                                             </connections>
                                         </textField>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hh:mm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPQ-Fv-Qaz">
-                                            <rect key="frame" x="70" y="3" width="43" height="25"/>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sxg-Ug-TWx">
+                                            <rect key="frame" x="55" y="0.0" width="40" height="30"/>
+                                            <color key="backgroundColor" red="0.90561580659999996" green="0.90203398469999996" blue="0.90181511640000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="43" id="I21-eN-Rrp"/>
-                                                <constraint firstAttribute="height" constant="25" id="Jze-j0-r2i"/>
+                                                <constraint firstAttribute="width" constant="40" id="QnD-b3-ZtG"/>
+                                                <constraint firstAttribute="height" constant="30" id="rPg-E1-AiK"/>
+                                            </constraints>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                            </variation>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="XHY-C2-JIu"/>
+                                            </connections>
+                                        </textField>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hh:mm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPQ-Fv-Qaz">
+                                            <rect key="frame" x="100" y="3" width="43" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="43" id="GL2-nK-0B6"/>
+                                                <constraint firstAttribute="height" constant="25" id="yit-BA-tLh"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="9"/>
                                             <nil key="textColor"/>
@@ -661,8 +685,10 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="3gW-ns-C7r" firstAttribute="leading" secondItem="2zy-VP-9u5" secondAttribute="leading" constant="10" id="6jk-Hg-8xQ"/>
-                                        <constraint firstItem="vPQ-Fv-Qaz" firstAttribute="leading" secondItem="3gW-ns-C7r" secondAttribute="trailing" constant="5" id="PHG-6C-h7k"/>
-                                        <constraint firstItem="vPQ-Fv-Qaz" firstAttribute="top" secondItem="2zy-VP-9u5" secondAttribute="top" constant="3" id="eIc-aN-H5D"/>
+                                        <constraint firstItem="vPQ-Fv-Qaz" firstAttribute="leading" secondItem="sxg-Ug-TWx" secondAttribute="trailing" constant="5" id="AQl-w4-CPq"/>
+                                        <constraint firstItem="sxg-Ug-TWx" firstAttribute="top" secondItem="2zy-VP-9u5" secondAttribute="top" id="CAp-zx-kGp"/>
+                                        <constraint firstItem="sxg-Ug-TWx" firstAttribute="leading" secondItem="3gW-ns-C7r" secondAttribute="trailing" constant="5" id="G8G-W9-qnB"/>
+                                        <constraint firstItem="vPQ-Fv-Qaz" firstAttribute="top" secondItem="2zy-VP-9u5" secondAttribute="top" constant="3" id="Yah-gx-npP"/>
                                         <constraint firstAttribute="height" constant="30" id="uT8-0n-UVU"/>
                                         <constraint firstItem="3gW-ns-C7r" firstAttribute="centerY" secondItem="2zy-VP-9u5" secondAttribute="centerY" id="ylj-Xf-8zu"/>
                                     </constraints>
@@ -705,8 +731,11 @@
                                                 <constraint firstAttribute="width" constant="55" id="qm4-2K-Qnt"/>
                                             </constraints>
                                             <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                            </variation>
                                             <connections>
                                                 <outlet property="delegate" destination="-1" id="EGK-LW-aav"/>
                                             </connections>
@@ -772,8 +801,11 @@
                                                 <constraint firstAttribute="height" constant="30" id="K0b-03-9Im"/>
                                             </constraints>
                                             <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                            </variation>
                                             <connections>
                                                 <outlet property="delegate" destination="-1" id="mZp-oo-Uq8"/>
                                             </connections>
@@ -839,8 +871,11 @@
                                                 <constraint firstAttribute="height" constant="30" id="T1f-dB-goq"/>
                                             </constraints>
                                             <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                            </variation>
                                             <connections>
                                                 <outlet property="delegate" destination="-1" id="QLh-a4-X24"/>
                                             </connections>
@@ -865,8 +900,11 @@
                                                 <constraint firstAttribute="height" constant="30" id="lKf-RQ-nJq"/>
                                             </constraints>
                                             <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                            </variation>
                                             <connections>
                                                 <outlet property="delegate" destination="-1" id="bNo-F1-5Rr"/>
                                             </connections>

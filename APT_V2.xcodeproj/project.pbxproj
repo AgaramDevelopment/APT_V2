@@ -214,6 +214,8 @@
 		18A68ACF20371A7E00EBA479 /* WellnessTrainingBowlingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A68AC920371A7D00EBA479 /* WellnessTrainingBowlingVC.xib */; };
 		18A6ADB220C2BE57000F342E /* TeamsReportsHistoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A6ADB020C2BE57000F342E /* TeamsReportsHistoryVC.m */; };
 		18A6ADB320C2BE57000F342E /* TeamsReportsHistoryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A6ADB120C2BE57000F342E /* TeamsReportsHistoryVC.xib */; };
+		18A6ADB820C2CB51000F342E /* HistoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A6ADB620C2CB51000F342E /* HistoryVC.m */; };
+		18A6ADB920C2CB51000F342E /* HistoryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A6ADB720C2CB51000F342E /* HistoryVC.xib */; };
 		18AA1B952092FCC2009634A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18AA1B932092FCC2009634A3 /* Main.storyboard */; };
 		18AA1B982092FD17009634A3 /* SessionSummaryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AA1B962092FD16009634A3 /* SessionSummaryVC.m */; };
 		18AA1B9E2092FD64009634A3 /* FieldSummaryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AA1B9A2092FD63009634A3 /* FieldSummaryTVC.m */; };
@@ -705,6 +707,9 @@
 		18A6ADAF20C2BE57000F342E /* TeamsReportsHistoryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamsReportsHistoryVC.h; sourceTree = "<group>"; };
 		18A6ADB020C2BE57000F342E /* TeamsReportsHistoryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamsReportsHistoryVC.m; sourceTree = "<group>"; };
 		18A6ADB120C2BE57000F342E /* TeamsReportsHistoryVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamsReportsHistoryVC.xib; sourceTree = "<group>"; };
+		18A6ADB520C2CB51000F342E /* HistoryVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryVC.h; sourceTree = "<group>"; };
+		18A6ADB620C2CB51000F342E /* HistoryVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryVC.m; sourceTree = "<group>"; };
+		18A6ADB720C2CB51000F342E /* HistoryVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryVC.xib; sourceTree = "<group>"; };
 		18AA1B942092FCC2009634A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		18AA1B962092FD16009634A3 /* SessionSummaryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionSummaryVC.m; sourceTree = "<group>"; };
 		18AA1B972092FD17009634A3 /* SessionSummaryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionSummaryVC.h; sourceTree = "<group>"; };
@@ -1528,6 +1533,7 @@
 		18A6ADAD20C2BD98000F342E /* NewDesignControllers */ = {
 			isa = PBXGroup;
 			children = (
+				18A6ADB420C2CB21000F342E /* HistoryVC */,
 				18A6ADAE20C2BE57000F342E /* TeamsReportsHistoryVC */,
 			);
 			path = NewDesignControllers;
@@ -1541,6 +1547,16 @@
 				18A6ADB120C2BE57000F342E /* TeamsReportsHistoryVC.xib */,
 			);
 			path = TeamsReportsHistoryVC;
+			sourceTree = "<group>";
+		};
+		18A6ADB420C2CB21000F342E /* HistoryVC */ = {
+			isa = PBXGroup;
+			children = (
+				18A6ADB520C2CB51000F342E /* HistoryVC.h */,
+				18A6ADB620C2CB51000F342E /* HistoryVC.m */,
+				18A6ADB720C2CB51000F342E /* HistoryVC.xib */,
+			);
+			path = HistoryVC;
 			sourceTree = "<group>";
 		};
 		18AC3447203E812C003EE0F0 /* ReportsVC */ = {
@@ -2703,6 +2719,7 @@
 				CEB2B99320257BBD00E7D5E4 /* MontserratAlternates-SemiBoldItalic.otf in Resources */,
 				CEA42106203161A800B2DAB5 /* VideoPlayerViewController.xib in Resources */,
 				CEB2B98F20257BBD00E7D5E4 /* MontserratAlternates-Medium.otf in Resources */,
+				18A6ADB920C2CB51000F342E /* HistoryVC.xib in Resources */,
 				18AA1B952092FCC2009634A3 /* Main.storyboard in Resources */,
 				04B27F18202D784600ECB699 /* illnessVC.xib in Resources */,
 				CEB2B98A20257BBD00E7D5E4 /* MontserratAlternates-ExtraLight.otf in Resources */,
@@ -2915,6 +2932,7 @@
 				CEF38326203D6BC200FB5838 /* PlayerDetailTableViewCell.m in Sources */,
 				18949A2A20875C5F002ECEE0 /* FFGuestsTableViewCell.m in Sources */,
 				CE6C161E204520B300672253 /* PlayersCell.m in Sources */,
+				18A6ADB820C2CB51000F342E /* HistoryVC.m in Sources */,
 				18949A2220875C5F002ECEE0 /* FFEvent.m in Sources */,
 				CEBD2A7320289999000AFD1B /* SKSTableViewCell.m in Sources */,
 				CE102812202DDB7500FA0B61 /* AssesmentTableViewCell.m in Sources */,

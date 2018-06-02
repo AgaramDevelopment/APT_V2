@@ -20,11 +20,18 @@
 #import "MyStatsBattingVC.h"
 #import "TeamMembersVC.h"
 #import "PopOverVC.h"
+#import "TeamsVC.h"
+#import "ReportsVC.h"
+#import "HistoryVC.h"
 
 @interface TeamsReportsHistoryVC ()
 {
     NSIndexPath* selectedIndex;
     NSArray *titleArray;
+    TeamsVC *objteam;
+    ReportsVC *objrep;
+    CustomNavigation *objCustomNavigation;
+    HistoryVC *objhis;
 }
 
 @end
@@ -34,9 +41,42 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+     [self.Titlecollview registerNib:[UINib nibWithNibName:@"TabHomeCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
+    objteam = [[TeamsVC alloc] initWithNibName:@"TeamsVC" bundle:nil];
+    objrep = [[ReportsVC alloc] initWithNibName:@"ReportsVC" bundle:nil];
+    objhis = [[HistoryVC alloc] initWithNibName:@"HistoryVC" bundle:nil];
     selectedIndex = [NSIndexPath indexPathForItem:0 inSection:0];
     
-    titleArray = @[@"Home",([AppCommon isCoach] ? @"My Teams" : @"Wellness/Training/Bowling")];
+    titleArray = @[@"Teams",@"Reports",@"History"];
+    [self customnavigationmethod];
+}
+
+-(void)customnavigationmethod
+{
+    objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    
+    //    [self.view addSubview:objCustomNavigation.view];
+    //    objCustomNavigation.tittle_lbl.text=@"";
+    
+    //UIView* view= self.navigation_view.subviews.firstObject;
+    [self.navi_View addSubview:objCustomNavigation.view];
+    
+    objCustomNavigation.btn_back.hidden =YES;
+    objCustomNavigation.menu_btn.hidden =NO;
+    //        [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    //        [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    //Notification Method
+    
+    
+    [objCustomNavigation.notificationView setHidden:![AppCommon isKXIP]];
+    
+    [objCustomNavigation.notificationBtn addTarget:self action:@selector(didClickNotificationBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -47,14 +87,14 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //return self.commonArray.count;
     
-    return 2;
+    return titleArray.count;
 }
 
 #pragma mar - UICollectionViewFlowDelegateLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    CGFloat widthF = self.Titlecollview.superview.frame.size.width/2;
+    CGFloat widthF = self.Titlecollview.superview.frame.size.width/3;
     CGFloat HeightF = self.Titlecollview.superview.frame.size.height;
     
     return CGSizeMake(widthF, HeightF);
@@ -99,27 +139,24 @@
     
     if(index == 0)
     {
-//        objSch.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
-//        [view addSubview:objSch.view];
+        objteam.view.frame = CGRectMake(0, -70, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
+       // objteam.navi_View.frame.size.height = 0;
+        [view addSubview:objteam.view];
         
     }
     
     else if(index == 1)
     {
-        //            if ([AppCommon isCoach]) {
-        //                CGFloat Yposition = objPlayersVC.filterContainerView.frame.origin.y;
-        //                objPlayersVC.view.frame = CGRectMake(0, -70, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+70);
-        //                [view addSubview:objPlayersVC.view];
-        //            }
-        //            else
-        //            {
-        //                objStats.view.frame = CGRectMake(0, -75, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+75);
-        //                [view addSubview:objStats.view];
-        //            }
-        //CGFloat Yposition = objWell.filterContainerView.frame.origin.y;
-//        objWell.view.frame = CGRectMake(0, -70, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+70);
-//        
-//        [view addSubview:objWell.view];
+        
+        objrep.view.frame = CGRectMake(0, -70, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
+        [view addSubview:objrep.view];
+        
+    }
+    else if(index == 2)
+    {
+        objhis.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
+        [view addSubview:objhis.view];
+        
     }
     
     return view;

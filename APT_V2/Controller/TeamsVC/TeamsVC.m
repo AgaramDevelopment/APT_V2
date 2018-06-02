@@ -151,7 +151,7 @@
 {
     
     static NSString *MyIdentifier = @"MyIdentifier";
-    ProfileVCCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    ProfileVCCell *cell = [tableView dequeueReusableCellWithIdentifier:nil];
     if (cell == nil)
     {
         [[NSBundle mainBundle] loadNibNamed:@"ProfileVCCell" owner:self options:nil];

@@ -133,6 +133,8 @@
 		04CC004520C2CDD8004C7696 /* FoodDiaryUpdateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CC004320C2CDD8004C7696 /* FoodDiaryUpdateVC.xib */; };
 		182D854820342D1F005FFBF8 /* CategoryTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182D854620342D1F005FFBF8 /* CategoryTableCell.m */; };
 		182D854920342D1F005FFBF8 /* CategoryTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182D854720342D1F005FFBF8 /* CategoryTableCell.xib */; };
+		188F3D0C20C5038A00199CBF /* HistoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 188F3D0A20C5038A00199CBF /* HistoryVC.m */; };
+		188F3D0D20C5038A00199CBF /* HistoryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 188F3D0B20C5038A00199CBF /* HistoryVC.xib */; };
 		1894995A208759F8002ECEE0 /* PlannerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18949957208759F7002ECEE0 /* PlannerVC.m */; };
 		1894995B208759F8002ECEE0 /* PlannerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18949958208759F8002ECEE0 /* PlannerVC.xib */; };
 		1894996120875A3C002ECEE0 /* PlannerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1894995C20875A3B002ECEE0 /* PlannerCell.xib */; };
@@ -216,8 +218,6 @@
 		18A68ACF20371A7E00EBA479 /* WellnessTrainingBowlingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A68AC920371A7D00EBA479 /* WellnessTrainingBowlingVC.xib */; };
 		18A6ADB220C2BE57000F342E /* TeamsReportsHistoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A6ADB020C2BE57000F342E /* TeamsReportsHistoryVC.m */; };
 		18A6ADB320C2BE57000F342E /* TeamsReportsHistoryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A6ADB120C2BE57000F342E /* TeamsReportsHistoryVC.xib */; };
-		18A6ADB820C2CB51000F342E /* HistoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A6ADB620C2CB51000F342E /* HistoryVC.m */; };
-		18A6ADB920C2CB51000F342E /* HistoryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A6ADB720C2CB51000F342E /* HistoryVC.xib */; };
 		18AA1B952092FCC2009634A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18AA1B932092FCC2009634A3 /* Main.storyboard */; };
 		18AA1B982092FD17009634A3 /* SessionSummaryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AA1B962092FD16009634A3 /* SessionSummaryVC.m */; };
 		18AA1B9E2092FD64009634A3 /* FieldSummaryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18AA1B9A2092FD63009634A3 /* FieldSummaryTVC.m */; };
@@ -557,6 +557,9 @@
 		182D854520342D1F005FFBF8 /* CategoryTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CategoryTableCell.h; path = CategoryTableCell/CategoryTableCell.h; sourceTree = "<group>"; };
 		182D854620342D1F005FFBF8 /* CategoryTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CategoryTableCell.m; path = CategoryTableCell/CategoryTableCell.m; sourceTree = "<group>"; };
 		182D854720342D1F005FFBF8 /* CategoryTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CategoryTableCell.xib; path = CategoryTableCell/CategoryTableCell.xib; sourceTree = "<group>"; };
+		188F3D0920C5038A00199CBF /* HistoryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryVC.h; sourceTree = "<group>"; };
+		188F3D0A20C5038A00199CBF /* HistoryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryVC.m; sourceTree = "<group>"; };
+		188F3D0B20C5038A00199CBF /* HistoryVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryVC.xib; sourceTree = "<group>"; };
 		18949957208759F7002ECEE0 /* PlannerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlannerVC.m; sourceTree = "<group>"; };
 		18949958208759F8002ECEE0 /* PlannerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlannerVC.xib; sourceTree = "<group>"; };
 		18949959208759F8002ECEE0 /* PlannerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlannerVC.h; sourceTree = "<group>"; };
@@ -712,7 +715,6 @@
 		18A6ADAF20C2BE57000F342E /* TeamsReportsHistoryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamsReportsHistoryVC.h; sourceTree = "<group>"; };
 		18A6ADB020C2BE57000F342E /* TeamsReportsHistoryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamsReportsHistoryVC.m; sourceTree = "<group>"; };
 		18A6ADB120C2BE57000F342E /* TeamsReportsHistoryVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamsReportsHistoryVC.xib; sourceTree = "<group>"; };
-		18A6ADB520C2CB51000F342E /* HistoryVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HistoryVC.h; sourceTree = "<group>"; };
 		18A6ADB620C2CB51000F342E /* HistoryVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryVC.m; sourceTree = "<group>"; };
 		18A6ADB720C2CB51000F342E /* HistoryVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryVC.xib; sourceTree = "<group>"; };
 		18AA1B942092FCC2009634A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -1128,6 +1130,16 @@
 				04BC4AC2208618A000CEB23E /* TabHomeVC.xib */,
 			);
 			path = TabHomeVC;
+			sourceTree = "<group>";
+		};
+		188F3D0820C5038A00199CBF /* HistoryVC */ = {
+			isa = PBXGroup;
+			children = (
+				188F3D0920C5038A00199CBF /* HistoryVC.h */,
+				188F3D0A20C5038A00199CBF /* HistoryVC.m */,
+				188F3D0B20C5038A00199CBF /* HistoryVC.xib */,
+			);
+			path = HistoryVC;
 			sourceTree = "<group>";
 		};
 		1894996420875C5E002ECEE0 /* Ffcalendar */ = {
@@ -1548,6 +1560,7 @@
 		18A6ADAD20C2BD98000F342E /* NewDesignControllers */ = {
 			isa = PBXGroup;
 			children = (
+				188F3D0820C5038A00199CBF /* HistoryVC */,
 				04CC004020C2CD8C004C7696 /* FoodDiaryUpdateVc */,
 				18A6ADAE20C2BE57000F342E /* TeamsReportsHistoryVC */,
 			);
@@ -1562,16 +1575,6 @@
 				18A6ADB120C2BE57000F342E /* TeamsReportsHistoryVC.xib */,
 			);
 			path = TeamsReportsHistoryVC;
-			sourceTree = "<group>";
-		};
-		18A6ADB420C2CB21000F342E /* HistoryVC */ = {
-			isa = PBXGroup;
-			children = (
-				18A6ADB520C2CB51000F342E /* HistoryVC.h */,
-				18A6ADB620C2CB51000F342E /* HistoryVC.m */,
-				18A6ADB720C2CB51000F342E /* HistoryVC.xib */,
-			);
-			path = HistoryVC;
 			sourceTree = "<group>";
 		};
 		18AC3447203E812C003EE0F0 /* ReportsVC */ = {
@@ -2154,6 +2157,8 @@
 				CE102817202DDBE300FA0B61 /* CalendarViewController.xib */,
 				041B9DE42046A4D700ECFDD8 /* TeamOverviewVC.m */,
 				041B9DE52046A4D700ECFDD8 /* TeamOverviewVC.xib */,
+				18A6ADB620C2CB51000F342E /* HistoryVC.m */,
+				18A6ADB720C2CB51000F342E /* HistoryVC.xib */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -2734,7 +2739,6 @@
 				CEB2B99320257BBD00E7D5E4 /* MontserratAlternates-SemiBoldItalic.otf in Resources */,
 				CEA42106203161A800B2DAB5 /* VideoPlayerViewController.xib in Resources */,
 				CEB2B98F20257BBD00E7D5E4 /* MontserratAlternates-Medium.otf in Resources */,
-				18A6ADB920C2CB51000F342E /* HistoryVC.xib in Resources */,
 				18AA1B952092FCC2009634A3 /* Main.storyboard in Resources */,
 				04B27F18202D784600ECB699 /* illnessVC.xib in Resources */,
 				CEB2B98A20257BBD00E7D5E4 /* MontserratAlternates-ExtraLight.otf in Resources */,
@@ -2780,6 +2784,7 @@
 				CEB2B97320257BBD00E7D5E4 /* Montserrat-BlackItalic.otf in Resources */,
 				04BC4B41208632E900CEB23E /* VideoGalleryCell.xib in Resources */,
 				18A6ADB320C2BE57000F342E /* TeamsReportsHistoryVC.xib in Resources */,
+				188F3D0D20C5038A00199CBF /* HistoryVC.xib in Resources */,
 				CE6C16492045211400672253 /* BattingTableViewCell.xib in Resources */,
 				04BC4A382085FE7700CEB23E /* OverviewView.xib in Resources */,
 				04BC49F32085FB1900CEB23E /* MCTossAndResultsVC.xib in Resources */,
@@ -2948,10 +2953,10 @@
 				CEF38326203D6BC200FB5838 /* PlayerDetailTableViewCell.m in Sources */,
 				18949A2A20875C5F002ECEE0 /* FFGuestsTableViewCell.m in Sources */,
 				CE6C161E204520B300672253 /* PlayersCell.m in Sources */,
-				18A6ADB820C2CB51000F342E /* HistoryVC.m in Sources */,
 				18949A2220875C5F002ECEE0 /* FFEvent.m in Sources */,
 				CEBD2A7320289999000AFD1B /* SKSTableViewCell.m in Sources */,
 				CE102812202DDB7500FA0B61 /* AssesmentTableViewCell.m in Sources */,
+				188F3D0C20C5038A00199CBF /* HistoryVC.m in Sources */,
 				04BC4AD520861A5100CEB23E /* MCOverViewResultCVC.m in Sources */,
 				04C1EC4F2084C9410030E358 /* LoginVC.m in Sources */,
 				CE6C162F204520D100672253 /* SessionDayCell.m in Sources */,

@@ -139,7 +139,9 @@
     
     if(index == 0)
     {
-        objteam.view.frame = CGRectMake(0, -70, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
+        objteam.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
+        objteam.naviHeight.constant = 0;
+        objteam.navi_View.hidden = YES;
        // objteam.navi_View.frame.size.height = 0;
         [view addSubview:objteam.view];
         
@@ -148,7 +150,8 @@
     else if(index == 1)
     {
         
-        objrep.view.frame = CGRectMake(0, -70, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
+        objrep.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
+        objrep.naviHeight.constant = 0;
         [view addSubview:objrep.view];
         
     }
@@ -183,7 +186,7 @@
     // self.page_control.currentPage = self.swipeView.currentItemIndex;
     
     selectedIndex = [NSIndexPath indexPathForItem:swipeView.currentItemIndex inSection:0];
-    if(selectedIndex ==1)
+    if(selectedIndex ==2)
     {
         [self.swipeView setScrollEnabled:NO];
     }

@@ -10,4 +10,13 @@
 
 @interface HistoryVC : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITableView *tblHistory;
+
+
+@property (nonatomic,strong) IBOutlet UIButton * ModuleBtn;
+
+
+@property (nonatomic,strong) IBOutlet UIView * v1;
+@property (strong, nonatomic) IBOutlet UILabel *moduleLbl;
+
 @end

@@ -31,7 +31,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-//    [self customnavigationmethod];
+   [self customnavigationmethod];
     [self TeamsWebservice];
 }
 
@@ -45,7 +45,7 @@
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    [self customnavigationmethod];
+    //[self customnavigationmethod];
 }
 
 -(void)customnavigationmethod

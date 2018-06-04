@@ -15,4 +15,5 @@
 @property (strong, nonatomic) IBOutlet UITableView *teamsTable;
 @property (nonatomic,strong) IBOutlet ProfileVCCell *objProfilecell;
 @property (weak, nonatomic) IBOutlet UILabel *lblNoData;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *naviHeight;
 @end

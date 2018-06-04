@@ -24,6 +24,7 @@
                 <outlet property="TraingLoadView" destination="FbF-Gk-Lzj" id="wZe-zZ-4Oq"/>
                 <outlet property="WeeklyBtn" destination="NIm-mR-W2i" id="hqB-cJ-Fei"/>
                 <outlet property="chartView" destination="n2Q-b4-rpZ" id="w0b-qp-xnR"/>
+                <outlet property="naviHeight" destination="W8i-UB-sQ6" id="z90-gE-kSW"/>
                 <outlet property="navi_View" destination="MXl-2e-8P9" id="fw5-ex-UZr"/>
                 <outlet property="scrollView" destination="FVO-de-J3U" id="9Li-PZ-sA4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

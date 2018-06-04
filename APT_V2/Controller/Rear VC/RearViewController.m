@@ -63,6 +63,7 @@
                      @{@"name":@"Match Center",@"img":@"APT_ Match centre"},
                      @{@"name":@"Food Diary",@"img":@"APT_Food Dairy"},
                      @{@"name":@"Change Password",@"img":@"APT_Change Password"},
+                     @{@"name":@"TeamReportsHistory",@"img":@"APT_Team"},
                      @{@"name":@"Logout",@"img":@"APT_Logout"}];
     }
     else
@@ -195,6 +196,10 @@
         else if(indexPath.row == 5)
         {
             newFrontController= [ChangePasswordVC new];
+        }
+        else if(indexPath.row == 6)
+        {
+            newFrontController= [TeamsReportsHistoryVC new];
         }
 
         else if (indexPath.row == arrItems.count -1)

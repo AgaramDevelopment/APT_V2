@@ -99,7 +99,7 @@
     
     
     UIView* view= self.view.subviews.firstObject;
-    [view addSubview:objCustomNavigation.view];
+   // [view addSubview:objCustomNavigation.view];
     
     BOOL isBackEnable = [[NSUserDefaults standardUserDefaults] boolForKey:@"BACK"];
     
@@ -333,7 +333,8 @@
 {
     [AppCommon showLoading ];
     
-    NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+   // NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+        NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     //NSString *clientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     //NSString *date = @"02-21-2018";
     objWebservice = [[WebService alloc]init];

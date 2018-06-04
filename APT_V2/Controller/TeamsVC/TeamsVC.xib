@@ -21,6 +21,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TeamsVC">
             <connections>
                 <outlet property="lblNoData" destination="oFR-hn-w3U" id="eDN-HE-hJe"/>
+                <outlet property="naviHeight" destination="Pzq-fo-cIG" id="ROB-rK-PF6"/>
                 <outlet property="navi_View" destination="0kZ-mG-bnY" id="7cH-Af-rUk"/>
                 <outlet property="teamsTable" destination="51x-DZ-PKP" id="Sw8-fY-Ur5"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -63,7 +64,7 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="51x-DZ-PKP">
-                    <rect key="frame" x="5" y="140" width="365" height="522"/>
+                    <rect key="frame" x="5" y="140" width="365" height="577"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="23P-2h-ncj"/>
@@ -71,7 +72,7 @@
                     </connections>
                 </tableView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Data found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oFR-hn-w3U">
-                    <rect key="frame" x="126.5" y="390.5" width="122.5" height="21"/>
+                    <rect key="frame" x="126.5" y="418" width="122.5" height="21"/>
                     <fontDescription key="fontDescription" name="Montserrat-Thin" family="Montserrat" pointSize="17"/>
                     <color key="textColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -86,7 +87,7 @@
                 <constraint firstItem="51x-DZ-PKP" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="5" id="GRc-j3-NWV"/>
                 <constraint firstItem="0kZ-mG-bnY" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="PVK-du-N1o"/>
                 <constraint firstItem="oFR-hn-w3U" firstAttribute="centerY" secondItem="51x-DZ-PKP" secondAttribute="centerY" id="SGU-kO-iSx"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="51x-DZ-PKP" secondAttribute="bottom" constant="5" id="YsU-wg-Mw4"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="51x-DZ-PKP" secondAttribute="bottom" constant="-50" id="YsU-wg-Mw4"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="IrM-nv-kpn" secondAttribute="trailing" constant="5" id="Z54-6E-IVB"/>
                 <constraint firstItem="IrM-nv-kpn" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="5" id="b1x-Q1-KCl"/>
                 <constraint firstItem="51x-DZ-PKP" firstAttribute="top" secondItem="IrM-nv-kpn" secondAttribute="bottom" constant="10" id="ker-Ru-ctV"/>

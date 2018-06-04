@@ -22,4 +22,5 @@
 @property (strong, nonatomic) IBOutlet UIButton *DailyBtn;
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *naviHeight;
 @end

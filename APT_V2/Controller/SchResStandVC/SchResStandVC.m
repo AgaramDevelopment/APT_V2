@@ -823,8 +823,6 @@
 //        NSString *teamcode = [AppCommon getCurrentTeamCode];
         
         NSString *teamcode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"CAPTeamcode"];
-        
-        
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
 //        if(competition)   [dic    setObject:competition     forKey:@"Competitioncode"];
         if(teamcode)   [dic    setObject:teamcode     forKey:@"TeamCode"];

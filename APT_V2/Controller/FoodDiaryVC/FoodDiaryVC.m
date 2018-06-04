@@ -173,9 +173,11 @@
         [self setClearBorderForMealTypeAndLocation];
     });
     */
-    FoodDiaryUpdateVC *objresult = (FoodDiaryUpdateVC *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"FoodDiaryUpdateVC"];
+//    FoodDiaryUpdateVC *objresult = (FoodDiaryUpdateVC *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"FoodDiaryUpdateVC"];
+//     [appDel.frontNavigationController pushViewController:objresult animated:YES];
     
-     [appDel.frontNavigationController pushViewController:objresult animated:YES];
+    FoodDiaryUpdateVC *objresult = [FoodDiaryUpdateVC new];
+    [self.navigationController pushViewController:objresult animated:YES];
 }
 
 - (IBAction)dateButtonTapped:(id)sender {

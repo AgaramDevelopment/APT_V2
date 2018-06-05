@@ -222,9 +222,9 @@
         
         double val4 = [[[self.chartValuesArray valueForKey:@"StreeRating"]objectAtIndex:i] doubleValue];
         
-        double val5 = [[[self.chartValuesArray valueForKey:@"URINECOLOUR"]objectAtIndex:i] doubleValue];
+       // double val5 = [[[self.chartValuesArray valueForKey:@"URINECOLOUR"]objectAtIndex:i] doubleValue];
         
-        [yVals addObject:[[BarChartDataEntry alloc] initWithX:i*spaceforbar yValues:@[@(val1), @(val2), @(val3),@(val4),@(val5)] icon: [UIImage imageNamed:@"icon"]]];
+        [yVals addObject:[[BarChartDataEntry alloc] initWithX:i*spaceforbar yValues:@[@(val1), @(val2), @(val3),@(val4)] icon: [UIImage imageNamed:@"icon"]]];
     }
     
     BarChartDataSet *set1 = nil;

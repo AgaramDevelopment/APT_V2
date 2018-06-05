@@ -13,10 +13,17 @@
 #import "WebService.h"
 #import "DropDownTableViewController.h"
 
-@interface HistoryVC ()<selectedDropDown>
+@interface HistoryVC ()<selectedDropDown,UISearchBarDelegate>
+{
+    NSString *changedText;
+}
+
 
 @property (strong, nonatomic)  NSMutableArray *listHistory;
+@property (strong, nonatomic)  NSMutableArray *mainArray;
 @property (strong, nonatomic)  NSMutableArray *listModule;
+@property (nonatomic, strong) NSArray *searchResult;
+@property (strong, nonatomic) IBOutlet UITextField *search_Txt;
 
 @end
 
@@ -27,9 +34,9 @@
     
     self.listHistory = [[NSMutableArray alloc]init];
     self.listModule = [[NSMutableArray alloc]init];
-   
-   // [self HistoryWebservice];
     [self Dropdownwebservice];
+    
+   
 }
 
 
@@ -76,7 +83,20 @@
         
         cell.lblModuleName.text = [self checkNull:[[self.listHistory valueForKey:@"Modulename"] objectAtIndex:indexPath.row]];
         cell.lblAssessmentName.text = [self checkNull:[[self.listHistory valueForKey:@"Assessmentname"] objectAtIndex:indexPath.row]];
-        cell.lblDate.text = [self checkNull:[[self.listHistory valueForKey:@"Assessmentdate"] objectAtIndex:indexPath.row]];
+        
+        
+        NSString *dateString = [self checkNull:[[self.listHistory valueForKey:@"Assessmentdate"] objectAtIndex:indexPath.row]];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        NSDate *dateFromString = [dateFormatter dateFromString:dateString];
+
+
+        NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
+        [dateFormatter1 setDateFormat:@"dd-MM-yyyy"];
+        NSString *stringDate = [dateFormatter1 stringFromDate:dateFromString];
+        NSLog(@"%@", stringDate);
+      
+        cell.lblDate.text = stringDate;
     }
     
     
@@ -138,11 +158,17 @@
                 {
                 self.listHistory = [[NSMutableArray alloc]init];
                 self.listHistory = [self checkNull:[responseObject valueForKey:@"LstHistoryDetails"]];
+                    
+                    self.mainArray = [[NSMutableArray alloc]init];
+                    self.mainArray = self.listHistory;
+                    
+                    self.search_Txt.text = @"";
                 [self.tblHistory reloadData];
                 }
                 else
                 {
                     self.listHistory = [[NSMutableArray alloc]init];
+                    self.search_Txt.text = @"";
                     [self.tblHistory reloadData];
                 }
                 
@@ -264,6 +290,7 @@
         self.moduleLbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
         NSString* modulecode = [[array objectAtIndex:Index.row] valueForKey:@"Module"];
         
+        
         [[NSUserDefaults standardUserDefaults] setValue:modulecode forKey:@"SelectedModuleCode"];
         [[NSUserDefaults standardUserDefaults] setValue:self.moduleLbl.text forKey:@"SelectedModuleName"];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -271,6 +298,161 @@
     }
         
     
+}
+
+
+#pragma mark - Search delegate methods
+
+- (void)filterContentForSearchText:(NSString*)searchText
+{
+    
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"Assessmentname CONTAINS[c] %@ OR Modulename CONTAINS[c] %@ OR Assessmentdate CONTAINS[c] %@", searchText,searchText,searchText];
+    _searchResult = [self.mainArray filteredArrayUsingPredicate:resultPredicate];
+    
+    NSLog(@"searchResult:%@", _searchResult);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // Update the UI
+        if (_searchResult.count == 0) {
+            self.listHistory = [self.searchResult copy];
+            [self.tblHistory reloadData];
+            
+        } else {
+            
+            self.listHistory =[[NSMutableArray alloc]init];
+            self.listHistory = [self.searchResult copy];
+            
+            [self.tblHistory reloadData];
+            
+        }
+    });
+    
+    
+}
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    //self.playerTbl.hidden = NO;
+    
+    return YES;
+}
+-(BOOL)textFieldDidBeginEditing:(UITextField *)textField
+{
+   
+    return YES;
+}
+
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+//{
+//    //self.playerTbl.hidden = NO;
+//    NSLog(@"%@",textField);
+//    NSString *searchString = [NSString stringWithFormat:@"%@%@",textField.text, string];
+//
+////    if (self.search_Txt.text.length!=1)
+////    {
+////        [self filterContentForSearchText:searchString];
+////    }
+////    else
+////    {
+////        self.listHistory = [[NSMutableArray alloc]init];
+////        self.listHistory =  self.mainArray;
+////
+////        [self.tblHistory reloadData];
+////
+////    }
+//
+//    if (self.search_Txt.text.length==0 || self.search_Txt.text.length == nil)
+//    {
+//        self.listHistory = [[NSMutableArray alloc]init];
+//        self.listHistory =  self.mainArray;
+//
+//        [self.tblHistory reloadData];
+//    }
+//    else
+//    {
+//        [self filterContentForSearchText:searchString];
+//    }
+//
+//    //[self filterContentForSearchText:searchString];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        // Update the UI
+//        [self.tblHistory reloadData];
+//    });
+//    return YES;
+//}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    [self updateTextLabelsWithText: newString];
+    
+    changedText = newString;
+    
+    return YES;
+}
+
+-(void)updateTextLabelsWithText:(NSString *)string
+{
+   // [self.search_Txt setText:string];
+    NSLog(@"@%",string);
+    
+        if (string.length==0 || string.length == nil)
+        {
+            self.listHistory = [[NSMutableArray alloc]init];
+            self.listHistory =  self.mainArray;
+    
+            [self.tblHistory reloadData];
+        }
+        else
+        {
+            [self filterContentForSearchText:string];
+        }
+    
+        //[self filterContentForSearchText:searchString];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // Update the UI
+            [self.tblHistory reloadData];
+        });
+}
+
+-(void)textFieldDidChange :(UITextField *) textField
+{
+    if (changedText.length==0 || changedText.length == nil)
+    {
+        self.listHistory = [[NSMutableArray alloc]init];
+        self.listHistory =  self.mainArray;
+        
+        [self.tblHistory reloadData];
+    }
+    else
+    {
+        [self filterContentForSearchText:changedText];
+    }
+    
+    //[self filterContentForSearchText:searchString];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // Update the UI
+        [self.tblHistory reloadData];
+    });
+
+}
+
+
+-(BOOL) textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //[self.videoCollectionview2 reloadData];
+    });
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField;
+{
+    
+    
+    [textField resignFirstResponder];
 }
 
 

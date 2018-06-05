@@ -63,7 +63,7 @@
                      @{@"name":@"Match Center",@"img":@"APT_ Match centre"},
                      @{@"name":@"Food Diary",@"img":@"APT_Food Dairy"},
                      @{@"name":@"Change Password",@"img":@"APT_Change Password"},
-                     @{@"name":@"TeamReportsHistory",@"img":@"APT_Team"},
+                     @{@"name":@"HistoryReports",@"img":@"APT_Team"},
                      @{@"name":@"Logout",@"img":@"APT_Logout"}];
     }
     else

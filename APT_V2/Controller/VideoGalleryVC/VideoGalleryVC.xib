@@ -19,7 +19,7 @@
             <connections>
                 <outlet property="btnCategory" destination="1lR-Ny-2Y6" id="1Lm-JO-LSG"/>
                 <outlet property="btnUpload" destination="SHW-CS-yeA" id="lfv-C3-9lW"/>
-                <outlet property="date_lbl" destination="Odu-9U-eGB" id="hcs-wY-7oU"/>
+                <outlet property="dateTF" destination="WD4-g2-jDw" id="yV1-Zy-r1G"/>
                 <outlet property="dropdownView" destination="iT0-Lz-NUf" id="7lb-Ts-mAb"/>
                 <outlet property="lblNovideo" destination="xfv-tr-FtC" id="wkE-dt-BID"/>
                 <outlet property="lblcategory" destination="wnt-7T-xbS" id="cU6-Cj-qdV"/>
@@ -104,7 +104,7 @@
                                         <constraint firstAttribute="width" constant="20" id="t2D-PG-zWf"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1lR-Ny-2Y6">
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1lR-Ny-2Y6">
                                     <rect key="frame" x="0.0" y="0.0" width="85" height="30"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
@@ -150,15 +150,18 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DtD-lu-Ppb" userLabel="Date Range View">
                             <rect key="frame" x="110.5" y="0.0" width="84.5" height="30"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Range" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Odu-9U-eGB">
-                                    <rect key="frame" x="0.0" y="0.0" width="60.5" height="24"/>
-                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date Range" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WD4-g2-jDw">
+                                    <rect key="frame" x="0.0" y="0.0" width="62.5" height="24"/>
                                     <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
+                                    <textInputTraits key="textInputTraits"/>
                                     <variation key="heightClass=regular-widthClass=regular">
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                     </variation>
-                                </label>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="gCL-5k-EgJ"/>
+                                    </connections>
+                                </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhS-6H-NzX">
                                     <rect key="frame" x="0.0" y="26" width="84.5" height="2"/>
                                     <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -176,28 +179,28 @@
                                         <constraint firstAttribute="width" constant="20" id="q9n-8H-JSr"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="twg-Er-pvL">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="twg-Er-pvL">
                                     <rect key="frame" x="0.0" y="0.0" width="84.5" height="30"/>
                                     <connections>
-                                        <action selector="showSelecteddate:" destination="-1" eventType="touchUpInside" id="Odg-g7-zNt"/>
+                                        <action selector="dateButtonTapped:" destination="-1" eventType="touchUpInside" id="0Xz-lH-REi"/>
                                     </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstItem="S3m-x4-NV2" firstAttribute="leading" secondItem="Odu-9U-eGB" secondAttribute="trailing" constant="2" id="EFd-S1-DxA"/>
                                 <constraint firstAttribute="trailing" secondItem="bhS-6H-NzX" secondAttribute="trailing" id="IYq-uS-TYq"/>
                                 <constraint firstAttribute="bottom" secondItem="bhS-6H-NzX" secondAttribute="bottom" constant="2" id="T8f-17-U06"/>
                                 <constraint firstItem="S3m-x4-NV2" firstAttribute="top" secondItem="DtD-lu-Ppb" secondAttribute="top" constant="4" id="V3Y-Rc-5O3"/>
-                                <constraint firstItem="Odu-9U-eGB" firstAttribute="top" secondItem="DtD-lu-Ppb" secondAttribute="top" id="ZIv-0c-dMO"/>
+                                <constraint firstItem="S3m-x4-NV2" firstAttribute="leading" secondItem="WD4-g2-jDw" secondAttribute="trailing" id="YXj-2x-2Gn"/>
                                 <constraint firstAttribute="trailing" secondItem="S3m-x4-NV2" secondAttribute="trailing" constant="2" id="ZdZ-CY-Dsf"/>
                                 <constraint firstAttribute="trailing" secondItem="twg-Er-pvL" secondAttribute="trailing" id="bIs-PQ-hLc"/>
-                                <constraint firstItem="bhS-6H-NzX" firstAttribute="top" secondItem="Odu-9U-eGB" secondAttribute="bottom" constant="2" id="j6f-Yv-9LV"/>
+                                <constraint firstItem="WD4-g2-jDw" firstAttribute="leading" secondItem="DtD-lu-Ppb" secondAttribute="leading" id="kKi-36-WFj"/>
+                                <constraint firstItem="bhS-6H-NzX" firstAttribute="top" secondItem="WD4-g2-jDw" secondAttribute="bottom" constant="2" id="ni8-tw-QfP"/>
+                                <constraint firstItem="WD4-g2-jDw" firstAttribute="top" secondItem="DtD-lu-Ppb" secondAttribute="top" id="r1W-I8-0RE"/>
                                 <constraint firstItem="bhS-6H-NzX" firstAttribute="leading" secondItem="DtD-lu-Ppb" secondAttribute="leading" id="tOh-Rh-HJf"/>
                                 <constraint firstItem="twg-Er-pvL" firstAttribute="leading" secondItem="DtD-lu-Ppb" secondAttribute="leading" id="twT-GN-qOD"/>
                                 <constraint firstAttribute="bottom" secondItem="twg-Er-pvL" secondAttribute="bottom" id="uLM-DY-f7L"/>
                                 <constraint firstItem="twg-Er-pvL" firstAttribute="top" secondItem="DtD-lu-Ppb" secondAttribute="top" id="vb4-3c-hXX"/>
-                                <constraint firstItem="Odu-9U-eGB" firstAttribute="leading" secondItem="DtD-lu-Ppb" secondAttribute="leading" id="wKD-sh-oVc"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Zx-9Z-Yqi" userLabel="Search View">

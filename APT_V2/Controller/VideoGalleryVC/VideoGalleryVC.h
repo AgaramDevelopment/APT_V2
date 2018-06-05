@@ -35,5 +35,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *tbl_list;
 @property (weak, nonatomic) IBOutlet UILabel *lblNovideo;
 
+@property (strong, nonatomic) IBOutlet UITextField *dateTF;
 
 @end

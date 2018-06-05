@@ -27,6 +27,7 @@
     BOOL isCategory;
     NSString* selectedTeamCode,*selectedPlayerCode;
     NSInteger* selectedButtonTag;
+    UIDatePicker * datePicker;
 }
 
 @property (nonatomic,strong) NSMutableArray * objFirstGalleryArray;
@@ -82,7 +83,7 @@
     self.categoryTbl.hidden= YES;
     self.CancelTextImg.hidden = NO;
     self.clearBtn.hidden = NO;
-    [self.view_datepicker setHidden:YES];
+//    [self.view_datepicker setHidden:YES];
     
 //    [btnUpload setHidden:![AppCommon isCoach]];
     
@@ -94,7 +95,40 @@
     
 //    view
 
+        //UIDatePicker
+    datePicker = [[UIDatePicker alloc] init];
+    
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 30)];
+    
+        //create left side empty space so that done button set on right side
+    UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonAction)];
+    
+        //    UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style: UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonAction)];
+    
+    UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc] initWithTitle:@"Done" style: UIBarButtonItemStyleDone target:self action:@selector(doneButtonAction)];
+    NSMutableArray *toolbarArray = [NSMutableArray new];
+    [toolbarArray addObject:cancelBtn];
+    [toolbarArray addObject:flexSpace];
+    [toolbarArray addObject:doneBtn];
+    
+    [toolbar setItems:toolbarArray animated:false];
+    [toolbar sizeToFit];
+    
+        //setting toolbar as inputAccessoryView
+    self.dateTF.inputAccessoryView = toolbar;
 
+}
+
+-(void) doneButtonAction {
+    [self.view endEditing:true];
+}
+
+-(void) cancelButtonAction {
+    
+    self.dateTF.text = @"";
+    [self.dateTF resignFirstResponder];
+    [self.view endEditing:true];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -1000,9 +1034,32 @@
         [AppCommon hideLoading];
 
     }];
+}
+
+- (IBAction)dateButtonTapped:(id)sender {
     
+    [self DisplaydatePickerForVideoGallery];
+}
+
+-(void)DisplaydatePickerForVideoGallery
+{
+    datePicker.datePickerMode = UIDatePickerModeDate;
+    self.dateTF.inputView = datePicker;
+    [datePicker addTarget:self action:@selector(displaySelectedDateAndTime:) forControlEvents:UIControlEventValueChanged];
+    [self.dateTF addTarget:self action:@selector(displaySelectedDateAndTime:) forControlEvents:UIControlEventEditingDidBegin];
+    [self.dateTF becomeFirstResponder];
+}
 
 
+- (void) displaySelectedDateAndTime:(UIDatePicker*)sender {
+    
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            //   2016-06-25 12:00:00
+        [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+        [datePicker setLocale:locale];
+        [datePicker reloadInputViews];
+        self.dateTF.text = [dateFormatter stringFromDate:[datePicker date]];
     
 }
 

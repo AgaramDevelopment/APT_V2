@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnSectionHead;
 @property (strong, nonatomic) IBOutlet UICollectionView *collection;
 @property (weak, nonatomic) IBOutlet UIView *customView;
+@property (weak, nonatomic) IBOutlet UILabel *lblNoData;
 
 @property (strong, nonnull) NSMutableDictionary* collectionArray;
 

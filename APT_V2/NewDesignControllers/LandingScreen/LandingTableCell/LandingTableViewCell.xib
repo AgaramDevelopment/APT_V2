@@ -63,6 +63,7 @@
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="btnSectionHead" destination="N9L-kc-A8M" id="bum-9R-Ymj"/>
+                <outlet property="lblNoData" destination="sHr-iP-R0m" id="FrK-NJ-VAw"/>
                 <outlet property="lblSectionTitle" destination="3Jo-oE-SEJ" id="4zg-l3-PAK"/>
             </connections>
             <point key="canvasLocation" x="-141" y="-59"/>
@@ -91,12 +92,20 @@
                                     <outlet property="delegate" destination="-1" id="cBF-6r-0vM"/>
                                 </connections>
                             </collectionView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No TReceords Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHr-iP-R0m">
+                                <rect key="frame" x="77" y="86" width="157.5" height="18.5"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="sHr-iP-R0m" firstAttribute="centerY" secondItem="uhm-Si-Mbj" secondAttribute="centerY" id="Rvr-Q3-a84"/>
                             <constraint firstAttribute="trailing" secondItem="Bcz-kZ-TdB" secondAttribute="trailing" id="bMZ-L4-54m"/>
                             <constraint firstItem="Bcz-kZ-TdB" firstAttribute="top" secondItem="uhm-Si-Mbj" secondAttribute="top" id="diK-KC-ril"/>
                             <constraint firstItem="Bcz-kZ-TdB" firstAttribute="leading" secondItem="uhm-Si-Mbj" secondAttribute="leading" id="jxP-Xj-gy1"/>
+                            <constraint firstItem="sHr-iP-R0m" firstAttribute="centerX" secondItem="uhm-Si-Mbj" secondAttribute="centerX" id="lTJ-zq-d7Y"/>
                             <constraint firstAttribute="bottom" secondItem="Bcz-kZ-TdB" secondAttribute="bottom" id="vtR-RR-Qtn"/>
                         </constraints>
                     </view>

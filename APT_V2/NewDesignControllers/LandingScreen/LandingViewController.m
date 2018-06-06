@@ -15,6 +15,8 @@
 #import "FoodDiaryCell.h"
 #import "TeamCollectionViewCell.h"
 #import "CustomNavigation.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+#import "WellnessTrainingBowlingVC.h"
 
 typedef enum : NSUInteger {
     Events,
@@ -33,6 +35,7 @@ typedef enum : NSUInteger {
     CustomNavigation * objCustomNavigation;
     NSMutableArray *notificationArray;
     NSTimer* myTimer;
+    WellnessTrainingBowlingVC* WTB_object;
 
 }
 
@@ -49,7 +52,7 @@ typedef enum : NSUInteger {
 //    [cell.collection registerNib:[UINib nibWithNibName:@"collection" bundle:nil] forCellWithReuseIdentifier:@"collection"];
 //    [cell.collection registerNib:[UINib nibWithNibName:@"ScheduleCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
 //    [cell.collection registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
-
+    WTB_object = [WellnessTrainingBowlingVC new];
     SectionNameArray = @[@{@"Title":@"Events"},
                          @{@"Title":@"Teams"},
                          @{@"Title":@"Fixtures"},
@@ -236,6 +239,7 @@ typedef enum : NSUInteger {
 }
 
 
+#pragma mark - UITableView Delegates
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
@@ -315,12 +319,25 @@ typedef enum : NSUInteger {
     
     NSString* title = [[SectionNameArray objectAtIndex:indexPath.section] valueForKey:@"Title"];
     
-    if ([title isEqualToString:@"Videos"] ||
-        [title isEqualToString:@"Documents"] ||
-        [title isEqualToString:@"Bowling Graph"]) { // Bowling Graph
+    if ([title isEqualToString:@"Wellness"]){
+        [cell.customView addSubview:WTB_object.topView];
+        
+    
+        [cell.collection setHidden:YES];
+        [cell.customView setBackgroundColor:[UIColor orangeColor]];
+    }
+    else if ([title isEqualToString:@"Wellness"]){
         
         [cell.collection setHidden:YES];
         [cell.customView setBackgroundColor:[UIColor orangeColor]];
+
+    }
+    else if([title isEqualToString:@"Bowling Graph"])
+    {
+        
+        [cell.collection setHidden:YES];
+        [cell.customView setBackgroundColor:[UIColor orangeColor]];
+
     }
     else
     {
@@ -370,7 +387,8 @@ typedef enum : NSUInteger {
     
 }
 
-#pragma mark collection view DataSource
+
+#pragma mark - UICollectionView view DataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -406,13 +424,24 @@ typedef enum : NSUInteger {
     if (collectionView.tag == 1) { // Events
 
         ScheduleCell* cell = (ScheduleCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
-        cell.eventNamelbl.text = @"ScheduleCell";
+//        cell.eventNamelbl.text = @"ScheduleCell";
+        
+        [self setupEventCell:cell andINdex:indexPath];
+        
         return  cell;
     }
     else if (collectionView.tag == 2){ // Teams
 
         TeamCollectionViewCell* cell = (TeamCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"TeamCollectionViewCell" forIndexPath:indexPath];
-        cell.lblTeamName.text = @"TeamsCell";
+//        cell.lblTeamName.text = @"TeamsCell";
+        
+        NSArray* teamlist = [TableListDict valueForKey:@"Teams"];
+        
+        NSString * imgStr1 = [[teamlist valueForKey:@"TeamPhotoLink"] objectAtIndex:indexPath.row];
+        
+        [cell.imgTeam sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
+
+        
         return cell;
 
     }
@@ -420,19 +449,53 @@ typedef enum : NSUInteger {
 
         ResultCell* cell = (ResultCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellno" forIndexPath:indexPath];
         cell.resultlbl.text = @"FixturesCell";
+        
+        NSArray* FixturesArray =  [TableListDict valueForKey:@"Fixtures"];
+        
+        NSLog(@"DATE FORMAT %@ ",[[FixturesArray valueForKey:@"date"] objectAtIndex:indexPath.row]);
+        cell.datelbl.text = [[FixturesArray valueForKey:@"date"] objectAtIndex:indexPath.row];
+        // cell.resultlbl.text = [[objarray valueForKey:@"time"] objectAtIndex:indexPath.row];
+        cell.resultlbl.text = [[FixturesArray valueForKey:@"ground"] objectAtIndex:indexPath.row];
+        cell.FirstInnScorelbl.text = [[FixturesArray valueForKey:@"team1"] objectAtIndex:indexPath.row];
+        cell.SecondInnScorelbl.text = [[FixturesArray valueForKey:@"team2"] objectAtIndex:indexPath.row];
+        cell.competitionNamelbl.text = [[FixturesArray valueForKey:@"CompetitionName"] objectAtIndex:indexPath.row];
+        
+        cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
+        cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
+        
+        NSString * imgStr1 = ([[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team1Img"]==[NSNull null])?@"":[[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team1Img"];
+        
+        NSString * imgStr2 = ([[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team2Img"]==[NSNull null])?@"":[[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team2Img"];
+        [cell.teamAlogo sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
+        [cell.teamBlogo sd_setImageWithURL:[NSURL URLWithString:imgStr2] placeholderImage:[UIImage imageNamed:@"no-image"]];
+        
+        cell.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+        cell.layer.shadowOffset = CGSizeZero;
+        cell.layer.shadowRadius = 1.0f;
+        cell.layer.shadowOpacity = 0.5f;
+        cell.layer.masksToBounds = NO;
+        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
+        
         return cell;
     }
     else if (collectionView.tag == 4){ // Results
 
         ResultCell* cell = (ResultCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellno" forIndexPath:indexPath];
         cell.resultlbl.text = @"ResultCell";
+        
+        [self setUpResultCell:cell andINdex:indexPath];
+        
+        
         return cell;
 
     }
     else if (collectionView.tag == 5){ // Food
         
         FoodDiaryCell *cell = (FoodDiaryCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"foodCell" forIndexPath:indexPath];
-        cell.mealNameLbl.text = @"Foodcell";
+//        cell.mealNameLbl.text = @"Foodcell";
+        [self setupFoodCell:cell andIndex:indexPath];
+        
+        
         return cell;
 
     }
@@ -441,9 +504,227 @@ typedef enum : NSUInteger {
     return  nil;
 }
 
+-(void)setupEventCell:(ScheduleCell *)cell andINdex:(NSIndexPath *)indexPath{
+    
+    NSArray* commonArray = [TableListDict valueForKey:@"Events"];
+    
+    cell.eventNamelbl.text = [[commonArray valueForKey:@"EventName"] objectAtIndex:indexPath.row];
+    
+    cell.eventTypelbl.text = [[commonArray valueForKey:@"EventTypeDesc"] objectAtIndex:indexPath.row];
+    NSArray *arr = [cell.eventTypelbl.text componentsSeparatedByString:@""];
+    
+    unichar firstChar = [[cell.eventTypelbl.text uppercaseString] characterAtIndex:0];
+    unichar secondChar = [[cell.eventTypelbl.text uppercaseString] characterAtIndex:1];
+    unichar thirdChar = [[cell.eventTypelbl.text uppercaseString] characterAtIndex:2];
+    unichar fourthChar = [[cell.eventTypelbl.text uppercaseString] characterAtIndex:3];
+    //cell.eventTypeLetterlbl.text = [NSString stringWithFormat:@"%c",firstChar];
+    
+    if( [[NSString stringWithFormat:@"%c",firstChar] isEqualToString:@"M"])
+    {
+        cell.ImgEvent.image = [UIImage imageNamed:@"Match_Icon"];
+    }
+    else if( [[NSString stringWithFormat:@"%c%c",firstChar,secondChar] isEqualToString:@"PR"])
+    {
+        cell.ImgEvent.image = [UIImage imageNamed:@"Practice_Icon"];
+    }
+    else if( [[NSString stringWithFormat:@"%c%c",firstChar,secondChar] isEqualToString:@"PH"])
+    {
+        cell.ImgEvent.image = [UIImage imageNamed:@"Physio_Icon"];
+    }
+    else if( [[NSString stringWithFormat:@"%c%c%c%c",firstChar,secondChar,thirdChar,fourthChar] isEqualToString:@"TRAV"])
+    {
+        cell.ImgEvent.image = [UIImage imageNamed:@"Travel_Icon"];
+    }
+    else if( [[NSString stringWithFormat:@"%c%c%c%c",firstChar,secondChar,thirdChar,fourthChar] isEqualToString:@"TRAI"])
+    {
+        cell.ImgEvent.image = [UIImage imageNamed:@"Training_Icon"];
+    }
+    else if( [[NSString stringWithFormat:@"%c%c",firstChar,secondChar] isEqualToString:@"TE"])
+    {
+        cell.ImgEvent.image = [UIImage imageNamed:@"Team_Icon"];
+    }
+    else if( [[NSString stringWithFormat:@"%c",firstChar] isEqualToString:@"C"])
+    {
+        cell.ImgEvent.image = [UIImage imageNamed:@"Competition_Icon"];
+    }
+    else if( [[NSString stringWithFormat:@"%c",firstChar] isEqualToString:@"O"])
+    {
+        cell.ImgEvent.image = [UIImage imageNamed:@"Others_Icon"];
+    }
+    else if( [[NSString stringWithFormat:@"%c",firstChar] isEqualToString:@"F"])
+    {
+        cell.ImgEvent.image = [UIImage imageNamed:@"Fitness_Icon"];
+    }
+    else if( [[NSString stringWithFormat:@"%c",firstChar] isEqualToString:@"N"])
+    {
+        cell.ImgEvent.image = [UIImage imageNamed:@"Net_Icon"];
+    }
+    else if( [[NSString stringWithFormat:@"%c%c",firstChar,secondChar] isEqualToString:@"ST"])
+    {
+        cell.ImgEvent.image = [UIImage imageNamed:@"Strength_Icon"];
+    }
+    else if( [[NSString stringWithFormat:@"%c%c",firstChar,secondChar] isEqualToString:@"SE"])
+    {
+        cell.ImgEvent.image = [UIImage imageNamed:@"Season_Icon"];
+    }
+    
+    
+    
+    NSString *starttime = [[commonArray valueForKey:@"EventStartTime"] objectAtIndex:indexPath.row];
+    NSString *endtime = [[commonArray valueForKey:@"EventEndTime"] objectAtIndex:indexPath.row];
+    cell.venuelbl.text = [[commonArray valueForKey:@"EventVenue"] objectAtIndex:indexPath.row];
+    
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm:ss"];
+    NSDate *date  = [dateFormatter dateFromString:starttime];
+    // Convert to new Date Format
+    [dateFormatter setDateFormat:@"hh:mm a"];
+    NSString *newtime1 = [dateFormatter stringFromDate:date];
+    
+    NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
+    [dateFormatter2 setDateFormat:@"HH:mm:ss"];
+    NSDate *date2  = [dateFormatter2 dateFromString:endtime];
+    // Convert to new Date Format
+    [dateFormatter2 setDateFormat:@"hh:mm a"];
+    NSString *newtime2 = [dateFormatter2 stringFromDate:date2];
+    
+    cell.timelbl.text = [NSString stringWithFormat:@"%@ to %@",newtime1,newtime2];
+    
+    
+    cell.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+    
+    cell.layer.shadowOffset = CGSizeZero;
+    cell.layer.shadowRadius = 1.0f;
+    cell.layer.shadowOpacity = 0.5f;
+    cell.layer.masksToBounds = NO;
+    cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
+
+}
+
+-(void)setUpResultCell:(ResultCell *)cell andINdex:(NSIndexPath *)indexPath {
+    
+    NSArray* resultArray = [TableListDict valueForKey:@"Results"];
+
+    cell.competitionNamelbl.text = [[resultArray valueForKey:@"COMPETITIONNAME"]objectAtIndex:indexPath.row];
+    
+    NSString *curdate = [[resultArray valueForKey:@"DateTime"]objectAtIndex:indexPath.row];
+    NSArray *arr = [curdate componentsSeparatedByString:@" "];
+    
+    cell.datelbl.text = [NSString stringWithFormat:@"%@ %@",arr[0],arr[1]];
+    cell.resultlbl.text = [[resultArray valueForKey:@"MATCHRESULTORRUNSREQURED"]objectAtIndex:indexPath.row];
+    
+    cell.teamAlbl.text = [[resultArray valueForKey:@"TeamA"]objectAtIndex:indexPath.row];
+    cell.teamBlbl.text = [[resultArray valueForKey:@"TeamB"]objectAtIndex:indexPath.row];
+    
+    NSString *first = [self checkNull:[[resultArray valueForKey:@"FIRSTINNINGSSCORE"]objectAtIndex:indexPath.row]];
+    NSLog(@"%ld",(long)indexPath.row);
+    if( [first isEqualToString:@"0 /0 (0.0 Ov)"])
+    {
+        cell.FirstInnScorelbl.text = @"";
+    }
+    else
+    {
+        cell.FirstInnScorelbl.text = first;
+    }
+    
+    
+    NSString *second = [self checkNull:[[resultArray valueForKey:@"SECONDINNINGSSCORE"]objectAtIndex:indexPath.row]];
+    NSLog(@"%ld",(long)indexPath.row);
+    
+    if( [second isEqualToString:@"0 /0 (0.0 Ov)"])
+    {
+        cell.SecondInnScorelbl.text = @"";
+    }
+    else
+    {
+        cell.SecondInnScorelbl.text = second;
+    }
+    
+    
+    NSString *third = [self checkNull:[[resultArray valueForKey:@"THIRDINNINGSSCORE"]objectAtIndex:indexPath.row]];
+    NSLog(@"%ld",(long)indexPath.row);
+    
+    if( [third isEqualToString:@"0 /0 (0.0 Ov)"])
+    {
+        cell.ThirdInnScorelbl.text = @"";
+    }
+    else
+    {
+        cell.ThirdInnScorelbl.text = third;
+    }
+    
+    
+    
+    NSString *fourth = [self checkNull:[[resultArray valueForKey:@"FOURTHINNINGSSCORE"]objectAtIndex:indexPath.row]];
+    NSLog(@"%ld",(long)indexPath.row);
+    
+    if( [fourth isEqualToString:@"0 /0 (0.0 Ov)"])
+    {
+        cell.FouthInnScorelbl.text = @"";
+    }
+    else
+    {
+        cell.FouthInnScorelbl.text = fourth;
+    }
+    
+    
+    
+    
+    NSString * imgStr1 = ([[resultArray objectAtIndex:indexPath.row] valueForKey:@"TeamALogo"]==[NSNull null])?@"":[[resultArray objectAtIndex:indexPath.row] valueForKey:@"TeamALogo"];
+    
+    NSString * imgStr2 = ([[resultArray objectAtIndex:indexPath.row] valueForKey:@"TeamBLogo"]==[NSNull null])?@"":[[resultArray objectAtIndex:indexPath.row] valueForKey:@"TeamBLogo"];
+    [cell.teamAlogo sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
+    [cell.teamBlogo sd_setImageWithURL:[NSURL URLWithString:imgStr2] placeholderImage:[UIImage imageNamed:@"no-image"]];
+    
+    
+    cell.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+    
+    cell.layer.shadowOffset = CGSizeZero;
+    cell.layer.shadowRadius = 1.0f;
+    cell.layer.shadowOpacity = 0.5f;
+    cell.layer.masksToBounds = NO;
+    cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
+
+}
+
+-(void)setupFoodCell:(FoodDiaryCell *)cell andIndex:(NSIndexPath *)indexPath{
+    
+    NSArray* mainArray = [TableListDict valueForKey:@"Foods"];
+    
+    cell.layer.masksToBounds = NO;
+    cell.layer.shadowColor = [UIColor blackColor].CGColor;
+    cell.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+    cell.layer.shadowRadius = 3;
+    cell.layer.shadowOpacity = 0.8f;
+    
+        NSMutableArray *foodListArray = [[mainArray objectAtIndex:indexPath.row] valueForKey:@"FOODLIST"];
+        
+        cell.timeLbl.text = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"STARTTIME"];
+        cell.mealNameLbl.text = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"MEALNAME"];
+        
+        if (foodListArray.count == 1) {
+            cell.food1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+            cell.food2Lbl.text = @"";
+            cell.food3Lbl.text = @"";
+        } else if (foodListArray.count == 2) {
+            cell.food1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+            cell.food2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+            cell.food3Lbl.text = @"";
+        } else {
+            cell.food1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+            cell.food2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+            cell.food3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
+        }
+        
+
+}
+
+#pragma mark- Webservice
+
+
 -(void)EventsAndResultsWebservice
 {
-    
     
     if(![COMMON isInternetReachable])
         return;
@@ -530,6 +811,7 @@ typedef enum : NSUInteger {
         }];
     
 }
+
 
 -(void)FixturesWebservice
 {
@@ -784,6 +1066,13 @@ typedef enum : NSUInteger {
     return str;
 }
 
+-(NSString *)checkNull:(NSString *)_value
+{
+    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"]) {
+        _value=@"";
+    }
+    return _value;
+}
 
 
 @end

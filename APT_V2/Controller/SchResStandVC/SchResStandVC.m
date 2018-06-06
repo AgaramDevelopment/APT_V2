@@ -525,69 +525,12 @@
         cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
         
                 NSString * imgStr1 = ([[objarray objectAtIndex:indexPath.row] valueForKey:@"team1Img"]==[NSNull null])?@"":[[objarray objectAtIndex:indexPath.row] valueForKey:@"team1Img"];
-//                NSString *teamAString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr1];
         
                 NSString * imgStr2 = ([[objarray objectAtIndex:indexPath.row] valueForKey:@"team2Img"]==[NSNull null])?@"":[[objarray objectAtIndex:indexPath.row] valueForKey:@"team2Img"];
-//                NSString *teamBString = [NSString stringWithFormat:@"%@%@",IMAGE_URL,imgStr2];
-        
-//                [self downloadImageWithURL:[NSURL URLWithString:imgStr1] completionBlock:^(BOOL succeeded, UIImage *image) {
-//                    if (succeeded) {
-//                        // change the image in the cell
-//                        cell.teamAlogo.image = image;
-//
-//                        // cache the image for use later (when scrolling up)
-//                        cell.teamAlogo.image = image;
-//                    }
-//                    else
-//                    {
-//                        cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
-//                    }
-//                }];
                 [cell.teamAlogo sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
-        
-//                [self downloadImageWithURL:[NSURL URLWithString:imgStr2] completionBlock:^(BOOL succeeded, UIImage *image) {
-//                    if (succeeded) {
-//                        // change the image in the cell
-//                        cell.teamBlogo.image = image;
-//
-//                        // cache the image for use later (when scrolling up)
-//                        cell.teamBlogo.image = image;
-//                    }
-//                    else
-//                    {
-//                        cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
-//                    }
-//                }];
                 [cell.teamBlogo sd_setImageWithURL:[NSURL URLWithString:imgStr2] placeholderImage:[UIImage imageNamed:@"no-image"]];
         
-        //        NSString *key = [[objarray valueForKey:@"team1"] objectAtIndex:indexPath.row];
-        //
-        //        if([ key isEqualToString:@"India"])
-        //        {
-        //            cell.team1Img.image = [UIImage imageNamed:@"Indialogo"];
-        //            cell.team2Img.image = [UIImage imageNamed:@"Srilankalogo"];
-        //
-        //        }
-        //        else
-        //        {
-        //            cell.team1Img.image = [UIImage imageNamed:@"Srilankalogo"];
-        //            cell.team2Img.image = [UIImage imageNamed:@"Indialogo"];
-        //        }
-        
-        
-//        cell.contentView.layer.cornerRadius = 2.0f;
-//        cell.contentView.layer.borderWidth = 1.0f;
-//        cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
-//        cell.contentView.layer.masksToBounds = YES;
-        
-//        if (indexPath.row % 2 == 1) {
-        
             cell.layer.shadowColor = [UIColor darkGrayColor].CGColor;
-//        }
-//        else {
-//            cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-//        }
-        
         cell.layer.shadowOffset = CGSizeZero;
         cell.layer.shadowRadius = 1.0f;
         cell.layer.shadowOpacity = 0.5f;
@@ -608,8 +551,6 @@
         NSArray *arr = [curdate componentsSeparatedByString:@" "];
         
         cell.datelbl.text = [NSString stringWithFormat:@"%@ %@",arr[0],arr[1]];
-//        cell.teamAlbl.text = [[self.commonArray2 valueForKey:@"TeamA"]objectAtIndex:indexPath.row];
-//        cell.teamBlbl.text = [[self.commonArray2 valueForKey:@"TeamB"]objectAtIndex:indexPath.row];
         cell.resultlbl.text = [[self.commonArray2 valueForKey:@"MATCHRESULTORRUNSREQURED"]objectAtIndex:indexPath.row];
         
         cell.teamAlbl.text = [[self.commonArray2 valueForKey:@"TeamA"]objectAtIndex:indexPath.row];

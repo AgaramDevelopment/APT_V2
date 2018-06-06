@@ -10,6 +10,7 @@
 #import "Header.h"
 #import "TabHomeVC.h"
 #import "TeamMembersVC.h"
+#import "LandingViewController.h"
 
 @interface LoginVC () <selectedDropDown>
 {
@@ -191,12 +192,13 @@
         NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
         NSString *plyRolecode = @"ROL0000002";
         
-        if([rolecode isEqualToString:plyRolecode])
-        {
-            VC = [TabHomeVC new];
-        } else {
-            VC = [TeamsVC new];
-        }
+//        if([rolecode isEqualToString:plyRolecode])
+//        {
+//            VC = [TabHomeVC new];
+//        } else {
+//            VC = [TeamsVC new];
+//        }
+            VC = [LandingViewController new];
         
                 [COMMON getIPLteams];
             

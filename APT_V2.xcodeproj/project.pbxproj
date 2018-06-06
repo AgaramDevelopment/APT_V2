@@ -30,8 +30,6 @@
 		04534F9620383F0C00C22717 /* FoodDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04534F9420383F0C00C22717 /* FoodDescriptionCell.xib */; };
 		045B58CD209B547B00443C65 /* FoodDiaryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 045B58CB209B547B00443C65 /* FoodDiaryVC.m */; };
 		045B58CE209B547B00443C65 /* FoodDiaryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045B58CC209B547B00443C65 /* FoodDiaryVC.xib */; };
-		04B1C70220C51EE1009ED2DC /* HistoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1C70020C51EE0009ED2DC /* HistoryVC.m */; };
-		04B1C70320C51EE1009ED2DC /* HistoryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B1C70120C51EE0009ED2DC /* HistoryVC.xib */; };
 		04B27F17202D784600ECB699 /* illnessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B27F15202D784600ECB699 /* illnessVC.m */; };
 		04B27F18202D784600ECB699 /* illnessVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B27F16202D784600ECB699 /* illnessVC.xib */; };
 		04B27F1C202D7DD100ECB699 /* illnessTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B27F1A202D7DD100ECB699 /* illnessTableViewCell.m */; };
@@ -287,6 +285,12 @@
 		CE6C16572045213C00672253 /* DMLazyScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16502045213C00672253 /* DMLazyScrollView.m */; };
 		CE6C16582045213C00672253 /* SACalendar.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16522045213C00672253 /* SACalendar.m */; };
 		CE6C16592045213C00672253 /* SACalendarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6C16542045213C00672253 /* SACalendarCell.m */; };
+		CE6DD96920C7AEA50026FE23 /* LandingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6DD96020C7AEA50026FE23 /* LandingTableViewCell.m */; };
+		CE6DD96A20C7AEA50026FE23 /* LandingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6DD96120C7AEA50026FE23 /* LandingTableViewCell.xib */; };
+		CE6DD96B20C7AEA50026FE23 /* LandingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6DD96320C7AEA50026FE23 /* LandingViewController.m */; };
+		CE6DD96C20C7AEA50026FE23 /* LandingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6DD96420C7AEA50026FE23 /* LandingViewController.xib */; };
+		CE6DD96D20C7AEA50026FE23 /* TeamCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6DD96720C7AEA50026FE23 /* TeamCollectionViewCell.m */; };
+		CE6DD96E20C7AEA50026FE23 /* TeamCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE6DD96820C7AEA50026FE23 /* TeamCollectionViewCell.xib */; };
 		CE76ECE02041498D00E183EA /* TTView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE76ECDF2041498D00E183EA /* TTView.m */; };
 		CE76ECE320416AE100E183EA /* UIImage+GetPoints.m in Sources */ = {isa = PBXBuildFile; fileRef = CE76ECE220416AE100E183EA /* UIImage+GetPoints.m */; };
 		CE76ECE52041715D00E183EA /* shape1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE76ECE42041715B00E183EA /* shape1.png */; };
@@ -400,9 +404,6 @@
 		045B58CA209B547A00443C65 /* FoodDiaryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodDiaryVC.h; sourceTree = "<group>"; };
 		045B58CB209B547B00443C65 /* FoodDiaryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodDiaryVC.m; sourceTree = "<group>"; };
 		045B58CC209B547B00443C65 /* FoodDiaryVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FoodDiaryVC.xib; sourceTree = "<group>"; };
-		04B1C6FF20C51EE0009ED2DC /* HistoryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryVC.h; sourceTree = "<group>"; };
-		04B1C70020C51EE0009ED2DC /* HistoryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryVC.m; sourceTree = "<group>"; };
-		04B1C70120C51EE0009ED2DC /* HistoryVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryVC.xib; sourceTree = "<group>"; };
 		04B27F14202D784600ECB699 /* illnessVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = illnessVC.h; sourceTree = "<group>"; };
 		04B27F15202D784600ECB699 /* illnessVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = illnessVC.m; sourceTree = "<group>"; };
 		04B27F16202D784600ECB699 /* illnessVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = illnessVC.xib; sourceTree = "<group>"; };
@@ -835,6 +836,15 @@
 		CE6C16532045213C00672253 /* SACalendarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SACalendarCell.h; sourceTree = "<group>"; };
 		CE6C16542045213C00672253 /* SACalendarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SACalendarCell.m; sourceTree = "<group>"; };
 		CE6C16552045213C00672253 /* SACalendarConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SACalendarConstants.h; sourceTree = "<group>"; };
+		CE6DD95F20C7AEA50026FE23 /* LandingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LandingTableViewCell.h; sourceTree = "<group>"; };
+		CE6DD96020C7AEA50026FE23 /* LandingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LandingTableViewCell.m; sourceTree = "<group>"; };
+		CE6DD96120C7AEA50026FE23 /* LandingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LandingTableViewCell.xib; sourceTree = "<group>"; };
+		CE6DD96220C7AEA50026FE23 /* LandingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LandingViewController.h; sourceTree = "<group>"; };
+		CE6DD96320C7AEA50026FE23 /* LandingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LandingViewController.m; sourceTree = "<group>"; };
+		CE6DD96420C7AEA50026FE23 /* LandingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LandingViewController.xib; sourceTree = "<group>"; };
+		CE6DD96620C7AEA50026FE23 /* TeamCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamCollectionViewCell.h; sourceTree = "<group>"; };
+		CE6DD96720C7AEA50026FE23 /* TeamCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamCollectionViewCell.m; sourceTree = "<group>"; };
+		CE6DD96820C7AEA50026FE23 /* TeamCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamCollectionViewCell.xib; sourceTree = "<group>"; };
 		CE76ECDE2041498D00E183EA /* TTView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTView.h; sourceTree = "<group>"; };
 		CE76ECDF2041498D00E183EA /* TTView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTView.m; sourceTree = "<group>"; };
 		CE76ECE120416A3800E183EA /* UIImage+GetPoints.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+GetPoints.h"; sourceTree = "<group>"; };
@@ -1079,16 +1089,6 @@
 				04534F9420383F0C00C22717 /* FoodDescriptionCell.xib */,
 			);
 			path = FoodDiaryVC;
-			sourceTree = "<group>";
-		};
-		04B1C6FE20C51EE0009ED2DC /* HistoryVC */ = {
-			isa = PBXGroup;
-			children = (
-				04B1C6FF20C51EE0009ED2DC /* HistoryVC.h */,
-				04B1C70020C51EE0009ED2DC /* HistoryVC.m */,
-				04B1C70120C51EE0009ED2DC /* HistoryVC.xib */,
-			);
-			path = HistoryVC;
 			sourceTree = "<group>";
 		};
 		04B27F13202D781D00ECB699 /* illnessVC */ = {
@@ -1575,6 +1575,8 @@
 		18A6ADAD20C2BD98000F342E /* NewDesignControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CE6DD95D20C7AEA50026FE23 /* LandingScreen */,
+				CE6DD96520C7AEA50026FE23 /* TeamCollectionCell */,
 				188F3D0820C5038A00199CBF /* HistoryVC */,
 				04CC004020C2CD8C004C7696 /* FoodDiaryUpdateVc */,
 				18A6ADAE20C2BE57000F342E /* TeamsReportsHistoryVC */,
@@ -2149,6 +2151,37 @@
 				1894996C20875C5E002ECEE0 /* FFSup */,
 			);
 			path = PlannerGraphs;
+			sourceTree = "<group>";
+		};
+		CE6DD95D20C7AEA50026FE23 /* LandingScreen */ = {
+			isa = PBXGroup;
+			children = (
+				CE6DD95E20C7AEA50026FE23 /* LandingTableCell */,
+				CE6DD96220C7AEA50026FE23 /* LandingViewController.h */,
+				CE6DD96320C7AEA50026FE23 /* LandingViewController.m */,
+				CE6DD96420C7AEA50026FE23 /* LandingViewController.xib */,
+			);
+			path = LandingScreen;
+			sourceTree = "<group>";
+		};
+		CE6DD95E20C7AEA50026FE23 /* LandingTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				CE6DD95F20C7AEA50026FE23 /* LandingTableViewCell.h */,
+				CE6DD96020C7AEA50026FE23 /* LandingTableViewCell.m */,
+				CE6DD96120C7AEA50026FE23 /* LandingTableViewCell.xib */,
+			);
+			path = LandingTableCell;
+			sourceTree = "<group>";
+		};
+		CE6DD96520C7AEA50026FE23 /* TeamCollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				CE6DD96620C7AEA50026FE23 /* TeamCollectionViewCell.h */,
+				CE6DD96720C7AEA50026FE23 /* TeamCollectionViewCell.m */,
+				CE6DD96820C7AEA50026FE23 /* TeamCollectionViewCell.xib */,
+			);
+			path = TeamCollectionCell;
 			sourceTree = "<group>";
 		};
 		CE8DE372203FDE930097BF66 /* InjurySelectionVC */ = {
@@ -2736,9 +2769,11 @@
 				CEB2B99620257BBD00E7D5E4 /* SIL Open Font License.txt in Resources */,
 				CEA42108203161A900B2DAB5 /* CalendarViewController.xib in Resources */,
 				CEB2B98420257BBD00E7D5E4 /* MontserratAlternates-Black.otf in Resources */,
+				CE6DD96A20C7AEA50026FE23 /* LandingTableViewCell.xib in Resources */,
 				CEB2B98220257BBD00E7D5E4 /* Montserrat-Thin.otf in Resources */,
 				182D854920342D1F005FFBF8 /* CategoryTableCell.xib in Resources */,
 				18AC3453203EC0D9003EE0F0 /* CoachTraingLoad.xib in Resources */,
+				CE6DD96E20C7AEA50026FE23 /* TeamCollectionViewCell.xib in Resources */,
 				18A5CABB20384F3800586896 /* ProfileVCCell.xib in Resources */,
 				CEB2B98B20257BBD00E7D5E4 /* MontserratAlternates-ExtraLightItalic.otf in Resources */,
 				CE3E741B20248BF100F10917 /* LaunchScreen.storyboard in Resources */,
@@ -2768,6 +2803,7 @@
 				04249B79203D466200B13889 /* NutritionVC.xib in Resources */,
 				CEB2B98320257BBD00E7D5E4 /* Montserrat-ThinItalic.otf in Resources */,
 				04BC4B44208632E900CEB23E /* VideoGalleryVC.xib in Resources */,
+				CE6DD96C20C7AEA50026FE23 /* LandingViewController.xib in Resources */,
 				04BC4AC8208618A200CEB23E /* TabHomeVC.xib in Resources */,
 				CEB2B97A20257BBD00E7D5E4 /* Montserrat-Italic.otf in Resources */,
 				04BC4AD620861A5100CEB23E /* MatchCenterTBC.xib in Resources */,
@@ -2932,6 +2968,7 @@
 				04BC4AD920861A5100CEB23E /* MCOverViewVC.m in Sources */,
 				04534F902037F44400C22717 /* FoodDiaryCell.m in Sources */,
 				18949A1320875C5F002ECEE0 /* FFWeekScrollView.m in Sources */,
+				CE6DD96920C7AEA50026FE23 /* LandingTableViewCell.m in Sources */,
 				18AA1B982092FD17009634A3 /* SessionSummaryVC.m in Sources */,
 				18949A2420875C5F002ECEE0 /* FFDatePopoverController.m in Sources */,
 				18A68ACB20371A7E00EBA479 /* HorizontalXLblFormatter.m in Sources */,
@@ -2987,6 +3024,7 @@
 				04BC4A182085FD4400CEB23E /* BowlTypeCell.m in Sources */,
 				CEB2B9E02025E30600E7D5E4 /* LineTextField.m in Sources */,
 				18EF9D1420316C3000CDA268 /* PlayerListCollectionViewCell.m in Sources */,
+				CE6DD96D20C7AEA50026FE23 /* TeamCollectionViewCell.m in Sources */,
 				182D854820342D1F005FFBF8 /* CategoryTableCell.m in Sources */,
 				18AC345D203EE50C003EE0F0 /* CoachBowlingLoad.m in Sources */,
 				CE8DE376203FDEC70097BF66 /* InjurySelectionViewController.m in Sources */,
@@ -3071,6 +3109,7 @@
 				18DF185C202B087200AB9DCF /* RGSPreviewView.m in Sources */,
 				18949A0520875C5F002ECEE0 /* FFMonthCalendarView.m in Sources */,
 				18B6D0ED203BDD580003CBA3 /* TrainingLoadGraphVC.m in Sources */,
+				CE6DD96B20C7AEA50026FE23 /* LandingViewController.m in Sources */,
 				CEBD2A7220289999000AFD1B /* SKSTableView.m in Sources */,
 				18949A1420875C5F002ECEE0 /* FFYearCalendarView.m in Sources */,
 				04B27F17202D784600ECB699 /* illnessVC.m in Sources */,

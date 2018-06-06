@@ -50,6 +50,12 @@
     else if ([title isEqualToString:@"Food"]) {
         [collection setTag:indexPath];
     }
+    else if ([title isEqualToString:@"Videos"]) {
+        [collection setTag:indexPath];
+    }
+    else if ([title isEqualToString:@"Documents"]) {
+        [collection setTag:indexPath];
+    }
     
     NSLog(@"collectionArray %ld",(long)collection.tag);
     

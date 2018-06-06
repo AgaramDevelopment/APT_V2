@@ -36,7 +36,6 @@ typedef enum : NSUInteger {
     NSMutableArray *notificationArray;
     NSTimer* myTimer;
     WellnessTrainingBowlingVC* WTB_object;
-
 }
 
 @end
@@ -84,7 +83,7 @@ typedef enum : NSUInteger {
     [TableListDict setValue:@[] forKey:@"Teams"];
     [TableListDict setValue:@[] forKey:@"Fixtures"];
     [TableListDict setValue:@[] forKey:@"Results"];
-    [TableListDict setValue:@[] forKey:@"Foods"];
+    [TableListDict setValue:@[] forKey:@"Food"];
 
     [self customnavigationmethod];
     [self EventsAndResultsWebservice];
@@ -299,7 +298,7 @@ typedef enum : NSUInteger {
     else if ([title isEqualToString:@"Results"]) {
         [Tablecell configureCell:self andIndex:4 andTitile:title];
     }
-    else if ([title isEqualToString:@"Foods"]) {
+    else if ([title isEqualToString:@"Food"]) {
         [Tablecell configureCell:self andIndex:5 andTitile:title];
     }
 
@@ -413,7 +412,7 @@ typedef enum : NSUInteger {
         return  [[TableListDict valueForKey:@"Results"] count];
     }
     else if (collectionView.tag == 5){
-        return  [[TableListDict valueForKey:@"Foods"] count];
+        return  [[TableListDict valueForKey:@"Food"] count];
     }
 
     return 0;
@@ -690,7 +689,7 @@ typedef enum : NSUInteger {
 
 -(void)setupFoodCell:(FoodDiaryCell *)cell andIndex:(NSIndexPath *)indexPath{
     
-    NSArray* mainArray = [TableListDict valueForKey:@"Foods"];
+    NSMutableArray *foodDiaryArray = [TableListDict valueForKey:@"Food"];
     
     cell.layer.masksToBounds = NO;
     cell.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -698,7 +697,7 @@ typedef enum : NSUInteger {
     cell.layer.shadowRadius = 3;
     cell.layer.shadowOpacity = 0.8f;
     
-        NSMutableArray *foodListArray = [[mainArray objectAtIndex:indexPath.row] valueForKey:@"FOODLIST"];
+        NSMutableArray *foodListArray = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"FOODLIST"];
         
         cell.timeLbl.text = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"STARTTIME"];
         cell.mealNameLbl.text = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"MEALNAME"];
@@ -964,7 +963,7 @@ typedef enum : NSUInteger {
         }
         
         [AppCommon hideLoading];
-        
+        [self FoodDiaryWebservice];
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -978,6 +977,80 @@ typedef enum : NSUInteger {
 }
 
 
+- (void)FoodDiaryWebservice {
+    
+        // Get current datetime
+    NSDate *currentDateTime = [NSDate date];
+    
+        // Instantiate a NSDateFormatter
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+        // Set the dateFormatter format
+    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+    
+        // Get the date time in NSString
+    NSString *date = [dateFormatter stringFromDate:currentDateTime];
+    
+    if(![COMMON isInternetReachable])
+        return;
+    
+    [AppCommon showLoading];
+    
+    NSString *URLString =  URL_FOR_RESOURCE(foodDiaryFetch);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+        //CLIENTCODE, PLAYERCODE, DATE
+    NSString *clientCode = [AppCommon GetClientCode];
+    NSString *userRefCode = [AppCommon GetuserReference];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    if(clientCode)   [dic    setObject:clientCode     forKey:@"CLIENTCODE"];
+    if(userRefCode)   [dic    setObject:userRefCode     forKey:@"PLAYERCODE"];
+    [dic setObject:date forKey:@"DATE"];
+    NSLog(@"parameters : %@",dic);
+    [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response ; %@",responseObject);
+        
+        if ([[responseObject valueForKey:@"STATUS"] integerValue] == 1) {
+            
+            NSMutableArray *foodDiaryArray = [NSMutableArray new];
+            NSMutableArray *FOODDIARYSArray = [NSMutableArray new];
+            FOODDIARYSArray = [responseObject objectForKey:@"FOODDIARYS"];
+            
+            if (FOODDIARYSArray.count) {
+                for (id key in FOODDIARYSArray) {
+                    
+                    if ([[key valueForKey:@"FOODLIST"] count]) {
+                        if ([date isEqualToString:[key valueForKey:@"DATE"]]) {
+                            [foodDiaryArray addObject:key];
+                        }
+                    }
+                }
+            }
+            
+            if (foodDiaryArray.count) {
+                [TableListDict setValue:foodDiaryArray forKey:@"Food"];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.LandingTable reloadData];
+            });
+            
+            NSLog(@"Count:%ld", foodDiaryArray.count);
+//            [self setClearBorderForMealTypeAndLocation];
+        }
+        
+        [AppCommon hideLoading];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+        [AppCommon hideLoading];
+    }];
+}
 
 //-(void)EventTypeWebservice:(NSString *) usercode :(NSString*) cliendcode:(NSString *)userreference
 //{

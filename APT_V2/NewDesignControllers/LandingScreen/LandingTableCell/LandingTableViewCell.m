@@ -47,7 +47,7 @@
     else if ([title isEqualToString:@"Results"]) {
         [collection setTag:indexPath];
     }
-    else if ([title isEqualToString:@"Foods"]) {
+    else if ([title isEqualToString:@"Food"]) {
         [collection setTag:indexPath];
     }
     

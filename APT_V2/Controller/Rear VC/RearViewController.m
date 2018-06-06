@@ -19,6 +19,9 @@
 #import "PlannerVC.h"
 #import "RearTableViewCell.h"
 #import "ChangePasswordVC.h"
+#import "LandingViewController.h"
+#import "VideoGalleryVC.h"
+#import "DocumentViewController.h"
 #import "TeamsReportsHistoryVC.h"
 
 @interface RearViewController ()
@@ -54,30 +57,29 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    if(![AppCommon isCoach])
+    if([AppCommon isCoach])
     {
-        arrItems = [NSArray new];
-        arrItems = @[@{@"name":@"Home",@"img":@"APT_Home"},
+        arrItems = @[@{@"name":@"Home",@"img":@"APT_Team"},
                      @{@"name":@"Planner",@"img":@"APT_Planner"},
-                     @{@"name":@"Stats",@"img":@"APT_Stats"},
-                     @{@"name":@"Match Center",@"img":@"APT_ Match centre"},
-                     @{@"name":@"Food Diary",@"img":@"APT_Food Dairy"},
+                     @{@"name":@"Teams",@"img":@"APT_Assessment"},
+                     @{@"name":@"Cricket Center",@"img":@"APT_ Match centre"},
+                     @{@"name":@"Videos",@"img":@"APT_ Match centre"},
+                     @{@"name":@"Documents",@"img":@"APT_ Match centre"},
+                     @{@"name":@"Sync",@"img":@"APT_Sync"},
                      @{@"name":@"Change Password",@"img":@"APT_Change Password"},
-                     @{@"name":@"HistoryReports",@"img":@"APT_Team"},
                      @{@"name":@"Logout",@"img":@"APT_Logout"}];
     }
     else
     {
-        arrItems = [NSArray new];
-        arrItems = @[@{@"name":@"Team",@"img":@"APT_Team"},
+        arrItems = @[@{@"name":@"Home",@"img":@"APT_Home"},
                      @{@"name":@"Planner",@"img":@"APT_Planner"},
-                     @{@"name":@"Assessment",@"img":@"APT_Assessment"},
-                     @{@"name":@"Match Center",@"img":@"APT_ Match centre"},
-                     @{@"name":@"Sync",@"img":@"APT_Sync"},
+                     @{@"name":@"History",@"img":@"APT_Stats"},
+                     @{@"name":@"Cricket Center",@"img":@"APT_ Match centre"},
+                     @{@"name":@"Videos",@"img":@"APT_ Match centre"},
+                     @{@"name":@"Documents",@"img":@"APT_ Match centre"},
+                     @{@"name":@"Food Diary",@"img":@"APT_Food Dairy"},
                      @{@"name":@"Change Password",@"img":@"APT_Change Password"},
-                     @{@"name":@"TeamReportsHistory",@"img":@"APT_Team"},
                      @{@"name":@"Logout",@"img":@"APT_Logout"}];
-
     }
     
     [self.RearTableView reloadData];
@@ -166,93 +168,108 @@
     UIViewController* newFrontController;
     
     
-    if(![AppCommon isCoach]) // player
-    {
-        if(indexPath.row == 0)
-        {
-            newFrontController= [TabHomeVC new];
-            
-        }
-        if(indexPath.row == 1)
-        {
-            newFrontController= [PlannerVC new];
-            
-        }
-        else if(indexPath.row == 2)
-        {
-            newFrontController= [MyStatsBattingVC new];
-            
-        }
-        else if(indexPath.row == 3)
-        {
-            newFrontController= [MatchCenterTBC new];
-            
-        }
-        else if(indexPath.row == 4)
-        {
-            newFrontController= [FoodDiaryVC new];
-            
-        }
-        else if(indexPath.row == 5)
-        {
-            newFrontController= [ChangePasswordVC new];
-        }
-        else if(indexPath.row == 6)
-        {
-            newFrontController= [TeamsReportsHistoryVC new];
-        }
-
-        else if (indexPath.row == arrItems.count -1)
-        {
-            [self actionLogOut];
-            
-        }
-    }
-    else
+    if([AppCommon isCoach]) // player
     {
         
-        if(indexPath.row == 0)
-        {
-            newFrontController= [TeamsVC new];
-            
-        }
-        else if(indexPath.row == 1)
-        {
-            newFrontController= [PlannerVC new];
-            
-        }
-        else if(indexPath.row == 2)
-        {
-            newFrontController= [ViewController new];
+//        arrItems = @[@{@"name":@"Home",@"img":@"APT_Team"},
+//                     @{@"name":@"Planner",@"img":@"APT_Planner"},
+//                     @{@"name":@"Teams",@"img":@"APT_Assessment"},
+//                     @{@"name":@"Cricket Center",@"img":@"APT_ Match centre"},
+//                     @{@"name":@"Videos",@"img":@"APT_ Match centre"},
+//                     @{@"name":@"Documents",@"img":@"APT_ Match centre"},
+//                     @{@"name":@"Sync",@"img":@"APT_Sync"},
+//                     @{@"name":@"Change Password",@"img":@"APT_Change Password"},
+//                     @{@"name":@"Logout",@"img":@"APT_Logout"}];
 
-        }
-        else if(indexPath.row == 3)
-        {
-            newFrontController= [MatchCenterTBC new];
+        if(indexPath.row == 0){
             
+            newFrontController= [LandingViewController new];
         }
-        else if(indexPath.row == 4)
-        {
+        else if(indexPath.row == 1){
+            
+            newFrontController= [PlannerVC new];
+        }
+        else if(indexPath.row == 2){
+            
+            newFrontController= [TeamsVC new];
+        }
+        else if(indexPath.row == 3){
+            
+            newFrontController= [MatchCenterTBC new];
+        }
+        else if(indexPath.row == 4){
+            
+            newFrontController= [VideoGalleryVC new];
+        }
+        else if(indexPath.row == 5){
+            
+            newFrontController= [DocumentViewController new];
+        }
+        else if(indexPath.row == 6){
+            
             DBMANAGERSYNC * objCaptransactions = [DBMANAGERSYNC sharedManager];
             NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
             dic = [objCaptransactions AssessmentEntrySyncBackground];
             NSMutableArray *reqList = [[NSMutableArray alloc]init];
             reqList = [dic valueForKey:@"LstAssessmententry"];
             [self synDataMethod];
-            
         }
-        else if(indexPath.row == 5)
-        {
+        else if(indexPath.row == 7){
+            
             newFrontController= [ChangePasswordVC new];
         }
-        else if(indexPath.row == 6)
-        {
+
+        else if (indexPath.row == arrItems.count -1){
+            
+            [self actionLogOut];
+        }
+    }
+    else
+    {
+        
+//        arrItems = @[@{@"name":@"Home",@"img":@"APT_Home"},
+//                     @{@"name":@"Planner",@"img":@"APT_Planner"},
+//                     @{@"name":@"History",@"img":@"APT_Stats"},
+//                     @{@"name":@"Cricket Center",@"img":@"APT_ Match centre"},
+//                     @{@"name":@"Videos",@"img":@"APT_ Match centre"},
+//                     @{@"name":@"Documents",@"img":@"APT_ Match centre"},
+//                     @{@"name":@"Food Diary",@"img":@"APT_Food Dairy"},
+//                     @{@"name":@"Change Password",@"img":@"APT_Change Password"},
+//                     @{@"name":@"Logout",@"img":@"APT_Logout"}];
+
+        if(indexPath.row == 0){
+            
+            newFrontController= [LandingViewController new];
+        }
+        else if(indexPath.row == 1){
+            
+            newFrontController= [PlannerVC new];
+        }
+        else if(indexPath.row == 2){
+            
             newFrontController= [TeamsReportsHistoryVC new];
         }
-        
-
-        else if (indexPath.row == arrItems.count -1)
-        {
+        else if(indexPath.row == 3){
+            
+            newFrontController= [MatchCenterTBC new];
+        }
+        else if(indexPath.row == 4){
+            
+            newFrontController= [VideoGalleryVC new];
+        }
+        else if(indexPath.row == 5){
+            
+            newFrontController= [DocumentViewController new];
+        }
+        else if(indexPath.row == 6){
+            
+            newFrontController= [FoodDiaryVC new];
+        }
+        else if(indexPath.row == 7){
+            
+            newFrontController= [ChangePasswordVC new];
+        }
+        else if (indexPath.row == arrItems.count -1){
             
             [self actionLogOut];
             

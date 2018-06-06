@@ -63,4 +63,6 @@
 @property (strong,nonatomic)  NSMutableArray * fetchArray;
 @property (strong,nonatomic)  NSString * isFetch;
 
+@property (weak, nonatomic) IBOutlet UIView *navView;
+
 @end

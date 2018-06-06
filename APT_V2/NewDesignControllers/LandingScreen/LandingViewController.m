@@ -17,6 +17,11 @@
 #import "CustomNavigation.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "WellnessTrainingBowlingVC.h"
+#import "TrainingLoadVC.h"
+#import "CoachBowlingLoad.h"
+@import Charts;
+#import "WebService.h"
+#import "HorizontalXLblFormatter.h"
 
 typedef enum : NSUInteger {
     Events,
@@ -36,7 +41,20 @@ typedef enum : NSUInteger {
     NSMutableArray *notificationArray;
     NSTimer* myTimer;
     WellnessTrainingBowlingVC* WTB_object;
+    TrainingLoadVC *Training_object;
+    WebService *objWebservice;
 }
+
+@property (nonatomic, strong)  NSMutableArray *BowlingloadXArray;
+@property (nonatomic, strong)  NSMutableArray *BowlingloadYArray;
+
+@property (nonatomic, strong) IBOutlet LineChartView *chartView;
+
+@property (nonatomic, strong) IBOutlet UISlider *sliderX;
+@property (nonatomic, strong) IBOutlet UISlider *sliderY;
+@property (nonatomic, strong) IBOutlet UITextField *sliderTextX;
+@property (nonatomic, strong) IBOutlet UITextField *sliderTextY;
+@property (nonatomic, strong)  NSMutableArray *fetchedArray;
 
 @end
 
@@ -48,10 +66,11 @@ typedef enum : NSUInteger {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-//    [cell.collection registerNib:[UINib nibWithNibName:@"collection" bundle:nil] forCellWithReuseIdentifier:@"collection"];
-//    [cell.collection registerNib:[UINib nibWithNibName:@"ScheduleCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
-//    [cell.collection registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
+    //    [cell.collection registerNib:[UINib nibWithNibName:@"collection" bundle:nil] forCellWithReuseIdentifier:@"collection"];
+    //    [cell.collection registerNib:[UINib nibWithNibName:@"ScheduleCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
+    //    [cell.collection registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
     WTB_object = [WellnessTrainingBowlingVC new];
+    Training_object = [TrainingLoadVC new];
     SectionNameArray = @[@{@"Title":@"Events"},
                          @{@"Title":@"Teams"},
                          @{@"Title":@"Fixtures"},
@@ -83,16 +102,19 @@ typedef enum : NSUInteger {
     [TableListDict setValue:@[] forKey:@"Teams"];
     [TableListDict setValue:@[] forKey:@"Fixtures"];
     [TableListDict setValue:@[] forKey:@"Results"];
-    [TableListDict setValue:@[] forKey:@"Food"];
-
+    [TableListDict setValue:@[] forKey:@"Foods"];
+    
     [self customnavigationmethod];
     [self EventsAndResultsWebservice];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotificationCount) name:@"updateNotificationCount" object:nil];
     
     myTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(updateNotificationCount) userInfo:nil repeats:YES];
-
-
+    
+    [self.BowlingDailyBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
+    [self FetchWebservice];
+    
+    
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -105,7 +127,7 @@ typedef enum : NSUInteger {
     SWRevealViewController *revealController = [self revealViewController];
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
-
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -114,14 +136,14 @@ typedef enum : NSUInteger {
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 -(void)customnavigationmethod
 {
@@ -264,7 +286,7 @@ typedef enum : NSUInteger {
     
     cell.lblSectionTitle.text = [[SectionNameArray objectAtIndex:section] valueForKey:@"Title"];
     return cell;
-
+    
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section{
@@ -278,11 +300,12 @@ typedef enum : NSUInteger {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    
     return  IS_IPAD ? 250 : 150;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    
     LandingTableViewCell* Tablecell = (LandingTableViewCell *)cell;
     NSString* title = [[SectionNameArray objectAtIndex:indexPath.section] valueForKey:@"Title"];
     
@@ -298,10 +321,10 @@ typedef enum : NSUInteger {
     else if ([title isEqualToString:@"Results"]) {
         [Tablecell configureCell:self andIndex:4 andTitile:title];
     }
-    else if ([title isEqualToString:@"Food"]) {
+    else if ([title isEqualToString:@"Foods"]) {
         [Tablecell configureCell:self andIndex:5 andTitile:title];
     }
-
+    
 }
 
 
@@ -318,25 +341,36 @@ typedef enum : NSUInteger {
     
     NSString* title = [[SectionNameArray objectAtIndex:indexPath.section] valueForKey:@"Title"];
     
-    if ([title isEqualToString:@"Wellness"]){
-        [cell.customView addSubview:WTB_object.topView];
+    if ([title isEqualToString:@"wellness"]){
+//        WTB_object = [[WellnessTrainingBowlingVC alloc] initWithNibName:@"WellnessTrainingBowlingVC" bundle:nil];
+//        WTB_object.view.frame = CGRectMake(0,0, cell.customView.bounds.size.width, 250);
+//        [cell.customView addSubview:WTB_object.topView];
         
-    
+        self.WellnessUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
+        
+        [cell.customView addSubview:self.WellnessUIView];
+        
         [cell.collection setHidden:YES];
-        [cell.customView setBackgroundColor:[UIColor orangeColor]];
+        //[cell.customView setBackgroundColor:[UIColor orangeColor]];
     }
-    else if ([title isEqualToString:@"Wellness"]){
-        
+    else if ([title isEqualToString:@"Training Load"]){
+        //Training_object = [[TrainingLoadVC alloc] initWithNibName:@"TrainingLoadVC" bundle:nil];
+        Training_object.view.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
+        [cell.customView addSubview:Training_object.view];
         [cell.collection setHidden:YES];
-        [cell.customView setBackgroundColor:[UIColor orangeColor]];
-
+        //[cell.customView setBackgroundColor:[UIColor orangeColor]];
+        
     }
     else if([title isEqualToString:@"Bowling Graph"])
     {
+        //WTB_object = [[WellnessTrainingBowlingVC alloc] initWithNibName:@"WellnessTrainingBowlingVC" bundle:nil];
+        self.BowlingUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
+        
+        [cell.customView addSubview:self.BowlingUIView];
         
         [cell.collection setHidden:YES];
-        [cell.customView setBackgroundColor:[UIColor orangeColor]];
-
+        //[cell.customView setBackgroundColor:[UIColor orangeColor]];
+        
     }
     else
     {
@@ -381,7 +415,7 @@ typedef enum : NSUInteger {
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-
+    
     return 10.0;
     
 }
@@ -395,7 +429,7 @@ typedef enum : NSUInteger {
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-
+    
     NSLog(@"collectionView.tag %ld",(long)collectionView.tag);
     
     
@@ -412,40 +446,40 @@ typedef enum : NSUInteger {
         return  [[TableListDict valueForKey:@"Results"] count];
     }
     else if (collectionView.tag == 5){
-        return  [[TableListDict valueForKey:@"Food"] count];
+        return  [[TableListDict valueForKey:@"Foods"] count];
     }
-
+    
     return 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     if (collectionView.tag == 1) { // Events
-
+        
         ScheduleCell* cell = (ScheduleCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
-//        cell.eventNamelbl.text = @"ScheduleCell";
+        //        cell.eventNamelbl.text = @"ScheduleCell";
         
         [self setupEventCell:cell andINdex:indexPath];
         
         return  cell;
     }
     else if (collectionView.tag == 2){ // Teams
-
+        
         TeamCollectionViewCell* cell = (TeamCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"TeamCollectionViewCell" forIndexPath:indexPath];
-//        cell.lblTeamName.text = @"TeamsCell";
+        //        cell.lblTeamName.text = @"TeamsCell";
         
         NSArray* teamlist = [TableListDict valueForKey:@"Teams"];
         
         NSString * imgStr1 = [[teamlist valueForKey:@"TeamPhotoLink"] objectAtIndex:indexPath.row];
         
         [cell.imgTeam sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
-
+        
         
         return cell;
-
+        
     }
     else if (collectionView.tag == 3){ // Fixtures
-
+        
         ResultCell* cell = (ResultCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellno" forIndexPath:indexPath];
         cell.resultlbl.text = @"FixturesCell";
         
@@ -478,7 +512,7 @@ typedef enum : NSUInteger {
         return cell;
     }
     else if (collectionView.tag == 4){ // Results
-
+        
         ResultCell* cell = (ResultCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellno" forIndexPath:indexPath];
         cell.resultlbl.text = @"ResultCell";
         
@@ -486,19 +520,19 @@ typedef enum : NSUInteger {
         
         
         return cell;
-
+        
     }
     else if (collectionView.tag == 5){ // Food
         
         FoodDiaryCell *cell = (FoodDiaryCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"foodCell" forIndexPath:indexPath];
-//        cell.mealNameLbl.text = @"Foodcell";
+        //        cell.mealNameLbl.text = @"Foodcell";
         [self setupFoodCell:cell andIndex:indexPath];
         
         
         return cell;
-
+        
     }
-
+    
     
     return  nil;
 }
@@ -598,13 +632,13 @@ typedef enum : NSUInteger {
     cell.layer.shadowOpacity = 0.5f;
     cell.layer.masksToBounds = NO;
     cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
-
+    
 }
 
 -(void)setUpResultCell:(ResultCell *)cell andINdex:(NSIndexPath *)indexPath {
     
     NSArray* resultArray = [TableListDict valueForKey:@"Results"];
-
+    
     cell.competitionNamelbl.text = [[resultArray valueForKey:@"COMPETITIONNAME"]objectAtIndex:indexPath.row];
     
     NSString *curdate = [[resultArray valueForKey:@"DateTime"]objectAtIndex:indexPath.row];
@@ -684,12 +718,12 @@ typedef enum : NSUInteger {
     cell.layer.shadowOpacity = 0.5f;
     cell.layer.masksToBounds = NO;
     cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
-
+    
 }
 
 -(void)setupFoodCell:(FoodDiaryCell *)cell andIndex:(NSIndexPath *)indexPath{
     
-    NSMutableArray *foodDiaryArray = [TableListDict valueForKey:@"Food"];
+    NSArray* mainArray = [TableListDict valueForKey:@"Foods"];
     
     cell.layer.masksToBounds = NO;
     cell.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -697,26 +731,26 @@ typedef enum : NSUInteger {
     cell.layer.shadowRadius = 3;
     cell.layer.shadowOpacity = 0.8f;
     
-        NSMutableArray *foodListArray = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"FOODLIST"];
-        
-        cell.timeLbl.text = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"STARTTIME"];
-        cell.mealNameLbl.text = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"MEALNAME"];
-        
-        if (foodListArray.count == 1) {
-            cell.food1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
-            cell.food2Lbl.text = @"";
-            cell.food3Lbl.text = @"";
-        } else if (foodListArray.count == 2) {
-            cell.food1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
-            cell.food2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
-            cell.food3Lbl.text = @"";
-        } else {
-            cell.food1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
-            cell.food2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
-            cell.food3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
-        }
-        
-
+    NSMutableArray *foodListArray = [[mainArray objectAtIndex:indexPath.row] valueForKey:@"FOODLIST"];
+    
+    //cell.timeLbl.text = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"STARTTIME"];
+    // cell.mealNameLbl.text = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"MEALNAME"];
+    
+    if (foodListArray.count == 1) {
+        cell.food1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+        cell.food2Lbl.text = @"";
+        cell.food3Lbl.text = @"";
+    } else if (foodListArray.count == 2) {
+        cell.food1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+        cell.food2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+        cell.food3Lbl.text = @"";
+    } else {
+        cell.food1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+        cell.food2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+        cell.food3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
+    }
+    
+    
 }
 
 #pragma mark- Webservice
@@ -729,85 +763,85 @@ typedef enum : NSUInteger {
         return;
     
     
-        [AppCommon showLoading];
+    [AppCommon showLoading];
+    
+    NSString *URLString =  URL_FOR_RESOURCE(ScheduleKey);
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    if(ClientCode)   [dic    setObject:ClientCode     forKey:@"ClientCode"];
+    if(UserrefCode)   [dic    setObject:UserrefCode     forKey:@"UserrefCode"];
+    if(playerCode)   [dic    setObject:playerCode     forKey:@"PlayerCode"];
+    [dic    setObject:[AppCommon getAppVersion]     forKey:@"version"];
+    [dic    setObject:@"ios"     forKey:@"platform"];
+    
+    NSLog(@"ScheduleKey URL : %@",URLString);
+    
+    NSLog(@"parameters : %@",dic);
+    [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response ; %@",responseObject);
         
-        NSString *URLString =  URL_FOR_RESOURCE(ScheduleKey);
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
-        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        
-        manager.requestSerializer = requestSerializer;
-        
-        NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-        NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-        NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-        
-        
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        if(ClientCode)   [dic    setObject:ClientCode     forKey:@"ClientCode"];
-        if(UserrefCode)   [dic    setObject:UserrefCode     forKey:@"UserrefCode"];
-        if(playerCode)   [dic    setObject:playerCode     forKey:@"PlayerCode"];
-        [dic    setObject:[AppCommon getAppVersion]     forKey:@"version"];
-        [dic    setObject:@"ios"     forKey:@"platform"];
-        
-        NSLog(@"ScheduleKey URL : %@",URLString);
-        
-        NSLog(@"parameters : %@",dic);
-        [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"response ; %@",responseObject);
+        if(responseObject >0)
+        {
+            //                NSMutableArray *scheduleArray = [responseObject valueForKey:@"EventDetails"];
+            //                NSMutableArray *resultArray = [responseObject valueForKey:@"ResultsValues"];
             
-            if(responseObject >0)
-            {
-//                NSMutableArray *scheduleArray = [responseObject valueForKey:@"EventDetails"];
-//                NSMutableArray *resultArray = [responseObject valueForKey:@"ResultsValues"];
-                
-//                self.commonArray = [[NSMutableArray alloc]init];
-//                self.commonArray2 = [[NSMutableArray alloc]init];
-                
-                if ([responseObject valueForKey:@"EventDetails"] != nil) {
-                    [TableListDict setValue:[responseObject valueForKey:@"EventDetails"] forKey:@"Events"];
-                }
-                
-                if ([responseObject valueForKey:@"ResultsValues"] != nil) {
-                    [TableListDict setValue:[responseObject valueForKey:@"ResultsValues"] forKey:@"Results"];
-                }
-
-                
-//                self.commonArray = scheduleArray;
-//                self.commonArray2 = resultArray;
-                
-//                [self.eventsCollectionView reloadData];
-//                [self.resultCollectionView reloadData];
-//
-//                BOOL iftheyClickedLater = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLater"];
-                
-//                if (!iftheyClickedLater) { // New version update alert if they click later, we dont show that alert again and again
-//
-//                    NSInteger* isLatestVersion = [[responseObject valueForKey:@"isLatestVersion"] integerValue];
-//                    NSLog(@"isLatestVersion %@",[responseObject valueForKey:@"isLatestVersion"] );
-//                    if (!isLatestVersion) {
-//                        NSLog(@"canUpdate TRUE ");
-//                        [AppCommon newVersionUpdateAlert];
-//                    }
-//
-//                }
-                
-                
+            //                self.commonArray = [[NSMutableArray alloc]init];
+            //                self.commonArray2 = [[NSMutableArray alloc]init];
+            
+            if ([responseObject valueForKey:@"EventDetails"] != nil) {
+                [TableListDict setValue:[responseObject valueForKey:@"EventDetails"] forKey:@"Events"];
+            }
+            
+            if ([responseObject valueForKey:@"ResultsValues"] != nil) {
+                [TableListDict setValue:[responseObject valueForKey:@"ResultsValues"] forKey:@"Results"];
             }
             
             
+            //                self.commonArray = scheduleArray;
+            //                self.commonArray2 = resultArray;
             
-            [AppCommon hideLoading];
-            [self FixturesWebservice];
+            //                [self.eventsCollectionView reloadData];
+            //                [self.resultCollectionView reloadData];
+            //
+            //                BOOL iftheyClickedLater = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLater"];
+            
+            //                if (!iftheyClickedLater) { // New version update alert if they click later, we dont show that alert again and again
+            //
+            //                    NSInteger* isLatestVersion = [[responseObject valueForKey:@"isLatestVersion"] integerValue];
+            //                    NSLog(@"isLatestVersion %@",[responseObject valueForKey:@"isLatestVersion"] );
+            //                    if (!isLatestVersion) {
+            //                        NSLog(@"canUpdate TRUE ");
+            //                        [AppCommon newVersionUpdateAlert];
+            //                    }
+            //
+            //                }
             
             
-            
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"failed");
-            [AppCommon hideLoading];
-            [COMMON webServiceFailureError:error];
-            
-        }];
+        }
+        
+        
+        
+        [AppCommon hideLoading];
+        [self FixturesWebservice];
+        
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failed");
+        [AppCommon hideLoading];
+        [COMMON webServiceFailureError:error];
+        
+    }];
     
 }
 
@@ -817,107 +851,107 @@ typedef enum : NSUInteger {
     if(![COMMON isInternetReachable])
         return;
     
-        NSString *URLString =  URL_FOR_RESOURCE(FixturesKey);
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
-        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    NSString *URLString =  URL_FOR_RESOURCE(FixturesKey);
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    //        NSString *competition = @"";
+    //        NSString *teamcode = [AppCommon getCurrentTeamCode];
+    
+    NSString *teamcode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"CAPTeamcode"];
+    
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    //        if(competition)   [dic    setObject:competition     forKey:@"Competitioncode"];
+    if(teamcode)   [dic    setObject:teamcode     forKey:@"TeamCode"];
+    
+    
+    NSLog(@"parameters : %@",dic);
+    [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response ; %@",responseObject);
         
-        manager.requestSerializer = requestSerializer;
-        
-        //        NSString *competition = @"";
-        //        NSString *teamcode = [AppCommon getCurrentTeamCode];
-        
-        NSString *teamcode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"CAPTeamcode"];
-        
-        
-        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-        //        if(competition)   [dic    setObject:competition     forKey:@"Competitioncode"];
-        if(teamcode)   [dic    setObject:teamcode     forKey:@"TeamCode"];
-        
-        
-        NSLog(@"parameters : %@",dic);
-        [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"response ; %@",responseObject);
+        if(responseObject >0)
+        {
+            NSMutableArray *objarray = [[NSMutableArray alloc]init];
+            NSMutableArray * fixArr = [[NSMutableArray alloc]init];
+            fixArr = [responseObject valueForKey:@"lstFixturesGridValues"];
             
-            if(responseObject >0)
+            if([[responseObject valueForKey:@"lstFixturesGridValues"] count])
             {
-                NSMutableArray *objarray = [[NSMutableArray alloc]init];
-                NSMutableArray * fixArr = [[NSMutableArray alloc]init];
-                fixArr = [responseObject valueForKey:@"lstFixturesGridValues"];
+                //self.competitionLbl.text = [[fixArr valueForKey:@"COMPETITIONNAME"] objectAtIndex:0];
                 
-                if([[responseObject valueForKey:@"lstFixturesGridValues"] count])
+                NSMutableArray * sepArray = [[NSMutableArray alloc]init];
+                
+                for(int i=0;i<fixArr.count;i++)
                 {
-                    //self.competitionLbl.text = [[fixArr valueForKey:@"COMPETITIONNAME"] objectAtIndex:0];
+                    sepArray = [fixArr objectAtIndex:i];
+                    NSString *dttime = [sepArray valueForKey:@"DateTime"];
                     
-                    NSMutableArray * sepArray = [[NSMutableArray alloc]init];
+                    NSArray *components = [dttime componentsSeparatedByString:@" "];
+                    NSString *day = components[0];
+                    NSString *monthyear = components[1];
+                    NSString *time = components[2];
+                    NSString *local = components[3];
                     
-                    for(int i=0;i<fixArr.count;i++)
-                    {
-                        sepArray = [fixArr objectAtIndex:i];
-                        NSString *dttime = [sepArray valueForKey:@"DateTime"];
-                        
-                        NSArray *components = [dttime componentsSeparatedByString:@" "];
-                        NSString *day = components[0];
-                        NSString *monthyear = components[1];
-                        NSString *time = components[2];
-                        NSString *local = components[3];
-                        
-                        NSString *realdate = [NSString stringWithFormat:@"%@ %@",day,monthyear];
-                        NSString *realtime = [NSString stringWithFormat:@"%@ %@",time,local];
-                        
-                        NSString *ground = [sepArray valueForKey:@"Ground"];
-                        NSString *place = [sepArray valueForKey:@"GroundCode"];
-                        NSString *realGroundname = [NSString stringWithFormat:@"%@,%@",ground,place];
-                        
-                        NSString *team1 = [sepArray valueForKey:@"TeamA"];
-                        NSString *team2 = [sepArray valueForKey:@"TeamB"];
-                        NSString *team1Image = [sepArray valueForKey:@"TeamALogo"];
-                        NSString *team2Image = [sepArray valueForKey:@"TeamBLogo"];
-                        NSString *CompetitionName = [sepArray valueForKey:@"COMPETITIONNAME"];
-                        
-                        NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-                        
-                        NSLog(@"SET DATE FORMAT %@ ",realdate);
-                        [dic setValue:realdate forKey:@"date"];
-                        [dic setValue:realtime forKey:@"time"];
-                        [dic setValue:realGroundname forKey:@"ground"];
-                        // [dic setValue:realdate forKey:@"date"];
-                        [dic setValue:team1 forKey:@"team1"];
-                        [dic setValue:team2 forKey:@"team2"];
-                        [dic setValue:team1Image forKey:@"team1Img"];
-                        [dic setValue:team2Image forKey:@"team2Img"];
-                        [dic setValue:CompetitionName forKey:@"CompetitionName"];
-                        
-                        [objarray addObject:dic];
-                        
-                    }
+                    NSString *realdate = [NSString stringWithFormat:@"%@ %@",day,monthyear];
+                    NSString *realtime = [NSString stringWithFormat:@"%@ %@",time,local];
+                    
+                    NSString *ground = [sepArray valueForKey:@"Ground"];
+                    NSString *place = [sepArray valueForKey:@"GroundCode"];
+                    NSString *realGroundname = [NSString stringWithFormat:@"%@,%@",ground,place];
+                    
+                    NSString *team1 = [sepArray valueForKey:@"TeamA"];
+                    NSString *team2 = [sepArray valueForKey:@"TeamB"];
+                    NSString *team1Image = [sepArray valueForKey:@"TeamALogo"];
+                    NSString *team2Image = [sepArray valueForKey:@"TeamBLogo"];
+                    NSString *CompetitionName = [sepArray valueForKey:@"COMPETITIONNAME"];
+                    
+                    NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+                    
+                    NSLog(@"SET DATE FORMAT %@ ",realdate);
+                    [dic setValue:realdate forKey:@"date"];
+                    [dic setValue:realtime forKey:@"time"];
+                    [dic setValue:realGroundname forKey:@"ground"];
+                    // [dic setValue:realdate forKey:@"date"];
+                    [dic setValue:team1 forKey:@"team1"];
+                    [dic setValue:team2 forKey:@"team2"];
+                    [dic setValue:team1Image forKey:@"team1Img"];
+                    [dic setValue:team2Image forKey:@"team2Img"];
+                    [dic setValue:CompetitionName forKey:@"CompetitionName"];
+                    
+                    [objarray addObject:dic];
                     
                 }
                 
-                if (objarray != nil) {
-                    [TableListDict setValue:objarray forKey:@"Fixtures"];
-                }
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.LandingTable reloadData];
-                });
-                
-                [self TeamsWebservice];
-                [AppCommon hideLoading];
-
             }
             
+            if (objarray != nil) {
+                [TableListDict setValue:objarray forKey:@"Fixtures"];
+            }
             
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [COMMON webServiceFailureError:error];
-            NSLog(@"failed");
-            [AppCommon hideLoading];
-
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.LandingTable reloadData];
             });
             
-        }];
+            [self TeamsWebservice];
+            [AppCommon hideLoading];
+            
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [COMMON webServiceFailureError:error];
+        NSLog(@"failed");
+        [AppCommon hideLoading];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.LandingTable reloadData];
+        });
+        
+    }];
     
 }
 
@@ -959,11 +993,11 @@ typedef enum : NSUInteger {
             if (teamslist != nil) {
                 [TableListDict setValue:teamslist forKey:@"Teams"];
             }
-
+            
         }
         
         [AppCommon hideLoading];
-        [self FoodDiaryWebservice];
+        
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -977,80 +1011,6 @@ typedef enum : NSUInteger {
 }
 
 
-- (void)FoodDiaryWebservice {
-    
-        // Get current datetime
-    NSDate *currentDateTime = [NSDate date];
-    
-        // Instantiate a NSDateFormatter
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
-        // Set the dateFormatter format
-    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
-    
-        // Get the date time in NSString
-    NSString *date = [dateFormatter stringFromDate:currentDateTime];
-    
-    if(![COMMON isInternetReachable])
-        return;
-    
-    [AppCommon showLoading];
-    
-    NSString *URLString =  URL_FOR_RESOURCE(foodDiaryFetch);
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
-    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    
-    manager.requestSerializer = requestSerializer;
-        //CLIENTCODE, PLAYERCODE, DATE
-    NSString *clientCode = [AppCommon GetClientCode];
-    NSString *userRefCode = [AppCommon GetuserReference];
-    
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    if(clientCode)   [dic    setObject:clientCode     forKey:@"CLIENTCODE"];
-    if(userRefCode)   [dic    setObject:userRefCode     forKey:@"PLAYERCODE"];
-    [dic setObject:date forKey:@"DATE"];
-    NSLog(@"parameters : %@",dic);
-    [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"response ; %@",responseObject);
-        
-        if ([[responseObject valueForKey:@"STATUS"] integerValue] == 1) {
-            
-            NSMutableArray *foodDiaryArray = [NSMutableArray new];
-            NSMutableArray *FOODDIARYSArray = [NSMutableArray new];
-            FOODDIARYSArray = [responseObject objectForKey:@"FOODDIARYS"];
-            
-            if (FOODDIARYSArray.count) {
-                for (id key in FOODDIARYSArray) {
-                    
-                    if ([[key valueForKey:@"FOODLIST"] count]) {
-                        if ([date isEqualToString:[key valueForKey:@"DATE"]]) {
-                            [foodDiaryArray addObject:key];
-                        }
-                    }
-                }
-            }
-            
-            if (foodDiaryArray.count) {
-                [TableListDict setValue:foodDiaryArray forKey:@"Food"];
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.LandingTable reloadData];
-            });
-            
-            NSLog(@"Count:%ld", foodDiaryArray.count);
-//            [self setClearBorderForMealTypeAndLocation];
-        }
-        
-        [AppCommon hideLoading];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"failed");
-        [COMMON webServiceFailureError:error];
-        [AppCommon hideLoading];
-    }];
-}
 
 //-(void)EventTypeWebservice:(NSString *) usercode :(NSString*) cliendcode:(NSString *)userreference
 //{
@@ -1148,4 +1108,565 @@ typedef enum : NSUInteger {
 }
 
 
+//for bowling
+- (IBAction)MonthlyAction:(id)sender
+{
+    [self setInningsBySelection:@"3"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDate *CurrentDate = [NSDate date];
+    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+    NSString *newDateString = [dateFormatter stringFromDate:CurrentDate];
+    NSArray *components = [newDateString componentsSeparatedByString:@"-"];
+    NSString *month = components[0];
+    NSString *year = components[2];
+    NSString *day = @"01";
+    
+    NSString *firstDayDate = [NSString stringWithFormat:@"%@-%@-%@",month,day,year];
+    [self BowlingLoadWebservice:firstDayDate:@"MONTHLY"];
+}
+
+- (IBAction)WeeklyAction:(id)sender
+{
+    [self setInningsBySelection:@"2"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDate *CurrentDate = [NSDate date];
+    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+    NSString *newDateString = [dateFormatter stringFromDate:CurrentDate];
+    [self BowlingLoadWebservice:newDateString:@"WEEKLY"];
+}
+- (IBAction)DailyAction:(id)sender
+{
+    [self setInningsBySelection:@"1"];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDate *CurrentDate = [NSDate date];
+    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+    NSString *newDateString = [dateFormatter stringFromDate:CurrentDate];
+    [self BowlingLoadWebservice:newDateString:@"DAILY"];
+}
+
+-(void)BowlingLoadWebservice : (NSString *)date : (NSString *)type
+{
+    [AppCommon showLoading ];
+    
+    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    NSString *playerCode;
+    if([AppCommon isCoach])
+    {
+        
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    }
+    else
+    {
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    }
+    NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    
+    objWebservice = [[WebService alloc]init];
+    
+    //NSString *dateString = self.datelbl.text;
+    
+    
+    
+    [objWebservice BowlingLoad :BowlingLoadKey:ClientCode : playerCode :date :type success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseObject=%@",responseObject);
+        
+        if(responseObject >0)
+        {
+            
+            NSMutableArray *reqArray = [[NSMutableArray alloc]init];
+            reqArray = responseObject;
+            if(reqArray.count>0)
+            {
+                self.BowlingloadXArray= [[NSMutableArray alloc]init];
+                self.BowlingloadYArray = [[NSMutableArray alloc]init];
+                
+                for(int i=0;i<reqArray.count;i++)
+                {
+                    //                int timecount = [[[reqArray valueForKey:@"DURATION"] objectAtIndex:i] intValue];
+                    //                int rpecount = [[[reqArray valueForKey:@"RPE"] objectAtIndex:i] intValue];
+                    //                int total = timecount * rpecount;
+                    [self.BowlingloadYArray addObject:[[reqArray valueForKey:@"BALL"] objectAtIndex:i]];
+                    [self.BowlingloadXArray addObject:[[reqArray valueForKey:@"WORKLOADDATE"] objectAtIndex:i]];
+                }
+                
+                [self BowlingLoadChart];
+            }
+        }
+        [AppCommon hideLoading];
+        
+    }
+                        failure:^(AFHTTPRequestOperation *operation, id error) {
+                            NSLog(@"failed");
+                            [COMMON webServiceFailureError:error];
+                        }];
+    
+}
+
+
+-(void)BowlingLoadChart
+{
+    self.title = @"Line Chart 2";
+    
+    _chartView.delegate = self;
+    
+    
+    _chartView.chartDescription.enabled = NO;
+    
+    _chartView.dragEnabled = YES;
+    [_chartView setScaleEnabled:YES];
+    _chartView.drawGridBackgroundEnabled = NO;
+    _chartView.pinchZoomEnabled = YES;
+    
+    
+    //  _chartView.backgroundColor = [UIColor colorWithWhite:204/255.f alpha:1.f];
+    _chartView.backgroundColor = [UIColor whiteColor];
+    
+    ChartLegend *l = _chartView.legend;
+    l.form = ChartLegendFormLine;
+    l.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:9.f];
+    l.textColor = UIColor.whiteColor;
+    l.horizontalAlignment = ChartLegendHorizontalAlignmentLeft;
+    l.verticalAlignment = ChartLegendVerticalAlignmentBottom;
+    l.orientation = ChartLegendOrientationHorizontal;
+    l.drawInside = NO;
+    l.enabled = NO;
+    
+    
+    ChartXAxis *xAxis = _chartView.xAxis;
+    xAxis.labelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:9.f];
+    xAxis.labelTextColor = UIColor.blackColor;
+    xAxis.drawGridLinesEnabled = NO;
+    xAxis.drawAxisLineEnabled = NO;
+    xAxis.labelPosition = UIBarPositionBottom;
+    
+    //NSArray *array = @[@"mon",@"tue",@"wed",@"thurs",@"friday",@"sat",@"sun",@"mon",@"tue",@"wed",@"thurs",@"friday",@"sat",@"sun",@"mon",@"tue",@"wed",@"thurs",@"friday",@"sat",@"sun"];
+    xAxis.valueFormatter = [[HorizontalXLblFormatter alloc] initForChart: self.BowlingloadXArray];
+    
+    
+    
+    ChartYAxis *leftAxis = _chartView.leftAxis;
+    leftAxis.labelTextColor = [UIColor colorWithRed:51/255.f green:181/255.f blue:229/255.f alpha:1.f];
+    
+    
+    
+    NSMutableArray *TotalValuesArr = [[NSMutableArray alloc]init];
+    for (int i = 0; i < self.BowlingloadYArray.count; i++)
+    {
+        //        double mult = range / 2.0;
+        //        double val = (double) (arc4random_uniform(mult)) + 50;
+        
+        int val = [self.BowlingloadYArray[i] intValue];
+        [TotalValuesArr addObject:[NSNumber numberWithInt:val]];
+    }
+    
+    NSNumber *maxNumber = [TotalValuesArr valueForKeyPath:@"@max.self"];
+    NSLog(@"%@", maxNumber);
+    
+    leftAxis.axisMaximum = [maxNumber floatValue]+1;
+    leftAxis.axisMinimum = 0.0;
+    leftAxis.drawGridLinesEnabled = YES;
+    leftAxis.drawZeroLineEnabled = NO;
+    leftAxis.granularityEnabled = YES;
+    
+    ChartYAxis *rightAxis = _chartView.rightAxis;
+    rightAxis.labelTextColor = UIColor.redColor;
+    rightAxis.axisMaximum = 0;
+    rightAxis.axisMinimum = 0;
+    rightAxis.drawGridLinesEnabled = NO;
+    rightAxis.granularityEnabled = NO;
+    
+    
+    _sliderX.value = 14;
+    _sliderY.value = 14;
+    [self slidersValueChanged:nil];
+    
+    [_chartView animateWithXAxisDuration:2.5];
+}
+
+
+- (void)updateChartData
+{
+    //    if (self.shouldHideData)
+    //    {
+    //        _chartView.data = nil;
+    //        return;
+    //    }
+    
+    [self setDataCount:_sliderX.value+1 range:_sliderY.value];
+}
+
+- (void)setDataCount:(int)count range:(double)range
+{
+    NSMutableArray *yVals1 = [[NSMutableArray alloc] init];
+    double spaceforbar = 10.0;
+    
+    //NSArray *array = @[@"10",@"20",@"30",@"20",@"40",@"60",@"20",@"70",@"20",@"30",@"20",@"40",@"60",@"20",@"70",@"20",@"30",@"20",@"40",@"60",@"20"];
+    //NSArray *array1 = @[@"mon",@"tue",@"wed",@"thurs",@"friday",@"sat",@"sun",@"mon",@"tue",@"wed",@"thurs",@"friday",@"sat",@"sun"];
+    //NSArray *array1 = @[@"mon",@"tue",@"wed",@"thursday",@"friday"];
+    for (int i = 0; i < self.BowlingloadYArray.count; i++)
+    {
+        //        double mult = range / 2.0;
+        //        double val = (double) (arc4random_uniform(mult)) + 50;
+        
+        double val = [self.BowlingloadYArray[i] doubleValue];
+        //double val1 = [array1[i] doubleValue];
+        [yVals1 addObject:[[ChartDataEntry alloc] initWithX:i*spaceforbar y:val]];
+    }
+    
+    
+    
+    LineChartDataSet *set1 = nil;
+    
+    if (_chartView.data.dataSetCount > 0)
+    {
+        set1 = (LineChartDataSet *)_chartView.data.dataSets[0];
+        set1.values = yVals1;
+        [_chartView.data notifyDataChanged];
+        [_chartView notifyDataSetChanged];
+    }
+    else
+    {
+        set1 = [[LineChartDataSet alloc] initWithValues:yVals1 label:@"DataSet 1"];
+        set1.axisDependency = AxisDependencyLeft;
+        [set1 setColor:[UIColor colorWithRed:51/255.f green:181/255.f blue:229/255.f alpha:1.f]];
+        [set1 setCircleColor:UIColor.blackColor];
+        set1.lineWidth = 2.0;
+        set1.circleRadius = 3.0;
+        set1.fillAlpha = 65/255.0;
+        set1.fillColor = [UIColor colorWithRed:51/255.f green:181/255.f blue:229/255.f alpha:1.f];
+        set1.highlightColor = [UIColor colorWithRed:244/255.f green:117/255.f blue:117/255.f alpha:1.f];
+        set1.drawCircleHoleEnabled = NO;
+        
+        
+        
+        NSMutableArray *dataSets = [[NSMutableArray alloc] init];
+        [dataSets addObject:set1];
+        
+        LineChartData *data = [[LineChartData alloc] initWithDataSets:dataSets];
+        [data setValueTextColor:UIColor.blackColor];
+        [data setValueFont:[UIFont systemFontOfSize:9.f]];
+        
+        _chartView.data = data;
+    }
+}
+
+
+
+
+#pragma mark - Actions
+
+- (IBAction)slidersValueChanged:(id)sender
+{
+    _sliderTextX.text = [@((int)_sliderX.value) stringValue];
+    _sliderTextY.text = [@((int)_sliderY.value) stringValue];
+    
+    [self updateChartData];
+}
+
+#pragma mark - ChartViewDelegate
+
+- (void)chartValueSelected:(ChartViewBase * __nonnull)chartView entry:(ChartDataEntry * __nonnull)entry highlight:(ChartHighlight * __nonnull)highlight
+{
+    NSLog(@"chartValueSelected");
+    
+    [_chartView centerViewToAnimatedWithXValue:entry.x yValue:entry.y axis:[_chartView.data getDataSetByIndex:highlight.dataSetIndex].axisDependency duration:1.0];
+    
+}
+
+- (void)chartValueNothingSelected:(ChartViewBase * __nonnull)chartView
+{
+    NSLog(@"chartValueNothingSelected");
+}
+
+
+
+-(void) setInningsBySelection: (NSString*) innsNo{
+    
+    [self setInningsButtonUnselect:self.BowlingDailyBtn];
+    [self setInningsButtonUnselect:self.BowlingWeeklyBtn];
+    [self setInningsButtonUnselect:self.BowlingMonthlyBtn];
+    
+    if([innsNo isEqualToString:@"1"]){
+        
+        [self setInningsButtonSelect:self.BowlingDailyBtn];
+        
+    }else if([innsNo isEqualToString:@"2"]){
+        
+        [self setInningsButtonSelect:self.BowlingWeeklyBtn];
+    }
+    else if([innsNo isEqualToString:@"3"]){
+        
+        [self setInningsButtonSelect:self.BowlingMonthlyBtn];
+    }
+    
+}
+
+-(UIColor*)colorWithHexString:(NSString*)hex
+{
+    //-----------------------------------------
+    // Convert hex string to an integer
+    //-----------------------------------------
+    unsigned int hexint = 0;
+    
+    // Create scanner
+    NSScanner *scanner = [NSScanner scannerWithString:hex];
+    
+    // Tell scanner to skip the # character
+    [scanner setCharactersToBeSkipped:[NSCharacterSet
+                                       characterSetWithCharactersInString:@"#"]];
+    [scanner scanHexInt:&hexint];
+    
+    //-----------------------------------------
+    // Create color object, specifying alpha
+    //-----------------------------------------
+    UIColor *color =
+    [UIColor colorWithRed:((CGFloat) ((hexint & 0xFF0000) >> 16))/255
+                    green:((CGFloat) ((hexint & 0xFF00) >> 8))/255
+                     blue:((CGFloat) (hexint & 0xFF))/255
+                    alpha:1.0f];
+    
+    return color;
+}
+
+-(void) setInningsButtonSelect : (UIButton*) innsBtn{
+    // innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#1C1A44"];
+    
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+    [innsBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+}
+
+-(void) setInningsButtonUnselect : (UIButton*) innsBtn{
+    //  innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#C8C8C8"];
+    
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+    [innsBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+}
+
+
+
+
+
+//For Wellness
+
+-(void)FetchWebservice
+{
+    [AppCommon showLoading ];
+    
+    NSString *playerCode;
+    if([AppCommon isCoach])
+    {
+        
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    }
+    else
+    {
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    }
+    // NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    NSDate *matchdate = [NSDate date];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    NSString * actualDate = [dateFormat stringFromDate:matchdate];
+    // NSString *urinecolor= @"0";
+    
+    [objWebservice fetchWellness :FetchrecordWellness : playerCode :actualDate success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseObject=%@",responseObject);
+        
+        self.NoDataView.hidden = YES;
+        NSMutableArray *arr = [[NSMutableArray alloc]init];
+        arr = responseObject;
+        if(arr.count >0)
+        {
+            self.NoDataView.hidden = YES;
+            if( ![[[responseObject valueForKey:@"BodyWeight"] objectAtIndex:0] isEqual:[NSNull null]])
+            {
+                self.bodyWeightlbl.text = [[responseObject valueForKey:@"BodyWeight"] objectAtIndex:0];
+                
+                //[self.fetchButton setTag:1];
+                self.fetchedArray = [[NSMutableArray alloc]init];
+                self.fetchedArray = [responseObject objectAtIndex:0];
+            }
+            if(! [[[responseObject valueForKey:@"SleepHours"] objectAtIndex:0] isEqual:[NSNull null]])
+            {
+                self.sleepHrlbl.text = [[responseObject valueForKey:@"SleepHours"] objectAtIndex:0];
+            }
+            if( ![[[responseObject valueForKey:@"SleepRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
+            {
+                NSString *sleepValue = [[responseObject valueForKey:@"SleepRatingDescription"] objectAtIndex:0];
+                NSArray *component = [sleepValue componentsSeparatedByString:@" "];
+                self.sleeplbl.text = [NSString stringWithFormat:@"%@/7",component[0]];
+                
+                
+                if([component[0] isEqualToString:@"1"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
+                }
+                if([component[0] isEqualToString:@"2"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
+                }
+                if([component[0] isEqualToString:@"3"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
+                }
+                if([component[0] isEqualToString:@"4"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
+                }
+                if([component[0] isEqualToString:@"5"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
+                }
+                if([component[0] isEqualToString:@"6"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
+                }
+                if([component[0] isEqualToString:@"7"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
+                }
+            }
+            
+            if( ![[[responseObject valueForKey:@"FatigueRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
+            {
+                NSString *fatiqueValue = [[responseObject valueForKey:@"FatigueRatingDescription"] objectAtIndex:0];
+                NSArray *component1 = [fatiqueValue componentsSeparatedByString:@" "];
+                self.fatiquelbl.text = [NSString stringWithFormat:@"%@/7",component1[0]];
+                
+                if([component1[0] isEqualToString:@"1"])
+                {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
+                }
+                if([component1[0] isEqualToString:@"2"])
+                {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
+                }
+                if([component1[0] isEqualToString:@"3"])
+                {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
+                }
+                if([component1[0] isEqualToString:@"4"])
+                {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
+                }
+                if([component1[0] isEqualToString:@"5"])
+                {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
+                }
+                if([component1[0] isEqualToString:@"6"])
+                {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
+                }
+                if([component1[0] isEqualToString:@"7"])
+                {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
+                }
+            }
+            
+            if( ![[[responseObject valueForKey:@"SoreNessRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
+            {
+                
+                NSString *muscleValue = [[responseObject valueForKey:@"SoreNessRatingDescription"] objectAtIndex:0];
+                NSArray *component2 = [muscleValue componentsSeparatedByString:@" "];
+                self.musclelbl.text = [NSString stringWithFormat:@"%@/7",component2[0]];
+                
+                if([component2[0] isEqualToString:@"1"])
+                {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
+                }
+                if([component2[0] isEqualToString:@"2"])
+                {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
+                }
+                if([component2[0] isEqualToString:@"3"])
+                {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
+                }
+                if([component2[0] isEqualToString:@"4"])
+                {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
+                }
+                if([component2[0] isEqualToString:@"5"])
+                {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
+                }
+                if([component2[0] isEqualToString:@"6"])
+                {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
+                }
+                if([component2[0] isEqualToString:@"7"])
+                {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
+                }
+            }
+            
+            if( ![[[responseObject valueForKey:@"StressRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
+            {
+                NSString *stressValue = [[responseObject valueForKey:@"StressRatingDescription"] objectAtIndex:0];
+                NSArray *component3 = [stressValue componentsSeparatedByString:@" "];
+                self.stresslbl.text = [NSString stringWithFormat:@"%@/7",component3[0]];
+                
+                if([component3[0] isEqualToString:@"1"])
+                {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
+                }
+                if([component3[0] isEqualToString:@"2"])
+                {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
+                }
+                if([component3[0] isEqualToString:@"3"])
+                {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
+                }
+                if([component3[0] isEqualToString:@"4"])
+                {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
+                }
+                if([component3[0] isEqualToString:@"5"])
+                {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
+                }
+                if([component3[0] isEqualToString:@"6"])
+                {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
+                }
+                if([component3[0] isEqualToString:@"7"])
+                {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
+                }
+            }
+            
+            
+        }
+        else
+        {
+            self.NoDataView.hidden = NO;
+        }
+        [AppCommon hideLoading];
+        
+    }
+                          failure:^(AFHTTPRequestOperation *operation, id error) {
+                              NSLog(@"failed");
+                              [COMMON webServiceFailureError:error];
+                          }];
+    
+}
+
+
+- (IBAction)AddWellnessAction:(id)sender {
+    
+    AddWellnessRatingVC *VC = [AddWellnessRatingVC new];
+    [appDel.frontNavigationController pushViewController:VC animated:YES];
+}
+
+
+
+
 @end
+
+

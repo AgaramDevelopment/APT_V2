@@ -154,12 +154,15 @@
 //}
 - (IBAction)AddtrainingBtnAction:(id)sender {
     
-    objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
-    objUpdate.view.frame = CGRectMake(0,0, self.traingView.bounds.size.width, self.traingView.bounds.size.height);
-     [self.traingView addSubview:objUpdate.view];
+//    objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
+//    objUpdate.view.frame = CGRectMake(0,0, self.traingView.bounds.size.width, self.traingView.bounds.size.height);
+//     [self.traingView addSubview:objUpdate.view];
     
 //        WellnessTrainingBowlingVC *objWell = [[WellnessTrainingBowlingVC alloc]init];
 //        objWell.traingViewHeight.constant = objWell.traingViewHeight.constant+300;
+    
+        TrainingLoadUpdateVC *VC = [TrainingLoadUpdateVC new];
+        [appDel.frontNavigationController pushViewController:VC animated:YES];
 }
 
 - (IBAction)TodayBtnAction:(id)sender {

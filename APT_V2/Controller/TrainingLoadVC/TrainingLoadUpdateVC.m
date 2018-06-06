@@ -69,6 +69,7 @@
     objWebservice = [[WebService alloc]init];
     //self.markers = [[NSMutableArray alloc] initWithObjects:@"50.343", @"84.43", @"63.22", @"31.43", nil];
     
+    [self customnavigationmethod];
     self.sessionBtn.hidden = NO;
     self.UpdateBtn.hidden = YES;
     
@@ -88,6 +89,19 @@
     self.tapView.hidden = YES;
     [self samplePieChart];
     [self DropDownWebservice];
+    
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    NSDate *matchdate = [NSDate date];
+    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+    
+    NSDateFormatter *dateFormat1 = [[NSDateFormatter alloc] init];
+    [dateFormat1 setDateFormat:@"MM-dd-yyyy"];
+   // SelectedDate = [dateFormat1 stringFromDate:matchdate];
+    
+    NSString * actualDate = [dateFormat stringFromDate:matchdate];
+    self.datelbl.text = [dateFormat1 stringFromDate:matchdate];
+    [self DateWebservice];
     
     
     
@@ -136,9 +150,51 @@
     }];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)customnavigationmethod
+{
+    CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    
+    //    [self.view addSubview:objCustomNavigation.view];
+    //    objCustomNavigation.tittle_lbl.text=@"";
+    
+    UIView* view= self.view.subviews.firstObject;
+    [self.navView addSubview:objCustomNavigation.view];
+    
+    BOOL isBackEnable = [[NSUserDefaults standardUserDefaults] boolForKey:@"BACK"];
+    isBackEnable=YES;
+    
+    if (isBackEnable) {
+        objCustomNavigation.menu_btn.hidden =YES;
+        objCustomNavigation.btn_back.hidden =NO;
+        [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else
+    {
+        objCustomNavigation.menu_btn.hidden =NO;
+        objCustomNavigation.btn_back.hidden =YES;
+        [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    //    objCustomNavigation.btn_back.hidden =isBackEnable;
+    //
+    //    objCustomNavigation.menu_btn.hidden = objCustomNavigation.btn_back.isHidden;
+    //    [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack:) forControlEvents:UIControlEventTouchUpInside];
+    //
+    //    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+}
+
+-(void)actionBack
+{
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"BACK"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [appDel.frontNavigationController popViewControllerAnimated:YES];
+    
 }
 
 - (IBAction)ActivityAction:(id)sender {
@@ -873,7 +929,7 @@ if([_isToday isEqualToString:@"yes"])
     //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"dd-MM-yyyy"];
     
-    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,self.view_datepicker.frame.origin.y-140,self.view.frame.size.width,100)];
+    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,20,self.view_datepicker.frame.size.width,100)];
     
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     [datePicker setLocale:locale];
@@ -966,8 +1022,9 @@ if([_isToday isEqualToString:@"yes"])
                 {
                     NSLog(@"success");
                     [self ShowAlterMsg:@"Training Load Inserted Successfully"];
-                    [self.view removeFromSuperview];
-                    [self.Delegate closeUpdateTrainingSource];
+                   // [self.view removeFromSuperview];
+                    //[self.Delegate closeUpdateTrainingSource];
+                    [appDel.frontNavigationController popViewControllerAnimated:YES];
                     
                     // [self.pieChartRight reloadData];
                 }
@@ -1061,8 +1118,9 @@ if([_isToday isEqualToString:@"yes"])
                     NSLog(@"success");
                     [self ShowAlterMsg:@"Training Load Updated Successfully"];
                    
-                    [self.view removeFromSuperview];
-                    [self.Delegate closeUpdateTrainingSource];
+                    //[self.view removeFromSuperview];
+                    //[self.Delegate closeUpdateTrainingSource];
+                    [appDel.frontNavigationController popViewControllerAnimated:YES];
                   
                 }
                 

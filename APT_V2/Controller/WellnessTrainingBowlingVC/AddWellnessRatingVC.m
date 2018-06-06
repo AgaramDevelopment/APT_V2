@@ -93,7 +93,52 @@ NSString *metaSubCode4;
     self.datelbl.text = actualDate;
     [self metacodeWebservice];
     [self DateWebservice];
+    [self customnavigationmethod];
    
+}
+
+-(void)customnavigationmethod
+{
+    CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    
+    //    [self.view addSubview:objCustomNavigation.view];
+    //    objCustomNavigation.tittle_lbl.text=@"";
+    
+    UIView* view= self.view.subviews.firstObject;
+    [self.navView addSubview:objCustomNavigation.view];
+    
+    BOOL isBackEnable = [[NSUserDefaults standardUserDefaults] boolForKey:@"BACK"];
+    isBackEnable = YES;
+    if (isBackEnable) {
+        objCustomNavigation.menu_btn.hidden =YES;
+        objCustomNavigation.btn_back.hidden =NO;
+        [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else
+    {
+        objCustomNavigation.menu_btn.hidden =NO;
+        objCustomNavigation.btn_back.hidden =YES;
+        [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    //    objCustomNavigation.btn_back.hidden =isBackEnable;
+    //
+    //    objCustomNavigation.menu_btn.hidden = objCustomNavigation.btn_back.isHidden;
+    //    [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack:) forControlEvents:UIControlEventTouchUpInside];
+    //
+    //    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+}
+-(void)actionBack
+{
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"BACK"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [appDel.frontNavigationController popViewControllerAnimated:YES];
 }
 
 - (void) touchesBegan: (NSSet *) touches withEvent: (UIEvent *) event {
@@ -200,14 +245,13 @@ NSString *metaSubCode4;
     //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"dd-MM-yyyy"];
     
-    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,self.view_datepicker.frame.origin.y-140,self.view.frame.size.width,100)];
+    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,0,self.view_datepicker.frame.size.width,100)];
     
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     [datePicker setLocale:locale];
     
     // [datePicker setDatePickerMode:UIDatePickerModeDateAndTime];
     datePicker.datePickerMode = UIDatePickerModeDate;
-    
     [datePicker reloadInputViews];
     [self.view_datepicker addSubview:datePicker];
     
@@ -453,10 +497,12 @@ NSString *metaSubCode4;
                 [self ShowAlterMsg:@"Wellness Rating Inserted Successfully"];
                 //objWell = [[WellnessTrainingBowlingVC alloc] init];
                 //objWell.topviewHeight.constant = 280;
-                [self.view removeFromSuperview];
-                [self.Delegate closeWellnessSource];
+                //[self.view removeFromSuperview];
+               // [self.Delegate closeWellnessSource];
                 
                 // [self.pieChartRight reloadData];
+                
+                [appDel.frontNavigationController popViewControllerAnimated:YES];
             }
             
         }
@@ -632,8 +678,9 @@ NSString *metaSubCode4;
             {
                 NSLog(@"success");
                 [self ShowAlterMsg:@"Wellness Rating Updated Successfully"];
-                [self.view removeFromSuperview];
-                [self.Delegate closeWellnessSource];
+                //[self.view removeFromSuperview];
+                //[self.Delegate closeWellnessSource];
+                [appDel.frontNavigationController popViewControllerAnimated:YES];
                 
             }
             

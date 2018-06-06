@@ -65,4 +65,6 @@
 
 @property (strong, nonatomic) IBOutlet UIView *tapView;
 
+@property (weak, nonatomic) IBOutlet UIView *navView;
+
 @end

@@ -25,6 +25,7 @@
 @property (nonatomic, strong) NSArray *searchResult;
 @property (strong, nonatomic) IBOutlet UITextField *search_Txt;
 
+
 @end
 
 @implementation HistoryVC
@@ -34,9 +35,15 @@
     
     self.listHistory = [[NSMutableArray alloc]init];
     self.listModule = [[NSMutableArray alloc]init];
+    
     [self Dropdownwebservice];
     
    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.searchViewWidth.constant = 0;
 }
 
 
@@ -238,6 +245,9 @@
                     self.listModule = [[NSMutableArray alloc]init];
                     self.listModule = [self checkNull:[responseObject valueForKey:@"lstAssessmentEntryModule"]];
                     //[self.tblHistory reloadData];
+                    //self.searchViewWidth.constant = 0;
+                    self.search_Txt.hidden =YES;
+                    self.searchBtn.hidden = NO;
                     [self HistoryWebservice];
                 }
                 
@@ -261,7 +271,8 @@
 -(IBAction)didClickModule:(id)sender
 {
     
-    
+    self.search_Txt.hidden = YES;
+    self.searchBtn.hidden = NO;
     
     DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
     dropVC.protocol = self;
@@ -453,6 +464,13 @@
     
     
     [textField resignFirstResponder];
+}
+
+
+- (IBAction)SearchBtnAction:(id)sender {
+    
+    self.search_Txt.hidden = NO;
+    self.searchBtn.hidden = YES;
 }
 
 

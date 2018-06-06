@@ -22,6 +22,9 @@
             <connections>
                 <outlet property="ModuleBtn" destination="fSD-QS-G7K" id="CHG-Xm-M0c"/>
                 <outlet property="moduleLbl" destination="sBg-0G-lW2" id="S6i-Du-IPZ"/>
+                <outlet property="moduleViewWidth" destination="V8z-GS-eYV" id="vEA-eF-8Z2"/>
+                <outlet property="searchBtn" destination="tML-5p-Flg" id="4m2-2q-g4h"/>
+                <outlet property="searchViewWidth" destination="KHR-3I-B0i" id="gtZ-Z5-p8A"/>
                 <outlet property="search_Txt" destination="VVI-6J-NHq" id="HzJ-dC-GPF"/>
                 <outlet property="tblHistory" destination="b4S-v4-K1j" id="3zX-Py-ikN"/>
                 <outlet property="v1" destination="QsR-TH-Yox" id="SKN-y8-Y80"/>
@@ -40,14 +43,14 @@
                             <rect key="frame" x="253.5" y="10" width="111.5" height="30"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DropdownWhite" translatesAutoresizingMaskIntoConstraints="NO" id="qym-qn-yXg">
-                                    <rect key="frame" x="77.5" y="3" width="25" height="25"/>
+                                    <rect key="frame" x="87.5" y="8" width="15" height="15"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="25" id="89b-rV-civ"/>
-                                        <constraint firstAttribute="width" constant="25" id="Iwp-yJ-q2a"/>
+                                        <constraint firstAttribute="height" constant="15" id="89b-rV-civ"/>
+                                        <constraint firstAttribute="width" constant="15" id="Iwp-yJ-q2a"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBg-0G-lW2">
-                                    <rect key="frame" x="1" y="0.0" width="75.5" height="30"/>
+                                    <rect key="frame" x="1" y="0.0" width="85.5" height="30"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -99,6 +102,17 @@
                                 <outlet property="delegate" destination="-1" id="FEr-DY-38t"/>
                             </connections>
                         </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tML-5p-Flg">
+                            <rect key="frame" x="213.5" y="10" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="0fF-sP-RAG"/>
+                                <constraint firstAttribute="width" constant="30" id="EqQ-jo-RXe"/>
+                            </constraints>
+                            <state key="normal" image="ico_search"/>
+                            <connections>
+                                <action selector="SearchBtnAction:" destination="-1" eventType="touchUpInside" id="ahj-zw-vKq"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -107,9 +121,11 @@
                         <constraint firstItem="VVI-6J-NHq" firstAttribute="leading" secondItem="T2V-HC-Vsf" secondAttribute="trailing" constant="10" id="FQX-gd-cuj"/>
                         <constraint firstAttribute="trailing" secondItem="QsR-TH-Yox" secondAttribute="trailing" constant="10" id="HXn-c3-uV0"/>
                         <constraint firstItem="VVI-6J-NHq" firstAttribute="width" secondItem="T2V-HC-Vsf" secondAttribute="width" id="KHR-3I-B0i"/>
+                        <constraint firstItem="QsR-TH-Yox" firstAttribute="leading" secondItem="tML-5p-Flg" secondAttribute="trailing" constant="10" id="MzA-9J-eSw"/>
                         <constraint firstAttribute="height" constant="50" id="OJe-cz-wgI"/>
                         <constraint firstItem="QsR-TH-Yox" firstAttribute="width" secondItem="T2V-HC-Vsf" secondAttribute="width" id="V8z-GS-eYV"/>
                         <constraint firstItem="T2V-HC-Vsf" firstAttribute="leading" secondItem="xAW-k1-EKM" secondAttribute="leading" constant="10" id="Zy6-qG-8oc"/>
+                        <constraint firstItem="tML-5p-Flg" firstAttribute="top" secondItem="xAW-k1-EKM" secondAttribute="top" constant="10" id="fI1-dE-mIW"/>
                         <constraint firstItem="QsR-TH-Yox" firstAttribute="top" secondItem="xAW-k1-EKM" secondAttribute="top" constant="10" id="hwc-JZ-nk3"/>
                         <constraint firstItem="VVI-6J-NHq" firstAttribute="top" secondItem="xAW-k1-EKM" secondAttribute="top" constant="10" id="yjn-BG-8w2"/>
                     </constraints>
@@ -139,5 +155,6 @@
     </objects>
     <resources>
         <image name="DropdownWhite" width="32" height="32"/>
+        <image name="ico_search" width="23" height="23"/>
     </resources>
 </document>

@@ -31,4 +31,8 @@
 @property(strong, nonatomic) IBOutlet NSString *mealTypeTF;
 @property(strong, nonatomic) IBOutlet NSString *locationTF;
 @property (nonatomic, strong) NSArray *searchResult;
+@property(strong, nonatomic) IBOutlet NSString *foodDiaryType;
+@property(strong, nonatomic) IBOutlet NSMutableArray *foodDiaryArray;
+@property(strong, nonatomic) IBOutlet NSIndexPath *selectedIndexPath;
+
 @end

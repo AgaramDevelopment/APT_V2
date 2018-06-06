@@ -90,8 +90,6 @@
     self.timeTF.inputAccessoryView = toolbar;
     
     mealCodeArray = [NSMutableArray new];
-        //Fetch Service Call
-    [self foodDiaryFetchDetailsPostMethodWebService];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -99,6 +97,9 @@
     SWRevealViewController *revealController = [self revealViewController];
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
+    
+        //Fetch Service Call
+    [self foodDiaryFetchDetailsPostMethodWebService];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -177,6 +178,7 @@
 //     [appDel.frontNavigationController pushViewController:objresult animated:YES];
     
     FoodDiaryUpdateVC *objresult = [FoodDiaryUpdateVC new];
+    objresult.foodDiaryType = @"Save";
     [self.navigationController pushViewController:objresult animated:YES];
 }
 
@@ -617,6 +619,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
     [self.saveOrUpdateBtn setTitle:@"Update" forState:UIControlStateNormal];
     selectedDate = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"DATE"];
     self.dateTF.text = selectedDate;
@@ -628,16 +631,6 @@
     NSMutableArray *foodArray = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"FOODLIST"];
     FOODDIARYSSSSS = [NSMutableArray new];
     emptyFoodArray = [NSMutableArray new];
-    /*
-    for (id key in foodListArray) {
-        NSMutableDictionary *foodDescriptionDict = [NSMutableDictionary new];
-        [foodDescriptionDict setObject:[key valueForKey:@"FOOD"] forKey:@"FOOD"];
-        //        [foodDescriptionDict setObject:[[key objectAtIndex:indexPath.row] valueForKey:@"FOOD"] forKey:@"FOOD"];
-        [foodDescriptionDict setObject:[key valueForKey:@"FOODQUANTITY"] forKey:@"FOODQUANTITY"];
-        [foodDescriptionArray addObject:foodDescriptionDict];
-    }
-    */
-    
     
     if (foodArray.count) {
         for (id key in foodArray) {
@@ -672,6 +665,12 @@
         [self setBorderForLocation:locationCode+1];
         [self.foodTableView reloadData];
     });
+    */
+    FoodDiaryUpdateVC *objresult = [FoodDiaryUpdateVC new];
+    objresult.foodDiaryType = @"Update";
+    objresult.selectedIndexPath = indexPath;
+    objresult.foodDiaryArray = foodDiaryArray;
+    [self.navigationController pushViewController:objresult animated:YES];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -866,6 +865,7 @@
             
             NSLog(@"Count:%ld", foodDiaryArray.count);
             [self setClearBorderForMealTypeAndLocation];
+            [self.navigationController popViewControllerAnimated:YES];
         }
         
         [AppCommon hideLoading];
@@ -1271,12 +1271,13 @@
         [self.foodTableView reloadData];
         [self.foodDiaryCollectionView reloadData];
     });
-    
+    /*
     NSArray *arr = @[self.breakfastBtn,self.snacksBtn,self.lunchBtn,self.dinnerBtn,self.supplementsBtn, self.teamBtn,self.restaurantBtn,self.homeBtn,self.otherBtn];
     for (UIButton *btn in arr) {
         btn.layer.borderWidth = 0.0f;
         btn.layer.borderColor = [UIColor blackColor].CGColor;
     }
+    */
 }
 
 - (void)setClearForFoodDiaryDetails {

@@ -17,7 +17,6 @@
     BOOL isDate;
     BOOL isTime;
     NSComparisonResult result;
-    NSMutableArray *foodDiaryArray;
     NSMutableArray *foodDiaryDateArray;
     NSMutableArray *foodDescriptionArray;
     NSMutableArray *foodDiaryCodeArray;
@@ -36,6 +35,7 @@
 @end
 
 @implementation FoodDiaryUpdateVC
+@synthesize foodDiaryType, selectedIndexPath, foodDiaryArray;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -45,7 +45,6 @@
     emptyFoodArray = [NSMutableArray new];
         //MSC412    Supplements
         //    self.saveOrUpdateBtn.hidden = NO;
-    [self.saveOrUpdateBtn setTitle:@"Save" forState:UIControlStateNormal];
     foodDescriptionArray = [[NSMutableArray alloc] init];
     foodArray = [NSMutableArray new];
     foodDiaryCodeArray = [[NSMutableArray alloc] initWithObjects:@"MSC342", @"MSC343", @"MSC344", @"MSC345", @"MSC412", nil];
@@ -79,27 +78,83 @@
     
     mealCodeArray = [NSMutableArray new];
         //Fetch Service Call
-    [self foodDiaryFetchDetailsPostMethodWebService];
+//    [self foodDiaryFetchDetailsPostMethodWebService];
+    
+    [self insertOrUpdateFoodDiaryMethod];
+}
+
+- (void)insertOrUpdateFoodDiaryMethod {
+    
+    if ([foodDiaryType isEqualToString:@"Save"]) {
+        [self setClearBorderForMealTypeAndLocation];
+    } else {
+        [self.saveOrUpdateBtn setTitle:@"Update" forState:UIControlStateNormal];
+        selectedDate = [[foodDiaryArray objectAtIndex:selectedIndexPath.row] valueForKey:@"DATE"];
+        self.dateTF.text = selectedDate;
+        self.timeTF.text = [[foodDiaryArray objectAtIndex:selectedIndexPath.row] valueForKey:@"STARTTIME"];
+        foodDiaryCode = [[foodDiaryArray objectAtIndex:selectedIndexPath.row] valueForKey:@"FOODDIARYCODE"];
+        
+        
+        
+        NSMutableArray *foodArray = [[foodDiaryArray objectAtIndex:selectedIndexPath.row] valueForKey:@"FOODLIST"];
+        FOODDIARYSSSSS = [NSMutableArray new];
+        emptyFoodArray = [NSMutableArray new];
+        
+        if (foodArray.count) {
+            for (id key in foodArray) {
+                
+                NSMutableDictionary *mealLocationDict = [NSMutableDictionary new];
+                
+                [mealLocationDict setObject:[[foodDiaryArray objectAtIndex:selectedIndexPath.row] valueForKey:@"DATE"] forKey:@"DATE"];
+                [mealLocationDict setObject:[[foodDiaryArray objectAtIndex:selectedIndexPath.row] valueForKey:@"STARTTIME"] forKey:@"STARTTIME"];
+                [mealLocationDict setObject:[[foodDiaryArray objectAtIndex:selectedIndexPath.row] valueForKey:@"FOODDIARYCODE"] forKey:@"FOODDIARYCODE"];
+                [mealLocationDict setObject:[[foodDiaryArray objectAtIndex:selectedIndexPath.row] valueForKey:@"MEALCODE"] forKey:@"MEALCODE"];
+                [mealLocationDict setObject:[[foodDiaryArray objectAtIndex:selectedIndexPath.row] valueForKey:@"LOCATION"] forKey:@"LOCATION"];
+                
+                
+                NSMutableDictionary *foodDescriptionDict = [NSMutableDictionary new];
+                [foodDescriptionDict setObject:[key valueForKey:@"FOOD"] forKey:@"FOOD"];
+                [foodDescriptionDict setObject:[key valueForKey:@"FOODQUANTITY"] forKey:@"FOODQUANTITY"];
+                
+                NSMutableArray *arrayy = [NSMutableArray new];
+                [arrayy addObject:foodDescriptionDict];
+                [mealLocationDict setObject:arrayy forKey:@"FOODLIST"];
+                
+                [FOODDIARYSSSSS addObject:mealLocationDict];
+                
+            }
+        }
+        
+        
+        int mealCode = (int)[foodDiaryCodeArray indexOfObject:[[foodDiaryArray objectAtIndex:selectedIndexPath.row] valueForKey:@"MEALCODE"]];
+        int locationCode = (int)[locationCodeArray indexOfObject:[[foodDiaryArray objectAtIndex:selectedIndexPath.row] valueForKey:@"LOCATION"]];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self setBorderForMealType:mealCode+1];
+            [self setBorderForLocation:locationCode+1];
+            [self.foodTableView reloadData];
+        });
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+/*
 -(void)viewWillAppear:(BOOL)animated
 {
     SWRevealViewController *revealController = [self revealViewController];
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
 }
-
+*/
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
     [self customnavigationmethod];
 }
-
+/*
 -(void)customnavigationmethod
 {
     CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
@@ -119,6 +174,46 @@
         //        [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
     [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
         //        [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+}
+*/
+
+-(void)customnavigationmethod
+{
+    CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    
+    
+    UIView* view= self.view.subviews.firstObject;
+    [view addSubview:objCustomNavigation.view];
+    
+    BOOL isBackEnable = [[NSUserDefaults standardUserDefaults] boolForKey:@"BACK"];
+    
+    isBackEnable = YES;
+    if (isBackEnable) {
+        objCustomNavigation.menu_btn.hidden =YES;
+        objCustomNavigation.btn_back.hidden =NO;
+        
+        [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
+            //[objCustomNavigation.btn_back addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    else
+        {
+        objCustomNavigation.menu_btn.hidden =NO;
+        objCustomNavigation.btn_back.hidden =YES;
+        [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+        }
+    [self.navi_View addSubview:objCustomNavigation.view];
+        //    objCustomNavigation.tittle_lbl.text=@"";
+    
+}
+
+-(IBAction)didClickBackBtn:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void) doneButtonAction {
@@ -882,7 +977,8 @@
         if ([[responseObject valueForKey:@"STATUS"] integerValue] == 1) {
             
             [self altermsg:[responseObject valueForKey:@"MESSAGE"]];
-            [self foodDiaryFetchDetailsPostMethodWebService];
+//            [self foodDiaryFetchDetailsPostMethodWebService];
+            [self.navigationController popViewControllerAnimated:YES];
         }
         
         [AppCommon hideLoading];
@@ -945,7 +1041,8 @@
                 }
             } else {
                 [self altermsg:[responseObject valueForKey:@"MESSAGE"]];
-                [self foodDiaryFetchDetailsPostMethodWebService];
+//                [self foodDiaryFetchDetailsPostMethodWebService];
+                [self.navigationController popViewControllerAnimated:YES];
             }
         }
         
@@ -1015,7 +1112,8 @@
                     //                }
             } else {
                 [self altermsg:[responseObject valueForKey:@"MESSAGE"]];
-                [self foodDiaryFetchDetailsPostMethodWebService];
+//                [self foodDiaryFetchDetailsPostMethodWebService];
+                [self.navigationController popViewControllerAnimated:YES];
             }
         }
         [AppCommon hideLoading];
@@ -1067,7 +1165,8 @@
         
         if ([[responseObject valueForKey:@"STATUS"] integerValue] == 1) {
             [self altermsg:[responseObject valueForKey:@"MESSAGE"]];
-            [self foodDiaryFetchDetailsPostMethodWebService];
+//            [self foodDiaryFetchDetailsPostMethodWebService];
+            [self.navigationController popViewControllerAnimated:YES];
         }
         [AppCommon hideLoading];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Regular.otf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" userLabel="sectionTitle cell" customClass="LandingTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rBc-5L-Oju">
+                        <rect key="frame" x="5" y="5" width="310" height="38.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Jo-oE-SEJ">
+                                <rect key="frame" x="5" y="0.0" width="255" height="38.5"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N9L-kc-A8M">
+                                <rect key="frame" x="260" y="0.0" width="50" height="38.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="7Lb-a7-jFC"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="3Jo-oE-SEJ" firstAttribute="top" secondItem="rBc-5L-Oju" secondAttribute="top" id="Afe-2V-sYj"/>
+                            <constraint firstAttribute="bottom" secondItem="3Jo-oE-SEJ" secondAttribute="bottom" id="WgL-le-w0a"/>
+                            <constraint firstAttribute="bottom" secondItem="N9L-kc-A8M" secondAttribute="bottom" id="dWg-J6-GTb"/>
+                            <constraint firstItem="N9L-kc-A8M" firstAttribute="leading" secondItem="3Jo-oE-SEJ" secondAttribute="trailing" id="j8s-vP-yC6"/>
+                            <constraint firstItem="N9L-kc-A8M" firstAttribute="top" secondItem="rBc-5L-Oju" secondAttribute="top" id="oMv-GF-6lo"/>
+                            <constraint firstAttribute="trailing" secondItem="N9L-kc-A8M" secondAttribute="trailing" id="rFq-Uh-yYX"/>
+                            <constraint firstItem="3Jo-oE-SEJ" firstAttribute="leading" secondItem="rBc-5L-Oju" secondAttribute="leading" constant="5" id="rSr-qx-jNv"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="rBc-5L-Oju" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="5By-xf-esb"/>
+                    <constraint firstItem="rBc-5L-Oju" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="uHe-9c-5uI"/>
+                    <constraint firstAttribute="trailing" secondItem="rBc-5L-Oju" secondAttribute="trailing" constant="5" id="xjj-1n-ZN8"/>
+                    <constraint firstAttribute="bottom" secondItem="rBc-5L-Oju" secondAttribute="bottom" id="zuo-Y0-N5O"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="btnSectionHead" destination="N9L-kc-A8M" id="bum-9R-Ymj"/>
+                <outlet property="lblSectionTitle" destination="3Jo-oE-SEJ" id="4zg-l3-PAK"/>
+            </connections>
+            <point key="canvasLocation" x="-141" y="-59"/>
+        </tableViewCell>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LandingTableViewCell" rowHeight="200" id="frm-rg-qgh" userLabel="Collectionview cell" customClass="LandingTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="frm-rg-qgh" id="35M-uI-XFH">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="199.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uhm-Si-Mbj">
+                        <rect key="frame" x="5" y="5" width="310" height="189.5"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Bcz-kZ-TdB">
+                                <rect key="frame" x="0.0" y="0.0" width="310" height="189.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="do8-tM-8dY">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <connections>
+                                    <outlet property="dataSource" destination="-1" id="SI3-OX-SI1"/>
+                                    <outlet property="delegate" destination="-1" id="cBF-6r-0vM"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Bcz-kZ-TdB" secondAttribute="trailing" id="bMZ-L4-54m"/>
+                            <constraint firstItem="Bcz-kZ-TdB" firstAttribute="top" secondItem="uhm-Si-Mbj" secondAttribute="top" id="diK-KC-ril"/>
+                            <constraint firstItem="Bcz-kZ-TdB" firstAttribute="leading" secondItem="uhm-Si-Mbj" secondAttribute="leading" id="jxP-Xj-gy1"/>
+                            <constraint firstAttribute="bottom" secondItem="Bcz-kZ-TdB" secondAttribute="bottom" id="vtR-RR-Qtn"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="uhm-Si-Mbj" firstAttribute="leading" secondItem="35M-uI-XFH" secondAttribute="leading" constant="5" id="Hgi-Xl-NzH"/>
+                    <constraint firstAttribute="bottom" secondItem="uhm-Si-Mbj" secondAttribute="bottom" constant="5" id="WvF-v9-3iT"/>
+                    <constraint firstAttribute="trailing" secondItem="uhm-Si-Mbj" secondAttribute="trailing" constant="5" id="XQr-BL-zM1"/>
+                    <constraint firstItem="uhm-Si-Mbj" firstAttribute="top" secondItem="35M-uI-XFH" secondAttribute="top" constant="5" id="c6K-ce-oRG"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <connections>
+                <outlet property="collection" destination="Bcz-kZ-TdB" id="sQz-9H-yxE"/>
+                <outlet property="customView" destination="uhm-Si-Mbj" id="iGV-fd-6c5"/>
+            </connections>
+            <point key="canvasLocation" x="-141" y="105"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -18,5 +18,8 @@
 
 @property (nonatomic,strong) IBOutlet UIView * v1;
 @property (strong, nonatomic) IBOutlet UILabel *moduleLbl;
+@property (strong, nonatomic) IBOutlet UIButton *searchBtn;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *searchViewWidth;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *moduleViewWidth;
 
 @end

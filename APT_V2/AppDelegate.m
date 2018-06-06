@@ -16,7 +16,7 @@
 #import "BPXLUUIDHandler.h"
 #import "DocumentViewController.h"
 #import "PlannerAddEvent.h"
-#import "TeamsReportsHistoryVC.h"
+#import "LandingViewController.h"
 
 @interface AppDelegate ()<SharedNotificationDelegate>
 {
@@ -69,15 +69,17 @@
     UIViewController *frontViewController;
     [COMMON getIPLteams];
     
-//    NSString *rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"RoleCode"];
-//    NSString *plyRolecode = @"ROL0000002";
     
-    if(![AppCommon isCoach])
-    {
-        frontViewController = (isLogin ? [TabHomeVC new] : [LoginVC new] );
-    } else {
-        frontViewController = (isLogin ? [TeamsVC new] : [LoginVC new] );
-    }
+//    frontViewController = (LandingViewController *)[storyBoard instantiateViewControllerWithIdentifier:@"LandingViewController"];
+    
+    frontViewController = isLogin ? [LandingViewController new] : [LoginVC new];
+    
+//    if(![AppCommon isCoach])
+//    {
+//        frontViewController = (isLogin ? [TabHomeVC new] : [LoginVC new] );
+//    } else {
+//        frontViewController = (isLogin ? [TeamsVC new] : [LoginVC new] );
+//    }
     
     [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"BACK"];
     [[NSUserDefaults standardUserDefaults] synchronize];

@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UICollectionView *collection;
 @property (weak, nonatomic) IBOutlet UIView *customView;
 @property (weak, nonatomic) IBOutlet UILabel *lblNoData;
+@property (weak, nonatomic) IBOutlet UIImageView *imgSectionHead;
 
 @property (strong, nonnull) NSMutableDictionary* collectionArray;
 

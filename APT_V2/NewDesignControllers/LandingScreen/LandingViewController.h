@@ -15,6 +15,12 @@
 @property (weak, nonatomic) IBOutlet UIView *BowlingUIView;
 @property (weak, nonatomic) IBOutlet UIView *WellnessUIView;
 @property (strong, nonatomic) IBOutlet UIView *FoodDiaryUIView;
+@property (weak, nonatomic) IBOutlet UIView *ResultsUIView;
+@property (weak, nonatomic) IBOutlet UIView *VideosUIView;
+@property (strong, nonatomic) IBOutlet UIView *DocumentsUIView;
+@property (weak, nonatomic) IBOutlet UIView *EventsUIView;
+@property (weak, nonatomic) IBOutlet UIView *FixturesUIView;
+@property (strong, nonatomic) IBOutlet UIView *TeamsUIView;
 
 
 @property (strong, nonatomic) IBOutlet UIButton *BowlingMonthlyBtn;
@@ -40,6 +46,12 @@
 
 //Food Diary Properties
 @property (strong, nonatomic) IBOutlet UICollectionView *foodDiaryCollectionView;
+@property (strong, nonatomic) IBOutlet UICollectionView *ResultsCollectionView;
+@property (strong, nonatomic) IBOutlet UICollectionView *VideosCollectionView;
+@property (strong, nonatomic) IBOutlet UICollectionView *DocumentsCollectionView;
+@property (strong, nonatomic) IBOutlet UICollectionView *EventsCollectionView;
+@property (strong, nonatomic) IBOutlet UICollectionView *FixturesCollectionView;
+@property (strong, nonatomic) IBOutlet UICollectionView *TeamsCollectionView;
 @property (strong, nonatomic) IBOutlet UIButton *addBtn;
 @property (strong, nonatomic) IBOutlet UILabel *lblNoData;
 

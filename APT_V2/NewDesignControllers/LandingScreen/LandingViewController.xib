@@ -24,13 +24,25 @@
                 <outlet property="BowlingMonthlyBtn" destination="2s7-vZ-vxV" id="uXe-B1-Bfi"/>
                 <outlet property="BowlingUIView" destination="gJJ-Wg-ErX" id="FbL-g2-Nwa"/>
                 <outlet property="BowlingWeeklyBtn" destination="PD4-cV-ZU0" id="fQC-CQ-Ck3"/>
+                <outlet property="DocumentsCollectionView" destination="gnD-br-qGh" id="eu7-ET-Dzh"/>
+                <outlet property="DocumentsUIView" destination="fJv-NC-AGs" id="T75-ew-LTD"/>
+                <outlet property="EventsCollectionView" destination="UQQ-fN-cQo" id="Pdw-fq-y0m"/>
+                <outlet property="EventsUIView" destination="7iL-MD-1wn" id="988-Qz-9g2"/>
                 <outlet property="FatiqueColorView" destination="FrI-Bs-KCc" id="d4P-F6-kma"/>
+                <outlet property="FixturesCollectionView" destination="aZy-FI-ABL" id="u2z-Pq-Xtz"/>
+                <outlet property="FixturesUIView" destination="ZWG-bq-cg3" id="aH0-xv-SJi"/>
                 <outlet property="FoodDiaryUIView" destination="OaZ-af-OQw" id="fkj-Vg-0oH"/>
                 <outlet property="LandingTable" destination="nyX-eu-mq3" id="9Yd-Rp-0vg"/>
                 <outlet property="MuscleColorView" destination="z7J-nL-4Ro" id="VWH-EH-SNi"/>
                 <outlet property="NoDataView" destination="h0P-CK-VkB" id="qqq-g1-ns0"/>
+                <outlet property="ResultsCollectionView" destination="0Qr-bK-liz" id="Rwj-W7-1I3"/>
+                <outlet property="ResultsUIView" destination="N9c-zs-orp" id="o4s-2r-2ak"/>
                 <outlet property="SleepColorView" destination="XQ2-iH-0H7" id="dsh-7k-Lew"/>
                 <outlet property="StressColorView" destination="qMf-wS-m31" id="FfU-dq-5Mx"/>
+                <outlet property="TeamsCollectionView" destination="ZxM-or-LQn" id="ihO-lw-Syy"/>
+                <outlet property="TeamsUIView" destination="5P9-nV-Xb1" id="0bQ-bG-Ubu"/>
+                <outlet property="VideosCollectionView" destination="djc-hm-m1m" id="UO5-Ya-DEL"/>
+                <outlet property="VideosUIView" destination="rrH-BX-0yl" id="zLF-Jw-F3h"/>
                 <outlet property="WellnessUIView" destination="qo1-he-Rxc" id="N5g-K7-ek7"/>
                 <outlet property="addBtn" destination="PDQ-8c-m4m" id="FTU-mM-WXW"/>
                 <outlet property="bodyWeightlbl" destination="bc1-fa-SYw" id="gxx-8j-LDN"/>
@@ -709,7 +721,187 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vPz-RH-vI9"/>
-            <point key="canvasLocation" x="634" y="360"/>
+            <point key="canvasLocation" x="614" y="334"/>
+        </view>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="N9c-zs-orp">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="0Qr-bK-liz">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="8" minimumInteritemSpacing="8" id="sOD-ZM-0OZ">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="8"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Vf5-Af-TDp"/>
+                        <outlet property="delegate" destination="-1" id="TSv-ss-lWD"/>
+                    </connections>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="0Qr-bK-liz" firstAttribute="bottom" secondItem="Zrt-P2-faD" secondAttribute="bottom" id="74D-iC-Ex9"/>
+                <constraint firstItem="0Qr-bK-liz" firstAttribute="top" secondItem="Zrt-P2-faD" secondAttribute="top" id="AQh-si-kYX"/>
+                <constraint firstItem="Zrt-P2-faD" firstAttribute="trailing" secondItem="0Qr-bK-liz" secondAttribute="trailing" id="bl3-ha-tBj"/>
+                <constraint firstItem="0Qr-bK-liz" firstAttribute="leading" secondItem="Zrt-P2-faD" secondAttribute="leading" id="znU-Aa-QJ7"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Zrt-P2-faD"/>
+            <point key="canvasLocation" x="634" y="585"/>
+        </view>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="rrH-BX-0yl">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="djc-hm-m1m">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="8" minimumInteritemSpacing="8" id="Kxe-dB-fFZ">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="8"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="RUP-R1-tVY"/>
+                        <outlet property="delegate" destination="-1" id="nCG-EC-AtT"/>
+                    </connections>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="djc-hm-m1m" firstAttribute="top" secondItem="bw2-rT-ajm" secondAttribute="top" id="7eD-i1-7BZ"/>
+                <constraint firstItem="djc-hm-m1m" firstAttribute="bottom" secondItem="bw2-rT-ajm" secondAttribute="bottom" id="8mH-RM-gNX"/>
+                <constraint firstItem="bw2-rT-ajm" firstAttribute="trailing" secondItem="djc-hm-m1m" secondAttribute="trailing" id="AKd-ad-aoS"/>
+                <constraint firstItem="djc-hm-m1m" firstAttribute="leading" secondItem="bw2-rT-ajm" secondAttribute="leading" id="VfL-ln-Psq"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="bw2-rT-ajm"/>
+            <point key="canvasLocation" x="634" y="585"/>
+        </view>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="fJv-NC-AGs">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="gnD-br-qGh">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="8" minimumInteritemSpacing="8" id="DDy-lR-Zsx">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="8"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="5SW-SW-VbJ"/>
+                        <outlet property="delegate" destination="-1" id="NWP-Wr-cFi"/>
+                    </connections>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="gnD-br-qGh" firstAttribute="bottom" secondItem="oMN-xO-LpM" secondAttribute="bottom" id="FzK-AZ-pJt"/>
+                <constraint firstItem="oMN-xO-LpM" firstAttribute="trailing" secondItem="gnD-br-qGh" secondAttribute="trailing" id="Qwp-mZ-N0U"/>
+                <constraint firstItem="gnD-br-qGh" firstAttribute="leading" secondItem="oMN-xO-LpM" secondAttribute="leading" id="nQ5-zN-4Tf"/>
+                <constraint firstItem="gnD-br-qGh" firstAttribute="top" secondItem="oMN-xO-LpM" secondAttribute="top" id="zOv-U7-kDz"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="oMN-xO-LpM"/>
+            <point key="canvasLocation" x="634" y="585"/>
+        </view>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="7iL-MD-1wn">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="UQQ-fN-cQo">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="8" minimumInteritemSpacing="8" id="hHX-c0-VEE">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="8"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="lpy-3g-xUq"/>
+                        <outlet property="delegate" destination="-1" id="rC7-Z8-6Bd"/>
+                    </connections>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="UQQ-fN-cQo" firstAttribute="bottom" secondItem="zRh-iR-GQE" secondAttribute="bottom" id="FXd-7G-hL0"/>
+                <constraint firstItem="UQQ-fN-cQo" firstAttribute="leading" secondItem="zRh-iR-GQE" secondAttribute="leading" id="J04-di-TvJ"/>
+                <constraint firstItem="UQQ-fN-cQo" firstAttribute="top" secondItem="zRh-iR-GQE" secondAttribute="top" id="VBm-d0-nsF"/>
+                <constraint firstItem="zRh-iR-GQE" firstAttribute="trailing" secondItem="UQQ-fN-cQo" secondAttribute="trailing" id="wWe-Of-dhj"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="zRh-iR-GQE"/>
+            <point key="canvasLocation" x="614" y="798"/>
+        </view>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ZWG-bq-cg3">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="aZy-FI-ABL">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="8" minimumInteritemSpacing="8" id="D1d-mR-yto">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="8"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="WON-SU-AeZ"/>
+                        <outlet property="delegate" destination="-1" id="1S8-xl-Pej"/>
+                    </connections>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="rfa-5j-9a9" firstAttribute="trailing" secondItem="aZy-FI-ABL" secondAttribute="trailing" id="8yX-cN-MnG"/>
+                <constraint firstItem="aZy-FI-ABL" firstAttribute="top" secondItem="rfa-5j-9a9" secondAttribute="top" id="92m-Bz-L5h"/>
+                <constraint firstItem="aZy-FI-ABL" firstAttribute="leading" secondItem="rfa-5j-9a9" secondAttribute="leading" id="It3-Qu-55A"/>
+                <constraint firstItem="aZy-FI-ABL" firstAttribute="bottom" secondItem="rfa-5j-9a9" secondAttribute="bottom" id="Z68-F8-k2c"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="rfa-5j-9a9"/>
+            <point key="canvasLocation" x="269" y="521"/>
+        </view>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="5P9-nV-Xb1">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZxM-or-LQn">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="8" minimumInteritemSpacing="8" id="yT9-0n-yue">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="8"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="vNa-Kl-bGh"/>
+                        <outlet property="delegate" destination="-1" id="zns-8V-Z85"/>
+                    </connections>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="ZxM-or-LQn" firstAttribute="bottom" secondItem="eJx-Q3-aFR" secondAttribute="bottom" id="27d-IZ-yKL"/>
+                <constraint firstItem="ZxM-or-LQn" firstAttribute="leading" secondItem="eJx-Q3-aFR" secondAttribute="leading" id="L1L-Wb-Uwr"/>
+                <constraint firstItem="eJx-Q3-aFR" firstAttribute="trailing" secondItem="ZxM-or-LQn" secondAttribute="trailing" id="TNp-kX-ocg"/>
+                <constraint firstItem="ZxM-or-LQn" firstAttribute="top" secondItem="eJx-Q3-aFR" secondAttribute="top" id="p7H-pA-Gqz"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="eJx-Q3-aFR"/>
+            <point key="canvasLocation" x="196" y="719"/>
         </view>
     </objects>
     <resources>

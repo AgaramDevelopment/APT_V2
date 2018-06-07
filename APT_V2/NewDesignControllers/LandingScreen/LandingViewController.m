@@ -73,27 +73,63 @@ typedef enum : NSUInteger {
     //    [cell.collection registerNib:[UINib nibWithNibName:@"ScheduleCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     //    [cell.collection registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
     
+  //  [self.LandingTable registerNib:@"LandingTableViewCell" forCellReuseIdentifier:@"LandingTableViewCell"];
+    
     [self.foodDiaryCollectionView registerNib:[UINib nibWithNibName:@"FoodDiaryCell" bundle:nil] forCellWithReuseIdentifier:@"foodCell"];
+    
+    [self.ResultsCollectionView registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
+    
+    [self.VideosCollectionView registerNib:[UINib nibWithNibName:@"VideoGalleryUploadCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
+    
+    [self.DocumentsCollectionView registerNib:[UINib nibWithNibName:@"VideoGalleryUploadCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
+    
+    [self.EventsCollectionView registerNib:[UINib nibWithNibName:@"ScheduleCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
+    
+    [self.FixturesCollectionView registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
+    
+    [self.TeamsCollectionView registerNib:[UINib nibWithNibName:@"TeamCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"TeamCollectionViewCell"];
+    
+    
+
     
     WTB_object = [WellnessTrainingBowlingVC new];
     Training_object = [TrainingLoadVC new];
-    SectionNameArray = @[@{@"Title":@"Events"},
-                         @{@"Title":@"Teams"},
-                         @{@"Title":@"Fixtures"},
-                         @{@"Title":@"Results"},
-                         @{@"Title":@"Videos"},
-                         @{@"Title":@"Documents"}];
+//    SectionNameArray = @[@{@"Title":@"Events"},
+//                         @{@"Title":@"Teams"},
+//                         @{@"Title":@"Fixtures"},
+//                         @{@"Title":@"Results"},
+//                         @{@"Title":@"Videos"},
+//                         @{@"Title":@"Documents"}];
+//
+//
+//    NSArray* arr = @[@{@"Title":@"Events"},
+//                     @{@"Title":@"Wellness"},
+//                     @{@"Title":@"Training Load"},
+//                     @{@"Title":@"Food"},
+//                     @{@"Title":@"Bowling Graph"},
+//                     @{@"Title":@"Fixtures"},
+//                     @{@"Title":@"Results"},
+//                     @{@"Title":@"Videos"},
+//                     @{@"Title":@"Documents"}];
     
     
-    NSArray* arr = @[@{@"Title":@"Events"},
-                     @{@"Title":@"Wellness"},
-                     @{@"Title":@"Training Load"},
-                     @{@"Title":@"Food"},
-                     @{@"Title":@"Bowling Graph"},
-                     @{@"Title":@"Fixtures"},
-                     @{@"Title":@"Results"},
-                     @{@"Title":@"Videos"},
-                     @{@"Title":@"Documents"}];
+    SectionNameArray = @[@{@"Title":@"Events",@"image":@""},
+                         @{@"Title":@"Teams",@"image":@""},
+                         @{@"Title":@"Fixtures",@"image":@""},
+                         @{@"Title":@"Results",@"image":@"More_selected"},
+                         @{@"Title":@"Videos",@"image":@"More_selected"},
+                         @{@"Title":@"Documents",@"image":@"More_selected"}];
+    
+    
+    NSArray* arr = @[@{@"Title":@"Events",@"image":@"ico_calendar"},
+                           @{@"Title":@"Wellness",@"image":@"APT_Stats"},
+                           @{@"Title":@"Training Load",@"image":@"APT_Stats"},
+                           @{@"Title":@"Foods",@"image":@""},
+                           @{@"Title":@"Bowling Graph",@"image":@""},
+                           @{@"Title":@"Fixtures",@"image":@""},
+                           @{@"Title":@"Results",@"image":@"More_selected"},
+                           @{@"Title":@"Videos",@"image":@"More_selected"},
+                           @{@"Title":@"Documents",@"image":@"More_selected"}];
     
     
     
@@ -292,9 +328,38 @@ typedef enum : NSUInteger {
     }
     
     cell.lblSectionTitle.text = [[SectionNameArray objectAtIndex:section] valueForKey:@"Title"];
+    UIImage* image = [UIImage imageNamed:[[SectionNameArray objectAtIndex:section]valueForKey:@"image"]];
+    [cell.imgSectionHead setImage:image];
+//    [cell.btnSectionHead setImage:image forState:UIControlStateNormal];
+    cell.btnSectionHead.tag = section;
+    [cell.btnSectionHead addTarget:self action:@selector(HeaderBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    
     return cell;
     
 }
+
+-(void)HeaderBtnAction:(UIButton *)button{
+    
+    if(button.tag == 0){
+        
+    }
+    else if(button.tag == 1){
+        
+    }
+    else if(button.tag == 2){
+        
+    }
+    else if(button.tag == 3){
+        
+    }
+    else if(button.tag == 4){
+        
+    }
+    
+    
+    
+}
+
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section{
     
@@ -311,34 +376,34 @@ typedef enum : NSUInteger {
     return  IS_IPAD ? 250 : 150;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    LandingTableViewCell* Tablecell = (LandingTableViewCell *)cell;
-    NSString* title = [[SectionNameArray objectAtIndex:indexPath.section] valueForKey:@"Title"];
-    
-    if ([title isEqualToString:@"Events"]) {
-        [Tablecell configureCell:self andIndex:1 andTitile:title];
-    }
-    else if ([title isEqualToString:@"Teams"]) {
-        [Tablecell configureCell:self andIndex:2 andTitile:title];
-    }
-    else if ([title isEqualToString:@"Fixtures"]) {
-        [Tablecell configureCell:self andIndex:3 andTitile:title];
-    }
-    else if ([title isEqualToString:@"Results"]) {
-        [Tablecell configureCell:self andIndex:4 andTitile:title];
-    }
-//    else if ([title isEqualToString:@"Food"]) {
-//        [Tablecell configureCell:self andIndex:5 andTitile:title];
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+//
+//    LandingTableViewCell* Tablecell = (LandingTableViewCell *)cell;
+//    NSString* title = [[SectionNameArray objectAtIndex:indexPath.section] valueForKey:@"Title"];
+//
+//    if ([title isEqualToString:@"Events"]) {
+//        [Tablecell configureCell:self andIndex:1 andTitile:title];
 //    }
-    else if ([title isEqualToString:@"Videos"]) {
-        [Tablecell configureCell:self andIndex:6 andTitile:title];
-    }
-    else if ([title isEqualToString:@"Documents"]) {
-        [Tablecell configureCell:self andIndex:7 andTitile:title];
-    }
-    
-}
+//    else if ([title isEqualToString:@"Teams"]) {
+//        [Tablecell configureCell:self andIndex:2 andTitile:title];
+//    }
+//    else if ([title isEqualToString:@"Fixtures"]) {
+//        [Tablecell configureCell:self andIndex:3 andTitile:title];
+//    }
+//    else if ([title isEqualToString:@"Results"]) {
+//        [Tablecell configureCell:self andIndex:4 andTitile:title];
+//    }
+////    else if ([title isEqualToString:@"Food"]) {
+////        [Tablecell configureCell:self andIndex:5 andTitile:title];
+////    }
+//    else if ([title isEqualToString:@"Videos"]) {
+//        [Tablecell configureCell:self andIndex:6 andTitile:title];
+//    }
+//    else if ([title isEqualToString:@"Documents"]) {
+//        [Tablecell configureCell:self andIndex:7 andTitile:title];
+//    }
+//
+//}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -350,39 +415,40 @@ typedef enum : NSUInteger {
     if(cell == nil)
     {
         cell = array[1];
+        
     }
     
+//    for (UIView* temp in cell.customView.subviews) {
+//        [temp removeFromSuperview];
+//    }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSString* title = [[SectionNameArray objectAtIndex:indexPath.section] valueForKey:@"Title"];
     
     if ([title isEqualToString:@"Wellness"]){
-//        WTB_object = [[WellnessTrainingBowlingVC alloc] initWithNibName:@"WellnessTrainingBowlingVC" bundle:nil];
-//        WTB_object.view.frame = CGRectMake(0,0, cell.customView.bounds.size.width, 250);
-//        [cell.customView addSubview:WTB_object.topView];
-        
         self.WellnessUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
         
         [cell.customView addSubview:self.WellnessUIView];
         
         [cell.collection setHidden:YES];
-        //[cell.customView setBackgroundColor:[UIColor orangeColor]];
+        
     }
     else if ([title isEqualToString:@"Training Load"]){
-        //Training_object = [[TrainingLoadVC alloc] initWithNibName:@"TrainingLoadVC" bundle:nil];
+        
         Training_object.view.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
         [cell.customView addSubview:Training_object.view];
         [cell.collection setHidden:YES];
-        //[cell.customView setBackgroundColor:[UIColor orangeColor]];
+        
         
     }
     else if([title isEqualToString:@"Bowling Graph"])
     {
-        //WTB_object = [[WellnessTrainingBowlingVC alloc] initWithNibName:@"WellnessTrainingBowlingVC" bundle:nil];
+        
         self.BowlingUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
         
         [cell.customView addSubview:self.BowlingUIView];
         
         [cell.collection setHidden:YES];
-        //[cell.customView setBackgroundColor:[UIColor orangeColor]];
         
     }
     else if ([title isEqualToString:@"Food"]) {
@@ -392,11 +458,50 @@ typedef enum : NSUInteger {
         
         [cell.collection setHidden:YES];
     }
-    else
-    {
-        [cell.customView setBackgroundColor:[UIColor clearColor]];
-        [cell.collection setHidden:NO];
+    else if ([title isEqualToString:@"Events"]) {
+        self.EventsUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
+        
+        [cell.customView addSubview:self.EventsUIView];
+        [cell.collection setHidden:YES];
     }
+    else if ([title isEqualToString:@"Videos"]) {
+        self.VideosUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
+        
+        [cell.customView addSubview:self.VideosUIView];
+        [cell.collection setHidden:YES];
+    }
+    else if ([title isEqualToString:@"Documents"]) {
+        self.DocumentsUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
+        
+        [cell.customView addSubview:self.DocumentsUIView];
+        [cell.collection setHidden:YES];
+    }
+    else if ([title isEqualToString:@"Teams"]) {
+        self.TeamsUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
+        
+        [cell.customView addSubview:self.TeamsUIView];
+        [cell.collection setHidden:YES];
+    }
+    else if ([title isEqualToString:@"Fixtures"]) {
+        self.FixturesUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
+        
+        [cell.customView addSubview:self.FixturesUIView];
+        [cell.collection setHidden:YES];
+    }
+    else if ([title isEqualToString:@"Results"]) {
+        self.ResultsUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
+        
+        [cell.customView addSubview:self.ResultsUIView];
+        [cell.collection setHidden:YES];
+    }
+//    else
+//    {
+//        [cell.customView removeFromSuperview];
+//        [cell.customView setBackgroundColor:[UIColor clearColor]];
+//        [cell.collection setHidden:NO];
+//    }
+    
+
     
     return cell;
 }
@@ -453,31 +558,52 @@ typedef enum : NSUInteger {
     NSLog(@"collectionView.tag %ld",(long)collectionView.tag);
     
     
-    if (collectionView.tag == 1) {
-        return  [[TableListDict valueForKey:@"Events"] count];
-    }
-    else if (collectionView.tag == 2){
-        return [[TableListDict valueForKey:@"Teams"] count];
-    }
-    else if (collectionView.tag == 3){
-        return  [[TableListDict valueForKey:@"Fixtures"] count];
-    }
-    else if (collectionView.tag == 4){
-        return  [[TableListDict valueForKey:@"Results"] count];
-    }
-//    else if (collectionView.tag == 5){
-//        return  [[TableListDict valueForKey:@"Food"] count];
+//    if (collectionView.tag == 1) {
+//        return  [[TableListDict valueForKey:@"Events"] count];
 //    }
-    else if (collectionView.tag == 6){
-        return  [[TableListDict valueForKey:@"Videos"] count];
-    }
-    else if (collectionView.tag == 7){
-        return  [[TableListDict valueForKey:@"Documents"] count];
-    }
+//    else if (collectionView.tag == 2){
+//        return [[TableListDict valueForKey:@"Teams"] count];
+//    }
+//    else if (collectionView.tag == 3){
+//        return  [[TableListDict valueForKey:@"Fixtures"] count];
+//    }
+//    else if (collectionView.tag == 4){
+//        return  [[TableListDict valueForKey:@"Results"] count];
+//    }
+////    else if (collectionView.tag == 5){
+////        return  [[TableListDict valueForKey:@"Food"] count];
+////    }
+//    else if (collectionView.tag == 6){
+//        return  [[TableListDict valueForKey:@"Videos"] count];
+//    }
+//    else if (collectionView.tag == 7){
+//        return  [[TableListDict valueForKey:@"Documents"] count];
+//    }
     
     if (collectionView == self.foodDiaryCollectionView) {
         [self.lblNoData setHidden:foodDiaryArray.count];
         return foodDiaryArray.count;
+    }
+    else if (collectionView == self.EventsCollectionView) {
+        return  [[TableListDict valueForKey:@"Events"] count];
+    }
+    else if (collectionView == self.TeamsCollectionView){
+        return [[TableListDict valueForKey:@"Teams"] count];
+    }
+    else if (collectionView == self.FixturesCollectionView){
+        return  [[TableListDict valueForKey:@"Fixtures"] count];
+    }
+    else if (collectionView == self.ResultsCollectionView){
+        return  [[TableListDict valueForKey:@"Results"] count];
+    }
+    //    else if (collectionView.tag == 5){
+    //        return  [[TableListDict valueForKey:@"Food"] count];
+    //    }
+    else if (collectionView == self.VideosCollectionView){
+        return  [[TableListDict valueForKey:@"Videos"] count];
+    }
+    else if (collectionView == self.DocumentsCollectionView){
+        return  [[TableListDict valueForKey:@"Documents"] count];
     }
     
     return 0;
@@ -485,7 +611,7 @@ typedef enum : NSUInteger {
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (collectionView.tag == 1) { // Events
+    if (collectionView == self.EventsCollectionView) { // Events
         
         ScheduleCell* cell = (ScheduleCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
         //        cell.eventNamelbl.text = @"ScheduleCell";
@@ -494,7 +620,7 @@ typedef enum : NSUInteger {
         
         return  cell;
     }
-    else if (collectionView.tag == 2){ // Teams
+    else if (collectionView == self.TeamsCollectionView){ // Teams
         
         TeamCollectionViewCell* cell = (TeamCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"TeamCollectionViewCell" forIndexPath:indexPath];
         //        cell.lblTeamName.text = @"TeamsCell";
@@ -509,7 +635,7 @@ typedef enum : NSUInteger {
         return cell;
         
     }
-    else if (collectionView.tag == 3){ // Fixtures
+    else if (collectionView == self.FixturesCollectionView){ // Fixtures
         
         ResultCell* cell = (ResultCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellno" forIndexPath:indexPath];
         cell.resultlbl.text = @"FixturesCell";
@@ -542,7 +668,7 @@ typedef enum : NSUInteger {
         
         return cell;
     }
-    else if (collectionView.tag == 4){ // Results
+    else if (collectionView == self.ResultsCollectionView){ // Results
         
         ResultCell* cell = (ResultCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellno" forIndexPath:indexPath];
         cell.resultlbl.text = @"ResultCell";
@@ -599,10 +725,10 @@ typedef enum : NSUInteger {
         return cell;
     }
     
-   else if (collectionView.tag == 6){ //Videos
+   else if (collectionView == self.VideosCollectionView){ //Videos
        return  nil;
    }
-   else if (collectionView.tag == 7){ //Documents
+   else if (collectionView == self.DocumentsCollectionView){ //Documents
        return  nil;
    }
     
@@ -930,6 +1056,11 @@ typedef enum : NSUInteger {
                 [TableListDict setValue:[responseObject valueForKey:@"ResultsValues"] forKey:@"Results"];
             }
             
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.EventsCollectionView reloadData];
+                [self.ResultsCollectionView reloadData];
+            });
+
             
             //                self.commonArray = scheduleArray;
             //                self.commonArray2 = resultArray;
@@ -1051,6 +1182,10 @@ typedef enum : NSUInteger {
             if (objarray != nil) {
                 [TableListDict setValue:objarray forKey:@"Fixtures"];
             }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.FixturesCollectionView reloadData];
+            });
         }
         
          [AppCommon hideLoading];
@@ -1111,7 +1246,7 @@ typedef enum : NSUInteger {
         }
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.LandingTable reloadData];
+            [self.TeamsCollectionView reloadData];
         });
         [AppCommon hideLoading];
         [self FoodDiaryWebservice];

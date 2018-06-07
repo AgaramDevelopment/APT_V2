@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIView *navView;
 @property (weak, nonatomic) IBOutlet UIView *BowlingUIView;
 @property (weak, nonatomic) IBOutlet UIView *WellnessUIView;
+@property (strong, nonatomic) IBOutlet UIView *FoodDiaryUIView;
 
 
 @property (strong, nonatomic) IBOutlet UIButton *BowlingMonthlyBtn;
@@ -37,6 +38,10 @@
 @property (strong, nonatomic) IBOutlet UIView *StressColorView;
 @property (weak, nonatomic) IBOutlet UIView *NoDataView;
 
+//Food Diary Properties
+@property (strong, nonatomic) IBOutlet UICollectionView *foodDiaryCollectionView;
+@property (strong, nonatomic) IBOutlet UIButton *addBtn;
+@property (strong, nonatomic) IBOutlet UILabel *lblNoData;
 
 
 

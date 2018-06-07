@@ -29,7 +29,7 @@ typedef enum : NSUInteger {
     Teams,
     Fixtures,
     Results,
-    Foods
+    Food
 } CollectionTitle;
 
 @interface LandingViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
@@ -44,6 +44,7 @@ typedef enum : NSUInteger {
     WellnessTrainingBowlingVC* WTB_object;
     TrainingLoadVC *Training_object;
     WebService *objWebservice;
+    NSMutableArray *foodDiaryArray;
 }
 
 @property (nonatomic, strong)  NSMutableArray *BowlingloadXArray;
@@ -70,6 +71,9 @@ typedef enum : NSUInteger {
     //    [cell.collection registerNib:[UINib nibWithNibName:@"collection" bundle:nil] forCellWithReuseIdentifier:@"collection"];
     //    [cell.collection registerNib:[UINib nibWithNibName:@"ScheduleCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     //    [cell.collection registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
+    
+    [self.foodDiaryCollectionView registerNib:[UINib nibWithNibName:@"FoodDiaryCell" bundle:nil] forCellWithReuseIdentifier:@"foodCell"];
+    
     WTB_object = [WellnessTrainingBowlingVC new];
     Training_object = [TrainingLoadVC new];
     SectionNameArray = @[@{@"Title":@"Events"},
@@ -81,7 +85,7 @@ typedef enum : NSUInteger {
     
     
     NSArray* arr = @[@{@"Title":@"Events"},
-                     @{@"Title":@"wellness"},
+                     @{@"Title":@"Wellness"},
                      @{@"Title":@"Training Load"},
                      @{@"Title":@"Food"},
                      @{@"Title":@"Bowling Graph"},
@@ -103,7 +107,8 @@ typedef enum : NSUInteger {
     [TableListDict setValue:@[] forKey:@"Teams"];
     [TableListDict setValue:@[] forKey:@"Fixtures"];
     [TableListDict setValue:@[] forKey:@"Results"];
-    [TableListDict setValue:@[] forKey:@"Food"];
+//    [TableListDict setValue:@[] forKey:@"Food"];
+    [TableListDict setValue:@[] forKey:@"Wellness"];
     
     [self customnavigationmethod];
     [self EventsAndResultsWebservice];
@@ -128,7 +133,7 @@ typedef enum : NSUInteger {
     [revealController.tapGestureRecognizer setEnabled:YES];
     
     [self FoodDiaryWebservice];
-    [self FetchWebservice];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -322,9 +327,9 @@ typedef enum : NSUInteger {
     else if ([title isEqualToString:@"Results"]) {
         [Tablecell configureCell:self andIndex:4 andTitile:title];
     }
-    else if ([title isEqualToString:@"Food"]) {
-        [Tablecell configureCell:self andIndex:5 andTitile:title];
-    }
+//    else if ([title isEqualToString:@"Food"]) {
+//        [Tablecell configureCell:self andIndex:5 andTitile:title];
+//    }
     else if ([title isEqualToString:@"Videos"]) {
         [Tablecell configureCell:self andIndex:6 andTitile:title];
     }
@@ -348,7 +353,7 @@ typedef enum : NSUInteger {
     
     NSString* title = [[SectionNameArray objectAtIndex:indexPath.section] valueForKey:@"Title"];
     
-    if ([title isEqualToString:@"wellness"]){
+    if ([title isEqualToString:@"Wellness"]){
 //        WTB_object = [[WellnessTrainingBowlingVC alloc] initWithNibName:@"WellnessTrainingBowlingVC" bundle:nil];
 //        WTB_object.view.frame = CGRectMake(0,0, cell.customView.bounds.size.width, 250);
 //        [cell.customView addSubview:WTB_object.topView];
@@ -378,6 +383,13 @@ typedef enum : NSUInteger {
         [cell.collection setHidden:YES];
         //[cell.customView setBackgroundColor:[UIColor orangeColor]];
         
+    }
+    else if ([title isEqualToString:@"Food"]) {
+        self.FoodDiaryUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
+        
+        [cell.customView addSubview:self.FoodDiaryUIView];
+        
+        [cell.collection setHidden:YES];
     }
     else
     {
@@ -452,9 +464,9 @@ typedef enum : NSUInteger {
     else if (collectionView.tag == 4){
         return  [[TableListDict valueForKey:@"Results"] count];
     }
-    else if (collectionView.tag == 5){
-        return  [[TableListDict valueForKey:@"Food"] count];
-    }
+//    else if (collectionView.tag == 5){
+//        return  [[TableListDict valueForKey:@"Food"] count];
+//    }
     else if (collectionView.tag == 6){
         return  [[TableListDict valueForKey:@"Videos"] count];
     }
@@ -462,6 +474,10 @@ typedef enum : NSUInteger {
         return  [[TableListDict valueForKey:@"Documents"] count];
     }
     
+    if (collectionView == self.foodDiaryCollectionView) {
+        [self.lblNoData setHidden:foodDiaryArray.count];
+        return foodDiaryArray.count;
+    }
     
     return 0;
 }
@@ -536,6 +552,7 @@ typedef enum : NSUInteger {
         return cell;
         
     }
+    /*
     else if (collectionView.tag == 5){ // Food
         
         FoodDiaryCell *cell = (FoodDiaryCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"foodCell" forIndexPath:indexPath];
@@ -546,7 +563,47 @@ typedef enum : NSUInteger {
         return cell;
         
     }
+    */
+   else if (collectionView == self.foodDiaryCollectionView) { // Food
+        
+        FoodDiaryCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"foodCell" forIndexPath:indexPath];
+        
+        cell.layer.masksToBounds = NO;
+        cell.layer.shadowColor = [UIColor blackColor].CGColor;
+        cell.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        cell.layer.shadowRadius = 3;
+        cell.layer.shadowOpacity = 0.8f;
+        
+        if (foodDiaryArray.count) {
+            NSMutableArray *foodListArray = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"FOODLIST"];
+            
+            cell.timeLbl.text = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"STARTTIME"];
+            cell.mealNameLbl.text = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"MEALNAME"];
+            
+            if (foodListArray.count == 1) {
+                cell.food1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.food2Lbl.text = @"";
+                cell.food3Lbl.text = @"";
+            } else if (foodListArray.count == 2) {
+                cell.food1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.food2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+                cell.food3Lbl.text = @"";
+            } else {
+                cell.food1Lbl.text = [[foodListArray objectAtIndex:0] valueForKey:@"FOOD"];
+                cell.food2Lbl.text = [[foodListArray objectAtIndex:1] valueForKey:@"FOOD"];
+                cell.food3Lbl.text = [[foodListArray objectAtIndex:2] valueForKey:@"FOOD"];
+            }
+            
+        }
+        return cell;
+    }
     
+   else if (collectionView.tag == 6){ //Videos
+       return  nil;
+   }
+   else if (collectionView.tag == 7){ //Documents
+       return  nil;
+   }
     
     return  nil;
 }
@@ -769,10 +826,16 @@ typedef enum : NSUInteger {
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
     if (collectionView.tag == 5){ // Food
-        
         [self selectedFoodCell:cell andIndex:indexPath];
     }
+    */
+    FoodDiaryUpdateVC *objresult = [FoodDiaryUpdateVC new];
+    objresult.foodDiaryType = @"Update";
+    objresult.selectedIndexPath = indexPath;
+    objresult.foodDiaryArray = foodDiaryArray;
+    [self.navigationController pushViewController:objresult animated:YES];
 }
 
 
@@ -788,8 +851,15 @@ typedef enum : NSUInteger {
     
 }
 
-#pragma mark- Webservice
 
+- (IBAction)addFoodDiaryButtonTapped:(id)sender {
+    
+    FoodDiaryUpdateVC *objresult = [FoodDiaryUpdateVC new];
+    objresult.foodDiaryType = @"Save";
+    [self.navigationController pushViewController:objresult animated:YES];
+}
+
+#pragma mark- Webservice
 
 -(void)EventsAndResultsWebservice
 {
@@ -864,13 +934,9 @@ typedef enum : NSUInteger {
             
         }
         
-        
-        
         [AppCommon hideLoading];
         [self FixturesWebservice];
-        
-        
-        
+    
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failed");
         [AppCommon hideLoading];
@@ -966,16 +1032,10 @@ typedef enum : NSUInteger {
             if (objarray != nil) {
                 [TableListDict setValue:objarray forKey:@"Fixtures"];
             }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.LandingTable reloadData];
-            });
-            
-            [self TeamsWebservice];
-            [AppCommon hideLoading];
-            
         }
         
+         [AppCommon hideLoading];
+        [self TeamsWebservice];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [COMMON webServiceFailureError:error];
@@ -1031,9 +1091,11 @@ typedef enum : NSUInteger {
             
         }
         
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.LandingTable reloadData];
+        });
         [AppCommon hideLoading];
-        
-        
+        [self FoodDiaryWebservice];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failed");
@@ -1044,8 +1106,6 @@ typedef enum : NSUInteger {
     }];
     
 }
-
-
 
 - (void)FoodDiaryWebservice {
     
@@ -1087,7 +1147,7 @@ typedef enum : NSUInteger {
         
         if ([[responseObject valueForKey:@"STATUS"] integerValue] == 1) {
             
-            NSMutableArray *foodDiaryArray = [NSMutableArray new];
+            foodDiaryArray = [NSMutableArray new];
             NSMutableArray *FOODDIARYSArray = [NSMutableArray new];
             FOODDIARYSArray = [responseObject objectForKey:@"FOODDIARYS"];
             
@@ -1102,24 +1162,233 @@ typedef enum : NSUInteger {
                 }
             }
             
-            if (foodDiaryArray.count) {
-                [TableListDict setValue:foodDiaryArray forKey:@"Food"];
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.LandingTable reloadData];
-            });
+//            if (foodDiaryArray.count) {
+//                [TableListDict setValue:foodDiaryArray forKey:@"Food"];
+//            }
             
             NSLog(@"Count:%ld", foodDiaryArray.count);
                 //            [self setClearBorderForMealTypeAndLocation];
+            
         }
         
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.foodDiaryCollectionView reloadData];
+        });
         [AppCommon hideLoading];
+        [self FetchWebservice];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failed");
         [COMMON webServiceFailureError:error];
         [AppCommon hideLoading];
     }];
+}
+
+//For Wellness
+
+- (void)FetchWebservice
+{
+    [AppCommon showLoading ];
+    
+    NSString *playerCode;
+    if([AppCommon isCoach])
+        {
+        
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+        }
+    else
+        {
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+        }
+        // NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    NSDate *matchdate = [NSDate date];
+    [dateFormat setDateFormat:@"MM-dd-yyyy"];
+    NSString * actualDate = [dateFormat stringFromDate:matchdate];
+        // NSString *urinecolor= @"0";
+    
+    [objWebservice fetchWellness :FetchrecordWellness : playerCode :actualDate success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseObject=%@",responseObject);
+        
+        self.NoDataView.hidden = YES;
+        NSMutableArray *arr = [[NSMutableArray alloc]init];
+        arr = responseObject;
+        if(arr.count >0)
+            {
+            self.NoDataView.hidden = YES;
+            if( ![[[responseObject valueForKey:@"BodyWeight"] objectAtIndex:0] isEqual:[NSNull null]])
+                {
+                self.bodyWeightlbl.text = [[responseObject valueForKey:@"BodyWeight"] objectAtIndex:0];
+                
+                    //[self.fetchButton setTag:1];
+                self.fetchedArray = [[NSMutableArray alloc]init];
+                self.fetchedArray = [responseObject objectAtIndex:0];
+                }
+            if(! [[[responseObject valueForKey:@"SleepHours"] objectAtIndex:0] isEqual:[NSNull null]])
+                {
+                self.sleepHrlbl.text = [[responseObject valueForKey:@"SleepHours"] objectAtIndex:0];
+                }
+            if( ![[[responseObject valueForKey:@"SleepRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
+                {
+                NSString *sleepValue = [[responseObject valueForKey:@"SleepRatingDescription"] objectAtIndex:0];
+                NSArray *component = [sleepValue componentsSeparatedByString:@" "];
+                self.sleeplbl.text = [NSString stringWithFormat:@"%@/7",component[0]];
+                
+                
+                if([component[0] isEqualToString:@"1"])
+                    {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
+                    }
+                if([component[0] isEqualToString:@"2"])
+                    {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
+                    }
+                if([component[0] isEqualToString:@"3"])
+                    {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
+                    }
+                if([component[0] isEqualToString:@"4"])
+                    {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
+                    }
+                if([component[0] isEqualToString:@"5"])
+                    {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
+                    }
+                if([component[0] isEqualToString:@"6"])
+                    {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
+                    }
+                if([component[0] isEqualToString:@"7"])
+                    {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
+                    }
+                }
+            
+            if( ![[[responseObject valueForKey:@"FatigueRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
+                {
+                NSString *fatiqueValue = [[responseObject valueForKey:@"FatigueRatingDescription"] objectAtIndex:0];
+                NSArray *component1 = [fatiqueValue componentsSeparatedByString:@" "];
+                self.fatiquelbl.text = [NSString stringWithFormat:@"%@/7",component1[0]];
+                
+                if([component1[0] isEqualToString:@"1"])
+                    {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
+                    }
+                if([component1[0] isEqualToString:@"2"])
+                    {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
+                    }
+                if([component1[0] isEqualToString:@"3"])
+                    {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
+                    }
+                if([component1[0] isEqualToString:@"4"])
+                    {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
+                    }
+                if([component1[0] isEqualToString:@"5"])
+                    {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
+                    }
+                if([component1[0] isEqualToString:@"6"])
+                    {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
+                    }
+                if([component1[0] isEqualToString:@"7"])
+                    {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
+                    }
+                }
+            
+            if( ![[[responseObject valueForKey:@"SoreNessRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
+                {
+                
+                NSString *muscleValue = [[responseObject valueForKey:@"SoreNessRatingDescription"] objectAtIndex:0];
+                NSArray *component2 = [muscleValue componentsSeparatedByString:@" "];
+                self.musclelbl.text = [NSString stringWithFormat:@"%@/7",component2[0]];
+                
+                if([component2[0] isEqualToString:@"1"])
+                    {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
+                    }
+                if([component2[0] isEqualToString:@"2"])
+                    {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
+                    }
+                if([component2[0] isEqualToString:@"3"])
+                    {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
+                    }
+                if([component2[0] isEqualToString:@"4"])
+                    {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
+                    }
+                if([component2[0] isEqualToString:@"5"])
+                    {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
+                    }
+                if([component2[0] isEqualToString:@"6"])
+                    {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
+                    }
+                if([component2[0] isEqualToString:@"7"])
+                    {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
+                    }
+                }
+            
+            if( ![[[responseObject valueForKey:@"StressRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
+                {
+                NSString *stressValue = [[responseObject valueForKey:@"StressRatingDescription"] objectAtIndex:0];
+                NSArray *component3 = [stressValue componentsSeparatedByString:@" "];
+                self.stresslbl.text = [NSString stringWithFormat:@"%@/7",component3[0]];
+                
+                if([component3[0] isEqualToString:@"1"])
+                    {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
+                    }
+                if([component3[0] isEqualToString:@"2"])
+                    {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
+                    }
+                if([component3[0] isEqualToString:@"3"])
+                    {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
+                    }
+                if([component3[0] isEqualToString:@"4"])
+                    {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
+                    }
+                if([component3[0] isEqualToString:@"5"])
+                    {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
+                    }
+                if([component3[0] isEqualToString:@"6"])
+                    {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
+                    }
+                if([component3[0] isEqualToString:@"7"])
+                    {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
+                    }
+                }
+            
+            
+            }
+        else
+            {
+            self.NoDataView.hidden = NO;
+            }
+        [AppCommon hideLoading];
+        
+    }
+                          failure:^(AFHTTPRequestOperation *operation, id error) {
+                              NSLog(@"failed");
+                              [COMMON webServiceFailureError:error];
+                          }];
+    
 }
 
 //-(void)EventTypeWebservice:(NSString *) usercode :(NSString*) cliendcode:(NSString *)userreference
@@ -1555,218 +1824,6 @@ typedef enum : NSUInteger {
     [innsBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
 }
-
-
-
-
-
-//For Wellness
-
-- (void)FetchWebservice
-{
-    [AppCommon showLoading ];
-    
-    NSString *playerCode;
-    if([AppCommon isCoach])
-    {
-        
-        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
-    }
-    else
-    {
-        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-    }
-    // NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-    
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    NSDate *matchdate = [NSDate date];
-    [dateFormat setDateFormat:@"MM-dd-yyyy"];
-    NSString * actualDate = [dateFormat stringFromDate:matchdate];
-    // NSString *urinecolor= @"0";
-    
-    [objWebservice fetchWellness :FetchrecordWellness : playerCode :actualDate success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"responseObject=%@",responseObject);
-        
-        self.NoDataView.hidden = YES;
-        NSMutableArray *arr = [[NSMutableArray alloc]init];
-        arr = responseObject;
-        if(arr.count >0)
-        {
-            self.NoDataView.hidden = YES;
-            if( ![[[responseObject valueForKey:@"BodyWeight"] objectAtIndex:0] isEqual:[NSNull null]])
-            {
-                self.bodyWeightlbl.text = [[responseObject valueForKey:@"BodyWeight"] objectAtIndex:0];
-                
-                //[self.fetchButton setTag:1];
-                self.fetchedArray = [[NSMutableArray alloc]init];
-                self.fetchedArray = [responseObject objectAtIndex:0];
-            }
-            if(! [[[responseObject valueForKey:@"SleepHours"] objectAtIndex:0] isEqual:[NSNull null]])
-            {
-                self.sleepHrlbl.text = [[responseObject valueForKey:@"SleepHours"] objectAtIndex:0];
-            }
-            if( ![[[responseObject valueForKey:@"SleepRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
-            {
-                NSString *sleepValue = [[responseObject valueForKey:@"SleepRatingDescription"] objectAtIndex:0];
-                NSArray *component = [sleepValue componentsSeparatedByString:@" "];
-                self.sleeplbl.text = [NSString stringWithFormat:@"%@/7",component[0]];
-                
-                
-                if([component[0] isEqualToString:@"1"])
-                {
-                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
-                }
-                if([component[0] isEqualToString:@"2"])
-                {
-                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
-                }
-                if([component[0] isEqualToString:@"3"])
-                {
-                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
-                }
-                if([component[0] isEqualToString:@"4"])
-                {
-                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
-                }
-                if([component[0] isEqualToString:@"5"])
-                {
-                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
-                }
-                if([component[0] isEqualToString:@"6"])
-                {
-                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
-                }
-                if([component[0] isEqualToString:@"7"])
-                {
-                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
-                }
-            }
-            
-            if( ![[[responseObject valueForKey:@"FatigueRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
-            {
-                NSString *fatiqueValue = [[responseObject valueForKey:@"FatigueRatingDescription"] objectAtIndex:0];
-                NSArray *component1 = [fatiqueValue componentsSeparatedByString:@" "];
-                self.fatiquelbl.text = [NSString stringWithFormat:@"%@/7",component1[0]];
-                
-                if([component1[0] isEqualToString:@"1"])
-                {
-                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
-                }
-                if([component1[0] isEqualToString:@"2"])
-                {
-                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
-                }
-                if([component1[0] isEqualToString:@"3"])
-                {
-                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
-                }
-                if([component1[0] isEqualToString:@"4"])
-                {
-                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
-                }
-                if([component1[0] isEqualToString:@"5"])
-                {
-                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
-                }
-                if([component1[0] isEqualToString:@"6"])
-                {
-                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
-                }
-                if([component1[0] isEqualToString:@"7"])
-                {
-                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
-                }
-            }
-            
-            if( ![[[responseObject valueForKey:@"SoreNessRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
-            {
-                
-                NSString *muscleValue = [[responseObject valueForKey:@"SoreNessRatingDescription"] objectAtIndex:0];
-                NSArray *component2 = [muscleValue componentsSeparatedByString:@" "];
-                self.musclelbl.text = [NSString stringWithFormat:@"%@/7",component2[0]];
-                
-                if([component2[0] isEqualToString:@"1"])
-                {
-                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
-                }
-                if([component2[0] isEqualToString:@"2"])
-                {
-                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
-                }
-                if([component2[0] isEqualToString:@"3"])
-                {
-                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
-                }
-                if([component2[0] isEqualToString:@"4"])
-                {
-                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
-                }
-                if([component2[0] isEqualToString:@"5"])
-                {
-                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
-                }
-                if([component2[0] isEqualToString:@"6"])
-                {
-                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
-                }
-                if([component2[0] isEqualToString:@"7"])
-                {
-                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
-                }
-            }
-            
-            if( ![[[responseObject valueForKey:@"StressRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
-            {
-                NSString *stressValue = [[responseObject valueForKey:@"StressRatingDescription"] objectAtIndex:0];
-                NSArray *component3 = [stressValue componentsSeparatedByString:@" "];
-                self.stresslbl.text = [NSString stringWithFormat:@"%@/7",component3[0]];
-                
-                if([component3[0] isEqualToString:@"1"])
-                {
-                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
-                }
-                if([component3[0] isEqualToString:@"2"])
-                {
-                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
-                }
-                if([component3[0] isEqualToString:@"3"])
-                {
-                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
-                }
-                if([component3[0] isEqualToString:@"4"])
-                {
-                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
-                }
-                if([component3[0] isEqualToString:@"5"])
-                {
-                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
-                }
-                if([component3[0] isEqualToString:@"6"])
-                {
-                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
-                }
-                if([component3[0] isEqualToString:@"7"])
-                {
-                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
-                }
-            }
-            
-            
-        }
-        else
-        {
-            self.NoDataView.hidden = NO;
-        }
-        [AppCommon hideLoading];
-        
-    }
-                          failure:^(AFHTTPRequestOperation *operation, id error) {
-                              NSLog(@"failed");
-                              [COMMON webServiceFailureError:error];
-                          }];
-    
-}
-
 
 - (IBAction)AddWellnessAction:(id)sender {
     

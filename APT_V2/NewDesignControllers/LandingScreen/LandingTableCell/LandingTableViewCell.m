@@ -21,7 +21,7 @@
     [collection registerNib:[UINib nibWithNibName:@"ScheduleCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     [collection registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
     [collection registerNib:[UINib nibWithNibName:@"TeamCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"TeamCollectionViewCell"];
-    [collection registerNib:[UINib nibWithNibName:@"FoodDiaryCell" bundle:nil] forCellWithReuseIdentifier:@"foodCell"];
+//    [collection registerNib:[UINib nibWithNibName:@"FoodDiaryCell" bundle:nil] forCellWithReuseIdentifier:@"foodCell"];
 
 }
 
@@ -47,9 +47,9 @@
     else if ([title isEqualToString:@"Results"]) {
         [collection setTag:indexPath];
     }
-    else if ([title isEqualToString:@"Food"]) {
-        [collection setTag:indexPath];
-    }
+//    else if ([title isEqualToString:@"Food"]) {
+//        [collection setTag:indexPath];
+//    }
     else if ([title isEqualToString:@"Videos"]) {
         [collection setTag:indexPath];
     }

@@ -23,6 +23,7 @@
 #import "WebService.h"
 #import "HorizontalXLblFormatter.h"
 #import "FoodDiaryUpdateVC.h"
+#import "PlannerVC.h"
 
 typedef enum : NSUInteger {
     Events,
@@ -831,11 +832,18 @@ typedef enum : NSUInteger {
         [self selectedFoodCell:cell andIndex:indexPath];
     }
     */
+    if(collectionView == self.foodDiaryCollectionView)
+    {
     FoodDiaryUpdateVC *objresult = [FoodDiaryUpdateVC new];
     objresult.foodDiaryType = @"Update";
     objresult.selectedIndexPath = indexPath;
     objresult.foodDiaryArray = foodDiaryArray;
     [self.navigationController pushViewController:objresult animated:YES];
+    }
+    else if(collectionView.tag == 1)
+    {
+        [self selectedEventCell:cell andIndex:indexPath];
+    }
 }
 
 
@@ -847,6 +855,17 @@ typedef enum : NSUInteger {
     objresult.foodDiaryType = @"Update";
     objresult.selectedIndexPath = indexPath;
     objresult.foodDiaryArray = foodDiaryArray;
+    [self.navigationController pushViewController:objresult animated:YES];
+    
+}
+
+-(void)selectedEventCell:(ScheduleCell *)cell andIndex:(NSIndexPath *)indexPath{
+    
+    //NSMutableArray *foodDiaryArray = [TableListDict valueForKey:@"Events"];
+    
+    PlannerVC *objresult = [PlannerVC new];
+    objresult.checkBacknavi = @"yes";
+    
     [self.navigationController pushViewController:objresult animated:YES];
     
 }

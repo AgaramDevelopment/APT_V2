@@ -63,6 +63,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
+    NSLog(@"%@",self.YesterdayLoadArray);
 
     self.view_datepicker.hidden=YES;
     sessionArray = [[NSMutableArray alloc]init];
@@ -90,18 +93,20 @@
     [self samplePieChart];
     [self DropDownWebservice];
     
-    
+   if(![_isToday isEqualToString:@"yes"] && ![_isYesterday isEqualToString:@"yes"] )
+   {
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     NSDate *matchdate = [NSDate date];
     [dateFormat setDateFormat:@"dd/MM/yyyy"];
-    
+
     NSDateFormatter *dateFormat1 = [[NSDateFormatter alloc] init];
     [dateFormat1 setDateFormat:@"MM-dd-yyyy"];
    // SelectedDate = [dateFormat1 stringFromDate:matchdate];
-    
+
     NSString * actualDate = [dateFormat stringFromDate:matchdate];
     self.datelbl.text = [dateFormat1 stringFromDate:matchdate];
     [self DateWebservice];
+   }
     
     
     

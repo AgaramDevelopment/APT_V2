@@ -170,12 +170,17 @@
     if(isToday == YES)
     {
         
+        TrainingLoadUpdateVC *VC = [TrainingLoadUpdateVC new];
+        VC.TodayLoadArray = self.todaysLoadArray;
+        VC.isToday = @"yes";
+       // VC.isYesterday = @"No";
+        [appDel.frontNavigationController pushViewController:VC animated:YES];
         
-    objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
-    objUpdate.TodayLoadArray = self.todaysLoadArray;
-    objUpdate.isToday = @"yes";
-    objUpdate.view.frame = CGRectMake(0,0, self.traingView.bounds.size.width, self.traingView.bounds.size.height);
-    [self.traingView addSubview:objUpdate.view];
+//    objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
+//    objUpdate.TodayLoadArray = self.todaysLoadArray;
+//    objUpdate.isToday = @"yes";
+//    objUpdate.view.frame = CGRectMake(0,0, self.traingView.bounds.size.width, self.traingView.bounds.size.height);
+//    [self.traingView addSubview:objUpdate.view];
     
     }
 }
@@ -185,14 +190,21 @@
     if(isYesterday == YES)
     {
         
-        //[objWell.AddTrainingBtn addTarget:self action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    //[objWell.AddTrainingBtn addTarget:self action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
     //WellnessTrainingBowlingVC *objWell = [[WellnessTrainingBowlingVC alloc] initWithNibName:@"WellnessTrainingBowlingVC" bundle:nil];
     //[objWell.AddTrainingBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
-    objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
-    objUpdate.YesterdayLoadArray = self.yesterdayLoadArray;
-    objUpdate.isYesterday = @"yes";
-    objUpdate.view.frame = CGRectMake(0,0, self.traingView.bounds.size.width, self.traingView.bounds.size.height);
-    [self.traingView addSubview:objUpdate.view];
+        
+        TrainingLoadUpdateVC *VC = [TrainingLoadUpdateVC new];
+        VC.YesterdayLoadArray = self.yesterdayLoadArray;
+        VC.isYesterday = @"yes";
+        //VC.isToday = @"No";
+        [appDel.frontNavigationController pushViewController:VC animated:YES];
+        
+//    objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
+//    objUpdate.YesterdayLoadArray = self.yesterdayLoadArray;
+//    objUpdate.isYesterday = @"yes";
+//    objUpdate.view.frame = CGRectMake(0,0, self.traingView.bounds.size.width, self.traingView.bounds.size.height);
+//    [self.traingView addSubview:objUpdate.view];
     }
 }
 
@@ -787,6 +799,12 @@
                 else
                 {
                     self.yesterdayPieNodataView.hidden = NO;
+                }
+                
+                if(self.todaysLoadArray.count>0 && self.yesterdayLoadArray.count>0)
+                {
+                    isToday = @"yes";
+                    isYesterday = @"yes";
                 }
         }
         }

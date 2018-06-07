@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,6 +28,7 @@
                 <outlet property="FoodDiaryUIView" destination="OaZ-af-OQw" id="fkj-Vg-0oH"/>
                 <outlet property="LandingTable" destination="nyX-eu-mq3" id="9Yd-Rp-0vg"/>
                 <outlet property="MuscleColorView" destination="z7J-nL-4Ro" id="VWH-EH-SNi"/>
+                <outlet property="NoDataView" destination="h0P-CK-VkB" id="qqq-g1-ns0"/>
                 <outlet property="SleepColorView" destination="XQ2-iH-0H7" id="dsh-7k-Lew"/>
                 <outlet property="StressColorView" destination="qMf-wS-m31" id="FfU-dq-5Mx"/>
                 <outlet property="WellnessUIView" destination="qo1-he-Rxc" id="N5g-K7-ek7"/>
@@ -563,13 +564,31 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPZ-nR-d4e">
                             <rect key="frame" x="5" y="91" width="365" height="118"/>
                         </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h0P-CK-VkB">
+                            <rect key="frame" x="5" y="5" width="365" height="210"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Data Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MfR-mZ-VsF">
+                                    <rect key="frame" x="117.5" y="94.5" width="130.5" height="21"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="MfR-mZ-VsF" firstAttribute="centerX" secondItem="h0P-CK-VkB" secondAttribute="centerX" id="9Vr-Os-CuS"/>
+                                <constraint firstItem="MfR-mZ-VsF" firstAttribute="centerY" secondItem="h0P-CK-VkB" secondAttribute="centerY" id="zVv-su-WPT"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="J7R-0a-X6e" firstAttribute="leading" secondItem="2nw-NX-bLv" secondAttribute="trailing" id="3TD-wZ-Gro"/>
+                        <constraint firstItem="h0P-CK-VkB" firstAttribute="leading" secondItem="XyQ-Fb-zEx" secondAttribute="leading" constant="5" id="4eu-er-Eo0"/>
                         <constraint firstItem="4yu-db-ewu" firstAttribute="top" secondItem="IVK-mf-0Fv" secondAttribute="bottom" constant="2" id="5r7-Z8-81A"/>
                         <constraint firstItem="IVK-mf-0Fv" firstAttribute="leading" secondItem="iQn-bI-nGm" secondAttribute="leading" id="Aa2-Mf-Q5B"/>
                         <constraint firstItem="IVK-mf-0Fv" firstAttribute="trailing" secondItem="iQn-bI-nGm" secondAttribute="trailing" id="AaJ-6J-eJM"/>
+                        <constraint firstItem="Dy2-E7-75I" firstAttribute="top" secondItem="h0P-CK-VkB" secondAttribute="bottom" constant="4" id="Ah4-mH-BZh"/>
                         <constraint firstItem="OPZ-nR-d4e" firstAttribute="centerX" secondItem="5Bp-HE-glZ" secondAttribute="centerX" id="DFs-OP-Jx2"/>
                         <constraint firstItem="OPZ-nR-d4e" firstAttribute="top" secondItem="4yu-db-ewu" secondAttribute="bottom" constant="13" id="Ga7-LV-dzu"/>
                         <constraint firstAttribute="height" constant="250" id="Gmo-gb-OTn"/>
@@ -577,11 +596,13 @@
                         <constraint firstItem="2nw-NX-bLv" firstAttribute="leading" secondItem="XyQ-Fb-zEx" secondAttribute="leading" id="JE6-cv-fUq"/>
                         <constraint firstItem="J7R-0a-X6e" firstAttribute="centerX" secondItem="IVK-mf-0Fv" secondAttribute="centerX" id="KDj-Mt-0nu"/>
                         <constraint firstItem="wdJ-H2-S1m" firstAttribute="trailing" secondItem="5Bp-HE-glZ" secondAttribute="trailing" id="LP5-IG-KgE"/>
+                        <constraint firstAttribute="trailing" secondItem="h0P-CK-VkB" secondAttribute="trailing" constant="5" id="LQp-uc-OsC"/>
                         <constraint firstItem="wdJ-H2-S1m" firstAttribute="top" secondItem="iQn-bI-nGm" secondAttribute="bottom" constant="5" id="Lt1-Ga-W7f"/>
                         <constraint firstItem="5Bp-HE-glZ" firstAttribute="top" secondItem="wdJ-H2-S1m" secondAttribute="bottom" constant="5" id="Mr9-Eo-zVt"/>
                         <constraint firstItem="iQn-bI-nGm" firstAttribute="leading" secondItem="wdJ-H2-S1m" secondAttribute="leading" id="Qhh-jT-Eeo"/>
                         <constraint firstItem="2nw-NX-bLv" firstAttribute="top" secondItem="J7R-0a-X6e" secondAttribute="top" id="RAZ-wi-4Na"/>
                         <constraint firstAttribute="trailing" secondItem="IVK-mf-0Fv" secondAttribute="trailing" id="RnT-vr-kGA"/>
+                        <constraint firstItem="h0P-CK-VkB" firstAttribute="top" secondItem="XyQ-Fb-zEx" secondAttribute="top" constant="5" id="VPr-vU-kXQ"/>
                         <constraint firstItem="5Bp-HE-glZ" firstAttribute="trailing" secondItem="LTq-kP-yfW" secondAttribute="trailing" id="VZC-7I-gLF"/>
                         <constraint firstItem="aUG-zG-8GL" firstAttribute="centerX" secondItem="Dy2-E7-75I" secondAttribute="centerX" id="Vhx-KQ-cYk"/>
                         <constraint firstItem="Dy2-E7-75I" firstAttribute="top" secondItem="LTq-kP-yfW" secondAttribute="bottom" constant="6" id="Z6m-7d-327"/>
@@ -610,7 +631,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="hsP-Pn-jHv"/>
-            <point key="canvasLocation" x="1184" y="-81"/>
+            <point key="canvasLocation" x="1183.5" y="-81"/>
         </view>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="OaZ-af-OQw">
             <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>

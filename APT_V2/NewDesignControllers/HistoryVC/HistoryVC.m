@@ -12,6 +12,7 @@
 #import "Config.h"
 #import "WebService.h"
 #import "DropDownTableViewController.h"
+#import "CustomNavigation.h"
 
 @interface HistoryVC ()<selectedDropDown,UISearchBarDelegate>
 {
@@ -35,7 +36,7 @@
     
     self.listHistory = [[NSMutableArray alloc]init];
     self.listModule = [[NSMutableArray alloc]init];
-    
+    [self customnavigationmethod];
     [self Dropdownwebservice];
     
    
@@ -44,6 +45,49 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     self.searchViewWidth.constant = 0;
+}
+-(void)customnavigationmethod
+{
+    CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    
+    //    [self.view addSubview:objCustomNavigation.view];
+    //    objCustomNavigation.tittle_lbl.text=@"";
+    
+    UIView* view= self.view.subviews.firstObject;
+    [self.navView addSubview:objCustomNavigation.view];
+    
+    BOOL isBackEnable = [[NSUserDefaults standardUserDefaults] boolForKey:@"BACK"];
+    isBackEnable = YES;
+    if (isBackEnable) {
+        objCustomNavigation.menu_btn.hidden =YES;
+        objCustomNavigation.btn_back.hidden =NO;
+        [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else
+    {
+        objCustomNavigation.menu_btn.hidden =NO;
+        objCustomNavigation.btn_back.hidden =YES;
+        [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    //    objCustomNavigation.btn_back.hidden =isBackEnable;
+    //
+    //    objCustomNavigation.menu_btn.hidden = objCustomNavigation.btn_back.isHidden;
+    //    [objCustomNavigation.btn_back addTarget:self action:@selector(actionBack:) forControlEvents:UIControlEventTouchUpInside];
+    //
+    //    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+}
+-(void)actionBack
+{
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"BACK"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [appDel.frontNavigationController popViewControllerAnimated:YES];
 }
 
 

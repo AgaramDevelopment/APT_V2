@@ -73,7 +73,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xqy-RH-gy4">
-                            <rect key="frame" x="0.0" y="70" width="375" height="532"/>
+                            <rect key="frame" x="0.0" y="80" width="375" height="567"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pnM-Ew-5vO">
                                     <rect key="frame" x="15" y="10" width="180" height="30"/>
@@ -414,7 +414,7 @@
                                     </constraints>
                                 </view>
                                 <view hidden="YES" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DBX-VZ-DEY">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="532"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="567"/>
                                     <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <gestureRecognizers/>
                                     <connections>
@@ -552,7 +552,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nye-Gy-BaJ">
-                                    <rect key="frame" x="10" y="166" width="355" height="200"/>
+                                    <rect key="frame" x="10" y="183.5" width="355" height="200"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XDv-xo-W6J">
                                             <rect key="frame" x="294" y="5" width="58" height="32"/>
@@ -672,11 +672,11 @@
                         <constraint firstItem="xqy-RH-gy4" firstAttribute="leading" secondItem="MKQ-F3-VL6" secondAttribute="leading" id="88Y-pu-og1">
                             <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                         </constraint>
-                        <constraint firstAttribute="bottom" secondItem="xqy-RH-gy4" secondAttribute="bottom" constant="45" id="aqO-AO-m6V"/>
+                        <constraint firstAttribute="bottom" secondItem="xqy-RH-gy4" secondAttribute="bottom" id="aqO-AO-m6V"/>
                         <constraint firstAttribute="trailing" secondItem="Upz-bY-nzh" secondAttribute="trailing" id="dhP-fZ-cp4">
                             <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                         </constraint>
-                        <constraint firstItem="xqy-RH-gy4" firstAttribute="top" secondItem="Upz-bY-nzh" secondAttribute="bottom" id="e99-sm-Nav"/>
+                        <constraint firstItem="xqy-RH-gy4" firstAttribute="top" secondItem="Upz-bY-nzh" secondAttribute="bottom" constant="10" id="e99-sm-Nav"/>
                         <constraint firstAttribute="trailing" secondItem="xqy-RH-gy4" secondAttribute="trailing" id="gcG-yf-1u1">
                             <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                         </constraint>

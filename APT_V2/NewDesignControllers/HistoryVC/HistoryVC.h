@@ -22,4 +22,6 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *searchViewWidth;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *moduleViewWidth;
 
+@property (weak, nonatomic) IBOutlet UIView *navView;
+
 @end

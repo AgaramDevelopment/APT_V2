@@ -235,7 +235,14 @@
     
     BOOL isBackEnable = [[NSUserDefaults standardUserDefaults] boolForKey:@"BACK"];
     
-    isBackEnable =NO;
+    if([self.checkBacknavi isEqualToString:@"yes"])
+    {
+    isBackEnable =YES;
+    }
+    else
+    {
+        isBackEnable =NO;
+    }
     if (isBackEnable) {
         objCustomNavigation.menu_btn.hidden =YES;
         objCustomNavigation.btn_back.hidden =NO;
@@ -250,6 +257,12 @@
     [self.navi_View addSubview:objCustomNavigation.view];
     //    objCustomNavigation.tittle_lbl.text=@"";
     
+}
+-(void)actionBack
+{
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"BACK"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [appDel.frontNavigationController popViewControllerAnimated:YES];
 }
 
 -(IBAction)didClickevent:(id)sender
@@ -905,7 +918,8 @@
 -(void)didSelectEventOfCell:(NSDate *)selectedDate
 {
     NSLog(@"FINAL DATE %@",selectedDate);
-    
+   if([AppCommon isCoach])
+   {
     if(![selectedDate isEqual:[NSNull null]])
     {
         
@@ -1148,6 +1162,7 @@
             NSLog(@"Both dates are same");
     }
     }
+   }
     
 }
 

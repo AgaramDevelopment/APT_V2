@@ -22,7 +22,7 @@
 @property (nonatomic, strong)IBOutlet UIButton *MONTH;
 @property (nonatomic, strong)IBOutlet UILabel *nameOfMonth;
 @property (nonatomic, copy, readwrite) NSDate *reqDate;
-@property (nonatomic, strong) NSString *check;
+@property (nonatomic, strong) NSString *checkBacknavi;
 @property (weak, nonatomic) IBOutlet UIView *calendarView;
 
 @property (strong, nonatomic) IBOutlet UIView *navi_View;

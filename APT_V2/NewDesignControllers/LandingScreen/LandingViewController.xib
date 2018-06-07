@@ -25,14 +25,18 @@
                 <outlet property="BowlingUIView" destination="gJJ-Wg-ErX" id="FbL-g2-Nwa"/>
                 <outlet property="BowlingWeeklyBtn" destination="PD4-cV-ZU0" id="fQC-CQ-Ck3"/>
                 <outlet property="FatiqueColorView" destination="FrI-Bs-KCc" id="d4P-F6-kma"/>
+                <outlet property="FoodDiaryUIView" destination="OaZ-af-OQw" id="fkj-Vg-0oH"/>
                 <outlet property="LandingTable" destination="nyX-eu-mq3" id="9Yd-Rp-0vg"/>
                 <outlet property="MuscleColorView" destination="z7J-nL-4Ro" id="VWH-EH-SNi"/>
                 <outlet property="SleepColorView" destination="XQ2-iH-0H7" id="dsh-7k-Lew"/>
                 <outlet property="StressColorView" destination="qMf-wS-m31" id="FfU-dq-5Mx"/>
                 <outlet property="WellnessUIView" destination="qo1-he-Rxc" id="N5g-K7-ek7"/>
+                <outlet property="addBtn" destination="PDQ-8c-m4m" id="FTU-mM-WXW"/>
                 <outlet property="bodyWeightlbl" destination="bc1-fa-SYw" id="gxx-8j-LDN"/>
                 <outlet property="chartView" destination="Xc4-j4-ebY" id="Gva-Oq-oc5"/>
                 <outlet property="fatiquelbl" destination="2R2-4Q-3Ac" id="sBv-dl-CEV"/>
+                <outlet property="foodDiaryCollectionView" destination="6Ef-VR-aO9" id="FMs-Uv-oyH"/>
+                <outlet property="lblNoData" destination="097-ho-s9N" id="SnU-lN-jc9"/>
                 <outlet property="musclelbl" destination="k12-pv-XKp" id="x7E-E7-wex"/>
                 <outlet property="navView" destination="jhr-Yz-qJi" id="3uB-eJ-dMi"/>
                 <outlet property="sleepHrlbl" destination="A9L-J8-ez2" id="PEI-Nr-r46"/>
@@ -608,8 +612,87 @@
             <viewLayoutGuide key="safeArea" id="hsP-Pn-jHv"/>
             <point key="canvasLocation" x="1184" y="-81"/>
         </view>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="OaZ-af-OQw">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YRW-6j-dhn">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RVf-4S-eVv">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+                            <subviews>
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="6Ef-VR-aO9">
+                                    <rect key="frame" x="0.0" y="0.0" width="325" height="160"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="8" minimumInteritemSpacing="8" id="WKB-46-1i5">
+                                        <size key="itemSize" width="50" height="50"/>
+                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                        <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="8"/>
+                                    </collectionViewFlowLayout>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="whA-xK-swM"/>
+                                        <outlet property="delegate" destination="-1" id="X5p-Iz-d5c"/>
+                                    </connections>
+                                </collectionView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PDQ-8c-m4m">
+                                    <rect key="frame" x="330" y="8" width="40" height="144"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="eFD-Wn-WZr">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                        </constraint>
+                                    </constraints>
+                                    <state key="normal" title="Button" image="icon_plus"/>
+                                    <connections>
+                                        <action selector="addFoodDiaryButtonTapped:" destination="-1" eventType="touchUpInside" id="aw1-av-Cb9"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Data Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="097-ho-s9N">
+                                    <rect key="frame" x="130" y="69" width="115" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="6Ef-VR-aO9" secondAttribute="bottom" id="LqI-rG-MgO"/>
+                                <constraint firstItem="097-ho-s9N" firstAttribute="centerY" secondItem="RVf-4S-eVv" secondAttribute="centerY" id="OfB-fM-FM1"/>
+                                <constraint firstItem="6Ef-VR-aO9" firstAttribute="leading" secondItem="RVf-4S-eVv" secondAttribute="leading" id="P8E-K0-pT7"/>
+                                <constraint firstItem="6Ef-VR-aO9" firstAttribute="top" secondItem="RVf-4S-eVv" secondAttribute="top" id="YSW-LZ-2lD"/>
+                                <constraint firstItem="PDQ-8c-m4m" firstAttribute="leading" secondItem="6Ef-VR-aO9" secondAttribute="trailing" constant="5" id="ZY4-15-Ixo"/>
+                                <constraint firstItem="097-ho-s9N" firstAttribute="centerX" secondItem="RVf-4S-eVv" secondAttribute="centerX" id="c13-ib-NmM"/>
+                                <constraint firstAttribute="trailing" secondItem="PDQ-8c-m4m" secondAttribute="trailing" constant="5" id="e3Z-ai-zEd"/>
+                                <constraint firstItem="PDQ-8c-m4m" firstAttribute="top" secondItem="RVf-4S-eVv" secondAttribute="top" constant="8" id="h3r-g5-oax"/>
+                                <constraint firstAttribute="bottom" secondItem="PDQ-8c-m4m" secondAttribute="bottom" constant="8" id="ttR-7o-EPX"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="RVf-4S-eVv" secondAttribute="trailing" id="Jzx-73-oTY"/>
+                        <constraint firstItem="RVf-4S-eVv" firstAttribute="leading" secondItem="YRW-6j-dhn" secondAttribute="leading" id="Y7o-gH-5u8"/>
+                        <constraint firstItem="RVf-4S-eVv" firstAttribute="top" secondItem="YRW-6j-dhn" secondAttribute="top" id="g6W-2i-0B9"/>
+                        <constraint firstAttribute="bottom" secondItem="RVf-4S-eVv" secondAttribute="bottom" id="jsc-A4-sod"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="YRW-6j-dhn" firstAttribute="trailing" secondItem="vPz-RH-vI9" secondAttribute="trailing" id="Bry-Ay-ILO"/>
+                <constraint firstItem="YRW-6j-dhn" firstAttribute="top" secondItem="vPz-RH-vI9" secondAttribute="top" id="E8e-Zw-CUc"/>
+                <constraint firstItem="YRW-6j-dhn" firstAttribute="bottom" secondItem="vPz-RH-vI9" secondAttribute="bottom" id="jur-Dj-FUL"/>
+                <constraint firstItem="YRW-6j-dhn" firstAttribute="leading" secondItem="vPz-RH-vI9" secondAttribute="leading" id="ydG-gd-M0T"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vPz-RH-vI9"/>
+            <point key="canvasLocation" x="634" y="360"/>
+        </view>
     </objects>
     <resources>
         <image name="ico_addWhite" width="24" height="24"/>
+        <image name="icon_plus" width="57" height="57"/>
     </resources>
 </document>

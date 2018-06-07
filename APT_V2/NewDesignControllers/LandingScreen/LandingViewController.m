@@ -109,7 +109,9 @@ typedef enum : NSUInteger {
     [TableListDict setValue:@[] forKey:@"Fixtures"];
     [TableListDict setValue:@[] forKey:@"Results"];
 //    [TableListDict setValue:@[] forKey:@"Food"];
-    [TableListDict setValue:@[] forKey:@"Wellness"];
+//    [TableListDict setValue:@[] forKey:@"Wellness"];
+    [TableListDict setValue:@[] forKey:@"Videos"];
+    [TableListDict setValue:@[] forKey:@"Documents"];
     
     [self customnavigationmethod];
     [self EventsAndResultsWebservice];
@@ -354,46 +356,26 @@ typedef enum : NSUInteger {
     
     NSString* title = [[SectionNameArray objectAtIndex:indexPath.section] valueForKey:@"Title"];
     
-    if ([title isEqualToString:@"Wellness"]){
-//        WTB_object = [[WellnessTrainingBowlingVC alloc] initWithNibName:@"WellnessTrainingBowlingVC" bundle:nil];
-//        WTB_object.view.frame = CGRectMake(0,0, cell.customView.bounds.size.width, 250);
-//        [cell.customView addSubview:WTB_object.topView];
-        
-        self.WellnessUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
-        
-        [cell.customView addSubview:self.WellnessUIView];
-        
+    if ([title isEqualToString:@"Wellness"]) {
         [cell.collection setHidden:YES];
-        //[cell.customView setBackgroundColor:[UIColor orangeColor]];
+        self.WellnessUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
+        [cell.customView addSubview:self.WellnessUIView];
     }
-    else if ([title isEqualToString:@"Training Load"]){
-        //Training_object = [[TrainingLoadVC alloc] initWithNibName:@"TrainingLoadVC" bundle:nil];
+    else if ([title isEqualToString:@"Training Load"]) {
+        [cell.collection setHidden:YES];
         Training_object.view.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
         [cell.customView addSubview:Training_object.view];
-        [cell.collection setHidden:YES];
-        //[cell.customView setBackgroundColor:[UIColor orangeColor]];
-        
     }
-    else if([title isEqualToString:@"Bowling Graph"])
-    {
-        //WTB_object = [[WellnessTrainingBowlingVC alloc] initWithNibName:@"WellnessTrainingBowlingVC" bundle:nil];
-        self.BowlingUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
-        
-        [cell.customView addSubview:self.BowlingUIView];
-        
+    else if([title isEqualToString:@"Bowling Graph"]) {
         [cell.collection setHidden:YES];
-        //[cell.customView setBackgroundColor:[UIColor orangeColor]];
-        
+        self.BowlingUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
+        [cell.customView addSubview:self.BowlingUIView];
     }
     else if ([title isEqualToString:@"Food"]) {
-        self.FoodDiaryUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
-        
-        [cell.customView addSubview:self.FoodDiaryUIView];
-        
         [cell.collection setHidden:YES];
-    }
-    else
-    {
+        self.FoodDiaryUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
+        [cell.customView addSubview:self.FoodDiaryUIView];
+    } else {
         [cell.customView setBackgroundColor:[UIColor clearColor]];
         [cell.collection setHidden:NO];
     }
@@ -456,28 +438,27 @@ typedef enum : NSUInteger {
     if (collectionView.tag == 1) {
         return  [[TableListDict valueForKey:@"Events"] count];
     }
-    else if (collectionView.tag == 2){
+    else if (collectionView.tag == 2) {
         return [[TableListDict valueForKey:@"Teams"] count];
     }
-    else if (collectionView.tag == 3){
+    else if (collectionView.tag == 3) {
         return  [[TableListDict valueForKey:@"Fixtures"] count];
     }
-    else if (collectionView.tag == 4){
+    else if (collectionView.tag == 4) {
         return  [[TableListDict valueForKey:@"Results"] count];
     }
 //    else if (collectionView.tag == 5){
 //        return  [[TableListDict valueForKey:@"Food"] count];
 //    }
-    else if (collectionView.tag == 6){
-        return  [[TableListDict valueForKey:@"Videos"] count];
-    }
-    else if (collectionView.tag == 7){
-        return  [[TableListDict valueForKey:@"Documents"] count];
-    }
-    
-    if (collectionView == self.foodDiaryCollectionView) {
+    else if (collectionView == self.foodDiaryCollectionView) {
         [self.lblNoData setHidden:foodDiaryArray.count];
         return foodDiaryArray.count;
+    }
+    else if (collectionView.tag == 6) {
+        return  [[TableListDict valueForKey:@"Videos"] count];
+    }
+    else if (collectionView.tag == 7) {
+        return  [[TableListDict valueForKey:@"Documents"] count];
     }
     
     return 0;
@@ -496,51 +477,48 @@ typedef enum : NSUInteger {
     }
     else if (collectionView.tag == 2){ // Teams
         
-        TeamCollectionViewCell* cell = (TeamCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"TeamCollectionViewCell" forIndexPath:indexPath];
-        //        cell.lblTeamName.text = @"TeamsCell";
-        
         NSArray* teamlist = [TableListDict valueForKey:@"Teams"];
         
-        NSString * imgStr1 = [[teamlist valueForKey:@"TeamPhotoLink"] objectAtIndex:indexPath.row];
-        
-        [cell.imgTeam sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
-        
-        
-        return cell;
-        
+        if (teamlist.count) {
+            TeamCollectionViewCell* cell = (TeamCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"TeamCollectionViewCell" forIndexPath:indexPath];
+            NSString * imgStr1 = [[teamlist valueForKey:@"TeamPhotoLink"] objectAtIndex:indexPath.row];
+            [cell.imgTeam sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
+            return cell;
+        }
     }
     else if (collectionView.tag == 3){ // Fixtures
         
-        ResultCell* cell = (ResultCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellno" forIndexPath:indexPath];
-        cell.resultlbl.text = @"FixturesCell";
-        
         NSArray* FixturesArray =  [TableListDict valueForKey:@"Fixtures"];
-        
-        NSLog(@"DATE FORMAT %@ ",[[FixturesArray valueForKey:@"date"] objectAtIndex:indexPath.row]);
-        cell.datelbl.text = [[FixturesArray valueForKey:@"date"] objectAtIndex:indexPath.row];
-        // cell.resultlbl.text = [[objarray valueForKey:@"time"] objectAtIndex:indexPath.row];
-        cell.resultlbl.text = [[FixturesArray valueForKey:@"ground"] objectAtIndex:indexPath.row];
-        cell.FirstInnScorelbl.text = [[FixturesArray valueForKey:@"team1"] objectAtIndex:indexPath.row];
-        cell.SecondInnScorelbl.text = [[FixturesArray valueForKey:@"team2"] objectAtIndex:indexPath.row];
-        cell.competitionNamelbl.text = [[FixturesArray valueForKey:@"CompetitionName"] objectAtIndex:indexPath.row];
-        
-        cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
-        cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
-        
-        NSString * imgStr1 = ([[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team1Img"]==[NSNull null])?@"":[[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team1Img"];
-        
-        NSString * imgStr2 = ([[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team2Img"]==[NSNull null])?@"":[[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team2Img"];
-        [cell.teamAlogo sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
-        [cell.teamBlogo sd_setImageWithURL:[NSURL URLWithString:imgStr2] placeholderImage:[UIImage imageNamed:@"no-image"]];
-        
-        cell.layer.shadowColor = [UIColor darkGrayColor].CGColor;
-        cell.layer.shadowOffset = CGSizeZero;
-        cell.layer.shadowRadius = 1.0f;
-        cell.layer.shadowOpacity = 0.5f;
-        cell.layer.masksToBounds = NO;
-        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
-        
-        return cell;
+        if (FixturesArray.count) {
+            ResultCell* cell = (ResultCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellno" forIndexPath:indexPath];
+            cell.resultlbl.text = @"FixturesCell";
+            
+            NSLog(@"DATE FORMAT %@ ",[[FixturesArray valueForKey:@"date"] objectAtIndex:indexPath.row]);
+            cell.datelbl.text = [[FixturesArray valueForKey:@"date"] objectAtIndex:indexPath.row];
+                // cell.resultlbl.text = [[objarray valueForKey:@"time"] objectAtIndex:indexPath.row];
+            cell.resultlbl.text = [[FixturesArray valueForKey:@"ground"] objectAtIndex:indexPath.row];
+            cell.FirstInnScorelbl.text = [[FixturesArray valueForKey:@"team1"] objectAtIndex:indexPath.row];
+            cell.SecondInnScorelbl.text = [[FixturesArray valueForKey:@"team2"] objectAtIndex:indexPath.row];
+            cell.competitionNamelbl.text = [[FixturesArray valueForKey:@"CompetitionName"] objectAtIndex:indexPath.row];
+            
+            cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
+            cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
+            
+            NSString * imgStr1 = ([[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team1Img"]==[NSNull null])?@"":[[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team1Img"];
+            
+            NSString * imgStr2 = ([[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team2Img"]==[NSNull null])?@"":[[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team2Img"];
+            [cell.teamAlogo sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
+            [cell.teamBlogo sd_setImageWithURL:[NSURL URLWithString:imgStr2] placeholderImage:[UIImage imageNamed:@"no-image"]];
+            
+            cell.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+            cell.layer.shadowOffset = CGSizeZero;
+            cell.layer.shadowRadius = 1.0f;
+            cell.layer.shadowOpacity = 0.5f;
+            cell.layer.masksToBounds = NO;
+            cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
+            
+            return cell;
+        }
     }
     else if (collectionView.tag == 4){ // Results
         
@@ -599,11 +577,19 @@ typedef enum : NSUInteger {
         return cell;
     }
     
-   else if (collectionView.tag == 6){ //Videos
-       return  nil;
+   else if (collectionView.tag == 6){ // Videos
+//       ResultCell* cell = (ResultCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellno" forIndexPath:indexPath];
+//       cell.resultlbl.text = @"ResultCell";
+//       [self setUpResultCell:cell andINdex:indexPath];
+//       return cell;
+       return nil;
    }
-   else if (collectionView.tag == 7){ //Documents
-       return  nil;
+   else if (collectionView.tag == 7){ // Documents
+//       ResultCell* cell = (ResultCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellno" forIndexPath:indexPath];
+//       cell.resultlbl.text = @"ResultCell";
+//       [self setUpResultCell:cell andINdex:indexPath];
+//       return cell;
+       return nil;
    }
     
     return  nil;
@@ -1060,11 +1046,6 @@ typedef enum : NSUInteger {
         [COMMON webServiceFailureError:error];
         NSLog(@"failed");
         [AppCommon hideLoading];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.LandingTable reloadData];
-        });
-        
     }];
     
 }
@@ -1110,9 +1091,6 @@ typedef enum : NSUInteger {
             
         }
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.LandingTable reloadData];
-        });
         [AppCommon hideLoading];
         [self FoodDiaryWebservice];
         
@@ -1190,9 +1168,6 @@ typedef enum : NSUInteger {
             
         }
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.foodDiaryCollectionView reloadData];
-        });
         [AppCommon hideLoading];
         [self FetchWebservice];
         
@@ -1400,14 +1375,20 @@ typedef enum : NSUInteger {
             {
             self.NoDataView.hidden = NO;
             }
-        [AppCommon hideLoading];
         
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.foodDiaryCollectionView reloadData];
+            [self.LandingTable reloadData];
+            NSLog(@"Countt:%ld", TableListDict.count);
+        });
+        
+        [AppCommon hideLoading];
     }
-                          failure:^(AFHTTPRequestOperation *operation, id error) {
-                              NSLog(@"failed");
-                              [COMMON webServiceFailureError:error];
-                          }];
-    
+    failure:^(AFHTTPRequestOperation *operation, id error) {
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+         [AppCommon hideLoading];
+    }];
 }
 
 //-(void)EventTypeWebservice:(NSString *) usercode :(NSString*) cliendcode:(NSString *)userreference

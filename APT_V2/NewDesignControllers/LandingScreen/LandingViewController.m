@@ -145,7 +145,9 @@ typedef enum : NSUInteger {
     [TableListDict setValue:@[] forKey:@"Fixtures"];
     [TableListDict setValue:@[] forKey:@"Results"];
 //    [TableListDict setValue:@[] forKey:@"Food"];
-    [TableListDict setValue:@[] forKey:@"Wellness"];
+//    [TableListDict setValue:@[] forKey:@"Wellness"];
+    [TableListDict setValue:@[] forKey:@"Videos"];
+    [TableListDict setValue:@[] forKey:@"Documents"];
     
     [self customnavigationmethod];
     [self EventsAndResultsWebservice];
@@ -427,7 +429,6 @@ typedef enum : NSUInteger {
     
     if ([title isEqualToString:@"Wellness"]){
         self.WellnessUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
-        
         [cell.customView addSubview:self.WellnessUIView];
         
         [cell.collection setHidden:YES];
@@ -445,15 +446,14 @@ typedef enum : NSUInteger {
     {
         
         self.BowlingUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
-        
         [cell.customView addSubview:self.BowlingUIView];
         
         [cell.collection setHidden:YES];
         
     }
     else if ([title isEqualToString:@"Food"]) {
+        [cell.collection setHidden:YES];
         self.FoodDiaryUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
-        
         [cell.customView addSubview:self.FoodDiaryUIView];
         
         [cell.collection setHidden:YES];
@@ -622,51 +622,48 @@ typedef enum : NSUInteger {
     }
     else if (collectionView == self.TeamsCollectionView){ // Teams
         
-        TeamCollectionViewCell* cell = (TeamCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"TeamCollectionViewCell" forIndexPath:indexPath];
-        //        cell.lblTeamName.text = @"TeamsCell";
-        
         NSArray* teamlist = [TableListDict valueForKey:@"Teams"];
         
-        NSString * imgStr1 = [[teamlist valueForKey:@"TeamPhotoLink"] objectAtIndex:indexPath.row];
-        
-        [cell.imgTeam sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
-        
-        
-        return cell;
-        
+        if (teamlist.count) {
+            TeamCollectionViewCell* cell = (TeamCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"TeamCollectionViewCell" forIndexPath:indexPath];
+            NSString * imgStr1 = [[teamlist valueForKey:@"TeamPhotoLink"] objectAtIndex:indexPath.row];
+            [cell.imgTeam sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
+            return cell;
+        }
     }
     else if (collectionView == self.FixturesCollectionView){ // Fixtures
         
-        ResultCell* cell = (ResultCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellno" forIndexPath:indexPath];
-        cell.resultlbl.text = @"FixturesCell";
-        
         NSArray* FixturesArray =  [TableListDict valueForKey:@"Fixtures"];
-        
-        NSLog(@"DATE FORMAT %@ ",[[FixturesArray valueForKey:@"date"] objectAtIndex:indexPath.row]);
-        cell.datelbl.text = [[FixturesArray valueForKey:@"date"] objectAtIndex:indexPath.row];
-        // cell.resultlbl.text = [[objarray valueForKey:@"time"] objectAtIndex:indexPath.row];
-        cell.resultlbl.text = [[FixturesArray valueForKey:@"ground"] objectAtIndex:indexPath.row];
-        cell.FirstInnScorelbl.text = [[FixturesArray valueForKey:@"team1"] objectAtIndex:indexPath.row];
-        cell.SecondInnScorelbl.text = [[FixturesArray valueForKey:@"team2"] objectAtIndex:indexPath.row];
-        cell.competitionNamelbl.text = [[FixturesArray valueForKey:@"CompetitionName"] objectAtIndex:indexPath.row];
-        
-        cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
-        cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
-        
-        NSString * imgStr1 = ([[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team1Img"]==[NSNull null])?@"":[[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team1Img"];
-        
-        NSString * imgStr2 = ([[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team2Img"]==[NSNull null])?@"":[[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team2Img"];
-        [cell.teamAlogo sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
-        [cell.teamBlogo sd_setImageWithURL:[NSURL URLWithString:imgStr2] placeholderImage:[UIImage imageNamed:@"no-image"]];
-        
-        cell.layer.shadowColor = [UIColor darkGrayColor].CGColor;
-        cell.layer.shadowOffset = CGSizeZero;
-        cell.layer.shadowRadius = 1.0f;
-        cell.layer.shadowOpacity = 0.5f;
-        cell.layer.masksToBounds = NO;
-        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
-        
-        return cell;
+        if (FixturesArray.count) {
+            ResultCell* cell = (ResultCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellno" forIndexPath:indexPath];
+            cell.resultlbl.text = @"FixturesCell";
+            
+            NSLog(@"DATE FORMAT %@ ",[[FixturesArray valueForKey:@"date"] objectAtIndex:indexPath.row]);
+            cell.datelbl.text = [[FixturesArray valueForKey:@"date"] objectAtIndex:indexPath.row];
+                // cell.resultlbl.text = [[objarray valueForKey:@"time"] objectAtIndex:indexPath.row];
+            cell.resultlbl.text = [[FixturesArray valueForKey:@"ground"] objectAtIndex:indexPath.row];
+            cell.FirstInnScorelbl.text = [[FixturesArray valueForKey:@"team1"] objectAtIndex:indexPath.row];
+            cell.SecondInnScorelbl.text = [[FixturesArray valueForKey:@"team2"] objectAtIndex:indexPath.row];
+            cell.competitionNamelbl.text = [[FixturesArray valueForKey:@"CompetitionName"] objectAtIndex:indexPath.row];
+            
+            cell.teamAlogo.image = [UIImage imageNamed:@"no-image"];
+            cell.teamBlogo.image = [UIImage imageNamed:@"no-image"];
+            
+            NSString * imgStr1 = ([[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team1Img"]==[NSNull null])?@"":[[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team1Img"];
+            
+            NSString * imgStr2 = ([[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team2Img"]==[NSNull null])?@"":[[FixturesArray objectAtIndex:indexPath.row] valueForKey:@"team2Img"];
+            [cell.teamAlogo sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
+            [cell.teamBlogo sd_setImageWithURL:[NSURL URLWithString:imgStr2] placeholderImage:[UIImage imageNamed:@"no-image"]];
+            
+            cell.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+            cell.layer.shadowOffset = CGSizeZero;
+            cell.layer.shadowRadius = 1.0f;
+            cell.layer.shadowOpacity = 0.5f;
+            cell.layer.masksToBounds = NO;
+            cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
+            
+            return cell;
+        }
     }
     else if (collectionView == self.ResultsCollectionView){ // Results
         
@@ -1195,11 +1192,6 @@ typedef enum : NSUInteger {
         [COMMON webServiceFailureError:error];
         NSLog(@"failed");
         [AppCommon hideLoading];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.LandingTable reloadData];
-        });
-        
     }];
     
 }
@@ -1325,9 +1317,6 @@ typedef enum : NSUInteger {
             
         }
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.foodDiaryCollectionView reloadData];
-        });
         [AppCommon hideLoading];
         [self FetchWebservice];
         
@@ -1535,14 +1524,20 @@ typedef enum : NSUInteger {
             {
             self.NoDataView.hidden = NO;
             }
-        [AppCommon hideLoading];
         
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.foodDiaryCollectionView reloadData];
+            [self.LandingTable reloadData];
+            NSLog(@"Countt:%ld", TableListDict.count);
+        });
+        
+        [AppCommon hideLoading];
     }
-                          failure:^(AFHTTPRequestOperation *operation, id error) {
-                              NSLog(@"failed");
-                              [COMMON webServiceFailureError:error];
-                          }];
-    
+    failure:^(AFHTTPRequestOperation *operation, id error) {
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+         [AppCommon hideLoading];
+    }];
 }
 
 //-(void)EventTypeWebservice:(NSString *) usercode :(NSString*) cliendcode:(NSString *)userreference

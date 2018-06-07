@@ -140,6 +140,33 @@
 
 }
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
+
+
+-(void)customnavigationmethod
+{
+    CustomNavigation * objCustomNavigation;
+    
+    objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
+    
+    [self.headerView addSubview:objCustomNavigation.view];
+    objCustomNavigation.tittle_lbl.text=@"VideoGallery";
+    objCustomNavigation.btn_back.hidden = YES;
+    objCustomNavigation.home_btn.hidden = YES;
+    objCustomNavigation.menu_btn.hidden =NO;
+    
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    
+    
+    [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    
+}
 - (void)showAnimate
 {
     self.categoryTbl.transform = CGAffineTransformMakeScale(1.3, 1.3);

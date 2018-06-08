@@ -226,6 +226,7 @@
 //    if(UserrefCode)   [dic    setObject:UserrefCode     forKey:@"Userreferencecode"];
 //    if(usercode)   [dic    setObject:usercode     forKey:@"Usercode"];
 
+    /*
     if (selectedTeamCode == nil) {
         [AppCommon showAlertWithMessage:@"Please select Team"];
         return;
@@ -242,12 +243,9 @@
         [AppCommon showAlertWithMessage:@"Please select Category"];
         return;
     }
-
-
-
-    
-    
-    
+    */
+    selectedTeamCode = [AppCommon getCurrentTeamCode];
+    selectedPlayerCode = [AppCommon GetuserReference];
     
     if(lblTeam.text)   [dic    setObject:selectedTeamCode     forKey:@"TeamCode"];
     if(selectedPlayerCode)   [dic    setObject:selectedPlayerCode     forKey:@"PlayerCode"];
@@ -301,12 +299,12 @@
 - (IBAction)UploadVideoAction:(id)sender {
     
     VideoPlayerUploadVC *VC = [VideoPlayerUploadVC new];
-//    VC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-//    VC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-//    [VC.view setBackgroundColor:[UIColor clearColor]];
-//    [appDel.frontNavigationController presentViewController:VC animated:YES completion:nil];
+    VC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    VC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [VC.view setBackgroundColor:[UIColor clearColor]];
+    [appDel.frontNavigationController presentViewController:VC animated:YES completion:nil];
     
-    [appDel.frontNavigationController pushViewController:VC animated:YES];
+//    [appDel.frontNavigationController pushViewController:VC animated:YES];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView

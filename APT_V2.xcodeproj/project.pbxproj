@@ -21,6 +21,8 @@
 		042542B92028A1A10088B87B /* HomeScreenStandingsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042542B82028A1A10088B87B /* HomeScreenStandingsCell.xib */; };
 		042699CD2043DB06001AB09F /* IllnessTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 042699CB2043DB06001AB09F /* IllnessTracker.m */; };
 		042699CE2043DB06001AB09F /* IllnessTracker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042699CC2043DB06001AB09F /* IllnessTracker.xib */; };
+		042E22DF20CA459500D8349C /* NewVideoDocumentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 042E22DD20CA459500D8349C /* NewVideoDocumentVC.m */; };
+		042E22E020CA459500D8349C /* NewVideoDocumentVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042E22DE20CA459500D8349C /* NewVideoDocumentVC.xib */; };
 		043C2F2F202AF59E00EB3F8C /* PieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C2F2C202AF59E00EB3F8C /* PieChartView.m */; };
 		043C2F30202AF59E00EB3F8C /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 043C2F2E202AF59E00EB3F8C /* XYPieChart.m */; };
 		04534F7F2037E63600C22717 /* CRTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04534F7E2037E63600C22717 /* CRTableViewCell.m */; };
@@ -389,6 +391,9 @@
 		042699CA2043DB06001AB09F /* IllnessTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IllnessTracker.h; sourceTree = "<group>"; };
 		042699CB2043DB06001AB09F /* IllnessTracker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IllnessTracker.m; sourceTree = "<group>"; };
 		042699CC2043DB06001AB09F /* IllnessTracker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IllnessTracker.xib; sourceTree = "<group>"; };
+		042E22DC20CA459500D8349C /* NewVideoDocumentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewVideoDocumentVC.h; sourceTree = "<group>"; };
+		042E22DD20CA459500D8349C /* NewVideoDocumentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewVideoDocumentVC.m; sourceTree = "<group>"; };
+		042E22DE20CA459500D8349C /* NewVideoDocumentVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewVideoDocumentVC.xib; sourceTree = "<group>"; };
 		043C2F2B202AF59E00EB3F8C /* PieChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieChartView.h; sourceTree = "<group>"; };
 		043C2F2C202AF59E00EB3F8C /* PieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieChartView.m; sourceTree = "<group>"; };
 		043C2F2D202AF59E00EB3F8C /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
@@ -1027,6 +1032,16 @@
 			path = IllnessTracker;
 			sourceTree = "<group>";
 		};
+		042E22DB20CA455500D8349C /* NewVideoDocumentVC */ = {
+			isa = PBXGroup;
+			children = (
+				042E22DC20CA459500D8349C /* NewVideoDocumentVC.h */,
+				042E22DD20CA459500D8349C /* NewVideoDocumentVC.m */,
+				042E22DE20CA459500D8349C /* NewVideoDocumentVC.xib */,
+			);
+			path = NewVideoDocumentVC;
+			sourceTree = "<group>";
+		};
 		043828CE2031DD6300B32899 /* TeamMembersVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1573,6 +1588,7 @@
 		18A6ADAD20C2BD98000F342E /* NewDesignControllers */ = {
 			isa = PBXGroup;
 			children = (
+				042E22DB20CA455500D8349C /* NewVideoDocumentVC */,
 				CE6DD95D20C7AEA50026FE23 /* LandingScreen */,
 				CE6DD96520C7AEA50026FE23 /* TeamCollectionCell */,
 				188F3D0820C5038A00199CBF /* HistoryVC */,
@@ -2728,6 +2744,7 @@
 				18949A2E20875C5F002ECEE0 /* blackCircle.png in Resources */,
 				04534F912037F44400C22717 /* FoodDiaryCell.xib in Resources */,
 				18AC345E203EE50C003EE0F0 /* CoachBowlingLoad.xib in Resources */,
+				042E22E020CA459500D8349C /* NewVideoDocumentVC.xib in Resources */,
 				CE60F10220870C8200B74A2C /* ResultsCell_iPhone.xib in Resources */,
 				04BC4A85208607FF00CEB23E /* DropDownTableViewController.xib in Resources */,
 				04534F9620383F0C00C22717 /* FoodDescriptionCell.xib in Resources */,
@@ -2935,6 +2952,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				042E22DF20CA459500D8349C /* NewVideoDocumentVC.m in Sources */,
 				CEA42105203161A800B2DAB5 /* VideoPlayerViewController.m in Sources */,
 				CE6C16472045211300672253 /* BattingKPIViewController.m in Sources */,
 				18949A0720875C5F002ECEE0 /* FFMonthCell.m in Sources */,

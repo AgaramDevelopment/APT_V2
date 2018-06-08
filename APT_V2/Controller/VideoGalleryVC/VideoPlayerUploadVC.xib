@@ -33,6 +33,7 @@
                 <outlet property="shareuser_lbl" destination="q2g-KH-JPX" id="WQX-Sp-eTk"/>
                 <outlet property="teamBtn" destination="fLJ-Fy-o7D" id="xbg-6H-MW4"/>
                 <outlet property="teamView" destination="aRT-oP-rm8" id="reQ-iV-F8K"/>
+                <outlet property="titleLbl" destination="6A0-dr-aoI" id="ahz-Dh-6ef"/>
                 <outlet property="txtVideoDate" destination="yOA-HR-zbt" id="lL3-rY-Wde"/>
                 <outlet property="videoDateView" destination="DIU-Kw-G1M" id="SgK-EB-Rlo"/>
                 <outlet property="view" destination="zpW-1O-4dz" id="9zM-km-i6X"/>
@@ -49,7 +50,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5z-Lw-ZQk">
                             <rect key="frame" x="5" y="35" width="365" height="35"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Videos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6A0-dr-aoI">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6A0-dr-aoI">
                                     <rect key="frame" x="5" y="3" width="175" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="3Ch-rG-VTr"/>
@@ -480,7 +481,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="0iL-1x-1dY"/>
                         <barButtonItem tag="1" title="Done" id="yqh-Cl-tDm">
                             <connections>
-                                <action selector="datePickerAction:" destination="-1" id="OcP-hK-bhH"/>
+                                <action selector="showSelecteddate:" destination="-1" id="4rS-Av-NVi"/>
                             </connections>
                         </barButtonItem>
                     </items>

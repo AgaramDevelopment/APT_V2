@@ -17,6 +17,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewVideoDocumentVC">
             <connections>
+                <outlet property="btnCategory" destination="KBX-7L-yzE" id="3g3-fg-PRg"/>
+                <outlet property="btnUpload" destination="Ihm-Pq-zPd" id="szu-Jg-wVX"/>
+                <outlet property="dateTF" destination="E1C-y9-ivv" id="9aR-jb-eR3"/>
+                <outlet property="headerView" destination="ShK-7k-VQr" id="PMH-AG-cR7"/>
+                <outlet property="lblNovideo" destination="q02-70-goq" id="owu-GA-M2e"/>
+                <outlet property="lblcategory" destination="yy2-NT-C4z" id="tdP-OO-CVj"/>
+                <outlet property="search_Txt" destination="Xo9-6M-ICP" id="bCs-8q-4qz"/>
+                <outlet property="tableMainView" destination="BcX-ek-Oen" id="Zav-yi-Gjo"/>
+                <outlet property="tbl_list" destination="uDR-bk-xHe" id="6eH-EE-MDR"/>
+                <outlet property="videoCollectionview2" destination="nQQ-FB-Fji" id="Xbp-AY-3Dg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -55,6 +65,9 @@
                             <variation key="heightClass=regular-widthClass=regular">
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
                             </variation>
+                            <connections>
+                                <action selector="UploadVideoAction:" destination="-1" eventType="touchUpInside" id="Spk-8C-an6"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -100,7 +113,7 @@
                                         <constraint firstAttribute="height" constant="20" id="WrO-yW-dBw"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBX-7L-yzE">
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBX-7L-yzE">
                                     <rect key="frame" x="0.0" y="0.0" width="103" height="30"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
@@ -110,6 +123,9 @@
                                             <integer key="value" value="5"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="showFilter:" destination="-1" eventType="touchUpInside" id="8Ko-z2-4Nx"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -148,6 +164,9 @@
                                     <variation key="heightClass=regular-widthClass=regular">
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                     </variation>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="eKL-Be-2Av"/>
+                                    </connections>
                                 </textField>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHq-Ie-7gy">
                                     <rect key="frame" x="0.0" y="26" width="103.5" height="2"/>
@@ -168,6 +187,9 @@
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vNB-2a-NwU">
                                     <rect key="frame" x="0.0" y="0.0" width="103.5" height="30"/>
+                                    <connections>
+                                        <action selector="dateButtonTapped:" destination="-1" eventType="touchUpInside" id="UlR-Tn-oaV"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -199,6 +221,9 @@
                                     <variation key="heightClass=regular-widthClass=regular">
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                     </variation>
+                                    <connections>
+                                        <outlet property="delegate" destination="-1" id="syw-h7-Fkc"/>
+                                    </connections>
                                 </textField>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_search" translatesAutoresizingMaskIntoConstraints="NO" id="FiY-4Y-GVJ">
                                     <rect key="frame" x="81" y="5" width="20" height="20"/>
@@ -248,6 +273,10 @@
                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </collectionViewFlowLayout>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="ZU4-RV-xOU"/>
+                                <outlet property="delegate" destination="-1" id="n48-3u-3HR"/>
+                            </connections>
                         </collectionView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Videos Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q02-70-goq">
                             <rect key="frame" x="132.5" y="237.5" width="110" height="17"/>

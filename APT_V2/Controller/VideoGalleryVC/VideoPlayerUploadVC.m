@@ -130,6 +130,14 @@
     [DatePicker addTarget:self action:@selector(showSelecteddate:) forControlEvents:UIControlEventValueChanged];
     self.ModuleArray = [[NSMutableArray alloc]initWithObjects:coachdict,physiodict,Sandcdict, nil];
     [self.txtVideoDate setInputView:datepickerView];
+    
+    //Video or Document Upload Title
+    if ([self.titleString isEqualToString:@"Videos"]) {
+        self.titleLbl.text = self.titleString;
+    } else {
+        self.titleLbl.text = self.titleString;
+    }
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -893,6 +901,8 @@
     }
     else if ([sender tag] == 4) // share to user
     {
+    
+    isShare = YES;
         self.commonArray = self.sharetouserArray;
         popTbl.frame = CGRectMake(sharetoUserView.frame.origin.x+10, CGRectGetMaxY(sharetoUserView.frame)+460, sharetoUserView.frame.size.width, 200);
     }

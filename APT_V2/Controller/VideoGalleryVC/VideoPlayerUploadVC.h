@@ -46,5 +46,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *txtVideoDate;
 - (IBAction)didClickType:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *teamBtn;
-
+@property (strong, nonatomic) IBOutlet UILabel *titleLbl;
+@property (nonatomic,strong) NSString * titleString;
 @end

@@ -23,6 +23,7 @@
 #import "VideoGalleryVC.h"
 #import "DocumentViewController.h"
 #import "TeamsReportsHistoryVC.h"
+#import "NewVideoDocumentVC.h"
 
 @interface RearViewController ()
 {
@@ -203,7 +204,8 @@
         }
         else if(indexPath.row == 5){
             
-            newFrontController= [DocumentViewController new];
+//            newFrontController= [DocumentViewController new];
+            newFrontController= [NewVideoDocumentVC new];
         }
         else if(indexPath.row == 6){
             
@@ -259,7 +261,8 @@
         }
         else if(indexPath.row == 5){
             
-            newFrontController= [DocumentViewController new];
+//            newFrontController= [DocumentViewController new];
+            newFrontController= [NewVideoDocumentVC new];
         }
         else if(indexPath.row == 6){
             

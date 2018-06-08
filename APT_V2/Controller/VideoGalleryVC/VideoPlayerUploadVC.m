@@ -744,7 +744,15 @@
         return;
     
     [AppCommon showLoading];
-    NSString *URLString =  URL_FOR_RESOURCE(VideoUpload);
+    
+     NSString *URLString;
+    
+    if ([self.titleString isEqualToString:@"Videos"]) {
+        URLString =  URL_FOR_RESOURCE(VideoUpload);
+    } else {
+        URLString =  URL_FOR_RESOURCE(DocumentUpload);
+    }
+   
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
    
@@ -765,21 +773,37 @@
         if(createdby)   [dic    setObject:createdby     forKey:@"Createdby"];
         
         selectModule = @"MSC084 "; // MSC084 moduleCode - coach
-        if(selectModule)   [dic    setObject:selectModule     forKey:@"moduleCode"];
+    
+        if ([self.titleString isEqualToString:@"Videos"]) {
+            if(selectModule)   [dic    setObject:selectModule     forKey:@"moduleCode"];
+            if(self.txtVideoDate.text)   [dic    setObject:self.txtVideoDate.text     forKey:@"videoDate"];
+//            if(imgFileName)   [dic    setObject:imgFileName  forKey:@"documentFile"];
+            
+             if(imgFileName)   [dic    setObject:imgFileName  forKey:@"videoFile"];
+            if(correspondingTeamCode)   [dic    setObject:correspondingTeamCode     forKey:@"teamCode"];
+            if(self.objKeyword_Txt.text)   [dic    setObject:self.objKeyword_Txt.text     forKey:@"keyWords"];
+        } else {
+            if(selectModule)   [dic    setObject:selectModule     forKey:@"Modulecode"];
+            if(self.txtVideoDate.text)   [dic    setObject:self.txtVideoDate.text     forKey:@"Uploaddate"];
+             if(imgFileName)   [dic    setObject:imgFileName  forKey:@"DocumentFilename"];
+            if(correspondingTeamCode)   [dic    setObject:correspondingTeamCode     forKey:@"TeamCode"];
+            if(self.objKeyword_Txt.text)   [dic    setObject:self.objKeyword_Txt.text     forKey:@"KeyWords"];
+        }
+    
         //    if(selectGameCode)   [dic    setObject:selectGameCode     forKey:@"gameCode"];
         
         //        correspondingTeamCode = @"TEA0000004";
-        if(correspondingTeamCode)   [dic    setObject:correspondingTeamCode     forKey:@"teamCode"];
+        if(imgFileName)   [dic    setObject:imgFileName  forKey:@"filename"];
+    
         
         //        selectPlayer = @"AMR0000001";
         if(selectPlayer)   [dic    setObject:selectPlayer     forKey:@"playerCode"];
-        if(self.txtVideoDate.text)   [dic    setObject:self.txtVideoDate.text     forKey:@"videoDate"];
+    
         if(SelectedcategoryCode)   [dic    setObject:SelectedcategoryCode     forKey:@"categoryCode"];
-        if(self.objKeyword_Txt.text)   [dic    setObject:self.objKeyword_Txt.text     forKey:@"keyWords"];
+    
         //    if(comments)   [dic    setObject:@""    forKey:@"comments"];
-        
-        if(imgFileName)   [dic    setObject:imgFileName  forKey:@"videoFile"];
-        if(imgFileName)   [dic    setObject:imgFileName  forKey:@"filename"];
+    
+    
         //
         //    if(videoCode)   [dic    setObject:videoCode  forKey:@"videoCode"];
         //        sharedUserID = @"AMR0000059,AMR000005";

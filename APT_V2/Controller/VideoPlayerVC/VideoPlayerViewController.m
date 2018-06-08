@@ -47,7 +47,8 @@
 }
 - (IBAction)closeBtn:(id)sender {
     
-    [self.view removeFromSuperview];
+    //[self.view removeFromSuperview];
+    [appDel.frontNavigationController popViewControllerAnimated:YES];
 }
 -(void)staticvideo
 {

@@ -24,6 +24,9 @@
 #import "HorizontalXLblFormatter.h"
 #import "FoodDiaryUpdateVC.h"
 #import "PlannerVC.h"
+#import "TabbarVC.h"
+#import "VideoGalleryUploadCell.h"
+#import "VideoPlayerViewController.h"
 
 typedef enum : NSUInteger {
     Events,
@@ -73,7 +76,7 @@ typedef enum : NSUInteger {
     //    [cell.collection registerNib:[UINib nibWithNibName:@"ScheduleCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     //    [cell.collection registerNib:[UINib nibWithNibName:@"ResultCell" bundle:nil] forCellWithReuseIdentifier:@"cellno"];
     
-  //  [self.LandingTable registerNib:@"LandingTableViewCell" forCellReuseIdentifier:@"LandingTableViewCell"];
+    //  [self.LandingTable registerNib:@"LandingTableViewCell" forCellReuseIdentifier:@"LandingTableViewCell"];
     
     [self.foodDiaryCollectionView registerNib:[UINib nibWithNibName:@"FoodDiaryCell" bundle:nil] forCellWithReuseIdentifier:@"foodCell"];
     
@@ -90,46 +93,46 @@ typedef enum : NSUInteger {
     [self.TeamsCollectionView registerNib:[UINib nibWithNibName:@"TeamCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"TeamCollectionViewCell"];
     
     
-
+    
     
     WTB_object = [WellnessTrainingBowlingVC new];
     Training_object = [TrainingLoadVC new];
-//    SectionNameArray = @[@{@"Title":@"Events"},
-//                         @{@"Title":@"Teams"},
-//                         @{@"Title":@"Fixtures"},
-//                         @{@"Title":@"Results"},
-//                         @{@"Title":@"Videos"},
-//                         @{@"Title":@"Documents"}];
-//
-//
-//    NSArray* arr = @[@{@"Title":@"Events"},
-//                     @{@"Title":@"Wellness"},
-//                     @{@"Title":@"Training Load"},
-//                     @{@"Title":@"Food"},
-//                     @{@"Title":@"Bowling Graph"},
-//                     @{@"Title":@"Fixtures"},
-//                     @{@"Title":@"Results"},
-//                     @{@"Title":@"Videos"},
-//                     @{@"Title":@"Documents"}];
+    //    SectionNameArray = @[@{@"Title":@"Events"},
+    //                         @{@"Title":@"Teams"},
+    //                         @{@"Title":@"Fixtures"},
+    //                         @{@"Title":@"Results"},
+    //                         @{@"Title":@"Videos"},
+    //                         @{@"Title":@"Documents"}];
+    //
+    //
+    //    NSArray* arr = @[@{@"Title":@"Events"},
+    //                     @{@"Title":@"Wellness"},
+    //                     @{@"Title":@"Training Load"},
+    //                     @{@"Title":@"Food"},
+    //                     @{@"Title":@"Bowling Graph"},
+    //                     @{@"Title":@"Fixtures"},
+    //                     @{@"Title":@"Results"},
+    //                     @{@"Title":@"Videos"},
+    //                     @{@"Title":@"Documents"}];
     
     
     SectionNameArray = @[@{@"Title":@"Events",@"image":@""},
-                         @{@"Title":@"Teams",@"image":@""},
+                         @{@"Title":@"Teams",@"image":@"APT_Team"},
                          @{@"Title":@"Fixtures",@"image":@""},
                          @{@"Title":@"Results",@"image":@"More_selected"},
                          @{@"Title":@"Videos",@"image":@"More_selected"},
                          @{@"Title":@"Documents",@"image":@"More_selected"}];
     
     
-    NSArray* arr = @[@{@"Title":@"Events",@"image":@"ico_calendar"},
-                           @{@"Title":@"Wellness",@"image":@"APT_Stats"},
-                           @{@"Title":@"Training Load",@"image":@"APT_Stats"},
-                           @{@"Title":@"Foods",@"image":@""},
-                           @{@"Title":@"Bowling Graph",@"image":@""},
-                           @{@"Title":@"Fixtures",@"image":@""},
-                           @{@"Title":@"Results",@"image":@"More_selected"},
-                           @{@"Title":@"Videos",@"image":@"More_selected"},
-                           @{@"Title":@"Documents",@"image":@"More_selected"}];
+    NSArray* arr = @[@{@"Title":@"Events",@"image":@"APT_Planner"},
+                     @{@"Title":@"Wellness",@"image":@"APT_Stats"},
+                     @{@"Title":@"Training Load",@"image":@"APT_Training load"},
+                     @{@"Title":@"Foods",@"image":@"APT_Food Dairy"},
+                     @{@"Title":@"Bowling Graph",@"image":@""},
+                     @{@"Title":@"Fixtures",@"image":@""},
+                     @{@"Title":@"Results",@"image":@"Toss&Results_selected"},
+                     @{@"Title":@"Videos",@"image":@"Video-Icon-crop"},
+                     @{@"Title":@"Documents",@"image":@""}];
     
     
     
@@ -144,8 +147,8 @@ typedef enum : NSUInteger {
     [TableListDict setValue:@[] forKey:@"Teams"];
     [TableListDict setValue:@[] forKey:@"Fixtures"];
     [TableListDict setValue:@[] forKey:@"Results"];
-//    [TableListDict setValue:@[] forKey:@"Food"];
-//    [TableListDict setValue:@[] forKey:@"Wellness"];
+    //    [TableListDict setValue:@[] forKey:@"Food"];
+    //    [TableListDict setValue:@[] forKey:@"Wellness"];
     [TableListDict setValue:@[] forKey:@"Videos"];
     [TableListDict setValue:@[] forKey:@"Documents"];
     
@@ -332,7 +335,7 @@ typedef enum : NSUInteger {
     cell.lblSectionTitle.text = [[SectionNameArray objectAtIndex:section] valueForKey:@"Title"];
     UIImage* image = [UIImage imageNamed:[[SectionNameArray objectAtIndex:section]valueForKey:@"image"]];
     [cell.imgSectionHead setImage:image];
-//    [cell.btnSectionHead setImage:image forState:UIControlStateNormal];
+    //    [cell.btnSectionHead setImage:image forState:UIControlStateNormal];
     cell.btnSectionHead.tag = section;
     [cell.btnSectionHead addTarget:self action:@selector(HeaderBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -378,8 +381,8 @@ typedef enum : NSUInteger {
     return  IS_IPAD ? 250 : 150;
 }
 
-//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-//
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+
 //    LandingTableViewCell* Tablecell = (LandingTableViewCell *)cell;
 //    NSString* title = [[SectionNameArray objectAtIndex:indexPath.section] valueForKey:@"Title"];
 //
@@ -404,8 +407,15 @@ typedef enum : NSUInteger {
 //    else if ([title isEqualToString:@"Documents"]) {
 //        [Tablecell configureCell:self andIndex:7 andTitile:title];
 //    }
-//
-//}
+    
+    CGRect frame = cell.frame;
+    [cell setFrame:CGRectMake(0, self.LandingTable.frame.size.height, frame.size.width, frame.size.height)];
+    [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionTransitionCrossDissolve  animations:^{
+        [cell setFrame:frame];
+    } completion:^(BOOL finished) {
+    }];
+
+}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -420,15 +430,16 @@ typedef enum : NSUInteger {
         
     }
     
-//    for (UIView* temp in cell.customView.subviews) {
-//        [temp removeFromSuperview];
-//    }
+    
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSString* title = [[SectionNameArray objectAtIndex:indexPath.section] valueForKey:@"Title"];
     
     if ([title isEqualToString:@"Wellness"]){
         self.WellnessUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
+        
+        
+        
         [cell.customView addSubview:self.WellnessUIView];
         
         [cell.collection setHidden:YES];
@@ -494,14 +505,14 @@ typedef enum : NSUInteger {
         [cell.customView addSubview:self.ResultsUIView];
         [cell.collection setHidden:YES];
     }
-//    else
-//    {
-//        [cell.customView removeFromSuperview];
-//        [cell.customView setBackgroundColor:[UIColor clearColor]];
-//        [cell.collection setHidden:NO];
-//    }
+    //    else
+    //    {
+    //        [cell.customView removeFromSuperview];
+    //        [cell.customView setBackgroundColor:[UIColor clearColor]];
+    //        [cell.collection setHidden:NO];
+    //    }
     
-
+    
     
     return cell;
 }
@@ -513,16 +524,34 @@ typedef enum : NSUInteger {
     CGFloat width = collectionView.frame.size.width;
     CGFloat height = collectionView.frame.size.height;
     
-    if(!IS_IPAD && !IS_IPHONE5)
+    if(collectionView  == self.EventsCollectionView)
     {
-        width = width/2;
+        if(!IS_IPAD && !IS_IPHONE5)
+        {
+            width = width/2;
+        }
+        else if(IS_IPAD)
+        {
+            width = width/3;
+        }
+        
+        return CGSizeMake(width-20, height-50);
     }
-    else if(IS_IPAD)
+    else
     {
-        width = width/3;
+        if(!IS_IPAD && !IS_IPHONE5)
+        {
+            width = width/2;
+        }
+        else if(IS_IPAD)
+        {
+            width = width/3;
+        }
+        
+        return CGSizeMake(width-20, height-20);
     }
     
-    return CGSizeMake(width-20, height-20);
+    
     
 }
 
@@ -558,27 +587,27 @@ typedef enum : NSUInteger {
     NSLog(@"collectionView.tag %ld",(long)collectionView.tag);
     
     
-//    if (collectionView.tag == 1) {
-//        return  [[TableListDict valueForKey:@"Events"] count];
-//    }
-//    else if (collectionView.tag == 2){
-//        return [[TableListDict valueForKey:@"Teams"] count];
-//    }
-//    else if (collectionView.tag == 3){
-//        return  [[TableListDict valueForKey:@"Fixtures"] count];
-//    }
-//    else if (collectionView.tag == 4){
-//        return  [[TableListDict valueForKey:@"Results"] count];
-//    }
-////    else if (collectionView.tag == 5){
-////        return  [[TableListDict valueForKey:@"Food"] count];
-////    }
-//    else if (collectionView.tag == 6){
-//        return  [[TableListDict valueForKey:@"Videos"] count];
-//    }
-//    else if (collectionView.tag == 7){
-//        return  [[TableListDict valueForKey:@"Documents"] count];
-//    }
+    //    if (collectionView.tag == 1) {
+    //        return  [[TableListDict valueForKey:@"Events"] count];
+    //    }
+    //    else if (collectionView.tag == 2){
+    //        return [[TableListDict valueForKey:@"Teams"] count];
+    //    }
+    //    else if (collectionView.tag == 3){
+    //        return  [[TableListDict valueForKey:@"Fixtures"] count];
+    //    }
+    //    else if (collectionView.tag == 4){
+    //        return  [[TableListDict valueForKey:@"Results"] count];
+    //    }
+    ////    else if (collectionView.tag == 5){
+    ////        return  [[TableListDict valueForKey:@"Food"] count];
+    ////    }
+    //    else if (collectionView.tag == 6){
+    //        return  [[TableListDict valueForKey:@"Videos"] count];
+    //    }
+    //    else if (collectionView.tag == 7){
+    //        return  [[TableListDict valueForKey:@"Documents"] count];
+    //    }
     
     if (collectionView == self.foodDiaryCollectionView) {
         [self.lblNoData setHidden:foodDiaryArray.count];
@@ -640,7 +669,7 @@ typedef enum : NSUInteger {
             
             NSLog(@"DATE FORMAT %@ ",[[FixturesArray valueForKey:@"date"] objectAtIndex:indexPath.row]);
             cell.datelbl.text = [[FixturesArray valueForKey:@"date"] objectAtIndex:indexPath.row];
-                // cell.resultlbl.text = [[objarray valueForKey:@"time"] objectAtIndex:indexPath.row];
+            // cell.resultlbl.text = [[objarray valueForKey:@"time"] objectAtIndex:indexPath.row];
             cell.resultlbl.text = [[FixturesArray valueForKey:@"ground"] objectAtIndex:indexPath.row];
             cell.FirstInnScorelbl.text = [[FixturesArray valueForKey:@"team1"] objectAtIndex:indexPath.row];
             cell.SecondInnScorelbl.text = [[FixturesArray valueForKey:@"team2"] objectAtIndex:indexPath.row];
@@ -677,18 +706,18 @@ typedef enum : NSUInteger {
         
     }
     /*
-    else if (collectionView.tag == 5){ // Food
-        
-        FoodDiaryCell *cell = (FoodDiaryCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"foodCell" forIndexPath:indexPath];
-            //        cell.mealNameLbl.text = @"Foodcell";
-        [self setupFoodCell:cell andIndex:indexPath];
-        
-        
-        return cell;
-        
-    }
-    */
-   else if (collectionView == self.foodDiaryCollectionView) { // Food
+     else if (collectionView.tag == 5){ // Food
+     
+     FoodDiaryCell *cell = (FoodDiaryCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"foodCell" forIndexPath:indexPath];
+     //        cell.mealNameLbl.text = @"Foodcell";
+     [self setupFoodCell:cell andIndex:indexPath];
+     
+     
+     return cell;
+     
+     }
+     */
+    else if (collectionView == self.foodDiaryCollectionView) { // Food
         
         FoodDiaryCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"foodCell" forIndexPath:indexPath];
         
@@ -722,12 +751,57 @@ typedef enum : NSUInteger {
         return cell;
     }
     
-   else if (collectionView == self.VideosCollectionView){ //Videos
-       return  nil;
-   }
-   else if (collectionView == self.DocumentsCollectionView){ //Documents
-       return  nil;
-   }
+    else if (collectionView == self.VideosCollectionView){ //Videos
+        
+        VideoGalleryUploadCell* cell = [self.VideosCollectionView dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
+        
+        NSArray* videosArray = [TableListDict valueForKey:@"Videos"];
+        
+        cell.contentView.layer.cornerRadius = 2.0f;
+        cell.contentView.layer.borderWidth = 1.0f;
+        cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
+        cell.contentView.layer.masksToBounds = YES;
+        
+        cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+        cell.layer.shadowOffset = CGSizeMake(0, 2.0f);
+        cell.layer.shadowRadius = 2.0f;
+        cell.layer.shadowOpacity = 1.0f;
+        cell.layer.masksToBounds = NO;
+        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
+        
+       // NSString * videoDetailStr = [[self.objFirstGalleryArray valueForKey:@"videoFile"] objectAtIndex:indexPath.row];
+        //        NSArray *component3 = [videoDetailStr componentsSeparatedByString:@" "];
+        
+        //        cell.playername_lbl.text =  [NSString stringWithFormat:@"%@",component3[0]];
+        //        if ([[AppCommon checkNull:[[self.objFirstGalleryArray valueForKey:@"videoFile"] objectAtIndex:indexPath.row]] isEqualToString:@""]) {
+        //
+        //
+        //        }
+        
+        cell.batting_lbl.text = [[videosArray valueForKey:@"videoName"] objectAtIndex:indexPath.row];
+        //        cell.date_lbl.text =  [NSString stringWithFormat:@"%@",component3[2]];
+        
+        //        if (indexPath.row % 2 == 1) {
+        //
+        cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+        //        }
+        //        else {
+        //            cell.layer.shadowColor = [UIColor redColor].CGColor;
+        //        }
+        
+        
+        cell.layer.shadowOffset = CGSizeZero;
+        cell.layer.shadowRadius = 1.0f;
+        cell.layer.shadowOpacity = 0.5f;
+        cell.layer.masksToBounds = NO;
+        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
+        
+        
+        return cell;
+    }
+    else if (collectionView == self.DocumentsCollectionView){ //Documents
+        return  nil;
+    }
     
     return  nil;
 }
@@ -951,22 +1025,31 @@ typedef enum : NSUInteger {
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     /*
-    if (collectionView.tag == 5){ // Food
-        [self selectedFoodCell:cell andIndex:indexPath];
-    }
-    */
+     if (collectionView.tag == 5){ // Food
+     [self selectedFoodCell:cell andIndex:indexPath];
+     }
+     */
     if(collectionView == self.foodDiaryCollectionView)
     {
-    FoodDiaryUpdateVC *objresult = [FoodDiaryUpdateVC new];
-    objresult.foodDiaryType = @"Update";
-    objresult.selectedIndexPath = indexPath;
-    objresult.foodDiaryArray = foodDiaryArray;
-    [self.navigationController pushViewController:objresult animated:YES];
+        FoodDiaryUpdateVC *objresult = [FoodDiaryUpdateVC new];
+        objresult.foodDiaryType = @"Update";
+        objresult.selectedIndexPath = indexPath;
+        objresult.foodDiaryArray = foodDiaryArray;
+        [self.navigationController pushViewController:objresult animated:YES];
     }
-    else if(collectionView.tag == 1)
+    else if(collectionView == self.EventsCollectionView)
     {
         [self selectedEventCell:cell andIndex:indexPath];
     }
+    else if(collectionView == self.ResultsCollectionView)
+    {
+        [self selectedResultsCell:cell andIndex:indexPath];
+    }
+    else if(collectionView == self.VideosCollectionView)
+    {
+        [self selectedVideoCell:cell andIndex:indexPath];
+    }
+    
 }
 
 
@@ -993,6 +1076,30 @@ typedef enum : NSUInteger {
     
 }
 
+-(void)selectedResultsCell:(ResultCell *)cell andIndex:(NSIndexPath *)indexPath{
+    
+    NSMutableArray *resultsArray = [TableListDict valueForKey:@"Results"];
+    
+   NSString * displayMatchCode = [[resultsArray valueForKey:@"MATCHCODE"] objectAtIndex:indexPath.row];
+    
+   TabbarVC * objtab = (TabbarVC *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"TabbarVC"];
+    appDel.Currentmatchcode = displayMatchCode;
+    //appDel.Scorearray = scoreArray;
+    //objtab.backkey = @"yes";
+    //[self.navigationController pushViewController:objFix animated:YES];
+    [appDel.frontNavigationController pushViewController:objtab animated:YES];
+    
+}
+
+-(void)selectedVideoCell:(ResultCell *)cell andIndex:(NSIndexPath *)indexPath{
+
+   NSMutableArray *VideosArray = [TableListDict valueForKey:@"Videos"];
+   NSString * selectvideoStr = [[VideosArray valueForKey:@"videoFile"]objectAtIndex:indexPath.row];
+    
+    VideoPlayerViewController *videoPlayerVC = [[VideoPlayerViewController alloc] initWithNibName:@"VideoPlayerViewController" bundle:nil];
+    videoPlayerVC.objSelectVideoLink = selectvideoStr;
+    [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
+}
 
 - (IBAction)addFoodDiaryButtonTapped:(id)sender {
     
@@ -1057,7 +1164,7 @@ typedef enum : NSUInteger {
                 [self.EventsCollectionView reloadData];
                 [self.ResultsCollectionView reloadData];
             });
-
+            
             
             //                self.commonArray = scheduleArray;
             //                self.commonArray2 = resultArray;
@@ -1083,7 +1190,7 @@ typedef enum : NSUInteger {
         
         [AppCommon hideLoading];
         [self FixturesWebservice];
-    
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failed");
         [AppCommon hideLoading];
@@ -1185,7 +1292,7 @@ typedef enum : NSUInteger {
             });
         }
         
-         [AppCommon hideLoading];
+        [AppCommon hideLoading];
         [self TeamsWebservice];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -1255,16 +1362,16 @@ typedef enum : NSUInteger {
 
 - (void)FoodDiaryWebservice {
     
-        // Get current datetime
+    // Get current datetime
     NSDate *currentDateTime = [NSDate date];
     
-        // Instantiate a NSDateFormatter
+    // Instantiate a NSDateFormatter
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     
-        // Set the dateFormatter format
+    // Set the dateFormatter format
     [dateFormatter setDateFormat:@"MM-dd-yyyy"];
     
-        // Get the date time in NSString
+    // Get the date time in NSString
     NSString *date = [dateFormatter stringFromDate:currentDateTime];
     
     if(![COMMON isInternetReachable])
@@ -1279,7 +1386,7 @@ typedef enum : NSUInteger {
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     manager.requestSerializer = requestSerializer;
-        //CLIENTCODE, PLAYERCODE, DATE
+    //CLIENTCODE, PLAYERCODE, DATE
     NSString *clientCode = [AppCommon GetClientCode];
     NSString *userRefCode = [AppCommon GetuserReference];
     
@@ -1308,12 +1415,12 @@ typedef enum : NSUInteger {
                 }
             }
             
-//            if (foodDiaryArray.count) {
-//                [TableListDict setValue:foodDiaryArray forKey:@"Food"];
-//            }
+            //            if (foodDiaryArray.count) {
+            //                [TableListDict setValue:foodDiaryArray forKey:@"Food"];
+            //            }
             
             NSLog(@"Count:%ld", foodDiaryArray.count);
-                //            [self setClearBorderForMealTypeAndLocation];
+            //            [self setClearBorderForMealTypeAndLocation];
             
         }
         
@@ -1335,21 +1442,21 @@ typedef enum : NSUInteger {
     
     NSString *playerCode;
     if([AppCommon isCoach])
-        {
+    {
         
         playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
-        }
+    }
     else
-        {
+    {
         playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-        }
-        // NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    }
+    // NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     NSDate *matchdate = [NSDate date];
     [dateFormat setDateFormat:@"MM-dd-yyyy"];
     NSString * actualDate = [dateFormat stringFromDate:matchdate];
-        // NSString *urinecolor= @"0";
+    // NSString *urinecolor= @"0";
     
     [objWebservice fetchWellness :FetchrecordWellness : playerCode :actualDate success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"responseObject=%@",responseObject);
@@ -1358,172 +1465,172 @@ typedef enum : NSUInteger {
         NSMutableArray *arr = [[NSMutableArray alloc]init];
         arr = responseObject;
         if(arr.count >0)
-            {
+        {
             self.NoDataView.hidden = YES;
             if( ![[[responseObject valueForKey:@"BodyWeight"] objectAtIndex:0] isEqual:[NSNull null]])
-                {
+            {
                 self.bodyWeightlbl.text = [[responseObject valueForKey:@"BodyWeight"] objectAtIndex:0];
                 
-                    //[self.fetchButton setTag:1];
+                //[self.fetchButton setTag:1];
                 self.fetchedArray = [[NSMutableArray alloc]init];
                 self.fetchedArray = [responseObject objectAtIndex:0];
-                }
+            }
             if(! [[[responseObject valueForKey:@"SleepHours"] objectAtIndex:0] isEqual:[NSNull null]])
-                {
+            {
                 self.sleepHrlbl.text = [[responseObject valueForKey:@"SleepHours"] objectAtIndex:0];
-                }
+            }
             if( ![[[responseObject valueForKey:@"SleepRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
-                {
+            {
                 NSString *sleepValue = [[responseObject valueForKey:@"SleepRatingDescription"] objectAtIndex:0];
                 NSArray *component = [sleepValue componentsSeparatedByString:@" "];
                 self.sleeplbl.text = [NSString stringWithFormat:@"%@/7",component[0]];
                 
                 
                 if([component[0] isEqualToString:@"1"])
-                    {
+                {
                     self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
-                    }
-                if([component[0] isEqualToString:@"2"])
-                    {
-                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
-                    }
-                if([component[0] isEqualToString:@"3"])
-                    {
-                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
-                    }
-                if([component[0] isEqualToString:@"4"])
-                    {
-                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
-                    }
-                if([component[0] isEqualToString:@"5"])
-                    {
-                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
-                    }
-                if([component[0] isEqualToString:@"6"])
-                    {
-                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
-                    }
-                if([component[0] isEqualToString:@"7"])
-                    {
-                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
-                    }
                 }
+                if([component[0] isEqualToString:@"2"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
+                }
+                if([component[0] isEqualToString:@"3"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
+                }
+                if([component[0] isEqualToString:@"4"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
+                }
+                if([component[0] isEqualToString:@"5"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
+                }
+                if([component[0] isEqualToString:@"6"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
+                }
+                if([component[0] isEqualToString:@"7"])
+                {
+                    self.SleepColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
+                }
+            }
             
             if( ![[[responseObject valueForKey:@"FatigueRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
-                {
+            {
                 NSString *fatiqueValue = [[responseObject valueForKey:@"FatigueRatingDescription"] objectAtIndex:0];
                 NSArray *component1 = [fatiqueValue componentsSeparatedByString:@" "];
                 self.fatiquelbl.text = [NSString stringWithFormat:@"%@/7",component1[0]];
                 
                 if([component1[0] isEqualToString:@"1"])
-                    {
+                {
                     self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
-                    }
-                if([component1[0] isEqualToString:@"2"])
-                    {
-                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
-                    }
-                if([component1[0] isEqualToString:@"3"])
-                    {
-                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
-                    }
-                if([component1[0] isEqualToString:@"4"])
-                    {
-                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
-                    }
-                if([component1[0] isEqualToString:@"5"])
-                    {
-                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
-                    }
-                if([component1[0] isEqualToString:@"6"])
-                    {
-                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
-                    }
-                if([component1[0] isEqualToString:@"7"])
-                    {
-                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
-                    }
                 }
+                if([component1[0] isEqualToString:@"2"])
+                {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
+                }
+                if([component1[0] isEqualToString:@"3"])
+                {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
+                }
+                if([component1[0] isEqualToString:@"4"])
+                {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
+                }
+                if([component1[0] isEqualToString:@"5"])
+                {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
+                }
+                if([component1[0] isEqualToString:@"6"])
+                {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
+                }
+                if([component1[0] isEqualToString:@"7"])
+                {
+                    self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
+                }
+            }
             
             if( ![[[responseObject valueForKey:@"SoreNessRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
-                {
+            {
                 
                 NSString *muscleValue = [[responseObject valueForKey:@"SoreNessRatingDescription"] objectAtIndex:0];
                 NSArray *component2 = [muscleValue componentsSeparatedByString:@" "];
                 self.musclelbl.text = [NSString stringWithFormat:@"%@/7",component2[0]];
                 
                 if([component2[0] isEqualToString:@"1"])
-                    {
+                {
                     self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
-                    }
-                if([component2[0] isEqualToString:@"2"])
-                    {
-                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
-                    }
-                if([component2[0] isEqualToString:@"3"])
-                    {
-                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
-                    }
-                if([component2[0] isEqualToString:@"4"])
-                    {
-                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
-                    }
-                if([component2[0] isEqualToString:@"5"])
-                    {
-                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
-                    }
-                if([component2[0] isEqualToString:@"6"])
-                    {
-                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
-                    }
-                if([component2[0] isEqualToString:@"7"])
-                    {
-                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
-                    }
                 }
+                if([component2[0] isEqualToString:@"2"])
+                {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
+                }
+                if([component2[0] isEqualToString:@"3"])
+                {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
+                }
+                if([component2[0] isEqualToString:@"4"])
+                {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
+                }
+                if([component2[0] isEqualToString:@"5"])
+                {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
+                }
+                if([component2[0] isEqualToString:@"6"])
+                {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
+                }
+                if([component2[0] isEqualToString:@"7"])
+                {
+                    self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
+                }
+            }
             
             if( ![[[responseObject valueForKey:@"StressRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
-                {
+            {
                 NSString *stressValue = [[responseObject valueForKey:@"StressRatingDescription"] objectAtIndex:0];
                 NSArray *component3 = [stressValue componentsSeparatedByString:@" "];
                 self.stresslbl.text = [NSString stringWithFormat:@"%@/7",component3[0]];
                 
                 if([component3[0] isEqualToString:@"1"])
-                    {
+                {
                     self.StressColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
-                    }
-                if([component3[0] isEqualToString:@"2"])
-                    {
-                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
-                    }
-                if([component3[0] isEqualToString:@"3"])
-                    {
-                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
-                    }
-                if([component3[0] isEqualToString:@"4"])
-                    {
-                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
-                    }
-                if([component3[0] isEqualToString:@"5"])
-                    {
-                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
-                    }
-                if([component3[0] isEqualToString:@"6"])
-                    {
-                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
-                    }
-                if([component3[0] isEqualToString:@"7"])
-                    {
-                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
-                    }
                 }
-            
-            
+                if([component3[0] isEqualToString:@"2"])
+                {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(102/255.0f) blue:(39/255.0f) alpha:1.0f];
+                }
+                if([component3[0] isEqualToString:@"3"])
+                {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(187/255.0f) blue:(64/255.0f) alpha:1.0f];
+                }
+                if([component3[0] isEqualToString:@"4"])
+                {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(242/255.0f) green:(249/255.0f) blue:(82/255.0f) alpha:1.0f];
+                }
+                if([component3[0] isEqualToString:@"5"])
+                {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(167/255.0f) green:(229/255.0f) blue:(79/255.0f) alpha:1.0f];
+                }
+                if([component3[0] isEqualToString:@"6"])
+                {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(96/255.0f) green:(208/255.0f) blue:(80/255.0f) alpha:1.0f];
+                }
+                if([component3[0] isEqualToString:@"7"])
+                {
+                    self.StressColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
+                }
             }
+            
+            
+        }
         else
-            {
+        {
             self.NoDataView.hidden = NO;
-            }
+        }
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.foodDiaryCollectionView reloadData];
@@ -1533,11 +1640,11 @@ typedef enum : NSUInteger {
         
         [AppCommon hideLoading];
     }
-    failure:^(AFHTTPRequestOperation *operation, id error) {
-        NSLog(@"failed");
-        [COMMON webServiceFailureError:error];
-         [AppCommon hideLoading];
-    }];
+                          failure:^(AFHTTPRequestOperation *operation, id error) {
+                              NSLog(@"failed");
+                              [COMMON webServiceFailureError:error];
+                              [AppCommon hideLoading];
+                          }];
 }
 
 //-(void)EventTypeWebservice:(NSString *) usercode :(NSString*) cliendcode:(NSString *)userreference
@@ -1718,9 +1825,12 @@ typedef enum : NSUInteger {
                 }
                 
                 [self BowlingLoadChart];
+                
+                [self VideosWebservice];
             }
         }
         [AppCommon hideLoading];
+        
         
     }
                         failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -1979,6 +2089,71 @@ typedef enum : NSUInteger {
     AddWellnessRatingVC *VC = [AddWellnessRatingVC new];
     [appDel.frontNavigationController pushViewController:VC animated:YES];
 }
+
+- (IBAction)didClickWellnessAction:(id)sender {
+    
+    AddWellnessRatingVC *VC = [AddWellnessRatingVC new];
+    [appDel.frontNavigationController pushViewController:VC animated:YES];
+}
+
+-(void)VideosWebservice
+{
+    if(![COMMON isInternetReachable])
+        return;
+    
+    //NSString *URLString =  URL_FOR_RESOURCE(@"MOBILE_APT_VIDEOGALLERY");
+    NSString *URLString = @"http://192.168.0.154:8029/AGAPTService.svc/MOBILE_APT_VIDEOGALLERY";
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    //        NSString *competition = @"";
+    //        NSString *teamcode = [AppCommon getCurrentTeamCode];
+    
+    NSString *usercode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
+    // NSString *usercode = @"USM0000107";
+    NSString *clientcode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    //        if(competition)   [dic    setObject:competition     forKey:@"Competitioncode"];
+    if(usercode)   [dic    setObject:usercode     forKey:@"Usercode"];
+    if(clientcode)   [dic    setObject:clientcode     forKey:@"clientCode"];
+    
+    
+    NSLog(@"parameters : %@",dic);
+    [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response ; %@",responseObject);
+        
+        if(responseObject >0)
+        {
+//            self.objFirstGalleryArray =[[NSMutableArray alloc]init];
+//            self.objFirstGalleryArray = [responseObject valueForKey:@"Secondlist"];
+//            self.mainGalleryArray = self.objFirstGalleryArray;
+            
+            if ([responseObject valueForKey:@"Secondlist"] != nil) {
+                [TableListDict setValue:[responseObject valueForKey:@"Secondlist"] forKey:@"Videos"];
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.VideosCollectionView reloadData];
+            });
+            
+        }
+        
+        [AppCommon hideLoading];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [COMMON webServiceFailureError:error];
+        NSLog(@"failed");
+        [AppCommon hideLoading];
+    }];
+    
+}
+
+
 
 
 

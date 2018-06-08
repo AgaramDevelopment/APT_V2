@@ -721,8 +721,6 @@
 		18A6ADAF20C2BE57000F342E /* TeamsReportsHistoryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamsReportsHistoryVC.h; sourceTree = "<group>"; };
 		18A6ADB020C2BE57000F342E /* TeamsReportsHistoryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamsReportsHistoryVC.m; sourceTree = "<group>"; };
 		18A6ADB120C2BE57000F342E /* TeamsReportsHistoryVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamsReportsHistoryVC.xib; sourceTree = "<group>"; };
-		18A6ADB620C2CB51000F342E /* HistoryVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HistoryVC.m; sourceTree = "<group>"; };
-		18A6ADB720C2CB51000F342E /* HistoryVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryVC.xib; sourceTree = "<group>"; };
 		18AA1B942092FCC2009634A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		18AA1B962092FD16009634A3 /* SessionSummaryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionSummaryVC.m; sourceTree = "<group>"; };
 		18AA1B972092FD17009634A3 /* SessionSummaryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionSummaryVC.h; sourceTree = "<group>"; };
@@ -2205,8 +2203,6 @@
 				CE102817202DDBE300FA0B61 /* CalendarViewController.xib */,
 				041B9DE42046A4D700ECFDD8 /* TeamOverviewVC.m */,
 				041B9DE52046A4D700ECFDD8 /* TeamOverviewVC.xib */,
-				18A6ADB620C2CB51000F342E /* HistoryVC.m */,
-				18A6ADB720C2CB51000F342E /* HistoryVC.xib */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";

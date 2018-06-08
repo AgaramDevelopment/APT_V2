@@ -28,8 +28,10 @@
     NSString* selectedTeamCode,*selectedPlayerCode;
     NSInteger* selectedButtonTag;
     UIDatePicker * datePicker;
+    NSString *changedText;
 }
 
+@property (nonatomic,strong) NSMutableArray * mainGalleryArray;
 @property (nonatomic,strong) NSMutableArray * objFirstGalleryArray;
 @property (nonatomic,strong) NSMutableArray * objSecondGalleryArray;
 @property (nonatomic,strong) NSMutableArray * objCatoryArray;
@@ -91,7 +93,8 @@
     lblPlayer.text = @"Chris Lynn";
     lblcategory.text = @"BATTING";
     lblType.text = @"BEATEN&UNCOMFORT";
-    [self newVideoListingwebservice];
+    //[self newVideoListingwebservice];
+    [self VideosWebservice];
     
 //    view
 
@@ -648,22 +651,22 @@
 - (void)filterContentForSearchText:(NSString*)searchText
 {
     
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"videoName CONTAINS[c] %@", searchText];
-    _searchResult = [self.objSecondGalleryArray filteredArrayUsingPredicate:resultPredicate];
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"videoName CONTAINS[c] %@ OR keyWords CONTAINS[c] %@ OR TeamName CONTAINS[c] %@ OR PlayerName CONTAINS[c] %@ ", searchText,searchText,searchText,searchText];
+    _searchResult = [self.mainGalleryArray filteredArrayUsingPredicate:resultPredicate];
     
     NSLog(@"searchResult:%@", _searchResult);
     
     dispatch_async(dispatch_get_main_queue(), ^{
         // Update the UI
         if (_searchResult.count == 0) {
-            self.objVideoFilterArray = [self.searchResult copy];
+            self.objFirstGalleryArray = [self.searchResult copy];
             
             [self.videoCollectionview2 reloadData];
             
         } else {
             
-            self.objVideoFilterArray =[[NSMutableArray alloc]init];
-            self.objVideoFilterArray = [self.searchResult copy];
+            self.objFirstGalleryArray =[[NSMutableArray alloc]init];
+            self.objFirstGalleryArray = [self.searchResult copy];
             
             [self.videoCollectionview2 reloadData];
             
@@ -675,7 +678,6 @@
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    //self.playerTbl.hidden = NO;
     
     return YES;
 }
@@ -683,48 +685,80 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     //self.playerTbl.hidden = NO;
-    NSLog(@"%@",textField);
-    NSString *searchString = [NSString stringWithFormat:@"%@%@",textField.text, string];
+//    NSLog(@"%@",textField);
+//    NSString *searchString = [NSString stringWithFormat:@"%@%@",textField.text, string];
+//
+//    if (self.search_Txt.text.length!=1)
+//    {
+//        [self filterContentForSearchText:searchString];
+//    }
+//    else
+//    {
+//        self.objVideoFilterArray = [[NSMutableArray alloc]init];
+//        self.objVideoFilterArray =  self.objSecondGalleryArray;
+//
+//        [self.videoCollectionview2 reloadData];
+//
+//    }
+//
+//    //[self filterContentForSearchText:searchString];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        // Update the UI
+//        //[self.videoCollectionview2 reloadData];
+//    });
+//    return YES;
     
-    if (self.search_Txt.text.length!=1)
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    [self updateTextLabelsWithText: newString];
+    
+    changedText = newString;
+    
+    return YES;
+}
+
+-(void)updateTextLabelsWithText:(NSString *)string
+{
+    // [self.search_Txt setText:string];
+    NSLog(@"@%",string);
+    
+    if (string.length==0 || string.length == nil)
     {
-        [self filterContentForSearchText:searchString];
+        self.objFirstGalleryArray = [[NSMutableArray alloc]init];
+        self.objFirstGalleryArray =  self.mainGalleryArray;
+        
+        [self.videoCollectionview2 reloadData];
     }
     else
     {
-        self.objVideoFilterArray = [[NSMutableArray alloc]init];
-        self.objVideoFilterArray =  self.objSecondGalleryArray;
-    
-        [self.videoCollectionview2 reloadData];
-    
+        [self filterContentForSearchText:string];
     }
     
     //[self filterContentForSearchText:searchString];
     dispatch_async(dispatch_get_main_queue(), ^{
         // Update the UI
-        //[self.videoCollectionview2 reloadData];
+        [self.videoCollectionview2 reloadData];
     });
-    return YES;
 }
 
 -(void)textFieldDidChange :(UITextField *) textField
 {
-    if (textField.text.length == 0) {
+    if (changedText.length==0 || changedText.length == nil)
+    {
+        self.objFirstGalleryArray = [[NSMutableArray alloc]init];
+        self.objFirstGalleryArray =  self.mainGalleryArray;
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.videoCollectionview2 reloadData];
-        });
+        [self.videoCollectionview2 reloadData];
     }
-    else {
-        
-        [self filterContentForSearchText:textField.text];
+    else
+    {
+        [self filterContentForSearchText:changedText];
     }
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
     
-    //self.videoCollectionview2.hidden = NO;
+    //[self filterContentForSearchText:searchString];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // Update the UI
+        [self.videoCollectionview2 reloadData];
+    });
     
 }
 
@@ -733,7 +767,7 @@
     [textField resignFirstResponder];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.videoCollectionview2 reloadData];
+        //[self.videoCollectionview2 reloadData];
     });
     return YES;
 }
@@ -990,6 +1024,8 @@
 -(IBAction)closeView:(id)sender
 {
     [tableMainView setHidden:YES];
+    
+    [appDel.frontNavigationController popViewControllerAnimated:YES];
 }
 
 
@@ -1048,7 +1084,7 @@
         if(responseObject >0)
         {
             self.objFirstGalleryArray =[[NSMutableArray alloc]init];
-            self.objFirstGalleryArray =responseObject;
+            self.objFirstGalleryArray = [responseObject valueForKey:@"Secondlist"];
         
             [self.videoCollectionview2 reloadData];
         }
@@ -1087,6 +1123,57 @@
         [datePicker setLocale:locale];
         [datePicker reloadInputViews];
         self.dateTF.text = [dateFormatter stringFromDate:[datePicker date]];
+    
+}
+
+
+-(void)VideosWebservice
+{
+    if(![COMMON isInternetReachable])
+        return;
+    
+    //NSString *URLString =  URL_FOR_RESOURCE(@"MOBILE_APT_VIDEOGALLERY");
+    NSString *URLString = @"http://192.168.0.154:8029/AGAPTService.svc/MOBILE_APT_VIDEOGALLERY";
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    //        NSString *competition = @"";
+    //        NSString *teamcode = [AppCommon getCurrentTeamCode];
+    
+     NSString *usercode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
+   // NSString *usercode = @"USM0000107";
+    NSString *clientcode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    //        if(competition)   [dic    setObject:competition     forKey:@"Competitioncode"];
+    if(usercode)   [dic    setObject:usercode     forKey:@"Usercode"];
+    if(clientcode)   [dic    setObject:clientcode     forKey:@"clientCode"];
+    
+    
+    NSLog(@"parameters : %@",dic);
+    [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response ; %@",responseObject);
+        
+        if(responseObject >0)
+        {
+            self.objFirstGalleryArray =[[NSMutableArray alloc]init];
+            self.objFirstGalleryArray = [responseObject valueForKey:@"Secondlist"];
+            self.mainGalleryArray = self.objFirstGalleryArray;
+            
+            [self.videoCollectionview2 reloadData];
+        }
+        
+        [AppCommon hideLoading];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [COMMON webServiceFailureError:error];
+        NSLog(@"failed");
+        [AppCommon hideLoading];
+    }];
     
 }
 

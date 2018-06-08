@@ -575,6 +575,9 @@
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OPZ-nR-d4e">
                             <rect key="frame" x="5" y="91" width="365" height="118"/>
+                            <connections>
+                                <action selector="didClickWellnessAction:" destination="-1" eventType="touchUpInside" id="RT3-4t-ntw"/>
+                            </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h0P-CK-VkB">
                             <rect key="frame" x="5" y="5" width="365" height="210"/>

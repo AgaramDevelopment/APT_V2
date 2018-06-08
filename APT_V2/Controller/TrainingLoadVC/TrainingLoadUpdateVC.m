@@ -330,14 +330,15 @@
         }
         
     }
-       if(!keyValue1)
-       {
-           [sessionArray addObject:dic];
-       }
-       else
-       {
-           [self ShowAlterMsg:@"Activity Already Exists"];
-       }
+       [sessionArray addObject:dic];
+//       if(!keyValue1)
+//       {
+//           [sessionArray addObject:dic];
+//       }
+//       else
+//       {
+//           [self ShowAlterMsg:@"Activity Already Exists"];
+//       }
    }
     else
     {
@@ -1324,6 +1325,8 @@ if([_isToday isEqualToString:@"yes"])
     [label setAdjustsFontSizeToFitWidth:TRUE];
     [label setCenter:circleChart.center];
     [circleChart addSubview:label];
+    
+    
     
 
 }

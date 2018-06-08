@@ -843,8 +843,11 @@
 
 -(IBAction)didClickCancelBtnAction:(id)sender
 {
-//    [appDel.frontNavigationController dismissViewControllerAnimated:YES completion:nil];
-    [appDel.frontNavigationController popViewControllerAnimated:YES];
+    
+    
+    [appDel.frontNavigationController dismissViewControllerAnimated:YES completion:nil];
+//    [appDel.frontNavigationController popViewControllerAnimated:YES];
+   
 }
 - (IBAction)actionShowDropDown:(id)sender {
     [popTbl setHidden:NO];
@@ -853,29 +856,37 @@
     
     if ([sender tag] == 0) // team
     {
-        popTbl.frame = CGRectMake(teamView.frame.origin.x, CGRectGetMaxY(teamView.frame), teamView.frame.size.width, 200);
-        
         self.commonArray = appDel.ArrayTeam;
+        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.teamView.frame)+10, CGRectGetMaxY(self.teamView.superview.frame)+250, CGRectGetWidth(self.teamView.frame), 50*self.commonArray.count)];
+    
     }
     else if ([sender tag] == 1) // player
     {
-        
-        popTbl.frame = CGRectMake(playerView.frame.origin.x, CGRectGetMaxY(playerView.frame), playerView.frame.size.width, 200);
         self.commonArray = [self getCorrespoingPlayerForthisTeamCode:correspondingTeamCode];
+        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.playerView.frame)+10, CGRectGetMaxY(self.playerView.superview.frame)+250, CGRectGetWidth(self.playerView.frame), 50*self.commonArray.count)];
 
     }
     else if ([sender tag] == 2) // category
     {
-        popTbl.frame = CGRectMake(CategoryView.frame.origin.x, CGRectGetMaxY(CategoryView.frame), CategoryView.frame.size.width, 200);
-
         NSArray* arr1 = @[@"Batting",@"Bowling"];
         self.commonArray = arr1;
+        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.CategoryView.frame)+10, CGRectGetMaxY(self.CategoryView.superview.frame)+300, CGRectGetWidth(self.CategoryView.frame), 50*self.commonArray.count)];
 
     }
     else if ([sender tag] == 3) // type
     {
-        
-        popTbl.frame = CGRectMake(keywordsView.frame.origin.x, CGRectGetMaxY(keywordsView.frame), keywordsView.frame.size.width, self.commonArray.count*45);
+        NSArray* arr1 = @[@"Beaten",@"Boundaires",@"Dotballs",@"Dismissals"];
+        NSArray* arr2 = @[@"Beaten",@"Boundaires",@"Dotballs",@"Variations"];
+    
+        if ([category_lbl.text isEqualToString:@"Batting"]) {
+            self.commonArray = arr1;
+        }
+        else
+        {
+            self.commonArray = arr2;
+        }
+    
+        popTbl.frame = CGRectMake(keywordsView.frame.origin.x+10, CGRectGetMaxY(keywordsView.superview.frame)+345, keywordsView.frame.size.width, self.commonArray.count*45);
 
         /*
          Beaten
@@ -891,23 +902,11 @@
          Dismissals,
          Variations
          */
-        
-        NSArray* arr1 = @[@"Beaten",@"Boundaires",@"Dotballs",@"Dismissals"];
-        NSArray* arr2 = @[@"Beaten",@"Boundaires",@"Dotballs",@"Variations"];
-
-        if ([category_lbl.text isEqualToString:@"Batting"]) {
-            self.commonArray = arr1;
-        }
-        else
-        {
-            self.commonArray = arr2;
-        }
     }
     else if ([sender tag] == 4) // share to user
     {
-        popTbl.frame = CGRectMake(sharetoUserView.frame.origin.x, CGRectGetMaxY(sharetoUserView.frame), sharetoUserView.frame.size.width, 200);
         self.commonArray = self.sharetouserArray;
-        
+        popTbl.frame = CGRectMake(sharetoUserView.frame.origin.x+10, CGRectGetMaxY(sharetoUserView.frame)+460, sharetoUserView.frame.size.width, 200);
     }
 
     [popTbl reloadData];

@@ -299,12 +299,12 @@
 - (IBAction)UploadVideoAction:(id)sender {
     
     VideoPlayerUploadVC *VC = [VideoPlayerUploadVC new];
-    VC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    VC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [VC.view setBackgroundColor:[UIColor clearColor]];
-    [appDel.frontNavigationController presentViewController:VC animated:YES completion:nil];
+//    VC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//    VC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//    [VC.view setBackgroundColor:[UIColor clearColor]];
+//    [appDel.frontNavigationController presentViewController:VC animated:YES completion:nil];
     
-//    [appDel.frontNavigationController pushViewController:VC animated:YES];
+    [appDel.frontNavigationController pushViewController:VC animated:YES];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView

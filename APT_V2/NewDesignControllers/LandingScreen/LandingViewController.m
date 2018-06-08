@@ -159,7 +159,6 @@ typedef enum : NSUInteger {
     
     myTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(updateNotificationCount) userInfo:nil repeats:YES];
     
-    [self.BowlingDailyBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -174,7 +173,6 @@ typedef enum : NSUInteger {
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
     
-    [self FoodDiaryWebservice];
     
 }
 
@@ -806,6 +804,37 @@ typedef enum : NSUInteger {
     return  nil;
 }
 
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    /*
+     if (collectionView.tag == 5){ // Food
+     [self selectedFoodCell:cell andIndex:indexPath];
+     }
+     */
+    if(collectionView == self.foodDiaryCollectionView)
+    {
+        FoodDiaryUpdateVC *objresult = [FoodDiaryUpdateVC new];
+        objresult.foodDiaryType = @"Update";
+        objresult.selectedIndexPath = indexPath;
+        objresult.foodDiaryArray = foodDiaryArray;
+        [self.navigationController pushViewController:objresult animated:YES];
+    }
+    else if(collectionView == self.EventsCollectionView)
+    {
+        [self selectedEventCell:cell andIndex:indexPath];
+    }
+    else if(collectionView == self.ResultsCollectionView)
+    {
+        [self selectedResultsCell:cell andIndex:indexPath];
+    }
+    else if(collectionView == self.VideosCollectionView)
+    {
+        [self selectedVideoCell:cell andIndex:indexPath];
+    }
+    
+}
+
+
 -(void)setupEventCell:(ScheduleCell *)cell andINdex:(NSIndexPath *)indexPath{
     
     NSArray* commonArray = [TableListDict valueForKey:@"Events"];
@@ -1022,35 +1051,6 @@ typedef enum : NSUInteger {
     
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    /*
-     if (collectionView.tag == 5){ // Food
-     [self selectedFoodCell:cell andIndex:indexPath];
-     }
-     */
-    if(collectionView == self.foodDiaryCollectionView)
-    {
-        FoodDiaryUpdateVC *objresult = [FoodDiaryUpdateVC new];
-        objresult.foodDiaryType = @"Update";
-        objresult.selectedIndexPath = indexPath;
-        objresult.foodDiaryArray = foodDiaryArray;
-        [self.navigationController pushViewController:objresult animated:YES];
-    }
-    else if(collectionView == self.EventsCollectionView)
-    {
-        [self selectedEventCell:cell andIndex:indexPath];
-    }
-    else if(collectionView == self.ResultsCollectionView)
-    {
-        [self selectedResultsCell:cell andIndex:indexPath];
-    }
-    else if(collectionView == self.VideosCollectionView)
-    {
-        [self selectedVideoCell:cell andIndex:indexPath];
-    }
-    
-}
 
 
 -(void)selectedFoodCell:(FoodDiaryCell *)cell andIndex:(NSIndexPath *)indexPath{
@@ -1117,7 +1117,7 @@ typedef enum : NSUInteger {
         return;
     
     
-    [AppCommon showLoading];
+//    [AppCommon showLoading];
     
     NSString *URLString =  URL_FOR_RESOURCE(ScheduleKey);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -1189,13 +1189,21 @@ typedef enum : NSUInteger {
         }
         
         [AppCommon hideLoading];
-        [self FixturesWebservice];
+
+//        dispatch_async(dispatch_get_main_queue(), ^{
+            [self FixturesWebservice];
+//        });
+
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failed");
-        [AppCommon hideLoading];
         [COMMON webServiceFailureError:error];
-        
+        [AppCommon hideLoading];
+
+//        dispatch_async(dispatch_get_main_queue(), ^{
+            [self FixturesWebservice];
+//        });
+
     }];
     
 }
@@ -1206,6 +1214,7 @@ typedef enum : NSUInteger {
     if(![COMMON isInternetReachable])
         return;
     
+//    [AppCommon showLoading];
     NSString *URLString =  URL_FOR_RESOURCE(FixturesKey);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
@@ -1276,7 +1285,6 @@ typedef enum : NSUInteger {
                     [dic setValue:team1Image forKey:@"team1Img"];
                     [dic setValue:team2Image forKey:@"team2Img"];
                     [dic setValue:CompetitionName forKey:@"CompetitionName"];
-                    
                     [objarray addObject:dic];
                     
                 }
@@ -1291,14 +1299,23 @@ typedef enum : NSUInteger {
                 [self.FixturesCollectionView reloadData];
             });
         }
-        
         [AppCommon hideLoading];
-        [self TeamsWebservice];
+
+//        dispatch_async(dispatch_get_main_queue(), ^{
+            [self TeamsWebservice];
+//        });
+
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [COMMON webServiceFailureError:error];
-        NSLog(@"failed");
         [AppCommon hideLoading];
+
+        NSLog(@"failed");
+//        dispatch_async(dispatch_get_main_queue(), ^{
+            [self TeamsWebservice];
+//        });
+
     }];
     
 }
@@ -1310,7 +1327,7 @@ typedef enum : NSUInteger {
         return;
     
     
-    [AppCommon showLoading];
+//    [AppCommon showLoading];
     
     NSString *URLString =  URL_FOR_RESOURCE(TeamsKey);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -1343,17 +1360,25 @@ typedef enum : NSUInteger {
             }
             
         }
-        
+        [AppCommon hideLoading];
+
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.TeamsCollectionView reloadData];
+
         });
-        [AppCommon hideLoading];
-        [self FoodDiaryWebservice];
         
+        [self FoodDiaryWebservice];
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failed");
-        [AppCommon hideLoading];
         [COMMON webServiceFailureError:error];
+        [AppCommon hideLoading];
+
+//        dispatch_async(dispatch_get_main_queue(), ^{
+            [self FoodDiaryWebservice];
+            
+//        });
+
         
         
     }];
@@ -1377,7 +1402,7 @@ typedef enum : NSUInteger {
     if(![COMMON isInternetReachable])
         return;
     
-    [AppCommon showLoading];
+//    [AppCommon showLoading];
     
     NSString *URLString =  URL_FOR_RESOURCE(foodDiaryFetch);
     
@@ -1423,14 +1448,23 @@ typedef enum : NSUInteger {
             //            [self setClearBorderForMealTypeAndLocation];
             
         }
-        
         [AppCommon hideLoading];
-        [self FetchWebservice];
-        
+
+//        dispatch_async(dispatch_get_main_queue(), ^{
+            [self FetchWebservice];
+            
+//        });
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"failed");
         [COMMON webServiceFailureError:error];
         [AppCommon hideLoading];
+
+//        dispatch_async(dispatch_get_main_queue(), ^{
+            [self FetchWebservice];
+            
+//        });
+
     }];
 }
 
@@ -1438,7 +1472,11 @@ typedef enum : NSUInteger {
 
 - (void)FetchWebservice
 {
-    [AppCommon showLoading ];
+    
+    if(![COMMON isInternetReachable])
+        return;
+
+//    [AppCommon showLoading];
     
     NSString *playerCode;
     if([AppCommon isCoach])
@@ -1632,20 +1670,163 @@ typedef enum : NSUInteger {
             self.NoDataView.hidden = NO;
         }
         
+        [AppCommon hideLoading];
+
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.foodDiaryCollectionView reloadData];
             [self.LandingTable reloadData];
             NSLog(@"Countt:%ld", TableListDict.count);
         });
+        [self.BowlingDailyBtn sendActionsForControlEvents:UIControlEventTouchUpInside]; // This will call BowlingLoadWebservice
+
+        
+    }
+      failure:^(AFHTTPRequestOperation *operation, id error) {
+          NSLog(@"failed");
+          [COMMON webServiceFailureError:error];
+          [AppCommon hideLoading];
+          [self.BowlingDailyBtn sendActionsForControlEvents:UIControlEventTouchUpInside]; // This will call BowlingLoadWebservice
+
+      }];
+}
+
+-(void)VideosWebservice
+{
+    if(![COMMON isInternetReachable])
+        return;
+    
+//    [AppCommon showLoading];
+    
+    NSLog(@"Videos Webservice called ");
+    NSString *URLString =  URL_FOR_RESOURCE(@"MOBILE_APT_VIDEOGALLERY");
+//    NSString *URLString = @"http://192.168.0.154:8029/AGAPTService.svc/MOBILE_APT_VIDEOGALLERY";
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    //        NSString *competition = @"";
+    //        NSString *teamcode = [AppCommon getCurrentTeamCode];
+    
+    NSString *usercode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
+    // NSString *usercode = @"USM0000107";
+    NSString *clientcode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    //        if(competition)   [dic    setObject:competition     forKey:@"Competitioncode"];
+    if(usercode)   [dic    setObject:usercode     forKey:@"Usercode"];
+    if(clientcode)   [dic    setObject:clientcode     forKey:@"clientCode"];
+    [dic setObject:@"10" forKey:@"Count"];
+    
+    NSLog(@"parameters : %@",dic);
+    [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response ; %@",responseObject);
+        
+        if(responseObject >0)
+        {
+            //            self.objFirstGalleryArray =[[NSMutableArray alloc]init];
+            //            self.objFirstGalleryArray = [responseObject valueForKey:@"Secondlist"];
+            //            self.mainGalleryArray = self.objFirstGalleryArray;
+            
+            if ([responseObject valueForKey:@"Secondlist"] != nil) {
+                [TableListDict setValue:[responseObject valueForKey:@"Secondlist"] forKey:@"Videos"];
+            }
+            
+            
+        }
         
         [AppCommon hideLoading];
-    }
-                          failure:^(AFHTTPRequestOperation *operation, id error) {
-                              NSLog(@"failed");
-                              [COMMON webServiceFailureError:error];
-                              [AppCommon hideLoading];
-                          }];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.VideosCollectionView reloadData];
+        });
+
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [COMMON webServiceFailureError:error];
+        NSLog(@"failed");
+        [AppCommon hideLoading];
+    }];
+    
 }
+
+-(void)BowlingLoadWebservice : (NSString *)date : (NSString *)type
+{
+    
+    if(![COMMON isInternetReachable])
+        return;
+
+    [AppCommon showLoading ];
+    
+    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    NSString *playerCode;
+    if([AppCommon isCoach])
+    {
+        
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    }
+    else
+    {
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    }
+    NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    
+    objWebservice = [[WebService alloc]init];
+    
+    //NSString *dateString = self.datelbl.text;
+    
+    
+    
+    [objWebservice BowlingLoad :BowlingLoadKey:ClientCode : playerCode :date :type success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseObject=%@",responseObject);
+        
+        if(responseObject >0)
+        {
+            
+            NSMutableArray *reqArray = [[NSMutableArray alloc]init];
+            reqArray = responseObject;
+            if(reqArray.count>0)
+            {
+                self.BowlingloadXArray= [[NSMutableArray alloc]init];
+                self.BowlingloadYArray = [[NSMutableArray alloc]init];
+                
+                for(int i=0;i<reqArray.count;i++)
+                {
+                    //                int timecount = [[[reqArray valueForKey:@"DURATION"] objectAtIndex:i] intValue];
+                    //                int rpecount = [[[reqArray valueForKey:@"RPE"] objectAtIndex:i] intValue];
+                    //                int total = timecount * rpecount;
+                    [self.BowlingloadYArray addObject:[[reqArray valueForKey:@"BALL"] objectAtIndex:i]];
+                    [self.BowlingloadXArray addObject:[[reqArray valueForKey:@"WORKLOADDATE"] objectAtIndex:i]];
+                }
+                
+                [self BowlingLoadChart];
+
+                
+            }
+            
+        }
+        [AppCommon hideLoading];
+
+//        dispatch_async(dispatch_get_main_queue(), ^{
+            [self VideosWebservice];
+//        });
+        
+    }
+    failure:^(AFHTTPRequestOperation *operation, id error) {
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+        [AppCommon hideLoading];
+
+//        dispatch_async(dispatch_get_main_queue(), ^{
+            [self VideosWebservice];
+//        });
+        
+    }];
+    
+}
+
 
 //-(void)EventTypeWebservice:(NSString *) usercode :(NSString*) cliendcode:(NSString *)userreference
 //{
@@ -1713,10 +1894,14 @@ typedef enum : NSUInteger {
 //        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
 //            NSLog(@"failed");
 //            [COMMON webServiceFailureError:error];
+//              [AppCommon hideLoading];
 //        }];
 //    }
 //
 //}
+
+#pragma mark - Custom Methods
+
 
 - (NSString *)checkNSNumber:(id)unknownTypeParameter {
     
@@ -1779,66 +1964,6 @@ typedef enum : NSUInteger {
     [self BowlingLoadWebservice:newDateString:@"DAILY"];
 }
 
--(void)BowlingLoadWebservice : (NSString *)date : (NSString *)type
-{
-    [AppCommon showLoading ];
-    
-    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-    NSString *playerCode;
-    if([AppCommon isCoach])
-    {
-        
-        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
-    }
-    else
-    {
-        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-    }
-    NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-    
-    objWebservice = [[WebService alloc]init];
-    
-    //NSString *dateString = self.datelbl.text;
-    
-    
-    
-    [objWebservice BowlingLoad :BowlingLoadKey:ClientCode : playerCode :date :type success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"responseObject=%@",responseObject);
-        
-        if(responseObject >0)
-        {
-            
-            NSMutableArray *reqArray = [[NSMutableArray alloc]init];
-            reqArray = responseObject;
-            if(reqArray.count>0)
-            {
-                self.BowlingloadXArray= [[NSMutableArray alloc]init];
-                self.BowlingloadYArray = [[NSMutableArray alloc]init];
-                
-                for(int i=0;i<reqArray.count;i++)
-                {
-                    //                int timecount = [[[reqArray valueForKey:@"DURATION"] objectAtIndex:i] intValue];
-                    //                int rpecount = [[[reqArray valueForKey:@"RPE"] objectAtIndex:i] intValue];
-                    //                int total = timecount * rpecount;
-                    [self.BowlingloadYArray addObject:[[reqArray valueForKey:@"BALL"] objectAtIndex:i]];
-                    [self.BowlingloadXArray addObject:[[reqArray valueForKey:@"WORKLOADDATE"] objectAtIndex:i]];
-                }
-                
-                [self BowlingLoadChart];
-                
-                [self VideosWebservice];
-            }
-        }
-        [AppCommon hideLoading];
-        
-        
-    }
-                        failure:^(AFHTTPRequestOperation *operation, id error) {
-                            NSLog(@"failed");
-                            [COMMON webServiceFailureError:error];
-                        }];
-    
-}
 
 
 -(void)BowlingLoadChart
@@ -2096,62 +2221,6 @@ typedef enum : NSUInteger {
     [appDel.frontNavigationController pushViewController:VC animated:YES];
 }
 
--(void)VideosWebservice
-{
-    if(![COMMON isInternetReachable])
-        return;
-    
-    //NSString *URLString =  URL_FOR_RESOURCE(@"MOBILE_APT_VIDEOGALLERY");
-    NSString *URLString = @"http://192.168.0.154:8029/AGAPTService.svc/MOBILE_APT_VIDEOGALLERY";
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
-    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    
-    manager.requestSerializer = requestSerializer;
-    
-    //        NSString *competition = @"";
-    //        NSString *teamcode = [AppCommon getCurrentTeamCode];
-    
-    NSString *usercode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
-    // NSString *usercode = @"USM0000107";
-    NSString *clientcode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-    
-    
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    //        if(competition)   [dic    setObject:competition     forKey:@"Competitioncode"];
-    if(usercode)   [dic    setObject:usercode     forKey:@"Usercode"];
-    if(clientcode)   [dic    setObject:clientcode     forKey:@"clientCode"];
-    
-    
-    NSLog(@"parameters : %@",dic);
-    [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"response ; %@",responseObject);
-        
-        if(responseObject >0)
-        {
-//            self.objFirstGalleryArray =[[NSMutableArray alloc]init];
-//            self.objFirstGalleryArray = [responseObject valueForKey:@"Secondlist"];
-//            self.mainGalleryArray = self.objFirstGalleryArray;
-            
-            if ([responseObject valueForKey:@"Secondlist"] != nil) {
-                [TableListDict setValue:[responseObject valueForKey:@"Secondlist"] forKey:@"Videos"];
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self.VideosCollectionView reloadData];
-            });
-            
-        }
-        
-        [AppCommon hideLoading];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [COMMON webServiceFailureError:error];
-        NSLog(@"failed");
-        [AppCommon hideLoading];
-    }];
-    
-}
 
 
 

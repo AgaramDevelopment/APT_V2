@@ -23,7 +23,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 //#define BASE_URL    @"http://192.168.0.151:8044/AGAPTService.svc/"
 
 // LOCAL 2
-//#define BASE_URL    @"http://192.168.0.154:8029/AGAPTService.svc/"
+#define BASE_URL    @"http://192.168.0.154:8029/AGAPTService.svc/"
 
 // LIVE
 //#define BASE_URL    @"http://13.126.151.253:9001/AGAPTService.svc/"
@@ -32,7 +32,7 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 //#define BASE_URL   @"http://192.168.0.154:8029/AGAPTService.svc/"
 
 //LIVE
-#define BASE_URL    @"http://service.alphaprotracker.com/AGAPTService.svc/"
+//#define BASE_URL    @"http://service.alphaprotracker.com/AGAPTService.svc/"
 
 
 #define URL_FOR_RESOURCE(RESOURCE) [NSString stringWithFormat:@"%@%@",BASE_URL,RESOURCE]

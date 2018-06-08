@@ -31,7 +31,7 @@
     NSString * selectCategory;
     NSString * selectModule;
     NSString * selectTeamCode;
-    NSString * selectGameCode;
+    NSString * selectGameCode,*SelectedcategoryCode;
     NSInteger* buttonTag;
     NSString* correspondingTeamCode;
 
@@ -258,7 +258,14 @@
     
             self.popTbl.hidden = NO;
             self.commonArray = [[NSMutableArray alloc]init];
-            self.commonArray = self.objCategoryArray;
+//            self.commonArray = self.objCategoryArray;
+        
+        
+//        category_lbl.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"categoryName"];
+//        SelectedcategoryCode = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"categoryCode"];
+
+        self.commonArray = @[@{@"categoryName":@"Batting",@"categoryCode":@"MSC356"},
+                             @{@"categoryName":@"Bowling",@"categoryCode":@"MSC357"}];
             [self.popTbl reloadData];
             isCategory = YES;
     
@@ -550,7 +557,7 @@
     }
     else if (buttonTag == 2) // category
     {
-        cell.textLabel.text = [self.commonArray objectAtIndex:indexPath.row];
+        cell.textLabel.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"categoryName"];
     }
     else if (buttonTag == 3) // type
     {
@@ -583,42 +590,14 @@
     }
     else if (buttonTag == 2) // category
     {
-        category_lbl.text = [self.commonArray objectAtIndex:indexPath.row];
+        category_lbl.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"categoryName"];
+        SelectedcategoryCode = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"categoryCode"];
     }
     else if (buttonTag == 3) // type
     {
         objKeyword_Txt.text = [self.commonArray objectAtIndex:indexPath.row];
     }
     else if (buttonTag == 4)
-    {
-        
-    }
-
-    
-    
-//    if(isPlayer == YES)
-//    {
-//        self.player_lbl.text = [[self.commonArray valueForKey:@"PlayerName"] objectAtIndex:indexPath.row];
-//        selectPlayer = [[self.commonArray valueForKey:@"PlayerCode"] objectAtIndex:indexPath.row];
-//        selectTeamCode = [[self.commonArray valueForKey:@"TeamCode"] objectAtIndex:indexPath.row];
-//        selectGameCode = [[self.commonArray valueForKey:@"GameCode"] objectAtIndex:indexPath.row];
-//
-//        isPlayer = NO;
-//    }
-//    else if (isModule == YES)
-//    {
-//        self.module_lbl.text = [[self.commonArray valueForKey:@"ModuleName"] objectAtIndex:indexPath.row];
-//        selectModule = [[self.commonArray valueForKey:@"ModuleCode"] objectAtIndex:indexPath.row];
-//        isModule = NO;
-//    }
-//    else if (isCategory == YES)
-//    {
-//        self.category_lbl.text = [[self.commonArray valueForKey:@"CategoryName"] objectAtIndex:indexPath.row];
-//        selectCategory = [[self.commonArray valueForKey:@"CategoryCode"] objectAtIndex:indexPath.row];
-//        isCategory = NO;
-//    }
-    
-    if(isShare == YES)
     {
         
         plyCode = [self.commonArray objectAtIndex:indexPath.row];
@@ -773,27 +752,34 @@
      */
         
         
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-//    if(ClientCode)   [dic    setObject:ClientCode     forKey:@"clientCode"];
-//    if(createdby)   [dic    setObject:createdby     forKey:@"Createdby"];
-//    if(selectModule)   [dic    setObject:selectModule     forKey:@"moduleCode"];
-//    if(selectGameCode)   [dic    setObject:selectGameCode     forKey:@"gameCode"];
-        if(correspondingTeamCode)   [dic    setObject:correspondingTeamCode     forKey:@"teamCode"];
-
-    if(selectPlayer)   [dic    setObject:selectPlayer     forKey:@"playerCode"];
-//    if(self.date_lbl.text)   [dic    setObject:self.date_lbl.text     forKey:@"videoDate"];
-        if(category_lbl.text)   [dic    setObject:category_lbl.text     forKey:@"categoryCode"];
-    if(self.objKeyword_Txt.text)   [dic    setObject:self.objKeyword_Txt.text     forKey:@"keyWords"];
-//    if(comments)   [dic    setObject:@""    forKey:@"comments"];
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        if(ClientCode)   [dic    setObject:ClientCode     forKey:@"clientCode"];
+        if(createdby)   [dic    setObject:createdby     forKey:@"Createdby"];
         
-//    if(imgFileName)   [dic    setObject:imgFileName  forKey:@"videoFile"];
-//        if(imgFileName)   [dic    setObject:imgFileName  forKey:@"fileName"];
-//
-//        if(imgData) [dic setObject:imgData forKey:@"newmessagephoto"];
-//    if(videoCode)   [dic    setObject:videoCode  forKey:@"videoCode"];
-//        if(sharedUserID) [dic setObject:sharedUserID forKey:@"sharedUserID"];
-
-
+        selectModule = @"MSC084 "; // MSC084 moduleCode - coach
+        if(selectModule)   [dic    setObject:selectModule     forKey:@"moduleCode"];
+        //    if(selectGameCode)   [dic    setObject:selectGameCode     forKey:@"gameCode"];
+        
+        //        correspondingTeamCode = @"TEA0000004";
+        if(correspondingTeamCode)   [dic    setObject:correspondingTeamCode     forKey:@"teamCode"];
+        
+        //        selectPlayer = @"AMR0000001";
+        if(selectPlayer)   [dic    setObject:selectPlayer     forKey:@"playerCode"];
+        if(self.txtVideoDate.text)   [dic    setObject:self.txtVideoDate.text     forKey:@"videoDate"];
+        if(SelectedcategoryCode)   [dic    setObject:SelectedcategoryCode     forKey:@"categoryCode"];
+        if(self.objKeyword_Txt.text)   [dic    setObject:self.objKeyword_Txt.text     forKey:@"keyWords"];
+        //    if(comments)   [dic    setObject:@""    forKey:@"comments"];
+        
+        if(imgFileName)   [dic    setObject:imgFileName  forKey:@"videoFile"];
+        if(imgFileName)   [dic    setObject:imgFileName  forKey:@"filename"];
+        //
+        //    if(videoCode)   [dic    setObject:videoCode  forKey:@"videoCode"];
+        //        sharedUserID = @"AMR0000059,AMR000005";
+        if(sharedUserID) [dic setObject:sharedUserID forKey:@"shareduserid"];
+        NSLog(@"USED PARAMS %@ ",dic);
+        
+        if(imgData) [dic setObject:imgData forKey:@"newmessagephoto"];
+        
         NSURL *filePath = [NSURL fileURLWithPath:@"file://path/to/image.png"];
 
         [AppCommon showLoading];
@@ -845,8 +831,8 @@
 {
     
     
-    [appDel.frontNavigationController dismissViewControllerAnimated:YES completion:nil];
-//    [appDel.frontNavigationController popViewControllerAnimated:YES];
+//    [appDel.frontNavigationController dismissViewControllerAnimated:YES completion:nil];
+    [appDel.frontNavigationController popViewControllerAnimated:YES];
    
 }
 - (IBAction)actionShowDropDown:(id)sender {
@@ -868,7 +854,9 @@
     }
     else if ([sender tag] == 2) // category
     {
-        NSArray* arr1 = @[@"Batting",@"Bowling"];
+        NSArray* arr1 = @[@{@"categoryName":@"Batting",@"categoryCode":@"MSC356"},
+                        @{@"categoryName":@"Bowling",@"categoryCode":@"MSC357"}];
+
         self.commonArray = arr1;
         [popTbl setFrame:CGRectMake(CGRectGetMinX(self.CategoryView.frame)+10, CGRectGetMaxY(self.CategoryView.superview.frame)+300, CGRectGetWidth(self.CategoryView.frame), 50*self.commonArray.count)];
 

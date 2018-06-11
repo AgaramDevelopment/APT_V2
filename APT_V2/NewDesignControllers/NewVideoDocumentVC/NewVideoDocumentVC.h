@@ -25,4 +25,8 @@
 //PDF properties
 @property (strong, nonatomic) IBOutlet UIViewController *pdfView;
 @property (weak, nonatomic) IBOutlet UIWebView *docWebview;
+@property (nonatomic, weak) NSString *titleString;
+@property (nonatomic, strong) NSString *documentLink;
+
+- (void)loadWebView:(NSString*)link;
 @end

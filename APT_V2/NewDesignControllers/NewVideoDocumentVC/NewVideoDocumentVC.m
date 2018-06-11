@@ -73,6 +73,14 @@
         //setting toolbar as inputAccessoryView
     self.dateTF.inputAccessoryView = toolbar;
     
+    if ([self.titleString isEqualToString:@"Documents"]) {
+            //To Display Document PDFView
+        [self loadWebView:self.documentLink];
+        
+        [appDel.frontNavigationController presentViewController:pdfView animated:YES completion:^{
+        }];
+    }
+    
     lblcategory.text = @"BATTING";
     [self videoDocumentWebservice];
 }
@@ -363,11 +371,22 @@
         selectvideoStr = [[self.objFirstGalleryArray valueForKey:@"videoFile"]objectAtIndex:indexPath.row];
         }
     
-    videoPlayerVC = [[VideoPlayerViewController alloc] initWithNibName:@"VideoPlayerViewController" bundle:nil];
-    videoPlayerVC.objSelectVideoLink = selectvideoStr;
-    [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
+//    videoPlayerVC = [[VideoPlayerViewController alloc] initWithNibName:@"VideoPlayerViewController" bundle:nil];
+//    videoPlayerVC.objSelectVideoLink = selectvideoStr;
+//    [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
+    
+    //To Display Document PDFView
+    NSString *documentFile = [[self.objFirstGalleryArray valueForKey:@"documentFile"] objectAtIndex:indexPath.row];
+    
+    [self loadWebView:documentFile];
+//    [self loadWebView: @"https://www.example.com/document.pdf"];
+    
+    [appDel.frontNavigationController presentViewController:pdfView animated:YES completion:^{
+    }];
     
 }
+    
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

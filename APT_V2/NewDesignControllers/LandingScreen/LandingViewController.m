@@ -27,6 +27,7 @@
 #import "TabbarVC.h"
 #import "VideoGalleryUploadCell.h"
 #import "VideoPlayerViewController.h"
+#import "NewVideoDocumentVC.h"
 
 typedef enum : NSUInteger {
     Events,
@@ -49,6 +50,7 @@ typedef enum : NSUInteger {
     TrainingLoadVC *Training_object;
     WebService *objWebservice;
     NSMutableArray *foodDiaryArray;
+    NewVideoDocumentVC *documentObject;
 }
 
 @property (nonatomic, strong)  NSMutableArray *BowlingloadXArray;
@@ -881,6 +883,24 @@ typedef enum : NSUInteger {
     else if(collectionView == self.VideosCollectionView)
     {
         [self selectedVideoCell:cell andIndex:indexPath];
+    }
+    else if (collectionView == self.DocumentsCollectionView) {
+        NSArray* videosArray = [TableListDict valueForKey:@"Documents"];
+        NSString *documentFile = [[videosArray valueForKey:@"documentFile"] objectAtIndex:indexPath.row];
+        
+        documentObject = [[NewVideoDocumentVC alloc] initWithNibName:@"NewVideoDocumentVC" bundle:nil];
+        
+         //To Display Document PDFView
+        documentObject.documentLink = documentFile;
+//        documentObject.documentLink = @"https://www.example.com/document.pdf";
+        documentObject.titleString = @"Documents";
+      //  documentObject.pdfView;
+        [appDel.frontNavigationController presentViewController:documentObject animated:YES completion:nil];
+        
+//        documentObject.pdfView;
+//         [documentObject loadWebView:@"https://www.example.com/document.pdf"];
+//        [appDel.frontNavigationController presentViewController:documentObject.pdfView animated:YES completion:nil];
+        
     }
     
 }

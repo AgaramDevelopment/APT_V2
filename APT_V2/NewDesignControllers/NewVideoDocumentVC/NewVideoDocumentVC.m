@@ -24,6 +24,7 @@
     NSString* selectedTeamCode,*selectedPlayerCode;
     NSInteger* selectedButtonTag;
     UIDatePicker * datePicker;
+    NSString *changedText;
 }
 
 @property (nonatomic,strong) NSMutableArray * CommonArray;
@@ -31,6 +32,8 @@
 @property (nonatomic,strong) NSMutableArray * objSecondGalleryArray;
 @property (nonatomic,strong) NSMutableArray * objCatoryArray;
 @property (nonatomic,strong) NSMutableArray * objVideoFilterArray;
+@property (nonatomic,strong) NSMutableArray * mainGalleryArray;
+@property (nonatomic, strong) NSArray *searchResult;
 
 @end
 
@@ -43,6 +46,9 @@
         // Do any additional setup after loading the view from its nib.
     
     objWebService = [[WebService alloc]init];
+    
+    [self.videoCollectionview1 registerNib:[UINib nibWithNibName:@"VideoGalleryCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
+    [self.videoCollectionview2 registerNib:[UINib nibWithNibName:@"VideoGalleryUploadCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
     
         //UIDatePicker
     datePicker = [[UIDatePicker alloc] init];
@@ -134,13 +140,75 @@
     [tableMainView setHidden:NO];
     selectedButtonTag = [sender tag];
     
-    if([sender tag] == 1) // Category
-    {
+        //    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+        //    dropVC.protocol = self;
+        //    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+        //    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        //    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+        //
+        //    CGFloat leading = (dropVC.view.frame.size.width/2) - dropVC.tblDropDown.frame.size.width;
+    
+    if ([sender tag] == 0) { // TEAM
+        _CommonArray = appDel.ArrayTeam;
+            //        _CommonArray = appDel.MainArray;
+        
+        
+        
+            //        dropVC.array = appDel.ArrayTeam;
+            //        dropVC.key = @"TeamName";
+            //        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropdownView.frame), CGRectGetMinY(dropdownView.frame), CGRectGetWidth(dropdownView.frame)/2, 300)];
+        
+        CGFloat height = 0;
+        if (_CommonArray.count > 5) {
+            height = 5 * 50;
+        }
+        else
+            {
+            height = _CommonArray.count * 50;
+            }
+        
+        
+//        [tbl_list setFrame:CGRectMake(CGRectGetMinX(btnTeam.superview.frame), 0, CGRectGetWidth(btnTeam.superview.frame), height)];
+        
+    }
+    
+    else if([sender tag] == 2) // Category
+        {
+        
         NSArray* typeArray = @[@{@"category":@"BATTING"},@{@"category":@"BOWLING"}];
         _CommonArray = typeArray;
         
         [tbl_list setFrame:CGRectMake(CGRectGetMinX(btnCategory.superview.frame), 0, CGRectGetWidth(btnCategory.superview.frame), 50*_CommonArray.count)];
-    }
+        
+        
+        
+            //        dropVC.array = typeArray;
+            //        dropVC.key = @"type";
+        
+            //        [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(dropdownView.frame), CGRectGetMaxY(dropdownView.superview.frame), CGRectGetWidth(dropdownView.frame)/2, 50*typeArray.count)];
+        
+        }
+    else if([sender tag] == 3) // Type
+        {
+        NSString* temp =@"";
+        if ([lblcategory.text isEqualToString:@"Batting"]) {
+            temp = @"DISMISSALS";
+        }
+        else {
+            temp = @"VARIATIONS";
+            
+        }
+        
+        
+        NSArray* typeArray = @[@{@"type":@"BEATEN&UNCOMFORT"},@{@"type":@"BOUNDARIES"},@{@"type":@"DOTBALLS"},@{@"type":temp}];
+        _CommonArray = typeArray;
+        
+//        [tbl_list setFrame:CGRectMake(CGRectGetMinX(btnType.superview.frame), 0, CGRectGetWidth(btnType.superview.frame), 50*_CommonArray.count)];
+        
+        
+            //        [dropVC.tblDropDown setFrame:CGRectMake(leading, CGRectGetMaxY(dropdownView.superview.frame), CGRectGetWidth(dropdownView.frame)/2, 50*typeArray.count)];
+        
+        }
 
     [tbl_list reloadData];
     
@@ -256,9 +324,9 @@
         cell.layer.masksToBounds = NO;
         cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
         
-        NSString * videoDetailStr = [[self.objFirstGalleryArray valueForKey:@"videoFile"] objectAtIndex:indexPath.row];
+        NSString * videoDetailStr = [[self.objFirstGalleryArray valueForKey:@"documentFile"] objectAtIndex:indexPath.row];
         
-        cell.batting_lbl.text = [[self.objFirstGalleryArray valueForKey:@"videoName"] objectAtIndex:indexPath.row];
+        cell.batting_lbl.text = [[self.objFirstGalleryArray valueForKey:@"documentFileName"] objectAtIndex:indexPath.row];
         
         cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
         
@@ -328,7 +396,7 @@
     cell.textLabel.textColor = [UIColor whiteColor];
     cell.textLabel.numberOfLines = 2;
     
-    if (selectedButtonTag == 1) {
+    if (selectedButtonTag == 2) {
         
         cell.textLabel.text = [[self.CommonArray valueForKey:@"category"] objectAtIndex:indexPath.row];
         
@@ -345,9 +413,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (selectedButtonTag == 1) {
+    if (selectedButtonTag == 2) {
         lblcategory.text = [[self.CommonArray valueForKey:@"category"] objectAtIndex:indexPath.row];
     }
+    
+    [tableMainView setHidden:YES];
 }
 
 - (void) videoDocumentWebservice {
@@ -383,28 +453,10 @@
         if(responseObject >0)
             {
             self.objFirstGalleryArray =[[NSMutableArray alloc]init];
-            self.objSecondGalleryArray = [[NSMutableArray alloc]init];
-            self.objCatoryArray = [[NSMutableArray alloc]init];
-            self.objVideoFilterArray = [[NSMutableArray alloc]init];
-//            self.objFirstGalleryArray =[responseObject valueForKey:@"Firstlist"];
-//            self.objSecondGalleryArray =[responseObject valueForKey:@"Secondlist"];
-//            self.objCatoryArray = [responseObject valueForKey:@"Thirdlist"];
-//
-//            self.CommonArray = [[NSMutableArray alloc]init];
-//            NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
-//            [dic setValue:@"ALL" forKey:@"CategoryName"];
-//            [self.CommonArray addObject:dic];
-//
-//            for(int i=0;i<self.objCatoryArray.count;i++)
-//                {
-//                [self.CommonArray addObject:[self.objCatoryArray objectAtIndex:i]];
-//                }
-//
-//            self.objVideoFilterArray =  self.objSecondGalleryArray;
-//
-//            [self.videoCollectionview1 reloadData];
-//            [self.videoCollectionview2 reloadData];
+            self.objFirstGalleryArray = [responseObject valueForKey:@"Secondlist"];
+            self.mainGalleryArray = self.objFirstGalleryArray;
             
+            [self.videoCollectionview2 reloadData];
             }
         
         [AppCommon hideLoading];
@@ -416,5 +468,138 @@
         
     }];
 }
+
+#pragma mark - Search delegate methods
+
+- (void)filterContentForSearchText:(NSString*)searchText
+{
+    
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"documentFileName CONTAINS[c] %@ OR keyWords CONTAINS[c] %@ OR TeamName CONTAINS[c] %@ OR PlayerName CONTAINS[c] %@ OR DocumentFileDate CONTAINS[c] %@ ", searchText,searchText,searchText,searchText, searchText];
+    _searchResult = [self.mainGalleryArray filteredArrayUsingPredicate:resultPredicate];
+    
+    NSLog(@"searchResult:%@", _searchResult);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+            // Update the UI
+        if (_searchResult.count == 0) {
+            self.objFirstGalleryArray = [self.searchResult copy];
+            
+            [self.videoCollectionview2 reloadData];
+            
+        } else {
+            
+            self.objFirstGalleryArray =[[NSMutableArray alloc]init];
+            self.objFirstGalleryArray = [self.searchResult copy];
+            
+            [self.videoCollectionview2 reloadData];
+            
+        }
+    });
+    
+    
+}
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+        //self.playerTbl.hidden = NO;
+        //    NSLog(@"%@",textField);
+        //    NSString *searchString = [NSString stringWithFormat:@"%@%@",textField.text, string];
+        //
+        //    if (self.search_Txt.text.length!=1)
+        //    {
+        //        [self filterContentForSearchText:searchString];
+        //    }
+        //    else
+        //    {
+        //        self.objVideoFilterArray = [[NSMutableArray alloc]init];
+        //        self.objVideoFilterArray =  self.objSecondGalleryArray;
+        //
+        //        [self.videoCollectionview2 reloadData];
+        //
+        //    }
+        //
+        //    //[self filterContentForSearchText:searchString];
+        //    dispatch_async(dispatch_get_main_queue(), ^{
+        //        // Update the UI
+        //        //[self.videoCollectionview2 reloadData];
+        //    });
+        //    return YES;
+    
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    [self updateTextLabelsWithText: newString];
+    
+    changedText = newString;
+    
+    return YES;
+}
+
+-(void)updateTextLabelsWithText:(NSString *)string
+{
+        // [self.search_Txt setText:string];
+    NSLog(@"@%",string);
+    
+    if (string.length==0 || string.length == nil)
+        {
+        self.objFirstGalleryArray = [[NSMutableArray alloc]init];
+        self.objFirstGalleryArray =  self.mainGalleryArray;
+        
+        [self.videoCollectionview2 reloadData];
+        }
+    else
+        {
+        [self filterContentForSearchText:string];
+        }
+    
+        //[self filterContentForSearchText:searchString];
+    dispatch_async(dispatch_get_main_queue(), ^{
+            // Update the UI
+        [self.videoCollectionview2 reloadData];
+    });
+}
+
+-(void)textFieldDidChange :(UITextField *) textField
+{
+    if (changedText.length==0 || changedText.length == nil)
+        {
+        self.objFirstGalleryArray = [[NSMutableArray alloc]init];
+        self.objFirstGalleryArray =  self.mainGalleryArray;
+        
+        [self.videoCollectionview2 reloadData];
+        }
+    else
+        {
+        [self filterContentForSearchText:changedText];
+        }
+    
+        //[self filterContentForSearchText:searchString];
+    dispatch_async(dispatch_get_main_queue(), ^{
+            // Update the UI
+        [self.videoCollectionview2 reloadData];
+    });
+    
+}
+
+-(BOOL) textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+            //[self.videoCollectionview2 reloadData];
+    });
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField;
+{
+    
+    [textField resignFirstResponder];
+}
+
 
 @end

@@ -1130,8 +1130,8 @@
     if(![COMMON isInternetReachable])
         return;
     
-    //NSString *URLString =  URL_FOR_RESOURCE(@"MOBILE_APT_VIDEOGALLERY");
-    NSString *URLString = @"http://192.168.0.154:8029/AGAPTService.svc/MOBILE_APT_VIDEOGALLERY";
+    NSString *URLString =  URL_FOR_RESOURCE(@"MOBILE_APT_VIDEOGALLERY");
+   // NSString *URLString = @"http://192.168.0.154:8029/AGAPTService.svc/MOBILE_APT_VIDEOGALLERY";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -1144,12 +1144,14 @@
      NSString *usercode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
    // NSString *usercode = @"USM0000107";
     NSString *clientcode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    NSString *count =  @"0";
     
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     //        if(competition)   [dic    setObject:competition     forKey:@"Competitioncode"];
     if(usercode)   [dic    setObject:usercode     forKey:@"Usercode"];
     if(clientcode)   [dic    setObject:clientcode     forKey:@"clientCode"];
+    if(count)   [dic    setObject:count     forKey:@"Count"];
     
     
     NSLog(@"parameters : %@",dic);

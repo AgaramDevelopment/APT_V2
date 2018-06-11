@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,15 +36,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ShK-7k-VQr">
-                    <rect key="frame" x="0.0" y="20" width="375" height="70"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="bu7-2x-JlB"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="xk1-1R-1mO"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AH2-eU-57R" userLabel="View header">
-                    <rect key="frame" x="5" y="95" width="375" height="30"/>
+                    <rect key="frame" x="5" y="75" width="375" height="30"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Documents" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rND-RS-KDa">
                             <rect key="frame" x="5" y="0.0" width="101" height="30"/>
@@ -82,7 +81,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhT-30-hXw" userLabel="View dropdown search">
-                    <rect key="frame" x="0.0" y="135" width="375" height="30"/>
+                    <rect key="frame" x="0.0" y="115" width="375" height="30"/>
                     <subviews>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vTW-xO-GxV" userLabel="Category View">
                             <rect key="frame" x="10" y="0.0" width="103" height="30"/>
@@ -262,10 +261,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B9b-8R-2C6" userLabel="video View">
-                    <rect key="frame" x="0.0" y="175" width="375" height="492"/>
+                    <rect key="frame" x="0.0" y="155" width="375" height="512"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="nQQ-FB-Fji">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="492"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="512"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7bZ-Nb-sIm">
                                 <size key="itemSize" width="50" height="50"/>
@@ -279,7 +278,7 @@
                             </connections>
                         </collectionView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Videos Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q02-70-goq">
-                            <rect key="frame" x="132.5" y="237.5" width="110" height="17"/>
+                            <rect key="frame" x="132.5" y="247.5" width="110" height="17"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                             <color key="textColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -296,10 +295,10 @@
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BcX-ek-Oen" userLabel="drop down View">
-                    <rect key="frame" x="0.0" y="175" width="375" height="492"/>
+                    <rect key="frame" x="0.0" y="155" width="375" height="512"/>
                     <subviews>
                         <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gqE-TX-jOa">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="492"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="512"/>
                             <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <gestureRecognizers/>
                         </view>
@@ -325,6 +324,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="ShK-7k-VQr" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="9f6-qF-6bL"/>
+                <constraint firstItem="ShK-7k-VQr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="BpZ-H1-UNU"/>
                 <constraint firstItem="BcX-ek-Oen" firstAttribute="leading" secondItem="B9b-8R-2C6" secondAttribute="leading" id="EKb-eV-r0X"/>
                 <constraint firstItem="B9b-8R-2C6" firstAttribute="top" secondItem="hhT-30-hXw" secondAttribute="bottom" constant="10" id="I85-AQ-OG4"/>
                 <constraint firstItem="hhT-30-hXw" firstAttribute="top" secondItem="AH2-eU-57R" secondAttribute="bottom" constant="10" id="I9V-Bm-Bff"/>
@@ -334,7 +334,6 @@
                 <constraint firstItem="hhT-30-hXw" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="Ypz-lP-lni"/>
                 <constraint firstAttribute="trailing" secondItem="B9b-8R-2C6" secondAttribute="trailing" id="ZX0-M1-qYG"/>
                 <constraint firstItem="hhT-30-hXw" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="dyY-id-Z2d"/>
-                <constraint firstItem="ShK-7k-VQr" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="el7-fj-gcM"/>
                 <constraint firstItem="BcX-ek-Oen" firstAttribute="top" secondItem="B9b-8R-2C6" secondAttribute="top" id="gNH-ju-v3B"/>
                 <constraint firstItem="AH2-eU-57R" firstAttribute="top" secondItem="ShK-7k-VQr" secondAttribute="bottom" constant="5" id="p7Y-oc-cuJ"/>
                 <constraint firstAttribute="bottom" secondItem="B9b-8R-2C6" secondAttribute="bottom" id="pVc-Nd-c7c"/>

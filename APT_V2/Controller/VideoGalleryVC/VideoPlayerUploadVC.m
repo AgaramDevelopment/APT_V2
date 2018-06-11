@@ -149,6 +149,51 @@
         [revealController.tapGestureRecognizer setEnabled:YES];
 }
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self customnavigationmethod];
+}
+
+-(void)customnavigationmethod
+{
+    CustomNavigation * objCustomNavigation=[[CustomNavigation alloc] initWithNibName:@"CustomNavigation" bundle:nil];
+    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController panGestureRecognizer];
+    [revealController tapGestureRecognizer];
+    
+    
+    UIView* view= self.view.subviews.firstObject;
+    [view addSubview:objCustomNavigation.view];
+    
+    BOOL isBackEnable = [[NSUserDefaults standardUserDefaults] boolForKey:@"BACK"];
+    
+    isBackEnable = YES;
+    if (isBackEnable) {
+        objCustomNavigation.menu_btn.hidden =YES;
+        objCustomNavigation.btn_back.hidden =NO;
+        
+        [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
+            //[objCustomNavigation.btn_back addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    else
+        {
+        objCustomNavigation.menu_btn.hidden =NO;
+        objCustomNavigation.btn_back.hidden =YES;
+        [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+        }
+    [self.headerView addSubview:objCustomNavigation.view];
+        //    objCustomNavigation.tittle_lbl.text=@"";
+    
+}
+
+-(IBAction)didClickBackBtn:(id)sender
+{
+//    [self.navigationController popViewControllerAnimated:YES];
+    [appDel.frontNavigationController popViewControllerAnimated:YES];
+}
+
 
 -(void)FetchvideouploadWebservice
 {
@@ -875,13 +920,13 @@
     if ([sender tag] == 0) // team
     {
         self.commonArray = appDel.ArrayTeam;
-        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.teamView.frame)+10, CGRectGetMaxY(self.teamView.superview.frame)+250, CGRectGetWidth(self.teamView.frame), 50*self.commonArray.count)];
+        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.teamView.frame)+10, CGRectGetMaxY(self.teamView.superview.frame)-80, CGRectGetWidth(self.teamView.frame), 50*self.commonArray.count)];
     
     }
     else if ([sender tag] == 1) // player
     {
         self.commonArray = [self getCorrespoingPlayerForthisTeamCode:correspondingTeamCode];
-        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.playerView.frame)+10, CGRectGetMaxY(self.playerView.superview.frame)+250, CGRectGetWidth(self.playerView.frame), 50*self.commonArray.count)];
+        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.playerView.frame)+10, CGRectGetMaxY(self.playerView.superview.frame)-80, CGRectGetWidth(self.playerView.frame), 50*self.commonArray.count)];
 
     }
     else if ([sender tag] == 2) // category
@@ -890,7 +935,7 @@
                         @{@"categoryName":@"Bowling",@"categoryCode":@"MSC357"}];
 
         self.commonArray = arr1;
-        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.CategoryView.frame)+10, CGRectGetMaxY(self.CategoryView.superview.frame)+300, CGRectGetWidth(self.CategoryView.frame), 50*self.commonArray.count)];
+        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.CategoryView.frame)+10, CGRectGetMaxY(self.CategoryView.superview.frame)-20, CGRectGetWidth(self.CategoryView.frame), 50*self.commonArray.count)];
 
     }
     else if ([sender tag] == 3) // type
@@ -906,7 +951,7 @@
             self.commonArray = arr2;
         }
     
-        popTbl.frame = CGRectMake(keywordsView.frame.origin.x+10, CGRectGetMaxY(keywordsView.superview.frame)+345, keywordsView.frame.size.width, self.commonArray.count*45);
+        popTbl.frame = CGRectMake(keywordsView.frame.origin.x+10, CGRectGetMaxY(keywordsView.superview.frame)+15, keywordsView.frame.size.width, self.commonArray.count*45);
 
         /*
          Beaten
@@ -928,7 +973,8 @@
     
     isShare = YES;
         self.commonArray = self.sharetouserArray;
-        popTbl.frame = CGRectMake(sharetoUserView.frame.origin.x+10, CGRectGetMaxY(sharetoUserView.frame)+460, sharetoUserView.frame.size.width, 200);
+        popTbl.frame = CGRectMake(sharetoUserView.frame.origin.x+10, CGRectGetMaxY(sharetoUserView.superview.frame)+55, sharetoUserView.frame.size.width, 200);
+    
     }
 
     [popTbl reloadData];

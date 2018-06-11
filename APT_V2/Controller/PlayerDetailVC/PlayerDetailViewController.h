@@ -42,6 +42,7 @@
 @property (strong, nonatomic) IBOutlet UITableViewController *tblpopup;
 - (IBAction)actionpopup:(id)sender;
 @property (weak, nonatomic) IBOutlet UITableView *tblDateDropDown;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *TableWidth;
 
 - (IBAction)playerMultiActions:(id)sender;
 

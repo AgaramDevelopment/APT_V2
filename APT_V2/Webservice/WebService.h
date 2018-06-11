@@ -23,10 +23,10 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 //#define BASE_URL    @"http://192.168.0.151:8044/AGAPTService.svc/"
 
 // LOCAL 2
-#define BASE_URL    @"http://192.168.0.154:8029/AGAPTService.svc/"
+//#define BASE_URL    @"http://192.168.0.154:8029/AGAPTService.svc/"
 
 // LIVE
-//#define BASE_URL    @"http://13.126.151.253:9001/AGAPTService.svc/"
+#define BASE_URL    @"http://13.126.151.253:9001/AGAPTService.svc/"
 
 //Local Dev - URL Path
 //#define BASE_URL   @"http://192.168.0.154:8029/AGAPTService.svc/"

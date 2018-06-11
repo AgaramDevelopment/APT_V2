@@ -21,6 +21,7 @@
     UIBarStyle originalBarStyle;
     NSMutableArray* graphArray;
     NSMutableDictionary* graphDict;
+    BOOL isPOP;
 
 }
 
@@ -46,6 +47,9 @@
 //    [self customnavigationmethod];
 
 //    [self.txtTestDate setup];
+      isPOP = YES;
+    
+     self.tblDateDropDown.hidden = YES;
     
     [self playerDetailWebservice];
     
@@ -362,7 +366,6 @@
         UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
         [self fitnessGraphWebservicebyDate:cell.textLabel.text];
         [tblDateDropDown setHidden:YES];
-
         
     }
     [scrollView setScrollEnabled:YES];
@@ -419,7 +422,8 @@
         NSString *UserrefCode =[AppCommon GetuserReference];
 //    NSString *UserrefCode = @"AMR0000016";
 
-        NSString *PlayerCode = [self.selectedPlayerArray valueForKey:@"Playercode"];
+       // NSString *PlayerCode = [self.selectedPlayerArray valueForKey:@"Playercode"];
+       NSString *PlayerCode = [self.selectedPlayerArray valueForKey:@"AthleteCode"];
     
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(ClientCode)   [dic    setObject:ClientCode     forKey:@"ClientCode"];
@@ -498,7 +502,8 @@
     NSString *UserrefCode =[AppCommon GetuserReference];
     //    NSString *UserrefCode = @"AMR0000016";
     
-    NSString *PlayerCode = [self.selectedPlayerArray valueForKey:@"Playercode"];
+   // NSString *PlayerCode = [self.selectedPlayerArray valueForKey:@"Playercode"];//AthleteCode
+    NSString *PlayerCode = [self.selectedPlayerArray valueForKey:@"AthleteCode"];
 
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     if(ClientCode)   [dic    setObject:ClientCode     forKey:@"ClientCode"];
@@ -587,27 +592,42 @@
 }
 
 
+//-(IBAction)openDropDown:(id)sender
+//{
+//    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
+//    dropVC.protocol = self;
+//    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//    [dropVC.view setBackgroundColor:[UIColor clearColor]];
+//
+//
+//    dropVC.array = [TableArray valueForKey:@"testDates"];
+//    dropVC.key = @"ModuleName";
+//    [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX([sender superview].frame), CGRectGetMaxY([sender superview].frame)+170, CGRectGetWidth([sender frame]), 200)];
+//
+//    [self presentViewController:dropVC animated:YES completion:nil];
+//
+//}
+//
+//-(void)selectedValue:(NSMutableArray *)array andKey:(NSString *)key andIndex:(NSIndexPath *)Index
+//{
+//    NSLog(@"Selected Date %@ ",[[array objectAtIndex:Index.row]valueForKey:key]);
+//    [self fitnessGraphWebservicebyDate:[[array objectAtIndex:Index.row]valueForKey:key]];
+//
+//}
+
 -(IBAction)openDropDown:(id)sender
 {
-    DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
-    dropVC.protocol = self;
-    dropVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    dropVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [dropVC.view setBackgroundColor:[UIColor clearColor]];
-    
-    
-    dropVC.array = [TableArray valueForKey:@"testDates"];
-    dropVC.key = @"ModuleName";
-    [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX([sender superview].frame), CGRectGetMaxY([sender superview].frame)+170, CGRectGetWidth([sender frame]), 200)];
-    
-    [self presentViewController:dropVC animated:YES completion:nil];
-    
-}
-
--(void)selectedValue:(NSMutableArray *)array andKey:(NSString *)key andIndex:(NSIndexPath *)Index
-{
-    NSLog(@"Selected Date %@ ",[[array objectAtIndex:Index.row]valueForKey:key]);
-    [self fitnessGraphWebservicebyDate:[[array objectAtIndex:Index.row]valueForKey:key]];
-
+    if(isPOP)
+    {
+    self.tblDateDropDown.hidden = NO;
+    self.TableWidth.constant = self.txtTestDate.frame.size.width;
+        isPOP = NO;
+    }
+    else
+    {
+        self.tblDateDropDown.hidden = YES;
+        isPOP = YES;
+    }
 }
 @end

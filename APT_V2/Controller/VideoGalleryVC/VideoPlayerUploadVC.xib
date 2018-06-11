@@ -22,6 +22,7 @@
                 <outlet property="category_lbl" destination="P9E-wm-06B" id="m0B-di-rQX"/>
                 <outlet property="commonView" destination="n7O-Vm-A2F" id="IK5-tr-vXz"/>
                 <outlet property="datepickerView" destination="wsx-La-W4b" id="rqJ-ag-qpV"/>
+                <outlet property="headerView" destination="XVX-0N-Pue" id="EYl-aZ-2tQ"/>
                 <outlet property="keywordsView" destination="7he-KE-YK3" id="bBg-4H-gQn"/>
                 <outlet property="module_lbl" destination="WrV-RP-ZLp" id="Zad-nG-euy"/>
                 <outlet property="objKeyword_Txt" destination="ZbQ-5y-fJG" id="fhK-ed-g5i"/>
@@ -44,11 +45,18 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XVX-0N-Pue">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="iMO-lV-2Fl"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n7O-Vm-A2F">
-                    <rect key="frame" x="0.0" y="129" width="375" height="410"/>
+                    <rect key="frame" x="0.0" y="70" width="375" height="340"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5z-Lw-ZQk">
-                            <rect key="frame" x="5" y="35" width="365" height="35"/>
+                            <rect key="frame" x="5" y="10" width="365" height="35"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6A0-dr-aoI">
                                     <rect key="frame" x="5" y="3" width="175" height="30"/>
@@ -82,7 +90,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eXP-xK-bJy">
-                            <rect key="frame" x="5" y="80" width="365" height="270"/>
+                            <rect key="frame" x="5" y="55" width="365" height="270"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LBL-RQ-QJm">
                                     <rect key="frame" x="5" y="5" width="355" height="52"/>
@@ -417,50 +425,40 @@
                                 <constraint firstItem="cun-PD-mOD" firstAttribute="leading" secondItem="LBL-RQ-QJm" secondAttribute="leading" id="dIG-dW-Qu5"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sTV-MD-hP7">
-                            <rect key="frame" x="330" y="0.0" width="35" height="35"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="35" id="Um8-6A-CGY"/>
-                                <constraint firstAttribute="height" constant="35" id="WXK-Nt-6RQ"/>
-                            </constraints>
-                            <state key="normal" image="Cancelbtn"/>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cEW-Qz-kwo">
+                            <rect key="frame" x="17" y="316" width="170" height="128"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <action selector="didClickCancelBtnAction:" destination="-1" eventType="touchUpInside" id="HTM-vk-yhT"/>
+                                <outlet property="dataSource" destination="-1" id="K5T-XV-ojI"/>
+                                <outlet property="delegate" destination="-1" id="KwO-Vn-fEz"/>
                             </connections>
-                        </button>
+                        </tableView>
                     </subviews>
                     <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="eXP-xK-bJy" firstAttribute="leading" secondItem="n7O-Vm-A2F" secondAttribute="leading" constant="5" id="DuP-27-CEh"/>
                         <constraint firstItem="o5z-Lw-ZQk" firstAttribute="leading" secondItem="n7O-Vm-A2F" secondAttribute="leading" constant="5" id="KqC-ky-etO"/>
-                        <constraint firstAttribute="width" constant="375" id="Nkm-GB-S9C"/>
                         <constraint firstItem="eXP-xK-bJy" firstAttribute="top" secondItem="o5z-Lw-ZQk" secondAttribute="bottom" constant="10" id="TzA-WK-itc"/>
-                        <constraint firstAttribute="height" constant="410" id="Ucb-KN-IH6"/>
-                        <constraint firstItem="o5z-Lw-ZQk" firstAttribute="top" secondItem="n7O-Vm-A2F" secondAttribute="top" constant="35" id="Ucu-ZR-nMm"/>
-                        <constraint firstAttribute="trailing" secondItem="sTV-MD-hP7" secondAttribute="trailing" constant="10" id="WMj-jw-OmR"/>
-                        <constraint firstItem="sTV-MD-hP7" firstAttribute="top" secondItem="n7O-Vm-A2F" secondAttribute="top" id="bhk-5R-bL5"/>
+                        <constraint firstAttribute="height" constant="340" id="Ucb-KN-IH6"/>
+                        <constraint firstItem="o5z-Lw-ZQk" firstAttribute="top" secondItem="n7O-Vm-A2F" secondAttribute="top" constant="10" id="Ucu-ZR-nMm"/>
                         <constraint firstAttribute="trailing" secondItem="eXP-xK-bJy" secondAttribute="trailing" constant="5" id="lYM-0s-niA"/>
                         <constraint firstAttribute="trailing" secondItem="o5z-Lw-ZQk" secondAttribute="trailing" constant="5" id="sAW-6b-n0J"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cEW-Qz-kwo">
-                    <rect key="frame" x="16" y="465" width="170" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="K5T-XV-ojI"/>
-                        <outlet property="delegate" destination="-1" id="KwO-Vn-fEz"/>
-                    </connections>
-                </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="n7O-Vm-A2F" firstAttribute="leading" secondItem="nNM-4V-yfp" secondAttribute="leading" id="0xB-iV-6nD"/>
-                <constraint firstItem="n7O-Vm-A2F" firstAttribute="centerY" secondItem="zpW-1O-4dz" secondAttribute="centerY" id="428-0Z-p83"/>
-                <constraint firstItem="n7O-Vm-A2F" firstAttribute="leading" secondItem="nNM-4V-yfp" secondAttribute="leading" id="DQU-l3-Jov"/>
-                <constraint firstItem="n7O-Vm-A2F" firstAttribute="trailing" secondItem="nNM-4V-yfp" secondAttribute="trailing" id="Jbe-7q-y4t"/>
-                <constraint firstItem="n7O-Vm-A2F" firstAttribute="centerX" secondItem="zpW-1O-4dz" secondAttribute="centerX" id="Z29-nm-RCl"/>
-                <constraint firstItem="n7O-Vm-A2F" firstAttribute="trailing" secondItem="nNM-4V-yfp" secondAttribute="trailing" id="udP-f4-d81"/>
+                <constraint firstItem="XVX-0N-Pue" firstAttribute="leading" secondItem="nNM-4V-yfp" secondAttribute="leading" id="KjY-j2-JfF"/>
+                <constraint firstItem="n7O-Vm-A2F" firstAttribute="leading" secondItem="nNM-4V-yfp" secondAttribute="leading" id="NYU-bT-fc1">
+                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                </constraint>
+                <constraint firstItem="nNM-4V-yfp" firstAttribute="trailing" secondItem="n7O-Vm-A2F" secondAttribute="trailing" id="lnr-0z-Ddq">
+                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                </constraint>
+                <constraint firstItem="nNM-4V-yfp" firstAttribute="trailing" secondItem="XVX-0N-Pue" secondAttribute="trailing" id="tVT-yn-u1Q"/>
+                <constraint firstItem="n7O-Vm-A2F" firstAttribute="top" secondItem="XVX-0N-Pue" secondAttribute="bottom" id="wXv-lS-0Qe"/>
+                <constraint firstItem="XVX-0N-Pue" firstAttribute="top" secondItem="zpW-1O-4dz" secondAttribute="top" id="xDE-Oe-e6Z"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="nNM-4V-yfp"/>
@@ -512,7 +510,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Cancelbtn" width="42" height="42"/>
         <image name="Video-Icon-crop" width="315" height="236"/>
         <image name="down-arrow" width="21" height="21"/>
         <image name="imageView:axW-A7-Cte:image" width="21" height="21">

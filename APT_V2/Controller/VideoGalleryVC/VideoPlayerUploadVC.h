@@ -48,4 +48,5 @@
 @property (strong, nonatomic) IBOutlet UIButton *teamBtn;
 @property (strong, nonatomic) IBOutlet UILabel *titleLbl;
 @property (nonatomic,strong) NSString * titleString;
+@property (strong, nonatomic) IBOutlet UIView *headerView;
 @end

@@ -299,6 +299,7 @@
 - (IBAction)UploadVideoAction:(id)sender {
     
     VideoPlayerUploadVC *VC = [VideoPlayerUploadVC new];
+    VC.titleString = @"Videos";
 //    VC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
 //    VC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 //    [VC.view setBackgroundColor:[UIColor clearColor]];

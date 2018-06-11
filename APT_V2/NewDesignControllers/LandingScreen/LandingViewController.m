@@ -127,7 +127,7 @@ typedef enum : NSUInteger {
     NSArray* arr = @[@{@"Title":@"Events",@"image":@"APT_Planner"},
                      @{@"Title":@"Wellness",@"image":@"APT_Stats"},
                      @{@"Title":@"Training Load",@"image":@"APT_Training load"},
-                     @{@"Title":@"Foods",@"image":@"APT_Food Dairy"},
+                     @{@"Title":@"Food",@"image":@"APT_Food Dairy"},
                      @{@"Title":@"Bowling Graph",@"image":@""},
                      @{@"Title":@"Fixtures",@"image":@""},
                      @{@"Title":@"Results",@"image":@"Toss&Results_selected"},
@@ -159,6 +159,8 @@ typedef enum : NSUInteger {
     
     myTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(updateNotificationCount) userInfo:nil repeats:YES];
     
+    [self.BowlingDailyBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
+
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -1301,9 +1303,9 @@ typedef enum : NSUInteger {
         }
         [AppCommon hideLoading];
 
-//        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             [self TeamsWebservice];
-//        });
+        });
 
         
         
@@ -1676,6 +1678,7 @@ typedef enum : NSUInteger {
             [self.foodDiaryCollectionView reloadData];
             [self.LandingTable reloadData];
             NSLog(@"Countt:%ld", TableListDict.count);
+            
         });
         [self.BowlingDailyBtn sendActionsForControlEvents:UIControlEventTouchUpInside]; // This will call BowlingLoadWebservice
 
@@ -1802,6 +1805,8 @@ typedef enum : NSUInteger {
                 }
                 
                 [self BowlingLoadChart];
+                
+                
 
                 
             }
@@ -1809,9 +1814,9 @@ typedef enum : NSUInteger {
         }
         [AppCommon hideLoading];
 
-//        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             [self VideosWebservice];
-//        });
+        });
         
     }
     failure:^(AFHTTPRequestOperation *operation, id error) {

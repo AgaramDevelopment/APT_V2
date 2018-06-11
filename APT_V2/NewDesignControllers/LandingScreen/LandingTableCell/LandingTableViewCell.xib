@@ -28,27 +28,27 @@
                         <rect key="frame" x="5" y="5" width="310" height="38.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Jo-oE-SEJ">
-                                <rect key="frame" x="35" y="0.0" width="275" height="38.5"/>
+                                <rect key="frame" x="5" y="0.0" width="270" height="33.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NJX-0K-DMe">
-                                <rect key="frame" x="5" y="7" width="25" height="25"/>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NJX-0K-DMe">
+                                <rect key="frame" x="280" y="7" width="25" height="25"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="EJK-sL-2p0"/>
-                                    <constraint firstAttribute="width" constant="25" id="gWW-xF-Z43"/>
+                                    <constraint firstAttribute="height" constant="25" id="Kyu-OZ-yGM"/>
+                                    <constraint firstAttribute="width" constant="25" id="dc7-de-MVx"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.14349108930000001" green="0.68985170129999995" blue="0.94152849910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="3Jo-oE-SEJ" firstAttribute="leading" secondItem="NJX-0K-DMe" secondAttribute="trailing" constant="5" id="3gd-q5-VCx"/>
-                            <constraint firstItem="NJX-0K-DMe" firstAttribute="leading" secondItem="rBc-5L-Oju" secondAttribute="leading" constant="5" id="48k-QM-bTX"/>
-                            <constraint firstItem="NJX-0K-DMe" firstAttribute="top" secondItem="rBc-5L-Oju" secondAttribute="top" constant="7" id="DvE-ke-lah"/>
-                            <constraint firstAttribute="trailing" secondItem="3Jo-oE-SEJ" secondAttribute="trailing" id="EkE-ot-lBJ"/>
-                            <constraint firstAttribute="bottom" secondItem="3Jo-oE-SEJ" secondAttribute="bottom" id="aXI-hK-IFN"/>
-                            <constraint firstItem="3Jo-oE-SEJ" firstAttribute="top" secondItem="rBc-5L-Oju" secondAttribute="top" id="ibs-ob-ckg"/>
+                            <constraint firstAttribute="trailing" secondItem="NJX-0K-DMe" secondAttribute="trailing" constant="5" id="9Wh-aE-0L1"/>
+                            <constraint firstItem="NJX-0K-DMe" firstAttribute="top" secondItem="rBc-5L-Oju" secondAttribute="top" constant="7" id="ASE-5z-NLD"/>
+                            <constraint firstItem="3Jo-oE-SEJ" firstAttribute="leading" secondItem="rBc-5L-Oju" secondAttribute="leading" constant="5" id="Eor-up-w7E"/>
+                            <constraint firstItem="3Jo-oE-SEJ" firstAttribute="top" secondItem="rBc-5L-Oju" secondAttribute="top" id="FoU-hf-lf6"/>
+                            <constraint firstItem="NJX-0K-DMe" firstAttribute="leading" secondItem="3Jo-oE-SEJ" secondAttribute="trailing" constant="5" id="akq-DZ-fEr"/>
+                            <constraint firstAttribute="bottom" secondItem="3Jo-oE-SEJ" secondAttribute="bottom" constant="5" id="rCO-YI-rlq"/>
                         </constraints>
                     </view>
                 </subviews>

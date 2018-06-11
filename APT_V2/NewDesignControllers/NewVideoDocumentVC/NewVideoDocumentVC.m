@@ -37,8 +37,10 @@
 
 @end
 
+
 @implementation NewVideoDocumentVC
 
+@synthesize pdfView,docWebview;
 @synthesize tableMainView,tbl_list,lblNovideo, lblcategory, btnCategory;
 
 - (void)viewDidLoad {
@@ -325,6 +327,8 @@
         cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
         
         NSString * videoDetailStr = [[self.objFirstGalleryArray valueForKey:@"documentFile"] objectAtIndex:indexPath.row];
+        
+        [cell.fileImg setImage:[UIImage imageNamed:@"pdf"]];
         
         cell.batting_lbl.text = [[self.objFirstGalleryArray valueForKey:@"documentFileName"] objectAtIndex:indexPath.row];
         
@@ -615,5 +619,62 @@
     [textField resignFirstResponder];
 }
 
+
+-(void)loadWebView:(NSString *)str_file {
+        //    [COMMON loadingIcon:self.view];
+    NSURL *videoURL = [NSURL URLWithString:[str_file stringByReplacingOccurrencesOfString:@" " withString:@"%20"]];
+    
+    docWebview.scrollView.showsHorizontalScrollIndicator = NO;
+    docWebview.scrollView.showsVerticalScrollIndicator = NO;
+        //    NSURL*url=[[NSURL alloc]initWithString:str_file];
+    docWebview.scalesPageToFit = YES;
+    [docWebview setTranslatesAutoresizingMaskIntoConstraints: NO];
+    
+        // Fast scrolling   UIScrollViewDecelerationRateNormal UIScrollViewContentInsetAdjustmentAutomatic
+    docWebview.scrollView.decelerationRate = UIScrollViewContentInsetAdjustmentAutomatic;
+    
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:videoURL];
+    [docWebview loadRequest:requestObj];
+    
+        //    NSURL *pdfUrl = [NSURL fileURLWithPath:strPDFFilePath];
+    CGPDFDocumentRef document = CGPDFDocumentCreateWithURL((CFURLRef)videoURL);
+    size_t pageCount = CGPDFDocumentGetNumberOfPages(document);
+    
+    NSLog(@"Total no of page %@ ",pageCount);
+    
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView {
+        //    [COMMON RemoveLoadingIcon];
+    NSLog(@"webViewDidFinishLoad");
+    NSString* js =
+    @"var meta = document.createElement('meta'); " \
+    "meta.setAttribute( 'name', 'viewport' ); " \
+    "meta.setAttribute( 'content', 'width = device-width, initial-scale = 1.0,minimum-scale=1.0,maximum-scale=10.0 user-scalable = yes' ); " \
+    "document.getElementsByTagName('head')[0].appendChild(meta)";
+    [webView stringByEvaluatingJavaScriptFromString: js];
+    
+    CGPDFDocumentRef document = CGPDFDocumentCreateWithURL((CFURLRef)webView.request.URL);
+        //    size_t pageCount = CGPDFDocumentGetPage(document, 1);
+    size_t pageCount = CGPDFDocumentGetNumberOfPages(document);
+    
+    NSLog(@"Total no of page %@ ",pageCount);
+    
+    
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    return YES;
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return pdfView.view;
+}
+- (IBAction)closePDFDoc:(id)sender {
+    
+    [pdfView dismissViewControllerAnimated:YES completion:nil];
+        //    [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end

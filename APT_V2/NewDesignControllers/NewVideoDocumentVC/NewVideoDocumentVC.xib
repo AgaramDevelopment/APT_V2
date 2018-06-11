@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,9 +20,11 @@
                 <outlet property="btnCategory" destination="KBX-7L-yzE" id="3g3-fg-PRg"/>
                 <outlet property="btnUpload" destination="Ihm-Pq-zPd" id="szu-Jg-wVX"/>
                 <outlet property="dateTF" destination="E1C-y9-ivv" id="9aR-jb-eR3"/>
+                <outlet property="docWebview" destination="N75-N5-tkg" id="J9V-BU-KU5"/>
                 <outlet property="headerView" destination="ShK-7k-VQr" id="PMH-AG-cR7"/>
                 <outlet property="lblNovideo" destination="q02-70-goq" id="owu-GA-M2e"/>
                 <outlet property="lblcategory" destination="yy2-NT-C4z" id="tdP-OO-CVj"/>
+                <outlet property="pdfView" destination="2D7-ci-zED" id="Bsl-y5-Pan"/>
                 <outlet property="search_Txt" destination="Xo9-6M-ICP" id="bCs-8q-4qz"/>
                 <outlet property="tableMainView" destination="BcX-ek-Oen" id="Zav-yi-Gjo"/>
                 <outlet property="tbl_list" destination="uDR-bk-xHe" id="6eH-EE-MDR"/>
@@ -343,6 +345,39 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
         </view>
+        <viewController id="2D7-ci-zED">
+            <view key="view" contentMode="scaleToFill" id="pPl-yk-9DX">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <webView contentMode="scaleAspectFit" scalesPageToFit="YES" paginationMode="topToBottom" paginationBreakingMode="column" pageLength="1" translatesAutoresizingMaskIntoConstraints="NO" id="N75-N5-tkg">
+                        <rect key="frame" x="0.0" y="70" width="375" height="597"/>
+                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <connections>
+                            <outlet property="delegate" destination="-1" id="gOP-HP-YLG"/>
+                        </connections>
+                    </webView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nlk-7S-M0N">
+                        <rect key="frame" x="316" y="30" width="39" height="30"/>
+                        <state key="normal" title="Close"/>
+                        <connections>
+                            <action selector="closePDFDoc:" destination="-1" eventType="touchUpInside" id="QAd-dH-aaH"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <constraints>
+                    <constraint firstItem="N75-N5-tkg" firstAttribute="top" secondItem="WKY-7F-keO" secondAttribute="top" constant="50" id="WHO-6r-2zq"/>
+                    <constraint firstItem="N75-N5-tkg" firstAttribute="leading" secondItem="WKY-7F-keO" secondAttribute="leading" id="ac8-TQ-d8R"/>
+                    <constraint firstItem="N75-N5-tkg" firstAttribute="trailing" secondItem="WKY-7F-keO" secondAttribute="trailing" id="owX-d3-cLP"/>
+                    <constraint firstItem="WKY-7F-keO" firstAttribute="trailing" secondItem="Nlk-7S-M0N" secondAttribute="trailing" constant="20" id="vCH-a1-aRb"/>
+                    <constraint firstItem="WKY-7F-keO" firstAttribute="bottom" secondItem="N75-N5-tkg" secondAttribute="bottom" id="vxz-GF-PZb"/>
+                    <constraint firstItem="N75-N5-tkg" firstAttribute="top" secondItem="Nlk-7S-M0N" secondAttribute="bottom" constant="10" id="wy2-wn-7ET"/>
+                </constraints>
+                <viewLayoutGuide key="safeArea" id="WKY-7F-keO"/>
+            </view>
+            <point key="canvasLocation" x="550" y="111"/>
+        </viewController>
     </objects>
     <resources>
         <image name="downArrow" width="83" height="83"/>

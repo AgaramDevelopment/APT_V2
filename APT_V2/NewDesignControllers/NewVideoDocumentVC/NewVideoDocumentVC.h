@@ -22,5 +22,7 @@
 @property (strong, nonatomic) IBOutlet UICollectionView *videoCollectionview2;
 @property (weak, nonatomic) IBOutlet UILabel *lblNovideo;
 
-
+//PDF properties
+@property (strong, nonatomic) IBOutlet UIViewController *pdfView;
+@property (weak, nonatomic) IBOutlet UIWebView *docWebview;
 @end

@@ -779,6 +779,8 @@ typedef enum : NSUInteger {
         //        }
         
         cell.batting_lbl.text = [[videosArray valueForKey:@"videoName"] objectAtIndex:indexPath.row];
+        cell.fileImg.image = [UIImage imageNamed:@"Video-Icon-crop"];
+        //[cell.fileImg setImage:@"Video-Icon-crop"];
         //        cell.date_lbl.text =  [NSString stringWithFormat:@"%@",component3[2]];
         
         //        if (indexPath.row % 2 == 1) {
@@ -799,8 +801,55 @@ typedef enum : NSUInteger {
         
         return cell;
     }
-    else if (collectionView == self.DocumentsCollectionView){ //Documents
-        return  nil;
+    else if (collectionView == self.DocumentsCollectionView){ //Videos
+        
+        VideoGalleryUploadCell* cell = [self.DocumentsCollectionView dequeueReusableCellWithReuseIdentifier:@"cellid" forIndexPath:indexPath];
+        
+        NSArray* videosArray = [TableListDict valueForKey:@"Documents"];
+        
+        cell.contentView.layer.cornerRadius = 2.0f;
+        cell.contentView.layer.borderWidth = 1.0f;
+        cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
+        cell.contentView.layer.masksToBounds = YES;
+        
+        cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+        cell.layer.shadowOffset = CGSizeMake(0, 2.0f);
+        cell.layer.shadowRadius = 2.0f;
+        cell.layer.shadowOpacity = 1.0f;
+        cell.layer.masksToBounds = NO;
+        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
+        
+        // NSString * videoDetailStr = [[self.objFirstGalleryArray valueForKey:@"videoFile"] objectAtIndex:indexPath.row];
+        //        NSArray *component3 = [videoDetailStr componentsSeparatedByString:@" "];
+        
+        //        cell.playername_lbl.text =  [NSString stringWithFormat:@"%@",component3[0]];
+        //        if ([[AppCommon checkNull:[[self.objFirstGalleryArray valueForKey:@"videoFile"] objectAtIndex:indexPath.row]] isEqualToString:@""]) {
+        //
+        //
+        //        }
+        
+        cell.batting_lbl.text = [[videosArray valueForKey:@"documentFileName"] objectAtIndex:indexPath.row];
+        cell.fileImg.image = [UIImage imageNamed:@"pdf"];
+       // [cell.fileImg setImage:@"pdf"];
+        //        cell.date_lbl.text =  [NSString stringWithFormat:@"%@",component3[2]];
+        
+        //        if (indexPath.row % 2 == 1) {
+        //
+        cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+        //        }
+        //        else {
+        //            cell.layer.shadowColor = [UIColor redColor].CGColor;
+        //        }
+        
+        
+        cell.layer.shadowOffset = CGSizeZero;
+        cell.layer.shadowRadius = 1.0f;
+        cell.layer.shadowOpacity = 0.5f;
+        cell.layer.masksToBounds = NO;
+        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
+        
+        
+        return cell;
     }
     
     return  nil;
@@ -1745,6 +1794,7 @@ typedef enum : NSUInteger {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.VideosCollectionView reloadData];
         });
+        [self videoDocumentWebservice];
 
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -1753,6 +1803,71 @@ typedef enum : NSUInteger {
         [AppCommon hideLoading];
     }];
     
+}
+
+
+- (void) videoDocumentWebservice {
+    
+    
+    if(![COMMON isInternetReachable])
+        return;
+    
+    NSString *URLString =  URL_FOR_RESOURCE(@"MOBILE_DOCUMENTFILEGALLERY");
+    // NSString *URLString = @"http://192.168.0.154:8029/AGAPTService.svc/MOBILE_DOCUMENTFILEGALLERY";
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    // NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    
+    //    selectedTeamCode = [AppCommon getCurrentTeamCode];
+    //    selectedPlayerCode = [AppCommon GetuserReference];
+    //
+    //    if(selectedTeamCode)   [dic    setObject:selectedTeamCode     forKey:@"TeamCode"];
+    //    if(selectedPlayerCode)   [dic    setObject:selectedPlayerCode     forKey:@"PlayerCode"];
+    ////    if(lblType.text)   [dic    setObject:lblType.text     forKey:@"keyWords"];
+    //    if(lblcategory.text )   [dic    setObject:lblcategory.text     forKey:@"CategoryCode"];
+    //    [dic    setObject:@""  forKey:@"keyWords"];
+    
+    
+    NSString *usercode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
+    // NSString *usercode = @"USM0000107";
+    NSString *clientcode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    NSString *count =  @"10";
+    
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    //        if(competition)   [dic    setObject:competition     forKey:@"Competitioncode"];
+    if(usercode)   [dic    setObject:usercode     forKey:@"Usercode"];
+    if(clientcode)   [dic    setObject:clientcode     forKey:@"clientCode"];
+    if(count)   [dic    setObject:count     forKey:@"Count"];
+    
+    
+    
+    NSLog(@"parameters : %@",dic);
+    [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response ; %@",responseObject);
+        
+        if(responseObject >0)
+        {
+            if ([responseObject valueForKey:@"Secondlist"] != nil) {
+                [TableListDict setValue:[responseObject valueForKey:@"Secondlist"] forKey:@"Documents"];
+            }
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.DocumentsCollectionView reloadData];
+        });
+        
+        [AppCommon hideLoading];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+        [AppCommon hideLoading];
+        
+    }];
 }
 
 -(void)BowlingLoadWebservice : (NSString *)date : (NSString *)type

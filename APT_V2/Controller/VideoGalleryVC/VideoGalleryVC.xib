@@ -37,14 +37,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cn1-yO-Vfl">
-                    <rect key="frame" x="0.0" y="20" width="320" height="70"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="3j8-yI-UOn"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Emj-cj-AGt" userLabel="View header">
-                    <rect key="frame" x="0.0" y="95" width="320" height="30"/>
+                    <rect key="frame" x="0.0" y="75" width="320" height="30"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Videos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2p-Q7-6J2">
                             <rect key="frame" x="5" y="0.0" width="57" height="30"/>
@@ -81,7 +81,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iT0-Lz-NUf" userLabel="View dropdown search">
-                    <rect key="frame" x="0.0" y="135" width="320" height="30"/>
+                    <rect key="frame" x="0.0" y="115" width="320" height="30"/>
                     <subviews>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hdc-8o-1Hx" userLabel="Category View">
                             <rect key="frame" x="10" y="0.0" width="85" height="30"/>
@@ -263,10 +263,10 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SIN-tC-iDB" userLabel="video View">
-                    <rect key="frame" x="0.0" y="175" width="320" height="393"/>
+                    <rect key="frame" x="0.0" y="155" width="320" height="413"/>
                     <subviews>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="LUQ-Vu-Umg">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="393"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="413"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xYs-gQ-sjL">
                                 <size key="itemSize" width="50" height="50"/>
@@ -280,7 +280,7 @@
                             </connections>
                         </collectionView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Videos Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xfv-tr-FtC">
-                            <rect key="frame" x="105" y="188" width="110" height="17"/>
+                            <rect key="frame" x="105" y="198" width="110" height="17"/>
                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                             <color key="textColor" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -297,10 +297,10 @@
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rhr-rL-VN9" userLabel="drop down View">
-                    <rect key="frame" x="0.0" y="175" width="320" height="393"/>
+                    <rect key="frame" x="0.0" y="155" width="320" height="413"/>
                     <subviews>
                         <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XaP-r0-aTA">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="393"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="413"/>
                             <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <gestureRecognizers/>
                             <connections>
@@ -336,11 +336,11 @@
                 <constraint firstItem="SIN-tC-iDB" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="BnM-C4-HPB"/>
                 <constraint firstItem="iT0-Lz-NUf" firstAttribute="top" secondItem="Emj-cj-AGt" secondAttribute="bottom" constant="10" id="BwY-Um-sag"/>
                 <constraint firstItem="Rhr-rL-VN9" firstAttribute="leading" secondItem="SIN-tC-iDB" secondAttribute="leading" id="CMG-qO-aBX"/>
-                <constraint firstItem="cn1-yO-Vfl" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="EVF-Q7-qck"/>
                 <constraint firstItem="cn1-yO-Vfl" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="HaQ-7n-myV"/>
                 <constraint firstItem="cn1-yO-Vfl" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="N9B-YH-Zq7"/>
                 <constraint firstItem="Rhr-rL-VN9" firstAttribute="bottom" secondItem="SIN-tC-iDB" secondAttribute="bottom" id="Y4g-lA-ddX"/>
                 <constraint firstItem="Rhr-rL-VN9" firstAttribute="top" secondItem="SIN-tC-iDB" secondAttribute="top" id="ief-SI-cQE"/>
+                <constraint firstItem="cn1-yO-Vfl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="jUy-4s-qeT"/>
                 <constraint firstItem="Emj-cj-AGt" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="rSr-xE-7Fb"/>
                 <constraint firstItem="SIN-tC-iDB" firstAttribute="top" secondItem="iT0-Lz-NUf" secondAttribute="bottom" constant="10" id="uwE-ud-no5"/>
                 <constraint firstItem="Rhr-rL-VN9" firstAttribute="trailing" secondItem="SIN-tC-iDB" secondAttribute="trailing" id="xCZ-nd-eTD"/>

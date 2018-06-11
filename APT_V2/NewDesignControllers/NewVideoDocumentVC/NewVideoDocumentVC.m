@@ -426,24 +426,38 @@
     if(![COMMON isInternetReachable])
         return;
     
-//    NSString *URLString =  URL_FOR_RESOURCE(GalleryVideo);
-    NSString *URLString = @"http://192.168.0.154:8029/AGAPTService.svc/MOBILE_DOCUMENTFILEGALLERY";
+    NSString *URLString =  URL_FOR_RESOURCE(@"MOBILE_DOCUMENTFILEGALLERY");
+   // NSString *URLString = @"http://192.168.0.154:8029/AGAPTService.svc/MOBILE_DOCUMENTFILEGALLERY";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
     [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     manager.requestSerializer = requestSerializer;
     
+   // NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    
+//    selectedTeamCode = [AppCommon getCurrentTeamCode];
+//    selectedPlayerCode = [AppCommon GetuserReference];
+//
+//    if(selectedTeamCode)   [dic    setObject:selectedTeamCode     forKey:@"TeamCode"];
+//    if(selectedPlayerCode)   [dic    setObject:selectedPlayerCode     forKey:@"PlayerCode"];
+////    if(lblType.text)   [dic    setObject:lblType.text     forKey:@"keyWords"];
+//    if(lblcategory.text )   [dic    setObject:lblcategory.text     forKey:@"CategoryCode"];
+//    [dic    setObject:@""  forKey:@"keyWords"];
+    
+    
+    NSString *usercode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
+    // NSString *usercode = @"USM0000107";
+    NSString *clientcode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    NSString *count =  @"0";
+    
+    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    //        if(competition)   [dic    setObject:competition     forKey:@"Competitioncode"];
+    if(usercode)   [dic    setObject:usercode     forKey:@"Usercode"];
+    if(clientcode)   [dic    setObject:clientcode     forKey:@"clientCode"];
+    if(count)   [dic    setObject:count     forKey:@"Count"];
     
-    selectedTeamCode = [AppCommon getCurrentTeamCode];
-    selectedPlayerCode = [AppCommon GetuserReference];
-    
-    if(selectedTeamCode)   [dic    setObject:selectedTeamCode     forKey:@"TeamCode"];
-    if(selectedPlayerCode)   [dic    setObject:selectedPlayerCode     forKey:@"PlayerCode"];
-//    if(lblType.text)   [dic    setObject:lblType.text     forKey:@"keyWords"];
-    if(lblcategory.text )   [dic    setObject:lblcategory.text     forKey:@"CategoryCode"];
-    [dic    setObject:@""  forKey:@"keyWords"];
     
     
     NSLog(@"parameters : %@",dic);

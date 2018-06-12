@@ -10,7 +10,7 @@
 
 @interface LandingTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *lblSectionTitle;
-@property (weak, nonatomic) IBOutlet UIButton *btnSectionHead;
+@property (weak, nonatomic) IBOutlet UIButton *Morebtn;
 @property (strong, nonatomic) IBOutlet UICollectionView *collection;
 @property (weak, nonatomic) IBOutlet UIView *customView;
 @property (weak, nonatomic) IBOutlet UILabel *lblNoData;

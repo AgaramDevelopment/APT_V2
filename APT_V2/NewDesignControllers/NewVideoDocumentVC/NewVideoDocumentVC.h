@@ -29,4 +29,5 @@
 @property (nonatomic, strong) NSString *documentLink;
 
 - (void)loadWebView:(NSString*)link;
+@property (strong, nonatomic)  NSString *isBack;
 @end

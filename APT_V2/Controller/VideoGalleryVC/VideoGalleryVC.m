@@ -503,6 +503,7 @@
 //        }
         
         cell.batting_lbl.text = [[self.objFirstGalleryArray valueForKey:@"videoName"] objectAtIndex:indexPath.row];
+        cell.fileImg.image = [UIImage imageNamed:@"Video-Icon-crop"];
 //        cell.date_lbl.text =  [NSString stringWithFormat:@"%@",component3[2]];
         
 //        if (indexPath.row % 2 == 1) {
@@ -546,7 +547,7 @@
     //ScoreCardVideoPlayer * videoPlayerVC = [[ScoreCardVideoPlayer alloc]init];
     ScoreCardVideoPlayer * videoPlayerVC = (ScoreCardVideoPlayer *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"ScoreCardVideoPlayer"];
     videoPlayerVC.isFromHome = YES;
-    videoPlayerVC.HomeVideoStr = selectvideoStr;
+    videoPlayerVC.HomeVideoStr = [Video_BASE_URL stringByAppendingString:selectvideoStr];
     NSLog(@"appDel.frontNavigationController.topViewController %@",appDel.frontNavigationController.topViewController);
     [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
 

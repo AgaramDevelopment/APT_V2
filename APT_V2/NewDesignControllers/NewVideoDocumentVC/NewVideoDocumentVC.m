@@ -393,8 +393,11 @@
     
     //To Display Document PDFView
     NSString *documentFile = [[self.objFirstGalleryArray valueForKey:@"documentFile"] objectAtIndex:indexPath.row];
+    documentFile = [documentFile stringByReplacingOccurrencesOfString:@"\\" withString:@"/"];
     
-    [self loadWebView:documentFile];
+    NSString *CompletedocumentFile = [Video_BASE_URL stringByAppendingString:documentFile];
+    
+    [self loadWebView:CompletedocumentFile];
 //    [self loadWebView: @"https://www.example.com/document.pdf"];
     
     [appDel.frontNavigationController presentViewController:pdfView animated:YES completion:^{

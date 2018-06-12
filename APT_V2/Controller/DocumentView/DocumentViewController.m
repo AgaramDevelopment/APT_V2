@@ -40,7 +40,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
         
-    [btnUpload setHidden:![AppCommon isKXIP]];
+//    [btnUpload setHidden:![AppCommon isKXIP]];
 
     if (self.isNotificationPDF) {
         

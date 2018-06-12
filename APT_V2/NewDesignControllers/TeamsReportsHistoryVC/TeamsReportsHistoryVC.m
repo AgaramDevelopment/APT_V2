@@ -81,7 +81,7 @@
     //Notification Method
     
     
-    [objCustomNavigation.notificationView setHidden:![AppCommon isKXIP]];
+//    [objCustomNavigation.notificationView setHidden:![AppCommon isKXIP]];
     
     [objCustomNavigation.notificationBtn addTarget:self action:@selector(didClickNotificationBtn:) forControlEvents:UIControlEventTouchUpInside];
 }

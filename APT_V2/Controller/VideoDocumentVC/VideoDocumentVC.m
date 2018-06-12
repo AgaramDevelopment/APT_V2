@@ -56,7 +56,7 @@
     [self videoGalleryWebservice];
     backButtonNames = [NSMutableArray new];
         
-    [btnUpload setHidden:![AppCommon isKXIP]];
+//    [btnUpload setHidden:![AppCommon isKXIP]];
 
     
 }

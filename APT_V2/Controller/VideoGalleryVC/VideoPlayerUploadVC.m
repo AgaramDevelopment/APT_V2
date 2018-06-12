@@ -36,6 +36,7 @@
     NSString* correspondingTeamCode;
 
 }
+@property (nonatomic,strong) NSMutableArray * objTeamArray;
 @property (nonatomic,strong) NSMutableArray * objPlayerArray;
 @property (nonatomic,strong) NSMutableArray * objCategoryArray;
 @property (nonatomic,strong) NSMutableArray * sharetouserArray;
@@ -70,9 +71,9 @@
     objWebService = [[WebService alloc]init];
     [self FetchvideouploadWebservice];
     
-    if (!appDel.ArrayIPL_teamplayers.count) {
-        [AppCommon getTeamAndPlayerCode];
-    }
+//    if (!appDel.ArrayIPL_teamplayers.count) {
+//        [AppCommon getTeamAndPlayerCode];
+//    }
     
     [self.view setFrame:CGRectMake(0, 150, [UIScreen mainScreen].bounds.size.width, CGRectGetHeight(self.view.frame))];
 
@@ -128,6 +129,7 @@
     [Sandcdict setValue:@"MSC086" forKey:@"ModuleCode"];
     
     [DatePicker addTarget:self action:@selector(showSelecteddate:) forControlEvents:UIControlEventValueChanged];
+    
     self.ModuleArray = [[NSMutableArray alloc]initWithObjects:coachdict,physiodict,Sandcdict, nil];
     [self.txtVideoDate setInputView:datepickerView];
     
@@ -228,9 +230,12 @@
         
         if(responseObject >0)
         {
+            self.objTeamArray = [NSMutableArray new];
             self.objPlayerArray =[[NSMutableArray alloc]init];
             self.objCategoryArray = [[NSMutableArray alloc]init];
             self.sharetouserArray = [[NSMutableArray alloc]init];
+        
+            self.objTeamArray =[responseObject valueForKey:@"lstVideoUploadTeam"];
             self.objPlayerArray =[responseObject valueForKey:@"lstVideoUploadPlayer"];
             self.objCategoryArray =[responseObject valueForKey:@"lstVideoUploadCategory"];
             self.sharetouserArray = [responseObject valueForKey:@"lstVideoUploadUser"];
@@ -402,7 +407,7 @@
     NSString * actualDate = [dateFormat stringFromDate:DatePicker.date];
     
     _txtVideoDate.text = actualDate;
-    
+    [self.view endEditing:true];
 }
 
 -(IBAction)didClickCameraBtn:(id)sender
@@ -875,8 +880,8 @@
                 
                 // Update the UI
                 [AppCommon hideLoading];
-//                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-                [appDel.frontNavigationController dismissViewControllerAnimated:YES completion:nil];
+                [appDel.frontNavigationController popViewControllerAnimated:YES];
+//                [appDel.frontNavigationController dismissViewControllerAnimated:YES completion:nil];
             });
 
             
@@ -919,15 +924,15 @@
     
     if ([sender tag] == 0) // team
     {
-        self.commonArray = appDel.ArrayTeam;
-    
-        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.teamView.frame)+10, CGRectGetMaxY(self.teamView.superview.frame)-80, CGRectGetWidth(self.teamView.frame), IS_IPAD? 50*self.commonArray.count:30*self.commonArray.count)];
+//        self.commonArray = appDel.ArrayTeam;
+        self.commonArray = self.objTeamArray;
+        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.teamView.frame)+10, CGRectGetMaxY(self.teamView.superview.frame)-80, CGRectGetWidth(self.teamView.frame), IS_IPAD? 45*self.commonArray.count:30*self.commonArray.count)];
 
     }
     else if ([sender tag] == 1) // player
     {
         self.commonArray = [self getCorrespoingPlayerForthisTeamCode:correspondingTeamCode];
-        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.playerView.frame)+10, CGRectGetMaxY(self.playerView.superview.frame)-80, CGRectGetWidth(self.playerView.frame), IS_IPAD? 50*self.commonArray.count:20*self.commonArray.count)];
+        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.playerView.frame)+10, CGRectGetMaxY(self.playerView.superview.frame)-80, CGRectGetWidth(self.playerView.frame), IS_IPAD? 45*self.commonArray.count:20*self.commonArray.count)];
 
     }
     else if ([sender tag] == 2) // category
@@ -936,7 +941,7 @@
                         @{@"categoryName":@"Bowling",@"categoryCode":@"MSC357"}];
 
         self.commonArray = arr1;
-        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.CategoryView.frame)+10, CGRectGetMaxY(self.CategoryView.superview.frame)-20, CGRectGetWidth(self.CategoryView.frame), IS_IPAD? 50*self.commonArray.count:30*self.commonArray.count)];
+        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.CategoryView.frame)+10, CGRectGetMaxY(self.CategoryView.superview.frame)-20, CGRectGetWidth(self.CategoryView.frame), IS_IPAD? 45*self.commonArray.count:30*self.commonArray.count)];
 
     }
     else if ([sender tag] == 3) // type
@@ -952,7 +957,7 @@
             self.commonArray = arr2;
         }
     
-        popTbl.frame = CGRectMake(keywordsView.frame.origin.x+10, CGRectGetMaxY(keywordsView.superview.frame)+15, keywordsView.frame.size.width, IS_IPAD? 50*self.commonArray.count:30*self.commonArray.count);
+        popTbl.frame = CGRectMake(keywordsView.frame.origin.x+10, CGRectGetMaxY(keywordsView.superview.frame)+15, keywordsView.frame.size.width, IS_IPAD? 45*self.commonArray.count:30*self.commonArray.count);
 
         /*
          Beaten
@@ -974,7 +979,7 @@
     
     isShare = YES;
         self.commonArray = self.sharetouserArray;
-        popTbl.frame = CGRectMake(sharetoUserView.frame.origin.x+10, CGRectGetMaxY(sharetoUserView.superview.frame)+55, sharetoUserView.frame.size.width, IS_IPAD? 50*self.commonArray.count:30*self.commonArray.count);
+        popTbl.frame = CGRectMake(sharetoUserView.frame.origin.x+10, CGRectGetMaxY(sharetoUserView.superview.frame)+55, sharetoUserView.frame.size.width, IS_IPAD? 45*self.commonArray.count:30*self.commonArray.count);
     
     }
 
@@ -987,7 +992,8 @@
     NSArray* result;
     
     NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"TeamCode == %@", teamcode];
-    result = [appDel.ArrayIPL_teamplayers filteredArrayUsingPredicate:resultPredicate];
+//    result = [appDel.ArrayIPL_teamplayers filteredArrayUsingPredicate:resultPredicate];
+    result = [self.objPlayerArray filteredArrayUsingPredicate:resultPredicate];
     
     return result;
 }
@@ -997,7 +1003,9 @@
 
 - (IBAction)datePickerAction:(id)sender {
     
-    [_txtVideoDate resignFirstResponder];
+    _txtVideoDate.text = @"";
+//    [_txtVideoDate resignFirstResponder];
+    [self.view endEditing:true];
 }
 
 

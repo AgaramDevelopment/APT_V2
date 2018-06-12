@@ -17,6 +17,7 @@
 #import "DocumentViewController.h"
 #import "PlannerAddEvent.h"
 #import "LandingViewController.h"
+#import "NewVideoDocumentVC.h"
 @import Firebase;
 
 @interface AppDelegate ()<SharedNotificationDelegate>

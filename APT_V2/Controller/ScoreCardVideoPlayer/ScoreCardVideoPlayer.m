@@ -257,7 +257,7 @@
     sampleURL = [sampleURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSLog(@"URLQueryAllowedCharacterSet %@",sampleURL);
 
-        
+//    sampleURL = [sampleURL stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
         NSURL *videoURL = [NSURL URLWithString:[sampleURL stringByReplacingOccurrencesOfString:@" " withString:@"%20"]];
         
         [self.avPlayer seekToTime:CMTimeMake(0, 1)];

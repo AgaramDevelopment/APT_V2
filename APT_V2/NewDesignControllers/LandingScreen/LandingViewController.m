@@ -1018,11 +1018,13 @@ typedef enum : NSUInteger {
     else if (collectionView == self.DocumentsCollectionView) {
         NSArray* videosArray = [TableListDict valueForKey:@"Documents"];
         NSString *documentFile = [[videosArray valueForKey:@"documentFile"] objectAtIndex:indexPath.row];
+         documentFile = [documentFile stringByReplacingOccurrencesOfString:@"\\" withString:@"/"];
         
         documentObject = [[NewVideoDocumentVC alloc] initWithNibName:@"NewVideoDocumentVC" bundle:nil];
         
          //To Display Document PDFView
-        documentObject.documentLink = documentFile;
+        NSString *CompletedocumentFile = [Video_BASE_URL stringByAppendingString:documentFile];
+        documentObject.documentLink = CompletedocumentFile;
 //        documentObject.documentLink = @"https://www.example.com/document.pdf";
         documentObject.titleString = @"Documents";
       //  documentObject.pdfView;
@@ -1304,7 +1306,8 @@ typedef enum : NSUInteger {
     
     ScoreCardVideoPlayer * videoPlayerVC = (ScoreCardVideoPlayer *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"ScoreCardVideoPlayer"];
     videoPlayerVC.isFromHome = YES;
-    videoPlayerVC.HomeVideoStr = selectvideoStr;
+    //videoPlayerVC.HomeVideoStr = selectvideoStr;
+    videoPlayerVC.HomeVideoStr = [Video_BASE_URL stringByAppendingString:selectvideoStr];
     NSLog(@"appDel.frontNavigationController.topViewController %@",appDel.frontNavigationController.topViewController);
     [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
 }
@@ -1337,6 +1340,7 @@ typedef enum : NSUInteger {
     NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
     NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    
     
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];

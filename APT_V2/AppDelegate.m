@@ -432,17 +432,17 @@
 
     } else if ([[clickedData valueForKey:@"TypeDesc"] isEqualToString:@"file"]) {
 
-        DocumentViewController *documentObj = [DocumentViewController new];
-        documentObj.isNotificationPDF = YES;
-        documentObj.filePath = [clickedData valueForKey:@"FilePath"];
-        [appDel.frontNavigationController presentViewController:documentObj animated:YES completion:^{
-            
-            NSNumber* badgeCount = [[NSUserDefaults standardUserDefaults] valueForKey:@"badgeCount"];
-            NSInteger* badge = [badgeCount integerValue];
-            badgeCount = [NSNumber numberWithInteger:badge-1];
-            [[NSUserDefaults standardUserDefaults] setValue:badgeCount forKey:@"badgeCount"];
+//        DocumentViewController *documentObj = [DocumentViewController new];
+//        documentObj.isNotificationPDF = YES;
+//        documentObj.filePath = [clickedData valueForKey:@"FilePath"];
+//        [appDel.frontNavigationController presentViewController:documentObj animated:YES completion:^{
+//
+//            NSNumber* badgeCount = [[NSUserDefaults standardUserDefaults] valueForKey:@"badgeCount"];
+//            NSInteger* badge = [badgeCount integerValue];
+//            badgeCount = [NSNumber numberWithInteger:badge-1];
+//            [[NSUserDefaults standardUserDefaults] setValue:badgeCount forKey:@"badgeCount"];
 
-        }];
+  //      }];
         //        [self.navigationController pushViewController:documentObj animated:YES];
         //        NSString* fileName = [[self.listArray objectAtIndex:indexPath.item] valueForKey:@"FilePath"];
         //            //        pdfView
@@ -450,6 +450,19 @@
         //
         //        [appDel.frontNavigationController presentViewController:pdfView animated:YES completion:^{
         //        }];
+        
+        
+        //NSArray* videosArray = [TableListDict valueForKey:@"Documents"];
+        NSString *documentFile = [clickedData valueForKey:@"FilePath"];
+        
+       NewVideoDocumentVC * documentObject = [[NewVideoDocumentVC alloc] initWithNibName:@"NewVideoDocumentVC" bundle:nil];
+        
+        //To Display Document PDFView
+        documentObject.documentLink = documentFile;
+        //        documentObject.documentLink = @"https://www.example.com/document.pdf";
+        documentObject.titleString = @"Documents";
+        //  documentObject.pdfView;
+        [appDel.frontNavigationController presentViewController:documentObject animated:YES completion:nil];
 
     } else if ([[clickedData valueForKey:@"TypeDesc"] isEqualToString:@"Event"]) {
 

@@ -17,6 +17,7 @@
 #import "DocumentViewController.h"
 #import "PlannerAddEvent.h"
 #import "LandingViewController.h"
+@import Firebase;
 
 @interface AppDelegate ()<SharedNotificationDelegate>
 {
@@ -25,7 +26,6 @@
     NSTimer* _timer;
     BOOL isCoach;
     UNUserNotificationCenter *center;
-    TabHomeVC* tabHome;
 }
 
 @end
@@ -46,6 +46,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    [FIRApp configure];
+    
     DBManSyn = [DBMANAGERSYNC sharedManager];
     DBCon = [DBAConnection sharedManager];
     
@@ -62,8 +64,6 @@
     center.delegate = self;
     [self configureLocalNotification];
     [application setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
-    tabHome = [TabHomeVC new];
-    tabHome.protocol = self;
     
     
     UIViewController *frontViewController;
@@ -73,6 +73,10 @@
 //    frontViewController = (LandingViewController *)[storyBoard instantiateViewControllerWithIdentifier:@"LandingViewController"];
     
     frontViewController = isLogin ? [LandingViewController new] : [LoginVC new];
+    
+    if (isLogin) {
+        [[UIApplication sharedApplication]setApplicationIconBadgeNumber:0];
+    }
     
 //    if(![AppCommon isCoach])
 //    {

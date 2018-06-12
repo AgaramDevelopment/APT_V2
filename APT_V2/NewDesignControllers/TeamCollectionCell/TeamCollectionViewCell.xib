@@ -20,7 +20,11 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LiveBgimg" translatesAutoresizingMaskIntoConstraints="NO" id="5mx-lI-kLX">
-                        <rect key="frame" x="0.0" y="0.0" width="260" height="130"/>
+                        <rect key="frame" x="30" y="0.0" width="200" height="130"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="200" id="Mfq-HQ-xpe"/>
+                            <constraint firstAttribute="height" constant="130" id="vtl-qN-chV"/>
+                        </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sei-iK-JKU">
                         <rect key="frame" x="0.0" y="104" width="260" height="21"/>
@@ -37,11 +41,9 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="sei-iK-JKU" secondAttribute="trailing" id="2LJ-V0-fFu"/>
                 <constraint firstItem="sei-iK-JKU" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="3qA-Ng-4Eq"/>
-                <constraint firstItem="5mx-lI-kLX" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="FKb-ie-myq"/>
-                <constraint firstAttribute="bottom" secondItem="5mx-lI-kLX" secondAttribute="bottom" id="GKx-bB-0er"/>
+                <constraint firstItem="5mx-lI-kLX" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="5fe-1a-GlU"/>
                 <constraint firstAttribute="bottom" secondItem="sei-iK-JKU" secondAttribute="bottom" constant="5" id="Jae-bF-X2p"/>
-                <constraint firstItem="5mx-lI-kLX" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="PMd-W5-d46"/>
-                <constraint firstAttribute="trailing" secondItem="5mx-lI-kLX" secondAttribute="trailing" id="aqy-6r-Jth"/>
+                <constraint firstItem="5mx-lI-kLX" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="kA7-Oe-sCQ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="260" height="130"/>

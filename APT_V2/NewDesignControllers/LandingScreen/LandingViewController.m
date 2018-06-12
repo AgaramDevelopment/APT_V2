@@ -31,6 +31,7 @@
 #import "VideoGalleryVC.h"
 #import "ResultsVc.h"
 #import "ScoreCardVideoPlayer.h"
+#import "PopOverVC.h"
 
 typedef enum : NSUInteger {
     Events,
@@ -40,7 +41,7 @@ typedef enum : NSUInteger {
     Food
 } CollectionTitle;
 
-@interface LandingViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface LandingViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIPopoverPresentationControllerDelegate>
 {
     NSArray* SectionNameArray;
     NSMutableArray* ResponseArray;
@@ -121,23 +122,23 @@ typedef enum : NSUInteger {
     //                     @{@"Title":@"Documents"}];
     
     
-    SectionNameArray = @[@{@"Title":@"Events",@"image":@""},
-                         @{@"Title":@"Teams",@"image":@"APT_Team"},
-                         @{@"Title":@"Fixtures",@"image":@""},
-                         @{@"Title":@"Results",@"image":@"More"},
-                         @{@"Title":@"Videos",@"image":@"More"},
-                         @{@"Title":@"Documents",@"image":@"More"}];
+    SectionNameArray = @[@{@"Title":@"Events",@"image":@"",@"list":@"1"},
+                         @{@"Title":@"Teams",@"image":@"",@"list":@"2"},
+                         @{@"Title":@"Fixtures",@"image":@"",@"list":@"3"},
+                         @{@"Title":@"Results",@"image":@"More",@"list":@"4"},
+                         @{@"Title":@"Videos",@"image":@"More",@"list":@"5"},
+                         @{@"Title":@"Documents",@"image":@"More",@"list":@"6"}];
     
     
-    NSArray* arr = @[@{@"Title":@"Events",@"image":@""},
-                     @{@"Title":@"Wellness",@"image":@""},
-                     @{@"Title":@"Training Load",@"image":@""},
-                     @{@"Title":@"Food",@"image":@""},
-                     @{@"Title":@"Bowling Graph",@"image":@""},
-                     @{@"Title":@"Fixtures",@"image":@""},
-                     @{@"Title":@"Results",@"image":@"More"},
-                     @{@"Title":@"Videos",@"image":@"More"},
-                     @{@"Title":@"Documents",@"image":@"More"}];
+    NSArray* arr = @[@{@"Title":@"Events",@"image":@"",@"list":@"1"},
+                     @{@"Title":@"Wellness",@"image":@"",@"list":@"7"},
+                     @{@"Title":@"Training Load",@"image":@"",@"list":@"8"},
+                     @{@"Title":@"Food",@"image":@"",@"list":@"9"},
+                     @{@"Title":@"Bowling Graph",@"image":@"",@"list":@"10"},
+                     @{@"Title":@"Fixtures",@"image":@"",@"list":@"3"},
+                     @{@"Title":@"Results",@"image":@"More",@"list":@"4"},
+                     @{@"Title":@"Videos",@"image":@"More",@"list":@"5"},
+                     @{@"Title":@"Documents",@"image":@"More",@"list":@"6"}];
     
     
     
@@ -152,8 +153,8 @@ typedef enum : NSUInteger {
     [TableListDict setValue:@[] forKey:@"Teams"];
     [TableListDict setValue:@[] forKey:@"Fixtures"];
     [TableListDict setValue:@[] forKey:@"Results"];
-    //    [TableListDict setValue:@[] forKey:@"Food"];
-    //    [TableListDict setValue:@[] forKey:@"Wellness"];
+//        [TableListDict setValue:@[] forKey:@"Food"];
+//        [TableListDict setValue:@[] forKey:@"Wellness"];
     [TableListDict setValue:@[] forKey:@"Videos"];
     [TableListDict setValue:@[] forKey:@"Documents"];
     
@@ -226,6 +227,69 @@ typedef enum : NSUInteger {
 
     [objCustomNavigation.notificationBtn addTarget:self action:@selector(didClickNotificationBtn:) forControlEvents:UIControlEventTouchUpInside];
 }
+
+-(IBAction)didClickNotificationBtn:(id)sender
+{
+    /*
+     PopOverVC *popOverObj = [[PopOverVC alloc] init];
+     popOverObj.listArray = array;
+     UIPopoverController *popOver = [[UIPopoverController alloc] initWithContentViewController:popOverObj];
+     CGSize size;
+     if (IS_IPAD) {
+     size = CGSizeMake(300, array.count > 5 ? 200 : array.count*45);
+     } else {
+     size = CGSizeMake(250, array.count > 5 ? 200 : array.count*45);
+     }
+     
+     [popOver setPopoverContentSize:size];
+     [popOver setBackgroundColor:[UIColor colorWithRed:36/255.0 green:52/255.0 blue:75/255.0 alpha:1.0]];
+     [popOver presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+     */
+    
+    PopOverVC *contentVC = [[PopOverVC alloc] initWithNibName:@"PopOverVC" bundle:nil]; // 12
+    contentVC.listArray = notificationArray;
+    //    NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:@"Notification-1", @"Notification-2", @"Notification-3", @"Notification-4", @"Notification-5", @"Notification-6", nil];
+    //    contentVC.listArray = array;
+    contentVC.modalPresentationStyle = UIModalPresentationPopover; // 13
+    UIPopoverPresentationController *popPC = contentVC.popoverPresentationController; // 14
+    contentVC.popoverPresentationController.sourceRect = [sender bounds]; // 15
+    contentVC.popoverPresentationController.sourceView = sender; // 16
+    popPC.permittedArrowDirections = UIPopoverArrowDirectionAny; // 17
+    popPC.delegate = self; //18
+    [popPC setBackgroundColor:[UIColor colorWithRed:36/255.0 green:52/255.0 blue:75/255.0 alpha:1.0]];
+    //    [self presentViewController:contentVC animated:YES completion:nil]; // 19
+    [appDel.frontNavigationController presentViewController:contentVC animated:YES completion:nil];
+}
+
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller traitCollection:(UITraitCollection *)traitCollection {
+    return UIModalPresentationNone; // 20
+}
+
+- (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
+    
+    // return YES if the Popover should be dismissed
+    // return NO if the Popover should not be dismissed
+    return YES;
+}
+
+
+- (UIViewController *)presentationController:(UIPresentationController *)controller viewControllerForAdaptivePresentationStyle:(UIModalPresentationStyle)style {
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:controller.presentedViewController];
+    return navController; // 21
+}
+
+# pragma mark - Popover Presentation Controller Delegate
+
+- (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
+    
+    // called when a Popover is dismissed
+}
+
+- (void)popoverPresentationController:(UIPopoverPresentationController *)popoverPresentationController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView *__autoreleasing  _Nonnull *)view {
+    
+    // called when the Popover changes position
+}
+
 
 -(void)updateNotificationCount
 {
@@ -401,8 +465,50 @@ typedef enum : NSUInteger {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+        NSString* title = [[SectionNameArray objectAtIndex:indexPath.section] valueForKey:@"Title"];
     
-    return  IS_IPAD ? 250 : 150;
+        if ([title isEqualToString:@"Events"]) {
+            return IS_IPAD ? 250 : 180;
+        }
+        else if ([title isEqualToString:@"Teams"]) {
+            return IS_IPAD ? 250 : 150;
+        }
+        else if ([title isEqualToString:@"Fixtures"]) {
+            return IS_IPAD ? 250 : 180;
+        }
+        else if ([title isEqualToString:@"Results"]) {
+            return IS_IPAD ? 250 : 180;
+        }
+        else if ([title isEqualToString:@"Food"]) {
+            return IS_IPAD ? 250 : 180;
+        }
+        else if ([title isEqualToString:@"Videos"]) {
+            
+            return IS_IPAD ? 250 : 150;
+        }
+        else if ([title isEqualToString:@"Documents"]) {
+            
+            return IS_IPAD ? 250 : 150;
+        }
+        else if ([title isEqualToString:@"Wellness"]) {
+            
+            return IS_IPAD ? 250 : 150;
+        }
+        else if ([title isEqualToString:@"Training Load"]) {
+            
+            return IS_IPAD ? 250 : 150;
+        }
+        else if ([title isEqualToString:@"Bowling Graph"]) {
+            
+            return IS_IPAD ? 250 : 150;
+        }
+
+
+
+
+    
+    
+    return  0;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -445,7 +551,7 @@ typedef enum : NSUInteger {
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     static NSString *cellIdentifier = @"LandingTableViewCell";
-    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    LandingTableViewCell* cell = (LandingTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     NSArray* array = [[NSBundle mainBundle] loadNibNamed:@"LandingTableViewCell" owner:self options:nil];
     
     if(cell == nil)
@@ -462,8 +568,7 @@ typedef enum : NSUInteger {
     if ([title isEqualToString:@"Wellness"]){
         self.WellnessUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
         
-        
-        
+        [self.WellnessUIView removeFromSuperview];
         [cell.customView addSubview:self.WellnessUIView];
         
         [cell.collection setHidden:YES];
@@ -472,6 +577,7 @@ typedef enum : NSUInteger {
     else if ([title isEqualToString:@"Training Load"]){
         
         Training_object.view.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
+        [Training_object.view removeFromSuperview];
         [cell.customView addSubview:Training_object.view];
         [cell.collection setHidden:YES];
         
@@ -481,51 +587,52 @@ typedef enum : NSUInteger {
     {
         
         self.BowlingUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
+        [self.BowlingUIView removeFromSuperview];
         [cell.customView addSubview:self.BowlingUIView];
-        
         [cell.collection setHidden:YES];
         
     }
     else if ([title isEqualToString:@"Food"]) {
         [cell.collection setHidden:YES];
         self.FoodDiaryUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
+        [self.FoodDiaryUIView removeFromSuperview];
         [cell.customView addSubview:self.FoodDiaryUIView];
         
         [cell.collection setHidden:YES];
     }
     else if ([title isEqualToString:@"Events"]) {
         self.EventsUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
-        
+        [self.EventsUIView removeFromSuperview];
         [cell.customView addSubview:self.EventsUIView];
         [cell.collection setHidden:YES];
     }
     else if ([title isEqualToString:@"Videos"]) {
         self.VideosUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
-        
+        [self.VideosUIView removeFromSuperview];
         [cell.customView addSubview:self.VideosUIView];
         [cell.collection setHidden:YES];
     }
     else if ([title isEqualToString:@"Documents"]) {
         self.DocumentsUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
-        
+        [self.DocumentsUIView removeFromSuperview];
         [cell.customView addSubview:self.DocumentsUIView];
         [cell.collection setHidden:YES];
     }
     else if ([title isEqualToString:@"Teams"]) {
         self.TeamsUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
-        
+        [self.TeamsUIView removeFromSuperview];
         [cell.customView addSubview:self.TeamsUIView];
         [cell.collection setHidden:YES];
     }
     else if ([title isEqualToString:@"Fixtures"]) {
         self.FixturesUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
-        
+        [self.FixturesUIView removeFromSuperview];
         [cell.customView addSubview:self.FixturesUIView];
         [cell.collection setHidden:YES];
     }
     else if ([title isEqualToString:@"Results"]) {
         self.ResultsUIView.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
-        
+        [self.ResultsUIView removeFromSuperview];
         [cell.customView addSubview:self.ResultsUIView];
         [cell.collection setHidden:YES];
     }
@@ -886,6 +993,8 @@ typedef enum : NSUInteger {
      [self selectedFoodCell:cell andIndex:indexPath];
      }
      */
+    
+    
     if(collectionView == self.foodDiaryCollectionView)
     {
         FoodDiaryUpdateVC *objresult = [FoodDiaryUpdateVC new];

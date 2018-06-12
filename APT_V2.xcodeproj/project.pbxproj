@@ -251,6 +251,10 @@
 		18EF9D1320316C3000CDA268 /* CustomCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EF9D0E20316C2E00CDA268 /* CustomCollectionViewLayout.swift */; };
 		18EF9D1420316C3000CDA268 /* PlayerListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18EF9D1020316C2E00CDA268 /* PlayerListCollectionViewCell.m */; };
 		18EF9D1520316C3000CDA268 /* PlayerListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18EF9D1120316C2E00CDA268 /* PlayerListCollectionViewCell.xib */; };
+		CE0A3CF520CFC60800B2E83A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE0A3CF420CFC60700B2E83A /* GoogleService-Info.plist */; };
+		CE0A3CF720CFD05900B2E83A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0A3CF620CFD05900B2E83A /* AdSupport.framework */; };
+		CE0A3CFB20CFE96F00B2E83A /* PopOverVCCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0A3CF820CFE96E00B2E83A /* PopOverVCCell.m */; };
+		CE0A3CFC20CFE96F00B2E83A /* PopOverVCCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE0A3CF920CFE96E00B2E83A /* PopOverVCCell.xib */; };
 		CE102812202DDB7500FA0B61 /* AssesmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE102810202DDB7500FA0B61 /* AssesmentTableViewCell.m */; };
 		CE102813202DDB7500FA0B61 /* AssesmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE102811202DDB7500FA0B61 /* AssesmentTableViewCell.xib */; };
 		CE10281E202DDBFA00FA0B61 /* TestPropertyCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE10281C202DDBF900FA0B61 /* TestPropertyCollectionViewCell.m */; };
@@ -776,6 +780,11 @@
 		18EF9D1020316C2E00CDA268 /* PlayerListCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerListCollectionViewCell.m; sourceTree = "<group>"; };
 		18EF9D1120316C2E00CDA268 /* PlayerListCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerListCollectionViewCell.xib; sourceTree = "<group>"; };
 		A341C632E084798C93714773 /* Pods_APT_V2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_APT_V2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE0A3CF420CFC60700B2E83A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CE0A3CF620CFD05900B2E83A /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		CE0A3CF820CFE96E00B2E83A /* PopOverVCCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopOverVCCell.m; sourceTree = "<group>"; };
+		CE0A3CF920CFE96E00B2E83A /* PopOverVCCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopOverVCCell.xib; sourceTree = "<group>"; };
+		CE0A3CFA20CFE96F00B2E83A /* PopOverVCCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopOverVCCell.h; sourceTree = "<group>"; };
 		CE10280F202DDB7500FA0B61 /* AssesmentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssesmentTableViewCell.h; sourceTree = "<group>"; };
 		CE102810202DDB7500FA0B61 /* AssesmentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssesmentTableViewCell.m; sourceTree = "<group>"; };
 		CE102811202DDB7500FA0B61 /* AssesmentTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssesmentTableViewCell.xib; sourceTree = "<group>"; };
@@ -951,6 +960,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE0A3CF720CFD05900B2E83A /* AdSupport.framework in Frameworks */,
 				CE956094209D904F0086D2C9 /* libsqlite3.tbd in Frameworks */,
 				CE19EDD5209CC87800F9F233 /* libsqlite3.0.tbd in Frameworks */,
 				04BC4B0820862DF100CEB23E /* AVFoundation.framework in Frameworks */,
@@ -965,6 +975,9 @@
 		04249B74203D463E00B13889 /* NutritionVC */ = {
 			isa = PBXGroup;
 			children = (
+				CE0A3CFA20CFE96F00B2E83A /* PopOverVCCell.h */,
+				CE0A3CF820CFE96E00B2E83A /* PopOverVCCell.m */,
+				CE0A3CF920CFE96E00B2E83A /* PopOverVCCell.xib */,
 				04249B75203D466200B13889 /* NutritionVC.h */,
 				04249B76203D466200B13889 /* NutritionVC.m */,
 				04249B77203D466200B13889 /* NutritionVC.xib */,
@@ -1829,6 +1842,7 @@
 		285A0A2B20B2888F702E8C82 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE0A3CF620CFD05900B2E83A /* AdSupport.framework */,
 				CE956093209D904E0086D2C9 /* libsqlite3.tbd */,
 				CE19EDD4209CC87700F9F233 /* libsqlite3.0.tbd */,
 				04BC4B0720862DF100CEB23E /* AVFoundation.framework */,
@@ -1915,6 +1929,7 @@
 				CE3E741920248BF100F10917 /* LaunchScreen.storyboard */,
 				CE3E741C20248BF100F10917 /* Info.plist */,
 				CE3E741D20248BF100F10917 /* main.m */,
+				CE0A3CF420CFC60700B2E83A /* GoogleService-Info.plist */,
 			);
 			path = APT_V2;
 			sourceTree = "<group>";
@@ -2679,7 +2694,6 @@
 				CE3E740820248BF100F10917 /* Frameworks */,
 				CE3E740920248BF100F10917 /* Resources */,
 				F44D9B974C06A9733BE87852 /* [CP] Embed Pods Frameworks */,
-				4F4C392A227985FF60390866 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2782,6 +2796,7 @@
 				CEB2B99620257BBD00E7D5E4 /* SIL Open Font License.txt in Resources */,
 				CEA42108203161A900B2DAB5 /* CalendarViewController.xib in Resources */,
 				CEB2B98420257BBD00E7D5E4 /* MontserratAlternates-Black.otf in Resources */,
+				CE0A3CFC20CFE96F00B2E83A /* PopOverVCCell.xib in Resources */,
 				CE6DD96A20C7AEA50026FE23 /* LandingTableViewCell.xib in Resources */,
 				CEB2B98220257BBD00E7D5E4 /* Montserrat-Thin.otf in Resources */,
 				182D854920342D1F005FFBF8 /* CategoryTableCell.xib in Resources */,
@@ -2800,6 +2815,7 @@
 				CEF38327203D6BC200FB5838 /* PlayerDetailTableViewCell.xib in Resources */,
 				CEB2B97B20257BBD00E7D5E4 /* Montserrat-Light.otf in Resources */,
 				CEB2B99320257BBD00E7D5E4 /* MontserratAlternates-SemiBoldItalic.otf in Resources */,
+				CE0A3CF520CFC60800B2E83A /* GoogleService-Info.plist in Resources */,
 				CEA42106203161A800B2DAB5 /* VideoPlayerViewController.xib in Resources */,
 				CEB2B98F20257BBD00E7D5E4 /* MontserratAlternates-Medium.otf in Resources */,
 				18AA1B952092FCC2009634A3 /* Main.storyboard in Resources */,
@@ -2882,21 +2898,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4F4C392A227985FF60390866 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-APT_V2/Pods-APT_V2-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		F44D9B974C06A9733BE87852 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2906,21 +2907,25 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-APT_V2/Pods-APT_V2-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/RGSColorSlider/RGSColorSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/StepSlider/StepSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/drCharts/drCharts.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RGSColorSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StepSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/drCharts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3026,6 +3031,7 @@
 				04BC4AD520861A5100CEB23E /* MCOverViewResultCVC.m in Sources */,
 				04C1EC4F2084C9410030E358 /* LoginVC.m in Sources */,
 				CE6C162F204520D100672253 /* SessionDayCell.m in Sources */,
+				CE0A3CFB20CFE96F00B2E83A /* PopOverVCCell.m in Sources */,
 				18949A1020875C5F002ECEE0 /* FFWeekCell.m in Sources */,
 				18949A2720875C5F002ECEE0 /* FFEditEventPopoverController.m in Sources */,
 				18949A1220875C5F002ECEE0 /* FFWeekCollectionViewFlowLayout.m in Sources */,

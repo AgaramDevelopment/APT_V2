@@ -13,5 +13,8 @@ target 'APT_V2' do
     pod 'Charts'
     pod 'drCharts', :git => 'https://github.com/Zomato/DR-charts.git'
     pod 'StepSlider'
+    pod 'Firebase/Core'
+    
+
     
 end

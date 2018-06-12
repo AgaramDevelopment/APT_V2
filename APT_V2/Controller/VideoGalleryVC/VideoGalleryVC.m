@@ -18,6 +18,7 @@
 #import "VideoPlayerUploadVC.h"
 #import "WebService.h"
 #import "SchResStandVC.h"
+#import "ScoreCardVideoPlayer.h"
 
 
 @interface VideoGalleryVC ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate,videoUploadDelegate,selectedDropDown>
@@ -157,9 +158,19 @@
     
     [self.headerView addSubview:objCustomNavigation.view];
     objCustomNavigation.tittle_lbl.text=@"VideoGallery";
+    
+    if( [self.isBack isEqualToString:@"yes"])
+    {
+     objCustomNavigation.btn_back.hidden = NO;
+         objCustomNavigation.menu_btn.hidden =YES;
+    }
+    else
+    {
     objCustomNavigation.btn_back.hidden = YES;
-    objCustomNavigation.home_btn.hidden = YES;
     objCustomNavigation.menu_btn.hidden =NO;
+    }
+    objCustomNavigation.home_btn.hidden = YES;
+   
     
     
     SWRevealViewController *revealController = [self revealViewController];
@@ -168,7 +179,12 @@
     
     
     [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomNavigation.btn_back addTarget:nil action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
     
+}
+-(IBAction)didClickBackBtn:(id)sender
+{
+    [appDel.frontNavigationController popViewControllerAnimated:YES];
 }
 - (void)showAnimate
 {
@@ -524,17 +540,17 @@
         selectvideoStr = [[self.objFirstGalleryArray valueForKey:@"videoFile"]objectAtIndex:indexPath.row];
     }
     
-//    ScoreCardVideoPlayer * videoPlayerVC = [[ScoreCardVideoPlayer alloc]init];
-//    videoPlayerVC = (ScoreCardVideoPlayer *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"ScoreCardVideoPlayer"];
-//    videoPlayerVC.isFromHome = YES;
-//    videoPlayerVC.HomeVideoStr = selectvideoStr;
-//    NSLog(@"appDel.frontNavigationController.topViewController %@",appDel.frontNavigationController.topViewController);
-//    [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
+    //ScoreCardVideoPlayer * videoPlayerVC = [[ScoreCardVideoPlayer alloc]init];
+    ScoreCardVideoPlayer * videoPlayerVC = (ScoreCardVideoPlayer *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"ScoreCardVideoPlayer"];
+    videoPlayerVC.isFromHome = YES;
+    videoPlayerVC.HomeVideoStr = selectvideoStr;
+    NSLog(@"appDel.frontNavigationController.topViewController %@",appDel.frontNavigationController.topViewController);
+    [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
 
     
-    videoPlayerVC = [[VideoPlayerViewController alloc] initWithNibName:@"VideoPlayerViewController" bundle:nil];
-    videoPlayerVC.objSelectVideoLink = selectvideoStr;
-    [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
+//    videoPlayerVC = [[VideoPlayerViewController alloc] initWithNibName:@"VideoPlayerViewController" bundle:nil];
+//    videoPlayerVC.objSelectVideoLink = selectvideoStr;
+//    [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
     
 }
 

@@ -28,6 +28,9 @@
 #import "VideoGalleryUploadCell.h"
 #import "VideoPlayerViewController.h"
 #import "NewVideoDocumentVC.h"
+#import "VideoGalleryVC.h"
+#import "ResultsVc.h"
+#import "ScoreCardVideoPlayer.h"
 
 typedef enum : NSUInteger {
     Events,
@@ -121,20 +124,20 @@ typedef enum : NSUInteger {
     SectionNameArray = @[@{@"Title":@"Events",@"image":@""},
                          @{@"Title":@"Teams",@"image":@"APT_Team"},
                          @{@"Title":@"Fixtures",@"image":@""},
-                         @{@"Title":@"Results",@"image":@"More_selected"},
-                         @{@"Title":@"Videos",@"image":@"More_selected"},
-                         @{@"Title":@"Documents",@"image":@"More_selected"}];
+                         @{@"Title":@"Results",@"image":@"More"},
+                         @{@"Title":@"Videos",@"image":@"More"},
+                         @{@"Title":@"Documents",@"image":@"More"}];
     
     
-    NSArray* arr = @[@{@"Title":@"Events",@"image":@"APT_Planner"},
-                     @{@"Title":@"Wellness",@"image":@"APT_Stats"},
-                     @{@"Title":@"Training Load",@"image":@"APT_Training load"},
-                     @{@"Title":@"Food",@"image":@"APT_Food Dairy"},
+    NSArray* arr = @[@{@"Title":@"Events",@"image":@""},
+                     @{@"Title":@"Wellness",@"image":@""},
+                     @{@"Title":@"Training Load",@"image":@""},
+                     @{@"Title":@"Food",@"image":@""},
                      @{@"Title":@"Bowling Graph",@"image":@""},
                      @{@"Title":@"Fixtures",@"image":@""},
-                     @{@"Title":@"Results",@"image":@"Toss&Results_selected"},
-                     @{@"Title":@"Videos",@"image":@"Video-Icon-crop"},
-                     @{@"Title":@"Documents",@"image":@""}];
+                     @{@"Title":@"Results",@"image":@"More"},
+                     @{@"Title":@"Videos",@"image":@"More"},
+                     @{@"Title":@"Documents",@"image":@"More"}];
     
     
     
@@ -338,8 +341,8 @@ typedef enum : NSUInteger {
     UIImage* image = [UIImage imageNamed:[[SectionNameArray objectAtIndex:section]valueForKey:@"image"]];
     [cell.imgSectionHead setImage:image];
     //    [cell.btnSectionHead setImage:image forState:UIControlStateNormal];
-    cell.btnSectionHead.tag = section;
-    [cell.btnSectionHead addTarget:self action:@selector(HeaderBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    cell.Morebtn.tag = section;
+    [cell.Morebtn addTarget:self action:@selector(HeaderBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
     
@@ -361,6 +364,24 @@ typedef enum : NSUInteger {
     }
     else if(button.tag == 4){
         
+    }
+    else if(button.tag == 5){
+        
+    }
+    else if(button.tag == 6){
+         ResultsVc *objresu = [ResultsVc new];
+         objresu = (ResultsVc *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"ResultsVc"];
+        [appDel.frontNavigationController pushViewController:objresu animated:YES];
+    }
+    else if(button.tag == 7){
+        VideoGalleryVC *objVideo = [VideoGalleryVC new];
+        objVideo.isBack = @"yes";
+        [appDel.frontNavigationController pushViewController:objVideo animated:YES];
+    }
+    else if(button.tag == 8){
+        documentObject = [NewVideoDocumentVC new];
+        documentObject.isBack = @"yes";
+        [appDel.frontNavigationController pushViewController:documentObject animated:YES];
     }
     
     
@@ -1167,8 +1188,14 @@ typedef enum : NSUInteger {
    NSMutableArray *VideosArray = [TableListDict valueForKey:@"Videos"];
    NSString * selectvideoStr = [[VideosArray valueForKey:@"videoFile"]objectAtIndex:indexPath.row];
     
-    VideoPlayerViewController *videoPlayerVC = [[VideoPlayerViewController alloc] initWithNibName:@"VideoPlayerViewController" bundle:nil];
-    videoPlayerVC.objSelectVideoLink = selectvideoStr;
+//    VideoPlayerViewController *videoPlayerVC = [[VideoPlayerViewController alloc] initWithNibName:@"VideoPlayerViewController" bundle:nil];
+//    videoPlayerVC.objSelectVideoLink = selectvideoStr;
+//    [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
+    
+    ScoreCardVideoPlayer * videoPlayerVC = (ScoreCardVideoPlayer *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"ScoreCardVideoPlayer"];
+    videoPlayerVC.isFromHome = YES;
+    videoPlayerVC.HomeVideoStr = selectvideoStr;
+    NSLog(@"appDel.frontNavigationController.topViewController %@",appDel.frontNavigationController.topViewController);
     [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
 }
 

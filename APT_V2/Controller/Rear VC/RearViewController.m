@@ -78,7 +78,7 @@
                      @{@"name":@"Cricket Center",@"img":@"APT_ Match centre"},
                      @{@"name":@"Videos",@"img":@"APT_ Match centre"},
                      @{@"name":@"Documents",@"img":@"APT_ Match centre"},
-                     @{@"name":@"Food Diary",@"img":@"APT_Food Dairy"},
+                    // @{@"name":@"Food Diary",@"img":@"APT_Food Dairy"},
                      @{@"name":@"Change Password",@"img":@"APT_Change Password"},
                      @{@"name":@"Logout",@"img":@"APT_Logout"}];
     }
@@ -264,11 +264,11 @@
 //            newFrontController= [DocumentViewController new];
             newFrontController= [NewVideoDocumentVC new];
         }
+//        else if(indexPath.row == 6){
+//
+//            newFrontController= [FoodDiaryVC new];
+//        }
         else if(indexPath.row == 6){
-            
-            newFrontController= [FoodDiaryVC new];
-        }
-        else if(indexPath.row == 7){
             
             newFrontController= [ChangePasswordVC new];
         }

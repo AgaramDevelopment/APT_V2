@@ -122,15 +122,29 @@
     
     [self.headerView addSubview:objCustomNavigation.view];
     objCustomNavigation.tittle_lbl.text=@"VideoDocument";
-    objCustomNavigation.btn_back.hidden = YES;
     objCustomNavigation.home_btn.hidden = YES;
-    objCustomNavigation.menu_btn.hidden =NO;
+    if( [self.isBack isEqualToString:@"yes"])
+    {
+        objCustomNavigation.btn_back.hidden = NO;
+        objCustomNavigation.menu_btn.hidden =YES;
+    }
+    else
+    {
+        objCustomNavigation.btn_back.hidden = YES;
+        objCustomNavigation.menu_btn.hidden =NO;
+    }
+    objCustomNavigation.home_btn.hidden = YES;
     
     SWRevealViewController *revealController = [self revealViewController];
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
     
     [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+    [objCustomNavigation.btn_back addTarget:nil action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
+}
+-(IBAction)didClickBackBtn:(id)sender
+{
+    [appDel.frontNavigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)UploadVideoAction:(id)sender {

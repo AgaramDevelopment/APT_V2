@@ -36,5 +36,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblNovideo;
 
 @property (strong, nonatomic) IBOutlet UITextField *dateTF;
+@property (strong, nonatomic)  NSString *isBack;
 
 @end

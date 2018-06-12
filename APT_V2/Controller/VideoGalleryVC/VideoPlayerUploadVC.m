@@ -34,6 +34,11 @@
     NSString * selectGameCode,*SelectedcategoryCode;
     NSInteger* buttonTag;
     NSString* correspondingTeamCode;
+    
+    //AlertView Properties
+    NSString *alertTitle;
+    NSString *alertMessage;
+    NSString *alertFailed;
 
 }
 @property (nonatomic,strong) NSMutableArray * objTeamArray;
@@ -128,7 +133,7 @@
     [Sandcdict setValue:@"S and C" forKey:@"ModuleName"];
     [Sandcdict setValue:@"MSC086" forKey:@"ModuleCode"];
     
-    [DatePicker addTarget:self action:@selector(showSelecteddate:) forControlEvents:UIControlEventValueChanged];
+    [DatePicker addTarget:self action:@selector(displaySelectedDateAndTime:) forControlEvents:UIControlEventValueChanged];
     
     self.ModuleArray = [[NSMutableArray alloc]initWithObjects:coachdict,physiodict,Sandcdict, nil];
     [self.txtVideoDate setInputView:datepickerView];
@@ -136,8 +141,17 @@
     //Video or Document Upload Title
     if ([self.titleString isEqualToString:@"Videos"]) {
         self.titleLbl.text = self.titleString;
+        self.txtVideoDate.placeholder = @"Video date";
+        
+        alertTitle = @"Videos";
+        alertMessage = @"Video Uploaded Successfully";
+        alertFailed = @"Video Upload failed";
     } else {
         self.titleLbl.text = self.titleString;
+        self.txtVideoDate.placeholder = @"Document date";
+        alertTitle = @"Documents";
+        alertMessage = @"Document Uploaded Successfully";
+        alertFailed = @"Document Upload failed";
     }
     
 }
@@ -408,6 +422,24 @@
     
     _txtVideoDate.text = actualDate;
     [self.view endEditing:true];
+//    [_txtVideoDate resignFirstResponder];
+}
+
+- (IBAction)datePickerAction:(id)sender {
+    
+    _txtVideoDate.text = @"";
+        //    [_txtVideoDate resignFirstResponder];
+    [self.view endEditing:true];
+}
+
+
+- (void) displaySelectedDateAndTime:(UIDatePicker*)sender {
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString * actualDate = [dateFormat stringFromDate:DatePicker.date];
+    
+    _txtVideoDate.text = actualDate;
 }
 
 -(IBAction)didClickCameraBtn:(id)sender
@@ -880,8 +912,20 @@
                 
                 // Update the UI
                 [AppCommon hideLoading];
+                
+                if([[responseObject valueForKey:@"Status"] integerValue] == 1)
+                {
+                    
+                    UIAlertView * objaltert =[[UIAlertView alloc]initWithTitle:alertTitle message:[NSString stringWithFormat:alertMessage] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    objaltert.tag = 501;
+                    [objaltert show];
                 [appDel.frontNavigationController popViewControllerAnimated:YES];
-//                [appDel.frontNavigationController dismissViewControllerAnimated:YES completion:nil];
+                    //                [appDel.frontNavigationController dismissViewControllerAnimated:YES completion:nil];
+                } else {
+                 
+                    [self altermsg:alertFailed];
+                }
+                
             });
 
             
@@ -1001,12 +1045,23 @@
 - (IBAction)didClickType:(id)sender {
 }
 
-- (IBAction)datePickerAction:(id)sender {
-    
-    _txtVideoDate.text = @"";
-//    [_txtVideoDate resignFirstResponder];
-    [self.view endEditing:true];
-}
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    if (buttonIndex == [alertView cancelButtonIndex])
+        {
+        alertView.hidden=YES;
+        }
+    else if (alertView.tag == 501)
+        {
+        self.module_lbl.text =@"";
+        self.player_lbl.text =@"";
+        self.txtVideoDate.text =@"";
+        self.category_lbl.text =@"";
+        self.objKeyword_Txt.text =@"";
+        self.shareuser_lbl.text =@"";
+        }
+}
 
 @end

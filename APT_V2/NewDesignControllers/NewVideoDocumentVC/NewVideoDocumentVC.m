@@ -82,7 +82,7 @@
     }
     
     lblcategory.text = @"BATTING";
-    [self videoDocumentWebservice];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -107,6 +107,8 @@
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
     
+    //To Get Documents
+    [self videoDocumentWebservice];
 }
 
 - (void)viewWillLayoutSubviews {

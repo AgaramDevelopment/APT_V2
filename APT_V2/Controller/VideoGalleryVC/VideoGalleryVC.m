@@ -95,7 +95,7 @@
     lblcategory.text = @"BATTING";
     lblType.text = @"BEATEN&UNCOMFORT";
     //[self newVideoListingwebservice];
-    [self VideosWebservice];
+   
     
 //    view
 
@@ -141,6 +141,9 @@
     SWRevealViewController *revealController = [self revealViewController];
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
+    
+    //To Get Videos
+     [self VideosWebservice];
 
 }
 

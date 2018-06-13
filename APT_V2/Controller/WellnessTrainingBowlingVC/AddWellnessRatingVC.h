@@ -65,4 +65,9 @@
 
 @property (weak, nonatomic) IBOutlet UIView *navView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *navViewHeight;
+
+@property (strong, nonatomic) IBOutlet UIButton *CancelBtn;
+@property (strong, nonatomic) IBOutlet UIImageView *CancelImg;
+
 @end

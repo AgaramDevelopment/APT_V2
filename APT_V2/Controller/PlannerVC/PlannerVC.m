@@ -920,8 +920,8 @@
 -(void)didSelectEventOfCell:(NSDate *)selectedDate
 {
     NSLog(@"FINAL DATE %@",selectedDate);
-   if([AppCommon isCoach])
-   {
+  // if([AppCommon isCoach])
+   //{
     if(![selectedDate isEqual:[NSNull null]])
     {
         
@@ -1164,7 +1164,7 @@
             NSLog(@"Both dates are same");
     }
     }
-   }
+  // }
     
 }
 

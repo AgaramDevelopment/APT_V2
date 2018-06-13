@@ -245,6 +245,10 @@
     isTraingLoadExpand = YES;
     objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
     objUpdate.view.frame = CGRectMake(0,0, self.RootTrainingView.bounds.size.width, self.RootTrainingView.bounds.size.height);
+    objUpdate.navViewHeight.constant = 0;
+    objUpdate.navView.hidden = YES;
+    objUpdate.CancelBtn.hidden = NO;
+    objUpdate.CancelImg.hidden = NO;
     objUpdate.Delegate = self;
     [self.RootTrainingView addSubview:objUpdate.view];
     self.traingViewHeight.constant = 600;
@@ -256,10 +260,15 @@
     
     self.NoDataView.hidden = YES;
     objWell = [[AddWellnessRatingVC alloc] initWithNibName:@"AddWellnessRatingVC" bundle:nil];
-    objWell.Delegate = self;
+    //objWell.Delegate = self;
     objWell.view.frame = CGRectMake(0,0, self.topView.bounds.size.width, self.topView.bounds.size.height);
+    objWell.navViewHeight.constant = 0;
+    objWell.navView.hidden = YES;
+    objWell.CancelBtn.hidden = NO;
+    objWell.CancelImg.hidden = NO;
+    objWell.Delegate = self;
     [self.topView addSubview:objWell.view];
-    self.topviewHeight.constant = 578;
+    self.topviewHeight.constant = 600;
     [self setTotalScroll];
     [self.view updateConstraintsIfNeeded];
     

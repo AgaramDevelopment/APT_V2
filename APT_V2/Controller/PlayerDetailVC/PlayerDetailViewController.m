@@ -618,6 +618,7 @@
     else if ([sender tag] == 3) // Reports
     {
         selectedVC = [ReportsVC new];
+    
     }
     else if ([sender tag] == 4) // Wellness
     {

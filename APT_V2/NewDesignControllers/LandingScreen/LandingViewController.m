@@ -1378,24 +1378,21 @@ typedef enum : NSUInteger {
             });
             
             
-            //                self.commonArray = scheduleArray;
-            //                self.commonArray2 = resultArray;
+                            BOOL iftheyClickedLater = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLater"];
             
-            //                [self.eventsCollectionView reloadData];
-            //                [self.resultCollectionView reloadData];
-            //
-            //                BOOL iftheyClickedLater = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLater"];
+                            if (!iftheyClickedLater) { // New version update alert if they click later, we dont show that alert again and again
             
-            //                if (!iftheyClickedLater) { // New version update alert if they click later, we dont show that alert again and again
-            //
-            //                    NSInteger* isLatestVersion = [[responseObject valueForKey:@"isLatestVersion"] integerValue];
-            //                    NSLog(@"isLatestVersion %@",[responseObject valueForKey:@"isLatestVersion"] );
-            //                    if (!isLatestVersion) {
-            //                        NSLog(@"canUpdate TRUE ");
-            //                        [AppCommon newVersionUpdateAlert];
-            //                    }
-            //
-            //                }
+                                NSInteger* isLatestVersion = [[responseObject valueForKey:@"isLatestVersion"] integerValue];
+                                NSLog(@"isLatestVersion %@",[responseObject valueForKey:@"isLatestVersion"] );
+                                if (!isLatestVersion) {
+                                    NSLog(@"canUpdate TRUE ");
+                                    [AppCommon newVersionUpdateAlert];
+                                    [AppCommon hideLoading];
+
+                                    return ;
+                                }
+            
+                            }
             
             
         }

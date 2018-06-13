@@ -16,6 +16,7 @@
 #import "DocumentViewController.h"
 #import "TabHomeVC.h"
 #import "ScoreCardVideoPlayer.h"
+#import "NewVideoDocumentVC.h"
 
 @interface PopOverVC ()
 
@@ -102,45 +103,36 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
     if ([[[self.listArray objectAtIndex:indexPath.row] valueForKey:@"TypeDesc"] isEqualToString:@"video"]) {
     
         NSString* fileName = [[self.listArray objectAtIndex:indexPath.item] valueForKey:@"FilePath"];
-//        NSString* fileName = @"https://s3.ap-south-1.amazonaws.com/agaram-sports/IPL2018/CAPSULES/CSK/Shared Files/4/2/2018folk.mov";
         ScoreCardVideoPlayer *videoPlayerVC = [[ScoreCardVideoPlayer alloc]init];
         videoPlayerVC = (ScoreCardVideoPlayer *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"ScoreCardVideoPlayer"];
         videoPlayerVC.isFromHome = YES;
         videoPlayerVC.HomeVideoStr = fileName;
         NSLog(@"appDel.frontNavigationController.topViewController %@",appDel.frontNavigationController.topViewController);
-//        [self presentViewController:videoPlayerVC animated:YES completion:nil]; // 19
         
         [appDel.frontNavigationController dismissViewControllerAnimated:YES completion:^{
-//            [appDel.frontNavigationController pushViewController:videoPlayerVC animated:YES];
             [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
-
         }];
 
     
     } else if ([[[self.listArray objectAtIndex:indexPath.row] valueForKey:@"TypeDesc"] isEqualToString:@"file"]) {
         
-        DocumentViewController *documentObj = [DocumentViewController new];
-        documentObj.isNotificationPDF = YES;
-        documentObj.filePath = [[self.listArray objectAtIndex:indexPath.item] valueForKey:@"FilePath"];
-        [appDel.frontNavigationController presentViewController:documentObj animated:YES completion:nil];
-//        [self.navigationController pushViewController:documentObj animated:YES];
-//        NSString* fileName = [[self.listArray objectAtIndex:indexPath.item] valueForKey:@"FilePath"];
-//            //        pdfView
-//        [self loadWebView:fileName];
-//
-//        [appDel.frontNavigationController presentViewController:pdfView animated:YES completion:^{
-//        }];
+//        DocumentViewController *documentObj = [DocumentViewController new];
+//        documentObj.isNotificationPDF = YES;
+//        documentObj.filePath = [[self.listArray objectAtIndex:indexPath.item] valueForKey:@"FilePath"];
+//        [appDel.frontNavigationController presentViewController:documentObj animated:YES completion:nil];
+        
+        NewVideoDocumentVC * documentObject = [[NewVideoDocumentVC alloc] initWithNibName:@"NewVideoDocumentVC" bundle:nil];
+        documentObject.documentLink = [[self.listArray objectAtIndex:indexPath.item] valueForKey:@"FilePath"];
+        documentObject.titleString = @"Documents";
+        [appDel.frontNavigationController presentViewController:documentObject animated:YES completion:nil];
+
         
     } else if ([[[self.listArray objectAtIndex:indexPath.row] valueForKey:@"TypeDesc"] isEqualToString:@"Event"]) {
         
-        PlannerAddEvent  * objaddEvent=[[PlannerAddEvent alloc]init];
-        //objaddEvent = (PlannerAddEvent *)[self.storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
-        
-        objaddEvent = (PlannerAddEvent *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"AddEvent"];
+        PlannerAddEvent  * objaddEvent = (PlannerAddEvent *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"AddEvent"];
         objaddEvent.isEdit =YES;
         objaddEvent.isNotification = @"yes";
         objaddEvent.eventType = [[self.listArray objectAtIndex:indexPath.row] valueForKey:@"Type"];

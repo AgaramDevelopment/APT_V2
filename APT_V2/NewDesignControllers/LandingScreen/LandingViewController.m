@@ -32,6 +32,8 @@
 #import "ResultsVc.h"
 #import "ScoreCardVideoPlayer.h"
 #import "PopOverVC.h"
+#import "TeamsVC.h"
+#import "TeamMembersVC.h"
 
 typedef enum : NSUInteger {
     Events,
@@ -406,8 +408,16 @@ typedef enum : NSUInteger {
     UIImage* image = [UIImage imageNamed:[[SectionNameArray objectAtIndex:section]valueForKey:@"image"]];
     [cell.imgSectionHead setImage:image];
     //    [cell.btnSectionHead setImage:image forState:UIControlStateNormal];
+    
     cell.Morebtn.tag = section;
-    [cell.Morebtn addTarget:self action:@selector(HeaderBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    if ([cell.lblSectionTitle.text isEqualToString:@"Results"] ||
+        [cell.lblSectionTitle.text isEqualToString:@"Videos"] ||
+        [cell.lblSectionTitle.text isEqualToString:@"Documents"]){
+        
+        [cell.Morebtn addTarget:self action:@selector(HeaderBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+
+    }
+
     
     return cell;
     
@@ -415,41 +425,48 @@ typedef enum : NSUInteger {
 
 -(void)HeaderBtnAction:(UIButton *)button{
     
-    if(button.tag == 0){
-        
-    }
-    else if(button.tag == 1){
-        
-    }
-    else if(button.tag == 2){
-        
-    }
-    else if(button.tag == 3){
-        
-    }
-    else if(button.tag == 4){
-        
-    }
-    else if(button.tag == 5){
-        
-    }
-    else if(button.tag == 6){
-         ResultsVc *objresu = [ResultsVc new];
-         objresu = (ResultsVc *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"ResultsVc"];
-        [appDel.frontNavigationController pushViewController:objresu animated:YES];
-    }
-    else if(button.tag == 7){
-        VideoGalleryVC *objVideo = [VideoGalleryVC new];
-        objVideo.isBack = @"yes";
-        [appDel.frontNavigationController pushViewController:objVideo animated:YES];
-    }
-    else if(button.tag == 8){
-        documentObject = [NewVideoDocumentVC new];
-        documentObject.isBack = @"yes";
-        [appDel.frontNavigationController pushViewController:documentObject animated:YES];
-    }
     
+    LandingTableViewCell *cell = [LandingTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:button.tag]];
     
+//    button = cell.Morebtn;
+    
+    if ([cell.lblSectionTitle.text isEqualToString:@"Results"]) {
+        cell.Morebtn.tag == 1;
+        [cell.Morebtn addTarget:self action:@selector(HeaderBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    else if ([cell.lblSectionTitle.text isEqualToString:@"Videos"]){
+        cell.Morebtn.tag == 2;
+        [cell.Morebtn addTarget:self action:@selector(HeaderBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    else if ([cell.lblSectionTitle.text isEqualToString:@"Documents"]){
+        cell.Morebtn.tag == 3;
+        [cell.Morebtn addTarget:self action:@selector(HeaderBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+
+
+//    if(button.tag == 1){
+//
+//        ResultsVc *objresu = [ResultsVc new];
+//        objresu = (ResultsVc *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"ResultsVc"];
+//        [appDel.frontNavigationController pushViewController:objresu animated:YES];
+//
+//    }
+//    else if(button.tag == 2){
+//        VideoGalleryVC *objVideo = [VideoGalleryVC new];
+//        objVideo.isBack = @"yes";
+//        [appDel.frontNavigationController pushViewController:objVideo animated:YES];
+//
+//
+//    }
+//    else if(button.tag == 3){
+//        documentObject = [NewVideoDocumentVC new];
+//        documentObject.isBack = @"yes";
+//        [appDel.frontNavigationController pushViewController:documentObject animated:YES];
+//
+//    }
     
 }
 
@@ -538,12 +555,12 @@ typedef enum : NSUInteger {
 //        [Tablecell configureCell:self andIndex:7 andTitile:title];
 //    }
     
-//    CGRect frame = cell.frame;
-//    [cell setFrame:CGRectMake(0, self.LandingTable.frame.size.height, frame.size.width, frame.size.height)];
-//    [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionTransitionCrossDissolve  animations:^{
-//        [cell setFrame:frame];
-//    } completion:^(BOOL finished) {
-//    }];
+    CGRect frame = cell.frame;
+    [cell setFrame:CGRectMake(0, self.LandingTable.frame.size.height, frame.size.width, frame.size.height)];
+    [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionTransitionCrossDissolve  animations:^{
+        [cell setFrame:frame];
+    } completion:^(BOOL finished) {
+    }];
 
 }
 
@@ -788,6 +805,7 @@ typedef enum : NSUInteger {
             TeamCollectionViewCell* cell = (TeamCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"TeamCollectionViewCell" forIndexPath:indexPath];
             NSString * imgStr1 = [[teamlist valueForKey:@"TeamPhotoLink"] objectAtIndex:indexPath.row];
             [cell.imgTeam sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
+            cell.lblTeamName.text = [[teamlist valueForKey:@"Teamname"] objectAtIndex:indexPath.row];
             return cell;
         }
     }
@@ -1034,6 +1052,15 @@ typedef enum : NSUInteger {
 //         [documentObject loadWebView:@"https://www.example.com/document.pdf"];
 //        [appDel.frontNavigationController presentViewController:documentObject.pdfView animated:YES completion:nil];
         
+    }
+    else if(collectionView == self.TeamsCollectionView){
+        
+        NSArray* teamlist = [TableListDict valueForKey:@"Teams"];
+        TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
+        objPlayersVC.teamCode = [[teamlist valueForKey:@"Teamcode"] objectAtIndex:indexPath.row];
+        objPlayersVC.teamname = [[teamlist valueForKey:@"Teamname"] objectAtIndex:indexPath.row];
+        [appDel.frontNavigationController pushViewController:objPlayersVC animated:YES];
+
     }
     
 }

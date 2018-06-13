@@ -9,7 +9,7 @@
 //
 
 #import "FFHourAndMinLabel.h"
-
+#import "Config.h"
 #import "FFImportantFilesForCalendar.h"
 
 @implementation FFHourAndMinLabel
@@ -45,7 +45,12 @@
     
     NSDateComponents *comp =  [NSDate componentsOfDate:dateHourAndMin];
     [self setText:[NSString stringWithFormat:@"%02ld:%02ld", (long)comp.hour, (long)comp.minute]];
-    [self setFont:[UIFont fontWithName:@"HelveticaNeue" size:11]];
+//    [self setFont:[UIFont fontWithName:@"HelveticaNeue" size:11]];
+    
+//    [self setFont:[UIFont fontWithName:@"Montserrat-SemiBold" size:(IS_IPAD ? 19 : 17)]];
+    [self setFont:[UIFont fontWithName:@"Montserrat-Regular" size:(IS_IPAD ? 11 : 10)]];
+
+    
     
 }
 

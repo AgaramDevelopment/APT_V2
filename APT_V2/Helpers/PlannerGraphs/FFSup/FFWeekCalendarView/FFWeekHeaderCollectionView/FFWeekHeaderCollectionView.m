@@ -107,7 +107,12 @@
     cell.date = dateOfLabel;
     
     [cell.label setText:[NSString stringWithFormat:@"%@, %li", [arrayWeekAbrev objectAtIndex:compDateOfLabel.weekday-1], (long)compDateOfLabel.day]];
-    [cell.label setFont:[UIFont fontWithName:@"Helvetica Neue" size:(IS_IPAD ? 15 : 10)]];
+//    [cell.label setFont:[UIFont fontWithName:@"Helvetica Neue" size:(IS_IPAD ? 15 : 10)]];
+    
+//    [cell.label setFont:[UIFont fontWithName:@"Montserrat-SemiBold" size:(IS_IPAD ? 15 : 10)]];
+    
+    [cell.label setFont:[UIFont fontWithName:@"Montserrat-Regular" size:(IS_IPAD ? 15 : 10)]];
+
     NSLog(@"Week Header cell %@ ",cell.label.text);
 
     if (compDateOfLabel.weekday == 1 || compDateOfLabel.weekday == 7) {

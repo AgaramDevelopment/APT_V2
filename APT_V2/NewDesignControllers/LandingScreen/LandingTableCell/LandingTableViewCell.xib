@@ -28,7 +28,7 @@
                         <rect key="frame" x="5" y="5" width="310" height="38.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Jo-oE-SEJ">
-                                <rect key="frame" x="5" y="0.0" width="265" height="33.5"/>
+                                <rect key="frame" x="5" y="0.0" width="205" height="33.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -41,10 +41,9 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hy1-TS-uAN">
-                                <rect key="frame" x="275" y="4" width="30" height="30"/>
+                                <rect key="frame" x="210" y="0.0" width="100" height="38.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="UDf-QY-64F"/>
-                                    <constraint firstAttribute="width" constant="30" id="b5k-PF-IFu"/>
+                                    <constraint firstAttribute="width" constant="100" id="b5k-PF-IFu"/>
                                 </constraints>
                             </button>
                         </subviews>
@@ -54,10 +53,11 @@
                             <constraint firstItem="NJX-0K-DMe" firstAttribute="top" secondItem="rBc-5L-Oju" secondAttribute="top" constant="4" id="ASE-5z-NLD"/>
                             <constraint firstItem="3Jo-oE-SEJ" firstAttribute="leading" secondItem="rBc-5L-Oju" secondAttribute="leading" constant="5" id="Eor-up-w7E"/>
                             <constraint firstItem="3Jo-oE-SEJ" firstAttribute="top" secondItem="rBc-5L-Oju" secondAttribute="top" id="FoU-hf-lf6"/>
-                            <constraint firstAttribute="trailing" secondItem="Hy1-TS-uAN" secondAttribute="trailing" constant="5" id="X5k-9Z-UTt"/>
-                            <constraint firstItem="NJX-0K-DMe" firstAttribute="leading" secondItem="3Jo-oE-SEJ" secondAttribute="trailing" constant="5" id="akq-DZ-fEr"/>
-                            <constraint firstItem="Hy1-TS-uAN" firstAttribute="top" secondItem="rBc-5L-Oju" secondAttribute="top" constant="4" id="kqE-CI-vGL"/>
+                            <constraint firstAttribute="bottom" secondItem="Hy1-TS-uAN" secondAttribute="bottom" id="Ucf-ds-0jQ"/>
+                            <constraint firstAttribute="trailing" secondItem="Hy1-TS-uAN" secondAttribute="trailing" id="X5k-9Z-UTt"/>
+                            <constraint firstItem="Hy1-TS-uAN" firstAttribute="top" secondItem="rBc-5L-Oju" secondAttribute="top" id="kqE-CI-vGL"/>
                             <constraint firstAttribute="bottom" secondItem="3Jo-oE-SEJ" secondAttribute="bottom" constant="5" id="rCO-YI-rlq"/>
+                            <constraint firstItem="Hy1-TS-uAN" firstAttribute="leading" secondItem="3Jo-oE-SEJ" secondAttribute="trailing" id="u3y-ZB-Q1T"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -96,10 +96,6 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <connections>
-                                    <outlet property="dataSource" destination="-1" id="SI3-OX-SI1"/>
-                                    <outlet property="delegate" destination="-1" id="cBF-6r-0vM"/>
-                                </connections>
                             </collectionView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No TReceords Found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHr-iP-R0m">
                                 <rect key="frame" x="77" y="86" width="157.5" height="18.5"/>

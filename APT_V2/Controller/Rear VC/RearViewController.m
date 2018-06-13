@@ -60,27 +60,27 @@
 {
     if([AppCommon isCoach])
     {
-        arrItems = @[@{@"name":@"Home",@"img":@"APT_Team"},
-                     @{@"name":@"Planner",@"img":@"APT_Planner"},
-                     @{@"name":@"Teams",@"img":@"APT_Assessment"},
-                     @{@"name":@"Cricket Center",@"img":@"APT_ Match centre"},
-                     @{@"name":@"Videos",@"img":@"APT_ Match centre"},
-                     @{@"name":@"Documents",@"img":@"APT_ Match centre"},
-                     @{@"name":@"Sync",@"img":@"APT_Sync"},
-                     @{@"name":@"Change Password",@"img":@"APT_Change Password"},
-                     @{@"name":@"Logout",@"img":@"APT_Logout"}];
+        arrItems = @[@{@"name":@"Home",@"img":@"Home"},
+                     @{@"name":@"Planner",@"img":@"Planner"},
+                     @{@"name":@"Teams",@"img":@"Team"},
+                     @{@"name":@"Cricket Center",@"img":@"Match centre"},
+                     @{@"name":@"Videos",@"img":@"Video"},
+                     @{@"name":@"Documents",@"img":@"Document"},
+                     @{@"name":@"Sync",@"img":@"Sync"},
+                     @{@"name":@"Change Password",@"img":@"Change Password"},
+                     @{@"name":@"Logout",@"img":@"Logout"}];
     }
     else
     {
-        arrItems = @[@{@"name":@"Home",@"img":@"APT_Home"},
-                     @{@"name":@"Planner",@"img":@"APT_Planner"},
-                     @{@"name":@"History",@"img":@"APT_Stats"},
-                     @{@"name":@"Cricket Center",@"img":@"APT_ Match centre"},
-                     @{@"name":@"Videos",@"img":@"APT_ Match centre"},
-                     @{@"name":@"Documents",@"img":@"APT_ Match centre"},
+        arrItems = @[@{@"name":@"Home",@"img":@"Home"},
+                     @{@"name":@"Planner",@"img":@"Planner"},
+                     @{@"name":@"History",@"img":@"History"},
+                     @{@"name":@"Cricket Center",@"img":@"Match centre"},
+                     @{@"name":@"Videos",@"img":@"Video"},
+                     @{@"name":@"Documents",@"img":@"Document"},
                     // @{@"name":@"Food Diary",@"img":@"APT_Food Dairy"},
-                     @{@"name":@"Change Password",@"img":@"APT_Change Password"},
-                     @{@"name":@"Logout",@"img":@"APT_Logout"}];
+                     @{@"name":@"Change Password",@"img":@"Change Password"},
+                     @{@"name":@"Logout",@"img":@"Logout"}];
     }
     
     [self.RearTableView reloadData];

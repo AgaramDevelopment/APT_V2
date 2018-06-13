@@ -124,7 +124,12 @@
     NSLog(@"DAY Header cell %@ ",cell.button.titleLabel.text);
 
 //    [cell.button setBackgroundColor:[UIColor yellowColor]];
-    [cell.button.titleLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:(IS_IPAD ? 15 :10)]];
+//    [cell.button.titleLabel setFont:[UIFont fontWithName:@"Helvetica Neue" size:(IS_IPAD ? 15 :10)]];
+    
+//    [label setFont:[UIFont fontWithName:@"Montserrat-SemiBold" size:(IS_IPAD ? 19 : 17)]];
+    
+                [cell.button setFont:[UIFont fontWithName:@"Montserrat-Regular" size:(IS_IPAD ? 15 : 10)]];
+
     [cell.button setSelected:([NSDate isTheSameDateTheCompA:compDateOfLabel compB:[[FFDateManager sharedManager] currentDate].componentsOfDate])];
     cell.button.tag = indexPath.row;
     cell.button.buttonIndexPath = indexPath;

@@ -476,7 +476,7 @@
     if(indexPath.row ==0)
     {
         cell.backgroundColor=[UIColor colorWithRed:(37/255.0f) green:(187/255.0f) blue:(151/255.0f) alpha:1.0f];
-        self.eventview.backgroundColor =[UIColor colorWithRed:(37/255.0f) green:(187/255.0f) blue:(151/255.0f) alpha:1.0f];
+//        self.eventview.backgroundColor =[UIColor colorWithRed:(37/255.0f) green:(187/255.0f) blue:(151/255.0f) alpha:1.0f];
     }
     else if(indexPath.row ==1)
     {
@@ -532,7 +532,9 @@
     
     cell.textLabel.text = [[self.AllEventListArray valueForKey:@"EventTypename"] objectAtIndex:indexPath.row];
     cell.textLabel.textColor =[UIColor whiteColor];
-    self.eventLbl.text = [[self.AllEventListArray valueForKey:@"EventTypename"] objectAtIndex:0];
+    [cell.textLabel setFont:[UIFont fontWithName:@"Montserrat-Regular" size:(IS_IPAD ? 17 : 15)]];
+
+//    self.eventLbl.text = [[self.AllEventListArray valueForKey:@"EventTypename"] objectAtIndex:0];
     
     //cell.backgroundColor = [UIColor clearColor];
     

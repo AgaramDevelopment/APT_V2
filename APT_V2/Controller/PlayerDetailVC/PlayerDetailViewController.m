@@ -19,7 +19,6 @@
     UIColor *originalBarBgColor;
     UIColor *originalBarTintColor;
     UIBarStyle originalBarStyle;
-    NSMutableArray* graphArray;
     NSMutableDictionary* graphDict;
     BOOL isPOP;
 
@@ -55,7 +54,7 @@
     
 //    activities = @[ @"Burger", @"Steak", @"Salad", @"Pasta", @"Pizza" ];
     graphDict = [NSMutableDictionary new];
-
+    [self chartConfiguration];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -99,7 +98,7 @@
     [revealController.tapGestureRecognizer setEnabled:NO];
 }
 
--(void)chatConfiguration
+-(void)chartConfiguration
 {
     spiderChartView.delegate = self;
     
@@ -110,33 +109,38 @@
     spiderChartView.innerWebColor = UIColor.lightGrayColor;
     spiderChartView.webAlpha = 1.0;
     spiderChartView.backgroundColor = UIColor.whiteColor;
+    spiderChartView.sizeToFit;
 //    RadarMarkerView *marker = (RadarMarkerView *)[RadarMarkerView viewFromXib];
-//    marker.chartView = _chartView;
+//    marker.chartView = spiderChartView;
 //    spiderChartView.marker = marker;
     
     ChartXAxis *xAxis = spiderChartView.xAxis;
-    xAxis.labelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:9.f];
-    xAxis.xOffset = 0.0;
-    xAxis.yOffset = 0.0;
+    xAxis.labelFont = [UIFont fontWithName:@"Montserrat-Light" size:9.f];
+//    xAxis.xOffset = 0.0;
+//    xAxis.yOffset = 0.0;
+    xAxis.labelCount = 4;
+    xAxis.axisMinimum = 0.0;
+    xAxis.axisMaximum = 40.0;
     xAxis.valueFormatter = self;
     xAxis.labelTextColor = UIColor.blackColor;
     
     ChartYAxis *yAxis = spiderChartView.yAxis;
-    yAxis.labelFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:9.f];
-    yAxis.labelCount = 5;
+    yAxis.labelFont = [UIFont fontWithName:@"Montserrat-Light" size:9.f];
+    yAxis.labelCount = 4;
     yAxis.axisMinimum = 0.0;
-    yAxis.axisMaximum = 80.0;
-    yAxis.drawLabelsEnabled = NO;
-    yAxis.labelTextColor = UIColor.yellowColor;
+    yAxis.axisMaximum = 40.0;
+    yAxis.labelTextColor = UIColor.blackColor;
+    yAxis.drawLabelsEnabled = true;
+    yAxis.valueFormatter = self;
     
     ChartLegend *l = spiderChartView.legend;
     l.horizontalAlignment = ChartLegendHorizontalAlignmentCenter;
     l.verticalAlignment = ChartLegendVerticalAlignmentTop;
     l.orientation = ChartLegendOrientationHorizontal;
     l.drawInside = NO;
-    l.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.f];
-    l.xEntrySpace = 7.0;
-    l.yEntrySpace = 5.0;
+    l.font = [UIFont fontWithName:@"Montserrat-Light" size:10.f];
+//    l.xEntrySpace = 7.0;
+//    l.yEntrySpace = 5.0;
     l.textColor = UIColor.blackColor;
     
 //    [self updateChartData];
@@ -146,10 +150,15 @@
 }
 #pragma mark - IAxisValueFormatter
 
-- (NSString *)stringForValue:(double)value
-                        axis:(ChartAxisBase *)axis
+//-(void)setlabelco
+
+- (NSString *)stringForValue:(double)value axis:(ChartAxisBase *)axis
 {
-    return activities[(int) value % activities.count];
+    int tempValue = (int)value;
+    int count = activities.count;
+    int str = tempValue % count;
+//    return activities[(int)value % activities.count];
+    return  activities.count > 0 ? activities[(int)value % activities.count] : @"0" ;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -159,20 +168,20 @@
 
 //- (void)updateChartData
 //{
-////    if (self.shouldHideData)
-////    {
-////        spiderChartView.data = nil;
-////        return;
-////    }
+//    if (self.shouldHideData)
+//    {
+//        spiderChartView.data = nil;
+//        return;
+//    }
 //
 //    [self setChartData];
 //}
 
 - (void)setChartData:(NSDictionary *)DictValue
 {
-    double mult = 80;
-    double min = 20;
-    int cnt = 5;
+//    double mult = 80;
+//    double min = 20;
+//    int cnt = 5;
     
     NSMutableArray *entries1 = [[NSMutableArray alloc] init];
     NSMutableArray *entries2 = [[NSMutableArray alloc] init];
@@ -226,11 +235,12 @@
     [set2 setDrawHighlightIndicators:NO];
     
     RadarChartData *data = [[RadarChartData alloc] initWithDataSets:@[set1, set2]];
-    [data setValueFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:8.f]];
+    [data setValueFont:[UIFont fontWithName:@"Montserrat-Regular" size:8.f]];
     [data setDrawValues:NO];
     data.valueTextColor = UIColor.greenColor;
     
     spiderChartView.data = data;
+    spiderChartView.notifyDataSetChanged;
 }
 
 -(void)customnavigationmethod
@@ -427,7 +437,8 @@
     
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(ClientCode)   [dic    setObject:ClientCode     forKey:@"ClientCode"];
-        if(UserrefCode)   [dic    setObject:UserrefCode     forKey:@"UserrefCode"];
+//        if(UserrefCode)   [dic    setObject:UserrefCode     forKey:@"UserrefCode"];
+        if(PlayerCode)   [dic    setObject:PlayerCode     forKey:@"UserrefCode"];
         if(PlayerCode)   [dic    setObject:PlayerCode     forKey:@"PlayerCode"];
     
         NSLog(@"USED API URL %@ \n parameters %@",URLString,dic);
@@ -437,15 +448,21 @@
             if(responseObject >0)
             {
                 TableArray = [NSMutableArray new];
-                graphArray = [NSMutableArray new];
                 TableArray = responseObject;
 
                 [graphDict setValue:[TableArray valueForKey:@"homeFitness"] forKey:@"set1"];
                 
                 if ([[TableArray valueForKey:@"homeFitness"] count]) {
-                    activities = [graphArray valueForKey:@"testName"];
-                    [self chatConfiguration];
+                    
+//                    activities = [[TableArray valueForKey:@"homeFitness"] valueForKey:@"testName"];
+                    
+                   NSArray* reduce = [self reduceTestName:[[TableArray valueForKey:@"homeFitness"] valueForKey:@"testName"]];
+//                    activities = [[TableArray valueForKey:@"homeFitness"] valueForKey:@"testName"];
+                    activities = reduce;
                     [self setChartData:graphDict];
+                    
+                    NSString* strDate = [[[TableArray valueForKey:@"testDates"] firstObject] valueForKey:@"testDate"];
+                    [self fitnessGraphWebservicebyDate:strDate];
                 }
                 
         }
@@ -507,7 +524,8 @@
 
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     if(ClientCode)   [dic    setObject:ClientCode     forKey:@"ClientCode"];
-    if(UserrefCode)  [dic    setObject:UserrefCode     forKey:@"UserrefCode"];
+//    if(UserrefCode)  [dic    setObject:UserrefCode     forKey:@"UserrefCode"];
+    if(PlayerCode)  [dic    setObject:PlayerCode     forKey:@"UserrefCode"];
     if(strDate)   [dic    setObject:strDate     forKey:@"AssessmentEntryDate"];
     
     NSLog(@"USED API URL %@ \n parameters %@",URLString,dic);
@@ -516,12 +534,13 @@
         
         if(responseObject >0)
         {
-            graphArray = [NSMutableArray new];
             if ([[responseObject valueForKey:@"homeFitness"] count]) {
-                activities = [[responseObject valueForKey:@"homeFitness"]valueForKey:@"testName"];
-                [self chatConfiguration];
+                NSArray* reduce = [self reduceTestName:[[TableArray valueForKey:@"homeFitness"] valueForKey:@"testName"]];
+                activities = reduce;
                 [graphDict setValue:[responseObject valueForKey:@"homeFitness"] forKey:@"set2"];
                 [self setChartData:graphDict];
+                [self.spiderChartView notifyDataSetChanged];
+                
             }
             
         }
@@ -535,6 +554,31 @@
         
     }];
    
+}
+
+-(NSArray *)reduceTestName:(NSArray *)testArray{
+    
+    NSMutableArray* tempArray = [NSMutableArray new];
+    
+//    NSArray *new = [testArray map:^id(NSString *obj) {
+//        return [obj stringByAppendingString:@".png"];
+//    }];
+    
+//    NSArray * newArray = [testArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        if ([obj count] > 10) {
+//            [obj substringToIndex:10];
+//        }
+//    }];
+    
+    for (NSString* temp in testArray) {
+        NSString* str = temp;
+        if (str.length > 10) {
+            str = [str substringToIndex:10];
+        }
+        [tempArray addObject:str];
+    }
+    
+    return tempArray;
 }
 
 - (IBAction)actionpopup:(id)sender {

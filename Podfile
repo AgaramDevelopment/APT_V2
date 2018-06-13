@@ -15,6 +15,4 @@ target 'APT_V2' do
     pod 'StepSlider'
     pod 'Firebase/Core'
     
-
-    
 end

@@ -9,7 +9,7 @@
 //
 
 #import "FFHeaderMonthForYearCell.h"
-
+#import "Config.h"
 #import "FFImportantFilesForCalendar.h"
 
 @interface FFHeaderMonthForYearCell ()
@@ -60,7 +60,12 @@
             [label setTextAlignment:NSTextAlignmentCenter];
             [label setText:[arrayWeekAbrev objectAtIndex:i]];
             [label setTextColor:[UIColor blackColor]];
-            [label setFont:[UIFont boldSystemFontOfSize:label.font.pointSize-5]];
+//            [label setFont:[UIFont boldSystemFontOfSize:label.font.pointSize-5]];
+            
+            [label setFont:[UIFont fontWithName:@"Montserrat-Medium" size:(IS_IPAD ? 15 : 10)]];
+            
+//            [cell.lblName setFont:[UIFont fontWithName:@"Montserrat-light" size:(IS_IPAD ? 17 : 15)]];
+
             [self addSubview:label];
         }
     }

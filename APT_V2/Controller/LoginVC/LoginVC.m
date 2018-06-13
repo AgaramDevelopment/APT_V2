@@ -177,12 +177,15 @@
                 UIViewController* VC;
             
             //if (![AppCommon isCoach]) {
-                NSString * APTTeamCode =[responseObject valueForKey:@"APTTeamcode"];
+            
+            
+            
+            NSString * APTTeamCode =[AppCommon checkNull:[responseObject valueForKey:@"APTTeamcode"]];
                 [[NSUserDefaults standardUserDefaults] setValue:APTTeamCode forKey:@"APTTeamcode"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
 
                 
-                NSString * playerTeamCode =[responseObject valueForKey:@"CAPTeamcode"];
+                NSString * playerTeamCode =[AppCommon checkNull:[responseObject valueForKey:@"CAPTeamcode"]];
                 [[NSUserDefaults standardUserDefaults] setValue:playerTeamCode forKey:@"CAPTeamcode"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             //}

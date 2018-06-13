@@ -66,7 +66,11 @@
         for (int min=0; min<=45; min=min+MINUTES_PER_LABEL) {
             
             FFHourAndMinLabel *labelHourMin = [[FFHourAndMinLabel alloc] initWithFrame:CGRectMake(0, y, self.frame.size.width, HEIGHT_CELL_MIN) date:[NSDate dateWithHour:hour min:min]];
-            [labelHourMin setFont:[UIFont boldSystemFontOfSize:10]];
+//            [labelHourMin setFont:[UIFont boldSystemFontOfSize:10]];
+//            [label setFont:[UIFont fontWithName:@"Montserrat-SemiBold" size:(IS_IPAD ? 19 : 17)]];
+            
+            [labelHourMin setFont:[UIFont fontWithName:@"Montserrat-Regular" size:(IS_IPAD ? 11 : 10)]];
+
             [labelHourMin setTextColor:[UIColor grayColor]];
             if (min == 0) {
                 [labelHourMin showText];

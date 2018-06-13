@@ -9,7 +9,7 @@
 //
 
 #import "FFMonthHeaderView.h"
-
+#import "Config.h"
 #import "FFImportantFilesForCalendar.h"
 
 @implementation FFMonthHeaderView
@@ -29,7 +29,11 @@
             [label setTextAlignment:NSTextAlignmentRight];
             [label setText:[arrayWeekAbrev objectAtIndex:i]];
             [label setTextColor:[arrayColor objectAtIndex:i]];
-            [label setFont:[UIFont boldSystemFontOfSize:label.font.pointSize]];
+//            [label setFont:[UIFont boldSystemFontOfSize:label.font.pointSize]];
+            [label setFont:[UIFont fontWithName:@"Montserrat-SemiBold" size:(IS_IPAD ? 19 : 17)]];
+            
+            //            [cell.lblName setFont:[UIFont fontWithName:@"Montserrat-light" size:(IS_IPAD ? 17 : 15)]];
+
             [label setAutoresizingMask:AR_LEFT_RIGHT | UIViewAutoresizingFlexibleWidth];
             [self addSubview:label];
         }

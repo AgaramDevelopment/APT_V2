@@ -442,7 +442,7 @@ AppCommon *sharedCommon = nil;
     }];
     
     [alert addAction:actionYes];
-    [alert addAction:actionNo];
+//    [alert addAction:actionNo];
     [appDel.window.rootViewController presentViewController:alert animated:YES completion:nil];
 
 }

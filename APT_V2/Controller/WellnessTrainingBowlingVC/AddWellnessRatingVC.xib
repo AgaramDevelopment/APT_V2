@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
-        </array>
         <array key="Montserrat-Bold.otf">
             <string>Montserrat-Bold</string>
         </array>
@@ -23,6 +20,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddWellnessRatingVC">
             <connections>
+                <outlet property="CancelBtn" destination="0zm-GD-usL" id="EEs-Wf-HyD"/>
+                <outlet property="CancelImg" destination="Acl-rK-Ud0" id="bV5-WD-jio"/>
                 <outlet property="ColorSlider1" destination="Q4R-kS-TJU" id="8Es-Bg-vTZ"/>
                 <outlet property="ColorSlider2" destination="ITP-Wu-dMo" id="GPU-Hh-337"/>
                 <outlet property="ColorSlider3" destination="ngU-Oj-ghC" id="xkv-af-0L8"/>
@@ -49,6 +48,7 @@
                 <outlet property="fatiqueSlider" destination="ITP-Wu-dMo" id="3vM-Fp-fpg"/>
                 <outlet property="muscleSlider" destination="ngU-Oj-ghC" id="SAi-yw-lco"/>
                 <outlet property="navView" destination="FaR-lV-4YZ" id="Q6j-Mp-SVK"/>
+                <outlet property="navViewHeight" destination="DZM-7V-fOY" id="qy4-n0-7Bj"/>
                 <outlet property="restingBpMaxTxt" destination="G4y-tC-VUo" id="CRo-HD-mVd"/>
                 <outlet property="restingBpMinTxt" destination="aoO-Rd-zna" id="v9J-1i-lhr"/>
                 <outlet property="restingHrTxt" destination="ceo-5G-6Zf" id="DfH-eL-6KE"/>

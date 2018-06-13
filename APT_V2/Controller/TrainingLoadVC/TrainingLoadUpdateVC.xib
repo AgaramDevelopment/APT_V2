@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
-        </array>
         <array key="Montserrat-Bold.otf">
             <string>Montserrat-Bold</string>
         </array>
@@ -28,6 +25,8 @@
             <connections>
                 <outlet property="ActivityBtn" destination="YHO-N6-5jE" id="gXP-0B-53d"/>
                 <outlet property="ActivityFilterview" destination="6pD-uc-m2W" id="7do-2H-SQ2"/>
+                <outlet property="CancelBtn" destination="v9X-JB-9TI" id="qTj-fs-FhM"/>
+                <outlet property="CancelImg" destination="a9h-Gf-xOs" id="kF5-RA-86e"/>
                 <outlet property="FetchedUpdateBtn" destination="BYJ-a0-4tZ" id="56X-Lj-aqH"/>
                 <outlet property="RpeFilterview" destination="2oG-tg-odG" id="1VW-LV-JhE"/>
                 <outlet property="SaveBtn" destination="76Q-oS-TdO" id="x9J-K5-AkF"/>
@@ -41,6 +40,7 @@
                 <outlet property="countViewWidth" destination="nu6-9L-yyc" id="hK7-jE-gT2"/>
                 <outlet property="datelbl" destination="DRR-4r-kIY" id="UTD-hy-1P3"/>
                 <outlet property="navView" destination="Upz-bY-nzh" id="iGF-SV-6Sf"/>
+                <outlet property="navViewHeight" destination="gfp-zY-iEg" id="Qef-S2-UYD"/>
                 <outlet property="popViewtable" destination="AHI-mV-g9u" id="6Mj-h1-wex"/>
                 <outlet property="poptableWidth" destination="6Wg-Lj-vbe" id="Idu-tD-4Hv"/>
                 <outlet property="poptableXposition" destination="ox6-fY-1uT" id="uxh-FG-qnf"/>
@@ -87,15 +87,15 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6pD-uc-m2W">
                                     <rect key="frame" x="195" y="10" width="140" height="30"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DropdownWhite" translatesAutoresizingMaskIntoConstraints="NO" id="9ZO-Cq-Y8D">
-                                            <rect key="frame" x="112" y="3" width="25" height="25"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="9ZO-Cq-Y8D">
+                                            <rect key="frame" x="117" y="3" width="20" height="20"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="ovE-AU-mRZ"/>
-                                                <constraint firstAttribute="height" constant="25" id="qT0-2Q-3Qq"/>
+                                                <constraint firstAttribute="width" constant="20" id="ovE-AU-mRZ"/>
+                                                <constraint firstAttribute="height" constant="20" id="qT0-2Q-3Qq"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1F-hE-HDV">
-                                            <rect key="frame" x="5" y="0.0" width="106" height="30"/>
+                                            <rect key="frame" x="5" y="0.0" width="111" height="30"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -128,15 +128,15 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2oG-tg-odG">
                                     <rect key="frame" x="195" y="55" width="140" height="30"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DropdownWhite" translatesAutoresizingMaskIntoConstraints="NO" id="ui3-Er-wlk">
-                                            <rect key="frame" x="112" y="3" width="25" height="25"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="ui3-Er-wlk">
+                                            <rect key="frame" x="117" y="3" width="20" height="20"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="25" id="8Of-kq-liO"/>
-                                                <constraint firstAttribute="height" constant="25" id="cqT-8e-4LU"/>
+                                                <constraint firstAttribute="width" constant="20" id="8Of-kq-liO"/>
+                                                <constraint firstAttribute="height" constant="20" id="cqT-8e-4LU"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pOH-jq-zhj">
-                                            <rect key="frame" x="5" y="0.0" width="106" height="30"/>
+                                            <rect key="frame" x="5" y="0.0" width="111" height="30"/>
                                             <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -706,7 +706,7 @@
     </objects>
     <resources>
         <image name="Cancel_BlackColor" width="338" height="338"/>
-        <image name="DropdownWhite" width="32" height="32"/>
+        <image name="down-arrow" width="21" height="21"/>
         <image name="ico_addWhite" width="24" height="24"/>
         <image name="ico_calendar" width="14" height="14"/>
     </resources>

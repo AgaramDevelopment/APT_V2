@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -98,15 +98,15 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IrT-s2-R9L">
                             <rect key="frame" x="5" y="0.0" width="115" height="30"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DropdownWhite" translatesAutoresizingMaskIntoConstraints="NO" id="HQp-Fa-4TS">
-                                    <rect key="frame" x="85" y="3" width="25" height="25"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="HQp-Fa-4TS">
+                                    <rect key="frame" x="90" y="3" width="20" height="20"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="25" id="MHk-ob-KyL"/>
-                                        <constraint firstAttribute="height" constant="25" id="RoW-wI-fLM"/>
+                                        <constraint firstAttribute="width" constant="20" id="MHk-ob-KyL"/>
+                                        <constraint firstAttribute="height" constant="20" id="RoW-wI-fLM"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Wl-wx-7mq">
-                                    <rect key="frame" x="0.0" y="0.0" width="85" height="30"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -139,15 +139,15 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fmg-Ui-o5A">
                             <rect key="frame" x="125" y="0.0" width="115" height="30"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DropdownWhite" translatesAutoresizingMaskIntoConstraints="NO" id="c3m-VK-Urj">
-                                    <rect key="frame" x="85" y="3" width="25" height="25"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="c3m-VK-Urj">
+                                    <rect key="frame" x="90" y="3" width="20" height="20"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="25" id="FQY-4c-JI6"/>
-                                        <constraint firstAttribute="height" constant="25" id="pNk-89-APt"/>
+                                        <constraint firstAttribute="width" constant="20" id="FQY-4c-JI6"/>
+                                        <constraint firstAttribute="height" constant="20" id="pNk-89-APt"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Phf-tM-OOl">
-                                    <rect key="frame" x="0.0" y="0.0" width="85" height="30"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -180,15 +180,15 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1bW-9h-O9U">
                             <rect key="frame" x="245" y="0.0" width="115" height="30"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DropdownWhite" translatesAutoresizingMaskIntoConstraints="NO" id="0ET-Kg-XsQ">
-                                    <rect key="frame" x="85" y="3" width="25" height="25"/>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="0ET-Kg-XsQ">
+                                    <rect key="frame" x="90" y="3" width="20" height="20"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="25" id="M7V-JE-jkF"/>
-                                        <constraint firstAttribute="height" constant="25" id="lSs-kQ-iQx"/>
+                                        <constraint firstAttribute="width" constant="20" id="M7V-JE-jkF"/>
+                                        <constraint firstAttribute="height" constant="20" id="lSs-kQ-iQx"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qhQ-1f-AK0">
-                                    <rect key="frame" x="0.0" y="0.0" width="85" height="30"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="90" height="30"/>
                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="11"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
@@ -272,6 +272,6 @@
         </view>
     </objects>
     <resources>
-        <image name="DropdownWhite" width="32" height="32"/>
+        <image name="down-arrow" width="21" height="21"/>
     </resources>
 </document>

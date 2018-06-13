@@ -188,8 +188,19 @@
     }
     else
     {
-     self.startdateLbl.text =self.selectDateStr;
-     self.enddateLbl.text =self.selectDateStr;
+        if([AppCommon isCoach])
+        {
+            self.startdateLbl.text =self.selectDateStr;
+            self.enddateLbl.text =self.selectDateStr;
+        }
+        else
+            {
+            self.updateBtn.hidden=YES;
+            self.deleteBtn.hidden =YES;
+            self.saveBtn.hidden =YES;
+            self.AddParticipantBtn.hidden =YES;
+            }
+            
     }
     self.view_datepicker.hidden=YES;
     self.comPopview.hidden =YES;

@@ -538,12 +538,12 @@ typedef enum : NSUInteger {
 //        [Tablecell configureCell:self andIndex:7 andTitile:title];
 //    }
     
-//    CGRect frame = cell.frame;
-//    [cell setFrame:CGRectMake(0, self.LandingTable.frame.size.height, frame.size.width, frame.size.height)];
-//    [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionTransitionCrossDissolve  animations:^{
-//        [cell setFrame:frame];
-//    } completion:^(BOOL finished) {
-//    }];
+    CGRect frame = cell.frame;
+    [cell setFrame:CGRectMake(0, self.LandingTable.frame.size.height, frame.size.width, frame.size.height)];
+    [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionTransitionCrossDissolve  animations:^{
+        [cell setFrame:frame];
+    } completion:^(BOOL finished) {
+    }];
 
 }
 

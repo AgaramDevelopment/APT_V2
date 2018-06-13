@@ -43,7 +43,7 @@
 {
     [super viewDidLoad];
     
-   
+    NSLog(@"ReportsVC");
     [self customnavigationmethod];
     //[self chartWebservice];
     

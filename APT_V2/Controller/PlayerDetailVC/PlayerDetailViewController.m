@@ -474,7 +474,7 @@
 {
     
     /*
-     API NAME       : MOBILE_RECENTDETAILS
+     API NAME       : MOBILE_RECENTDETAILSFITNESS
      METHOD         : POST
      INPUT FORMAT   : JSON
      INPUT PARAMS   :

@@ -163,6 +163,10 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController.panGestureRecognizer setEnabled:YES];
+    [revealController.tapGestureRecognizer setEnabled:YES];
+
     UIBezierPath *path = [UIBezierPath new];
     
     [path moveToPoint:(CGPoint){self.ColorView.frame.size.width-25,0 }];//w0

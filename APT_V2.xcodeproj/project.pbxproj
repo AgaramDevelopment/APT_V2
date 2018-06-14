@@ -941,6 +941,7 @@
 		CEBD2A7D202899BB000AFD1B /* DBAConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBAConnection.h; sourceTree = "<group>"; };
 		CEBD2A7E202899BB000AFD1B /* DBAConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBAConnection.m; sourceTree = "<group>"; };
 		CEBD2A8C20289B8C000AFD1B /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		CEBE2C5720D2949D00E09F53 /* APT KCA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "APT KCA.entitlements"; sourceTree = "<group>"; };
 		CEC34C322046B2A10058ACC3 /* RecentFitnessGraph.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecentFitnessGraph.xib; sourceTree = "<group>"; };
 		CEC34C332046B2A10058ACC3 /* RecentFitnessGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentFitnessGraph.m; sourceTree = "<group>"; };
 		CEC34C342046B2A10058ACC3 /* RecentFitnessGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentFitnessGraph.h; sourceTree = "<group>"; };
@@ -1912,6 +1913,7 @@
 		CE3E740D20248BF100F10917 /* APT_V2 */ = {
 			isa = PBXGroup;
 			children = (
+				CEBE2C5720D2949D00E09F53 /* APT KCA.entitlements */,
 				04BC4A9A208611D300CEB23E /* AppDelegate.h */,
 				04BC4A99208611D300CEB23E /* AppDelegate.m */,
 				18AA1B932092FCC2009634A3 /* Main.storyboard */,
@@ -2716,6 +2718,14 @@
 					CE3E740A20248BF100F10917 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -3297,6 +3307,7 @@
 			baseConfigurationReference = F768FE1F7DDD50DD60206473 /* Pods-APT_V2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "APT_V2/APT KCA.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -3317,6 +3328,7 @@
 			baseConfigurationReference = D2B0EB9CC9DCC379A1C41C4A /* Pods-APT_V2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "APT_V2/APT KCA.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;

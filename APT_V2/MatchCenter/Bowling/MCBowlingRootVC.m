@@ -62,7 +62,10 @@
 {
     [super viewWillAppear:animated];
     
-    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController.panGestureRecognizer setEnabled:YES];
+    [revealController.tapGestureRecognizer setEnabled:YES];
+
     dispatch_async(dispatch_get_main_queue(), ^{
         
         selectedTabLeading.constant = [self.battingBtn frame].origin.x +[self.battingBtn frame].size.width/4;

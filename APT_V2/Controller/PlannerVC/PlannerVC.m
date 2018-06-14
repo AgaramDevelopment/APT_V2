@@ -143,7 +143,10 @@
         boolDidLoad = YES;
         [self buttonTodayAction:nil];
     }
-    
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController.panGestureRecognizer setEnabled:YES];
+    [revealController.tapGestureRecognizer setEnabled:YES];
+
     [self EventTypeWebservice];
     self.TabbarPosition.constant = self.MONTH.frame.origin.x + self.MONTH.frame.size.width/4;
     self.TabbarWidth.constant = self.MONTH.frame.size.width/2;

@@ -44,6 +44,11 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController.panGestureRecognizer setEnabled:YES];
+    [revealController.tapGestureRecognizer setEnabled:YES];
+
     self.searchViewWidth.constant = 0;
 }
 -(void)customnavigationmethod

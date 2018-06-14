@@ -93,6 +93,9 @@
     
     CompetitionCode = [AppCommon getCurrentCompetitionCode];
     teamcode = [AppCommon getCurrentTeamCode];
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController.panGestureRecognizer setEnabled:YES];
+    [revealController.tapGestureRecognizer setEnabled:YES];
 
 //    [self OverviewWebservice:CompetitionCode :teamcode];
     [self OverviewWebservice];

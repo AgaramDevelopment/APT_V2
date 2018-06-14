@@ -52,15 +52,17 @@
     [self EventTypeWebservice :usercode:cliendcode:userref];
     
 }
-//-(void)viewWillAppear:(BOOL)animated
-//{
-//
-//    [super viewWillAppear:animated];
-//
-//   // [self EventTypeWebservice :usercode:cliendcode:userref];
-//
-//
-//}
+-(void)viewWillAppear:(BOOL)animated
+{
+
+    [super viewWillAppear:animated];
+
+    SWRevealViewController *revealController = [self revealViewController];
+    [revealController.panGestureRecognizer setEnabled:YES];
+    [revealController.tapGestureRecognizer setEnabled:YES];
+
+
+}
 
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];

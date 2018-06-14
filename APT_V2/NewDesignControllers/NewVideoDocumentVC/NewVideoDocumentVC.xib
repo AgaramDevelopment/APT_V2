@@ -375,7 +375,7 @@
                 </constraints>
                 <viewLayoutGuide key="safeArea" id="WKY-7F-keO"/>
             </view>
-            <point key="canvasLocation" x="550" y="111"/>
+            <point key="canvasLocation" x="750" y="164"/>
         </viewController>
     </objects>
     <resources>

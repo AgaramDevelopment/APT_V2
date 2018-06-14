@@ -1158,7 +1158,7 @@
         
         imgFileName = [[info valueForKey:@"UIImagePickerControllerMediaURL"] lastPathComponent];
         
-        image = info[UIImagePickerControllerOriginalImage];
+//        image = info[UIImagePickerControllerOriginalImage];
 //        mimeType = [NSString stringWithFormat:@"video/%@",[[videofileURL pathExtension]lowercaseString]];
         mimeType = @"video/quicktime";
         

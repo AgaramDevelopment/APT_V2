@@ -24,7 +24,7 @@
 #import "DocumentViewController.h"
 #import "TeamsReportsHistoryVC.h"
 #import "NewVideoDocumentVC.h"
-
+#import <SDWebImage/UIImageView+WebCache.h>
 @interface RearViewController ()
 {
     NSIndexPath* PreviouslySelectedIndex;
@@ -41,18 +41,23 @@
     
     PreviouslySelectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];
 
-    userImageView.layer.cornerRadius = userImageView.frame.size.height/2;
-//    userImageView.layer.borderWidth = 2.0;
-//    userImageView.layer.borderColor = [UIColor colorWithRed:37.0/255.0 green:176.0/255.0 blue:240.0/255.0 alpha:1.0].CGColor;
-//    userImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+//    userImageView.layer.cornerRadius = userImageView.frame.size.height/2;
+//    userImageView.layer.masksToBounds = YES;
+    
+    UIBezierPath* imgCorner = [UIBezierPath bezierPathWithRoundedRect:lblimgBackground.bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:userImageView.frame.size];
+    CAShapeLayer* imgLayer = [[CAShapeLayer alloc] init];
+    imgLayer.frame = userImageView.bounds;
+    imgLayer.path = imgCorner.CGPath;
+    userImageView.layer.mask = imgLayer;
     userImageView.layer.masksToBounds = YES;
     
     UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:lblimgBackground.bounds byRoundingCorners:(UIRectCornerTopLeft | UIRectCornerBottomLeft) cornerRadii:lblimgBackground.frame.size];
-
+    
     CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
     maskLayer.frame = lblimgBackground.bounds;
     maskLayer.path  = maskPath.CGPath;
-    userImageView.layer.mask = maskLayer;
+    lblimgBackground.layer.mask = maskLayer;
+    lblimgBackground.layer.masksToBounds = YES;
 
 }
 
@@ -85,6 +90,12 @@
     
     [self.RearTableView reloadData];
     self.lblName.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserName"];
+    
+//    PhotoPath
+    NSURL* url = [NSURL URLWithString:[[NSUserDefaults standardUserDefaults]stringForKey:@"PhotoPath"]];
+    [userImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"Default_userimage"]];
+    
+
 }
 
 - (void)didReceiveMemoryWarning {

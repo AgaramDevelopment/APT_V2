@@ -404,17 +404,38 @@ typedef enum : NSUInteger {
         cell = array[0];
     }
     
-    cell.lblSectionTitle.text = [[SectionNameArray objectAtIndex:section] valueForKey:@"Title"];
+    NSString* title =  [[SectionNameArray objectAtIndex:section] valueForKey:@"Title"];
+    
+    cell.lblSectionTitle.text = title;
     UIImage* image = [UIImage imageNamed:[[SectionNameArray objectAtIndex:section]valueForKey:@"image"]];
     [cell.imgSectionHead setImage:image];
     //    [cell.btnSectionHead setImage:image forState:UIControlStateNormal];
     
+    /*
+     SectionNameArray = @[@{@"Title":@"Events",@"image":@"",@"list":@"1"},
+     @{@"Title":@"Teams",@"image":@"",@"list":@"2"},
+     @{@"Title":@"Fixtures",@"image":@"",@"list":@"3"},
+     @{@"Title":@"Results",@"image":@"More",@"list":@"4"},
+     @{@"Title":@"Videos",@"image":@"More",@"list":@"5"},
+     @{@"Title":@"Documents",@"image":@"More",@"list":@"6"}];
+
+     */
+    
     cell.Morebtn.tag = section;
-    if ([cell.lblSectionTitle.text isEqualToString:@"Results"] ||
-        [cell.lblSectionTitle.text isEqualToString:@"Videos"] ||
-        [cell.lblSectionTitle.text isEqualToString:@"Documents"]){
+    if ([title isEqualToString:@"Results"] ||
+        [title isEqualToString:@"Videos"] ||
+        [title isEqualToString:@"Documents"]){
         
         [cell.Morebtn addTarget:self action:@selector(HeaderBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        if ([title isEqualToString:@"Results"]) {
+            cell.Morebtn.tag = 1;
+        }else if ([title isEqualToString:@"Videos"]) {
+            cell.Morebtn.tag = 2;
+        }else if ([title isEqualToString:@"Documents"]) {
+            cell.Morebtn.tag = 3;
+        }
+
 
     }
 
@@ -430,43 +451,43 @@ typedef enum : NSUInteger {
     
 //    button = cell.Morebtn;
     
-    if ([cell.lblSectionTitle.text isEqualToString:@"Results"]) {
-        cell.Morebtn.tag == 1;
-        [cell.Morebtn addTarget:self action:@selector(HeaderBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-    }
-    else if ([cell.lblSectionTitle.text isEqualToString:@"Videos"]){
-        cell.Morebtn.tag == 2;
-        [cell.Morebtn addTarget:self action:@selector(HeaderBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-    }
-    else if ([cell.lblSectionTitle.text isEqualToString:@"Documents"]){
-        cell.Morebtn.tag == 3;
-        [cell.Morebtn addTarget:self action:@selector(HeaderBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-    }
+//    if ([cell.lblSectionTitle.text isEqualToString:@"Results"]) {
+//        cell.Morebtn.tag == 1;
+//        [cell.Morebtn addTarget:self action:@selector(HeaderBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+//
+//    }
+//    else if ([cell.lblSectionTitle.text isEqualToString:@"Videos"]){
+//        cell.Morebtn.tag == 2;
+//        [cell.Morebtn addTarget:self action:@selector(HeaderBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+//
+//    }
+//    else if ([cell.lblSectionTitle.text isEqualToString:@"Documents"]){
+//        cell.Morebtn.tag == 3;
+//        [cell.Morebtn addTarget:self action:@selector(HeaderBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+//
+//    }
 
 
-//    if(button.tag == 1){
-//
-//        ResultsVc *objresu = [ResultsVc new];
-//        objresu = (ResultsVc *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"ResultsVc"];
-//        [appDel.frontNavigationController pushViewController:objresu animated:YES];
-//
-//    }
-//    else if(button.tag == 2){
-//        VideoGalleryVC *objVideo = [VideoGalleryVC new];
-//        objVideo.isBack = @"yes";
-//        [appDel.frontNavigationController pushViewController:objVideo animated:YES];
-//
-//
-//    }
-//    else if(button.tag == 3){
-//        documentObject = [NewVideoDocumentVC new];
-//        documentObject.isBack = @"yes";
-//        [appDel.frontNavigationController pushViewController:documentObject animated:YES];
-//
-//    }
+    if(button.tag == 1){
+
+        ResultsVc *objresu = [ResultsVc new];
+        objresu = (ResultsVc *)[appDel.storyBoard instantiateViewControllerWithIdentifier:@"ResultsVc"];
+        [appDel.frontNavigationController pushViewController:objresu animated:YES];
+
+    }
+    else if(button.tag == 2){
+        VideoGalleryVC *objVideo = [VideoGalleryVC new];
+        objVideo.isBack = @"yes";
+        [appDel.frontNavigationController pushViewController:objVideo animated:YES];
+
+
+    }
+    else if(button.tag == 3){
+        documentObject = [NewVideoDocumentVC new];
+        documentObject.isBack = @"yes";
+        [appDel.frontNavigationController pushViewController:documentObject animated:YES];
+
+    }
     
 }
 
@@ -806,6 +827,15 @@ typedef enum : NSUInteger {
             NSString * imgStr1 = [[teamlist valueForKey:@"TeamPhotoLink"] objectAtIndex:indexPath.row];
             [cell.imgTeam sd_setImageWithURL:[NSURL URLWithString:imgStr1] placeholderImage:[UIImage imageNamed:@"no-image"]];
             cell.lblTeamName.text = [[teamlist valueForKey:@"Teamname"] objectAtIndex:indexPath.row];
+            
+            cell.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+            
+            cell.layer.shadowOffset = CGSizeZero;
+            cell.layer.shadowRadius = 1.0f;
+            cell.layer.shadowOpacity = 0.5f;
+            cell.layer.masksToBounds = NO;
+            cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
+
             return cell;
         }
     }
@@ -1405,9 +1435,9 @@ typedef enum : NSUInteger {
             });
             
             
-                            BOOL iftheyClickedLater = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLater"];
-            
-                            if (!iftheyClickedLater) { // New version update alert if they click later, we dont show that alert again and again
+//                            BOOL iftheyClickedLater = [[NSUserDefaults standardUserDefaults] boolForKey:@"isLater"];
+//
+//                            if (!iftheyClickedLater) { // New version update alert if they click later, we dont show that alert again and again
             
                                 NSInteger* isLatestVersion = [[responseObject valueForKey:@"isLatestVersion"] integerValue];
                                 NSLog(@"isLatestVersion %@",[responseObject valueForKey:@"isLatestVersion"] );
@@ -1415,11 +1445,10 @@ typedef enum : NSUInteger {
                                     NSLog(@"canUpdate TRUE ");
                                     [AppCommon newVersionUpdateAlert];
                                     [AppCommon hideLoading];
-
                                     return ;
                                 }
             
-                            }
+//                            }
             
             
         }

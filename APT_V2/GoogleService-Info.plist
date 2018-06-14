@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>239877637675-ui1snjgro4oap4v4m2bi5rfo834tbqpo.apps.googleusercontent.com</string>
+	<string>239877637675-h61vmbcgj9t03bjcphmq5sja6fgeram7.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.239877637675-ui1snjgro4oap4v4m2bi5rfo834tbqpo</string>
+	<string>com.googleusercontent.apps.239877637675-h61vmbcgj9t03bjcphmq5sja6fgeram7</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAW64lnvUOn30KXRKQScKOnKr89r5U-Yo4</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.agaram.APT-V2</string>
+	<string>com.agaram.APT.KCA</string>
 	<key>PROJECT_ID</key>
 	<string>alpha-pro-tracker</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:239877637675:ios:9b019052a612d763</string>
+	<string>1:239877637675:ios:0967f5d1a7f0c65e</string>
 	<key>DATABASE_URL</key>
 	<string>https://alpha-pro-tracker.firebaseio.com</string>
 </dict>

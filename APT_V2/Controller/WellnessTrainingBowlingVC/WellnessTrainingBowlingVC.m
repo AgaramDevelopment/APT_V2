@@ -41,6 +41,10 @@
     NSString *metaSubCode3;
     NSString *metaSubCode4;
     
+    int sleepRate;
+    int fatiqueRate;
+    int muscleRate;
+    int stressRate;
     //training load
     float num1;
     float num2;
@@ -206,14 +210,21 @@
     {
         
         isTraingLoadExpand = YES;
+    objUpdate.isToday = @"yes";
+    objUpdate.isYesterday = @"no";
         objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
+       objUpdate.view.frame = CGRectMake(0,0, self.RootTrainingView.bounds.size.width, self.RootTrainingView.bounds.size.height);
         objUpdate.TodayLoadArray = self.todaysLoadArray;
-        objUpdate.isToday = @"yes";
+    objUpdate.isfromHome = @"NO";
+    objUpdate.navViewHeight.constant = 0;
+    objUpdate.navView.hidden = YES;
+    objUpdate.CancelBtn.hidden = NO;
+    objUpdate.CancelImg.hidden = NO;
         objUpdate.Delegate = self;
-        objUpdate.view.frame = CGRectMake(0,0, self.RootTrainingView.bounds.size.width, self.RootTrainingView.bounds.size.height);
         [self.RootTrainingView addSubview:objUpdate.view];
         self.traingViewHeight.constant = 600;
         [self setTotalScroll];
+    [self.view updateConstraintsIfNeeded];
         
     }
 }
@@ -228,23 +239,33 @@
         //[objWell.AddTrainingBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
         
         isTraingLoadExpand = YES;
-        
-        objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
-        objUpdate.YesterdayLoadArray = self.yesterdayLoadArray;
-        objUpdate.Delegate = self;
+    
+        objUpdate.isToday = @"no";
         objUpdate.isYesterday = @"yes";
-        objUpdate.view.frame = CGRectMake(0,0, self.RootTrainingView.bounds.size.width, self.RootTrainingView.bounds.size.height);
+        objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
+    objUpdate.view.frame = CGRectMake(0,0, self.RootTrainingView.bounds.size.width, self.RootTrainingView.bounds.size.height);
+        objUpdate.YesterdayLoadArray = self.yesterdayLoadArray;
+    objUpdate.isfromHome = @"NO";
+    objUpdate.navViewHeight.constant = 0;
+    objUpdate.navView.hidden = YES;
+    objUpdate.CancelBtn.hidden = NO;
+    objUpdate.CancelImg.hidden = NO;
+        objUpdate.Delegate = self;
+    
         [self.RootTrainingView addSubview:objUpdate.view];
-        self.traingViewHeight.constant = 600;
+    self.traingViewHeight.constant = 600;
         [self setTotalScroll];
+    [self.view updateConstraintsIfNeeded];
     }
 }
 
 - (IBAction)AddtrainingBtnAction:(id)sender {
     
     isTraingLoadExpand = YES;
+    
     objUpdate = [[TrainingLoadUpdateVC alloc] initWithNibName:@"TrainingLoadUpdateVC" bundle:nil];
     objUpdate.view.frame = CGRectMake(0,0, self.RootTrainingView.bounds.size.width, self.RootTrainingView.bounds.size.height);
+    objUpdate.isfromHome = @"NO";
     objUpdate.navViewHeight.constant = 0;
     objUpdate.navView.hidden = YES;
     objUpdate.CancelBtn.hidden = NO;
@@ -253,15 +274,18 @@
     [self.RootTrainingView addSubview:objUpdate.view];
     self.traingViewHeight.constant = 600;
     [self setTotalScroll];
+    [self.view updateConstraintsIfNeeded];
 }
 - (IBAction)AddBtnAction:(id)sender {
     
     isWellnessExpand = YES;
     
     self.NoDataView.hidden = YES;
+    
     objWell = [[AddWellnessRatingVC alloc] initWithNibName:@"AddWellnessRatingVC" bundle:nil];
     //objWell.Delegate = self;
     objWell.view.frame = CGRectMake(0,0, self.topView.bounds.size.width, self.topView.bounds.size.height);
+    objWell.isFromHome = @"NO";
     objWell.navViewHeight.constant = 0;
     objWell.navView.hidden = YES;
     objWell.CancelBtn.hidden = NO;
@@ -297,14 +321,20 @@
     {
     
     objWell = [[AddWellnessRatingVC alloc] initWithNibName:@"AddWellnessRatingVC" bundle:nil];
+    objWell.view.frame = CGRectMake(0,0, self.topView.bounds.size.width, self.topView.bounds.size.height);
     objWell.isFetch= @"yes";
     isWellnessExpand = YES;
+    objWell.isFromHome = @"NO";
+    objWell.navViewHeight.constant = 0;
+    objWell.navView.hidden = YES;
+    objWell.CancelBtn.hidden = NO;
+    objWell.CancelImg.hidden = NO;
     objWell.Delegate = self;
     objWell.fetchArray = self.fetchedArray;
-    objWell.view.frame = CGRectMake(0,0, self.topView.bounds.size.width, self.topView.bounds.size.height);
     [self.topView addSubview:objWell.view];
-    self.topviewHeight.constant = 578;
+    self.topviewHeight.constant = 600;
         [self setTotalScroll];
+     [self.view updateConstraintsIfNeeded];
     }
     
 }
@@ -401,13 +431,34 @@
             }
             if(! [[[responseObject valueForKey:@"SleepHours"] objectAtIndex:0] isEqual:[NSNull null]])
             {
-                self.sleepHrlbl.text = [[responseObject valueForKey:@"SleepHours"] objectAtIndex:0];
+            
+            NSString * slHourStr = [[responseObject valueForKey:@"SleepHours"] objectAtIndex:0];
+            int totalsleep = [slHourStr intValue];
+            
+            if(totalsleep>60)
+            {
+                int hour = totalsleep/60;
+                int min = totalsleep-(hour*60);
+                
+                self.sleepHrlbl.text = [NSString stringWithFormat:@"%d:%d",hour,min];
+            }
+            else
+                {
+                
+                NSString *min = [[responseObject valueForKey:@"SleepHours"] objectAtIndex:0];
+                self.sleepHrlbl.text = [NSString stringWithFormat:@"0:%@",min];
+                }
+            
+            
             }
             if( ![[[responseObject valueForKey:@"SleepRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
             {
                 NSString *sleepValue = [[responseObject valueForKey:@"SleepRatingDescription"] objectAtIndex:0];
                 NSArray *component = [sleepValue componentsSeparatedByString:@" "];
                 self.sleeplbl.text = [NSString stringWithFormat:@"%@/7",component[0]];
+            
+            
+            sleepRate = [component[0] intValue];
             
             
                 if([component[0] isEqualToString:@"1"])
@@ -445,6 +496,8 @@
                 NSString *fatiqueValue = [[responseObject valueForKey:@"FatigueRatingDescription"] objectAtIndex:0];
                 NSArray *component1 = [fatiqueValue componentsSeparatedByString:@" "];
                 self.fatiquelbl.text = [NSString stringWithFormat:@"%@/7",component1[0]];
+        
+             fatiqueRate = [component1[0] intValue];
             
             if([component1[0] isEqualToString:@"1"])
             {
@@ -482,7 +535,7 @@
                 NSString *muscleValue = [[responseObject valueForKey:@"SoreNessRatingDescription"] objectAtIndex:0];
                 NSArray *component2 = [muscleValue componentsSeparatedByString:@" "];
                 self.musclelbl.text = [NSString stringWithFormat:@"%@/7",component2[0]];
-            
+            muscleRate = [component2[0] intValue];
             if([component2[0] isEqualToString:@"1"])
             {
                 self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
@@ -518,7 +571,8 @@
                 NSString *stressValue = [[responseObject valueForKey:@"StressRatingDescription"] objectAtIndex:0];
                 NSArray *component3 = [stressValue componentsSeparatedByString:@" "];
                 self.stresslbl.text = [NSString stringWithFormat:@"%@/7",component3[0]];
-            
+        
+            stressRate = [component3[0] intValue];
             if([component3[0] isEqualToString:@"1"])
             {
                 self.StressColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
@@ -548,7 +602,13 @@
                 self.StressColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
             }
         }
-           
+        float totalFetchedRating = sleepRate+fatiqueRate+muscleRate+stressRate;
+        float totalCount = 28;
+        float ratingCountPer = (totalFetchedRating/totalCount)*100;
+        
+        NSString *finalPer = [NSString stringWithFormat:@"%.2f",ratingCountPer];
+        
+        self.ratinglbl.text = [finalPer stringByAppendingString:@"%"] ;
             
         }
         else
@@ -1196,8 +1256,10 @@
                 //[self trainingloadTodayChart];
                 
                 objtraing = [[TrainingLoadVC alloc] initWithNibName:@"TrainingLoadVC" bundle:nil];
-                objtraing.view.frame = CGRectMake(0,10, self.trainingview.bounds.size.width, self.trainingview.bounds.size.height);
+                objtraing.view.frame = CGRectMake(0,30, self.trainingview.bounds.size.width, self.trainingview.bounds.size.height);
+                objtraing.AddBtnView.hidden = YES;
                 [self.trainingview addSubview:objtraing.view];
+            
             }
         }
         [AppCommon hideLoading];
@@ -1215,15 +1277,14 @@
     self.topviewHeight.constant = 270;
     isWellnessExpand = NO;
     [self FetchWebservice];
-    [self FetchTrainingWebservice];
-
+    //[self FetchTrainingWebservice];
     [self setTotalScroll];
     [self.topView updateConstraintsIfNeeded];
 }
 
 -(void)closeUpdateTrainingSource
 {
-    self.traingViewHeight.constant = 350;
+    self.traingViewHeight.constant = 270;
     isTraingLoadExpand = NO;
     //[self viewDidLoad];
     //[self FetchWebservice];

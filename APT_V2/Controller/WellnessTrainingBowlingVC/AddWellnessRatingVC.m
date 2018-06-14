@@ -67,6 +67,8 @@ NSString *metaSubCode4;
     //[revealController.panGestureRecognizer setEnabled:NO];
     //[revealController.tapGestureRecognizer setEnabled:NO];
     
+    
+    
     objWebservice = [[WebService alloc] init];
     [self.view_datepicker setHidden:YES];
     
@@ -94,6 +96,15 @@ NSString *metaSubCode4;
     [self metacodeWebservice];
     [self DateWebservice];
     [self customnavigationmethod];
+    
+//    if([self.isFromHome isEqualToString:@"NO"])
+//    {
+//    self.navViewHeight.constant = 0;
+//    }
+//    else
+//    {
+//        [self customnavigationmethod];
+//    }
    
 }
 
@@ -497,12 +508,22 @@ NSString *metaSubCode4;
                 [self ShowAlterMsg:@"Wellness Rating Inserted Successfully"];
                 //objWell = [[WellnessTrainingBowlingVC alloc] init];
                 //objWell.topviewHeight.constant = 280;
-                //[self.view removeFromSuperview];
-               // [self.Delegate closeWellnessSource];
+            
+                if([self.isFromHome isEqualToString:@"NO"])
+                {
+
+                    [self.view removeFromSuperview];
+                    [self.Delegate closeWellnessSource];
+                }
+            else
+                {
+                
+                 [appDel.frontNavigationController popViewControllerAnimated:YES];
+                }
                 
                 // [self.pieChartRight reloadData];
                 
-                [appDel.frontNavigationController popViewControllerAnimated:YES];
+            
             }
             
         }
@@ -680,7 +701,20 @@ NSString *metaSubCode4;
                 [self ShowAlterMsg:@"Wellness Rating Updated Successfully"];
                 //[self.view removeFromSuperview];
                 //[self.Delegate closeWellnessSource];
-                [appDel.frontNavigationController popViewControllerAnimated:YES];
+                //[appDel.frontNavigationController popViewControllerAnimated:YES];
+            
+            if([self.isFromHome isEqualToString:@"NO"])
+                {
+                
+                    [self.view removeFromSuperview];
+                    [self.Delegate closeWellnessSource];
+                }
+            else
+                {
+                
+                    [appDel.frontNavigationController popViewControllerAnimated:YES];
+                }
+            
                 
             }
             

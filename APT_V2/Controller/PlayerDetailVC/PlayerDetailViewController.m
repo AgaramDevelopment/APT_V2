@@ -120,9 +120,10 @@
 //    xAxis.yOffset = 0.0;
     xAxis.labelCount = 4;
     xAxis.axisMinimum = 0.0;
-    xAxis.axisMaximum = 40.0;
+    xAxis.axisMaximum = 1.0;
     xAxis.valueFormatter = self;
     xAxis.labelTextColor = UIColor.blackColor;
+    xAxis.drawLabelsEnabled = TRUE;
     
     ChartYAxis *yAxis = spiderChartView.yAxis;
     yAxis.labelFont = [UIFont fontWithName:@"Montserrat-Light" size:9.f];
@@ -132,7 +133,9 @@
     yAxis.labelTextColor = UIColor.blackColor;
     yAxis.drawLabelsEnabled = true;
     yAxis.valueFormatter = self;
-    
+    spiderChartView.setNeedsDisplay;
+//    chartView.setNeedsDisplay()
+
     ChartLegend *l = spiderChartView.legend;
     l.horizontalAlignment = ChartLegendHorizontalAlignmentCenter;
     l.verticalAlignment = ChartLegendVerticalAlignmentTop;
@@ -166,38 +169,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-//- (void)updateChartData
-//{
-//    if (self.shouldHideData)
-//    {
-//        spiderChartView.data = nil;
-//        return;
-//    }
-//
-//    [self setChartData];
-//}
 
 - (void)setChartData:(NSDictionary *)DictValue
 {
-//    double mult = 80;
-//    double min = 20;
-//    int cnt = 5;
     
     NSMutableArray *entries1 = [[NSMutableArray alloc] init];
     NSMutableArray *entries2 = [[NSMutableArray alloc] init];
     
-    // NOTE: The order of the entries when being added to the entries array determines their position around the center of the chart.
-//    for (int i = 0; i < cnt; i++)
-//    {
-//        [entries1 addObject:[[RadarChartDataEntry alloc] initWithValue:(arc4random_uniform(mult) + min)]];
-//        [entries2 addObject:[[RadarChartDataEntry alloc] initWithValue:(arc4random_uniform(mult) + min)]];
-//    }
-//
-//    [entries1 removeAllObjects];
-//    [entries2 removeAllObjects];
-    
-//    NSDictionary* mainDict = [Array valueForKey:@"set1"];
-//    NSDictionary* mainDict1 = [Array valueForKey:@"set2"];
     
     for (NSDictionary* dict in [DictValue valueForKey:@"set1"]) {
         
@@ -210,7 +188,6 @@
         NSNumber* data2 = [dict valueForKey:@"value"];
         [entries2 addObject:[[RadarChartDataEntry alloc]initWithValue:[data2 doubleValue]]];
     }
-    
     
     NSString* set1Name = [[[DictValue valueForKey:@"set1"] firstObject] valueForKey:@"testDate"];
     RadarChartDataSet *set1 = [[RadarChartDataSet alloc] initWithValues:entries1 label:set1Name];
@@ -236,8 +213,8 @@
     
     RadarChartData *data = [[RadarChartData alloc] initWithDataSets:@[set1, set2]];
     [data setValueFont:[UIFont fontWithName:@"Montserrat-Regular" size:8.f]];
-    [data setDrawValues:NO];
-    data.valueTextColor = UIColor.greenColor;
+    [data setDrawValues:YES];
+    data.valueTextColor = UIColor.blackColor;
     
     spiderChartView.data = data;
     spiderChartView.notifyDataSetChanged;
@@ -311,6 +288,11 @@
     NSInteger* cellCount = 0;
     if (tableView == tblDateDropDown) {
         cellCount = [[TableArray valueForKey:@"testDates"] count];
+        
+        CGRect tblFrame = tblDateDropDown.frame;
+        tblFrame.size.height = cellCount > 5 ? 45 * 5 : 45 * [[TableArray valueForKey:@"testDates"] count];
+        
+        tblDateDropDown.frame = tblFrame;
         return cellCount;
     }
     
@@ -341,7 +323,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"DropDown"];
         }
         cell.textLabel.text =  [[[TableArray valueForKey:@"testDates"] objectAtIndex:indexPath.row] valueForKey:@"testDate"];
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
     }
@@ -374,9 +356,13 @@
 {
     if (tableView == tblDateDropDown) {
         UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+        
+        spiderChartView.data = nil;
+        [self chartConfiguration];
+        
+        self.txtTestDate.text = cell.textLabel.text;
         [self fitnessGraphWebservicebyDate:cell.textLabel.text];
         [tblDateDropDown setHidden:YES];
-        
     }
     [scrollView setScrollEnabled:YES];
 }
@@ -454,15 +440,14 @@
                 
                 if ([[TableArray valueForKey:@"homeFitness"] count]) {
                     
-//                    activities = [[TableArray valueForKey:@"homeFitness"] valueForKey:@"testName"];
-                    
                    NSArray* reduce = [self reduceTestName:[[TableArray valueForKey:@"homeFitness"] valueForKey:@"testName"]];
-//                    activities = [[TableArray valueForKey:@"homeFitness"] valueForKey:@"testName"];
                     activities = reduce;
                     [self setChartData:graphDict];
-                    
+                    [self.spiderChartView notifyDataSetChanged];
+
                     NSString* strDate = [[[TableArray valueForKey:@"testDates"] firstObject] valueForKey:@"testDate"];
                     [self fitnessGraphWebservicebyDate:strDate];
+                    self.txtTestDate.text = strDate;
                 }
                 
         }

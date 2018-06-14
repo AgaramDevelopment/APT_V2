@@ -80,9 +80,12 @@
    // isYesterday = NO;
     
     //[self samplePieChart];
-    [self FetchWebservice];
     
+}
 
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    [self FetchWebservice];
 }
 
 //-(void)reloadPiechartData
@@ -640,7 +643,7 @@
                 }
                 //self.totalCountToday.text = [NSString stringWithFormat:@"%d",total];
                 todayTotalCount = [NSString stringWithFormat:@"%d",total];
-                
+                [todayChart removeFromSuperview];
                 [self TodayCircularChart];
             }
                 else
@@ -793,7 +796,8 @@
                 }
                 //self.totalCountYesterday.text = [NSString stringWithFormat:@"%d",total];
                 yesterdayTotalCount = [NSString stringWithFormat:@"%d",total];
-                
+            
+            [yesterdayChart removeFromSuperview];
                 [self YesterdayCircularChart];
             }
                 else

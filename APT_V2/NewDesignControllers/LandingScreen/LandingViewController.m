@@ -182,8 +182,8 @@ typedef enum : NSUInteger {
     SWRevealViewController *revealController = [self revealViewController];
     [revealController.panGestureRecognizer setEnabled:YES];
     [revealController.tapGestureRecognizer setEnabled:YES];
-    
-    
+    [self FoodDiaryWebservice];
+    [LandingTable reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

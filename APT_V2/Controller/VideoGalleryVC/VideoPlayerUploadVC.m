@@ -970,13 +970,13 @@
     {
 //        self.commonArray = appDel.ArrayTeam;
         self.commonArray = self.objTeamArray;
-        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.teamView.frame)+10, CGRectGetMaxY(self.teamView.superview.frame)-80, CGRectGetWidth(self.teamView.frame), IS_IPAD? 30*self.commonArray.count:30*self.commonArray.count)];
+        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.teamView.frame)+10, CGRectGetMaxY(self.teamView.superview.frame)-80, CGRectGetWidth(self.teamView.frame), self.commonArray.count >= 5? 200:45*self.commonArray.count)];
 
     }
     else if ([sender tag] == 1) // player
     {
         self.commonArray = [self getCorrespoingPlayerForthisTeamCode:correspondingTeamCode];
-        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.playerView.frame)+10, CGRectGetMaxY(self.playerView.superview.frame)-80, CGRectGetWidth(self.playerView.frame), IS_IPAD? 30*self.commonArray.count:20*self.commonArray.count)];
+        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.playerView.frame)+10, CGRectGetMaxY(self.playerView.superview.frame)-80, CGRectGetWidth(self.playerView.frame), self.commonArray.count >= 5? 200:45*self.commonArray.count)];
 
     }
     else if ([sender tag] == 2) // category
@@ -985,7 +985,7 @@
                         @{@"categoryName":@"Bowling",@"categoryCode":@"MSC357"}];
 
         self.commonArray = arr1;
-        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.CategoryView.frame)+10, CGRectGetMaxY(self.CategoryView.superview.frame)-20, CGRectGetWidth(self.CategoryView.frame), IS_IPAD? 30*self.commonArray.count:30*self.commonArray.count)];
+        [popTbl setFrame:CGRectMake(CGRectGetMinX(self.CategoryView.frame)+10, CGRectGetMaxY(self.CategoryView.superview.frame)-20, CGRectGetWidth(self.CategoryView.frame), self.commonArray.count >= 5? 200:45*self.commonArray.count)];
 
     }
     else if ([sender tag] == 3) // type
@@ -1001,7 +1001,7 @@
             self.commonArray = arr2;
         }
     
-        popTbl.frame = CGRectMake(keywordsView.frame.origin.x+10, CGRectGetMaxY(keywordsView.superview.frame)+15, keywordsView.frame.size.width, IS_IPAD? 30*self.commonArray.count:30*self.commonArray.count);
+        popTbl.frame = CGRectMake(keywordsView.frame.origin.x+10, CGRectGetMaxY(keywordsView.superview.frame)+15, keywordsView.frame.size.width, self.commonArray.count >= 5? 200:45*self.commonArray.count);
 
         /*
          Beaten
@@ -1023,7 +1023,7 @@
     
     isShare = YES;
         self.commonArray = self.sharetouserArray;
-        popTbl.frame = CGRectMake(sharetoUserView.frame.origin.x+10, CGRectGetMaxY(sharetoUserView.superview.frame)+55, sharetoUserView.frame.size.width, IS_IPAD? 30*self.commonArray.count:30*self.commonArray.count);
+        popTbl.frame = CGRectMake(sharetoUserView.frame.origin.x+10, CGRectGetMaxY(sharetoUserView.superview.frame)+55, sharetoUserView.frame.size.width, self.commonArray.count >= 5? 200:45*self.commonArray.count);
     
     }
 

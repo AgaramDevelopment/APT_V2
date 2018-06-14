@@ -14,8 +14,11 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "CRTableViewCell.h"
 #import "SWRevealViewController.h"
+#import <AVFoundation/AVAssetImageGenerator.h>
 
-@interface VideoPlayerUploadVC () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+// AVFoundation.AVAssetImageGenerato
+
+@interface VideoPlayerUploadVC () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,UIDocumentMenuDelegate,UIDocumentPickerDelegate, UIPopoverPresentationControllerDelegate>
 {
     WebService * objWebService;
     BOOL isPlayer;
@@ -68,7 +71,7 @@
 
 @synthesize popTbl,teamView,playerView,CategoryView,keywordsView;
 
-@synthesize datepickerView,DatePicker,sharetoUserView;
+@synthesize datepickerView,DatePicker,sharetoUserView,selectedImageView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -169,6 +172,14 @@
     [super viewWillLayoutSubviews];
     [self customnavigationmethod];
 }
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [super touchesBegan:touches withEvent:event];
+    
+    [self.view endEditing:YES];
+    
+}
+
 
 -(void)customnavigationmethod
 {
@@ -450,36 +461,51 @@
     videoPicker.allowsEditing = YES;
     
     videoPicker.sourceType =  UIImagePickerControllerSourceTypeCamera;
-    videoPicker.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
-    videoPicker.videoMaximumDuration = 30;
+    
+    if([self.titleLbl.text isEqualToString:@"Videos"]){
+        videoPicker.mediaTypes = [[NSArray alloc] initWithObjects: (NSString *) kUTTypeMovie, nil];
+//        videoPicker.showsCameraControls = NO;
+        videoPicker.videoMaximumDuration = 30;
+        videoPicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModeVideo;
+
+    }
+    else{
+        videoPicker.showsCameraControls = YES;
+        videoPicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+
+    }
+    
     [self presentViewController:videoPicker animated:YES completion:nil];
     
 }
 -(IBAction)didClickGalleryBtn:(id)sender
 {
     
-//    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-//    imagePicker.delegate = self;
-//    imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-//    imagePicker.mediaTypes = [[NSArray alloc] initWithObjects:(NSString *)kUTTypeMovie, nil];
-//
-//    [self presentModalViewController:imagePicker animated:YES];
     
-    UIImagePickerController *imagePicker =
-    [[UIImagePickerController alloc] init];
-    
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
     
-    imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    
-    imagePicker.mediaTypes =
-    @[(NSString *) kUTTypeImage,
-      (NSString *) kUTTypeMovie];
+//    imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+
+    if([self.titleLbl.text isEqualToString:@"Videos"]){
+        
+        imagePicker.mediaTypes =@[(NSString *) kUTTypeMovie,(NSString *) kUTTypeVideo];
+    }
+    else{
+        imagePicker.mediaTypes =@[(NSString *) kUTTypeImage,(NSString *) kUTTypePDF ,(NSString *)kUTTypeRTFD];
+    }
     
     imagePicker.allowsEditing = YES;
-    [self presentViewController:imagePicker
-                       animated:YES completion:nil];
+    [self presentViewController:imagePicker animated:YES completion:nil];
 }
+- (IBAction)didClickCloudDrive:(id)sender {
+    
+    [self showDocumentPickerInMode:UIDocumentPickerModeOpen];
+
+}
+
+
 #pragma mark UIImagePickerController Delegates
 
 
@@ -493,17 +519,16 @@
     {
         
         NSString* str = info[@"UIImagePickerControllerImageURL"];
-        
         imgDatas = [[NSData alloc] initWithContentsOfFile:str];
         imgFileName = [[info valueForKey:@"UIImagePickerControllerImageURL"] lastPathComponent];
-        
+        selectedImageView.image = info[UIImagePickerControllerOriginalImage];
+
     }
     else
     {
-        NSURL* url = (NSURL *)[info valueForKey:UIImagePickerControllerMediaURL];
-        imgDatas = [[NSData alloc] initWithContentsOfURL:url];
-        
-        
+        NSURL* videofileURL = (NSURL *)[info valueForKey:UIImagePickerControllerMediaURL];
+        imgDatas = [[NSData alloc] initWithContentsOfURL:videofileURL];
+        selectedImageView.image = [self generateThumbImage:videofileURL];
         imgFileName = [[info valueForKey:@"UIImagePickerControllerMediaURL"] lastPathComponent];
         
         image = info[UIImagePickerControllerOriginalImage];
@@ -518,7 +543,7 @@
     [self dismissViewControllerAnimated:YES completion:^{
         //_ImgViewBottomConst.constant = _imgView.frame.size.height;
         [_imgView updateConstraintsIfNeeded];
-        _currentlySelectedImage.image = image;
+        self.currentlySelectedImage.image = image;
         
     }];
     
@@ -532,6 +557,62 @@
 
 - (NSString *)encodeToBase64String:(UIImage *)image {
     return [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+}
+
+#pragma mark- Open Document Picker(Delegate) for PDF, DOC Slection from iCloud
+
+
+- (void)showDocumentPickerInMode:(UIDocumentPickerMode)mode
+{
+    
+    //    UIDocumentMenuViewController *picker =  [[UIDocumentMenuViewController alloc] initWithDocumentTypes:@[@"com.adobe.pdf"] inMode:UIDocumentPickerModeImport];
+    
+    UIDocumentMenuViewController *picker =  [[UIDocumentMenuViewController alloc] initWithDocumentTypes:@[@"public.image", @"public.audio", @"public.movie", @"public.text", @"public.item",@"public.content", @"public.source-code"] inMode:UIDocumentPickerModeImport];
+    
+    picker.delegate = self;
+    
+    picker.modalPresentationStyle = UIModalPresentationPopover;
+    //    picker.popoverPresentationController.sourceRect = btnGallery.frame;
+    picker.popoverPresentationController.sourceView = self.btnCloud;
+    
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+
+-(void)documentMenu:(UIDocumentMenuViewController *)documentMenu didPickDocumentPicker:(UIDocumentPickerViewController *)documentPicker
+{
+    documentPicker.delegate = self;
+    [self presentViewController:documentPicker animated:YES completion:nil];
+}
+
+- (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentAtURL:(NSURL *)url
+{
+    NSLog(@"selected file URL %@",url);
+//    videofileURL = url;
+    imgData = [[NSData alloc] initWithContentsOfURL:url];
+    selectedImageView.image = [self generateThumbImage:url];
+    
+    //    PDFUrl= url;
+    //    UploadType=@"PDF";
+    //    [arrimg removeAllObjects];
+    //    [arrimg addObject:url];
+    
+}
+
+-(UIImage *)generateThumbImage : (NSURL *)filepath
+{
+    AVAsset *asset = [AVAsset assetWithURL:filepath];
+    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc]initWithAsset:asset];
+    imageGenerator.appliesPreferredTrackTransform = YES;
+    CMTime time = [asset duration];
+    time.value = 0;
+    
+    NSError *err = NULL;
+    CGImageRef imgRef = [imageGenerator copyCGImageAtTime:CMTimeMake(1, 60) actualTime:NULL error:&err];
+    UIImage* thumbnail = [[UIImage alloc] initWithCGImage:imgRef scale:UIViewContentModeScaleAspectFit orientation:UIImageOrientationUp];
+    
+//    UIImage* thumbnail = nil;
+    return thumbnail;
 }
 
 -(NSString *)getFileName

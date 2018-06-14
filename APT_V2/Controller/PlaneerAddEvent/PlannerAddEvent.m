@@ -676,7 +676,8 @@
     if(isteam ==NO)
     {
         self.popviewTbl.hidden =NO;
-        self.popviewYposition.constant =self.mainteamView.frame.origin.y-315;
+        self.popviewYposition.constant =self.mainParticipantTypeView.frame.origin.y-200;
+        self.popviewXposition.constant =self.teamView.frame.origin.x;
         self.popviewWidth.constant =self.teamView.frame.size.width;
         
         self.commonArray =[[NSMutableArray alloc]init];
@@ -1158,13 +1159,13 @@
         manager.requestSerializer = requestSerializer;
         
         
-        NSString *team = [[NSUserDefaults standardUserDefaults]stringForKey:@"APTTeamcode"];
+       // NSString *team = [[NSUserDefaults standardUserDefaults]stringForKey:@"APTTeamcode"];
 
         
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(participantType)   [dic    setObject:participantType     forKey:@"ParticipantType"];
-        if(team)   [dic    setObject:team     forKey:@"TeamCode"];
+        if(selectTeam)   [dic    setObject:selectTeam     forKey:@"TeamCode"];
         if(cliendcode)   [dic    setObject:cliendcode     forKey:@"ClientCode"];
         
         
@@ -1707,7 +1708,7 @@
         self.particiTypeLbl.text =[[self.commonArray valueForKey:@"ParticipantTypename"] objectAtIndex:indexPath.row];
         selectParticipantType =[[self.commonArray valueForKey:@"ParticipantTypecode"] objectAtIndex:indexPath.row];
         [self startFetchTeamByParticipantType:selectParticipantType];
-         [self startFetchPlayerByTeamAndParticipantType:selectParticipantType];
+         //[self startFetchPlayerByTeamAndParticipantType:selectParticipantType];
         self.popviewTbl.hidden =YES;
     }
     else if (isteam)

@@ -127,12 +127,12 @@
 		04BC4B682086398D00CEB23E /* DocumentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BC4B662086398D00CEB23E /* DocumentViewController.xib */; };
 		04BC4B6E20863B9200CEB23E /* AddParticipantCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BC4B6920863B9100CEB23E /* AddParticipantCell.xib */; };
 		04BC4B6F20863B9200CEB23E /* AddParticipantCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4B6B20863B9200CEB23E /* AddParticipantCell.m */; };
-		04BC4B7020863B9200CEB23E /* PlannerAddEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4B6D20863B9200CEB23E /* PlannerAddEvent.m */; };
 		04BC4B7320863BC700CEB23E /* EventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4B7220863BC700CEB23E /* EventRecord.m */; };
 		04C1EC4F2084C9410030E358 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C1EC4D2084C9410030E358 /* LoginVC.m */; };
 		04C1EC502084C9410030E358 /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C1EC4E2084C9410030E358 /* LoginVC.xib */; };
 		04CC004420C2CDD8004C7696 /* FoodDiaryUpdateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CC004220C2CDD8004C7696 /* FoodDiaryUpdateVC.m */; };
 		04CC004520C2CDD8004C7696 /* FoodDiaryUpdateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CC004320C2CDD8004C7696 /* FoodDiaryUpdateVC.xib */; };
+		04D8EB4B20D24C6F00D46F23 /* PlannerAddEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8EB4A20D24C6E00D46F23 /* PlannerAddEvent.m */; };
 		182D854820342D1F005FFBF8 /* CategoryTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182D854620342D1F005FFBF8 /* CategoryTableCell.m */; };
 		182D854920342D1F005FFBF8 /* CategoryTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182D854720342D1F005FFBF8 /* CategoryTableCell.xib */; };
 		188F3D0C20C5038A00199CBF /* HistoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 188F3D0A20C5038A00199CBF /* HistoryVC.m */; };
@@ -557,10 +557,8 @@
 		04BC4B652086398D00CEB23E /* DocumentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentViewController.m; sourceTree = "<group>"; };
 		04BC4B662086398D00CEB23E /* DocumentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DocumentViewController.xib; sourceTree = "<group>"; };
 		04BC4B6920863B9100CEB23E /* AddParticipantCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddParticipantCell.xib; sourceTree = "<group>"; };
-		04BC4B6A20863B9100CEB23E /* PlannerAddEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlannerAddEvent.h; sourceTree = "<group>"; };
 		04BC4B6B20863B9200CEB23E /* AddParticipantCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddParticipantCell.m; sourceTree = "<group>"; };
 		04BC4B6C20863B9200CEB23E /* AddParticipantCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddParticipantCell.h; sourceTree = "<group>"; };
-		04BC4B6D20863B9200CEB23E /* PlannerAddEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlannerAddEvent.m; sourceTree = "<group>"; };
 		04BC4B7120863BC700CEB23E /* EventRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventRecord.h; sourceTree = "<group>"; };
 		04BC4B7220863BC700CEB23E /* EventRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventRecord.m; sourceTree = "<group>"; };
 		04C1EC4C2084C9410030E358 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
@@ -569,6 +567,8 @@
 		04CC004120C2CDD8004C7696 /* FoodDiaryUpdateVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoodDiaryUpdateVC.h; sourceTree = "<group>"; };
 		04CC004220C2CDD8004C7696 /* FoodDiaryUpdateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoodDiaryUpdateVC.m; sourceTree = "<group>"; };
 		04CC004320C2CDD8004C7696 /* FoodDiaryUpdateVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodDiaryUpdateVC.xib; sourceTree = "<group>"; };
+		04D8EB4920D24C6E00D46F23 /* PlannerAddEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlannerAddEvent.h; sourceTree = "<group>"; };
+		04D8EB4A20D24C6E00D46F23 /* PlannerAddEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlannerAddEvent.m; sourceTree = "<group>"; };
 		182D854520342D1F005FFBF8 /* CategoryTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CategoryTableCell.h; path = CategoryTableCell/CategoryTableCell.h; sourceTree = "<group>"; };
 		182D854620342D1F005FFBF8 /* CategoryTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CategoryTableCell.m; path = CategoryTableCell/CategoryTableCell.m; sourceTree = "<group>"; };
 		182D854720342D1F005FFBF8 /* CategoryTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CategoryTableCell.xib; path = CategoryTableCell/CategoryTableCell.xib; sourceTree = "<group>"; };
@@ -2144,8 +2144,8 @@
 				04BC4B6C20863B9200CEB23E /* AddParticipantCell.h */,
 				04BC4B6B20863B9200CEB23E /* AddParticipantCell.m */,
 				04BC4B6920863B9100CEB23E /* AddParticipantCell.xib */,
-				04BC4B6A20863B9100CEB23E /* PlannerAddEvent.h */,
-				04BC4B6D20863B9200CEB23E /* PlannerAddEvent.m */,
+				04D8EB4920D24C6E00D46F23 /* PlannerAddEvent.h */,
+				04D8EB4A20D24C6E00D46F23 /* PlannerAddEvent.m */,
 				CE6C165E2045216000672253 /* EventRecord */,
 			);
 			path = PlaneerAddEvent;
@@ -3055,7 +3055,6 @@
 				18AA1B9E2092FD64009634A3 /* FieldSummaryTVC.m in Sources */,
 				18A68ACC20371A7E00EBA479 /* AddWellnessRatingVC.m in Sources */,
 				CE60F10620870C8200B74A2C /* TabbarVC.m in Sources */,
-				04BC4B7020863B9200CEB23E /* PlannerAddEvent.m in Sources */,
 				04BC4B47208636AA00CEB23E /* ScoreCardVideoPlayer.m in Sources */,
 				04BC4A062085FC4000CEB23E /* BowlingView.m in Sources */,
 				18AA1BAB2092FDFC009634A3 /* ScoreCardVC.m in Sources */,
@@ -3109,6 +3108,7 @@
 				18AA1BAA2092FDFC009634A3 /* ScoreCardHeader.m in Sources */,
 				CE6C1630204520D100672253 /* SessionPartCell.m in Sources */,
 				18A5CAB520383FAD00586896 /* TeamsVC.m in Sources */,
+				04D8EB4B20D24C6F00D46F23 /* PlannerAddEvent.m in Sources */,
 				18949A0920875C5F002ECEE0 /* FFMonthCollectionViewFlowLayout.m in Sources */,
 				04249B78203D466200B13889 /* NutritionVC.m in Sources */,
 				04BC4A86208607FF00CEB23E /* DropDownTableViewController.m in Sources */,

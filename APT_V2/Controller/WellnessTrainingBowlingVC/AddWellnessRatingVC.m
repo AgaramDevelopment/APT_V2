@@ -158,6 +158,7 @@ NSString *metaSubCode4;
 //    }
 //    [super touchesBegan: touches withEvent: event];
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     SWRevealViewController *revealController = [self revealViewController];

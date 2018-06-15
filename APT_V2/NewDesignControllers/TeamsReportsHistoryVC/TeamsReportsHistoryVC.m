@@ -28,7 +28,7 @@
 {
     NSIndexPath* selectedIndex;
     NSArray *titleArray;
-    TeamsVC *objteam;
+    TeamMembersVC *objteam;
     ReportsVC *objrep;
     CustomNavigation *objCustomNavigation;
     HistoryVC *objhis;
@@ -37,22 +37,24 @@
 @end
 
 @implementation TeamsReportsHistoryVC
-
+@synthesize teamCode;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
      [self.Titlecollview registerNib:[UINib nibWithNibName:@"TabHomeCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
-    objteam = [[TeamsVC alloc] initWithNibName:@"TeamsVC" bundle:nil];
+    objteam = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
+    objteam.teamCode = teamCode;
     objrep = [[ReportsVC alloc] initWithNibName:@"ReportsVC" bundle:nil];
     objhis = [[HistoryVC alloc] initWithNibName:@"HistoryVC" bundle:nil];
     selectedIndex = [NSIndexPath indexPathForItem:0 inSection:0];
     
-    if(![AppCommon isCoach])
+    if([AppCommon isCoach])
     {
-        titleArray = @[@"Reports",@"History"];
+        titleArray = @[@"Players",@"Reports",@"History"];
+
     }else
     {
-        titleArray = @[@"Teams",@"Reports",@"History"];
+        titleArray = @[@"Reports",@"History"];
     }
     
     [self customnavigationmethod];
@@ -150,32 +152,15 @@
 {
     view = [[UIView alloc] initWithFrame:self.swipeView.bounds];
     view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    if(![AppCommon isCoach])
+    if([AppCommon isCoach])
     {
         if(index == 0)
         {
-        
-        objrep.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
-        objrep.naviHeight.constant = 0;
-        objrep.navi_View.hidden = YES;
-        [view addSubview:objrep.view];
-        
-        }
-        else if(index == 1)
-        {
-        objhis.view.frame = CGRectMake(0, -70, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
-        [view addSubview:objhis.view];
-        
-        }
-    }
-    else
-    {
-        if(index == 0)
-        {
-            objteam.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
-            objteam.naviHeight.constant = 0;
-            objteam.navi_View.hidden = YES;
-            // objteam.navi_View.frame.size.height = 0;
+//            objteam.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
+//            objteam.naviHeight.constant = 0;
+//            objteam.navi_View.hidden = YES;
+            
+            objteam.view.frame = CGRectMake(0, -70, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+70);
             [view addSubview:objteam.view];
         }
         else if(index == 1)
@@ -188,6 +173,25 @@
         else if(index == 2)
         {
             objhis.view.frame = CGRectMake(0, -70, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height+70);
+            [view addSubview:objhis.view];
+            
+        }
+
+    }
+    else
+    {
+        if(index == 0)
+        {
+            
+            objrep.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
+            objrep.naviHeight.constant = 0;
+            objrep.navi_View.hidden = YES;
+            [view addSubview:objrep.view];
+            
+        }
+        else if(index == 1)
+        {
+            objhis.view.frame = CGRectMake(0, -70, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
             [view addSubview:objhis.view];
             
         }
@@ -204,7 +208,7 @@
 - (void)swipeViewDidScroll:(SwipeView *)swipeView
 {
     selectedIndex = [NSIndexPath indexPathForItem:swipeView.currentItemIndex inSection:0];
-    if(selectedIndex ==1)
+    if(selectedIndex == 1)
     {
         [self.swipeView setScrollEnabled:NO];
     }

@@ -23,5 +23,6 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *moduleViewWidth;
 
 @property (weak, nonatomic) IBOutlet UIView *navView;
+@property (strong, nonnull) NSString* playerCode;
 
 @end

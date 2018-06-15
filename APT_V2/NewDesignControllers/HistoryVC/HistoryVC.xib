@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -139,7 +139,7 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="b4S-v4-K1j">
-                    <rect key="frame" x="5" y="125" width="365" height="736"/>
+                    <rect key="frame" x="5" y="125" width="365" height="630"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="0XA-5m-1pw"/>
@@ -149,20 +149,20 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="b4S-v4-K1j" firstAttribute="top" secondItem="xAW-k1-EKM" secondAttribute="bottom" constant="5" id="0MQ-ef-1lh"/>
                 <constraint firstItem="xAW-k1-EKM" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="3NC-ww-9W6"/>
                 <constraint firstItem="zny-Dg-cv9" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5YT-1Q-OXH"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="zny-Dg-cv9" secondAttribute="trailing" id="7Ae-kp-d4h"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="b4S-v4-K1j" secondAttribute="trailing" constant="5" id="9gP-na-M05"/>
+                <constraint firstItem="b4S-v4-K1j" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" constant="5" id="CgC-nT-ZbD"/>
                 <constraint firstItem="zny-Dg-cv9" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="E7e-ef-gPA"/>
+                <constraint firstItem="b4S-v4-K1j" firstAttribute="top" secondItem="xAW-k1-EKM" secondAttribute="bottom" constant="5" id="HYA-W1-Jxb"/>
+                <constraint firstItem="b4S-v4-K1j" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="5" id="LX0-Rb-fPB"/>
                 <constraint firstItem="xAW-k1-EKM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="70" id="LhV-Ec-tce"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="b4S-v4-K1j" secondAttribute="trailing" constant="5" id="NDF-5D-w2X"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="b4S-v4-K1j" secondAttribute="bottom" constant="-111" id="bzZ-Fz-4jL"/>
                 <constraint firstItem="xAW-k1-EKM" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="oDh-op-Nww"/>
-                <constraint firstItem="b4S-v4-K1j" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="5" id="sWk-s3-aer"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="44.5" y="-48.5"/>
+            <point key="canvasLocation" x="44.5" y="-49"/>
         </view>
     </objects>
     <resources>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -52,6 +52,7 @@
                 <outlet property="lblNoData" destination="097-ho-s9N" id="SnU-lN-jc9"/>
                 <outlet property="musclelbl" destination="k12-pv-XKp" id="x7E-E7-wex"/>
                 <outlet property="navView" destination="jhr-Yz-qJi" id="3uB-eJ-dMi"/>
+                <outlet property="ratinglbl" destination="TRv-6z-dxu" id="dVZ-FX-cQZ"/>
                 <outlet property="sleepHrlbl" destination="A9L-J8-ez2" id="PEI-Nr-r46"/>
                 <outlet property="sleeplbl" destination="3a5-6U-EMu" id="rdQ-Kr-ckl"/>
                 <outlet property="stresslbl" destination="uSV-s7-iP0" id="nGI-sB-lXW"/>
@@ -209,7 +210,7 @@
                                     </variation>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jfj-H0-Jc4">
-                                    <rect key="frame" x="0.0" y="20" width="125.5" height="25"/>
+                                    <rect key="frame" x="0.0" y="25" width="125.5" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="p8o-Hp-ODj"/>
                                     </constraints>
@@ -229,7 +230,7 @@
                                 <constraint firstItem="TRv-6z-dxu" firstAttribute="leading" secondItem="2nw-NX-bLv" secondAttribute="leading" id="YbC-kK-an1"/>
                                 <constraint firstAttribute="trailing" secondItem="Jfj-H0-Jc4" secondAttribute="trailing" id="Zqe-3k-83d"/>
                                 <constraint firstItem="TRv-6z-dxu" firstAttribute="top" secondItem="2nw-NX-bLv" secondAttribute="top" constant="10" id="qSP-Cf-lBO"/>
-                                <constraint firstAttribute="bottom" secondItem="Jfj-H0-Jc4" secondAttribute="bottom" constant="5" id="uqV-yR-5Wl"/>
+                                <constraint firstAttribute="bottom" secondItem="Jfj-H0-Jc4" secondAttribute="bottom" id="uqV-yR-5Wl"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J7R-0a-X6e">
@@ -248,7 +249,7 @@
                                     </variation>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sleep hours" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sl9-wX-eXY">
-                                    <rect key="frame" x="0.0" y="24" width="125" height="25"/>
+                                    <rect key="frame" x="0.0" y="25" width="125" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="Pgh-0l-227"/>
                                     </constraints>
@@ -267,7 +268,7 @@
                                 <constraint firstAttribute="trailing" secondItem="A9L-J8-ez2" secondAttribute="trailing" id="GH8-e8-f79"/>
                                 <constraint firstItem="A9L-J8-ez2" firstAttribute="leading" secondItem="J7R-0a-X6e" secondAttribute="leading" id="INK-mq-DKT"/>
                                 <constraint firstItem="sl9-wX-eXY" firstAttribute="leading" secondItem="J7R-0a-X6e" secondAttribute="leading" id="agF-WH-TKk"/>
-                                <constraint firstAttribute="bottom" secondItem="sl9-wX-eXY" secondAttribute="bottom" constant="1" id="mle-ax-1kn"/>
+                                <constraint firstAttribute="bottom" secondItem="sl9-wX-eXY" secondAttribute="bottom" id="mle-ax-1kn"/>
                                 <constraint firstAttribute="height" constant="50" id="yUk-PZ-r7Z"/>
                             </constraints>
                         </view>

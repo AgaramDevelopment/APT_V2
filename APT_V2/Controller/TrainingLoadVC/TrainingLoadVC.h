@@ -28,7 +28,7 @@
 @property (strong, nonatomic) IBOutlet NSMutableArray *markers;
 @property (strong, nonatomic) IBOutlet NSMutableArray *markers2;
 
-@property (strong, nonatomic) IBOutlet UIButton *AddBtn;
+@property (strong, nonatomic) IBOutlet UIView *AddBtnView;
 
 
 @property (weak, nonatomic) IBOutlet UILabel *todayActivitynamelbl1;

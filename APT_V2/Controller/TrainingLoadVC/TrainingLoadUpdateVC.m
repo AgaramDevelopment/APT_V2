@@ -1030,9 +1030,20 @@ if([_isToday isEqualToString:@"yes"])
                     [self ShowAlterMsg:@"Training Load Inserted Successfully"];
                    // [self.view removeFromSuperview];
                     //[self.Delegate closeUpdateTrainingSource];
-                    [appDel.frontNavigationController popViewControllerAnimated:YES];
+                    //[appDel.frontNavigationController popViewControllerAnimated:YES];
                     
                     // [self.pieChartRight reloadData];
+                
+                
+                if([self.isfromHome isEqualToString:@"NO"])
+                    {
+                    [self.view removeFromSuperview];
+                    [self.Delegate closeUpdateTrainingSource];
+                    }
+                else
+                    {
+                    [appDel.frontNavigationController popViewControllerAnimated:YES];
+                    }
                 }
                 
             }
@@ -1123,10 +1134,16 @@ if([_isToday isEqualToString:@"yes"])
                 {
                     NSLog(@"success");
                     [self ShowAlterMsg:@"Training Load Updated Successfully"];
-                   
-                    //[self.view removeFromSuperview];
-                    //[self.Delegate closeUpdateTrainingSource];
+                
+                if([self.isfromHome isEqualToString:@"NO"])
+                    {
+                    [self.view removeFromSuperview];
+                    [self.Delegate closeUpdateTrainingSource];
+                    }
+                else
+                    {
                     [appDel.frontNavigationController popViewControllerAnimated:YES];
+                    }
                   
                 }
                 

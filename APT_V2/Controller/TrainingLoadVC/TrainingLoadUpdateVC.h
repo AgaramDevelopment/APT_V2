@@ -62,6 +62,7 @@
 @property (strong,nonatomic)  NSMutableArray * YesterdayLoadArray;
 @property (strong,nonatomic)  NSString * isToday;
 @property (strong,nonatomic)  NSString * isYesterday;
+@property (strong,nonatomic)  NSString * isfromHome;
 
 @property (strong, nonatomic) IBOutlet UIView *tapView;
 

@@ -58,6 +58,12 @@ typedef enum : NSUInteger {
     WebService *objWebservice;
     NSMutableArray *foodDiaryArray;
     NewVideoDocumentVC *documentObject;
+    
+    
+    int sleepRate;
+    int fatiqueRate;
+    int muscleRate;
+    int stressRate;
 }
 
 @property (nonatomic, strong)  NSMutableArray *BowlingloadXArray;
@@ -1788,7 +1794,23 @@ typedef enum : NSUInteger {
             }
             if(! [[[responseObject valueForKey:@"SleepHours"] objectAtIndex:0] isEqual:[NSNull null]])
             {
-                self.sleepHrlbl.text = [[responseObject valueForKey:@"SleepHours"] objectAtIndex:0];
+            NSString * slHourStr = [[responseObject valueForKey:@"SleepHours"] objectAtIndex:0];
+            int totalsleep = [slHourStr intValue];
+            
+            if(totalsleep>60)
+                {
+                int hour = totalsleep/60;
+                int min = totalsleep-(hour*60);
+                
+                self.sleepHrlbl.text = [NSString stringWithFormat:@"%d:%d",hour,min];
+                }
+            else
+                {
+                
+                NSString *min = [[responseObject valueForKey:@"SleepHours"] objectAtIndex:0];
+                self.sleepHrlbl.text = [NSString stringWithFormat:@"0:%@",min];
+                }
+            
             }
             if( ![[[responseObject valueForKey:@"SleepRatingDescription"] objectAtIndex:0] isEqual:[NSNull null]])
             {
@@ -1796,7 +1818,7 @@ typedef enum : NSUInteger {
                 NSArray *component = [sleepValue componentsSeparatedByString:@" "];
                 self.sleeplbl.text = [NSString stringWithFormat:@"%@/7",component[0]];
                 
-                
+                sleepRate = [component[0] intValue];
                 if([component[0] isEqualToString:@"1"])
                 {
                     self.SleepColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
@@ -1832,7 +1854,8 @@ typedef enum : NSUInteger {
                 NSString *fatiqueValue = [[responseObject valueForKey:@"FatigueRatingDescription"] objectAtIndex:0];
                 NSArray *component1 = [fatiqueValue componentsSeparatedByString:@" "];
                 self.fatiquelbl.text = [NSString stringWithFormat:@"%@/7",component1[0]];
-                
+            
+            fatiqueRate = [component1[0] intValue];
                 if([component1[0] isEqualToString:@"1"])
                 {
                     self.FatiqueColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
@@ -1869,7 +1892,8 @@ typedef enum : NSUInteger {
                 NSString *muscleValue = [[responseObject valueForKey:@"SoreNessRatingDescription"] objectAtIndex:0];
                 NSArray *component2 = [muscleValue componentsSeparatedByString:@" "];
                 self.musclelbl.text = [NSString stringWithFormat:@"%@/7",component2[0]];
-                
+            
+            muscleRate = [component2[0] intValue];
                 if([component2[0] isEqualToString:@"1"])
                 {
                     self.MuscleColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
@@ -1905,7 +1929,8 @@ typedef enum : NSUInteger {
                 NSString *stressValue = [[responseObject valueForKey:@"StressRatingDescription"] objectAtIndex:0];
                 NSArray *component3 = [stressValue componentsSeparatedByString:@" "];
                 self.stresslbl.text = [NSString stringWithFormat:@"%@/7",component3[0]];
-                
+            
+            stressRate = [component3[0] intValue];
                 if([component3[0] isEqualToString:@"1"])
                 {
                     self.StressColorView.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(24/255.0f) alpha:1.0f];
@@ -1935,7 +1960,14 @@ typedef enum : NSUInteger {
                     self.StressColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(179/255.0f) blue:(88/255.0f) alpha:1.0f];
                 }
             }
-            
+        
+        float totalFetchedRating = sleepRate+fatiqueRate+muscleRate+stressRate;
+        float totalCount = 28;
+        float ratingCountPer = (totalFetchedRating/totalCount)*100;
+        
+        NSString *finalPer = [NSString stringWithFormat:@"%.2f",ratingCountPer];
+        
+        self.ratinglbl.text = [finalPer stringByAppendingString:@"%"] ;
             
         }
         else

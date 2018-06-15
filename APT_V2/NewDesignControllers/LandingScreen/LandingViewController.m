@@ -34,6 +34,7 @@
 #import "PopOverVC.h"
 #import "TeamsVC.h"
 #import "TeamMembersVC.h"
+#import "TeamsReportsHistoryVC.h"
 
 typedef enum : NSUInteger {
     Events,
@@ -1086,10 +1087,16 @@ typedef enum : NSUInteger {
     else if(collectionView == self.TeamsCollectionView){
         
         NSArray* teamlist = [TableListDict valueForKey:@"Teams"];
-        TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
-        objPlayersVC.teamCode = [[teamlist valueForKey:@"Teamcode"] objectAtIndex:indexPath.row];
-        objPlayersVC.teamname = [[teamlist valueForKey:@"Teamname"] objectAtIndex:indexPath.row];
-        [appDel.frontNavigationController pushViewController:objPlayersVC animated:YES];
+//        TeamMembersVC* objPlayersVC = [[TeamMembersVC alloc] initWithNibName:@"TeamMembersVC" bundle:nil];
+//        objPlayersVC.teamCode = [[teamlist valueForKey:@"Teamcode"] objectAtIndex:indexPath.row];
+//        objPlayersVC.teamname = [[teamlist valueForKey:@"Teamname"] objectAtIndex:indexPath.row];
+//        [appDel.frontNavigationController pushViewController:objPlayersVC animated:YES];
+        
+        TeamsReportsHistoryVC* VC = [TeamsReportsHistoryVC new];
+        VC.teamCode = [[teamlist valueForKey:@"Teamcode"] objectAtIndex:indexPath.row];
+        
+        [[NSUserDefaults standardUserDefaults] setValue:[[teamlist valueForKey:@"Teamcode"] objectAtIndex:indexPath.row] forKey:@"selectedTeamCode"];
+        [appDel.frontNavigationController pushViewController:VC animated:YES];
 
     }
     

@@ -25,7 +25,7 @@
 #import "TeamsReportsHistoryVC.h"
 #import "NewVideoDocumentVC.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-@interface RearViewController ()
+@interface RearViewController ()<passwordChangedNotification>
 {
     NSIndexPath* PreviouslySelectedIndex;
 }
@@ -180,19 +180,8 @@
     UIViewController* newFrontController;
     
     
-    if([AppCommon isCoach]) // player
+    if([AppCommon isCoach])
     {
-        
-//        arrItems = @[@{@"name":@"Home",@"img":@"APT_Team"},
-//                     @{@"name":@"Planner",@"img":@"APT_Planner"},
-//                     @{@"name":@"Teams",@"img":@"APT_Assessment"},
-//                     @{@"name":@"Cricket Center",@"img":@"APT_ Match centre"},
-//                     @{@"name":@"Videos",@"img":@"APT_ Match centre"},
-//                     @{@"name":@"Documents",@"img":@"APT_ Match centre"},
-//                     @{@"name":@"Sync",@"img":@"APT_Sync"},
-//                     @{@"name":@"Change Password",@"img":@"APT_Change Password"},
-//                     @{@"name":@"Logout",@"img":@"APT_Logout"}];
-
         if(indexPath.row == 0){
             
             newFrontController= [LandingViewController new];
@@ -230,6 +219,8 @@
         else if(indexPath.row == 7){
             
             newFrontController= [ChangePasswordVC new];
+            ChangePasswordVC* vc = newFrontController;
+            vc.passwordDelegate = self;
         }
 
         else if (indexPath.row == arrItems.count -1){
@@ -239,17 +230,6 @@
     }
     else
     {
-        
-//        arrItems = @[@{@"name":@"Home",@"img":@"APT_Home"},
-//                     @{@"name":@"Planner",@"img":@"APT_Planner"},
-//                     @{@"name":@"History",@"img":@"APT_Stats"},
-//                     @{@"name":@"Cricket Center",@"img":@"APT_ Match centre"},
-//                     @{@"name":@"Videos",@"img":@"APT_ Match centre"},
-//                     @{@"name":@"Documents",@"img":@"APT_ Match centre"},
-//                     @{@"name":@"Food Diary",@"img":@"APT_Food Dairy"},
-//                     @{@"name":@"Change Password",@"img":@"APT_Change Password"},
-//                     @{@"name":@"Logout",@"img":@"APT_Logout"}];
-
         if(indexPath.row == 0){
             
             newFrontController= [LandingViewController new];
@@ -282,6 +262,8 @@
         else if(indexPath.row == 6){
             
             newFrontController= [ChangePasswordVC new];
+            ChangePasswordVC* vc = newFrontController;
+            vc.passwordDelegate = self;
         }
         else if (indexPath.row == arrItems.count -1){
             
@@ -305,6 +287,13 @@
     
 }
 
+
+-(void)notifyPasswordChanged{
+    NSLog(@"notifyPasswordChanged called");
+    PreviouslySelectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];
+
+}
+
 -(void)actionLogOut
 {
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:APP_NAME message:@"Are you sure, you want to Logout?" preferredStyle:UIAlertControllerStyleAlert];
@@ -323,6 +312,7 @@
         appDel.frontNavigationController = navigationController;
         [navigationController setNavigationBarHidden:YES];
         [appDel.revealViewController pushFrontViewController:navigationController animated:YES];
+        
         NSArray* tblName = @[@"ASSESSMENT",@"ASSESSMENTENTRY",@"ASSESSMENTENTRYACTIONPLAN",@"ASSESSMENTENTRYKEYFINDINGS",@"ASSESSMENTREGISTER",@"ASSESSMENTTESTMASTER",@"ASSOCIATIONGAMEMASTER",@"ASSOCIATIONMASTER",@"ASSOCIATIONMEMBERQUALIFICATIONS",@"ASSOCIATIONMEMBERREGISTRATION",@"ATHLETEINFO",@"ATHLETEINFODETAILS",@"ATHLETEINFOGAME",@"ATHLETEINFOTEAM",@"CLIENTGAMES",@"CLIENTMASTER",@"CLIENTMODULES",@"DASHBOARD",@"DASHBOARDMETADATA",@"DASHBOARDWIDGETS",@"DOCUMENT",@"DOCUMENTNOTIFICATION",@"DOCUMENTSETTING",@"DOCUMENTTEMPLATE",@"EVENTPARTICIPANTSDETAILS",@"EVENTTEMPLATEDETAILS",@"EVENTTEMPLATEPARTICIPANTSDETAILS",@"EXERCISEMASTER",@"EXERCISEPARAMETER",@"GAMEATTRIBUTEMETADATA",@"ILLNESSDETAILS",@"INJURYDETAILS",@"LOGINDETAILS",@"MEDICALSURGERY",@"MEDICATION",@"METADATA",@""];
             }];
     

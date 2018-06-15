@@ -27,7 +27,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0pt-hd-sG8">
                         <rect key="frame" x="0.0" y="0.0" width="100" height="122"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2cb-39-pkx">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Video-Icon-crop" translatesAutoresizingMaskIntoConstraints="NO" id="2cb-39-pkx">
                                 <rect key="frame" x="5" y="5" width="90" height="90"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="1wl-gF-lnM"/>
@@ -73,4 +73,7 @@
             <point key="canvasLocation" x="0.0" y="-88"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="Video-Icon-crop" width="315" height="236"/>
+    </resources>
 </document>

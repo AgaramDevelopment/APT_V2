@@ -38,7 +38,6 @@
     self.listModule = [[NSMutableArray alloc]init];
     [self customnavigationmethod];
     [self Dropdownwebservice];
-    
    
 }
 
@@ -130,11 +129,6 @@
     
     PlayerDetailTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"Content"];
     NSArray* array = [[NSBundle mainBundle] loadNibNamed:@"PlayerDetailTableViewCell" owner:self options:nil];
-    if (!tableView.tag) {
-        
-    }
-    else
-    {
         cell = array[3];
         
         cell.lblModuleName.text = [self checkNull:[[self.listHistory valueForKey:@"Modulename"] objectAtIndex:indexPath.row]];
@@ -153,7 +147,6 @@
         NSLog(@"%@", stringDate);
       
         cell.lblDate.text = stringDate;
-    }
     
     
     
@@ -181,7 +174,7 @@
     {
         [AppCommon showLoading];
         
-        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"%@",@"PageloadSandcreport"]];
+        NSString *URLString =  URL_FOR_RESOURCE(@"PageloadSandcreport");
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
         [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -190,16 +183,23 @@
         
         
         NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-//        NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-       
+        NSString *UserCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
+        NSString *Rolecode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Rolecode"];
+
         NSString *Module= [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedModuleCode"];
         self.moduleLbl.text = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedModuleName"];
        
+        if (![AppCommon isCoach]) {
+            self.playerCode = @"";
+        }
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(ClientCode)   [dic    setObject:ClientCode     forKey:@"Clientcode"];
         if(Module)   [dic    setObject:Module     forKey:@"Modulecode"];
-        
+        if(UserCode)   [dic    setObject:UserCode     forKey:@"UserCode"];
+//        if(self.playerCode)   [dic    setObject:self.playerCode forKey:@"Playercode"];
+        if(Rolecode)   [dic    setObject:Rolecode     forKey:@"RoleCode"];
+
         
         
         
@@ -261,15 +261,9 @@
         
         
         NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-                NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
-        
+        NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
         NSString *Module=@"MSC084";
-        
         NSString *createdby = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
-        
-        
-        
-        
         
         NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
         if(ClientCode)   [dic    setObject:ClientCode     forKey:@"Clientcode"];
@@ -293,10 +287,16 @@
                 {
                     self.listModule = [[NSMutableArray alloc]init];
                     self.listModule = [self checkNull:[responseObject valueForKey:@"lstAssessmentEntryModule"]];
-                    //[self.tblHistory reloadData];
-                    //self.searchViewWidth.constant = 0;
                     self.search_Txt.hidden =YES;
                     self.searchBtn.hidden = NO;
+                    
+                    self.moduleLbl.text = [[self.listModule firstObject] valueForKey:@"ModuleName"];
+                    NSString* modulecode = [[self.listModule firstObject] valueForKey:@"Module"];
+                    
+                    [[NSUserDefaults standardUserDefaults] setValue:modulecode forKey:@"SelectedModuleCode"];
+                    [[NSUserDefaults standardUserDefaults] setValue:self.moduleLbl.text forKey:@"SelectedModuleName"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+
                     [self HistoryWebservice];
                 }
                 

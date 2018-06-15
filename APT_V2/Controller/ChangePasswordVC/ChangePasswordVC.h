@@ -9,13 +9,23 @@
 #import <UIKit/UIKit.h>
 #import "CustomTextField.h"
 
+@protocol passwordChangedNotification <NSObject>
+
+-(void)notifyPasswordChanged;
+
+@end
+
+
 @interface ChangePasswordVC : UIViewController<UITextFieldDelegate> {
 
     IBOutlet CustomTextField *oldPasswordTF;
     IBOutlet CustomTextField *newwPasswordTF;
     IBOutlet CustomTextField *confirmNewPasswordTF;
+    
 }
 
+@property (strong, nonatomic) id<passwordChangedNotification> passwordDelegate;
 @property (strong, nonatomic) IBOutlet UIView *navi_View;
 
 @end
+

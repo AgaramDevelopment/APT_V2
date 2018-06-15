@@ -15,6 +15,7 @@
 @end
 
 @implementation ChangePasswordVC
+@synthesize passwordDelegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -127,6 +128,7 @@
                     NSString *password = [key valueForKey:@"OldPassword"];
                     [[NSUserDefaults standardUserDefaults] setObject:password forKey:@"Password"];
                 }
+                
                 oldPasswordTF.text = @"";
                 newwPasswordTF.text = @"";
                 confirmNewPasswordTF.text = @"";
@@ -135,13 +137,14 @@
             [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
 
             UIViewController* newFrontController= [LoginVC new];
-            
+                [passwordDelegate notifyPasswordChanged];
             UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:newFrontController];
             [navigationController setNavigationBarHidden:YES];
             appDel.frontNavigationController = navigationController;
             [appDel.revealViewController pushFrontViewController:navigationController animated:YES];
             [AppCommon showAlertWithMessage:@"Password Changed Successfully"];
 //                [self.navigationController popToRootViewControllerAnimated:YES];
+                
             }
             
             [AppCommon hideLoading];

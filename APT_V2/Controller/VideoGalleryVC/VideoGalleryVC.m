@@ -19,7 +19,7 @@
 #import "WebService.h"
 #import "SchResStandVC.h"
 #import "ScoreCardVideoPlayer.h"
-
+#import <MediaPlayer/MediaPlayer.h>
 
 @interface VideoGalleryVC ()<UITableViewDelegate, UITableViewDataSource,UITextFieldDelegate,videoUploadDelegate,selectedDropDown>
 {
@@ -484,37 +484,33 @@
         cell.contentView.layer.cornerRadius = 2.0f;
         cell.contentView.layer.borderWidth = 1.0f;
         cell.contentView.layer.borderColor = [UIColor clearColor].CGColor;
-        cell.contentView.layer.masksToBounds = YES;
         
-        cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-        cell.layer.shadowOffset = CGSizeMake(0, 2.0f);
-        cell.layer.shadowRadius = 2.0f;
-        cell.layer.shadowOpacity = 1.0f;
-        cell.layer.masksToBounds = NO;
-        cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
         
         NSString * videoDetailStr = [[self.objFirstGalleryArray valueForKey:@"videoFile"] objectAtIndex:indexPath.row];
-//        NSArray *component3 = [videoDetailStr componentsSeparatedByString:@" "];
+//        videoDetailStr = [videoDetailStr stringByReplacingOccurrencesOfString:@"" withString:<#(nonnull NSString *)#>]
         
-//        cell.playername_lbl.text =  [NSString stringWithFormat:@"%@",component3[0]];
-//        if ([[AppCommon checkNull:[[self.objFirstGalleryArray valueForKey:@"videoFile"] objectAtIndex:indexPath.row]] isEqualToString:@""]) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+        
+//            NSString* strVideoURL = [Video_BASE_URL stringByAppendingString:videoDetailStr];
+//            NSString *escapedString = [strVideoURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+//            NSLog(@"escapedString: %@", escapedString);
+//            strVideoURL = [strVideoURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
 //
+//            NSURL *videoURL = [NSURL URLWithString:[strVideoURL stringByReplacingOccurrencesOfString:@" " withString:@"%20"]];
 //
-//        }
-        
-        cell.batting_lbl.text = [[self.objFirstGalleryArray valueForKey:@"videoName"] objectAtIndex:indexPath.row];
-        cell.fileImg.image = [UIImage imageNamed:@"Video-Icon-crop"];
-//        cell.date_lbl.text =  [NSString stringWithFormat:@"%@",component3[2]];
-        
-//        if (indexPath.row % 2 == 1) {
+//            MPMoviePlayerController *player = [[MPMoviePlayerController alloc] initWithContentURL:videoURL];
+//            UIImage  *thumbnail = [player thumbnailImageAtTime:1.0 timeOption:MPMovieTimeOptionNearestKeyFrame];
+//            player = nil;
 //
-            cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-//        }
-//        else {
-//            cell.layer.shadowColor = [UIColor redColor].CGColor;
-//        }
-        
+//            cell.fileImg.image = thumbnail;
+//            cell.fileImg.image = [self thumbImage:[Video_BASE_URL stringByAppendingString:videoDetailStr]];
 
+//        });
+        
+//        cell.fileImg.image = [self thumbImage:[Video_BASE_URL stringByAppendingString:videoDetailStr]];
+        cell.batting_lbl.text = [[self.objFirstGalleryArray valueForKey:@"videoName"] objectAtIndex:indexPath.row];
+        
+        cell.layer.shadowColor = [UIColor lightGrayColor].CGColor;
         cell.layer.shadowOffset = CGSizeZero;
         cell.layer.shadowRadius = 1.0f;
         cell.layer.shadowOpacity = 0.5f;
@@ -556,6 +552,25 @@
 //    videoPlayerVC.objSelectVideoLink = selectvideoStr;
 //    [appDel.frontNavigationController presentViewController:videoPlayerVC animated:YES completion:nil];
     
+}
+
+-(UIImage *)thumbImage:(NSString *)strVideoURL{
+    
+//    NSString *strVideoURL = @"http://www.xyzvideourl.com/samplevideourl";
+    
+    NSString *escapedString = [strVideoURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+    NSLog(@"escapedString: %@", escapedString);
+    strVideoURL = [strVideoURL stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    
+    NSURL *videoURL = [NSURL URLWithString:[strVideoURL stringByReplacingOccurrencesOfString:@" " withString:@"%20"]];
+
+    MPMoviePlayerController *player = [[MPMoviePlayerController alloc] initWithContentURL:videoURL];
+    UIImage  *thumbnail = [player thumbnailImageAtTime:1.0 timeOption:MPMovieTimeOptionNearestKeyFrame];
+    player = nil;
+    
+    UIImage* defaultimg = [UIImage imageNamed:@"Video-Icon-crop"];
+    
+    return thumbnail ? thumbnail : defaultimg;
 }
 
 -(IBAction)didClickcategoryPopView:(id)sender

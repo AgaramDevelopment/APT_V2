@@ -827,7 +827,7 @@
 #pragma Mark CreateCircularChart
 - (void)TodayCircularChart{
     //CircularChart *circleChart = [[CircularChart alloc] initWithFrame:CGRectMake(0,0,self.todayMainView.frame.size.width,self.todayMainView.frame.size.height)];
-    todayChart = [[CircularChart alloc] initWithFrame:CGRectMake(0,0,self.todayMainView.frame.size.width-30,self.todayMainView.frame.size.height-30)];
+    todayChart = [[CircularChart alloc] initWithFrame:CGRectMake(0,0,self.todayMainView.frame.size.width,self.todayMainView.frame.size.height)];
     [todayChart setDataSource:self];
     [todayChart setDelegate:self];
     [todayChart setLegendViewType:LegendTypeHorizontal];
@@ -850,7 +850,7 @@
 {
     //CircularChart *circleChart1 = [[CircularChart alloc] initWithFrame:CGRectMake(0,0,self.yesterdayMainView.frame.size.width,self.yesterdayMainView.frame.size.height)];
    
-        yesterdayChart = [[CircularChart alloc] initWithFrame:CGRectMake(0,0,self.yesterdayMainView.frame.size.width-30,self.yesterdayMainView.frame.size.height-30)];
+        yesterdayChart = [[CircularChart alloc] initWithFrame:CGRectMake(0,0,self.yesterdayMainView.frame.size.width,self.yesterdayMainView.frame.size.height)];
     
     [yesterdayChart setDataSource:self];
     [yesterdayChart setDelegate:self];

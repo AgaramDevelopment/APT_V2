@@ -43,6 +43,36 @@
     self.addBtn.layer.masksToBounds = YES;
     self.objWebservice =[[WebService alloc]init];
     
+    
+    float headerWidth = self.view.frame.size.width;
+    
+    float headerWidthHalf = headerWidth/2;
+    
+    self.EventWidth.constant = headerWidthHalf/3;
+    self.stWidth.constant = headerWidthHalf/3;
+    self.etWidth.constant = headerWidthHalf/3;
+    self.CmtsWidth.constant = headerWidth/2;
+    
+    if([AppCommon isCoach])
+    {
+        self.addBtn.hidden = NO;
+    }
+    else
+    {
+        self.addBtn.hidden = YES;
+    }
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    NSDate *actualdate = [dateFormatter dateFromString:self.DateSelected];
+    
+    
+    NSDateFormatter* dfs = [[NSDateFormatter alloc]init];
+    [dfs setDateFormat:@"dd-MMM-yyyy"];
+    NSString * actualdate1 = [dfs stringFromDate:actualdate];
+    
+    self.Datelbl.text = actualdate1;
+    
     usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
     
     cliendcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
@@ -224,8 +254,18 @@
     
     objCell.objStartTime_lbl.text = endDateStr;
     objCell.objendTime_lbl.text = endtimeStr;
+    objCell.Commentslbl.text = [[self.objPlannerArray valueForKey:@"comments"] objectAtIndex:indexPath.row];
     objCell.selectionStyle =UITableViewCellSelectionStyleNone;
     objCell.contentView.backgroundColor = [UIColor whiteColor];
+    
+    float cellWidth = objCell.frame.size.width;
+    
+    float cellWidthHalf = cellWidth/2;
+    
+    objCell.EventWidth.constant = cellWidthHalf/3;
+    objCell.stWidth.constant = cellWidthHalf/3;
+    objCell.etWidth.constant = cellWidthHalf/3;
+    objCell.CmtsWidth.constant = cellWidthHalf;
     
     return objCell;
 }
@@ -238,6 +278,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    
+    if( [AppCommon isCoach])
+    {
+    
     NSDictionary * selectDic = [self.objPlannerArray objectAtIndex:indexPath.row];
     PlannerAddEvent  * objaddEvent=[[PlannerAddEvent alloc]init];
     objaddEvent = (PlannerAddEvent *)[self.storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
@@ -248,6 +292,7 @@
     objaddEvent.ListparticipantTypeArray =self.ParticipantsTypeArray;
 
     [self.navigationController pushViewController:objaddEvent animated:YES];
+    }
     
     
     

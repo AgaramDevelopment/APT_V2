@@ -18,4 +18,12 @@
 @property (nonatomic,strong) NSMutableArray * objPlannerArray;
 
 @property (strong, nonatomic) IBOutlet UIView *navi_View;
+@property (strong, nonatomic) IBOutlet UILabel *Datelbl;
+@property (strong, nonatomic)  NSString *DateSelected;
+
+
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * EventWidth;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * stWidth;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * etWidth;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * CmtsWidth;
 @end

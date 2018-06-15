@@ -536,15 +536,15 @@ typedef enum : NSUInteger {
         }
         else if ([title isEqualToString:@"Wellness"]) {
             
-            return IS_IPAD ? 250 : 150;
+            return IS_IPAD ? 250 : 250;
         }
         else if ([title isEqualToString:@"Training Load"]) {
             
-            return IS_IPAD ? 250 : 150;
+            return IS_IPAD ? 250 : 250;
         }
         else if ([title isEqualToString:@"Bowling Graph"]) {
             
-            return IS_IPAD ? 250 : 150;
+            return IS_IPAD ? 250 : 200;
         }
 
 
@@ -582,12 +582,12 @@ typedef enum : NSUInteger {
 //        [Tablecell configureCell:self andIndex:7 andTitile:title];
 //    }
     
-//    CGRect frame = cell.frame;
-//    [cell setFrame:CGRectMake(0, self.LandingTable.frame.size.height, frame.size.width, frame.size.height)];
-//    [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionTransitionCrossDissolve  animations:^{
-//        [cell setFrame:frame];
-//    } completion:^(BOOL finished) {
-//    }];
+    CGRect frame = cell.frame;
+    [cell setFrame:CGRectMake(0, self.LandingTable.frame.size.height, frame.size.width, frame.size.height)];
+    [UIView animateWithDuration:1.0 delay:0 options:UIViewAnimationOptionTransitionCrossDissolve  animations:^{
+        [cell setFrame:frame];
+    } completion:^(BOOL finished) {
+    }];
 
 }
 
@@ -620,7 +620,7 @@ typedef enum : NSUInteger {
     }
     else if ([title isEqualToString:@"Training Load"]){
         
-        Training_object.view.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
+        Training_object.view.frame = CGRectMake(0,10, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
         [Training_object.view removeFromSuperview];
         [cell.customView addSubview:Training_object.view];
         [cell.collection setHidden:YES];

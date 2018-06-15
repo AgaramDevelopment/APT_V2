@@ -263,7 +263,16 @@
         
         NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
        // NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
-        NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+        //NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+        NSString *UserrefCode;
+        if( [AppCommon isCoach])
+        {
+            UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+        }
+        else
+        {
+            UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+        }
         NSString *barTestCode = @"";
         NSString *lineTestCode = @"";
         NSString *Years = @"1";
@@ -468,7 +477,18 @@
         
         
         NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-        NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+//        NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+        
+        NSString *UserrefCode;
+        if( [AppCommon isCoach])
+        {
+            UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+        }
+        else
+        {
+            UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+        }
+        
         NSString *Years = @"1";
         
         

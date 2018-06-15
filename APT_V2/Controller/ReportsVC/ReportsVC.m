@@ -150,6 +150,8 @@
 
 -(void)setChartData
 {
+
+    
     self.title = @"Stacked Bar Chart";
     
     //    self.options = @[
@@ -244,16 +246,16 @@
     }
     
     BarChartDataSet *set1 = nil;
-    if (_chartView.data.dataSetCount > 0)
-    {
-        set1 = (BarChartDataSet *)_chartView.data.dataSets[0];
-        set1.values = yVals;
-        [_chartView.data notifyDataChanged];
-        [_chartView notifyDataSetChanged];
-    }
-    else
-    {
-        
+//    if (_chartView.data.dataSetCount > 0)
+//    {
+//        set1 = (BarChartDataSet *)_chartView.data.dataSets[0];
+//        set1.values = yVals;
+//        [_chartView.data notifyDataChanged];
+//        [_chartView notifyDataSetChanged];
+//    }
+//    else
+//    {
+    
         NSMutableArray *dataSets = [[NSMutableArray alloc] init];
         for(int i=0;i<yVals.count;i++)
         {
@@ -282,7 +284,7 @@
         
         _chartView.fitBars = YES;
         _chartView.data = data;
-    }
+    //}
 }
 
 
@@ -312,6 +314,10 @@
 - (IBAction)MonthlyAction:(id)sender
 {
     [self setInningsBySelection:@"3"];
+    
+    self.chartValuesArray = [[NSMutableArray alloc]init];
+    self.chartXvaluesArray = [[NSMutableArray alloc]init];
+    [self setChartData];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSDate *CurrentDate = [NSDate date];
     [dateFormatter setDateFormat:@"MM-dd-yyyy"];
@@ -327,6 +333,9 @@
 
 - (IBAction)WeeklyAction:(id)sender
 {
+    self.chartValuesArray = [[NSMutableArray alloc]init];
+    self.chartXvaluesArray = [[NSMutableArray alloc]init];
+    [self setChartData];
     [self setInningsBySelection:@"2"];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSDate *CurrentDate = [NSDate date];
@@ -336,6 +345,9 @@
 }
 - (IBAction)DailyAction:(id)sender
 {
+    self.chartValuesArray = [[NSMutableArray alloc]init];
+    self.chartXvaluesArray = [[NSMutableArray alloc]init];
+    [self setChartData];
     [self setInningsBySelection:@"1"];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     NSDate *CurrentDate = [NSDate date];
@@ -349,8 +361,15 @@
 {
     [AppCommon showLoading ];
     
-   // NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
-        NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    NSString *playerCode;
+    if( [AppCommon isCoach])
+    {
+       playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    }
+    else
+    {
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    }
     //NSString *clientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     //NSString *date = @"02-21-2018";
     objWebservice = [[WebService alloc]init];
@@ -378,6 +397,8 @@
                 }
                 
                 [self setChartData];
+                
+                
             }
             
         }

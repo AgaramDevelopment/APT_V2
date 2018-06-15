@@ -11,8 +11,13 @@
 @interface PlannerCell : UITableViewCell
 
 @property (nonatomic,strong) IBOutlet UILabel * objEventName_lbl;
-
 @property (nonatomic,strong) IBOutlet UILabel * objStartTime_lbl;
 @property (nonatomic,strong) IBOutlet UILabel * objendTime_lbl;
+@property (nonatomic,strong) IBOutlet UILabel * Commentslbl;
+
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * EventWidth;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * stWidth;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * etWidth;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * CmtsWidth;
 
 @end

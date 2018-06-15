@@ -261,7 +261,16 @@
 {
     [AppCommon showLoading ];
     
-    NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    NSString *playerCode;
+    if( [AppCommon isCoach])
+    {
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    }
+    else
+    {
+        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+    }
     NSString *clientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
     //NSString *date = @"02-21-2018";
     objWebservice = [[WebService alloc]init];

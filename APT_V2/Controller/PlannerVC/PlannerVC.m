@@ -1005,6 +1005,7 @@
                 PlannerListVC  * objPlannerlist=[[PlannerListVC alloc]init];
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
                 objPlannerlist = (PlannerListVC *)[storyboard instantiateViewControllerWithIdentifier:@"PlannerList"];
+                objPlannerlist.DateSelected = selectdate2;
                 objPlannerlist.objPlannerArray =ojAddPlannerArray;
                 [self.navigationController pushViewController:objPlannerlist animated:YES];
                 
@@ -1017,8 +1018,8 @@
             
             else
             {
-                // if([AppCommon isCoach])
-                //{
+                 if([AppCommon isCoach])
+                {
                 PlannerAddEvent  * objaddEvent=[[PlannerAddEvent alloc]init];
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
                 objaddEvent = (PlannerAddEvent *)[storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
@@ -1029,7 +1030,7 @@
                 objaddEvent.ListparticipantTypeArray = [self.PlannerResponseArray valueForKey:@"ListParticipantsTypeDetails"];
                 
                 [self.navigationController pushViewController:objaddEvent animated:YES];
-                //}
+                }
                 
                 //            PlannerAddEvent *objaddEvent = [[PlannerAddEvent alloc] initWithNibName:@"PlannerAddEvent" bundle:nil];
                 //            objaddEvent.selectDateStr =selectdate;
@@ -1048,6 +1049,7 @@
                 PlannerListVC  * objPlannerlist=[[PlannerListVC alloc]init];
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
                 objPlannerlist = (PlannerListVC *)[storyboard instantiateViewControllerWithIdentifier:@"PlannerList"];
+                 objPlannerlist.DateSelected = selectdate1;
                 objPlannerlist.objPlannerArray =ojAddPlannerArray;
                 [self.navigationController pushViewController:objPlannerlist animated:YES];
             }
@@ -1112,6 +1114,7 @@
                 PlannerListVC  * objPlannerlist=[[PlannerListVC alloc]init];
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
                 objPlannerlist = (PlannerListVC *)[storyboard instantiateViewControllerWithIdentifier:@"PlannerList"];
+                 objPlannerlist.DateSelected = selectdate1;
                 objPlannerlist.objPlannerArray =ojAddPlannerArray;
                 [self.navigationController pushViewController:objPlannerlist animated:YES];
                 
@@ -1126,6 +1129,9 @@
             {
                 // if([AppCommon isCoach])
                 //{
+                
+                if( [AppCommon isCoach])
+                {
                 PlannerAddEvent  * objaddEvent=[[PlannerAddEvent alloc]init];
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
                 objaddEvent = (PlannerAddEvent *)[storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
@@ -1136,6 +1142,7 @@
                 objaddEvent.ListparticipantTypeArray = [self.PlannerResponseArray valueForKey:@"ListParticipantsTypeDetails"];
                 
                 [self.navigationController pushViewController:objaddEvent animated:YES];
+                }
                 //}
                 
                 //            PlannerAddEvent *objaddEvent = [[PlannerAddEvent alloc] initWithNibName:@"PlannerAddEvent" bundle:nil];
@@ -1155,6 +1162,7 @@
                 PlannerListVC  * objPlannerlist=[[PlannerListVC alloc]init];
                 UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
                 objPlannerlist = (PlannerListVC *)[storyboard instantiateViewControllerWithIdentifier:@"PlannerList"];
+                 objPlannerlist.DateSelected = selectdate1;
                 objPlannerlist.objPlannerArray =ojAddPlannerArray;
                 [self.navigationController pushViewController:objPlannerlist animated:YES];
             }

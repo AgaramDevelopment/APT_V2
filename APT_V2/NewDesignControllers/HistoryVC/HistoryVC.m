@@ -135,18 +135,19 @@
         cell.lblAssessmentName.text = [self checkNull:[[self.listHistory valueForKey:@"Assessmentname"] objectAtIndex:indexPath.row]];
         
         
-        NSString *dateString = [self checkNull:[[self.listHistory valueForKey:@"Assessmentdate"] objectAtIndex:indexPath.row]];
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-        NSDate *dateFromString = [dateFormatter dateFromString:dateString];
-
-
-        NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
-        [dateFormatter1 setDateFormat:@"dd-MM-yyyy"];
-        NSString *stringDate = [dateFormatter1 stringFromDate:dateFromString];
-        NSLog(@"%@", stringDate);
+//        NSString *dateString = [self checkNull:[[self.listHistory valueForKey:@"Assessmentdate"] objectAtIndex:indexPath.row]];
+//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+//        NSDate *dateFromString = [dateFormatter dateFromString:dateString];
+//
+//
+//        NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
+//        [dateFormatter1 setDateFormat:@"dd-MM-yyyy"];
+//        NSString *stringDate = [dateFormatter1 stringFromDate:dateFromString];
+//        NSLog(@"%@", stringDate);
       
-        cell.lblDate.text = stringDate;
+        cell.lblDate.text = [self checkNull:[[self.listHistory valueForKey:@"Assessmentdate"] objectAtIndex:indexPath.row]];
+    }
     
     
     

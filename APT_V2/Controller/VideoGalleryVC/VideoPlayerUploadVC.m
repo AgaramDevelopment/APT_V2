@@ -42,6 +42,7 @@
     NSString *alertTitle;
     NSString *alertMessage;
     NSString *alertFailed;
+    Boolean isPickerOpned;
 
 }
 @property (nonatomic,strong) NSMutableArray * objTeamArray;
@@ -72,6 +73,8 @@
 @synthesize popTbl,teamView,playerView,CategoryView,keywordsView;
 
 @synthesize datepickerView,DatePicker,sharetoUserView,selectedImageView;
+
+@synthesize tapView,MainView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -156,6 +159,9 @@
         alertMessage = @"Document Uploaded Successfully";
         alertFailed = @"Document Upload failed";
     }
+    
+    [tapView setHidden:YES];
+
     
 }
 
@@ -474,7 +480,9 @@
         videoPicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
 
     }
-    
+
+//    [appDel.frontNavigationController presentViewController:videoPicker animated:YES completion:nil];
+
     [self presentViewController:videoPicker animated:YES completion:nil];
     
 }
@@ -540,7 +548,7 @@
         
         imgFileName = [self getFileName];
     }
-    [self dismissViewControllerAnimated:YES completion:^{
+    [picker dismissViewControllerAnimated:YES completion:^{
         //_ImgViewBottomConst.constant = _imgView.frame.size.height;
         [_imgView updateConstraintsIfNeeded];
         self.currentlySelectedImage.image = image;
@@ -805,6 +813,7 @@
     }
     
     self.popTbl.hidden = YES;
+    [tapView setHidden:YES];
     //self.catagory_lbl.text = [[self.commonArray valueForKey:@"CategoryName"] objectAtIndex:indexPath.row];
     
     
@@ -1044,7 +1053,8 @@
 }
 - (IBAction)actionShowDropDown:(id)sender {
     [popTbl setHidden:NO];
-    
+    [tapView setHidden:NO];
+
     buttonTag = [sender tag];
     
     if ([sender tag] == 0) // team
@@ -1077,27 +1087,12 @@
         if ([category_lbl.text isEqualToString:@"Batting"]) {
             self.commonArray = arr1;
         }
-        else
-        {
+        else {
             self.commonArray = arr2;
         }
     
         popTbl.frame = CGRectMake(keywordsView.frame.origin.x+10, CGRectGetMaxY(keywordsView.superview.frame)+15, keywordsView.frame.size.width, self.commonArray.count >= 5? 200:45*self.commonArray.count);
 
-        /*
-         Beaten
-         Uncomforts,
-         Boundaires,
-         Dotballs,
-         Dismissals
-         
-         bowling
-         Beaten
-         Uncomforts,
-         Boundaries,
-         Dismissals,
-         Variations
-         */
     }
     else if ([sender tag] == 4) // share to user
     {
@@ -1107,7 +1102,8 @@
         popTbl.frame = CGRectMake(sharetoUserView.frame.origin.x+10, CGRectGetMaxY(sharetoUserView.superview.frame)+55, sharetoUserView.frame.size.width, self.commonArray.count >= 5? 200:45*self.commonArray.count);
     
     }
-
+//    [popTbl removeFromSuperview];
+//    [tapView addSubview:popTbl];
     [popTbl reloadData];
    
 }
@@ -1143,6 +1139,13 @@
         self.objKeyword_Txt.text =@"";
         self.shareuser_lbl.text =@"";
         }
+}
+
+-(IBAction)closeDropDownView:(id)sender{
+    
+    [tapView setHidden:YES];
+    [popTbl setHidden:YES];
+    
 }
 
 @end

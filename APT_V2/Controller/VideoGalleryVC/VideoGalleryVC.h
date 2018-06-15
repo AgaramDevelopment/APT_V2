@@ -37,5 +37,7 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *dateTF;
 @property (strong, nonatomic)  NSString *isBack;
+@property (strong, nonatomic) IBOutlet UIView *uploadView;
+@property (weak, nonatomic) IBOutlet UIView *uploadContentView;
 
 @end

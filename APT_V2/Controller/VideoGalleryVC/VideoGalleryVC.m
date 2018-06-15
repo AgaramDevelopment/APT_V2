@@ -62,6 +62,8 @@
 
 @synthesize tableMainView,tbl_list,lblNovideo;
 
+@synthesize uploadView,uploadContentView;
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -319,8 +321,15 @@
     
     VideoPlayerUploadVC *VC = [VideoPlayerUploadVC new];
     VC.titleString = @"Videos";
+//    [uploadView removeFromSuperview];
+//    [VC.MainView removeFromSuperview];
+//
+//    uploadView.frame = self.view.frame;
+//    VC.view.frame = CGRectMake(0, 0, uploadContentView.frame.size.width,  uploadContentView.frame.size.height);
+//    [self.view addSubview:uploadView];
+//    [uploadContentView addSubview:VC.MainView];
+    
 //    VC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-//    VC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 //    [VC.view setBackgroundColor:[UIColor clearColor]];
 //    [appDel.frontNavigationController presentViewController:VC animated:YES completion:nil];
     
@@ -1211,6 +1220,10 @@
         [AppCommon hideLoading];
     }];
     
+}
+
+-(IBAction)closepopup:(id)sender{
+    [uploadView removeFromSuperview];
 }
 
 @end

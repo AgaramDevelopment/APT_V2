@@ -41,6 +41,7 @@
 @property (strong,nonatomic) IBOutlet UIView * commonView;
 @property (nonatomic,strong) IBOutlet UITextField * objKeyword_Txt;
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *ImgViewBottomConst;
+@property (weak, nonatomic) IBOutlet UIView *tapView;
 
 @property (strong, nonatomic) IBOutlet UIView *datepickerView;
 @property (weak, nonatomic) IBOutlet UITextField *txtVideoDate;
@@ -51,4 +52,5 @@
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UIImageView *selectedImageView;
 @property (weak, nonatomic) IBOutlet UIButton *btnCloud;
+@property (weak, nonatomic) IBOutlet UIView *MainView;
 @end

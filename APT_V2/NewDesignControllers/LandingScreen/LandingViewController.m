@@ -58,7 +58,7 @@ typedef enum : NSUInteger {
     WebService *objWebservice;
     NSMutableArray *foodDiaryArray;
     NewVideoDocumentVC *documentObject;
-    
+    NSMutableArray *foodDiaryCodeArray;
     
     int sleepRate;
     int fatiqueRate;
@@ -149,7 +149,7 @@ typedef enum : NSUInteger {
                      @{@"Title":@"Videos",@"image":@"More",@"list":@"5"},
                      @{@"Title":@"Documents",@"image":@"More",@"list":@"6"}];
     
-    
+    foodDiaryCodeArray = [[NSMutableArray alloc] initWithObjects:@"MSC342", @"MSC343", @"MSC344", @"MSC345", @"MSC412", nil];
     
     ResponseArray = [NSMutableArray new];
     TableListDict = [NSMutableDictionary new];
@@ -914,9 +914,23 @@ typedef enum : NSUInteger {
         cell.layer.shadowOpacity = 0.8f;
         
         if (foodDiaryArray.count) {
+            
             NSMutableArray *foodListArray = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"FOODLIST"];
             
             cell.timeLbl.text = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"STARTTIME"];
+            
+                //Food Items Background Style
+            if ([[foodDiaryCodeArray objectAtIndex:0] isEqualToString:[[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"MEALCODE"]]) {
+                cell.mealNameLbl.backgroundColor = [UIColor colorWithRed:155/255.0 green:195/255.0 blue:227/255.0 alpha:1.0];
+            } else if ([[foodDiaryCodeArray objectAtIndex:1] isEqualToString:[[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"MEALCODE"]]) {
+                cell.mealNameLbl.backgroundColor = [UIColor colorWithRed:165/255.0 green:208/255.0 blue:149/255.0 alpha:1.0];
+            } else if ([[foodDiaryCodeArray objectAtIndex:2] isEqualToString:[[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"MEALCODE"]]) {
+                cell.mealNameLbl.backgroundColor = [UIColor colorWithRed:247/255.0 green:176/255.0 blue:137/255.0 alpha:1.0];
+            } else if ([[foodDiaryCodeArray objectAtIndex:3] isEqualToString:[[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"MEALCODE"]]) {
+                cell.mealNameLbl.backgroundColor = [UIColor colorWithRed:255/255.0 green:216/255.0 blue:119/255.0 alpha:1.0];
+            } else if ([[foodDiaryCodeArray objectAtIndex:4] isEqualToString:[[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"MEALCODE"]]) {
+                cell.mealNameLbl.backgroundColor = [UIColor colorWithRed:199/255.0 green:199/255.0 blue:199/255.0 alpha:1.0];
+            }
             cell.mealNameLbl.text = [[foodDiaryArray objectAtIndex:indexPath.row] valueForKey:@"MEALNAME"];
             
             if (foodListArray.count == 1) {

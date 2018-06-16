@@ -147,7 +147,7 @@
 //        NSLog(@"%@", stringDate);
       
         cell.lblDate.text = [self checkNull:[[self.listHistory valueForKey:@"Assessmentdate"] objectAtIndex:indexPath.row]];
-    }
+    
     
     
     

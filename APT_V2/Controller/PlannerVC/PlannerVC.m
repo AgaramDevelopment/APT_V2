@@ -864,6 +864,9 @@
         NSString *datee1 = components1[0];
         NSString *timee1 = components1[1];
         
+        NSDate *dateFromStringEnd = [dateFormatter1 dateFromString:datee1];
+        self.reqEndDate = [dateFromStringEnd copy];
+        
         NSArray *componentsEND = [timee1 componentsSeparatedByString:@":"];
         NSString *ENDhrs = componentsEND[0];
         NSString *ENDmnts = componentsEND[1];
@@ -882,15 +885,81 @@
         [ar1 replaceObjectAtIndex:0 withObject:ENDmnts];
         int endM = [[ar1 objectAtIndex:0] intValue];
         
+        if([datee isEqualToString:datee1])
+        {
+            
+            
+            
         EventRecord * objRecord    = [[EventRecord alloc]init];
         objRecord.numCustomerID    = @1;
         objRecord.stringCustomerName  = [temp valueForKey:@"title"];
         objRecord.dateDay          = self.reqDate;
+        objRecord.EnddateDay          = self.reqEndDate;
         objRecord.dateTimeBegin  = [NSDate dateWithHour:startH min:startM];
         objRecord.dateTimeEnd         = [NSDate dateWithHour:endH min:endM];
         objRecord.color         = [temp valueForKey:@"backgroundColor"];
         
         [allCompetitionArray addObject:objRecord];
+        }
+        else
+        {
+            NSDate *startdate = self.reqDate;
+            NSDate *enddate = self.reqEndDate;
+            
+            NSTimeInterval secondsBetween = [enddate timeIntervalSinceDate:startdate];
+            int numberOfDays = secondsBetween / 86400;
+            
+            
+            NSMutableArray *filteredArray = [NSMutableArray new];
+            
+            NSDate *ssdate = startdate;// [startdate dateByAddingTimeInterval:24*60*60];
+            for(int i=0;i<=numberOfDays;i++)
+            {
+                if(i==0)
+                {
+                    EventRecord * objRecord    = [[EventRecord alloc]init];
+                    objRecord.numCustomerID    = @1;
+                    objRecord.stringCustomerName  = [temp valueForKey:@"title"];
+                    objRecord.dateDay          = ssdate;
+                    objRecord.EnddateDay          =  ssdate;
+                    objRecord.dateTimeBegin  = [NSDate dateWithHour:startH min:startM];// [NSDate dateWithHour:00 min:01];
+                    objRecord.dateTimeEnd    = [NSDate dateWithHour:23 min:59];
+                    objRecord.color         = [temp valueForKey:@"backgroundColor"];
+                    [allCompetitionArray addObject:objRecord];
+                    ssdate = [ssdate dateByAddingTimeInterval:24*60*60];
+                }
+                else if(i==numberOfDays)
+                {
+                    EventRecord * objRecord    = [[EventRecord alloc]init];
+                    objRecord.numCustomerID    = @1;
+                    objRecord.stringCustomerName  = [temp valueForKey:@"title"];
+                    objRecord.dateDay          = ssdate;
+                    objRecord.EnddateDay          =  ssdate;
+                    objRecord.dateTimeBegin  = [NSDate dateWithHour:00 min:01];
+                    objRecord.dateTimeEnd    = [NSDate dateWithHour:endH min:endM];//[NSDate dateWithHour:23 min:59];
+                    objRecord.color         = [temp valueForKey:@"backgroundColor"];
+                    [allCompetitionArray addObject:objRecord];
+                    ssdate = [ssdate dateByAddingTimeInterval:24*60*60];
+                }
+                else
+                {
+                    
+                    EventRecord * objRecord    = [[EventRecord alloc]init];
+                    objRecord.numCustomerID    = @1;
+                    objRecord.stringCustomerName  = [temp valueForKey:@"title"];
+                    objRecord.dateDay          = ssdate;
+                    objRecord.EnddateDay          =  ssdate;
+                    objRecord.dateTimeBegin  = [NSDate dateWithHour:00 min:01];
+                    objRecord.dateTimeEnd    = [NSDate dateWithHour:23 min:59];
+                    objRecord.color         = [temp valueForKey:@"backgroundColor"];
+                    [allCompetitionArray addObject:objRecord];
+                    ssdate = [ssdate dateByAddingTimeInterval:24*60*60];
+                    
+                }
+            }
+            
+            
+        }
         
     }
 
@@ -1124,35 +1193,78 @@
                 //            objPlannerlist.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
                 //            [self.view addSubview:objPlannerlist.view];
             }
-            
             else
             {
-                // if([AppCommon isCoach])
-                //{
                 
-                if( [AppCommon isCoach])
+                NSMutableArray *array = [dictEvents objectForKey:selectedDate];
+                
+                if(array.count>0)
                 {
-                PlannerAddEvent  * objaddEvent=[[PlannerAddEvent alloc]init];
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-                objaddEvent = (PlannerAddEvent *)[storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
-                objaddEvent.selectDateStr =selectdate;
-                objaddEvent.isEdit =NO;
-                objaddEvent.ListeventTypeArray = [self.PlannerResponseArray valueForKey:@"ListEventTypeDetails"];
-                objaddEvent.ListeventStatusArray = [self.PlannerResponseArray valueForKey:@"ListEventStatusDetails"];
-                objaddEvent.ListparticipantTypeArray = [self.PlannerResponseArray valueForKey:@"ListParticipantsTypeDetails"];
-                
-                [self.navigationController pushViewController:objaddEvent animated:YES];
+                    NSString *eventName = [[array objectAtIndex:0] valueForKey:@"stringCustomerName"];
+                    for(int i=0; self.AllEventDetailListArray.count>i;i++)
+                    {
+                        NSDictionary * objDic =[self.AllEventDetailListArray objectAtIndex:i];
+                        NSString * title =[objDic valueForKey:@"title"];
+                        if([eventName isEqualToString:title])
+                        {
+                            [ojAddPlannerArray addObject:objDic];
+                        }
+                        
+                    }
+                    
+                    if(ojAddPlannerArray.count>0)
+                    {
+                        PlannerListVC  * objPlannerlist=[[PlannerListVC alloc]init];
+                        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+                        objPlannerlist = (PlannerListVC *)[storyboard instantiateViewControllerWithIdentifier:@"PlannerList"];
+                        objPlannerlist.DateSelected = selectdate1;
+                        objPlannerlist.objPlannerArray =ojAddPlannerArray;
+                        [self.navigationController pushViewController:objPlannerlist animated:YES];
+            
+                    }
+                    else
+                    {
+                        // if([AppCommon isCoach])
+                        //{
+                        
+                        if( [AppCommon isCoach])
+                        {
+                            PlannerAddEvent  * objaddEvent=[[PlannerAddEvent alloc]init];
+                            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+                            objaddEvent = (PlannerAddEvent *)[storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
+                            objaddEvent.selectDateStr =selectdate;
+                            objaddEvent.isEdit =NO;
+                            objaddEvent.ListeventTypeArray = [self.PlannerResponseArray valueForKey:@"ListEventTypeDetails"];
+                            objaddEvent.ListeventStatusArray = [self.PlannerResponseArray valueForKey:@"ListEventStatusDetails"];
+                            objaddEvent.ListparticipantTypeArray = [self.PlannerResponseArray valueForKey:@"ListParticipantsTypeDetails"];
+                            
+                            [self.navigationController pushViewController:objaddEvent animated:YES];
+                        }
+                    
+                    NSLog(@"%@",array);
                 }
-                //}
                 
-                //            PlannerAddEvent *objaddEvent = [[PlannerAddEvent alloc] initWithNibName:@"PlannerAddEvent" bundle:nil];
-                //            objaddEvent.selectDateStr =selectdate;
-                //            objaddEvent.isEdit =NO;
-                //            objaddEvent.ListeventTypeArray = [self.PlannerResponseArray valueForKey:@"ListEventTypeDetails"];
-                //            objaddEvent.ListeventStatusArray = [self.PlannerResponseArray valueForKey:@"ListEventStatusDetails"];
-                //            objaddEvent.ListparticipantTypeArray = [self.PlannerResponseArray valueForKey:@"ListParticipantsTypeDetails"];
-                //            objaddEvent.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
-                //            [self.view addSubview:objaddEvent.view];
+            }
+                else
+                {
+                    
+                    if( [AppCommon isCoach])
+                    {
+                        PlannerAddEvent  * objaddEvent=[[PlannerAddEvent alloc]init];
+                        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+                        objaddEvent = (PlannerAddEvent *)[storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
+                        objaddEvent.selectDateStr =selectdate;
+                        objaddEvent.isEdit =NO;
+                        objaddEvent.ListeventTypeArray = [self.PlannerResponseArray valueForKey:@"ListEventTypeDetails"];
+                        objaddEvent.ListeventStatusArray = [self.PlannerResponseArray valueForKey:@"ListEventStatusDetails"];
+                        objaddEvent.ListparticipantTypeArray = [self.PlannerResponseArray valueForKey:@"ListParticipantsTypeDetails"];
+                        
+                        [self.navigationController pushViewController:objaddEvent animated:YES];
+                    }
+            
+                }
+            
+                
             }
         }
         else if(result==NSOrderedDescending)

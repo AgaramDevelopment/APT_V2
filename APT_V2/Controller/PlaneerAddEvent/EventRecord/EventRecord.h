@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *stringCustomerName;
 @property (nonatomic, strong) NSNumber *numCustomerID;
 @property (nonatomic, strong) NSDate *dateDay;
+@property (nonatomic, strong) NSDate *EnddateDay;
 @property (nonatomic, strong) NSDate *dateTimeBegin;
 @property (nonatomic, strong) NSDate *dateTimeEnd;
 @property (nonatomic, strong) NSMutableArray *arrayWithGuests;

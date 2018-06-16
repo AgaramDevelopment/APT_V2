@@ -13,6 +13,7 @@
 @synthesize stringCustomerName;
 @synthesize numCustomerID;
 @synthesize dateDay;
+@synthesize EnddateDay;
 @synthesize dateTimeBegin;
 @synthesize dateTimeEnd;
 @synthesize arrayWithGuests;

@@ -14,6 +14,7 @@
 #import "AppCommon.h"
 #import "WebService.h"
 #import "PopOverVC.h"
+#import "NutritionPopOverVC.h"
 
 @interface NutritionVC () <UIPopoverPresentationControllerDelegate>{
     NSString *clientCode;
@@ -431,14 +432,14 @@
     [popOver presentPopoverFromRect:[sender bounds] inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
      */
     
-    PopOverVC *popOverObj = [[PopOverVC alloc] initWithNibName:@"PopOverVC" bundle:nil]; // 12
+    NutritionPopOverVC *popOverObj = [[NutritionPopOverVC alloc] initWithNibName:@"NutritionPopOverVC" bundle:nil]; // 12
    popOverObj.listArray = array [[sender tag]];
     popOverObj.modalPresentationStyle = UIModalPresentationPopover; // 13
     UIPopoverPresentationController *popPC = popOverObj.popoverPresentationController; // 14
    
     int arrayCount = [array [[sender tag]] count];
     
-        popOverObj.preferredContentSize = CGSizeMake(200, arrayCount > 5 ? 300 : array.count*45);
+        popOverObj.preferredContentSize = CGSizeMake(200, arrayCount >= 5 ? 300 : array.count*45);
         popOverObj.popoverPresentationController.sourceRect = CGRectMake(0, 0, 0, 0);
         popOverObj.popoverPresentationController.sourceView = sender; // 16
         popPC.permittedArrowDirections = UIPopoverArrowDirectionAny; // 17

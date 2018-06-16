@@ -105,6 +105,36 @@ NSString *metaSubCode4;
 //    {
 //        [self customnavigationmethod];
 //    }
+    
+    
+    UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0,5,30)];
+    
+    self.bodyWeightTxt.leftView = paddingView;
+    self.bodyWeightTxt.leftViewMode = UITextFieldViewModeAlways;
+    
+    UIView *paddingView1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0,5,30)];
+    self.sleepHrTxt.leftView = paddingView1;
+    self.sleepHrTxt.leftViewMode = UITextFieldViewModeAlways;
+
+    UIView *paddingView2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0,5,30)];
+    self.sleepMinTxt.leftView = paddingView2;
+    self.sleepMinTxt.leftViewMode = UITextFieldViewModeAlways;
+
+    UIView *paddingView3 = [[UIView alloc] initWithFrame:CGRectMake(0, 0,5,30)];
+    self.fatTxt.leftView = paddingView3;
+    self.fatTxt.leftViewMode = UITextFieldViewModeAlways;
+
+    UIView *paddingView4 = [[UIView alloc] initWithFrame:CGRectMake(0, 0,5,30)];
+    self.restingHrTxt.leftView = paddingView4;
+    self.restingHrTxt.leftViewMode = UITextFieldViewModeAlways;
+
+    UIView *paddingView5 = [[UIView alloc] initWithFrame:CGRectMake(0, 0,5,30)];
+    self.restingBpMaxTxt.leftView = paddingView5;
+    self.restingBpMaxTxt.leftViewMode = UITextFieldViewModeAlways;
+
+    UIView *paddingView6 = [[UIView alloc] initWithFrame:CGRectMake(0, 0,5,30)];
+    self.restingBpMinTxt.leftView = paddingView6;
+    self.restingBpMinTxt.leftViewMode = UITextFieldViewModeAlways;
    
 }
 

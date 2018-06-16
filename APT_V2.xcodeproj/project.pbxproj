@@ -130,6 +130,8 @@
 		04BC4B7320863BC700CEB23E /* EventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BC4B7220863BC700CEB23E /* EventRecord.m */; };
 		04C1EC4F2084C9410030E358 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C1EC4D2084C9410030E358 /* LoginVC.m */; };
 		04C1EC502084C9410030E358 /* LoginVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C1EC4E2084C9410030E358 /* LoginVC.xib */; };
+		04C592F220D4E9DB00961CE2 /* NutritionPopOverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C592F020D4E9DB00961CE2 /* NutritionPopOverVC.m */; };
+		04C592F320D4E9DB00961CE2 /* NutritionPopOverVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C592F120D4E9DB00961CE2 /* NutritionPopOverVC.xib */; };
 		04CC004420C2CDD8004C7696 /* FoodDiaryUpdateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CC004220C2CDD8004C7696 /* FoodDiaryUpdateVC.m */; };
 		04CC004520C2CDD8004C7696 /* FoodDiaryUpdateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CC004320C2CDD8004C7696 /* FoodDiaryUpdateVC.xib */; };
 		04D8EB4B20D24C6F00D46F23 /* PlannerAddEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8EB4A20D24C6E00D46F23 /* PlannerAddEvent.m */; };
@@ -566,6 +568,9 @@
 		04C1EC4C2084C9410030E358 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		04C1EC4D2084C9410030E358 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
 		04C1EC4E2084C9410030E358 /* LoginVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginVC.xib; sourceTree = "<group>"; };
+		04C592EF20D4E9DB00961CE2 /* NutritionPopOverVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NutritionPopOverVC.h; sourceTree = "<group>"; };
+		04C592F020D4E9DB00961CE2 /* NutritionPopOverVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NutritionPopOverVC.m; sourceTree = "<group>"; };
+		04C592F120D4E9DB00961CE2 /* NutritionPopOverVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NutritionPopOverVC.xib; sourceTree = "<group>"; };
 		04CC004120C2CDD8004C7696 /* FoodDiaryUpdateVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FoodDiaryUpdateVC.h; sourceTree = "<group>"; };
 		04CC004220C2CDD8004C7696 /* FoodDiaryUpdateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FoodDiaryUpdateVC.m; sourceTree = "<group>"; };
 		04CC004320C2CDD8004C7696 /* FoodDiaryUpdateVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodDiaryUpdateVC.xib; sourceTree = "<group>"; };
@@ -993,6 +998,9 @@
 				042381CA204173F900212684 /* PopOverVC.h */,
 				042381CB204173F900212684 /* PopOverVC.m */,
 				042381C9204173F800212684 /* PopOverVC.xib */,
+				04C592EF20D4E9DB00961CE2 /* NutritionPopOverVC.h */,
+				04C592F020D4E9DB00961CE2 /* NutritionPopOverVC.m */,
+				04C592F120D4E9DB00961CE2 /* NutritionPopOverVC.xib */,
 			);
 			path = NutritionVC;
 			sourceTree = "<group>";
@@ -2892,6 +2900,7 @@
 				18A68ACF20371A7E00EBA479 /* WellnessTrainingBowlingVC.xib in Resources */,
 				CEB2B98E20257BBD00E7D5E4 /* MontserratAlternates-LightItalic.otf in Resources */,
 				CEB2B99520257BBD00E7D5E4 /* MontserratAlternates-ThinItalic.otf in Resources */,
+				04C592F320D4E9DB00961CE2 /* NutritionPopOverVC.xib in Resources */,
 				CEB2B97520257BBD00E7D5E4 /* Montserrat-BoldItalic.otf in Resources */,
 				18E07118204702930020D8EE /* InjuryAndIllnessVC.xib in Resources */,
 				04BC4B3E208632E900CEB23E /* VideoPlayerUploadVC.xib in Resources */,
@@ -3035,6 +3044,7 @@
 				18949A2B20875C5F002ECEE0 /* FFSearchBarWithAutoComplete.m in Sources */,
 				1894996320875A3C002ECEE0 /* PlannerListVC.m in Sources */,
 				18949A1F20875C5F002ECEE0 /* UIImage+FFCustomMethods.m in Sources */,
+				04C592F220D4E9DB00961CE2 /* NutritionPopOverVC.m in Sources */,
 				18949A1820875C5F002ECEE0 /* FFYearCell.m in Sources */,
 				18949A2020875C5F002ECEE0 /* UILabel+FFCustomMethods.m in Sources */,
 				CE54E70A2099C74E0019A558 /* ChangePasswordVC.m in Sources */,

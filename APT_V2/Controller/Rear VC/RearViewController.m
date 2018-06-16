@@ -241,6 +241,8 @@
         else if(indexPath.row == 2){
             
             newFrontController= [TeamsReportsHistoryVC new];
+            TeamsReportsHistoryVC* VC = newFrontController;
+            VC.isBackBtnEnable = NO;
         }
         else if(indexPath.row == 3){
             

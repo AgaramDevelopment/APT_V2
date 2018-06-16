@@ -127,7 +127,10 @@
 }
 
 -(void) doneButtonAction {
+    _search_Txt.text = @"";
     [self.view endEditing:true];
+    
+    [self filterContentForSearchText:[lblcategory.text stringByAppendingString:_dateTF.text]];
 }
 
 -(void) cancelButtonAction {
@@ -136,6 +139,7 @@
     [self.dateTF resignFirstResponder];
     [self.view endEditing:true];
 }
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -146,7 +150,7 @@
     
     //To Get Videos
      [self VideosWebservice];
-
+     [self filterContentForSearchText:[lblcategory.text stringByAppendingString:_dateTF.text]];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -166,18 +170,16 @@
     
     if( [self.isBack isEqualToString:@"yes"])
     {
-     objCustomNavigation.btn_back.hidden = NO;
-         objCustomNavigation.menu_btn.hidden =YES;
+        objCustomNavigation.btn_back.hidden = NO;
+        objCustomNavigation.menu_btn.hidden =YES;
     }
     else
     {
-    objCustomNavigation.btn_back.hidden = YES;
-    objCustomNavigation.menu_btn.hidden =NO;
+        objCustomNavigation.btn_back.hidden = YES;
+        objCustomNavigation.menu_btn.hidden =NO;
     }
+
     objCustomNavigation.home_btn.hidden = YES;
-   
-    
-    
     SWRevealViewController *revealController = [self revealViewController];
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
@@ -694,7 +696,8 @@
 - (void)filterContentForSearchText:(NSString*)searchText
 {
     
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"videoName CONTAINS[c] %@ OR keyWords CONTAINS[c] %@ OR TeamName CONTAINS[c] %@ OR PlayerName CONTAINS[c] %@ ", searchText,searchText,searchText,searchText];
+    searchText = [searchText stringByReplacingOccurrencesOfString:@"-" withString:@"/"];
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"videoName CONTAINS[c] %@ OR keyWords CONTAINS[c] %@ OR TeamName CONTAINS[c] %@ OR PlayerName CONTAINS[c] %@ OR videoDate CONTAINS[c] %@", searchText,searchText,searchText,searchText,searchText];
     _searchResult = [self.mainGalleryArray filteredArrayUsingPredicate:resultPredicate];
     
     NSLog(@"searchResult:%@", _searchResult);
@@ -703,14 +706,12 @@
         // Update the UI
         if (_searchResult.count == 0) {
             self.objFirstGalleryArray = [self.searchResult copy];
-            
             [self.videoCollectionview2 reloadData];
             
         } else {
             
             self.objFirstGalleryArray =[[NSMutableArray alloc]init];
             self.objFirstGalleryArray = [self.searchResult copy];
-            
             [self.videoCollectionview2 reloadData];
             
         }
@@ -721,35 +722,15 @@
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
-    
     return YES;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    //self.playerTbl.hidden = NO;
-//    NSLog(@"%@",textField);
-//    NSString *searchString = [NSString stringWithFormat:@"%@%@",textField.text, string];
-//
-//    if (self.search_Txt.text.length!=1)
-//    {
-//        [self filterContentForSearchText:searchString];
-//    }
-//    else
-//    {
-//        self.objVideoFilterArray = [[NSMutableArray alloc]init];
-//        self.objVideoFilterArray =  self.objSecondGalleryArray;
-//
-//        [self.videoCollectionview2 reloadData];
-//
-//    }
-//
-//    //[self filterContentForSearchText:searchString];
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        // Update the UI
-//        //[self.videoCollectionview2 reloadData];
-//    });
-//    return YES;
+    if (lblcategory.text.length || _dateTF.hasText) {
+        lblcategory.text = @"";
+        _dateTF.text = @"";
+    }
     
     NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
     [self updateTextLabelsWithText: newString];
@@ -761,24 +742,19 @@
 
 -(void)updateTextLabelsWithText:(NSString *)string
 {
-    // [self.search_Txt setText:string];
-    NSLog(@"@%",string);
     
     if (string.length==0 || string.length == nil)
     {
         self.objFirstGalleryArray = [[NSMutableArray alloc]init];
         self.objFirstGalleryArray =  self.mainGalleryArray;
-        
         [self.videoCollectionview2 reloadData];
     }
-    else
-    {
+    else {
+        
         [self filterContentForSearchText:string];
     }
     
-    //[self filterContentForSearchText:searchString];
     dispatch_async(dispatch_get_main_queue(), ^{
-        // Update the UI
         [self.videoCollectionview2 reloadData];
     });
 }
@@ -1038,20 +1014,17 @@
     }
     else if ([key isEqualToString:@"PlayerName"]) {
         
-        
         lblPlayer.text = [[array objectAtIndex:Index.row] valueForKey:key];
         selectedPlayerCode = [[array objectAtIndex:Index.row] valueForKey:@"PlayerCode"];
     }
     else if ([key isEqualToString:@"type"]) {
         lblType.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        
     }
     else if ([key isEqualToString:@"category"]) {
         lblcategory.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        
+        _search_Txt.text = @"";
+        [self filterContentForSearchText:[lblcategory.text stringByAppendingString:_dateTF.text]];
     }
-
-
     
     NSLog(@"selected value %@",[[array objectAtIndex:Index.row] valueForKey:key]);
 }
@@ -1208,6 +1181,9 @@
             self.objFirstGalleryArray =[[NSMutableArray alloc]init];
             self.objFirstGalleryArray = [responseObject valueForKey:@"Secondlist"];
             self.mainGalleryArray = self.objFirstGalleryArray;
+            if (!self.search_Txt.hasText) {
+                [self filterContentForSearchText:[lblcategory.text stringByAppendingString:_dateTF.text]];
+            }
             
             [self.videoCollectionview2 reloadData];
         }

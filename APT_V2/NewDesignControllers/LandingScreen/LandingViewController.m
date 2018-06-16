@@ -1100,7 +1100,7 @@ typedef enum : NSUInteger {
         
         TeamsReportsHistoryVC* VC = [TeamsReportsHistoryVC new];
         VC.teamCode = [[teamlist valueForKey:@"Teamcode"] objectAtIndex:indexPath.row];
-        
+        VC.isBackBtnEnable = YES;
         [[NSUserDefaults standardUserDefaults] setValue:[[teamlist valueForKey:@"Teamcode"] objectAtIndex:indexPath.row] forKey:@"selectedTeamCode"];
         [appDel.frontNavigationController pushViewController:VC animated:YES];
 

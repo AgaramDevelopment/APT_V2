@@ -303,6 +303,8 @@
 		CE8DE376203FDEC70097BF66 /* InjurySelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8DE374203FDEC70097BF66 /* InjurySelectionViewController.m */; };
 		CE8DE377203FDEC70097BF66 /* InjurySelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE8DE375203FDEC70097BF66 /* InjurySelectionViewController.xib */; };
 		CE956094209D904F0086D2C9 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE956093209D904E0086D2C9 /* libsqlite3.tbd */; };
+		CEA1531A20D4E0C9002EB538 /* HeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA1531820D4E0C9002EB538 /* HeaderTableViewCell.m */; };
+		CEA1531B20D4E0C9002EB538 /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA1531920D4E0C9002EB538 /* HeaderTableViewCell.xib */; };
 		CEA42104203161A800B2DAB5 /* BallsInVideosCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA420EF203161A800B2DAB5 /* BallsInVideosCVC.m */; };
 		CEA42105203161A800B2DAB5 /* VideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA420F1203161A800B2DAB5 /* VideoPlayerViewController.m */; };
 		CEA42106203161A800B2DAB5 /* VideoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA420F2203161A800B2DAB5 /* VideoPlayerViewController.xib */; };
@@ -866,6 +868,9 @@
 		CE8DE374203FDEC70097BF66 /* InjurySelectionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InjurySelectionViewController.m; sourceTree = "<group>"; };
 		CE8DE375203FDEC70097BF66 /* InjurySelectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InjurySelectionViewController.xib; sourceTree = "<group>"; };
 		CE956093209D904E0086D2C9 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		CEA1531720D4E0C9002EB538 /* HeaderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeaderTableViewCell.h; sourceTree = "<group>"; };
+		CEA1531820D4E0C9002EB538 /* HeaderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeaderTableViewCell.m; sourceTree = "<group>"; };
+		CEA1531920D4E0C9002EB538 /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderTableViewCell.xib; sourceTree = "<group>"; };
 		CEA420EE203161A800B2DAB5 /* BallsInVideosCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BallsInVideosCVC.h; sourceTree = "<group>"; };
 		CEA420EF203161A800B2DAB5 /* BallsInVideosCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BallsInVideosCVC.m; sourceTree = "<group>"; };
 		CEA420F0203161A800B2DAB5 /* VideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewController.h; sourceTree = "<group>"; };
@@ -2277,6 +2282,9 @@
 				04BC4B3C208632E900CEB23E /* VideoPlayerUploadVC.h */,
 				04BC4B32208632E600CEB23E /* VideoPlayerUploadVC.m */,
 				04BC4B33208632E600CEB23E /* VideoPlayerUploadVC.xib */,
+				CEA1531720D4E0C9002EB538 /* HeaderTableViewCell.h */,
+				CEA1531820D4E0C9002EB538 /* HeaderTableViewCell.m */,
+				CEA1531920D4E0C9002EB538 /* HeaderTableViewCell.xib */,
 			);
 			path = VideoGalleryVC;
 			sourceTree = "<group>";
@@ -2804,6 +2812,7 @@
 				18AA1BA82092FDFC009634A3 /* ScoreCardHeader.xib in Resources */,
 				18949A3120875C5F002ECEE0 /* redCircle.png in Resources */,
 				CEB2B99620257BBD00E7D5E4 /* SIL Open Font License.txt in Resources */,
+				CEA1531B20D4E0C9002EB538 /* HeaderTableViewCell.xib in Resources */,
 				CEA42108203161A900B2DAB5 /* CalendarViewController.xib in Resources */,
 				CEB2B98420257BBD00E7D5E4 /* MontserratAlternates-Black.otf in Resources */,
 				CE0A3CFC20CFE96F00B2E83A /* PopOverVCCell.xib in Resources */,
@@ -3007,6 +3016,7 @@
 				04BC4B40208632E900CEB23E /* VideoGalleryCell.m in Sources */,
 				18A590682047C4C8002BBF64 /* LargeValueFormatter.swift in Sources */,
 				18949A0020875C5F002ECEE0 /* FFDayHeaderCollectionView.m in Sources */,
+				CEA1531A20D4E0C9002EB538 /* HeaderTableViewCell.m in Sources */,
 				043C2F30202AF59E00EB3F8C /* XYPieChart.m in Sources */,
 				18949A0320875C5F002ECEE0 /* FFDayCollectionViewFlowLayout.m in Sources */,
 				CEBD2A81202899BB000AFD1B /* DBMANAGERSYNC.m in Sources */,

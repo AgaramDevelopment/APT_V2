@@ -38,7 +38,9 @@
 
 @implementation TeamsReportsHistoryVC
 @synthesize teamCode;
+
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
      [self.Titlecollview registerNib:[UINib nibWithNibName:@"TabHomeCell" bundle:nil] forCellWithReuseIdentifier:@"cellid"];
@@ -57,7 +59,12 @@
         titleArray = @[@"Reports",@"History"];
     }
     
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self customnavigationmethod];
+
 }
 
 -(void)customnavigationmethod
@@ -67,25 +74,19 @@
     SWRevealViewController *revealController = [self revealViewController];
     [revealController panGestureRecognizer];
     [revealController tapGestureRecognizer];
-    
-    //    [self.view addSubview:objCustomNavigation.view];
-    //    objCustomNavigation.tittle_lbl.text=@"";
-    
-    //UIView* view= self.navigation_view.subviews.firstObject;
     [self.navi_View addSubview:objCustomNavigation.view];
     
-    objCustomNavigation.btn_back.hidden =YES;
-    objCustomNavigation.menu_btn.hidden =NO;
-    //        [objCustomNavigation.btn_back addTarget:self action:@selector(didClickBackBtn:) forControlEvents:UIControlEventTouchUpInside];
+    
+    objCustomNavigation.btn_back.hidden = !self.isBackBtnEnable;
+    objCustomNavigation.menu_btn.hidden = self.isBackBtnEnable;
     [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-    //        [objCustomNavigation.home_btn addTarget:self action:@selector(HomeBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    //Notification Method
-    
-    
-//    [objCustomNavigation.notificationView setHidden:![AppCommon isKXIP]];
-    
+    [objCustomNavigation.btn_back addTarget:self action:@selector(backButton) forControlEvents:UIControlEventTouchUpInside];
     [objCustomNavigation.notificationBtn addTarget:self action:@selector(didClickNotificationBtn:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+-(void)backButton{
+    
+    [appDel.frontNavigationController popViewControllerAnimated:YES];
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView

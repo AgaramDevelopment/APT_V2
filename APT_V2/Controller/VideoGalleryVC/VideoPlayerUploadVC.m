@@ -15,6 +15,7 @@
 #import "CRTableViewCell.h"
 #import "SWRevealViewController.h"
 #import <AVFoundation/AVAssetImageGenerator.h>
+#import "HeaderTableViewCell.h"
 
 // AVFoundation.AVAssetImageGenerato
 
@@ -60,9 +61,6 @@
 @property (nonatomic, strong) UIDatePicker * datePicker;
 @property (strong, nonatomic)  NSMutableArray *selectedMarks;
 @property (strong,nonatomic) NSMutableArray * ModuleArray;
-
-
-
 
 @end
 
@@ -670,6 +668,40 @@
     return 1;    //count of section
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    return buttonTag == 4 ? 45 : 0;
+
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    if(buttonTag == 4)
+    {
+    static NSString *cellIdentifier = @"Header";
+    HeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    NSArray* array = [[NSBundle mainBundle] loadNibNamed:@"HeaderTableViewCell" owner:self options:nil];
+    if (cell == nil)
+    {
+        cell = array[0];
+    }
+    
+    [cell.Donebtn addTarget:self action:@selector(actionDone) forControlEvents:UIControlEventTouchUpInside];
+    
+    return cell;
+        
+    }
+    else{
+        return  nil;
+    }
+}
+
+-(void)actionDone{
+    
+[self closeDropDownView:nil];
+    
+}
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -681,25 +713,26 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(buttonTag == 4)
-    {
-
-
-            static NSString *CRTableViewCellIdentifier = @"cellIdentifier";
-            CRTableViewCell *cell = (CRTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CRTableViewCellIdentifier];
-
-            if (cell == nil) {
-                cell = [[CRTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CRTableViewCellIdentifier];
-            }
-
-            plyCode = [self.commonArray objectAtIndex:indexPath.row];
-            NSString *text = [[self.commonArray valueForKey:@"sharedUserName"] objectAtIndex:[indexPath row]];
-            cell.isSelected = [self.selectedMarks containsObject:plyCode] ? YES : NO;
-            cell.textLabel.text = text;
-            return cell;
-
-
-    }
+//    if(buttonTag == 4)
+//    {
+//
+//
+//
+//            static NSString *CRTableViewCellIdentifier = @"cellIdentifier";
+//            CRTableViewCell *cell = (CRTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CRTableViewCellIdentifier];
+//
+//            if (cell == nil) {
+//                cell = [[CRTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CRTableViewCellIdentifier];
+//            }
+//
+//            plyCode = [self.commonArray objectAtIndex:indexPath.row];
+//            NSString *text = [[self.commonArray valueForKey:@"sharedUserName"] objectAtIndex:[indexPath row]];
+//            cell.isSelected = [self.selectedMarks containsObject:plyCode] ? YES : NO;
+//            cell.textLabel.text = text;
+//            return cell;
+//
+//
+//    }
     static NSString *MyIdentifier = @"CategoryCell";
 
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
@@ -709,23 +742,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:MyIdentifier];
     }
-//    NSString * selectStr;
-//    if(isModule)
-//    {
-//        selectStr = [[self.commonArray valueForKey:@"TeamName"] objectAtIndex:indexPath.row];
-//    }
-//    else if (isCategory)
-//    {
-//        selectStr = [[self.commonArray valueForKey:@"CategoryName"] objectAtIndex:indexPath.row];
-//
-//    }
-//    else if (isPlayer)
-//    {
-//        selectStr = [[self.commonArray valueForKey:@"PlayerName"] objectAtIndex:indexPath.row];
-//
-//    }
-//    cell.textLabel.text = selectStr;
-    
+    cell.accessoryType = UITableViewCellAccessoryNone;
+
     if (buttonTag == 0) // team
     {
         cell.textLabel.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
@@ -742,6 +760,23 @@
     {
         cell.textLabel.text = [self.commonArray objectAtIndex:indexPath.row];
     }
+    else if(buttonTag == 4){
+//        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        cell.textLabel.text = [[self.commonArray valueForKey:@"sharedUserName"] objectAtIndex:indexPath.row];
+        
+        plyCode = [self.commonArray objectAtIndex:indexPath.row];
+//        NSString *text = [[self.commonArray valueForKey:@"sharedUserName"] objectAtIndex:[indexPath row]];
+//        cell.isSelected = [self.selectedMarks containsObject:plyCode] ? YES : NO;
+        
+        if ([self.selectedMarks containsObject:plyCode]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+        else
+        {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+
+    }
     
     return cell;
 //    }
@@ -751,7 +786,6 @@
 {
     
     return 44;
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -761,20 +795,24 @@
     {
         module_lbl.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamName"];
         correspondingTeamCode = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"TeamCode"];
+        [self closeDropDownView:nil];
     }
     else if (buttonTag == 1) // player
     {
         player_lbl.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"PlayerName"];
         selectPlayer = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"PlayerCode"];
+        [self closeDropDownView:nil];
     }
     else if (buttonTag == 2) // category
     {
         category_lbl.text = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"categoryName"];
         SelectedcategoryCode = [[self.commonArray objectAtIndex:indexPath.row] valueForKey:@"categoryCode"];
+        [self closeDropDownView:nil];
     }
     else if (buttonTag == 3) // type
     {
         objKeyword_Txt.text = [self.commonArray objectAtIndex:indexPath.row];
+        [self closeDropDownView:nil];
     }
     else if (buttonTag == 4)
     {
@@ -785,35 +823,40 @@
         else
             [self.selectedMarks addObject:plyCode];
         
-        static NSString *CRTableViewCellIdentifier = @"cellIdentifier";
         
-        CRTableViewCell *cell = (CRTableViewCell *)[self.popTbl dequeueReusableCellWithIdentifier:CRTableViewCellIdentifier];
-        cell.isSelected = [self.selectedMarks containsObject:plyCode] ? YES : NO;
-        
-        
+        self.shareuser_lbl.text = [[self.selectedMarks valueForKey:@"sharedUserName"] componentsJoinedByString:@","];
         
         [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         
-        int a = self.selectedMarks.count;
-        if(a == 0)
-        {
-            //NSString *b = [NSString stringWithFormat:@"%d", a];
-            self.shareuser_lbl.text = @"";
-        }
-        if(a == 1)
-        {
-            //NSString *b = [NSString stringWithFormat:@"%d", a];
-            self.shareuser_lbl.text = [NSString stringWithFormat:@"%d item selected", a];
-        }
-        else
-        {
-            self.shareuser_lbl.text = [NSString stringWithFormat:@"%d items selected", a];
-        }
-        isShare = NO;
+//        static NSString *CRTableViewCellIdentifier = @"cellIdentifier";
+        
+//        CRTableViewCell *cell = (CRTableViewCell *)[self.popTbl dequeueReusableCellWithIdentifier:CRTableViewCellIdentifier];
+//        cell.isSelected = [self.selectedMarks containsObject:plyCode] ? YES : NO;
+//
+//
+//
+//        [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//
+//        int a = self.selectedMarks.count;
+//        if(a == 0)
+//        {
+//            //NSString *b = [NSString stringWithFormat:@"%d", a];
+//            self.shareuser_lbl.text = @"";
+//        }
+//        if(a == 1)
+//        {
+//            //NSString *b = [NSString stringWithFormat:@"%d", a];
+//            self.shareuser_lbl.text = [NSString stringWithFormat:@"%d item selected", a];
+//        }
+//        else
+//        {
+//            self.shareuser_lbl.text = [NSString stringWithFormat:@"%d items selected", a];
+//        }
+//        isShare = NO;
     }
     
-    self.popTbl.hidden = YES;
-    [tapView setHidden:YES];
+//    self.popTbl.hidden = YES;
+//    [tapView setHidden:YES];
     //self.catagory_lbl.text = [[self.commonArray valueForKey:@"CategoryName"] objectAtIndex:indexPath.row];
     
     

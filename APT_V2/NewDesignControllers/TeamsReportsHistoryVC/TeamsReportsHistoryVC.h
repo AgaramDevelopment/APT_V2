@@ -16,7 +16,7 @@
 @property (strong, nonatomic) IBOutlet UIView *navi_View;
 @property (strong, nonnull) NSString* teamCode;
 @property (strong, nonatomic) IBOutlet SwipeView *swipeView;
-//@property (strong, nonatomic)TeamMembersVC *objteam;
+@property BOOL isBackBtnEnable;
 
 
 @end

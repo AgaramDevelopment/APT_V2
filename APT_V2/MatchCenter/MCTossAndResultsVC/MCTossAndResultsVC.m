@@ -513,11 +513,6 @@
     if(![sender selectedSegmentIndex]) // Won batting 1st and 2nd
     {
         NSNumber *TosswonMatches = [[[_mainArray valueForKey:@"TossList"]firstObject] valueForKey:@"TosswonMatches"];
-//        NSNumber *MatchWon1 = [[[_mainArray valueForKey:@"TossList"]firstObject] valueForKey:@"BattingFirstTw"];
-//        NSNumber *MatchLost1 = [[[_mainArray valueForKey:@"TossList"]firstObject] valueForKey:@"BattingFirstTl"];
-//
-//        NSNumber *MatchWon2 = [[[_mainArray valueForKey:@"TossList"]firstObject] valueForKey:@"BattingSecondTw"];
-//        NSNumber *MatchLost2 = [[[_mainArray valueForKey:@"TossList"]firstObject] valueForKey:@"BattingSecondTl"];
         
         NSNumber *totalMatchWon1 = [[[_mainArray valueForKey:@"TossList"]firstObject] valueForKey:@"BattingFirstTw"];
 
@@ -539,37 +534,24 @@
         
         lblMatchWon1.text = [MatchWon1 stringValue];
         lblMatchLost1.text = [MatchLost1 stringValue];
-//        NSNumber* tot1 = @([MatchWon1 integerValue] + [MatchLost1 integerValue]);
         lbl1stCenter.text = [totalMatchWon1 stringValue];
         
         lblMatchWon2.text = [MatchWon2 stringValue];
         lblMatchLost2.text = [MatchLost2 stringValue];
         
-//        NSNumber* tot2 = @([MatchWon2 integerValue] + [MatchLost2 integerValue]);
         lbl2ndCenter.text = [totalMatchWon2 stringValue];
-        
-//        self.battingSecPie.obj.text = [totalMatchWon1 stringValue];
-//        self.battingFstPie.obj.text = [totalMatchWon2 stringValue];
         
     }
     else // Loss batting 1st and 2nd
     {
         NSNumber *TosslostMatches = [[[_mainArray valueForKey:@"TossList"] firstObject] valueForKey:@"TosslostMatches"];
-
-//        NSNumber *MatchWon1 = [[[_mainArray valueForKey:@"TossList"] firstObject] valueForKey:@"BattingFirstTw"];
-//        NSNumber *MatchLost1 = [[[_mainArray valueForKey:@"TossList"]firstObject] valueForKey:@"BattingFirstTl"];
-//
-//        NSNumber *MatchWon2 = [[[_mainArray valueForKey:@"TossList"] firstObject] valueForKey:@"BattingSecondTw"];
-//        NSNumber *MatchLost2 = [[[_mainArray valueForKey:@"TossList"]firstObject] valueForKey:@"BattingSecondTl"];
         
         NSNumber *totalMatchWon1 = [[[_mainArray valueForKey:@"TossList"]firstObject] valueForKey:@"BattingFirstTl"];
-//
         NSNumber *MatchWon1 = [[[_mainArray valueForKey:@"TossList"]firstObject] valueForKey:@"MatchWonBFTl"];
         NSNumber *MatchLost1 = [[[_mainArray valueForKey:@"TossList"]firstObject] valueForKey:@"MatchLostBFTl"];
 
         NSNumber *MatchWon2 = [[[_mainArray valueForKey:@"TossList"]firstObject] valueForKey:@"MatchWonBSTl"];
         NSNumber *MatchLost2 = [[[_mainArray valueForKey:@"TossList"]firstObject] valueForKey:@"MatchLostBSTl"];
-//
         NSNumber *totalMatchWon2 = [[[_mainArray valueForKey:@"TossList"]firstObject] valueForKey:@"BattingSecondTl"];
 
         NSDictionary* set1 = @{@"set1":@[TosslostMatches,MatchLost1]};
@@ -588,9 +570,7 @@
         lbl1stCenter.text = [totalMatchWon1 stringValue];
         lbl2ndCenter.text = [totalMatchWon2 stringValue];
         
-        
-        NSNumber* tot1 = @([MatchWon2 integerValue] + [MatchLost2 integerValue]);
-//        self.battingSecPie.obj.text = [tot1 stringValue];
+//        NSNumber* tot1 = @([MatchWon2 integerValue] + [MatchLost2 integerValue]);
 
     }
     

@@ -573,7 +573,15 @@
     
     //    UIDocumentMenuViewController *picker =  [[UIDocumentMenuViewController alloc] initWithDocumentTypes:@[@"com.adobe.pdf"] inMode:UIDocumentPickerModeImport];
     
-    UIDocumentMenuViewController *picker =  [[UIDocumentMenuViewController alloc] initWithDocumentTypes:@[@"public.image", @"public.audio", @"public.movie", @"public.text", @"public.item",@"public.content", @"public.source-code"] inMode:UIDocumentPickerModeImport];
+    NSArray* DocType = @[@"public.image",@"public.text",@"com.adobe.pdf "];
+    if([self.titleLbl.text isEqualToString:@"Videos"]){
+        DocType = @[@"public.movie"];
+    }
+
+    
+//    UIDocumentMenuViewController *picker =  [[UIDocumentMenuViewController alloc] initWithDocumentTypes:@[@"public.image", @"public.audio", @"public.movie", @"public.text", @"public.item",@"public.content", @"public.source-code"] inMode:UIDocumentPickerModeImport];
+    UIDocumentMenuViewController *picker =  [[UIDocumentMenuViewController alloc] initWithDocumentTypes:NSRTFTextDocumentType inMode:UIDocumentPickerModeImport];
+
     
     picker.delegate = self;
     

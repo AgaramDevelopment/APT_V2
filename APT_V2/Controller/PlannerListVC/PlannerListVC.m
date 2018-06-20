@@ -231,31 +231,75 @@
         objCell = self.objPlannercell;
     }
     
-    objCell.objEventName_lbl.text =[[self.objPlannerArray valueForKey:@"title"] objectAtIndex:indexPath.row];
+//    objCell.objEventName_lbl.text =[[self.objPlannerArray valueForKey:@"title"] objectAtIndex:indexPath.row];
+//
+//    NSString * startdate =[[self.objPlannerArray valueForKey:@"startdatetime"] objectAtIndex:indexPath.row];
+//    NSDateFormatter *dateFormatters = [[NSDateFormatter alloc] init];
+//    [dateFormatters setDateFormat:@"dd/MM/yyyy hh:mm a"];
+//    NSDate *dates = [dateFormatters dateFromString:startdate];
+//
+//    NSDateFormatter* dfs = [[NSDateFormatter alloc]init];
+//    [dfs setDateFormat:@"hh:mma"];
+//    NSString * endDateStr = [dfs stringFromDate:dates];
+//
+//
+//    NSString * endtime =[[self.objPlannerArray valueForKey:@"enddatetime"] objectAtIndex:indexPath.row];
+//    NSDateFormatter *dateFormatterss = [[NSDateFormatter alloc] init];
+//    [dateFormatterss setDateFormat:@"dd/MM/yyyy hh:mm a"];
+//    NSDate *date = [dateFormatters dateFromString:endtime];
+//
+//    NSDateFormatter* df = [[NSDateFormatter alloc]init];
+//    [df setDateFormat:@"hh:mma"];
+//    NSString * endtimeStr = [df stringFromDate:date];
+//
+//    objCell.objStartTime_lbl.text = endDateStr;
+//    objCell.objendTime_lbl.text = endtimeStr;
+//    objCell.Commentslbl.text = [[self.objPlannerArray valueForKey:@"comments"] objectAtIndex:indexPath.row];
     
-    NSString * startdate =[[self.objPlannerArray valueForKey:@"startdatetime"] objectAtIndex:indexPath.row];
-    NSDateFormatter *dateFormatters = [[NSDateFormatter alloc] init];
-    [dateFormatters setDateFormat:@"dd/MM/yyyy hh:mm a"];
-    NSDate *dates = [dateFormatters dateFromString:startdate];
-    
-    NSDateFormatter* dfs = [[NSDateFormatter alloc]init];
-    [dfs setDateFormat:@"hh:mma"];
-    NSString * endDateStr = [dfs stringFromDate:dates];
     
     
-    NSString * endtime =[[self.objPlannerArray valueForKey:@"enddatetime"] objectAtIndex:indexPath.row];
-    NSDateFormatter *dateFormatterss = [[NSDateFormatter alloc] init];
-    [dateFormatterss setDateFormat:@"dd/MM/yyyy hh:mm a"];
-    NSDate *date = [dateFormatters dateFromString:endtime];
+//    EventRecord * objRecord    = [[EventRecord alloc]init];
+//    objRecord.numCustomerID    = @1;
+//    objRecord.stringCustomerName  = [temp valueForKey:@"title"];
+//    objRecord.dateDay          = ssdate;
+//    objRecord.EnddateDay          =  ssdate;
+//    objRecord.dateTimeBegin  = [NSDate dateWithHour:00 min:01];
+//    objRecord.dateTimeEnd    = [NSDate dateWithHour:23 min:59];
+//    objRecord.color         = [temp valueForKey:@"backgroundColor"];
+//    [allCompetitionArray addObject:objRecord];
+//    ssdate = [ssdate dateByAddingTimeInterval:24*60*60];
     
-    NSDateFormatter* df = [[NSDateFormatter alloc]init];
-    [df setDateFormat:@"hh:mma"];
-    NSString * endtimeStr = [df stringFromDate:date];
     
-    objCell.objStartTime_lbl.text = endDateStr;
-    objCell.objendTime_lbl.text = endtimeStr;
-    objCell.Commentslbl.text = [[self.objPlannerArray valueForKey:@"comments"] objectAtIndex:indexPath.row];
+    NSDate *starttime = [self checkNull:[[self.objPlannerArray valueForKey:@"dateTimeBegin"] objectAtIndex:indexPath.row]];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"HH:mm"];
+    NSString *formattedDateStringStart = [dateFormatter stringFromDate:starttime];
+    
+//    NSCalendar *calendar = [NSCalendar currentCalendar];
+//    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:starttime];
+//    NSInteger hour = [components hour];
+//    NSInteger minute = [components minute];
+//
+    
+    NSDate *endtime = [self checkNull:[[self.objPlannerArray valueForKey:@"dateTimeEnd"] objectAtIndex:indexPath.row]];
+    
+    NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
+    [dateFormatter1 setDateFormat:@"HH:mm"];
+    NSString *formattedDateStringEnd = [dateFormatter1 stringFromDate:endtime];
+    
+//    NSCalendar *calendar1 = [NSCalendar currentCalendar];
+//    NSDateComponents *components1 = [calendar1 components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:endtime];
+//    NSInteger endhour = [components1 hour];
+//    NSInteger endminute = [components1 minute];
+    
+    objCell.objEventName_lbl.text = [self checkNull:[[self.objPlannerArray valueForKey:@"stringCustomerName"] objectAtIndex:indexPath.row]];
+    objCell.objStartTime_lbl.text = formattedDateStringStart;
+    objCell.objendTime_lbl.text = formattedDateStringEnd;
+    objCell.Commentslbl.text = [self checkNull:[[self.objPlannerArray valueForKey:@"comments"] objectAtIndex:indexPath.row]];
+    
     objCell.selectionStyle =UITableViewCellSelectionStyleNone;
+    //objCell.contentView.backgroundColor = [self colorWithHexString:[self checkNull:[[self.objPlannerArray valueForKey:@"color"] objectAtIndex:indexPath.row]]] ;
     objCell.contentView.backgroundColor = [UIColor whiteColor];
     
     float cellWidth = objCell.frame.size.width;
@@ -274,6 +318,39 @@
     
     return 40;
     
+}
+-(NSString *)checkNull:(NSString *)_value
+{
+    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"]) {
+        _value=@"";
+    }
+    return _value;
+}
+-(UIColor*)colorWithHexString:(NSString*)hex
+{
+    //-----------------------------------------
+    // Convert hex string to an integer
+    //-----------------------------------------
+    unsigned int hexint = 0;
+    
+    // Create scanner
+    NSScanner *scanner = [NSScanner scannerWithString:hex];
+    
+    // Tell scanner to skip the # character
+    [scanner setCharactersToBeSkipped:[NSCharacterSet
+                                       characterSetWithCharactersInString:@"#"]];
+    [scanner scanHexInt:&hexint];
+    
+    //-----------------------------------------
+    // Create color object, specifying alpha
+    //-----------------------------------------
+    UIColor *color =
+    [UIColor colorWithRed:((CGFloat) ((hexint & 0xFF0000) >> 16))/255
+                    green:((CGFloat) ((hexint & 0xFF00) >> 8))/255
+                     blue:((CGFloat) (hexint & 0xFF))/255
+                    alpha:1.0f];
+    
+    return color;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

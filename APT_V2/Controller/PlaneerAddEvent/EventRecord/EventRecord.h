@@ -17,7 +17,9 @@
 @property (nonatomic, strong) NSDate *dateTimeBegin;
 @property (nonatomic, strong) NSDate *dateTimeEnd;
 @property (nonatomic, strong) NSMutableArray *arrayWithGuests;
+@property (nonatomic, strong) NSString *comments;
 
 @property (nonatomic, strong) NSString *color;
+@property (nonatomic, strong) NSString *Eventid;
 
 @end

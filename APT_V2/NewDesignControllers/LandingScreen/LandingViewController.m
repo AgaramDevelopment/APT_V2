@@ -621,7 +621,7 @@ typedef enum : NSUInteger {
     }
     else if ([title isEqualToString:@"Training Load"]){
         
-        Training_object.view.frame = CGRectMake(0,10, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
+        Training_object.view.frame = CGRectMake(0,0, cell.customView.bounds.size.width, cell.customView.bounds.size.height);
         [Training_object.view removeFromSuperview];
         [cell.customView addSubview:Training_object.view];
         [cell.collection setHidden:YES];
@@ -1460,6 +1460,7 @@ typedef enum : NSUInteger {
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.EventsCollectionView reloadData];
                 [self.ResultsCollectionView reloadData];
+                [self FixturesWebservice];
             });
             
             
@@ -1590,6 +1591,7 @@ typedef enum : NSUInteger {
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.FixturesCollectionView reloadData];
+                [self TeamsWebservice];
             });
         }
         [AppCommon hideLoading];
@@ -1651,6 +1653,11 @@ typedef enum : NSUInteger {
             if (teamslist != nil) {
                 [TableListDict setValue:teamslist forKey:@"Teams"];
             }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.TeamsCollectionView reloadData];
+                
+            });
             
         }
         [AppCommon hideLoading];

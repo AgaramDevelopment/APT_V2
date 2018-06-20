@@ -666,6 +666,8 @@
     [commonArray addObjectsFromArray:Session1array];
     
     //Pace
+    if(pacearrS1.count>0)
+    {
     self.OversPacelbl.text = [self checkNull:[[pacearrS1 valueForKey:@"PaceOvers"] objectAtIndex:0]];
     NSString *v1 =[self checkNull:[[pacearrS1 valueForKey:@"PaceOversWidth"] objectAtIndex:0]];
     NSArray* foo = [v1 componentsSeparatedByString: @"%"];
@@ -714,11 +716,37 @@
     NSString* firstBit6 = [foo6 objectAtIndex: 0];
     float x6 = [firstBit6 floatValue];
     self.EconPrgPace.progress = 1-(x6/100);
+    }
+    else
+    {
+        self.OversPacelbl.text = @"";
+        self.OvrPrgPace.progress = 1;
+        
+        self.RunsPacelbl.text = @"";
+        self.RunsPrgPace.progress = 1;
+        
+        self.WktsPacelbl.text = @"";
+        self.WktsPrgPace.progress = 1;
+        
+        self.MdnsPacelbl.text = @"";
+        self.MdnsPrgPace.progress = 1;
+        
+        self.StrPacelbl.text = @"";
+        self.StrPrgPace.progress = 1;
+        
+        self.AvgPacelbl.text = @"";
+        self.AvgPrgPace.progress = 1;
+        
+        self.EconPacelbl.text = @"";
+        self.EconPrgPace.progress = 1;
+    }
 
     
     
     
     //spin
+    if(spinarrS1.count>0)
+    {
     self.OversSpinlbl.text = [self checkNull:[[spinarrS1 valueForKey:@"SpinOvers"] objectAtIndex:0]];
     NSString *vv1 = [self checkNull:[[spinarrS1 valueForKey:@"SpinOversWidth"] objectAtIndex:0]];
     NSArray* fooo = [vv1 componentsSeparatedByString: @"%"];
@@ -768,6 +796,31 @@
     NSString* first7 = [fooo7 objectAtIndex: 0];
     float y6 = [first7 floatValue];
     self.EconPrgSpin.progress = y6/100;
+    }
+    else
+    {
+        self.OversSpinlbl.text = @"";
+        self.OvrPrgSpin.progress = 0;
+        
+        self.RunsSpinlbl.text = @"";
+        self.RunsPrgSpin.progress = 0;
+        
+        self.WktsSpinlbl.text = @"";
+        self.WktsPrgSpin.progress = 0;
+        
+        
+        self.MdnsSpinlbl.text = @"";
+        self.MdnsPrgSpin.progress = 0;
+        
+        self.StrSpinlbl.text = @"";
+        self.StrPrgSpin.progress = 0;
+        
+        self.AvgSpinlbl.text = @"";
+        self.AvgPrgSpin.progress = 0;
+        
+        self.EconSpinlbl.text = @"";
+        self.EconPrgSpin.progress = 0;
+    }
     
     [self.partnrshpTbl reloadData];
     
@@ -795,6 +848,8 @@
 
     
     //Pace
+    if(pacearrS2.count>0)
+    {
     self.OversPacelbl.text = [self checkNull:[[pacearrS2 valueForKey:@"PaceOvers"] objectAtIndex:0]];
     NSString *v1 = [self checkNull:[[pacearrS2 valueForKey:@"PaceOversWidth"] objectAtIndex:0]];
     NSArray* foo = [v1 componentsSeparatedByString: @"%"];
@@ -844,9 +899,35 @@
     NSString* firstBit6 = [foo6 objectAtIndex: 0];
     float x6 = [firstBit6 floatValue];
     self.EconPrgPace.progress = 1-(x6/100);
+    }
+    else
+    {
+        self.OversPacelbl.text = @"";
+        self.OvrPrgPace.progress = 1;
+        
+        self.RunsPacelbl.text = @"";
+        self.RunsPrgPace.progress = 1;
+        
+        self.WktsPacelbl.text = @"";
+        self.WktsPrgPace.progress = 1;
+        
+        self.MdnsPacelbl.text = @"";
+        self.MdnsPrgPace.progress = 1;
+        
+        self.StrPacelbl.text = @"";
+        self.StrPrgPace.progress = 1;
+        
+        self.AvgPacelbl.text = @"";
+        self.AvgPrgPace.progress = 1;
+        
+        self.EconPacelbl.text = @"";
+        self.EconPrgPace.progress = 1;
+    }
     
     
     //spin
+    if(spinarrS2.count>0)
+    {
     self.OversSpinlbl.text = [self checkNull:[[spinarrS2 valueForKey:@"SpinOvers"] objectAtIndex:0]];
     NSString *vv1 = [self checkNull:[[spinarrS2 valueForKey:@"SpinOversWidth"] objectAtIndex:0]];
     NSArray* fooo = [vv1 componentsSeparatedByString: @"%"];
@@ -896,6 +977,31 @@
     NSString* first7 = [fooo7 objectAtIndex: 0];
     float y6 = [first7 floatValue];
     self.EconPrgSpin.progress = y6/100;
+    }
+    else
+    {
+        self.OversSpinlbl.text = @"";
+        self.OvrPrgSpin.progress = 0;
+        
+        self.RunsSpinlbl.text = @"";
+        self.RunsPrgSpin.progress = 0;
+        
+        self.WktsSpinlbl.text = @"";
+        self.WktsPrgSpin.progress = 0;
+        
+        
+        self.MdnsSpinlbl.text = @"";
+        self.MdnsPrgSpin.progress = 0;
+        
+        self.StrSpinlbl.text = @"";
+        self.StrPrgSpin.progress = 0;
+        
+        self.AvgSpinlbl.text = @"";
+        self.AvgPrgSpin.progress = 0;
+        
+        self.EconSpinlbl.text = @"";
+        self.EconPrgSpin.progress = 0;
+    }
     
     [self.partnrshpTbl reloadData];
     
@@ -920,7 +1026,8 @@
 //    commonArray = Session3array;
     [commonArray addObjectsFromArray:Session3array];
 
-    
+    if(pacearrS3.count>0)
+    {
     //Pace
     self.OversPacelbl.text = [self checkNull:[[pacearrS3 valueForKey:@"PaceOvers"] objectAtIndex:0]];
     NSString *v1 = [self checkNull:[[pacearrS3 valueForKey:@"PaceOversWidth"] objectAtIndex:0]];
@@ -970,9 +1077,35 @@
     NSString* firstBit6 = [foo6 objectAtIndex: 0];
     float x6 = [firstBit6 floatValue];
     self.EconPrgPace.progress = 1-(x6/100);
+        
+    }
+    else
+    {
+        self.OversPacelbl.text = @"";
+        self.OvrPrgPace.progress = 1;
+        
+        self.RunsPacelbl.text = @"";
+        self.RunsPrgPace.progress = 1;
+        
+        self.WktsPacelbl.text = @"";
+        self.WktsPrgPace.progress = 1;
+        
+        self.MdnsPacelbl.text = @"";
+        self.MdnsPrgPace.progress = 1;
+        
+        self.StrPacelbl.text = @"";
+        self.StrPrgPace.progress = 1;
+        
+        self.AvgPacelbl.text = @"";
+        self.AvgPrgPace.progress = 1;
+        
+        self.EconPacelbl.text = @"";
+        self.EconPrgPace.progress = 1;
+    }
     
     
-    
+   if(spinarrS3.count>0)
+   {
     //spin
     self.OversSpinlbl.text = [self checkNull:[[spinarrS3 valueForKey:@"SpinOvers"] objectAtIndex:0]];
     NSString *vv1 = [self checkNull:[[spinarrS3 valueForKey:@"SpinOversWidth"] objectAtIndex:0]];
@@ -1023,6 +1156,31 @@
     NSString* first7 = [fooo7 objectAtIndex: 0];
     float y6 = [first7 floatValue];
     self.EconPrgSpin.progress = y6/100;
+   }
+    else
+    {
+        self.OversSpinlbl.text = @"";
+        self.OvrPrgSpin.progress = 0;
+        
+        self.RunsSpinlbl.text = @"";
+        self.RunsPrgSpin.progress = 0;
+        
+        self.WktsSpinlbl.text = @"";
+        self.WktsPrgSpin.progress = 0;
+        
+        
+        self.MdnsSpinlbl.text = @"";
+        self.MdnsPrgSpin.progress = 0;
+        
+        self.StrSpinlbl.text = @"";
+        self.StrPrgSpin.progress = 0;
+        
+        self.AvgSpinlbl.text = @"";
+        self.AvgPrgSpin.progress = 0;
+        
+        self.EconSpinlbl.text = @"";
+        self.EconPrgSpin.progress = 0;
+    }
     
     [self.partnrshpTbl reloadData];
     

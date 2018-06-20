@@ -531,7 +531,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dy2-E7-75I">
-                            <rect key="frame" x="281" y="215" width="79" height="30"/>
+                            <rect key="frame" x="286" y="215" width="79" height="30"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_addWhite" translatesAutoresizingMaskIntoConstraints="NO" id="ejO-8D-lxR">
                                     <rect key="frame" x="5" y="5" width="20" height="20"/>
@@ -612,7 +612,7 @@
                         <constraint firstItem="wdJ-H2-S1m" firstAttribute="trailing" secondItem="5Bp-HE-glZ" secondAttribute="trailing" id="LP5-IG-KgE"/>
                         <constraint firstAttribute="trailing" secondItem="h0P-CK-VkB" secondAttribute="trailing" constant="5" id="LQp-uc-OsC"/>
                         <constraint firstItem="wdJ-H2-S1m" firstAttribute="top" secondItem="iQn-bI-nGm" secondAttribute="bottom" constant="5" id="Lt1-Ga-W7f"/>
-                        <constraint firstAttribute="trailing" secondItem="Dy2-E7-75I" secondAttribute="trailing" constant="15" id="MPi-M5-NhL"/>
+                        <constraint firstAttribute="trailing" secondItem="Dy2-E7-75I" secondAttribute="trailing" constant="10" id="MPi-M5-NhL"/>
                         <constraint firstItem="5Bp-HE-glZ" firstAttribute="top" secondItem="wdJ-H2-S1m" secondAttribute="bottom" constant="5" id="Mr9-Eo-zVt"/>
                         <constraint firstItem="iQn-bI-nGm" firstAttribute="leading" secondItem="wdJ-H2-S1m" secondAttribute="leading" id="Qhh-jT-Eeo"/>
                         <constraint firstItem="2nw-NX-bLv" firstAttribute="top" secondItem="J7R-0a-X6e" secondAttribute="top" id="RAZ-wi-4Na"/>

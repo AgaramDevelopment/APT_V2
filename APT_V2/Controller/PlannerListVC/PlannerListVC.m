@@ -299,7 +299,10 @@
     objCell.Commentslbl.text = [self checkNull:[[self.objPlannerArray valueForKey:@"comments"] objectAtIndex:indexPath.row]];
     
     objCell.selectionStyle =UITableViewCellSelectionStyleNone;
-    //objCell.contentView.backgroundColor = [self colorWithHexString:[self checkNull:[[self.objPlannerArray valueForKey:@"color"] objectAtIndex:indexPath.row]]] ;
+    objCell.objEventName_lbl.textColor = [self colorWithHexString:[self checkNull:[[self.objPlannerArray valueForKey:@"color"] objectAtIndex:indexPath.row]]] ;
+    objCell.objStartTime_lbl.textColor = [self colorWithHexString:[self checkNull:[[self.objPlannerArray valueForKey:@"color"] objectAtIndex:indexPath.row]]] ;
+    objCell.objendTime_lbl.textColor = [self colorWithHexString:[self checkNull:[[self.objPlannerArray valueForKey:@"color"] objectAtIndex:indexPath.row]]] ;
+    objCell.Commentslbl.textColor = [self colorWithHexString:[self checkNull:[[self.objPlannerArray valueForKey:@"color"] objectAtIndex:indexPath.row]]] ;
     objCell.contentView.backgroundColor = [UIColor whiteColor];
     
     float cellWidth = objCell.frame.size.width;

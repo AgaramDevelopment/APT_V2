@@ -1470,12 +1470,12 @@ typedef enum : NSUInteger {
             
                                 NSInteger* isLatestVersion = [[responseObject valueForKey:@"isLatestVersion"] integerValue];
                                 NSLog(@"isLatestVersion %@",[responseObject valueForKey:@"isLatestVersion"] );
-                                if (!isLatestVersion) {
-                                    NSLog(@"canUpdate TRUE ");
-                                    [AppCommon newVersionUpdateAlert];
-                                    [AppCommon hideLoading];
-                                    return ;
-                                }
+//                                if (!isLatestVersion) {
+//                                    NSLog(@"canUpdate TRUE ");
+//                                    [AppCommon newVersionUpdateAlert];
+//                                    [AppCommon hideLoading];
+//                                    return ;
+//                                }
             
 //                            }
             

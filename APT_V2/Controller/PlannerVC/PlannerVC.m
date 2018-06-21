@@ -428,9 +428,14 @@
                 NSLog(@"%@",responseObject);
                 self.AllEventDetailListArray = [[NSMutableArray alloc]init];
             
-                [self.AllEventDetailListArray addObjectsFromArray:[responseObject valueForKey:@"lstEventDetailsEntity"]];
-                self.eventArray = self.AllEventDetailListArray;
-                [self setArrayWithEvents:[self arrayWithEvents]];
+                //[self.AllEventDetailListArray addObjectsFromArray:[responseObject valueForKey:@"lstEventDetailsEntity"]];
+                
+                if( ![[responseObject valueForKey:@"lstEventDetailsEntity"] isEqual:[NSNull null]])
+                {
+                    self.AllEventDetailListArray =[responseObject valueForKey:@"lstEventDetailsEntity"];
+                    self.eventArray = self.AllEventDetailListArray;
+                    [self setArrayWithEvents:[self arrayWithEvents]];
+                }
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     UIButton* button = [arrayButtons objectAtIndex:loadedCalendrType];
@@ -449,6 +454,13 @@
     
 }
 
+- (NSString *)checkNull:(NSString *)_value
+{
+    if ([_value isEqual:[NSNull null]] || _value == nil || [_value isEqual:@"<null>"]) {
+            _value=@"";
+            }
+        return _value;
+}
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -818,7 +830,8 @@
 - (NSMutableArray *)arrayWithEvents {
     
     allCompetitionArray = [[NSMutableArray alloc]init];
-    
+ if(self.AllEventDetailListArray.count>0)
+ {
     for (NSDictionary *temp in self.AllEventDetailListArray) {
         ///STARTDATETIME  START
         NSString *dateString = [temp valueForKey:@"startdatetime"];
@@ -971,6 +984,7 @@
         }
         
     }
+ }
     
     return allCompetitionArray;
 }

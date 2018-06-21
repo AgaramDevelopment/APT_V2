@@ -17,5 +17,8 @@
 @synthesize dateTimeBegin;
 @synthesize dateTimeEnd;
 @synthesize arrayWithGuests;
+@synthesize Eventid;
+@synthesize color;
+@synthesize comments;
 
 @end

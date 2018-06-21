@@ -183,7 +183,7 @@
                 self.AddParticipantBtn.hidden =YES;
             }
             
-        [self editFetchWebservice:[self.objSelectEditDic valueForKey:@"id"] :@"0" :@"false"];
+        [self editFetchWebservice:[self.objSelectEditDic valueForKey:@"Eventid"] :@"0" :@"false"];
         }
     }
     else

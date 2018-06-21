@@ -36,6 +36,7 @@
     NSDate *dateFromString;
     NSInteger loadedCalendrType;
     NSString *EventBgcolor;
+    NSMutableArray *allCompetitionArray;
 }
 
 @property (nonatomic) BOOL boolDidLoad;
@@ -816,7 +817,7 @@
 
 - (NSMutableArray *)arrayWithEvents {
     
-    NSMutableArray *allCompetitionArray = [[NSMutableArray alloc]init];
+    allCompetitionArray = [[NSMutableArray alloc]init];
     
     for (NSDictionary *temp in self.AllEventDetailListArray) {
         ///STARTDATETIME  START
@@ -898,6 +899,8 @@
         objRecord.dateTimeBegin  = [NSDate dateWithHour:startH min:startM];
         objRecord.dateTimeEnd         = [NSDate dateWithHour:endH min:endM];
         objRecord.color         = [temp valueForKey:@"backgroundColor"];
+        objRecord.comments = [temp valueForKey:@"comments"];
+        objRecord.Eventid = [temp valueForKey:@"id"];
         
         [allCompetitionArray addObject:objRecord];
         }
@@ -925,6 +928,8 @@
                     objRecord.dateTimeBegin  = [NSDate dateWithHour:startH min:startM];// [NSDate dateWithHour:00 min:01];
                     objRecord.dateTimeEnd    = [NSDate dateWithHour:23 min:59];
                     objRecord.color         = [temp valueForKey:@"backgroundColor"];
+                    objRecord.comments = [temp valueForKey:@"comments"];
+                    objRecord.Eventid = [temp valueForKey:@"id"];
                     [allCompetitionArray addObject:objRecord];
                     ssdate = [ssdate dateByAddingTimeInterval:24*60*60];
                 }
@@ -935,9 +940,11 @@
                     objRecord.stringCustomerName  = [temp valueForKey:@"title"];
                     objRecord.dateDay          = ssdate;
                     objRecord.EnddateDay          =  ssdate;
-                    objRecord.dateTimeBegin  = [NSDate dateWithHour:00 min:01];
+                    objRecord.dateTimeBegin  = [NSDate dateWithHour:00 min:00];
                     objRecord.dateTimeEnd    = [NSDate dateWithHour:endH min:endM];//[NSDate dateWithHour:23 min:59];
                     objRecord.color         = [temp valueForKey:@"backgroundColor"];
+                    objRecord.comments = [temp valueForKey:@"comments"];
+                    objRecord.Eventid = [temp valueForKey:@"id"];
                     [allCompetitionArray addObject:objRecord];
                     ssdate = [ssdate dateByAddingTimeInterval:24*60*60];
                 }
@@ -949,9 +956,11 @@
                     objRecord.stringCustomerName  = [temp valueForKey:@"title"];
                     objRecord.dateDay          = ssdate;
                     objRecord.EnddateDay          =  ssdate;
-                    objRecord.dateTimeBegin  = [NSDate dateWithHour:00 min:01];
+                    objRecord.dateTimeBegin  = [NSDate dateWithHour:00 min:00];
                     objRecord.dateTimeEnd    = [NSDate dateWithHour:23 min:59];
                     objRecord.color         = [temp valueForKey:@"backgroundColor"];
+                    objRecord.comments = [temp valueForKey:@"comments"];
+                    objRecord.Eventid = [temp valueForKey:@"id"];
                     [allCompetitionArray addObject:objRecord];
                     ssdate = [ssdate dateByAddingTimeInterval:24*60*60];
                     
@@ -962,7 +971,6 @@
         }
         
     }
-
     
     return allCompetitionArray;
 }
@@ -1042,19 +1050,49 @@
         NSDate *today = [NSDate date]; // it will give you current date
         
         NSMutableArray * ojAddPlannerArray =[[NSMutableArray alloc]init];
-        for(int i=0; self.AllEventDetailListArray.count>i;i++)
+//        for(int i=0; self.AllEventDetailListArray.count>i;i++)
+//        {
+//            NSDictionary * objDic =[self.AllEventDetailListArray objectAtIndex:i];
+//            NSString * startdate =[objDic valueForKey:@"startdatetime"];
+//            NSDateFormatter *dateFormatters = [[NSDateFormatter alloc] init];
+//            [dateFormatters setDateFormat:@"dd/MM/yyyy hh:mm a"];
+//            NSDate *dates = [dateFormatters dateFromString:startdate];
+//
+//            NSDateFormatter* dfs = [[NSDateFormatter alloc]init];
+//            [dfs setDateFormat:@"dd/MM/yyyy"];
+//            NSString * endDateStr = [dfs stringFromDate:dates];
+//
+//            if([endDateStr isEqualToString:selectdate])
+//            {
+//                [ojAddPlannerArray addObject:objDic];
+//            }
+//        }
+        
+        for(int i=0; allCompetitionArray.count>i;i++)
         {
-            NSDictionary * objDic =[self.AllEventDetailListArray objectAtIndex:i];
-            NSString * startdate =[objDic valueForKey:@"startdatetime"];
-            NSDateFormatter *dateFormatters = [[NSDateFormatter alloc] init];
-            [dateFormatters setDateFormat:@"dd/MM/yyyy hh:mm a"];
-            NSDate *dates = [dateFormatters dateFromString:startdate];
+            NSDictionary * objDic =[allCompetitionArray objectAtIndex:i];
+            NSDate * startdate =[objDic valueForKey:@"dateDay"];
             
-            NSDateFormatter* dfs = [[NSDateFormatter alloc]init];
-            [dfs setDateFormat:@"dd/MM/yyyy"];
-            NSString * endDateStr = [dfs stringFromDate:dates];
             
-            if([endDateStr isEqualToString:selectdate])
+            NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:startdate];
+            NSLog(@"%ld ",[components day]);
+            
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+            
+            NSString * startdate1 =[NSString stringWithFormat:@"%02ld/%02ld/%ld",(long)[components day],(long)[components month],(long)[components year]];
+            
+            
+            
+            //        NSDateFormatter *dateFormatters = [[NSDateFormatter alloc] init];
+            //        [dateFormatters setDateFormat:@"yyy-MM-dd hh:mm a"];
+            //        NSDate *dates = [dateFormatters dateFromString:startdate];
+            
+            //        NSDateFormatter* dfs = [[NSDateFormatter alloc]init];
+            //        [dfs setDateFormat:@"dd/MM/yyyy"];
+            //        NSString * endDateStr = [dfs stringFromDate:dates];
+            
+            if([startdate1 isEqualToString:selectdate])
             {
                 [ojAddPlannerArray addObject:objDic];
             }
@@ -1079,10 +1117,7 @@
                 [self.navigationController pushViewController:objPlannerlist animated:YES];
                 
                 
-                //           PlannerListVC *objPlannerlist = [[PlannerListVC alloc] initWithNibName:@"PlannerListVC" bundle:nil];
-                //            objPlannerlist.objPlannerArray =ojAddPlannerArray;
-                //            objPlannerlist.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
-                //            [self.view addSubview:objPlannerlist.view];
+                
             }
             
             else
@@ -1101,14 +1136,7 @@
                 [self.navigationController pushViewController:objaddEvent animated:YES];
                 }
                 
-                //            PlannerAddEvent *objaddEvent = [[PlannerAddEvent alloc] initWithNibName:@"PlannerAddEvent" bundle:nil];
-                //            objaddEvent.selectDateStr =selectdate;
-                //            objaddEvent.isEdit =NO;
-                //            objaddEvent.ListeventTypeArray = [self.PlannerResponseArray valueForKey:@"ListEventTypeDetails"];
-                //            objaddEvent.ListeventStatusArray = [self.PlannerResponseArray valueForKey:@"ListEventStatusDetails"];
-                //            objaddEvent.ListparticipantTypeArray = [self.PlannerResponseArray valueForKey:@"ListParticipantsTypeDetails"];
-                //            objaddEvent.view.frame = CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height);
-                //            [self.view addSubview:objaddEvent.view];
+                
             }
         }
         else if(result==NSOrderedDescending)
@@ -1151,19 +1179,31 @@
     NSDate *today = [NSDate date]; // it will give you current date
     
     NSMutableArray * ojAddPlannerArray =[[NSMutableArray alloc]init];
-    for(int i=0; self.AllEventDetailListArray.count>i;i++)
+    for(int i=0; allCompetitionArray.count>i;i++)
     {
-        NSDictionary * objDic =[self.AllEventDetailListArray objectAtIndex:i];
-        NSString * startdate =[objDic valueForKey:@"startdatetime"];
-        NSDateFormatter *dateFormatters = [[NSDateFormatter alloc] init];
-        [dateFormatters setDateFormat:@"dd/MM/yyyy hh:mm a"];
-        NSDate *dates = [dateFormatters dateFromString:startdate];
+        NSDictionary * objDic =[allCompetitionArray objectAtIndex:i];
+        NSDate * startdate =[objDic valueForKey:@"dateDay"];
         
-        NSDateFormatter* dfs = [[NSDateFormatter alloc]init];
-        [dfs setDateFormat:@"dd/MM/yyyy"];
-        NSString * endDateStr = [dfs stringFromDate:dates];
         
-        if([endDateStr isEqualToString:selectdate])
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:startdate];
+        NSLog(@"%ld ",[components day]);
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+        
+        NSString * startdate1 =[NSString stringWithFormat:@"%02ld/%02ld/%ld",(long)[components day],(long)[components month],(long)[components year]];
+        
+       
+        
+//        NSDateFormatter *dateFormatters = [[NSDateFormatter alloc] init];
+//        [dateFormatters setDateFormat:@"yyy-MM-dd hh:mm a"];
+//        NSDate *dates = [dateFormatters dateFromString:startdate];
+        
+//        NSDateFormatter* dfs = [[NSDateFormatter alloc]init];
+//        [dfs setDateFormat:@"dd/MM/yyyy"];
+//        NSString * endDateStr = [dfs stringFromDate:dates];
+        
+        if([startdate1 isEqualToString:selectdate])
         {
             [ojAddPlannerArray addObject:objDic];
         }
@@ -1171,6 +1211,7 @@
         
         NSComparisonResult result;
         //has three possible values: NSOrderedSame,NSOrderedDescending, NSOrderedAscending
+        
         
         result = [today compare:datess]; // comparing two dates
         

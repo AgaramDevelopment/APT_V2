@@ -20,6 +20,8 @@
 @property (nonatomic, strong) IBOutlet UILabel *datelbl;
 @property (nonatomic, strong) IBOutlet UILabel *barlbl;
 @property (nonatomic, strong) IBOutlet UILabel *linelbl;
+@property (strong, nonatomic)  NSString *selectionBaseKey;
+
 
 
 

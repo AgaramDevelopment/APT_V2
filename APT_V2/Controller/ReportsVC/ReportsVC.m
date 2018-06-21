@@ -56,15 +56,23 @@
     self.MonthlyBtn.layer.cornerRadius = 5;
     self.MonthlyBtn.clipsToBounds = YES;
     
+    
     objtraing = [[CoachTraingLoad alloc] initWithNibName:@"CoachTraingLoad" bundle:nil];
+    objtraing.selectionBaseKey = self.selectionBaseKey;
     objtraing.view.frame = CGRectMake(0,0, self.TraingLoadView.bounds.size.width, self.TraingLoadView.bounds.size.height);
     [self.TraingLoadView addSubview:objtraing.view];
     
+    
+    
     objBowling = [[CoachBowlingLoad alloc] initWithNibName:@"CoachBowlingLoad" bundle:nil];
+    objBowling.selectionBaseKey = self.selectionBaseKey;
     objBowling.view.frame = CGRectMake(0,0, self.BowlingLoadView.bounds.size.width, self.BowlingLoadView.bounds.size.height);
     [self.BowlingLoadView addSubview:objBowling.view];
     
+    
+    
     objRecent = [[RecentFitnessGraph alloc] initWithNibName:@"RecentFitnessGraph" bundle:nil];
+    objRecent.selectionBaseKey = self.selectionBaseKey;
     objRecent.view.frame = CGRectMake(0,0, self.RecentFitnessView.bounds.size.width, self.RecentFitnessView.bounds.size.height);
     [self.RecentFitnessView addSubview:objRecent.view];
     
@@ -87,6 +95,10 @@
         contentRect = CGRectUnion(contentRect, view.frame);
     }
     self.scrollView.contentSize = contentRect.size;
+    
+//    objtraing.selectionBaseKey = self.selectionBaseKey;
+//    objBowling.selectionBaseKey = self.selectionBaseKey;
+//    objRecent.selectionBaseKey = self.selectionBaseKey;
 }
 
 -(void)customnavigationmethod
@@ -328,7 +340,15 @@
     NSString *day = @"01";
     
     NSString *firstDayDate = [NSString stringWithFormat:@"%@-%@-%@",month,day,year];
-    [self chartWebservice:firstDayDate:@"MONTHLY"];
+    
+    if( [self.selectionBaseKey isEqualToString:@"reportselected"])
+    {
+    [self chartWebserviceCoachTeam:firstDayDate:@"MONTHLY"];
+    }
+    else
+    {
+        [self chartWebservice:firstDayDate:@"MONTHLY"];
+    }
 }
 
 - (IBAction)WeeklyAction:(id)sender
@@ -341,7 +361,17 @@
     NSDate *CurrentDate = [NSDate date];
     [dateFormatter setDateFormat:@"MM-dd-yyyy"];
     NSString *newDateString = [dateFormatter stringFromDate:CurrentDate];
-    [self chartWebservice:newDateString:@"WEEKLY"];
+    
+    
+    
+     if( [self.selectionBaseKey isEqualToString:@"reportselected"])
+    {
+        [self chartWebserviceCoachTeam:newDateString:@"WEEKLY"];
+    }
+     else {
+         [self chartWebservice:newDateString:@"WEEKLY"];
+     }
+
 }
 - (IBAction)DailyAction:(id)sender
 {
@@ -353,7 +383,18 @@
     NSDate *CurrentDate = [NSDate date];
     [dateFormatter setDateFormat:@"MM-dd-yyyy"];
     NSString *newDateString = [dateFormatter stringFromDate:CurrentDate];
-    [self chartWebservice:newDateString:@"DAILY"];
+    
+    
+    
+    if( [self.selectionBaseKey isEqualToString:@"reportselected"])
+    {
+         [self chartWebserviceCoachTeam:newDateString:@"DAILY"];
+    }
+    else
+    {
+        [self chartWebservice:newDateString:@"DAILY"];
+    }
+
 }
 
 
@@ -411,6 +452,63 @@
     }];
     
 }
+
+-(void)chartWebserviceCoachTeam :(NSString *)date :(NSString *)type
+{
+    [AppCommon showLoading ];
+    
+    NSString *playerCode;
+//    if( [AppCommon isCoach])
+//    {
+//        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+//    }
+//    else
+//    {
+//        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+//    }
+    //NSString *clientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    //NSString *date = @"02-21-2018";
+    objWebservice = [[WebService alloc]init];
+    
+    playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"loginedTeamCode"];
+    //NSString *dateString = self.datelbl.text;
+    
+    http://localhost:53916/AGAPTService.svc/MOBILE_FETCH_WORKLOAD_WELLNESSCHART_TEAM/TEM0000001/05-26-2018/MONTHLY
+    
+    [objWebservice CoachWellnessGraph:@"MOBILE_FETCH_WORKLOAD_WELLNESSCHART_TEAM" :playerCode : date :type success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseObject=%@",responseObject);
+        
+        if(responseObject >0)
+        {
+            NSMutableArray *reArray = [[NSMutableArray alloc]init];
+            self.chartValuesArray = [[NSMutableArray alloc]init];
+            self.chartXvaluesArray = [[NSMutableArray alloc]init];
+            if(![[responseObject valueForKey:@"WellnessChart"] isEqual:[NSNull null]])
+            {
+                self.chartValuesArray = [responseObject valueForKey:@"WellnessChart"];
+                
+                for(int i=0;i<self.chartValuesArray.count;i++)
+                {
+                    NSString *xvalue = [[self.chartValuesArray valueForKey:@"PlayerName"] objectAtIndex:i];
+                    [self.chartXvaluesArray addObject:xvalue];
+                }
+                
+                [self setChartData];
+                
+                
+            }
+            
+        }
+        [AppCommon hideLoading];
+        
+    }
+                              failure:^(AFHTTPRequestOperation *operation, id error) {
+                                  NSLog(@"failed");
+                                  [COMMON webServiceFailureError:error];
+                              }];
+    
+}
+
 
 
 -(void) setInningsBySelection: (NSString*) innsNo{

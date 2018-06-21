@@ -381,10 +381,15 @@
             NSArray *mealCodeArray = [FOODDIARYSSSSS filteredArrayUsingPredicate:mealPredicate];
             
             
-                //Custom Code
+            //Custom Code
             if (mealCodeArray.count) {
                 
                 if ([mealCode isEqualToString:[[FOODDIARYSSSSS objectAtIndex:foodIndexPath.row] valueForKey:@"MEALCODE"]]) {
+                    
+                    [[FOODDIARYSSSSS objectAtIndex:foodIndexPath.row] setObject:self.timeTF.text forKey:@"STARTTIME"];
+                    [[FOODDIARYSSSSS objectAtIndex:foodIndexPath.row] setObject:self.timeTF.text forKey:@"ENDTIME"];
+                    [[FOODDIARYSSSSS objectAtIndex:foodIndexPath.row] setObject:self.mealTypeTF forKey:@"MEALCODE"];
+                    [[FOODDIARYSSSSS objectAtIndex:foodIndexPath.row] setObject:self.locationTF forKey:@"LOCATION"];
                     [[[FOODDIARYSSSSS objectAtIndex:foodIndexPath.row] valueForKey:@"FOODLIST"] addObject:foodDescriptionDict];
                 }
             } else {

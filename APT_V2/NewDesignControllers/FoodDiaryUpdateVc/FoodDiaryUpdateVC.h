@@ -35,5 +35,5 @@
 @property(strong, nonatomic) IBOutlet NSMutableArray *foodDiaryArray;
 @property(strong, nonatomic) IBOutlet NSIndexPath *selectedIndexPath;
 @property(strong, nonatomic) IBOutlet NSIndexPath *foodIndexPath;
-
+@property (strong, nonatomic) IBOutlet UILabel *lblNoData;
 @end

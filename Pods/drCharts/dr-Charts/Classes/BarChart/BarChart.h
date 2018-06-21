@@ -57,6 +57,9 @@
 //show GRID with the graph
 @property (nonatomic) BOOL drawGridX; //Default is TRUE
 @property (nonatomic) BOOL drawGridY; //Default is TRUE
+
+@property (nonatomic) float minY;
+@property (nonatomic) float maxY;
 //set property for the GRID
 @property (nonatomic, strong) UIColor *gridLineColor; //Default is [UIColor lightGrayColor]
 @property (nonatomic) CGFloat gridLineWidth; //Default is 0.3F
@@ -78,5 +81,8 @@
 
 //To reload data on the graph
 - (void)reloadBarGraph;
+
+
+
 
 @end

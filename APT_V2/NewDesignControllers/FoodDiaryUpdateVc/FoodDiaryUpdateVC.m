@@ -400,6 +400,7 @@
         
         NSLog(@"Updated:%@", FOODDIARYSSSSS);
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self.lblNoData setHidden:FOODDIARYSSSSS.count];
             [self.foodTableView reloadData];
             self.foodItemTF.text = @"";
             self.quantityTF.text = @"";
@@ -693,14 +694,17 @@
                                         mealCode];
         
         NSArray *mealCodeArray = [FOODDIARYSSSSS filteredArrayUsingPredicate:resultPredicate];
-        
+        [self.lblNoData setHidden:mealCodeArray.count];
         if (mealCodeArray.count) {
+            
             NSArray *IDs = [FOODDIARYSSSSS valueForKey:@"MEALCODE"];
             foodIndexPath = [NSIndexPath indexPathForRow:[IDs indexOfObject:mealCode] inSection:section];
             
             if ([mealCode isEqualToString:[[FOODDIARYSSSSS objectAtIndex:foodIndexPath.row] valueForKey:@"MEALCODE"]]) {
                 return [[[FOODDIARYSSSSS objectAtIndex:foodIndexPath.row] valueForKey:@"FOODLIST"] count];
             }
+        } else {
+            [self setClearBorderLocationAndTime];
         }
     }
     
@@ -719,6 +723,9 @@
     if (FOODDIARYSSSSS.count) {
         NSMutableArray *extractArray = [[FOODDIARYSSSSS objectAtIndex:foodIndexPath.row] valueForKey:@"FOODLIST"];
         self.timeTF.text = [[FOODDIARYSSSSS objectAtIndex:foodIndexPath.row] valueForKey:@"STARTTIME"];
+        int locationCode = (int)[locationCodeArray indexOfObject:[[FOODDIARYSSSSS objectAtIndex:foodIndexPath.row] valueForKey:@"LOCATION"]];
+        [self setBorderForLocation:locationCode+1];
+        
         if (extractArray.count) {
             cell.foodItemLbl.text = [[extractArray objectAtIndex:indexPath.row] valueForKey:@"FOOD"];
             cell.quantityLbl.text = [[extractArray objectAtIndex:indexPath.row] valueForKey:@"FOODQUANTITY"];
@@ -1293,6 +1300,14 @@
     }
 }
 
+- (void)setClearBorderLocationAndTime {
+    self.timeTF.text = @"";
+    NSArray *arr = @[self.teamBtn,self.restaurantBtn,self.homeBtn,self.otherBtn];
+    for (UIButton *btn in arr) {
+        btn.layer.borderWidth = 0.0f;
+        btn.layer.borderColor = [UIColor blackColor].CGColor;
+    }
+}
 - (void)setClearForFoodDiaryDetails {
     
         //    self.saveOrUpdateBtn.hidden = NO;

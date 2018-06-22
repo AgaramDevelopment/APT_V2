@@ -232,7 +232,15 @@
     NSString *day = @"01";
     
     NSString *firstDayDate = [NSString stringWithFormat:@"%@-%@-%@",month,day,year];
+    
+    if( [self.selectionBaseKey isEqualToString:@"reportselected"])
+    {
+        [self chartWebserviceCoachTeam:firstDayDate:@"MONTHLY"];
+    }
+    else
+    {
     [self chartWebservice:firstDayDate:@"MONTHLY"];
+    }
 }
 
 - (IBAction)WeeklyAction:(id)sender
@@ -242,7 +250,16 @@
     NSDate *CurrentDate = [NSDate date];
     [dateFormatter setDateFormat:@"MM-dd-yyyy"];
     NSString *newDateString = [dateFormatter stringFromDate:CurrentDate];
-    [self chartWebservice:newDateString:@"WEEKLY"];
+    
+    
+    if( [self.selectionBaseKey isEqualToString:@"reportselected"])
+    {
+        [self chartWebserviceCoachTeam:newDateString:@"WEEKLY"];
+    }
+    else
+    {
+       [self chartWebservice:newDateString:@"WEEKLY"];
+    }
 }
 - (IBAction)DailyAction:(id)sender
 {
@@ -251,7 +268,16 @@
     NSDate *CurrentDate = [NSDate date];
     [dateFormatter setDateFormat:@"MM-dd-yyyy"];
     NSString *newDateString = [dateFormatter stringFromDate:CurrentDate];
-    [self chartWebservice:newDateString:@"DAILY"];
+    
+    
+    if( [self.selectionBaseKey isEqualToString:@"reportselected"])
+    {
+        [self chartWebserviceCoachTeam:newDateString:@"DAILY"];
+    }
+    else
+    {
+        [self chartWebservice:newDateString:@"DAILY"];
+    }
 }
 
 -(void)chartWebservice :(NSString *)date :(NSString *)type
@@ -296,6 +322,64 @@
                     //                int total = timecount * rpecount;
                     [self.ChartValuesArray addObject:[[reqArray valueForKey:@"BALL"] objectAtIndex:i]];
                     [self.ChartXaxisValuesArray addObject:[[reqArray valueForKey:@"WORKLOADDATE"] objectAtIndex:i]];
+                }
+                
+                [self sethartData];
+            }
+        }
+        [AppCommon hideLoading];
+        
+    }
+                        failure:^(AFHTTPRequestOperation *operation, id error) {
+                            NSLog(@"failed");
+                            [COMMON webServiceFailureError:error];
+                        }];
+    
+}
+
+-(void)chartWebserviceCoachTeam :(NSString *)date :(NSString *)type
+{
+    [AppCommon showLoading ];
+    
+    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    NSString *playerCode;
+//    if( [AppCommon isCoach])
+//    {
+//        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+//    }
+//    else
+//    {
+//        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+//    }
+    playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"loginedTeamCode"];
+    NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    
+    objWebservice = [[WebService alloc]init];
+    
+    //NSString *dateString = self.datelbl.text;
+    
+    
+    
+    [objWebservice BowlingLoad :@"MOBILE_BOWLINGLOADCHART_TEAM":ClientCode : playerCode :date :type success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseObject=%@",responseObject);
+        
+        if(responseObject >0)
+        {
+            
+            NSMutableArray *reqArray = [[NSMutableArray alloc]init];
+            reqArray = responseObject;
+            if(reqArray.count>0)
+            {
+                self.ChartValuesArray = [[NSMutableArray alloc]init];
+                self.ChartXaxisValuesArray = [[NSMutableArray alloc]init];
+                
+                for(int i=0;i<reqArray.count;i++)
+                {
+                    //                int timecount = [[[reqArray valueForKey:@"DURATION"] objectAtIndex:i] intValue];
+                    //                int rpecount = [[[reqArray valueForKey:@"RPE"] objectAtIndex:i] intValue];
+                    //                int total = timecount * rpecount;
+                    [self.ChartValuesArray addObject:[[reqArray valueForKey:@"BALL"] objectAtIndex:i]];
+                    [self.ChartXaxisValuesArray addObject:[[reqArray valueForKey:@"PLAYERNAME"] objectAtIndex:i]];
                 }
                 
                 [self sethartData];

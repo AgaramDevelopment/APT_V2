@@ -234,7 +234,16 @@
     NSString *day = @"01";
     
     NSString *firstDayDate = [NSString stringWithFormat:@"%@-%@-%@",month,day,year];
-    [self chartWebservice:firstDayDate:@"MONTHLY"];
+    
+    
+    if( [self.selectionBaseKey isEqualToString:@"reportselected"])
+    {
+        [self chartWebserviceCoachTeam:firstDayDate:@"MONTHLY"];
+    }
+    else
+    {
+       [self chartWebservice:firstDayDate:@"MONTHLY"];
+    }
 }
 
 - (IBAction)WeeklyAction:(id)sender
@@ -244,7 +253,16 @@
     NSDate *CurrentDate = [NSDate date];
     [dateFormatter setDateFormat:@"MM-dd-yyyy"];
     NSString *newDateString = [dateFormatter stringFromDate:CurrentDate];
-    [self chartWebservice:newDateString:@"WEEKLY"];
+    
+    
+    if( [self.selectionBaseKey isEqualToString:@"reportselected"])
+    {
+        [self chartWebserviceCoachTeam:newDateString:@"WEEKLY"];
+    }
+    else
+    {
+        [self chartWebservice:newDateString:@"WEEKLY"];
+    }
 }
 - (IBAction)DailyAction:(id)sender
 {
@@ -253,7 +271,15 @@
     NSDate *CurrentDate = [NSDate date];
     [dateFormatter setDateFormat:@"MM-dd-yyyy"];
     NSString *newDateString = [dateFormatter stringFromDate:CurrentDate];
+    
+    if( [self.selectionBaseKey isEqualToString:@"reportselected"])
+    {
+        [self chartWebserviceCoachTeam:newDateString:@"DAILY"];
+    }
+    else
+    {
     [self chartWebservice:newDateString:@"DAILY"];
+    }
 }
 
 
@@ -307,6 +333,59 @@ failure:^(AFHTTPRequestOperation *operation, id error) {
 NSLog(@"failed");
 [COMMON webServiceFailureError:error];
 }];
+    
+}
+
+-(void)chartWebserviceCoachTeam :(NSString *)date :(NSString *)type
+{
+    [AppCommon showLoading ];
+    
+    //NSString *playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+    NSString *playerCode;
+//    if( [AppCommon isCoach])
+//    {
+//        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+//    }
+//    else
+//    {
+//        playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+//    }
+    
+    playerCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"loginedTeamCode"];
+    NSString *clientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+    //NSString *date = @"02-21-2018";
+    objWebservice = [[WebService alloc]init];
+    
+    //NSString *dateString = self.datelbl.text;
+    
+    [objWebservice CoachTrainingGraph :@"MOBILE_GETTRAININGLOADCHART_TEAM": clientCode :playerCode : date :type success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"responseObject=%@",responseObject);
+        
+        if(responseObject >0)
+        {
+            
+            if(![[responseObject valueForKey:@"WorkloadTraingDetails"] isEqual:[NSNull null]])
+            {
+                self.ChartValuesArray = [[NSMutableArray alloc]init];
+                self.ChartXaxisValuesArray = [[NSMutableArray alloc]init];
+                self.ChartValuesArray = [responseObject valueForKey:@"WorkloadTraingDetails"];
+                for(int i=0;i<self.ChartValuesArray.count;i++)
+                {
+                    NSString *value = [[self.ChartValuesArray valueForKey:@"PLAYERNAME"] objectAtIndex:i];
+                    NSArray *arr = [value componentsSeparatedByString:@""];
+                    NSString *xvalue = arr[0];
+                    [self.ChartXaxisValuesArray addObject:xvalue];
+                }
+                [self sethartData];
+            }
+        }
+        [AppCommon hideLoading];
+        
+    }
+                               failure:^(AFHTTPRequestOperation *operation, id error) {
+                                   NSLog(@"failed");
+                                   [COMMON webServiceFailureError:error];
+                               }];
     
 }
 

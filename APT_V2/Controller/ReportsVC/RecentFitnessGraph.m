@@ -49,7 +49,15 @@
     
     self.title = @"Combined Chart";
     self.Poptable.hidden = YES;
-    [self ChartWebservice];
+    
+    if( [self.selectionBaseKey isEqualToString:@"reportselected"])
+    {
+        [self ChartWebserviceCoachTeam];
+    }
+    else
+    {
+       [self ChartWebservice];
+    }
     
 //    self.options = @[
 //                     @{@"key": @"toggleLineValues", @"label": @"Toggle Line Values"},
@@ -325,6 +333,87 @@
     
 }
 
+-(void)ChartWebserviceCoachTeam
+{
+    
+    if([COMMON isInternetReachable])
+    {
+        [AppCommon showLoading];
+        
+        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"MOBILE_RECENTDETAILSFITNESSCHART_TEAM"]];
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        manager.requestSerializer = requestSerializer;
+        
+        
+        NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+        // NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+        //NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+        NSString *UserrefCode;
+//        if( [AppCommon isCoach])
+//        {
+//            UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+//        }
+//        else
+//        {
+//            UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+//        }
+        
+         UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"loginedTeamCode"];
+        NSString *barTestCode = @"";
+        NSString *lineTestCode = @"";
+        NSString *Years = @"1";
+        
+        
+        
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        if(ClientCode)   [dic    setObject:ClientCode     forKey:@"ClientCode"];
+        if(UserrefCode)   [dic    setObject:UserrefCode     forKey:@"UserrefCode"];
+        if(barTestCode)   [dic    setObject:barTestCode     forKey:@"barTestCode"];
+        if(lineTestCode)   [dic    setObject:lineTestCode     forKey:@"lineTestCode"];
+        if(Years)   [dic    setObject:Years     forKey:@"Years"];
+        
+        
+        NSLog(@"parameters : %@",dic);
+        [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response ; %@",responseObject);
+            
+            if(responseObject >0)
+            {
+                self.testArray = [[NSMutableArray alloc]init];
+                self.testArray = [responseObject valueForKey:@"testsList"];
+                
+                if(self.testArray.count>0)
+                {
+                    barValue = [[self.testArray valueForKey:@"testCode"] objectAtIndex:0];
+                    lineValue = [[self.testArray valueForKey:@"testCode"] objectAtIndex:1];
+                    
+                    self.barlbl.text = [[self.testArray valueForKey:@"testName"] objectAtIndex:0];
+                    self.linelbl.text = [[self.testArray valueForKey:@"testName"] objectAtIndex:1];
+                    self.datelbl.text = @"1";
+                    
+                    [self chartGetValuesCoachTeam];
+                }
+            }
+            
+            [AppCommon hideLoading];
+            
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"failed");
+            [AppCommon hideLoading];
+            [COMMON webServiceFailureError:error];
+            
+            
+        }];
+    }
+    
+}
+
 - (IBAction)DateBtnAction:(id)sender
 {
     isDate = YES;
@@ -454,7 +543,14 @@
 
     if(![self.barlbl.text isEqualToString:@""] && ![self.linelbl.text isEqualToString:@""] && ![self.datelbl.text isEqualToString:@""] )
     {
+        if( [self.selectionBaseKey isEqualToString:@"reportselected"])
+        {
+            [self chartGetValuesCoachTeam];
+        }
+        else
+        {
         [self chartGetValues];
+        }
     }
     
     
@@ -553,6 +649,104 @@
             [AppCommon hideLoading];
             [COMMON webServiceFailureError:error];
              
+            
+        }];
+    }
+}
+
+-(void)chartGetValuesCoachTeam
+{
+    if([COMMON isInternetReachable])
+    {
+        [AppCommon showLoading];
+        
+        NSString *URLString =  [URL_FOR_RESOURCE(@"") stringByAppendingString:[NSString stringWithFormat:@"MOBILE_RECENTDETAILSFITNESSCHART_TEAM"]];
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+        [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        manager.requestSerializer = requestSerializer;
+        
+        
+        NSString *ClientCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
+        //        NSString *UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+        
+        NSString *UserrefCode;
+//        if( [AppCommon isCoach])
+//        {
+//            UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"SelectedPlayerCode"];
+//        }
+//        else
+//        {
+//            UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"Userreferencecode"];
+//        }
+        
+        UserrefCode = [[NSUserDefaults standardUserDefaults]stringForKey:@"loginedTeamCode"];
+        
+        NSString *Years = @"1";
+        
+        
+        
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        if(ClientCode)   [dic    setObject:ClientCode     forKey:@"ClientCode"];
+        if(UserrefCode)   [dic    setObject:UserrefCode     forKey:@"TeamCode"];
+        if(barValue)   [dic    setObject:barValue     forKey:@"barTestCode"];
+        if(lineValue)   [dic    setObject:lineValue     forKey:@"lineTestCode"];
+        if(Years)   [dic    setObject:Years     forKey:@"Years"];
+        
+        
+        NSLog(@"parameters : %@",dic);
+        [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"response ; %@",responseObject);
+            
+            if(responseObject >0)
+            {
+                months = [[NSMutableArray alloc]init];
+                self.BarValuesArray = [[NSMutableArray alloc]init];
+                self.lineValuesArray = [[NSMutableArray alloc]init];
+                
+                if(![[responseObject valueForKey:@"homeFitnessBars"] isEqual:[NSNull null]])
+                {
+                    NSMutableArray *arr = [responseObject valueForKey:@"homeFitnessBars"];
+                    for(int i =0;i<arr.count;i++)
+                    {
+                        [months addObject:[[arr valueForKey:@"playerName"] objectAtIndex:i]];
+                    }
+                    for(int i=0;i<arr.count;i++)
+                    {
+                        NSString * value = [[arr valueForKey:@"value"] objectAtIndex:i];
+                        [self.BarValuesArray addObject:value];
+                    }
+                }
+                
+                if(![[responseObject valueForKey:@"homeFitnessLines"] isEqual:[NSNull null]])
+                {
+                    NSMutableArray *arr1 = [responseObject valueForKey:@"homeFitnessLines"];
+                    
+                    for(int i =0;i<arr1.count;i++)
+                    {
+                        [months addObject:[[arr1 valueForKey:@"playerName"] objectAtIndex:i]];
+                    }
+                    
+                    for(int i=0;i<arr1.count;i++)
+                    {
+                        NSString * value = [[arr1 valueForKey:@"value"] objectAtIndex:i];
+                        [self.lineValuesArray addObject:value];
+                    }
+                }
+                [self chartCombined];
+            }
+            
+            [AppCommon hideLoading];
+            
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"failed");
+            [AppCommon hideLoading];
+            [COMMON webServiceFailureError:error];
+            
             
         }];
     }

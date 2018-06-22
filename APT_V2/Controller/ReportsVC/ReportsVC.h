@@ -23,4 +23,6 @@
 
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *naviHeight;
+
+@property (strong, nonatomic)  NSString *selectionBaseKey;
 @end

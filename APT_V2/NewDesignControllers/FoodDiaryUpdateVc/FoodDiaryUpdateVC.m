@@ -80,10 +80,48 @@
     mealCodeArray = [NSMutableArray new];
         //Fetch Service Call
 //    [self foodDiaryFetchDetailsPostMethodWebService];
-    
+    [self cornerRadiusStyleForButtons];
     [self insertOrUpdateFoodDiaryMethod];
 }
 
+- (void)cornerRadiusStyleForButtons {
+    
+    if (IS_IPAD) {
+        self.breakfastBtn.layer.cornerRadius = 8;
+        self.snacksBtn.layer.cornerRadius = 8;
+        self.lunchBtn.layer.cornerRadius = 8;
+        self.dinnerBtn.layer.cornerRadius = 8;
+        self.supplementsBtn.layer.cornerRadius = 8;
+        
+        self.teamBtn.layer.cornerRadius = 8;
+        self.restaurantBtn.layer.cornerRadius = 8;
+        self.homeBtn.layer.cornerRadius = 8;
+        self.otherBtn.layer.cornerRadius = 8;
+    } else {
+        self.breakfastBtn.layer.cornerRadius = 5;
+        self.snacksBtn.layer.cornerRadius = 5;
+        self.lunchBtn.layer.cornerRadius = 5;
+        self.dinnerBtn.layer.cornerRadius = 5;
+        self.supplementsBtn.layer.cornerRadius = 5;
+        
+        self.teamBtn.layer.cornerRadius = 5;
+        self.restaurantBtn.layer.cornerRadius = 5;
+        self.homeBtn.layer.cornerRadius = 5;
+        self.otherBtn.layer.cornerRadius = 5;
+    }
+    
+    self.breakfastBtn.layer.masksToBounds = YES;
+    self.snacksBtn.layer.masksToBounds = YES;
+    self.lunchBtn.layer.masksToBounds = YES;
+    self.dinnerBtn.layer.masksToBounds = YES;
+    self.supplementsBtn.layer.masksToBounds = YES;
+    
+    self.teamBtn.layer.masksToBounds = YES;
+    self.restaurantBtn.layer.masksToBounds =YES;
+    self.homeBtn.layer.masksToBounds = YES;
+    self.otherBtn.layer.masksToBounds = YES;
+    
+}
 - (void)insertOrUpdateFoodDiaryMethod {
     
     if ([foodDiaryType isEqualToString:@"Save"]) {

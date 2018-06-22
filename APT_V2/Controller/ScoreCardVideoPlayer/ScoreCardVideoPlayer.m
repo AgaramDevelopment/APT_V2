@@ -277,11 +277,14 @@
 {
     
     NSMutableArray<AVPlayerItem *> *arrItems = [NSMutableArray new];
-    
+   
+    if(videoURLArray.count>0)
+    {
     for (NSDictionary* temp in videoURLArray) { // VIDEOFILE
         
         NSString *url = [temp valueForKey:@"VIDEOFILE"];
-        NSURL *videoURL = [NSURL URLWithString:url];
+        //NSURL *videoURL = [NSURL URLWithString:url];
+         NSURL *videoURL = [NSURL URLWithString:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         AVPlayerItem* item = [AVPlayerItem playerItemWithURL:videoURL];
         [arrItems addObject:item];
 
@@ -289,6 +292,7 @@
     
     avQplayer = [AVQueuePlayer queuePlayerWithItems:arrItems];
     [self playAndPause:nil];
+    }
     
 }
 

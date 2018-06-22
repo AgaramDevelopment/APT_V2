@@ -209,9 +209,9 @@
         
         if(self.TeamPlayersArray1.count ==1)
         {
-            return CGSizeMake(widthF, 785);
+            return CGSizeMake(widthF, 835);
         }
-        return (IS_IPAD ? CGSizeMake(300, 785) : CGSizeMake(290, 785) );
+        return (IS_IPAD ? CGSizeMake(300, 835) : CGSizeMake(290, 835) );
     }
     else
     {
@@ -321,8 +321,21 @@
             
             if(placedArray.count>0)
             {
+                
+                
+                
                 NSString *players = [placedArray componentsJoinedByString:@","];
                 cell.replacePlayerslbl.text =[NSString stringWithFormat:@"IN: %@", players];
+                
+//                CGSize maximumLabelSize = CGSizeMake(296, FLT_MAX);
+//                
+//                CGSize expectedLabelSize = [[NSString stringWithFormat:@"IN: %@", players] sizeWithFont:cell.replacePlayerslbl.font constrainedToSize:maximumLabelSize lineBreakMode:cell.replacePlayerslbl.lineBreakMode];
+//                
+//                //adjust the label the the new height.
+//                CGRect newFrame = cell.replacePlayerslbl.frame;
+//                newFrame.size.height = expectedLabelSize.height;
+//                cell.replacePlayerslbl.frame = newFrame;
+                
                 cell.replacePlayersCountlbl.text = [NSString stringWithFormat:@"%d",placedArray.count];
             }
             else

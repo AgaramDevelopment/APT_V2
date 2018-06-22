@@ -113,8 +113,8 @@
     rightAxis.granularityEnabled = NO;
     
     
-    _sliderX.value = 14;
-    _sliderY.value = 14;
+    _sliderX.value = 0;
+    _sliderY.value = 0;
     [self slidersValueChanged:nil];
     
     [_chartView animateWithXAxisDuration:2.5];

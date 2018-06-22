@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="Montserrat-Regular.otf">
-            <string>Montserrat-Regular</string>
+        <array key="Montserrat-SemiBold.otf">
+            <string>Montserrat-SemiBold</string>
         </array>
     </customFonts>
     <objects>
@@ -32,51 +32,51 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="1Rr-Vb-dBK"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="18"/>
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7WP-rE-k2T">
-                                <rect key="frame" x="5" y="45" width="115" height="18"/>
+                                <rect key="frame" x="10" y="45" width="110" height="23"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="18" id="66f-iJ-kyk"/>
+                                    <constraint firstAttribute="height" constant="23" id="66f-iJ-kyk"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="17"/>
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VXT-Ny-iAA">
-                                <rect key="frame" x="5" y="65" width="115" height="18"/>
-                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
+                                <rect key="frame" x="10" y="70" width="110" height="23"/>
+                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="17"/>
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJT-rb-psl">
-                                <rect key="frame" x="5" y="85" width="115" height="18"/>
-                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
+                                <rect key="frame" x="10" y="95" width="110" height="23"/>
+                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="17"/>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kfd-qR-UBj">
-                                <rect key="frame" x="5" y="119" width="115" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kfd-qR-UBj">
+                                <rect key="frame" x="70" y="114" width="40" height="23"/>
                                 <color key="backgroundColor" red="0.6226462721824646" green="0.76668506860733032" blue="0.90163737535476685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="heightClass=regular-widthClass=regular">
-                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="17"/>
                                 </variation>
                             </label>
                         </subviews>
@@ -84,11 +84,11 @@
                         <constraints>
                             <constraint firstItem="VXT-Ny-iAA" firstAttribute="top" secondItem="7WP-rE-k2T" secondAttribute="bottom" constant="2" id="5QP-dL-Or7"/>
                             <constraint firstAttribute="trailing" secondItem="d9F-UP-Cm0" secondAttribute="trailing" id="8q9-JK-Whf"/>
-                            <constraint firstItem="7WP-rE-k2T" firstAttribute="leading" secondItem="QWN-5u-cxF" secondAttribute="leading" constant="5" id="Bg5-6k-dkW"/>
+                            <constraint firstItem="7WP-rE-k2T" firstAttribute="leading" secondItem="QWN-5u-cxF" secondAttribute="leading" constant="10" id="Bg5-6k-dkW"/>
                             <constraint firstAttribute="trailing" secondItem="7WP-rE-k2T" secondAttribute="trailing" id="Eei-fm-HD7"/>
-                            <constraint firstAttribute="trailing" secondItem="Kfd-qR-UBj" secondAttribute="trailing" id="P9B-yZ-GW2"/>
+                            <constraint firstAttribute="trailing" secondItem="Kfd-qR-UBj" secondAttribute="trailing" constant="10" id="P9B-yZ-GW2"/>
                             <constraint firstItem="7WP-rE-k2T" firstAttribute="top" secondItem="d9F-UP-Cm0" secondAttribute="bottom" constant="5" id="XbH-Ga-ZFf"/>
-                            <constraint firstItem="Kfd-qR-UBj" firstAttribute="leading" secondItem="7WP-rE-k2T" secondAttribute="leading" id="Xcw-Xh-MtA"/>
+                            <constraint firstItem="Kfd-qR-UBj" firstAttribute="leading" secondItem="7WP-rE-k2T" secondAttribute="leading" constant="60" id="Xcw-Xh-MtA"/>
                             <constraint firstAttribute="trailing" secondItem="KJT-rb-psl" secondAttribute="trailing" id="cmU-6W-jte"/>
                             <constraint firstItem="d9F-UP-Cm0" firstAttribute="top" secondItem="QWN-5u-cxF" secondAttribute="top" constant="10" id="dZt-7J-5iQ"/>
                             <constraint firstAttribute="trailing" secondItem="VXT-Ny-iAA" secondAttribute="trailing" id="glr-bM-73R"/>

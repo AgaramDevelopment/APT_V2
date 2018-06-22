@@ -14,6 +14,8 @@
     [super awakeFromNib];
     // Initialization code
     
+    self.mealNameLbl.layer.cornerRadius = 5;
+    self.mealNameLbl.layer.masksToBounds = YES;
 }
 
 @end

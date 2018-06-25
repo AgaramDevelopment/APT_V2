@@ -73,7 +73,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xlP-hc-Uvr">
-                            <rect key="frame" x="0.0" y="-13" width="375" height="250"/>
+                            <rect key="frame" x="0.0" y="-5" width="375" height="250"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NAN-D7-6Dh">
                                     <rect key="frame" x="0.0" y="15" width="186" height="180"/>
@@ -228,7 +228,7 @@
                         <constraint firstAttribute="trailing" secondItem="9LI-xg-WP7" secondAttribute="trailing" id="I04-bZ-FCH"/>
                         <constraint firstItem="9LI-xg-WP7" firstAttribute="top" secondItem="lqI-Gp-SFy" secondAttribute="top" id="S5v-uy-twP"/>
                         <constraint firstItem="9LI-xg-WP7" firstAttribute="leading" secondItem="lqI-Gp-SFy" secondAttribute="leading" id="XdU-Pw-PCo"/>
-                        <constraint firstItem="xlP-hc-Uvr" firstAttribute="top" secondItem="9LI-xg-WP7" secondAttribute="bottom" constant="-48" id="tnI-ML-ClA"/>
+                        <constraint firstItem="xlP-hc-Uvr" firstAttribute="top" secondItem="9LI-xg-WP7" secondAttribute="bottom" constant="-40" id="tnI-ML-ClA"/>
                     </constraints>
                 </view>
             </subviews>

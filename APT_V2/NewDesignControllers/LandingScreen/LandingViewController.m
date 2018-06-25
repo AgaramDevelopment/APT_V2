@@ -537,7 +537,7 @@ typedef enum : NSUInteger {
         }
         else if ([title isEqualToString:@"Wellness"]) {
             
-            return IS_IPAD ? 250 : 250;
+            return IS_IPAD ? 250 : 270;
         }
         else if ([title isEqualToString:@"Training Load"]) {
             

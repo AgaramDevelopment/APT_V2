@@ -37,6 +37,7 @@
     self.listHistory = [[NSMutableArray alloc]init];
     self.listModule = [[NSMutableArray alloc]init];
     [self customnavigationmethod];
+    
     [self Dropdownwebservice];
    
 }
@@ -322,6 +323,7 @@
 {
     
     self.search_Txt.hidden = YES;
+     [self.search_Txt resignFirstResponder];
     self.searchBtn.hidden = NO;
     
     DropDownTableViewController* dropVC = [[DropDownTableViewController alloc] init];
@@ -390,6 +392,7 @@
     
     
 }
+
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
@@ -520,6 +523,8 @@
 - (IBAction)SearchBtnAction:(id)sender {
     
     self.search_Txt.hidden = NO;
+    [self.search_Txt becomeFirstResponder];
+    
     self.searchBtn.hidden = YES;
 }
 

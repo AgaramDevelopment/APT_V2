@@ -95,6 +95,7 @@
         contentRect = CGRectUnion(contentRect, view.frame);
     }
     self.scrollView.contentSize = contentRect.size;
+    [self.view updateConstraintsIfNeeded];
     
 //    objtraing.selectionBaseKey = self.selectionBaseKey;
 //    objBowling.selectionBaseKey = self.selectionBaseKey;

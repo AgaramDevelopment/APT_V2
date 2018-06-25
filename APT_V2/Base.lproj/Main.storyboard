@@ -1010,7 +1010,7 @@
                                                         </constraints>
                                                     </progressView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Cpb-Sb-avf">
-                                                        <rect key="frame" x="30" y="5" width="410.5" height="50"/>
+                                                        <rect key="frame" x="30" y="5" width="436" height="50"/>
                                                         <subviews>
                                                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yZW-FW-Cgo" customClass="TappabbleView">
                                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -1039,7 +1039,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KYA-v0-JCJ" customClass="TappabbleView">
-                                                                <rect key="frame" x="60" y="0.0" width="50" height="50"/>
+                                                                <rect key="frame" x="64.5" y="0.0" width="50" height="50"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="udG-SD-nJq">
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -1059,7 +1059,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VKp-SQ-xm2" customClass="TappabbleView">
-                                                                <rect key="frame" x="120" y="0.0" width="50" height="50"/>
+                                                                <rect key="frame" x="128.5" y="0.0" width="50" height="50"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBU-cz-ETR">
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -1079,7 +1079,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hCW-u0-Su1" customClass="TappabbleView">
-                                                                <rect key="frame" x="180" y="0.0" width="50.5" height="50"/>
+                                                                <rect key="frame" x="193" y="0.0" width="50.5" height="50"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WVI-zc-A4W">
                                                                         <rect key="frame" x="0.0" y="0.0" width="50.5" height="50"/>
@@ -1099,7 +1099,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZAZ-dj-lPn" customClass="TappabbleView">
-                                                                <rect key="frame" x="240.5" y="0.0" width="50" height="50"/>
+                                                                <rect key="frame" x="257.5" y="0.0" width="50" height="50"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixa-cn-Pbv">
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -1119,7 +1119,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view tag="6" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kdm-gt-ly2" customClass="TappabbleView">
-                                                                <rect key="frame" x="300.5" y="0.0" width="50" height="50"/>
+                                                                <rect key="frame" x="322" y="0.0" width="50" height="50"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QO1-at-FR4">
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -1139,7 +1139,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <view tag="7" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AP4-L9-nSw" customClass="TappabbleView">
-                                                                <rect key="frame" x="360.5" y="0.0" width="50" height="50"/>
+                                                                <rect key="frame" x="386" y="0.0" width="50" height="50"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6X-UQ-bVW">
                                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -1181,7 +1181,7 @@
                                                         <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="132" id="xob-Ks-uQE">
-                                                                <variation key="heightClass=regular-widthClass=compact" constant="100"/>
+                                                                <variation key="heightClass=regular-widthClass=compact" constant="80"/>
                                                             </constraint>
                                                         </constraints>
                                                         <connections>
@@ -1193,6 +1193,9 @@
                                                 <constraints>
                                                     <constraint firstItem="Cpb-Sb-avf" firstAttribute="leading" secondItem="ckt-Rj-8ze" secondAttribute="leading" constant="30" id="0NX-f7-Xjf">
                                                         <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                                                    </constraint>
+                                                    <constraint firstItem="Snf-Nf-bPf" firstAttribute="leading" secondItem="Cpb-Sb-avf" secondAttribute="trailing" constant="15" id="7SZ-em-ePQ">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="140"/>
                                                     </constraint>
                                                     <constraint firstItem="M9O-x8-Qei" firstAttribute="leading" secondItem="ckt-Rj-8ze" secondAttribute="leading" id="7kF-jn-BMH"/>
                                                     <constraint firstAttribute="trailing" secondItem="M9O-x8-Qei" secondAttribute="trailing" id="CLL-UL-Ma2"/>

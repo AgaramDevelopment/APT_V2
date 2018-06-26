@@ -23,6 +23,8 @@
 
 @implementation InjuryAndIllnessVC
 
+@synthesize TeamCode;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -32,8 +34,6 @@
     clientCode = [AppCommon GetClientCode];
     userRefCode = [AppCommon GetuserReference];
     
-    //FETCHLOADINJURYWEB
-//    [self fetchLoadInjuryPostMethodService];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,6 +76,7 @@
 
 - (IBAction)injuriesAction:(id)sender {
     InjuryVC *injuryObj = [InjuryVC new];
+    injuryObj.TeamCode = self.TeamCode;
     [self.navigationController pushViewController:injuryObj animated:YES];
 }
 
@@ -115,6 +116,10 @@
             injuryArray = [NSMutableArray new];
             injuryArray = [responseObject objectForKey:@"InjuryWebs"];
         }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.injuryTableView reloadData];
+        });
         
         [AppCommon hideLoading];
         [self fetchLoadIllnessPostMethodService];
@@ -156,7 +161,6 @@
             illnessArray = [responseObject objectForKey:@"illnessWebCruds"];
         
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self.injuryTableView reloadData];
                 [self.illnessTableView reloadData];
             });
         }

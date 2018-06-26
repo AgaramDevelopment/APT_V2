@@ -19,6 +19,7 @@
 
 @property (strong, readwrite) NSString* PlayerAge;
 @property (strong, readwrite) NSString* TeamName;
+@property (strong, readwrite) NSString* TeamCode;
 @property (strong, readwrite) NSString* PlaerDesignation;
 
 @property (strong, nonatomic) UIColor* availableColor;

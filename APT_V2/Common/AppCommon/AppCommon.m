@@ -436,9 +436,10 @@ AppCommon *sharedCommon = nil;
     }];
     
     UIAlertAction* actionYes = [UIAlertAction actionWithTitle:@"Update Now" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        NSString *iTunesLink = @"https://itunes.apple.com/us/app/apt-cricket/id1356455542?ls=1&mt=8";
+//        NSString *iTunesLink = @"https://itunes.apple.com/us/app/apt-cricket/id1356455542?ls=1&mt=8";
+        NSString *iTunesLink = @"https://itunes.apple.com/us/app/apt-kca/id1398868388?ls=1&mt=8";
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:iTunesLink]];
-        
+         
     }];
     
     [alert addAction:actionYes];

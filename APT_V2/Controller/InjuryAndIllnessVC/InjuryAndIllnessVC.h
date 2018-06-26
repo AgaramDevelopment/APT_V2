@@ -17,5 +17,5 @@
 @property (strong, nonatomic) IBOutlet UIView *navigationView;
 @property (strong, nonatomic) IBOutlet UILabel *lblNoInjuryData;
 @property (strong, nonatomic) IBOutlet UILabel *lblNoIllnessData;
-
+@property (strong, readwrite) NSString* TeamCode;
 @end

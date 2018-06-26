@@ -287,6 +287,7 @@
         
         PlayerDetailViewController* VC = [PlayerDetailViewController new];
         VC.selectedPlayerArray = [self.CommonArray objectAtIndex:indexPath.row];
+        VC.TeamCode = self.teamCode;
         [appDel.frontNavigationController pushViewController:VC animated:YES];
         
     }

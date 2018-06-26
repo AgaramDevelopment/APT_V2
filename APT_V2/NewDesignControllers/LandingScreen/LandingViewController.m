@@ -172,7 +172,7 @@ typedef enum : NSUInteger {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNotificationCount) name:@"updateNotificationCount" object:nil];
     
-    myTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(updateNotificationCount) userInfo:nil repeats:YES];
+//    myTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(updateNotificationCount) userInfo:nil repeats:YES];
     
     [self.BowlingDailyBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
 
@@ -1467,14 +1467,14 @@ typedef enum : NSUInteger {
 //
 //                            if (!iftheyClickedLater) { // New version update alert if they click later, we dont show that alert again and again
             
-                                NSInteger* isLatestVersion = [[responseObject valueForKey:@"isLatestVersion"] integerValue];
-                                NSLog(@"isLatestVersion %@",[responseObject valueForKey:@"isLatestVersion"] );
-                                if (!isLatestVersion) {
-                                    NSLog(@"canUpdate TRUE ");
-                                    [AppCommon newVersionUpdateAlert];
-                                    [AppCommon hideLoading];
-                                    return ;
-                                }
+//                                NSInteger* isLatestVersion = [[responseObject valueForKey:@"isLatestVersion"] integerValue];
+//                                NSLog(@"isLatestVersion %@",[responseObject valueForKey:@"isLatestVersion"] );
+//                                if (!isLatestVersion) {
+//                                    NSLog(@"canUpdate TRUE ");
+//                                    [AppCommon newVersionUpdateAlert];
+//                                    [AppCommon hideLoading];
+//                                    return ;
+//                                }
             
 //                            }
             

@@ -9,7 +9,7 @@
 #import "InjuryVC.h"
 #import "CustomNavigation.h"
 #import "SWRevealViewController.h"
-
+#import "InjurySelectionViewController.h"
 typedef enum {
     kDelayed,
     kTraumatic
@@ -21,7 +21,7 @@ typedef enum {
 //} ExpertOptionType;
 
 
-@interface InjuryVC () <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface InjuryVC () <UINavigationControllerDelegate,UIImagePickerControllerDelegate,InjuryDelegate>
 {
     BOOL isOccurrence;
     BOOL isLocation;
@@ -69,17 +69,17 @@ typedef enum {
     BOOL isCT;
     BOOL isMRI;
     BOOL isBlood;
-    
+    NSInteger selectedFileType;
     NSInteger* dateTag;
-
+    NSMutableArray* imageArray;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *lblFile1;
 @property (weak, nonatomic) IBOutlet UILabel *lblFile2;
 @property (weak, nonatomic) IBOutlet UILabel *lblFile3;
 @property (weak, nonatomic) IBOutlet UILabel *lblFIle4;
-@property (weak, nonatomic) IBOutlet CustomButton *btnAssment;
-@property (weak, nonatomic) IBOutlet CustomButton *btnOnsetDate;
+//@property (weak, nonatomic) IBOutlet CustomButton *btnAssment;
+//@property (weak, nonatomic) IBOutlet CustomButton *btnOnsetDate;
 
 @property (nonatomic,strong) NSMutableArray * gameArray;
 @property (nonatomic,strong) NSMutableArray * TeamArray;
@@ -102,6 +102,11 @@ typedef enum {
 @end
 
 @implementation InjuryVC
+
+
+@synthesize btnF1,btnF2,btnF3,btnF4;
+
+@synthesize TeamCode;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -139,6 +144,7 @@ typedef enum {
 //    NSDictionary* location = @{@"location":@[@"Header & Trunk",@"Upper Extremity",@"Lower Extremity"]};
 //    NSDictionary* injurySite = @{@"injurysite":@[@"Anterior",@"Posterior",@"Medical",@"Lateral"]};
     [self startFetchTeamPlayerGameService];
+    selectsliderValue = 0;
 
 }
 
@@ -618,10 +624,10 @@ typedef enum {
 
 - (IBAction)actionVisualSelection:(id)sender {
     
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"BACK"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
     InjurySelectionViewController* selectedVC = [InjurySelectionViewController new];
-    [appDel.frontNavigationController pushViewController:selectedVC animated:YES];
+    selectedVC.selectedImageArray = imageArray;
+    selectedVC.injuryDelegate = self;
+    [appDel.frontNavigationController presentViewController:selectedVC animated:YES completion:nil];
     
 }
 
@@ -662,8 +668,8 @@ typedef enum {
 - (IBAction)actionOpenDate:(id)sender {
     
     CalendarViewController  * objTabVC = [CalendarViewController new];
-    //    objTabVC.datePickerFormat = @"yyy-MM-dd"; // 2/9/2018 12:00:00 AM
-    objTabVC.datePickerFormat = @"dd/MM/yyy";
+    //    objTabVC.datePickerFormat = @"yyy-MM-dd"; // 2/9/2018 12:00:00 AM // 06-22-2018
+    objTabVC.datePickerFormat = @"dd-MM-yyy";
     objTabVC.datePickerDelegate = self;
     objTabVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     objTabVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
@@ -679,12 +685,12 @@ typedef enum {
 {
     if (dateTag == 0) {
 //        NSString* str_date = [NSString stringWithFormat:@"Assessment Date \n %@",Date];
-        _btnAssment.titleLabel.text = Date;
+        self.btnAssment.titleLabel.text = Date;
     }
     else if(dateTag == 1)
     {
 //        NSString* str_date = [NSString stringWithFormat:@"Onset Date \n %@",Date];
-        _btnOnsetDate.titleLabel.text = Date;
+        self.btnOnsetDate.titleLabel.text = Date;
     }
     else
     {
@@ -717,27 +723,29 @@ typedef enum {
     NSString * objPath =[[picker valueForKey:@"mediaTypes"] objectAtIndex:0];
     NSString *savedImagePath =   [documentsDirectory stringByAppendingPathComponent:objPath];
     imageToPost = image;
+    
     if(isXray ==YES)
     {
-//        self.xrayLbl.text =savedImagePath;
-        self.imgFile1.image = image;
+//        self.imgFile1.image = image;
+        [btnF1 setImage:image forState:UIControlStateNormal];
         xrData = [self encodeToBase64String:imageToPost];
     }
     else if (isCT ==YES)
     {
-//        self.CTScanLbl.text =savedImagePath;
+        [btnF2 setImage:image forState:UIControlStateNormal];
         ctData = [self encodeToBase64String:imageToPost];
     }
     else if (isMRI ==YES)
     {
-//        self.MRILbl.text =savedImagePath;
+        [btnF3 setImage:image forState:UIControlStateNormal];
         mrData = [self encodeToBase64String:imageToPost];
     }
-    else if (isBlood ==YES)
-    {
+//    else if (isBlood ==YES)
+//    {
+//    [btnF4 setImage:image forState:UIControlStateNormal];
 //        self.BloodTestLbl.text =savedImagePath;
 //        bloodData = [self encodeToBase64String:imageToPost];
-    }
+//    }
     
     [picker dismissViewControllerAnimated:YES completion:nil];
     
@@ -800,10 +808,133 @@ typedef enum {
     
 }
 
+-(void)newInjuryService {
+    
+    /*
+     {
+     "ClientCode":"cli0000004",
+     "GameCode":"MSC083",
+     "TeamCode":"TEA0000003",
+     "PlayerCode":"AMR0000110" ,
+     "DateOfAssessment":"06-22-2018",
+     "OnSetDate":"06-22-2018",
+     "OnSetType":"MSC005",
+     "InjuryName":"InjuryName",
+     "ChiefCompliant":"ChiefCompliant",
+     "Vas":"10",
+     "InjuaryOccuranceCode":"MSC401",
+     "InjuaryOccuranceSubCode":"MSC401",
+     "InjurySiteCode":"MSC401",
+     "InjuryTypeCode":"MSC401",
+     "InjuryCauseCode":"MSC401",
+     "ExpertOptionTakenCode":"MSC401",
+     "ExpectedDateOfRecovery":"06-22-2018",
+     "CreatedBy":"MSC401",
+     "lstInjuryLocations":[{"InjuryLocationCode":"BLU1","InjurySiteCode":"MSC001"},{"InjuryLocationCode":"BLU2","InjurySiteCode":"MSC002"},{"InjuryLocationCode":"BLU3","InjurySiteCode":"MSC003"}]
+     }
+     
+     URL : /AGAPTService.svc/INSERTINJURIES
+     */
+    
+    if(![COMMON isInternetReachable])
+        return;
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    NSString* cliendcode = [AppCommon GetClientCode];
+    if(cliendcode)   [dic    setObject:cliendcode     forKey:@"ClientCode"];
+    
+    NSString* RoleCode = [AppCommon GetUserRoleCode];
+//    NSString* selectGameCode = [AppCommon GetUserRoleCode];
+    NSString* selectTeamCode = self.TeamCode;
+    NSString* selectPlayerCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedPlayerCode"];
+    NSString* userCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserCode"];
+    
+    if(userCode)   [dic setObject:userCode forKey:@"CreatedBy"];
+    [dic setObject:@"" forKey:@"GameCode"];
+    if(selectTeamCode)   [dic setObject:selectTeamCode forKey:@"TeamCode"];
+    if(selectPlayerCode)   [dic setObject:selectPlayerCode forKey:@"PlayerCode"];
+    if(selectOnsetTypeCode)   [dic setObject:selectOnsetTypeCode forKey:@"OnSetType"];
+    [dic setObject:@"" forKey:@"InjuryName"];
+    if(self.btnAssment.titleLabel.text) [dic setObject:self.btnAssment.titleLabel.text forKey:@"DateOfAssessment"];
+    if(self.btnOnsetDate.titleLabel.text) [dic setObject:self.btnOnsetDate.titleLabel.text forKey:@"OnSetDate"];
+
+    if(self.compliant_Txt.hasText)   [dic    setObject:self.compliant_Txt.text     forKey:@"ChiefCompliant"];
+    if(selectsliderValue)   [dic    setObject:selectsliderValue     forKey:@"Vas"];
+    if(selectInjuryOccuranceCode)   [dic    setObject:selectInjuryOccuranceCode     forKey:@"InjuaryOccuranceCode"];
+     [dic    setObject:@""     forKey:@"InjuaryOccuranceSubCode"];
+     [dic    setObject:@""     forKey:@"InjurySiteCode"];
+
+    if(injuryTypeCode)   [dic    setObject:injuryTypeCode     forKey:@"InjuryTypeCode"];
+    if(injuryCausecode)   [dic    setObject:injuryCausecode     forKey:@"InjuryCauseCode"];
+    if(selectExpertOpinionCode)   [dic    setObject:selectExpertOpinionCode     forKey:@"ExpertOptionTakenCode"];
+    if(imageArray.count) [dic setObject:imageArray forKey:@"lstInjuryLocations"];
+    if(self.date_lbl.text)   [dic    setObject:self.date_lbl.text     forKey:@"ExpectedDateOfRecovery"];
+    if(usercode)   [dic    setObject:usercode     forKey:@"CreatedBy"];
+    
+    if(xrData == nil)
+    {
+        [dic setObject:@"" forKey:@"XRAYSFILE"];
+    }
+    else {
+        [dic    setObject:xrData     forKey:@"XRAYSFILE"];
+    }
+    [dic    setObject:@"Xray.png"     forKey:@"XRAYSFILENAME"];
+    
+    
+    
+    if(ctData==nil)
+    {
+        [dic    setObject:@""     forKey:@"CTSCANSFILE"];
+    }
+    else
+    {
+        [dic    setObject:ctData     forKey:@"CTSCANSFILE"];
+    }
+    [dic    setObject:@"Ctscan.png"     forKey:@"CTSCANSFILENAME"];
+    
+    
+    
+    if(mrData==nil)
+    {
+        [dic    setObject:@""     forKey:@"MRISCANSFILE"];
+    }
+    else
+    {
+        [dic    setObject:mrData     forKey:@"MRISCANSFILE"];;
+    }
+    [dic    setObject:@"Mriscan.png"     forKey:@"MRISCANSFILENAME"];
+    
+    NSLog(@"parameters : %@",dic);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSURL *filePath = [NSURL fileURLWithPath:@"file://path/to/image.png"];
+    NSString * url = URL_FOR_RESOURCE(injuryInsert);
+    [manager POST:url parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileURL:filePath name:@"image" error:nil];
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Success: %@", responseObject);
+        BOOL status=[responseObject valueForKey:@"Status"];
+        if(status == YES)
+        {
+            [AppCommon showAlertWithMessage:@"Injury Inserted Successfully"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        [AppCommon hideLoading];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [COMMON webServiceFailureError:error];
+    }];
+    
+
+}
+
 
 
 -(void)InsertWebservice
 {
+    
+   
+    
     if(![COMMON isInternetReachable])
         return;
     
@@ -2098,7 +2229,8 @@ typedef enum {
 
 - (IBAction)actionUPDATE:(id)sender {
     
-    [self InsertWebservice];
+//    [self InsertWebservice];
+    [self newInjuryService];
     
 }
 
@@ -2187,6 +2319,12 @@ typedef enum {
                    {
                    [alertView show];
                    });
+}
+
+-(void)didFinishPickedWithInjryLocationWithOptions:(NSArray *)options {
+    
+    NSLog(@"didFinishPickedWithInjryLocationWithOptions %@",options);
+    imageArray = options;
 }
 
 

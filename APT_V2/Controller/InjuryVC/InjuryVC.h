@@ -54,6 +54,12 @@
 @property (nonatomic,strong) IBOutlet UIView * locationselectview;
 
 @property (nonatomic,strong) IBOutlet UIView * TypeAndCaseView;
-
+@property (weak, nonatomic) IBOutlet UIButton *btnF1;
+@property (weak, nonatomic) IBOutlet UIButton *btnF2;
+@property (weak, nonatomic) IBOutlet UIButton *btnF3;
+@property (weak, nonatomic) IBOutlet UIButton *btnF4;
+@property (strong, atomic) NSString*  TeamCode;
+@property (weak, nonatomic) IBOutlet UIButton *btnAssment;
+@property (weak, nonatomic) IBOutlet UIButton *btnOnsetDate;
 
 @end

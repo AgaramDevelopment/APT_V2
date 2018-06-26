@@ -29,7 +29,7 @@
 @implementation PlayerDetailViewController
 @synthesize scrollView,contentView,tblDateDropDown;
 
-@synthesize spiderChartView;
+@synthesize spiderChartView,TeamCode;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -159,7 +159,7 @@
 {
     int tempValue = (int)value;
     int count = activities.count;
-    int str = tempValue % count;
+//    int str = tempValue % count;
 //    return activities[(int)value % activities.count];
     return  activities.count > 0 ? activities[(int)value % activities.count] : @"0" ;
 }
@@ -581,8 +581,7 @@
     
     NSString *athletCode = [self.selectedPlayerArray valueForKey:@"AthleteCode"];
     [[NSUserDefaults standardUserDefaults] setObject:athletCode forKey:@"SelectedPlayerCode"];
-    NSString *userRefCode =  [[NSUserDefaults standardUserDefaults]
-                              stringForKey:@"SelectedPlayerCode"];
+    NSString *userRefCode =  [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedPlayerCode"];
     NSLog(@"userRefCode:%@", userRefCode);
     [[NSUserDefaults standardUserDefaults] synchronize];
 
@@ -595,6 +594,8 @@
     else if ([sender tag] == 1) // Illness
     {
         selectedVC = [InjuryAndIllnessVC new];
+        InjuryAndIllnessVC* VC = selectedVC;
+        VC.TeamCode = self.TeamCode;
     }
     else if ([sender tag] == 2)  // Nutrition
     {
@@ -603,7 +604,6 @@
     else if ([sender tag] == 3) // Reports
     {
         selectedVC = [ReportsVC new];
-    
     }
     else if ([sender tag] == 4) // Wellness
     {

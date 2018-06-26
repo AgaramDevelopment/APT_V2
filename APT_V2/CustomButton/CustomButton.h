@@ -13,6 +13,6 @@
 @property (readwrite) NSInteger secondTag;
 @property (strong,nonatomic) NSString* SelctedDate;
 @property (strong,nonatomic) NSString* SelctedCode;
-
+@property (strong,atomic) NSString* injuryCode;
 
 @end

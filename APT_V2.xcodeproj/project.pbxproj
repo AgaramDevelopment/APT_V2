@@ -368,6 +368,7 @@
 		CEC34C352046B2A10058ACC3 /* RecentFitnessGraph.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC34C322046B2A10058ACC3 /* RecentFitnessGraph.xib */; };
 		CEC34C362046B2A10058ACC3 /* RecentFitnessGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC34C332046B2A10058ACC3 /* RecentFitnessGraph.m */; };
 		CEC34C552046B8630058ACC3 /* CustomCollectionLayerBowling.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC34C542046B8630058ACC3 /* CustomCollectionLayerBowling.swift */; };
+		CED6DD3820E11C93008D846A /* injury.json in Resources */ = {isa = PBXBuildFile; fileRef = CED6DD3720E11C92008D846A /* injury.json */; };
 		CEF38320203D419300FB5838 /* PlayerDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF3831E203D419300FB5838 /* PlayerDetailViewController.m */; };
 		CEF38321203D419300FB5838 /* PlayerDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF3831F203D419300FB5838 /* PlayerDetailViewController.xib */; };
 		CEF38326203D6BC200FB5838 /* PlayerDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF38324203D6BC200FB5838 /* PlayerDetailTableViewCell.m */; };
@@ -956,6 +957,7 @@
 		CEC34C332046B2A10058ACC3 /* RecentFitnessGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentFitnessGraph.m; sourceTree = "<group>"; };
 		CEC34C342046B2A10058ACC3 /* RecentFitnessGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentFitnessGraph.h; sourceTree = "<group>"; };
 		CEC34C542046B8630058ACC3 /* CustomCollectionLayerBowling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionLayerBowling.swift; sourceTree = "<group>"; };
+		CED6DD3720E11C92008D846A /* injury.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = injury.json; sourceTree = "<group>"; };
 		CEF3831D203D419300FB5838 /* PlayerDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerDetailViewController.h; sourceTree = "<group>"; };
 		CEF3831E203D419300FB5838 /* PlayerDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayerDetailViewController.m; sourceTree = "<group>"; };
 		CEF3831F203D419300FB5838 /* PlayerDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerDetailViewController.xib; sourceTree = "<group>"; };
@@ -2239,6 +2241,7 @@
 				CE76ECDF2041498D00E183EA /* TTView.m */,
 				CE76ECE120416A3800E183EA /* UIImage+GetPoints.h */,
 				CE76ECE220416AE100E183EA /* UIImage+GetPoints.m */,
+				CED6DD3720E11C92008D846A /* injury.json */,
 			);
 			path = InjurySelectionVC;
 			sourceTree = "<group>";
@@ -2857,6 +2860,7 @@
 				CEB2B97820257BBD00E7D5E4 /* Montserrat-ExtraLight.otf in Resources */,
 				04B27F23202DA48E00ECB699 /* PlayerProfileChartsVC.xib in Resources */,
 				04249B79203D466200B13889 /* NutritionVC.xib in Resources */,
+				CED6DD3820E11C93008D846A /* injury.json in Resources */,
 				CEB2B98320257BBD00E7D5E4 /* Montserrat-ThinItalic.otf in Resources */,
 				04BC4B44208632E900CEB23E /* VideoGalleryVC.xib in Resources */,
 				CE6DD96C20C7AEA50026FE23 /* LandingViewController.xib in Resources */,

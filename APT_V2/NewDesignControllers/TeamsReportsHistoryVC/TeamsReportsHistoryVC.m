@@ -166,6 +166,7 @@
         }
         else if(index == 1)
         {
+            objrep.selectionBaseKey = @"reportselected";
             objrep.view.frame = CGRectMake(0, 0, self.swipeView.bounds.size.width, self.swipeView.bounds.size.height);
             objrep.naviHeight.constant = 0;
             objrep.navi_View.hidden = YES;

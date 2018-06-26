@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,7 +34,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="1500"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="1750"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wcD-8H-5nu">
@@ -45,10 +45,10 @@
                     </constraints>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWM-De-msy">
-                    <rect key="frame" x="0.0" y="60" width="375" height="1440"/>
+                    <rect key="frame" x="0.0" y="60" width="375" height="1790"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tAi-EV-s7t">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="1520"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="1700"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B0D-7J-eY4">
                                     <rect key="frame" x="5" y="10" width="365" height="40"/>
@@ -293,7 +293,7 @@
                                     </constraints>
                                 </view>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ra0-aC-fGH">
-                                    <rect key="frame" x="5" y="630" width="365" height="885"/>
+                                    <rect key="frame" x="5" y="630" width="365" height="1115"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="3Tb-pN-ckh">
                                         <size key="itemSize" width="300" height="825"/>
@@ -331,7 +331,7 @@
                                 <constraint firstItem="0md-SM-aFE" firstAttribute="leading" secondItem="tAi-EV-s7t" secondAttribute="leading" constant="5" id="JuG-dh-dDC"/>
                                 <constraint firstAttribute="trailing" secondItem="B0D-7J-eY4" secondAttribute="trailing" constant="5" id="LPu-Db-iBn"/>
                                 <constraint firstItem="OBj-FN-SFG" firstAttribute="leading" secondItem="tAi-EV-s7t" secondAttribute="leading" constant="5" id="La9-Fl-cTc"/>
-                                <constraint firstAttribute="height" constant="1520" id="N9p-95-jab">
+                                <constraint firstAttribute="height" constant="1700" id="N9p-95-jab">
                                     <variation key="heightClass=regular-widthClass=regular" constant="1440"/>
                                 </constraint>
                                 <constraint firstAttribute="trailing" secondItem="ra0-aC-fGH" secondAttribute="trailing" constant="5" id="Oyn-1D-wYT"/>
@@ -350,7 +350,7 @@
                                 <constraint firstAttribute="trailing" secondItem="OBj-FN-SFG" secondAttribute="trailing" constant="5" id="lZU-pX-R9t"/>
                                 <constraint firstItem="kIT-Du-0L4" firstAttribute="top" secondItem="asC-yk-J2e" secondAttribute="bottom" constant="5" id="nN8-KS-ZXU"/>
                                 <constraint firstItem="ncJ-Xw-e5X" firstAttribute="leading" secondItem="tAi-EV-s7t" secondAttribute="leading" constant="5" id="qpj-uW-zJ0"/>
-                                <constraint firstAttribute="bottom" secondItem="ra0-aC-fGH" secondAttribute="bottom" constant="5" id="v6w-AZ-dpz"/>
+                                <constraint firstAttribute="bottom" secondItem="ra0-aC-fGH" secondAttribute="bottom" constant="-45" id="v6w-AZ-dpz"/>
                                 <constraint firstItem="ucT-r2-2tn" firstAttribute="leading" secondItem="tAi-EV-s7t" secondAttribute="leading" constant="5" id="xcK-2t-ika"/>
                                 <constraint firstAttribute="trailing" secondItem="kIT-Du-0L4" secondAttribute="trailing" constant="5" id="xjl-ob-QYQ"/>
                             </constraints>
@@ -360,7 +360,7 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="tAi-EV-s7t" secondAttribute="trailing" id="VRC-PH-MFd"/>
                         <constraint firstItem="tAi-EV-s7t" firstAttribute="top" secondItem="qWM-De-msy" secondAttribute="top" id="Zqo-s7-G6K"/>
-                        <constraint firstAttribute="bottom" secondItem="tAi-EV-s7t" secondAttribute="bottom" id="d5x-Td-8KF"/>
+                        <constraint firstAttribute="bottom" secondItem="tAi-EV-s7t" secondAttribute="bottom" constant="90" id="d5x-Td-8KF"/>
                         <constraint firstItem="tAi-EV-s7t" firstAttribute="leading" secondItem="qWM-De-msy" secondAttribute="leading" id="rFU-zJ-wu1"/>
                     </constraints>
                 </scrollView>
@@ -369,7 +369,7 @@
             <constraints>
                 <constraint firstItem="tAi-EV-s7t" firstAttribute="width" secondItem="wcD-8H-5nu" secondAttribute="width" id="5Gk-xY-Bjr"/>
                 <constraint firstItem="qWM-De-msy" firstAttribute="top" secondItem="wcD-8H-5nu" secondAttribute="bottom" id="EKj-Jq-BEy"/>
-                <constraint firstItem="qWM-De-msy" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="F4q-eg-wii"/>
+                <constraint firstItem="qWM-De-msy" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" constant="100" id="F4q-eg-wii"/>
                 <constraint firstItem="wcD-8H-5nu" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Fcr-7Q-JsL"/>
                 <constraint firstItem="wcD-8H-5nu" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="Hv3-bY-5pj"/>
                 <constraint firstItem="qWM-De-msy" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="QBd-c5-goF"/>

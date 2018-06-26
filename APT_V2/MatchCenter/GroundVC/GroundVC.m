@@ -333,7 +333,16 @@
     arr = [NSArray new];
     arr = [self checkNull:[battingDict valueForKey:@"BattingInnFirstChartResults"]];
     //Bar Charts
+    if(arr.count>0)
+    {
     [self createBarChart];
+    }
+    else
+    {
+        arr = [NSArray new];
+        [self createBarChart];
+        
+    }
 }
 
 - (IBAction)innings2ButtonTapped:(id)sender {
@@ -355,7 +364,16 @@
     arr = [NSArray new];
     arr = [self checkNull:[battingDict valueForKey:@"BattingInnSecondChartResults"]];
     //Bar Charts
+    if(arr.count>0)
+    {
     [self createBarChart];
+    }
+    else
+    {
+        arr = [NSArray new];
+        [self createBarChart];
+        
+    }
 }
 
 
@@ -1044,7 +1062,16 @@
     
     arr = [self checkNull:[battingDict valueForKey:str_ChartResult]];
     //Bar Charts
+    if(arr.count>0)
+    {
     [self createBarChart];
+    }
+    else
+    {
+        arr = [NSArray new];
+        [self createBarChart];
+       
+    }
     
 }
 #pragma mark -    PieChartViewDelegate
@@ -1508,8 +1535,15 @@
 - (NSMutableArray *)xDataForBarChart{
     NSMutableArray *array = [[NSMutableArray alloc] init];
     //[array addObject:@""];
+    if(arr.count>0)
+    {
     for (int i = 0; i < arr.count; i++) {
             [array addObject:[NSString stringWithFormat:@"%@", [[arr objectAtIndex:i] valueForKey:@"BFOvers"]]];
+    }
+    }
+    else
+    {
+        return nil;
     }
     return  array;
 }
@@ -1519,10 +1553,20 @@
 }
 
 - (UIColor *)colorForTheBarWithBarNumber:(NSInteger)barNumber{
-    NSInteger aRedValue = arc4random()%255;
-    NSInteger aGreenValue = arc4random()%255;
-    NSInteger aBlueValue = arc4random()%255;
-    UIColor *randColor = [UIColor colorWithRed:aRedValue/255.0f green:aGreenValue/255.0f blue:aBlueValue/255.0f alpha:1.0f];
+//    NSInteger aRedValue = arc4random()%255;
+//    NSInteger aGreenValue = arc4random()%255;
+//    NSInteger aBlueValue = arc4random()%255;
+//    UIColor *randColor = [UIColor colorWithRed:aRedValue/255.0f green:aGreenValue/255.0f blue:aBlueValue/255.0f alpha:1.0f];
+    
+    UIColor *randColor;
+    if(barNumber == 0)
+    {
+        randColor = [UIColor colorWithRed:45/255.0f green:176/255.0f blue:216/255.0f alpha:1.0f];
+    }
+    else if(barNumber == 1)
+    {
+         randColor = [UIColor colorWithRed:126/255.0f green:196/255.0f blue:68/255.0f alpha:1.0f];
+    }
     return randColor;
 }
 
@@ -1551,19 +1595,30 @@
     if(barNumber==0)
     {
         array = [[NSMutableArray alloc] init];
+        if(arr.count>0)
+        {
         for (int i = 0; i < arr.count; i++) {
             // [array addObject:[NSNumber numberWithLong:random() % 100]];
             [array addObject:[[arr objectAtIndex:i]valueForKey:@"BFScore"]];
+        }
+        }
+        else
+        {
+            return nil;
         }
     }
     if(barNumber==1)
     {
         array = [[NSMutableArray alloc] init];
+        if(arr.count>0)
+        {
         for (int i = 0; i < arr.count; i++) {
             // [array addObject:[NSNumber numberWithLong:random() % 100]];
             [array addObject:[[arr objectAtIndex:i]valueForKey:@"BSRuns"]];
         }
+        }
     }
+    
     return array;
 }
 

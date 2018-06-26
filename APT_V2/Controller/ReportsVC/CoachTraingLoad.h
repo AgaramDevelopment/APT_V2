@@ -15,4 +15,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *MonthlyBtn;
 @property (strong, nonatomic) IBOutlet UIButton *WeeklyBtn;
 @property (strong, nonatomic) IBOutlet UIButton *DailyBtn;
+@property (strong, nonatomic)  NSString *selectionBaseKey;
+
 @end

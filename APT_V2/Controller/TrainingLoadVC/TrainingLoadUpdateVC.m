@@ -1359,10 +1359,49 @@ if([_isToday isEqualToString:@"yes"])
 }
 
 - (UIColor *)colorForValueInCircularChartWithIndex:(NSInteger)lineNumber{
-    NSInteger aRedValue = arc4random()%255;
-    NSInteger aGreenValue = arc4random()%255;
-    NSInteger aBlueValue = arc4random()%255;
-    UIColor *randColor = [UIColor colorWithRed:aRedValue/255.0f green:aGreenValue/255.0f blue:aBlueValue/255.0f alpha:1.0f];
+//    NSInteger aRedValue = arc4random()%255;
+//    NSInteger aGreenValue = arc4random()%255;
+//    NSInteger aBlueValue = arc4random()%255;
+//    UIColor *randColor = [UIColor colorWithRed:aRedValue/255.0f green:aGreenValue/255.0f blue:aBlueValue/255.0f alpha:1.0f];
+    
+    UIColor *randColor;
+    if(lineNumber == 0)
+    {
+        randColor = [UIColor colorWithRed:235/255.0f green:62/255.0f blue:114/255.0f alpha:1.0f];
+    }
+    else if(lineNumber == 1)
+    {
+        randColor = [UIColor colorWithRed:45/255.0f green:176/255.0f blue:216/255.0f alpha:1.0f];
+    }
+    else if(lineNumber == 2)
+    {
+        randColor = [UIColor colorWithRed:126/255.0f green:196/255.0f blue:68/255.0f alpha:1.0f];
+    }
+    else if(lineNumber == 3)
+    {
+        randColor = [UIColor colorWithRed:250/255.0f green:155/255.0f blue:54/255.0f alpha:1.0f];
+    }
+    else if(lineNumber == 4)
+    {
+        randColor = [UIColor colorWithRed:75/255.0f green:116/255.0f blue:216/255.0f alpha:1.0f];
+    }
+    else if(lineNumber == 5)
+    {
+        randColor = [UIColor colorWithRed:40/255.0f green:110/255.0f blue:60/255.0f alpha:1.0f];
+    }
+    else if(lineNumber == 6)
+    {
+        randColor = [UIColor lightGrayColor];
+    }
+    else if(lineNumber == 7)
+    {
+        randColor = [UIColor yellowColor];
+    }
+    else
+    {
+        randColor = [UIColor darkGrayColor];
+    }
+    
     return randColor;
 }
 

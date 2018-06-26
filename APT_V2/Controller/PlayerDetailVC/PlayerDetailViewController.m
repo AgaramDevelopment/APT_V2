@@ -11,6 +11,7 @@
 #import "InjuryAndIllnessVC.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "DropDownTableViewController.h"
+#import "ReportsVC.h"
 
 @interface PlayerDetailViewController () <ChartViewDelegate, IChartAxisValueFormatter, selectedDropDown>
 {
@@ -21,6 +22,7 @@
     UIBarStyle originalBarStyle;
     NSMutableDictionary* graphDict;
     BOOL isPOP;
+    ReportsVC *objrep;
 
 }
 

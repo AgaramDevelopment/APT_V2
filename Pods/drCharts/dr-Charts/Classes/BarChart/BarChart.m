@@ -12,10 +12,12 @@
 
 @interface BarChartDataRenderer : NSObject
 
+
 @property (nonatomic, strong) NSMutableArray *yAxisArray;
 @property (nonatomic, strong) UIColor *barColor;
 @property (nonatomic, strong) NSString *graphName;
 @property (nonatomic) CGFloat barWidth;
+
 
 @end
 
@@ -28,6 +30,8 @@
     
     CAShapeLayer *touchedLayer;
     CAShapeLayer *dataShapeLayer;
+    
+    
 }
 
 @property (nonatomic, strong) LegendView *legendView;
@@ -133,7 +137,7 @@
     }
     
     [self.graphView setNeedsDisplay];
-
+    
     [self addSubview:self.graphView];
     
     [self.graphScrollView addSubview:self.graphView];
@@ -147,37 +151,65 @@
 
 #pragma mark Draw Shape Layer
 - (void)createYAxisLine{
-    float minY = 0.0;
-    float maxY = 0.0;
+    
+    BarChartDataRenderer *barData;
+    barData = [self.barDataArray objectAtIndex:0];
+    NSMutableArray *values = barData.yAxisArray;
+    NSNumber *l = [values objectAtIndex:0];
+    for (int i = 1; i < values.count; i++) {
+        l = ([[values objectAtIndex:i]floatValue] > [l floatValue] ? [values objectAtIndex:i]:l);
+    }
+    NSLog(@"Largest = %@\n",l);
+    // _minY = 0;
+    int roundedUp = ceil([l floatValue]);
+    
+    
+    
+    BarChartDataRenderer *barData1;
+    barData1 = [self.barDataArray objectAtIndex:1];
+    NSMutableArray *values1 = barData1.yAxisArray;
+    NSNumber *ll = [values1 objectAtIndex:0];
+    for (int i = 1; i < values1.count; i++) {
+        ll = ([[values1 objectAtIndex:i]floatValue] > [ll floatValue] ? [values1 objectAtIndex:i]:ll);
+    }
+    NSLog(@"Largest = %@\n",l);
+    // _minY = 0;
+    int roundedUp1 = ceil([ll floatValue]);
+    
+    _minY = 0;
+    _maxY = MAX(roundedUp, roundedUp1);
+    
     
     for (BarChartDataRenderer *barData in self.barDataArray) {
         
         NSMutableArray *values = barData.yAxisArray;
+        
+        
         
         for (int j = 0; j < [values count]; j++) {
             if ([[values objectAtIndex:j] isKindOfClass:[NSNull class]]) {
                 continue;
             }
             
-            if ([[values objectAtIndex:j] floatValue] > maxY) {
-                maxY = [[values objectAtIndex:j] floatValue];
+            if ([[values objectAtIndex:j] floatValue] > _maxY) {
+                _maxY = [[values objectAtIndex:j] floatValue];
             }
             
-            if ([[values objectAtIndex:j] floatValue] < minY) {
-                minY = [[values objectAtIndex:j] floatValue];
+            if ([[values objectAtIndex:j] floatValue] < _minY) {
+                _minY = [[values objectAtIndex:j] floatValue];
             }
         }
     }
     
-    int gridYCount = 5;
+    int gridYCount = 4;
     
-    float step = (maxY - minY) / gridYCount;
+    float step = (_maxY - _minY) / gridYCount;
     
-    stepY = (HEIGHT(self.graphView) - (OFFSET_Y * 2)) / (maxY - minY);
+    stepY = (HEIGHT(self.graphView) - (OFFSET_Y * 2)) / (_maxY - _minY);
     
     for (int i = 0; i <= gridYCount; i++) {
         int y = (i * step) * stepY;
-        float value = i * step + minY;
+        float value = i * step + _minY;
         
         CGPoint startPoint = CGPointMake(OFFSET_X, HEIGHT(self.graphView) - (y + OFFSET_Y));
         CGPoint endPoint = CGPointMake(WIDTH(self.graphView) - OFFSET_X, HEIGHT(self.graphView) - (y + OFFSET_Y));
@@ -198,7 +230,7 @@
         }
         NSAttributedString *attrString = [LegendView getAttributedString:numberString withFont:self.textFont];
         CGSize size = [attrString boundingRectWithSize:CGSizeMake(WIDTH(self) - LEGEND_VIEW, MAXFLOAT) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin context:nil].size;
-
+        
         [self drawLineForGridWithStartPoint:startPoint endPoint:endPoint text:numberString textFrame:CGRectMake(INNER_PADDING, HEIGHT(self.graphView) -(y + OFFSET_Y + INNER_PADDING), size.width, size.height) drawGrid:drawGrid];
     }
 }
@@ -238,7 +270,7 @@
         NSAttributedString *attrString = [LegendView getAttributedString:text withFont:self.textFont];
         CGSize size = [attrString boundingRectWithSize:CGSizeMake(WIDTH(self) - LEGEND_VIEW, MAXFLOAT) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin context:nil].size;
         
-        [self drawLineForGridWithStartPoint:startPoint endPoint:endPoint text:text textFrame:CGRectMake(x + size.width/2, HEIGHT(self.graphView) - (size.height + INNER_PADDING), size.width, size.height) drawGrid:drawGrid];
+        [self drawLineForGridWithStartPoint:startPoint endPoint:endPoint text:text textFrame:CGRectMake(20+x + size.width/2, HEIGHT(self.graphView) - (size.height + INNER_PADDING), size.width, size.height) drawGrid:drawGrid];
     }
 }
 
@@ -247,7 +279,7 @@
     for (BarChartDataRenderer *barData in self.barDataArray) {
         int x = 0;
         int y = 0;
-                
+        
         CGPoint startPoint;
         CGPoint endPoint;
         
@@ -269,6 +301,21 @@
             [shapeLayer setShadowColor:[[UIColor clearColor] CGColor]];
             [shapeLayer setShadowOpacity:0.0f];
             [shapeLayer setValue:[barData.yAxisArray objectAtIndex:i] forKey:@"data"];
+            
+            
+            int value = [[barData.yAxisArray objectAtIndex:i] intValue] *stepY;
+            
+            CATextLayer *textLayer = [[CATextLayer alloc] init];
+            [textLayer setFont:(__bridge CFTypeRef _Nullable)self.textFont];
+            [textLayer setFontSize:self.textFontSize];
+            [textLayer setFrame:CGRectMake(startPoint.x-30, HEIGHT(self.graphView)-value-30, 30, 30)];
+            [textLayer setString:[barData.yAxisArray objectAtIndex:i]];
+            [textLayer setAlignmentMode:kCAAlignmentLeft];
+            [textLayer setForegroundColor:[UIColor blackColor].CGColor];
+            [textLayer setShouldRasterize:YES];
+            [textLayer setRasterizationScale:[[UIScreen mainScreen] scale]];
+            [textLayer setContentsScale:[[UIScreen mainScreen] scale]];
+            [self.graphView.layer addSublayer:textLayer];
             
             [CATransaction begin];
             
@@ -301,11 +348,13 @@
 #pragma mark Draw Grid Lines
 - (void)drawLineForGridWithStartPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint text:(NSString *)text textFrame:(CGRect)frame drawGrid:(BOOL)draw{
     if (draw) {
+        
         CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
         [shapeLayer setPath:[[self drawPathWithStartPoint:startPoint endPoint:endPoint] CGPath]];
         [shapeLayer setStrokeColor:self.gridLineColor.CGColor];
         [shapeLayer setLineWidth:self.gridLineWidth];
         [self.graphView.layer addSublayer:shapeLayer];
+        
     }
     
     CATextLayer *textLayer = [[CATextLayer alloc] init];
@@ -313,7 +362,7 @@
     [textLayer setFontSize:self.textFontSize];
     [textLayer setFrame:frame];
     [textLayer setString:text];
-    [textLayer setAlignmentMode:kCAAlignmentCenter];
+    [textLayer setAlignmentMode:kCAAlignmentRight];
     [textLayer setForegroundColor:self.textColor.CGColor];
     [textLayer setShouldRasterize:YES];
     [textLayer setRasterizationScale:[[UIScreen mainScreen] scale]];
@@ -335,7 +384,7 @@
 
 - (UIBezierPath *)drawBarPathWithStartPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint{
     UIBezierPath *path = [UIBezierPath bezierPathWithRect:CGRectMake(startPoint.x, startPoint.y, endPoint.x - startPoint.x, endPoint.y - startPoint.y)];
-  
+    
     [path closePath];
     [path stroke];
     
@@ -423,7 +472,7 @@
     
     if (self.customMarkerView != nil) {
         CGRect rect = CGPathGetBoundingBox(touchedLayer.path);
-
+        
         [self.customMarkerView setFrame:CGRectMake(rect.origin.x, rect.origin.y - HEIGHT(self.customMarkerView), WIDTH(self.customMarkerView), HEIGHT(self.customMarkerView))];
         [self.graphView addSubview:self.customMarkerView];
     }
@@ -435,7 +484,7 @@
     
     NSAttributedString *attrString = [LegendView getAttributedString:[NSString stringWithFormat:@"%@",text] withFont:self.textFont];
     CGSize size = [attrString boundingRectWithSize:CGSizeMake(WIDTH(self), MAXFLOAT) options:NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin context:nil].size;
-
+    
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(rect.origin.x, rect.origin.y - size.height, size.width + 2*INNER_PADDING, size.height) cornerRadius:3];
     [path closePath];
     [path stroke];

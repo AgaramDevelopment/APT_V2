@@ -61,5 +61,6 @@
 @property (strong, atomic) NSString*  TeamCode;
 @property (weak, nonatomic) IBOutlet UIButton *btnAssment;
 @property (weak, nonatomic) IBOutlet UIButton *btnOnsetDate;
+@property (weak, nonatomic) IBOutlet UITextField *txtInjuryName;
 
 @end

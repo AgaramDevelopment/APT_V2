@@ -20,6 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -62,6 +65,7 @@
         objCustomNavigation.menu_btn.hidden =NO;
         objCustomNavigation.btn_back.hidden =YES;
         [objCustomNavigation.menu_btn addTarget:revealController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
+        [objCustomNavigation.menu_btn addTarget:self action:@selector(didClickMenuFordismissKeyboard:) forControlEvents:UIControlEventTouchUpInside];
         }
     [self.navi_View addSubview:objCustomNavigation.view];
         //    objCustomNavigation.tittle_lbl.text=@"";
@@ -168,6 +172,28 @@
         [textField resignFirstResponder];
     }
     return YES;
+}
+
+//To Hide Keyboard
+-(void)dismissKeyboard {
+    [oldPasswordTF resignFirstResponder];
+    [newwPasswordTF resignFirstResponder];
+    [confirmNewPasswordTF resignFirstResponder];
+}
+-(IBAction)didClickMenuFordismissKeyboard:(id)sender
+{
+    [oldPasswordTF resignFirstResponder];
+    [newwPasswordTF resignFirstResponder];
+    [confirmNewPasswordTF resignFirstResponder];
+}
+
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+    [oldPasswordTF endEditing:YES];
+//    [_userTxt resignFirstResponder];
+    
 }
 
 @end

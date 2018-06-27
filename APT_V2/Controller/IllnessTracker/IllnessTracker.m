@@ -78,6 +78,10 @@
     self.filePopView.hidden = YES;
     objWebservice =[[WebService alloc]init];
     
+    //TapGesture for close filePopView
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissFilePopView)];
+    [self.view addGestureRecognizer:tap];
+    
         //UIDatePicker
     datePicker = [[UIDatePicker alloc] init];
     
@@ -256,6 +260,18 @@
         if([selectExpertOpinionCode isEqualToString:@"MSC215"]) {
             [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
             [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
+            
+            //For Update Images to buttons
+            /*
+            [self.xRayBtn setTitle:@"" forState:UIControlStateNormal];
+            [self.ctScanBtn setTitle:@"" forState:UIControlStateNormal];
+            [self.mriBtn setTitle:@"" forState:UIControlStateNormal];
+            [self.bloodTestBtn setTitle:@"" forState:UIControlStateNormal];
+            [self.xRayBtn setBackgroundImage:[self checkNull:[self.objSelectobjIllnessArray valueForKey:@"XRaysName"]] forState:UIControlStateNormal];
+            [self.ctScanBtn setBackgroundImage:[self checkNull:[self.objSelectobjIllnessArray valueForKey:@"CTScansName"]] forState:UIControlStateNormal];
+            [self.mriBtn setBackgroundImage:[self checkNull:[self.objSelectobjIllnessArray valueForKey:@"MriScansName"]] forState:UIControlStateNormal];
+            [self.bloodTestBtn setBackgroundImage:[self checkNull:[self.objSelectobjIllnessArray valueForKey:@"BloodTestName"]] forState:UIControlStateNormal];
+            */
         } else {
             [self.expertYesBtn setImage:[UIImage imageNamed:@"radio_off"] forState:UIControlStateNormal];
             [self.expertNoBtn setImage:[UIImage imageNamed:@"radio_on"] forState:UIControlStateNormal];
@@ -771,12 +787,25 @@
     NSString *savedImagePath =   [documentsDirectory stringByAppendingPathComponent:objPath];
     if(isXray ==YES) {
         self.xrayLbl.text =savedImagePath;
+//        self.xRayImageView.image = [UIImage imageNamed:savedImagePath];
+        [self.xRayBtn setTitle:@"" forState:UIControlStateNormal];
+//        [self.xRayBtn setImage:image forState:UIControlStateNormal];
+        [self.xRayBtn setBackgroundImage:image forState:UIControlStateNormal];
     } else if (isCT ==YES) {
         self.CTScanLbl.text =savedImagePath;
+        [self.ctScanBtn setTitle:@"" forState:UIControlStateNormal];
+//        [self.ctScanBtn setImage:image forState:UIControlStateNormal];
+        [self.ctScanBtn setBackgroundImage:image forState:UIControlStateNormal];
     } else if (isMRI ==YES) {
         self.MRILbl.text =savedImagePath;
+        [self.mriBtn setTitle:@"" forState:UIControlStateNormal];
+//        [self.mriBtn setImage:image forState:UIControlStateNormal];
+        [self.mriBtn setBackgroundImage:image forState:UIControlStateNormal];
     } else if (isBlood ==YES) {
         self.BloodTestLbl.text =savedImagePath;
+        [self.bloodTestBtn setTitle:@"" forState:UIControlStateNormal];
+//        [self.bloodTestBtn setImage:image forState:UIControlStateNormal];
+        [self.bloodTestBtn setBackgroundImage:image forState:UIControlStateNormal];
     }
     imageToPost = image;
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -974,6 +1003,15 @@
         self.CTScanLbl.text =@"";
         self.MRILbl.text =@"";
         self.BloodTestLbl.text=@"";
+    
+        [self.xRayBtn setTitle:@"F1" forState:UIControlStateNormal];
+        [self.ctScanBtn setTitle:@"F2" forState:UIControlStateNormal];
+        [self.mriBtn setTitle:@"F3" forState:UIControlStateNormal];
+        [self.bloodTestBtn setTitle:@"F4" forState:UIControlStateNormal];
+        [self.xRayBtn setBackgroundImage:@"" forState:UIControlStateNormal];
+        [self.ctScanBtn setBackgroundImage:@"" forState:UIControlStateNormal];
+        [self.mriBtn setBackgroundImage:@"" forState:UIControlStateNormal];
+        [self.bloodTestBtn setBackgroundImage:@"" forState:UIControlStateNormal];
     }
     else
     {
@@ -1101,4 +1139,13 @@
                    });
 }
 
+- (void)dismissFilePopView {
+    self.filePopView.hidden = YES;
+    isSelectPop = NO;
+    //To clear Label text
+    self.xrayLbl.text =@"";
+    self.CTScanLbl.text =@"";
+    self.MRILbl.text =@"";
+    self.BloodTestLbl.text=@"";
+}
 @end

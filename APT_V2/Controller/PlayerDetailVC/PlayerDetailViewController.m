@@ -13,10 +13,11 @@
 #import "DropDownTableViewController.h"
 #import "ReportsVC.h"
 
+
 @interface PlayerDetailViewController () <ChartViewDelegate, IChartAxisValueFormatter, selectedDropDown>
 {
     NSMutableArray* TableArray;
-    NSArray<NSString *> *activities;
+    NSMutableArray<NSString *> *activities;
     UIColor *originalBarBgColor;
     UIColor *originalBarTintColor;
     UIBarStyle originalBarStyle;
@@ -56,7 +57,7 @@
     
 //    activities = @[ @"Burger", @"Steak", @"Salad", @"Pasta", @"Pizza" ];
     graphDict = [NSMutableDictionary new];
-    [self chartConfiguration];
+    //[self chartConfiguration];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -112,14 +113,17 @@
     spiderChartView.webAlpha = 1.0;
     spiderChartView.backgroundColor = UIColor.whiteColor;
     spiderChartView.sizeToFit;
-//    RadarMarkerView *marker = (RadarMarkerView *)[RadarMarkerView viewFromXib];
+    
+//    RadarMarkerView *marker = (RadarMarkerView *)[RadarMarkerView viewFromXibIn:nil];
 //    marker.chartView = spiderChartView;
 //    spiderChartView.marker = marker;
     
+    
+    
     ChartXAxis *xAxis = spiderChartView.xAxis;
     xAxis.labelFont = [UIFont fontWithName:@"Montserrat-Light" size:9.f];
-//    xAxis.xOffset = 0.0;
-//    xAxis.yOffset = 0.0;
+   // xAxis.xOffset = 0.0;
+    //xAxis.yOffset = 0.0;
     xAxis.labelCount = 4;
     xAxis.axisMinimum = 0.0;
     xAxis.axisMaximum = 1.0;
@@ -127,11 +131,32 @@
     xAxis.labelTextColor = UIColor.blackColor;
     xAxis.drawLabelsEnabled = TRUE;
     
+    
+    
+    NSMutableArray *values = [graphDict valueForKey:@"set1"];
+    NSNumber *number1 = [[values objectAtIndex:0] valueForKey:@"value"];
+    for (int i = 1; i < values.count; i++) {
+        number1 = ([[[values objectAtIndex:i] valueForKey:@"value"]floatValue] > [number1 floatValue] ? [[values objectAtIndex:i] valueForKey:@"value"]:number1);
+    }
+    int roundedUp = ceil([number1 floatValue]);
+    
+    
+    NSMutableArray *values1 = [graphDict valueForKey:@"set2"];
+    NSNumber *number2 = [[values1 objectAtIndex:0] valueForKey:@"value"];
+    for (int i = 1; i < values1.count; i++) {
+        number2 = ([[[values1 objectAtIndex:i] valueForKey:@"value"]floatValue] > [number2 floatValue] ? [[values1 objectAtIndex:i] valueForKey:@"value"]:number2);
+    }
+    int roundedUp1 = ceil([number2 floatValue]);
+    
+    
+    
+    
+    
     ChartYAxis *yAxis = spiderChartView.yAxis;
     yAxis.labelFont = [UIFont fontWithName:@"Montserrat-Light" size:9.f];
     yAxis.labelCount = 4;
     yAxis.axisMinimum = 0.0;
-    yAxis.axisMaximum = 40.0;
+    yAxis.axisMaximum = MAX(roundedUp, roundedUp1);
     yAxis.labelTextColor = UIColor.blackColor;
     yAxis.drawLabelsEnabled = true;
     yAxis.valueFormatter = self;
@@ -444,8 +469,8 @@
                     
                    NSArray* reduce = [self reduceTestName:[[TableArray valueForKey:@"homeFitness"] valueForKey:@"testName"]];
                     activities = reduce;
-                    [self setChartData:graphDict];
-                    [self.spiderChartView notifyDataSetChanged];
+                    //[self setChartData:graphDict];
+                    //[self.spiderChartView notifyDataSetChanged];
 
                     NSString* strDate = [[[TableArray valueForKey:@"testDates"] firstObject] valueForKey:@"testDate"];
                     [self fitnessGraphWebservicebyDate:strDate];
@@ -522,9 +547,16 @@
         if(responseObject >0)
         {
             if ([[responseObject valueForKey:@"homeFitness"] count]) {
-                NSArray* reduce = [self reduceTestName:[[TableArray valueForKey:@"homeFitness"] valueForKey:@"testName"]];
-                activities = reduce;
+                NSArray* reduce = [self reduceTestName:[[responseObject valueForKey:@"homeFitness"] valueForKey:@"testName"]];
+                //activities = reduce;
+                
+                for (NSString* temp in reduce) {
+                    [activities addObject:temp];
+                }
+                
                 [graphDict setValue:[responseObject valueForKey:@"homeFitness"] forKey:@"set2"];
+                
+                [self chartConfiguration];
                 [self setChartData:graphDict];
                 [self.spiderChartView notifyDataSetChanged];
                 

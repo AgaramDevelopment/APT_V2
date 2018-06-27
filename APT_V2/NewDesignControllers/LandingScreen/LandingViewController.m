@@ -2110,7 +2110,7 @@ typedef enum : NSUInteger {
     NSString *usercode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
     // NSString *usercode = @"USM0000107";
     NSString *clientcode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-    NSString *count =  @"10";
+    NSString *count =  @"0";
     
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];

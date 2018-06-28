@@ -154,6 +154,17 @@
 }
 -(void)MatchTypeService
 {
+    /*
+     
+     Method Name : LOADSESSIONSUMMARY
+     MEthod Type : POST
+     MEthod Format : Query string
+     Parameters : match code/ match status
+http://13.126.151.253:9001/AGAPTService.svc/LOADSESSIONSUMMARY/DMSC11600224DB2663B20170820185600063/MSC215
+     
+     */
+    
+    
     [AppCommon showLoading];
     objWebservice = [[WebService alloc]init];
     [objWebservice matchtypesummary :MatchTypeKey :self.matchcode :matchstatus  success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -194,6 +205,17 @@
 
 -(void)OdiService1
 {
+    /*
+     Method Name : LOADSESSIONSUMMARYSINGLEDAYDETAILS
+     MEthod Type : POST
+     MEthod Format : Query string
+     Parameters : matchcode/ match type code/ session no/ inns no
+     
+     http://13.126.151.253:9001/AGAPTService.svc/LOADSESSIONSUMMARYSINGLEDAYDETAILS/DMSC11600224DB2663B20170820185600063/MSC116/2/1
+
+     */
+    
+    
     [AppCommon showLoading];
     objWebservice = [[WebService alloc]init];
     [objWebservice SingledaySession :SingledayKey :self.matchcode :matchTypeCode:sessionNo:innNo  success:^(AFHTTPRequestOperation *operation, id responseObject) {

@@ -86,8 +86,8 @@ int headdingCount = 0;
     self.matchHeadding = appDel.matchHeaderDetails;
     self.isTest = appDel.isTest;
     
-    [self.odiInn1Btn setTitle:appDel.TeamB forState:UIControlStateNormal];
-    [self.odiInn2Btn setTitle:appDel.TeamA forState:UIControlStateNormal];
+    [self.odiInn1Btn setTitle:appDel.TeamA forState:UIControlStateNormal];
+    [self.odiInn2Btn setTitle:appDel.TeamB forState:UIControlStateNormal];
 
     self.tblView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
@@ -679,6 +679,14 @@ int headdingCount = 0;
 
 -(void) loadFieldSummary
 {
+    
+    /*
+     Method Name : LOADFIELDSUMMARY
+     MEthod Type : POST
+     MEthod Format : Query string
+     Parameters : match code/ st
+     
+     */
     
     [AppCommon showLoading];
 

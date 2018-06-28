@@ -2719,6 +2719,16 @@
 -(void)ScoreWebservice
 {
     
+    /*
+     Method_Name    : FETCHSCORECARD
+     Type           : POST
+     parameters : {
+                 Competitioncode = "";
+                 MatchCode = DMSC11600224DB2663B20170820185600063;
+                 Teamcode = "";
+             }
+     */
+    
     if([COMMON isInternetReachable])
     {
         
@@ -3019,6 +3029,13 @@
 
 -(NSMutableDictionary *)WagonWheelWebservice
 {
+    /*
+     Method Name : GETSCORECARDBATTINGSPIDERWAGONWHEEL
+     Method : POST
+     PARAMETERs: playercode/matchcode/inns no
+     
+     */
+    
     NSMutableDictionary *dic1 = [[NSMutableDictionary alloc]init];
     
     [objWebservice BattingWagonWheel:ScorecardWagonKey  :playercode :self.matchCode :innno success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -3067,6 +3084,13 @@
 }
 -(NSMutableDictionary *)WagonWheelbowlWebservice
 {
+    /*
+     Method Name : GETSCORECARDBATTINGSPIDERWAGONWHEEL
+     Type : POST
+     Format : String Query
+     Parameters: (player code/ match code/ inns no)
+     */
+    
     NSMutableDictionary *dic1 = [[NSMutableDictionary alloc]init];
     
     [objWebservice BattingWagonWheel:ScorecardWagonKey  :playercode :self.matchCode :innno success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -3074,15 +3098,8 @@
         if(responseObject >0)
         {
             
-            
             [dic1 setValue:[responseObject valueForKey:@"BowlingSpiderWagonWheelValues"] forKey:@"Value"];
             [dic1 setValue:playercode forKey:@"playercode"];
-            
-            
-            
-            
-            
-            
         }
         
     } failure:^(AFHTTPRequestOperation *operation, id error) {
@@ -3096,6 +3113,13 @@
 
 -(NSMutableDictionary * )PitchmapWebservice
 {
+    /*
+     Method Name : FETCH_SCORECARD_PITCHMAP
+     Method : POST
+     Format : string Query (player code/match code/inns no)
+     
+     */
+    
     NSMutableDictionary *dic1 = [[NSMutableDictionary alloc]init];
     
     [objWebservice Battingpitchmap :ScorecardPitchmapKey  :playercode :self.matchCode :innno success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -3137,6 +3161,13 @@
 
 -(NSMutableDictionary *)PitchmapbowlWebservice
 {
+    /*
+     Method Name : FETCH_SCORECARD_PITCHMAP_BOWLING
+     Method Type : POST
+     Format : String Query Format
+     Parameters : player code/ match code/ inns no
+  */
+    
     objWebservice = [[WebService alloc]init];
     NSMutableDictionary *dic1 = [[NSMutableDictionary alloc]init];
     [objWebservice Bowlingpitchmap :@"FETCH_SCORECARD_PITCHMAP_BOWLING"  :playercode :self.matchCode :innno success:^(AFHTTPRequestOperation *operation, id responseObject) {

@@ -311,9 +311,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == _injuryTableView) {
         
-        InjuryVC *injuryObj = [InjuryVC new];
-        injuryObj.InjuryListArray = [injuryArray objectAtIndex:indexPath.row];
-        [self.navigationController pushViewController:injuryObj animated:YES];
+        NSString* injuryCode = [[injuryArray objectAtIndex:indexPath.row] valueForKey:@"InjuryCode"];
+        [self injuryDetailedView:injuryCode];
+//        InjuryVC *injuryObj = [InjuryVC new];
+//        injuryObj.InjuryListArray = [injuryArray objectAtIndex:indexPath.row];
+//        [self.navigationController pushViewController:injuryObj animated:YES];
+
     }
     
     if (tableView == self.illnessTableView) {
@@ -323,6 +326,60 @@
         illnessObj.objSelectobjIllnessArray = [illnessArray objectAtIndex:indexPath.row];
         [self.navigationController pushViewController:illnessObj animated:YES];
     }
+}
+
+
+-(void)injuryDetailedView:(NSString* )injuryCode{
+    
+    /*
+     FETCHINJURIESDETAILS
+                     {
+                     "ClientCode":"CLI0000001",
+                     "InjuryCode":"INJ0000001"
+                     }
+     
+     */
+    
+    
+    if(![COMMON isInternetReachable])
+        return;
+    
+    [AppCommon showLoading];
+    
+    NSString *URLString =  URL_FOR_RESOURCE(@"FETCHINJURIESDETAILS");
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPRequestSerializer *requestSerializer = [AFJSONRequestSerializer serializer];
+    [requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    manager.requestSerializer = requestSerializer;
+    
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    if(clientCode)   [dic    setObject:clientCode     forKey:@"ClientCode"];
+    if(injuryCode)   [dic    setObject:injuryCode     forKey:@"InjuryCode"];
+    NSLog(@"parameters : %@",dic);
+    [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"response ; %@",responseObject);
+        
+//        if ([[responseObject valueForKey:@"Status"] integerValue] == 1) {
+        
+            InjuryVC *injuryObj = [InjuryVC new];
+            injuryObj.InjuryListArray = [responseObject valueForKey:@"InjuryWebs"];
+            [self.navigationController pushViewController:injuryObj animated:YES];
+
+//        }
+        
+        [AppCommon hideLoading];
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failed");
+        [COMMON webServiceFailureError:error];
+        [AppCommon hideLoading];
+        
+    }];
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

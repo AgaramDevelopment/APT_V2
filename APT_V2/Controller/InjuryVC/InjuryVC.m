@@ -104,6 +104,8 @@ typedef enum {
 
 @synthesize TeamCode,txtInjuryName;
 
+@synthesize InjuryListArray;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -144,6 +146,8 @@ typedef enum {
     
     [self setInningsBySelection:@"1"];
     [self setInningsBySelection:@"6"];
+    
+    [self loadData:InjuryListArray];
 
 }
 
@@ -170,6 +174,8 @@ typedef enum {
                      ];
     return arr;
 }
+
+
 
 -(void)customnavigationmethod
 {
@@ -199,6 +205,10 @@ typedef enum {
     self.compliant_Txt.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.compliant_Txt.layer.borderWidth = 1.0;
     self.compliant_Txt.layer.masksToBounds = YES;
+    
+    self.txtInjuryName.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.txtInjuryName.layer.borderWidth = 1.0;
+    self.txtInjuryName.layer.masksToBounds = YES;
     
     self.comfirmatory_Txt.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.comfirmatory_Txt.layer.borderWidth = 1.0;
@@ -753,44 +763,6 @@ typedef enum {
 
 -(void)loadData:(NSArray *)array
 {
-    /*
-     BloodTestName = "";
-     CTScansName = "";
-     ChiefCompliant = "p[op[o";
-     ClientCode = "<null>";
-     CreatedBy = USM0000002;
-     DateOfAssessment = "09/01/2017";
-     ExpectedDateOfRecovery = "09/16/2017";
-     ExpertOptionTakenCode = MSC215;
-     GameCode = "";
-     InjuaryLocationCode = "<null>";
-     InjuaryOccuranceCode = MSC130;
-     InjuaryOccuranceSubCode = MSC133;
-     InjuryCaseCode1 = "<null>";
-     InjuryCauseCode = MSC213;
-     InjuryCode = INJ0000002;
-     InjuryLocationCode = MSC138;
-     InjuryLocationSubCode = MSC141;
-     InjuryLocationSubCode1 = "<null>";
-     InjuryName = "oip[o";
-     InjurySide1 = "<null>";
-     InjurySideCode = MSC170;
-     InjurySite1 = "<null>";
-     InjurySiteCode = MSC168;
-     InjuryTypeCode = MSC187;
-     InjuryTypeCode1 = "<null>";
-     Message = "<null>";
-     MriScansName = "";
-     MultiInjury = No;
-     OnSetDate = "09/08/2017";
-     OnSetType = MSC128;
-     PlayerCode = AMR0000010;
-     PlayerName = RohanKunnummal;
-     Status = 0;
-     TeamCode = "";
-     Vas = 3;
-     XRaysName = "";
-     */
     NSString* str_ass_date = [NSString stringWithFormat:@"Assessment Date %@",[array valueForKey:@"DateOfAssessment"]];
     NSString* str_onSet_date = [NSString stringWithFormat:@"OnSet Date %@",[array valueForKey:@"OnSetDate"]];
     NSString* str_chiefComplaint = [NSString stringWithFormat:@"%@",[array valueForKey:@"ChiefCompliant"]];
@@ -804,7 +776,18 @@ typedef enum {
     NSString* str_cause = [NSString stringWithFormat:@"%@",[array valueForKey:@"InjuryCauseCode"]];
     NSString* str_export_option = [NSString stringWithFormat:@"%@",[array valueForKey:@"ExpertOptionTakenCode"]];
     NSString* str_DOR = [NSString stringWithFormat:@"%@",[array valueForKey:@"ExpectedDateOfRecovery"]];
-
+    
+        if (!InjuryListArray.count)
+            return;
+        
+        txtInjuryName.text = [[InjuryListArray firstObject] valueForKey:@"InjuryName"];
+        _btnAssment.titleLabel.text = [[InjuryListArray firstObject] valueForKey:@"DateOfAssessment"];
+        assDate = [[InjuryListArray firstObject] valueForKey:@"DateOfAssessment"];
+        
+        _btnOnsetDate.titleLabel.text = [[InjuryListArray firstObject] valueForKey:@"OnSetDate"];
+        onSetDate = [[InjuryListArray firstObject] valueForKey:@"OnSetDate"];
+        
+        _compliant_Txt.text = [[InjuryListArray firstObject] valueForKey:@"ChiefCompliant"];
     
 }
 
@@ -872,41 +855,76 @@ typedef enum {
     if(selectTeamCode)   [dic setObject:selectTeamCode forKey:@"TeamCode"];
     if(selectPlayerCode)   [dic setObject:selectPlayerCode forKey:@"PlayerCode"];
     
-    if(selectOnsetTypeCode)   [dic setObject:selectOnsetTypeCode forKey:@"OnSetType"];
-    else [AppCommon showAlertWithMessage:@"Please select OnSet Type"]; return;
+//    if(selectOnsetTypeCode)   [dic setObject:selectOnsetTypeCode forKey:@"OnSetType"];
+//    else [AppCommon showAlertWithMessage:@"Please select OnSet Type"]; return;
     
-    if(txtInjuryName.text.length > 0)[dic setObject:txtInjuryName.text forKey:@"InjuryName"];
-    else [AppCommon showAlertWithMessage:@"Please Enter Injury Name"]; return;
+    if(txtInjuryName.hasText)
+    {
+     [dic setObject:txtInjuryName.text forKey:@"InjuryName"];
+    }
+    else{
+        [AppCommon showAlertWithMessage:@"Please Enter Injury Name"]; return;
+    }
     
-    if(assDate) [dic setObject:assDate forKey:@"DateOfAssessment"];
-    else [AppCommon showAlertWithMessage:@"Please Select Assessment Date"]; return;
+    if(assDate){
+       [dic setObject:assDate forKey:@"DateOfAssessment"];
+    }
+    else {
+       [AppCommon showAlertWithMessage:@"Please Select Assessment Date"]; return;
+    }
     
-    if(onSetDate) [dic setObject:onSetDate forKey:@"OnSetDate"];
-    else [AppCommon showAlertWithMessage:@"Please Select Onset Date"]; return;
+    if(onSetDate){
+       [dic setObject:onSetDate forKey:@"OnSetDate"];
+    }
+    else{
+       [AppCommon showAlertWithMessage:@"Please Select Onset Date"]; return;
+    }
 
 
-    if(self.compliant_Txt.hasText)   [dic    setObject:self.compliant_Txt.text     forKey:@"ChiefCompliant"];
+    if(self.compliant_Txt.hasText){
+        [dic    setObject:self.compliant_Txt.text     forKey:@"ChiefCompliant"];
+    }
+    else{
+        [AppCommon showAlertWithMessage:@"Please chief complaint"]; return;
+    }
+    
     if(selectsliderValue)   [dic    setObject:selectsliderValue     forKey:@"Vas"];
     if(selectoccurancecode)   [dic    setObject:selectoccurancecode     forKey:@"InjuaryOccuranceCode"];
+    
      [dic setObject:@"" forKey:@"InjuaryOccuranceSubCode"];
      [dic setObject:@"" forKey:@"InjurySiteCode"];
 
-    if(injuryTypeCode)   [dic    setObject:injuryTypeCode forKey:@"InjuryTypeCode"];
-    else [AppCommon showAlertWithMessage:@"Please Select Assessment Date"]; return;
+    if(injuryTypeCode){
+         [dic    setObject:injuryTypeCode forKey:@"InjuryTypeCode"];
+    }
+    else {
+       [AppCommon showAlertWithMessage:@"Please Select Injury Type"]; return;
+    }
 
-    if(injuryCausecode)   [dic    setObject:injuryCausecode forKey:@"InjuryCauseCode"];
-    if(selectExpertOpinionCode)   [dic    setObject:selectExpertOpinionCode forKey:@"ExpertOptionTakenCode"];
+    if(injuryCausecode) {
+       [dic    setObject:injuryCausecode forKey:@"InjuryCauseCode"];
+    }else{
+         [AppCommon showAlertWithMessage:@"Please Select Injury cause"]; return;
+    }
     
-    if(imageArray.count) [dic setObject:imageArray forKey:@"lstInjuryLocations"];
-    else [AppCommon showAlertWithMessage:@"Please Select Injury location"]; return;
+    if(imageArray.count){
+        [dic setObject:imageArray forKey:@"lstInjuryLocations"];
+    }
+    else {
+       [AppCommon showAlertWithMessage:@"Please Select Multiple Injury location"]; return;
+    }
 
-    if(self.date_lbl.text)   [dic    setObject:self.date_lbl.text     forKey:@"ExpectedDateOfRecovery"];
-    else [AppCommon showAlertWithMessage:@"Please Select Expected Recovery Date"]; return;
+    if(self.date_lbl.text){
+         [dic    setObject:self.date_lbl.text     forKey:@"ExpectedDateOfRecovery"];
+    }
+    else {
+       [AppCommon showAlertWithMessage:@"Please Select Expected Recovery Date"]; return;
+    }
 
     if(usercode)   [dic    setObject:usercode forKey:@"CreatedBy"];
     
     [dic setObject:(self.expectedright_Btn.tag == 1 ? @"YES" : @"NO") forKey:@"ExpertOptionTakenCode"];
-    [dic setObject:(self.delay_Btn.tag == 1 ? @"" : @"") forKey:@"OnSetType"];
+    [dic setObject:(self.delay_Btn.tag == 1 ? @"MSC128" : @"MSC127") forKey:@"OnSetType"];
 
     if(xrData == nil)
     {
@@ -916,7 +934,6 @@ typedef enum {
         [dic    setObject:xrData     forKey:@"XRAYSFILE"];
     }
     [dic    setObject:@"Xray.png"     forKey:@"XRaysName"];
-    
     
     
     if(ctData == nil)
@@ -962,6 +979,169 @@ typedef enum {
         [COMMON webServiceFailureError:error];
     }];
     
+
+}
+
+-(void)updateWebservice{
+    
+    /*
+     UPDATEINJURIES
+     
+     {
+     "InjuryCode":"INJ0000001",
+     "CTSCANSFILE" : "",
+     "CTScansName" : "Ctscan.png",
+     "ChiefCompliant" : " test",
+     "ClientCode" : "CLI0000001",
+     "CreatedBy" : "USM0000010",
+     "DateOfAssessment" : "06-29-2018",
+     "ExpectedDateOfRecovery" : "06-29-2018",
+     "GameCode" : "",
+     "InjuaryOccuranceCode" : "MSC129",
+     "InjuaryOccuranceSubCode" : "",
+     "InjuryCauseCode": "MSC203",
+     "InjuryName" : "",
+     "InjurySiteCode" : "",
+     "InjuryTypeCode" : "MSC171",
+     "MRISCANSFILE" : "",
+     "MriScansName" : "Mriscan.png",
+     "OnSetDate" : "06-29-2018",
+     "OnSetType":"",
+     "ExpertOptionTakenCode":"YES",
+     "PlayerCode" : "AMR0000010",
+     "TeamCode" : "TEA0000003",
+     "Vas" : "2",
+     "XRAYSFILE" : "",
+     "XRaysName" : "Xray.png",
+     "lstInjuryLocations" :     [
+     {
+     "InjuryLocationCode" : "FRU55",
+     "InjurySiteCode" : "MSC165"
+     },
+     {
+     "InjuryLocationCode" : "FLU40",
+     "InjurySiteCode" : "MSC165"
+     },
+     {
+     "InjuryLocationCode" : "FRL74",
+     "InjurySiteCode" : "MSC165"
+     },
+     {
+     "InjuryLocationCode" : "FRL78",
+     "InjurySiteCode" : "MSC165"
+     }
+     ]
+     }
+     
+     */
+    
+    if(![COMMON isInternetReachable])
+        return;
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    NSString* cliendcode = [AppCommon GetClientCode];
+    if(cliendcode)   [dic    setObject:cliendcode     forKey:@"ClientCode"];
+    
+    NSString* RoleCode = [AppCommon GetUserRoleCode];
+    NSString* selectTeamCode = self.TeamCode;
+    NSString* selectPlayerCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"SelectedPlayerCode"];
+    NSString* userCode = [[NSUserDefaults standardUserDefaults] stringForKey:@"UserCode"];
+    
+    if(userCode)   [dic setObject:userCode forKey:@"CreatedBy"];
+    [dic setObject:@"" forKey:@"GameCode"];
+    if(selectTeamCode)   [dic setObject:selectTeamCode forKey:@"TeamCode"];
+    if(selectPlayerCode)   [dic setObject:selectPlayerCode forKey:@"PlayerCode"];
+    
+    if(selectOnsetTypeCode)   [dic setObject:selectOnsetTypeCode forKey:@"OnSetType"];
+    else [AppCommon showAlertWithMessage:@"Please select OnSet Type"]; return;
+    
+    if(txtInjuryName.text.length > 0)[dic setObject:txtInjuryName.text forKey:@"InjuryName"];
+    else [AppCommon showAlertWithMessage:@"Please Enter Injury Name"]; return;
+    
+    if(assDate) [dic setObject:assDate forKey:@"DateOfAssessment"];
+    else [AppCommon showAlertWithMessage:@"Please Select Assessment Date"]; return;
+    
+    if(onSetDate) [dic setObject:onSetDate forKey:@"OnSetDate"];
+    else [AppCommon showAlertWithMessage:@"Please Select Onset Date"]; return;
+    
+    
+    if(self.compliant_Txt.hasText)   [dic    setObject:self.compliant_Txt.text     forKey:@"ChiefCompliant"];
+    if(selectsliderValue)   [dic    setObject:selectsliderValue     forKey:@"Vas"];
+    if(selectoccurancecode)   [dic    setObject:selectoccurancecode     forKey:@"InjuaryOccuranceCode"];
+    [dic setObject:@"" forKey:@"InjuaryOccuranceSubCode"];
+    [dic setObject:@"" forKey:@"InjurySiteCode"];
+    
+    if(injuryTypeCode)   [dic    setObject:injuryTypeCode forKey:@"InjuryTypeCode"];
+    else [AppCommon showAlertWithMessage:@"Please Select Assessment Date"]; return;
+    
+    if(injuryCausecode)   [dic    setObject:injuryCausecode forKey:@"InjuryCauseCode"];
+    if(selectExpertOpinionCode)   [dic    setObject:selectExpertOpinionCode forKey:@"ExpertOptionTakenCode"];
+    
+    if(imageArray.count) [dic setObject:imageArray forKey:@"lstInjuryLocations"];
+    else [AppCommon showAlertWithMessage:@"Please Select Injury location"]; return;
+    
+    if(self.date_lbl.text)   [dic    setObject:self.date_lbl.text     forKey:@"ExpectedDateOfRecovery"];
+    else [AppCommon showAlertWithMessage:@"Please Select Expected Recovery Date"]; return;
+    
+    if(usercode)   [dic    setObject:usercode forKey:@"CreatedBy"];
+    
+    [dic setObject:(self.expectedright_Btn.tag == 1 ? @"YES" : @"NO") forKey:@"ExpertOptionTakenCode"];
+    [dic setObject:(self.delay_Btn.tag == 1 ? @"" : @"") forKey:@"OnSetType"];
+    
+    if(xrData == nil)
+    {
+        [dic setObject:@"" forKey:@"XRAYSFILE"];
+    }
+    else {
+        [dic    setObject:xrData     forKey:@"XRAYSFILE"];
+    }
+    [dic    setObject:@"Xray.png"     forKey:@"XRaysName"];
+    
+    
+    
+    if(ctData == nil)
+    {
+        [dic    setObject:@""     forKey:@"CTSCANSFILE"];
+    }
+    else
+    {
+        [dic    setObject:ctData     forKey:@"CTSCANSFILE"];
+    }
+    [dic    setObject:@"Ctscan.png"     forKey:@"CTScansName"];
+    
+    
+    
+    if(mrData == nil)
+    {
+        [dic    setObject:@""     forKey:@"MRISCANSFILE"];
+    }
+    else
+    {
+        [dic    setObject:mrData     forKey:@"MRISCANSFILE"];;
+    }
+    [dic    setObject:@"Mriscan.png"     forKey:@"MriScansName"];
+    
+    NSLog(@"parameters : %@",dic);
+
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSURL *filePath = [NSURL fileURLWithPath:@"file://path/to/image.png"];
+    NSString * url = URL_FOR_RESOURCE(@"UPDATEINJURIES");
+    [manager POST:url parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileURL:filePath name:@"image" error:nil];
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Success: %@", responseObject);
+        BOOL status = [responseObject valueForKey:@"Status"];
+        if(status == YES)
+        {
+            [AppCommon showAlertWithMessage:@"Injury Inserted Successfully"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        [AppCommon hideLoading];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [COMMON webServiceFailureError:error];
+    }];
 
 }
 
@@ -2091,8 +2271,7 @@ typedef enum {
     
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"AddInjury";
     
@@ -2100,8 +2279,7 @@ typedef enum {
     
     if (Cell == nil)
     {
-        Cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:CellIdentifier];
+        Cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
     if(isGame)
@@ -2322,7 +2500,7 @@ typedef enum {
         }
         
         
-        if (textField==self.comfirmatory_Txt){
+        if (textField == self.comfirmatory_Txt){
             
             if (newString.length>250) {
                 [self alertStatus:@"Confirmatory Test must be minimum of 1-250 Alpha Numeric and Special Characters" :@"Injury Failed" :0];

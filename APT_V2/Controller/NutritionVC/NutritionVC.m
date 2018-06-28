@@ -120,6 +120,12 @@
      MSC345    DINNER
      MSC412    Supplements
      */
+    //Intially assign text to Each Cell for No Data Found
+    cell.breakfast2Lbl.text = @"NO Data Found";
+    cell.snacks2Lbl.text = @"NO Data Found";
+    cell.lunch2Lbl.text = @"NO Data Found";
+    cell.dinner2Lbl.text = @"NO Data Found";
+    cell.supplements2Lbl.text = @"NO Data Found";
     NSMutableArray *foodDateArray = [NSMutableArray new];
     foodDateArray = [foodDiaryArray objectAtIndex:indexPath.row];
     
@@ -170,13 +176,16 @@
                     [breakfastArray addObject:[listDict valueForKey:@"FOOD"]];
                 }
                 [breakfastMoreArray replaceObjectAtIndex:indexPath.row withObject:breakfastArray];
+            } else {
+//                cell.breakfast2Lbl.text = @"NO Data Found";
             }
         }
         else {
                 //            Data is not available then Declare values with "-"
                 //            cell.breakfast1Lbl.text = @"-";
-                //            cell.breakfast2Lbl.text = @"-";
+//                            cell.breakfast2Lbl.text = @"NO Data Found for BREAKFAST";
                 //            cell.breakfast3Lbl.text = @"-";
+//            NSLog(@"NO Data Found for BREAKFAST");
         }
         
             //For  MSC343    SNACK
@@ -219,14 +228,18 @@
 //                [snacksMoreArray addObject:snacksArray];
 //                [snacksMoreArray insertObject:snacksArray atIndex:indexPath.row];
                 [snacksMoreArray replaceObjectAtIndex:indexPath.row withObject:snacksArray];
+            } else {
+//                 cell.snacks2Lbl.text = @"NO Data Found";
             }
+            
         } else {
 //            [snacksMoreArray insertObject:@"" atIndex:indexPath.row];
 //            [snacksMoreArray addObject:@""];
                 //Data is not available then Declare values with "-"
                 //            cell.snacks1Lbl.text = @"-";
-                //            cell.snacks2Lbl.text = @"-";
+//                            cell.snacks2Lbl.text = @"NO Data Found for SNACKS";
                 //            cell.snacks3Lbl.text = @"-";
+//            NSLog(@"NO Data Found for SNACK");
         }
         
             //MSC344    LUNCH
@@ -264,12 +277,15 @@
                 }
                 
                 [lunchMoreArray replaceObjectAtIndex:indexPath.row withObject:lunchArray];
+            } else {
+//                 cell.lunch2Lbl.text = @"NO Data Found";
             }
         } else {
                 //Data is not available then Declare values with "-"
                 //            cell.lunch1Lbl.text = @"-";
-                //            cell.lunch2Lbl.text = @"-";
+//                            cell.lunch2Lbl.text = @"NO Data Found for LUNCH";
                 //            cell.lunch3Lbl.text = @"-";
+//            NSLog(@"NO Data Found for LUNCH");
         }
         
             //MSC345    DINNER
@@ -308,12 +324,15 @@
                 }
                 
                 [dinnerMoreArray replaceObjectAtIndex:indexPath.row withObject:dinnerArray];
+            } else {
+//                 cell.dinner2Lbl.text = @"NO Data Found";
             }
         } else {
                 //Data is not available then Declare values with "-"
                 //            cell.dinner1Lbl.text = @"-";
-                //            cell.dinner2Lbl.text = @"-";
+//                            cell.dinner2Lbl.text = @"NO Data Found for DINNER";
                 //            cell.dinner3Lbl.text = @"-";
+//            NSLog(@"NO Data Found for DINNER");
         }
             //MSC412    Supplements
         if ([[dateDict valueForKey:@"MEALCODE"] isEqualToString:@"MSC412"]) {
@@ -350,12 +369,15 @@
                 }
                 
                 [supplementsMoreArray replaceObjectAtIndex:indexPath.row withObject:supplementsArray];
+            } else {
+//                 cell.supplements2Lbl.text = @"NO Data Found";
             }
         } else {
                 //Data is not available then Declare values with "-"
                 //            cell.supplements1Lbl.text = @"-";
-                //            cell.supplements2Lbl.text = @"-";
+//                            cell.supplements2Lbl.text = @"NO Data Found for Supplements";
                 //            cell.supplements3Lbl.text = @"-";
+//            NSLog(@"NO Data Found for Supplements");
         }
     }
     

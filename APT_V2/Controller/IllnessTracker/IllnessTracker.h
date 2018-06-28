@@ -46,4 +46,11 @@
 @property (strong, nonatomic) IBOutlet UIButton *saveBtn;
 @property (strong, nonatomic) IBOutlet UIButton *deleteBtn;
 
+@property (strong, nonatomic) IBOutlet UIImageView *xRayImageView;
+
+//Properties for Files Buttons
+@property (strong, nonatomic) IBOutlet UIButton *xRayBtn;
+@property (strong, nonatomic) IBOutlet UIButton *ctScanBtn;
+@property (strong, nonatomic) IBOutlet UIButton *mriBtn;
+@property (strong, nonatomic) IBOutlet UIButton *bloodTestBtn;
 @end

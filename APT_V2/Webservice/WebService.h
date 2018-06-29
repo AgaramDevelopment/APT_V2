@@ -28,6 +28,9 @@ typedef void (^WebserviceRequestXMLFailureHandler)(AFHTTPRequestOperation  *oper
 // LIVE
 #define BASE_URL    @"http://13.126.151.253:9001/AGAPTService.svc/"
 
+#define FILE_UPLOAD_URL    @"http://13.126.151.253:9001/SampleImage/"
+
+
 //Local Dev - URL Path
 //#define BASE_URL   @"http://192.168.0.154:8029/AGAPTService.svc/"
 

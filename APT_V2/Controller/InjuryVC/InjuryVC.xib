@@ -38,6 +38,7 @@
                 <outlet property="btnF3" destination="vRf-tK-OdM" id="V6E-ky-aUu"/>
                 <outlet property="btnF4" destination="oNv-7B-B0X" id="LqJ-tT-0FC"/>
                 <outlet property="btnOnsetDate" destination="Mli-GR-Zzq" id="JUk-zG-sn5"/>
+                <outlet property="btnSubmit" destination="6k7-SO-qdm" id="aX1-uf-qmz"/>
                 <outlet property="casuse_view" destination="Ahu-47-3jK" id="xZc-UQ-CYB"/>
                 <outlet property="causelbl" destination="O5N-ZO-UMc" id="xHl-iv-FfL"/>
                 <outlet property="comfirmatory_Txt" destination="Ghl-0t-aul" id="b0B-pC-xVD"/>
@@ -940,7 +941,7 @@
                                     <constraints>
                                         <constraint firstAttribute="width" constant="100" id="CWA-jz-Shg"/>
                                     </constraints>
-                                    <state key="normal" title="Save">
+                                    <state key="normal" title="save">
                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <connections>

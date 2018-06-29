@@ -47,7 +47,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *typelbl;
 @property (weak, nonatomic) IBOutlet UILabel *causelbl;
 @property (weak, nonatomic) IBOutlet UIImageView *imgFile1;
-
+@property (nonatomic,assign)  BOOL isUpdate;
 
 @property (nonatomic,strong) IBOutlet UIButton * occurranceBtn;
 
@@ -63,4 +63,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnOnsetDate;
 @property (weak, nonatomic) IBOutlet UITextField *txtInjuryName;
 
+@property (weak, nonatomic) IBOutlet UIButton *btnSubmit;
 @end

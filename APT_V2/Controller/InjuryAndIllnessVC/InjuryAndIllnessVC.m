@@ -77,7 +77,8 @@
 - (IBAction)injuriesAction:(id)sender {
     InjuryVC *injuryObj = [InjuryVC new];
     injuryObj.TeamCode = self.TeamCode;
-    [self.navigationController pushViewController:injuryObj animated:YES];
+    injuryObj.isUpdate = NO;
+    [appDel.frontNavigationController pushViewController:injuryObj animated:YES];
 }
 
 - (IBAction)illnessAction:(id)sender {
@@ -88,6 +89,17 @@
 
 
 - (void)fetchLoadInjuryPostMethodService {
+    
+    /*
+     Method Name : FETCHLOADINJURYWEB
+     Method Type : POST
+     Input Format :  JSON
+     PARAMETERS : {
+     ClientCode
+     Userreferencecode
+     }
+     
+     */
     
     if(![COMMON isInternetReachable])
         return;
@@ -191,14 +203,13 @@
     }
     
     if (tableView == self.illnessTableView) {
-        [self.lblNoIllnessData setHidden:illnessArray.count];
+        [self.lblNoIllnessData setHidden:injuryArray.count];
         return illnessArray.count;
     }
     return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     InjuryAndIllnessCell *cell;
     
@@ -312,7 +323,7 @@
     if (tableView == _injuryTableView) {
         
         NSString* injuryCode = [[injuryArray objectAtIndex:indexPath.row] valueForKey:@"InjuryCode"];
-        [self injuryDetailedView:injuryCode];
+        [self injuryDetailedViewWebService:injuryCode];
 //        InjuryVC *injuryObj = [InjuryVC new];
 //        injuryObj.InjuryListArray = [injuryArray objectAtIndex:indexPath.row];
 //        [self.navigationController pushViewController:injuryObj animated:YES];
@@ -329,7 +340,7 @@
 }
 
 
--(void)injuryDetailedView:(NSString* )injuryCode{
+-(void)injuryDetailedViewWebService:(NSString* )injuryCode{
     
     /*
      FETCHINJURIESDETAILS
@@ -365,8 +376,10 @@
 //        if ([[responseObject valueForKey:@"Status"] integerValue] == 1) {
         
             InjuryVC *injuryObj = [InjuryVC new];
-            injuryObj.InjuryListArray = [responseObject valueForKey:@"InjuryWebs"];
-            [self.navigationController pushViewController:injuryObj animated:YES];
+            injuryObj.InjuryListArray = responseObject;
+            injuryObj.TeamCode = self.TeamCode;
+            injuryObj.isUpdate = YES;
+            [appDel.frontNavigationController pushViewController:injuryObj animated:YES];
 
 //        }
         

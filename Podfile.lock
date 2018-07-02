@@ -24,23 +24,24 @@ PODS:
     - Charts/Core (= 3.1.1)
   - Charts/Core (3.1.1)
   - drCharts (1.4)
-  - Firebase/Core (5.2.0):
+  - Firebase/Core (5.4.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (= 5.0.1)
-  - Firebase/CoreOnly (5.2.0):
-    - FirebaseCore (= 5.0.3)
+  - Firebase/CoreOnly (5.4.0):
+    - FirebaseCore (= 5.0.5)
   - FirebaseAnalytics (5.0.1):
     - FirebaseCore (~> 5.0)
     - FirebaseInstanceID (~> 3.0)
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - nanopb (~> 0.3)
-  - FirebaseCore (5.0.3):
+  - FirebaseCore (5.0.5):
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
-  - FirebaseInstanceID (3.1.0):
+  - FirebaseInstanceID (3.1.1):
     - FirebaseCore (~> 5.0)
   - GoogleToolboxForMac/Defines (2.1.4)
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
+  - LDProgressView (1.2.1)
   - MBProgressHUD (1.1.0)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -51,17 +52,20 @@ PODS:
   - SDWebImage (4.4.1):
     - SDWebImage/Core (= 4.4.1)
   - SDWebImage/Core (4.4.1)
-  - StepSlider (1.1.0)
+  - StepSlider (1.2.0)
+  - YLProgressBar (3.10.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5.4)
   - Charts
   - drCharts (from `https://github.com/Zomato/DR-charts.git`)
   - Firebase/Core
+  - LDProgressView (>= 1.1)
   - MBProgressHUD (~> 1.1.0)
   - RGSColorSlider
   - SDWebImage (~> 4.0)
   - StepSlider
+  - YLProgressBar (~> 3.10.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -72,11 +76,13 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseInstanceID
     - GoogleToolboxForMac
+    - LDProgressView
     - MBProgressHUD
     - nanopb
     - RGSColorSlider
     - SDWebImage
     - StepSlider
+    - YLProgressBar
 
 EXTERNAL SOURCES:
   drCharts:
@@ -91,17 +97,19 @@ SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
   Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
   drCharts: fd568784a514819ea7af12aabdd67e00ac359370
-  Firebase: 25ed0412036d7d008568d1fb4d2e9d81ea8a0a2c
+  Firebase: d66f4f29c23f22d96808d9abc174d81d8eee968f
   FirebaseAnalytics: b3628aea54c50464c32c393fb2ea032566e7ecc2
-  FirebaseCore: a3c87242451633fff8490183898075ce77d168d2
-  FirebaseInstanceID: 05d779cbb97bd5bd5c51a38a903fc9cfe1b2454a
+  FirebaseCore: 42b3267233bd21a5abd54117ccc38ca3dd0f8e83
+  FirebaseInstanceID: f3f0657372592ecdfdfe2cac604a5a75758376a6
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
+  LDProgressView: f6afc7c30d2a9edf33001515f3189338567a32d2
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   RGSColorSlider: b045e5a4bd9f6fe568184e1ad35dee1f0cdf948f
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
-  StepSlider: f0754da9b5bd112420f9d647f90114a9af3007e2
+  StepSlider: 32f47aefb730ca5ac9a18eade23cf9b1fc3254d9
+  YLProgressBar: 365b6c5e934be18b661f79413db33c993c8e8251
 
-PODFILE CHECKSUM: 5ae9d46ad85cf0bb65b3b5795fb2ed73155109b1
+PODFILE CHECKSUM: 308cd765ccdff35f30f5f55287d57b0e3fb209a5
 
-COCOAPODS: 1.5.2
+COCOAPODS: 1.5.3

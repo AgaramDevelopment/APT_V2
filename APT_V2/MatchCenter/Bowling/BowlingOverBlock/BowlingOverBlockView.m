@@ -282,8 +282,31 @@
             float runsper3 = (runscount3/totalrunscount)*100;
             
             self.runsPrgs1.progress = runsper1/100;
+            self.runsPrgs1.color = [UIColor colorWithRed:(192/255.0f) green:(9/255.0f) blue:(0/255.0f) alpha:1.00f];
+            self.runsPrgs1.flat = @YES;
+            self.runsPrgs1.borderRadius = @2;
+            self.runsPrgs1.showBackgroundInnerShadow = @YES;
+            //self.runsPrgs1.progress = 0.40;
+            self.runsPrgs1.animate = @YES;
+            
+            
+            
             self.runsPrgs2.progress = runsper2/100;
+            self.runsPrgs2.color = [UIColor colorWithRed:(46/255.0f) green:(117/255.0f) blue:(182/255.0f) alpha:1.00f];
+            self.runsPrgs2.flat = @YES;
+            self.runsPrgs2.borderRadius = @2;
+            self.runsPrgs2.showBackgroundInnerShadow = @YES;
+            //self.runsPrgs1.progress = 0.40;
+            self.runsPrgs2.animate = @YES;
+            
             self.runsPrgs3.progress = runsper3/100;
+            self.runsPrgs3.color = [UIColor colorWithRed:(254/255.0f) green:(217/255.0f) blue:(102/255.0f) alpha:1.00f];
+            self.runsPrgs3.flat = @YES;
+            self.runsPrgs3.borderRadius = @2;
+            self.runsPrgs3.showBackgroundInnerShadow = @YES;
+            //self.runsPrgs1.progress = 0.40;
+            self.runsPrgs3.animate = @YES;
+            
             
             
             //runrate
@@ -297,8 +320,26 @@
             float runrateper3 = (runRatecount3/totalrunRatecount)*100;
             
             self.runratePrgs1.progress = runrateper1/100;
+            self.runratePrgs1.color = [UIColor colorWithRed:(192/255.0f) green:(9/255.0f) blue:(0/255.0f) alpha:1.00f];
+            self.runratePrgs1.flat = @YES;
+            self.runratePrgs1.borderRadius = @2;
+            self.runratePrgs1.showBackgroundInnerShadow = @YES;
+            self.runratePrgs1.animate = @YES;
+            
+            
             self.runratePrgs2.progress = runrateper2/100;
+            self.runratePrgs2.color = [UIColor colorWithRed:(46/255.0f) green:(117/255.0f) blue:(182/255.0f) alpha:1.00f];
+            self.runratePrgs2.flat = @YES;
+            self.runratePrgs2.borderRadius = @2;
+            self.runratePrgs2.showBackgroundInnerShadow = @YES;
+            self.runratePrgs2.animate = @YES;
+            
             self.runratePrgs3.progress = runrateper3/100;
+            self.runratePrgs3.color = [UIColor colorWithRed:(254/255.0f) green:(217/255.0f) blue:(102/255.0f) alpha:1.00f];
+            self.runratePrgs3.flat = @YES;
+            self.runratePrgs3.borderRadius = @2;
+            self.runratePrgs3.showBackgroundInnerShadow = @YES;
+            self.runratePrgs3.animate = @YES;
             
             
             //dbper
@@ -312,8 +353,27 @@
             float dbper3 = (dbcount3/Totaldbcount)*100;
             
             self.dbPerPrgs1.progress = dbper1/100;
+            self.dbPerPrgs1.color = [UIColor colorWithRed:(192/255.0f) green:(9/255.0f) blue:(0/255.0f) alpha:1.00f];
+            self.dbPerPrgs1.flat = @YES;
+            self.dbPerPrgs1.borderRadius = @2;
+            self.dbPerPrgs1.showBackgroundInnerShadow = @YES;
+            self.dbPerPrgs1.animate = @YES;
+            
+            
             self.dbPerPrgs2.progress = dbper2/100;
+            self.dbPerPrgs2.color = [UIColor colorWithRed:(46/255.0f) green:(117/255.0f) blue:(182/255.0f) alpha:1.00f];
+            self.dbPerPrgs2.flat = @YES;
+            self.dbPerPrgs2.borderRadius = @2;
+            self.dbPerPrgs2.showBackgroundInnerShadow = @YES;
+            self.dbPerPrgs2.animate = @YES;
+            
+            
             self.dbPerPrgs3.progress = dbper3/100;
+            self.dbPerPrgs3.color = [UIColor colorWithRed:(254/255.0f) green:(217/255.0f) blue:(102/255.0f) alpha:1.00f];
+            self.dbPerPrgs3.flat = @YES;
+            self.dbPerPrgs3.borderRadius = @2;
+            self.dbPerPrgs3.showBackgroundInnerShadow = @YES;
+            self.dbPerPrgs3.animate = @YES;
             
             
             //wktsper
@@ -327,8 +387,27 @@
             float wktsper3 = (wktscount3/Totalwktscount)*100;
             
             self.WktsPrgs1.progress = wktsper1/100;
+            self.WktsPrgs1.color = [UIColor colorWithRed:(192/255.0f) green:(9/255.0f) blue:(0/255.0f) alpha:1.00f];
+            self.WktsPrgs1.flat = @YES;
+            self.WktsPrgs1.borderRadius = @2;
+            self.WktsPrgs1.showBackgroundInnerShadow = @YES;
+            self.WktsPrgs1.animate = @YES;
+            
+            
             self.WktsPrgs2.progress = wktsper2/100;
+            self.WktsPrgs2.color = [UIColor colorWithRed:(46/255.0f) green:(117/255.0f) blue:(182/255.0f) alpha:1.00f];
+            self.WktsPrgs2.flat = @YES;
+            self.WktsPrgs2.borderRadius = @2;
+            self.WktsPrgs2.showBackgroundInnerShadow = @YES;
+            self.WktsPrgs2.animate = @YES;
+            
+            
             self.WktsPrgs3.progress = wktsper3/100;
+            self.WktsPrgs3.color = [UIColor colorWithRed:(254/255.0f) green:(217/255.0f) blue:(102/255.0f) alpha:1.00f];
+            self.WktsPrgs3.flat = @YES;
+            self.WktsPrgs3.borderRadius = @2;
+            self.WktsPrgs3.showBackgroundInnerShadow = @YES;
+            self.WktsPrgs3.animate = @YES;
             
             
             
@@ -343,8 +422,26 @@
             float srper3 = (srcount3/Totalsrcount)*100;
             
             self.srPrgs1.progress = srper1/100;
+            self.srPrgs1.color = [UIColor colorWithRed:(192/255.0f) green:(9/255.0f) blue:(0/255.0f) alpha:1.00f];
+            self.srPrgs1.flat = @YES;
+            self.srPrgs1.borderRadius = @2;
+            self.srPrgs1.showBackgroundInnerShadow = @YES;
+            self.srPrgs1.animate = @YES;
+            
             self.srPrgs2.progress = srper2/100;
+            self.srPrgs2.color = [UIColor colorWithRed:(46/255.0f) green:(117/255.0f) blue:(182/255.0f) alpha:1.00f];
+            self.srPrgs2.flat = @YES;
+            self.srPrgs2.borderRadius = @2;
+            self.srPrgs2.showBackgroundInnerShadow = @YES;
+            self.srPrgs2.animate = @YES;
+            
+            
             self.srPrgs3.progress = srper3/100;
+            self.srPrgs3.color = [UIColor colorWithRed:(254/255.0f) green:(217/255.0f) blue:(102/255.0f) alpha:1.00f];
+            self.srPrgs3.flat = @YES;
+            self.srPrgs3.borderRadius = @2;
+            self.srPrgs3.showBackgroundInnerShadow = @YES;
+            self.srPrgs3.animate = @YES;
             
             
             //avgsper
@@ -358,8 +455,25 @@
             float avgper3 = (avgcount3/Totalavgcount)*100;
             
             self.avgPrgs1.progress = avgper1/100;
+            self.avgPrgs1.color = [UIColor colorWithRed:(192/255.0f) green:(9/255.0f) blue:(0/255.0f) alpha:1.00f];
+            self.avgPrgs1.flat = @YES;
+            self.avgPrgs1.borderRadius = @2;
+            self.avgPrgs1.showBackgroundInnerShadow = @YES;
+            self.avgPrgs1.animate = @YES;
+            
             self.avgPrgs2.progress = avgper2/100;
+            self.avgPrgs2.color = [UIColor colorWithRed:(46/255.0f) green:(117/255.0f) blue:(182/255.0f) alpha:1.00f];
+            self.avgPrgs2.flat = @YES;
+            self.avgPrgs2.borderRadius = @2;
+            self.avgPrgs2.showBackgroundInnerShadow = @YES;
+            self.avgPrgs2.animate = @YES;
+            
             self.avgPrgs3.progress = avgper3/100;
+            self.avgPrgs3.color = [UIColor colorWithRed:(254/255.0f) green:(217/255.0f) blue:(102/255.0f) alpha:1.00f];
+            self.avgPrgs3.flat = @YES;
+            self.avgPrgs3.borderRadius = @2;
+            self.avgPrgs3.showBackgroundInnerShadow = @YES;
+            self.avgPrgs3.animate = @YES;
             
             
             //bdrysper
@@ -374,8 +488,25 @@
             
             
             self.bdryPerPrgs1.progress = bdryper1/100;
+            self.bdryPerPrgs1.color = [UIColor colorWithRed:(192/255.0f) green:(9/255.0f) blue:(0/255.0f) alpha:1.00f];
+            self.bdryPerPrgs1.flat = @YES;
+            self.bdryPerPrgs1.borderRadius = @2;
+            self.bdryPerPrgs1.showBackgroundInnerShadow = @YES;
+            self.bdryPerPrgs1.animate = @YES;
+            
             self.bdryPerPrgs2.progress = bdryper2/100;
+            self.bdryPerPrgs2.color = [UIColor colorWithRed:(46/255.0f) green:(117/255.0f) blue:(182/255.0f) alpha:1.00f];
+            self.bdryPerPrgs2.flat = @YES;
+            self.bdryPerPrgs2.borderRadius = @2;
+            self.bdryPerPrgs2.showBackgroundInnerShadow = @YES;
+            self.bdryPerPrgs2.animate = @YES;
+            
             self.bdryPerPrgs3.progress = bdryper3/100;
+            self.bdryPerPrgs3.color = [UIColor colorWithRed:(254/255.0f) green:(217/255.0f) blue:(102/255.0f) alpha:1.00f];
+            self.bdryPerPrgs3.flat = @YES;
+            self.bdryPerPrgs3.borderRadius = @2;
+            self.bdryPerPrgs3.showBackgroundInnerShadow = @YES;
+            self.bdryPerPrgs3.animate = @YES;
         
             [self.pp1CollectionView reloadData];
             [self.pp2CollectionView reloadData];

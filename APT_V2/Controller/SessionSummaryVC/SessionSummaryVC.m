@@ -697,6 +697,7 @@ http://13.126.151.253:9001/AGAPTService.svc/LOADSESSIONSUMMARY/DMSC11600224DB266
     float x = [firstBit floatValue];
     self.OvrPrgPace.progress = 1-(x/100);
     
+    
     self.RunsPacelbl.text = [self checkNull:[[pacearrS1 valueForKey:@"PaceRuns"] objectAtIndex:0]];
     NSString *v2 = [self checkNull:[[pacearrS1 valueForKey:@"PaceRunsWidth"] objectAtIndex:0]];
     NSArray* foo1 = [v2 componentsSeparatedByString: @"%"];

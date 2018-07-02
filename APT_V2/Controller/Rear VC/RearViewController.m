@@ -25,6 +25,7 @@
 #import "TeamsReportsHistoryVC.h"
 #import "NewVideoDocumentVC.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+
 @interface RearViewController ()<passwordChangedNotification>
 {
     NSIndexPath* PreviouslySelectedIndex;

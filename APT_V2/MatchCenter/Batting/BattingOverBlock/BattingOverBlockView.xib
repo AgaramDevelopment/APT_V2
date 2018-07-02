@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -155,13 +155,13 @@
                                             <rect key="frame" x="0.0" y="15" width="320" height="542"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1-6 Overs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NWA-6k-JJ0">
-                                                    <rect key="frame" x="0.0" y="8" width="320" height="18"/>
+                                                    <rect key="frame" x="0.0" y="8" width="320" height="17.5"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="931-3L-fAJ">
-                                                    <rect key="frame" x="0.0" y="34" width="320" height="92"/>
+                                                    <rect key="frame" x="0.0" y="33.5" width="320" height="92"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9HZ-Au-H6O">
                                                             <rect key="frame" x="159" y="1" width="2" height="90"/>
@@ -187,7 +187,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6e9-wa-epq">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="luP-zA-f42" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="I8E-UB-mNT"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6e9-wa-epq">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.85089617967605591" green="0.85103946924209595" blue="0.85087728500366211" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.75381749868392944" green="0.035362593829631805" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -215,7 +222,10 @@
                                                                 <constraint firstItem="KtT-Lc-xkY" firstAttribute="leading" secondItem="mtV-IP-Bqb" secondAttribute="leading" constant="3" id="K1H-FE-aRP"/>
                                                                 <constraint firstItem="6e9-wa-epq" firstAttribute="top" secondItem="mtV-IP-Bqb" secondAttribute="top" constant="5" id="Lbt-sX-GzY"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Iyu-af-7qe" secondAttribute="trailing" constant="3" id="TD6-FI-ufO"/>
+                                                                <constraint firstItem="Iyu-af-7qe" firstAttribute="leading" secondItem="luP-zA-f42" secondAttribute="trailing" constant="4" id="Ucb-T3-yx2"/>
                                                                 <constraint firstItem="KtT-Lc-xkY" firstAttribute="top" secondItem="mtV-IP-Bqb" secondAttribute="top" constant="1" id="Wuo-Jg-Vt6"/>
+                                                                <constraint firstItem="luP-zA-f42" firstAttribute="top" secondItem="mtV-IP-Bqb" secondAttribute="top" id="YWN-wx-mSk"/>
+                                                                <constraint firstItem="luP-zA-f42" firstAttribute="leading" secondItem="KtT-Lc-xkY" secondAttribute="trailing" constant="4" id="awC-2G-1UJ"/>
                                                                 <constraint firstItem="6e9-wa-epq" firstAttribute="leading" secondItem="KtT-Lc-xkY" secondAttribute="trailing" constant="4" id="d9o-D9-gUr"/>
                                                                 <constraint firstItem="Iyu-af-7qe" firstAttribute="leading" secondItem="6e9-wa-epq" secondAttribute="trailing" constant="4" id="duQ-Kw-LVh"/>
                                                                 <constraint firstAttribute="bottom" secondItem="Iyu-af-7qe" secondAttribute="bottom" constant="1" id="o0A-Jq-7oX"/>
@@ -241,7 +251,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="IS3-2e-lKh">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tcp-zG-NEL" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="6mk-ye-kDg"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="IS3-2e-lKh">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.85089617967605591" green="0.85103946924209595" blue="0.85087728500366211" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.75381749868392944" green="0.035362593829631805" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -266,8 +283,11 @@
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
+                                                                <constraint firstItem="doa-Lr-UcR" firstAttribute="leading" secondItem="tcp-zG-NEL" secondAttribute="trailing" constant="4" id="22d-n6-YdW"/>
                                                                 <constraint firstAttribute="trailing" secondItem="doa-Lr-UcR" secondAttribute="trailing" constant="3" id="3oZ-jt-d7m"/>
+                                                                <constraint firstItem="tcp-zG-NEL" firstAttribute="top" secondItem="kRW-S1-A3m" secondAttribute="top" id="EML-J4-vpk"/>
                                                                 <constraint firstItem="cSk-Pl-oXk" firstAttribute="leading" secondItem="kRW-S1-A3m" secondAttribute="leading" constant="3" id="HpQ-NU-5uQ"/>
+                                                                <constraint firstItem="tcp-zG-NEL" firstAttribute="leading" secondItem="cSk-Pl-oXk" secondAttribute="trailing" constant="4" id="IjO-ao-Xex"/>
                                                                 <constraint firstAttribute="height" constant="20" id="Miq-Q4-JPE"/>
                                                                 <constraint firstItem="cSk-Pl-oXk" firstAttribute="top" secondItem="kRW-S1-A3m" secondAttribute="top" constant="1" id="Vi8-Tp-F9b"/>
                                                                 <constraint firstItem="doa-Lr-UcR" firstAttribute="top" secondItem="kRW-S1-A3m" secondAttribute="top" constant="1" id="WQ3-EY-Pce"/>
@@ -295,7 +315,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="QEG-xJ-iNK">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xmd-ce-11H" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="JDf-T6-9Lu"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="QEG-xJ-iNK">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.85089617967605591" green="0.85103946924209595" blue="0.85087728500366211" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.75381749868392944" green="0.035362593829631805" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -323,8 +350,11 @@
                                                                 <constraint firstAttribute="height" constant="20" id="3fU-bB-uEk"/>
                                                                 <constraint firstItem="iYK-vI-itA" firstAttribute="top" secondItem="HCN-YR-0Ih" secondAttribute="top" constant="1" id="5YL-mf-WUZ"/>
                                                                 <constraint firstItem="QEG-xJ-iNK" firstAttribute="top" secondItem="HCN-YR-0Ih" secondAttribute="top" constant="5" id="8Ic-yc-g93"/>
+                                                                <constraint firstItem="Xmd-ce-11H" firstAttribute="top" secondItem="HCN-YR-0Ih" secondAttribute="top" id="8bn-FM-4PV"/>
                                                                 <constraint firstAttribute="trailing" secondItem="iYK-vI-itA" secondAttribute="trailing" constant="3" id="BLY-hc-561"/>
                                                                 <constraint firstAttribute="bottom" secondItem="4qC-LA-5vK" secondAttribute="bottom" constant="1" id="Cu4-xm-FbT"/>
+                                                                <constraint firstItem="Xmd-ce-11H" firstAttribute="leading" secondItem="4qC-LA-5vK" secondAttribute="trailing" constant="4" id="Vgc-cC-nGO"/>
+                                                                <constraint firstItem="iYK-vI-itA" firstAttribute="leading" secondItem="Xmd-ce-11H" secondAttribute="trailing" constant="4" id="YvO-8O-lQC"/>
                                                                 <constraint firstItem="4qC-LA-5vK" firstAttribute="leading" secondItem="HCN-YR-0Ih" secondAttribute="leading" constant="3" id="fAB-TW-Lzm"/>
                                                                 <constraint firstItem="iYK-vI-itA" firstAttribute="leading" secondItem="QEG-xJ-iNK" secondAttribute="trailing" constant="4" id="hVm-wR-sUE"/>
                                                                 <constraint firstItem="4qC-LA-5vK" firstAttribute="top" secondItem="HCN-YR-0Ih" secondAttribute="top" constant="1" id="img-pV-aj9"/>
@@ -349,7 +379,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FAa-gU-MBT">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mmH-cP-m9g" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="fL2-B4-Qe9"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FAa-gU-MBT">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.85089617967605591" green="0.85103946924209595" blue="0.85087728500366211" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.75381749868392944" green="0.035362593829631805" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -377,12 +414,15 @@
                                                                 <constraint firstItem="FAa-gU-MBT" firstAttribute="top" secondItem="PBY-02-IVQ" secondAttribute="top" constant="5" id="0Ge-Zs-q4m"/>
                                                                 <constraint firstAttribute="bottom" secondItem="TD5-uT-djZ" secondAttribute="bottom" constant="1" id="1F3-tT-kO5"/>
                                                                 <constraint firstAttribute="height" constant="20" id="2mb-k0-1qq"/>
+                                                                <constraint firstItem="mmH-cP-m9g" firstAttribute="leading" secondItem="TD5-uT-djZ" secondAttribute="trailing" constant="4" id="3mk-Gy-mDU"/>
                                                                 <constraint firstAttribute="bottom" secondItem="lTt-wv-eqc" secondAttribute="bottom" constant="1" id="FRE-T5-5Df"/>
                                                                 <constraint firstItem="TD5-uT-djZ" firstAttribute="leading" secondItem="PBY-02-IVQ" secondAttribute="leading" constant="3" id="FoG-U0-85m"/>
+                                                                <constraint firstItem="mmH-cP-m9g" firstAttribute="top" secondItem="PBY-02-IVQ" secondAttribute="top" id="Jdk-g5-inW"/>
                                                                 <constraint firstItem="FAa-gU-MBT" firstAttribute="leading" secondItem="TD5-uT-djZ" secondAttribute="trailing" constant="4" id="Mgn-wG-8D5"/>
                                                                 <constraint firstItem="lTt-wv-eqc" firstAttribute="top" secondItem="PBY-02-IVQ" secondAttribute="top" constant="1" id="QtD-7f-rzR"/>
                                                                 <constraint firstItem="lTt-wv-eqc" firstAttribute="leading" secondItem="FAa-gU-MBT" secondAttribute="trailing" constant="4" id="SRE-w0-HzU"/>
                                                                 <constraint firstAttribute="trailing" secondItem="lTt-wv-eqc" secondAttribute="trailing" constant="3" id="VG2-tT-z7A"/>
+                                                                <constraint firstItem="lTt-wv-eqc" firstAttribute="leading" secondItem="mmH-cP-m9g" secondAttribute="trailing" constant="4" id="eHv-J0-d59"/>
                                                                 <constraint firstItem="TD5-uT-djZ" firstAttribute="top" secondItem="PBY-02-IVQ" secondAttribute="top" constant="1" id="lYM-9B-mY3"/>
                                                             </constraints>
                                                         </view>
@@ -403,7 +443,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="WUr-Oj-4YB">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MXe-rz-nRN" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="JTb-Ij-n4V"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="WUr-Oj-4YB">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.85089617967605591" green="0.85103946924209595" blue="0.85087728500366211" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.75381749868392944" green="0.035362593829631805" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -430,11 +477,14 @@
                                                             <constraints>
                                                                 <constraint firstItem="WUr-Oj-4YB" firstAttribute="leading" secondItem="jSD-eE-bBK" secondAttribute="trailing" constant="4" id="5B9-rm-YgC"/>
                                                                 <constraint firstAttribute="height" constant="20" id="9Xj-50-Zl6"/>
+                                                                <constraint firstItem="cCR-Cb-qFr" firstAttribute="leading" secondItem="MXe-rz-nRN" secondAttribute="trailing" constant="4" id="Ask-4f-ux3"/>
                                                                 <constraint firstAttribute="bottom" secondItem="jSD-eE-bBK" secondAttribute="bottom" constant="1" id="FUE-E0-AOM"/>
                                                                 <constraint firstAttribute="bottom" secondItem="cCR-Cb-qFr" secondAttribute="bottom" constant="1" id="Gaa-DK-oXt"/>
+                                                                <constraint firstItem="MXe-rz-nRN" firstAttribute="leading" secondItem="jSD-eE-bBK" secondAttribute="trailing" constant="4" id="IST-M7-kti"/>
                                                                 <constraint firstItem="cCR-Cb-qFr" firstAttribute="top" secondItem="2zJ-wI-85S" secondAttribute="top" constant="1" id="MjK-qP-3Yh"/>
                                                                 <constraint firstItem="jSD-eE-bBK" firstAttribute="top" secondItem="2zJ-wI-85S" secondAttribute="top" constant="1" id="N88-Ed-ea2"/>
                                                                 <constraint firstItem="cCR-Cb-qFr" firstAttribute="leading" secondItem="WUr-Oj-4YB" secondAttribute="trailing" constant="4" id="QPb-P3-kYC"/>
+                                                                <constraint firstItem="MXe-rz-nRN" firstAttribute="top" secondItem="2zJ-wI-85S" secondAttribute="top" id="RyY-pf-YUe"/>
                                                                 <constraint firstItem="jSD-eE-bBK" firstAttribute="leading" secondItem="2zJ-wI-85S" secondAttribute="leading" constant="3" id="cg0-51-MX1"/>
                                                                 <constraint firstItem="WUr-Oj-4YB" firstAttribute="top" secondItem="2zJ-wI-85S" secondAttribute="top" constant="5" id="etR-Mz-gmE"/>
                                                                 <constraint firstAttribute="trailing" secondItem="cCR-Cb-qFr" secondAttribute="trailing" constant="3" id="kg1-fM-Nq0"/>
@@ -457,7 +507,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="EMq-H8-Xl9">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XOC-Ye-2FE" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="Enu-PZ-7ka"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="EMq-H8-Xl9">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.85089617967605591" green="0.85103946924209595" blue="0.85087728500366211" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.75381749868392944" green="0.035362593829631805" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -486,12 +543,15 @@
                                                                 <constraint firstItem="7PP-Be-nlA" firstAttribute="leading" secondItem="lhH-tL-GDQ" secondAttribute="leading" constant="3" id="4Lh-hm-YsH"/>
                                                                 <constraint firstItem="Z31-v5-oxa" firstAttribute="leading" secondItem="EMq-H8-Xl9" secondAttribute="trailing" constant="4" id="4nb-av-LAN"/>
                                                                 <constraint firstAttribute="height" constant="20" id="7e2-wm-0Ov"/>
+                                                                <constraint firstItem="Z31-v5-oxa" firstAttribute="leading" secondItem="XOC-Ye-2FE" secondAttribute="trailing" constant="4" id="8w4-HL-Gxh"/>
                                                                 <constraint firstAttribute="bottom" secondItem="7PP-Be-nlA" secondAttribute="bottom" constant="1" id="Evy-3H-JAZ"/>
                                                                 <constraint firstAttribute="bottom" secondItem="Z31-v5-oxa" secondAttribute="bottom" constant="1" id="QPd-qj-R7N"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Z31-v5-oxa" secondAttribute="trailing" constant="3" id="TpE-n9-GWq"/>
+                                                                <constraint firstItem="XOC-Ye-2FE" firstAttribute="leading" secondItem="7PP-Be-nlA" secondAttribute="trailing" constant="4" id="Zu2-Q4-hn3"/>
                                                                 <constraint firstItem="EMq-H8-Xl9" firstAttribute="leading" secondItem="7PP-Be-nlA" secondAttribute="trailing" constant="4" id="bEu-cz-y3P"/>
                                                                 <constraint firstItem="Z31-v5-oxa" firstAttribute="top" secondItem="lhH-tL-GDQ" secondAttribute="top" constant="1" id="cHa-d1-L78"/>
                                                                 <constraint firstItem="EMq-H8-Xl9" firstAttribute="top" secondItem="lhH-tL-GDQ" secondAttribute="top" constant="5" id="g9V-DH-lWO"/>
+                                                                <constraint firstItem="XOC-Ye-2FE" firstAttribute="top" secondItem="lhH-tL-GDQ" secondAttribute="top" id="hgY-If-R72"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jyf-uH-ce8">
@@ -511,7 +571,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oe4-oK-Wqx">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eRu-j9-HTa" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="0AY-aX-lji"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="oe4-oK-Wqx">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.85089617967605591" green="0.85103946924209595" blue="0.85087728500366211" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.75381749868392944" green="0.035362593829631805" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -537,9 +604,12 @@
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstItem="5j1-Ld-q02" firstAttribute="leading" secondItem="Jyf-uH-ce8" secondAttribute="leading" constant="3" id="441-J5-sFy"/>
+                                                                <constraint firstItem="hpu-el-sui" firstAttribute="leading" secondItem="eRu-j9-HTa" secondAttribute="trailing" constant="4" id="A4r-44-yb2"/>
+                                                                <constraint firstItem="eRu-j9-HTa" firstAttribute="leading" secondItem="5j1-Ld-q02" secondAttribute="trailing" constant="4" id="GYl-wU-Ubw"/>
                                                                 <constraint firstItem="oe4-oK-Wqx" firstAttribute="top" secondItem="Jyf-uH-ce8" secondAttribute="top" constant="5" id="Kez-Tc-rou"/>
                                                                 <constraint firstItem="hpu-el-sui" firstAttribute="top" secondItem="Jyf-uH-ce8" secondAttribute="top" constant="1" id="Ppt-mC-nJb"/>
                                                                 <constraint firstAttribute="bottom" secondItem="hpu-el-sui" secondAttribute="bottom" constant="1" id="bJb-ZL-Xp2"/>
+                                                                <constraint firstItem="eRu-j9-HTa" firstAttribute="top" secondItem="Jyf-uH-ce8" secondAttribute="top" id="eBK-dN-hkD"/>
                                                                 <constraint firstItem="5j1-Ld-q02" firstAttribute="top" secondItem="Jyf-uH-ce8" secondAttribute="top" constant="1" id="f7P-JK-GLy"/>
                                                                 <constraint firstAttribute="trailing" secondItem="hpu-el-sui" secondAttribute="trailing" constant="3" id="fJh-c6-rxj"/>
                                                                 <constraint firstItem="oe4-oK-Wqx" firstAttribute="leading" secondItem="5j1-Ld-q02" secondAttribute="trailing" constant="4" id="hZZ-hL-Grs"/>
@@ -580,7 +650,7 @@
                                                     </constraints>
                                                 </view>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="9a1-Ws-n3n">
-                                                    <rect key="frame" x="5" y="134" width="310" height="400"/>
+                                                    <rect key="frame" x="5" y="133.5" width="310" height="400.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Qlf-3s-FIU">
                                                         <size key="itemSize" width="250" height="400"/>
@@ -609,13 +679,13 @@
                                             <rect key="frame" x="0.0" y="572" width="320" height="542"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7-15 Overs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mA4-fS-Njr">
-                                                    <rect key="frame" x="0.0" y="8" width="320" height="18"/>
+                                                    <rect key="frame" x="0.0" y="8" width="320" height="17.5"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sSX-VB-0qB">
-                                                    <rect key="frame" x="0.0" y="34" width="320" height="92"/>
+                                                    <rect key="frame" x="0.0" y="33.5" width="320" height="92"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hYQ-tH-ynb">
                                                             <rect key="frame" x="159" y="1" width="2" height="90"/>
@@ -641,7 +711,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0Qg-Sr-8iJ">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TgC-Ee-eFX" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="JfI-YP-Y1D"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0Qg-Sr-8iJ">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.83913260700000003" green="0.83927398919999996" blue="0.83911389110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.17984786629676819" green="0.45877349376678467" blue="0.71237760782241821" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -666,7 +743,9 @@
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
+                                                                <constraint firstItem="TgC-Ee-eFX" firstAttribute="top" secondItem="sCm-qJ-Kr2" secondAttribute="top" id="00g-hj-8pz"/>
                                                                 <constraint firstAttribute="bottom" secondItem="VT5-Z6-GJn" secondAttribute="bottom" constant="1" id="0HU-iA-t4i"/>
+                                                                <constraint firstItem="LG6-I2-Wm8" firstAttribute="leading" secondItem="TgC-Ee-eFX" secondAttribute="trailing" constant="4" id="6Vd-y7-7Ji"/>
                                                                 <constraint firstItem="VT5-Z6-GJn" firstAttribute="top" secondItem="sCm-qJ-Kr2" secondAttribute="top" constant="1" id="892-kM-sQQ"/>
                                                                 <constraint firstAttribute="height" constant="20" id="9Oq-9O-rbB"/>
                                                                 <constraint firstAttribute="trailing" secondItem="LG6-I2-Wm8" secondAttribute="trailing" constant="3" id="JON-9y-XOz"/>
@@ -674,6 +753,7 @@
                                                                 <constraint firstItem="VT5-Z6-GJn" firstAttribute="leading" secondItem="sCm-qJ-Kr2" secondAttribute="leading" constant="3" id="TSL-2j-uF2"/>
                                                                 <constraint firstItem="0Qg-Sr-8iJ" firstAttribute="leading" secondItem="VT5-Z6-GJn" secondAttribute="trailing" constant="4" id="bEY-kK-uHU"/>
                                                                 <constraint firstAttribute="bottom" secondItem="LG6-I2-Wm8" secondAttribute="bottom" constant="1" id="h9V-so-sli"/>
+                                                                <constraint firstItem="TgC-Ee-eFX" firstAttribute="leading" secondItem="VT5-Z6-GJn" secondAttribute="trailing" constant="4" id="hc5-PU-SmZ"/>
                                                                 <constraint firstItem="0Qg-Sr-8iJ" firstAttribute="top" secondItem="sCm-qJ-Kr2" secondAttribute="top" constant="5" id="mUL-D0-mJS"/>
                                                                 <constraint firstItem="LG6-I2-Wm8" firstAttribute="leading" secondItem="0Qg-Sr-8iJ" secondAttribute="trailing" constant="4" id="uBj-dR-PLk"/>
                                                             </constraints>
@@ -695,7 +775,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Iel-jc-LZ8">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RvW-zY-rgH" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="Yzb-Hi-ont"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Iel-jc-LZ8">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.83913260700000003" green="0.83927398919999996" blue="0.83911389110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.17984786629676819" green="0.45877349376678467" blue="0.71237760782241821" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -720,16 +807,19 @@
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
+                                                                <constraint firstItem="xr2-Gk-gZg" firstAttribute="leading" secondItem="RvW-zY-rgH" secondAttribute="trailing" constant="4" id="6yC-cr-Hog"/>
                                                                 <constraint firstAttribute="bottom" secondItem="2xB-by-gKu" secondAttribute="bottom" constant="1" id="8ov-JN-tuL"/>
                                                                 <constraint firstItem="xr2-Gk-gZg" firstAttribute="top" secondItem="9S7-tI-3cB" secondAttribute="top" constant="1" id="9tZ-EY-8rW"/>
                                                                 <constraint firstItem="Iel-jc-LZ8" firstAttribute="leading" secondItem="2xB-by-gKu" secondAttribute="trailing" constant="4" id="ISU-78-X1g"/>
                                                                 <constraint firstAttribute="bottom" secondItem="xr2-Gk-gZg" secondAttribute="bottom" constant="1" id="Iv2-NR-aah"/>
                                                                 <constraint firstItem="2xB-by-gKu" firstAttribute="leading" secondItem="9S7-tI-3cB" secondAttribute="leading" constant="3" id="Mgg-dp-nIZ"/>
                                                                 <constraint firstAttribute="trailing" secondItem="xr2-Gk-gZg" secondAttribute="trailing" constant="3" id="OEw-r0-fOF"/>
+                                                                <constraint firstItem="RvW-zY-rgH" firstAttribute="top" secondItem="9S7-tI-3cB" secondAttribute="top" id="R9b-TY-lR4"/>
                                                                 <constraint firstAttribute="height" constant="20" id="VQj-pv-B5E"/>
                                                                 <constraint firstItem="2xB-by-gKu" firstAttribute="top" secondItem="9S7-tI-3cB" secondAttribute="top" constant="1" id="WZI-Kb-NCq"/>
                                                                 <constraint firstItem="Iel-jc-LZ8" firstAttribute="top" secondItem="9S7-tI-3cB" secondAttribute="top" constant="5" id="dSj-lH-RqP"/>
                                                                 <constraint firstItem="xr2-Gk-gZg" firstAttribute="leading" secondItem="Iel-jc-LZ8" secondAttribute="trailing" constant="4" id="kwn-IM-5Jo"/>
+                                                                <constraint firstItem="RvW-zY-rgH" firstAttribute="leading" secondItem="2xB-by-gKu" secondAttribute="trailing" constant="4" id="wsf-oi-10S"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="agU-X4-2eC">
@@ -749,7 +839,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1Rz-RK-FAe">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TuB-5x-Ulu" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="anS-eP-qcJ"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1Rz-RK-FAe">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.83913260700000003" green="0.83927398919999996" blue="0.83911389110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.17984786629676819" green="0.45877349376678467" blue="0.71237760782241821" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -776,8 +873,11 @@
                                                             <constraints>
                                                                 <constraint firstItem="1Rz-RK-FAe" firstAttribute="top" secondItem="agU-X4-2eC" secondAttribute="top" constant="5" id="30i-WI-2vs"/>
                                                                 <constraint firstAttribute="bottom" secondItem="uhT-Li-cVq" secondAttribute="bottom" constant="1" id="9ER-nv-UDx"/>
+                                                                <constraint firstItem="TuB-5x-Ulu" firstAttribute="leading" secondItem="MvL-03-xuc" secondAttribute="trailing" constant="4" id="9vw-Dz-oUu"/>
                                                                 <constraint firstItem="MvL-03-xuc" firstAttribute="leading" secondItem="agU-X4-2eC" secondAttribute="leading" constant="3" id="F32-Sd-PYT"/>
                                                                 <constraint firstItem="1Rz-RK-FAe" firstAttribute="leading" secondItem="MvL-03-xuc" secondAttribute="trailing" constant="4" id="GdX-NT-1Eg"/>
+                                                                <constraint firstItem="TuB-5x-Ulu" firstAttribute="top" secondItem="agU-X4-2eC" secondAttribute="top" id="LfO-0X-yY0"/>
+                                                                <constraint firstItem="uhT-Li-cVq" firstAttribute="leading" secondItem="TuB-5x-Ulu" secondAttribute="trailing" constant="4" id="PtL-Wy-Tci"/>
                                                                 <constraint firstAttribute="bottom" secondItem="MvL-03-xuc" secondAttribute="bottom" constant="1" id="RfA-yk-UqP"/>
                                                                 <constraint firstAttribute="height" constant="20" id="Uvg-zC-21s"/>
                                                                 <constraint firstItem="uhT-Li-cVq" firstAttribute="leading" secondItem="1Rz-RK-FAe" secondAttribute="trailing" constant="4" id="cL5-5f-2SK"/>
@@ -803,7 +903,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lCk-q8-kfG">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JAb-6h-WHY" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="9ET-jz-457"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lCk-q8-kfG">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.83913260700000003" green="0.83927398919999996" blue="0.83911389110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.17984786629676819" green="0.45877349376678467" blue="0.71237760782241821" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -837,6 +944,9 @@
                                                                 <constraint firstItem="lCk-q8-kfG" firstAttribute="top" secondItem="Jeb-qR-3RR" secondAttribute="top" constant="5" id="fBP-p2-gwu"/>
                                                                 <constraint firstItem="eCu-9w-o2H" firstAttribute="top" secondItem="Jeb-qR-3RR" secondAttribute="top" constant="1" id="hvL-UF-B3S"/>
                                                                 <constraint firstAttribute="trailing" secondItem="eCu-9w-o2H" secondAttribute="trailing" constant="3" id="iK7-bZ-t1F"/>
+                                                                <constraint firstItem="eCu-9w-o2H" firstAttribute="leading" secondItem="JAb-6h-WHY" secondAttribute="trailing" constant="4" id="mTf-O2-Svu"/>
+                                                                <constraint firstItem="JAb-6h-WHY" firstAttribute="leading" secondItem="E4x-rB-V6J" secondAttribute="trailing" constant="4" id="mTm-M7-915"/>
+                                                                <constraint firstItem="JAb-6h-WHY" firstAttribute="top" secondItem="Jeb-qR-3RR" secondAttribute="top" id="qaO-e3-TYn"/>
                                                                 <constraint firstAttribute="bottom" secondItem="eCu-9w-o2H" secondAttribute="bottom" constant="1" id="vBa-8Q-nFr"/>
                                                             </constraints>
                                                         </view>
@@ -857,7 +967,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xt7-En-1nh">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGn-sm-vcW" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="pka-CR-6YD"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="xt7-En-1nh">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.83913260700000003" green="0.83927398919999996" blue="0.83911389110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.17984786629676819" green="0.45877349376678467" blue="0.71237760782241821" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -883,13 +1000,16 @@
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstItem="P6i-Jl-GgG" firstAttribute="leading" secondItem="xt7-En-1nh" secondAttribute="trailing" constant="4" id="4rI-BV-6Tl"/>
+                                                                <constraint firstItem="KGn-sm-vcW" firstAttribute="top" secondItem="jhq-J2-ZMD" secondAttribute="top" id="ABo-ef-CHg"/>
                                                                 <constraint firstItem="P6i-Jl-GgG" firstAttribute="top" secondItem="jhq-J2-ZMD" secondAttribute="top" constant="1" id="BPf-UL-awd"/>
+                                                                <constraint firstItem="KGn-sm-vcW" firstAttribute="leading" secondItem="kye-XQ-gkl" secondAttribute="trailing" constant="4" id="CPB-sZ-kTR"/>
                                                                 <constraint firstItem="kye-XQ-gkl" firstAttribute="leading" secondItem="jhq-J2-ZMD" secondAttribute="leading" constant="3" id="DWh-rl-TFK"/>
                                                                 <constraint firstAttribute="bottom" secondItem="P6i-Jl-GgG" secondAttribute="bottom" constant="1" id="Hez-BI-R4h"/>
                                                                 <constraint firstAttribute="bottom" secondItem="kye-XQ-gkl" secondAttribute="bottom" constant="1" id="HuQ-WK-JDo"/>
                                                                 <constraint firstItem="xt7-En-1nh" firstAttribute="top" secondItem="jhq-J2-ZMD" secondAttribute="top" constant="5" id="Jqc-cZ-Htw"/>
                                                                 <constraint firstAttribute="trailing" secondItem="P6i-Jl-GgG" secondAttribute="trailing" constant="3" id="QUD-5c-7hU"/>
                                                                 <constraint firstItem="kye-XQ-gkl" firstAttribute="top" secondItem="jhq-J2-ZMD" secondAttribute="top" constant="1" id="dJQ-8e-axc"/>
+                                                                <constraint firstItem="P6i-Jl-GgG" firstAttribute="leading" secondItem="KGn-sm-vcW" secondAttribute="trailing" constant="4" id="eo4-9q-DN6"/>
                                                                 <constraint firstAttribute="height" constant="20" id="mfU-0z-2hX"/>
                                                                 <constraint firstItem="xt7-En-1nh" firstAttribute="leading" secondItem="kye-XQ-gkl" secondAttribute="trailing" constant="4" id="wdG-o0-UmY"/>
                                                             </constraints>
@@ -911,7 +1031,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9ja-3K-b1e">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kbW-ku-Zey" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="a2f-yk-vY9"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9ja-3K-b1e">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.83913260700000003" green="0.83927398919999996" blue="0.83911389110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.17984786629676819" green="0.45877349376678467" blue="0.71237760782241821" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -936,11 +1063,14 @@
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
+                                                                <constraint firstItem="kbW-ku-Zey" firstAttribute="top" secondItem="sop-bh-1Mg" secondAttribute="top" id="98p-Eq-AVL"/>
                                                                 <constraint firstItem="A7K-yn-vCw" firstAttribute="top" secondItem="sop-bh-1Mg" secondAttribute="top" constant="1" id="9FD-qq-ARY"/>
+                                                                <constraint firstItem="kbW-ku-Zey" firstAttribute="leading" secondItem="gsJ-RB-knh" secondAttribute="trailing" constant="4" id="KpN-PC-nQH"/>
                                                                 <constraint firstAttribute="trailing" secondItem="A7K-yn-vCw" secondAttribute="trailing" constant="3" id="KqL-OA-VEt"/>
                                                                 <constraint firstItem="9ja-3K-b1e" firstAttribute="leading" secondItem="gsJ-RB-knh" secondAttribute="trailing" constant="4" id="N9K-gr-W5H"/>
                                                                 <constraint firstItem="9ja-3K-b1e" firstAttribute="top" secondItem="sop-bh-1Mg" secondAttribute="top" constant="5" id="NMc-rm-kxw"/>
                                                                 <constraint firstAttribute="bottom" secondItem="A7K-yn-vCw" secondAttribute="bottom" constant="1" id="Nh1-iM-Y7O"/>
+                                                                <constraint firstItem="A7K-yn-vCw" firstAttribute="leading" secondItem="kbW-ku-Zey" secondAttribute="trailing" constant="4" id="YGm-b8-XEO"/>
                                                                 <constraint firstAttribute="bottom" secondItem="gsJ-RB-knh" secondAttribute="bottom" constant="1" id="ZKt-WV-9z5"/>
                                                                 <constraint firstItem="A7K-yn-vCw" firstAttribute="leading" secondItem="9ja-3K-b1e" secondAttribute="trailing" constant="4" id="eQA-JO-FjY"/>
                                                                 <constraint firstAttribute="height" constant="20" id="grw-hm-OkW"/>
@@ -965,7 +1095,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="iwH-6I-sNM">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XZs-dn-9bv" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="m5n-0R-DBa"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="iwH-6I-sNM">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.83913260700000003" green="0.83927398919999996" blue="0.83911389110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.17984786629676819" green="0.45877349376678467" blue="0.71237760782241821" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -992,10 +1129,13 @@
                                                             <constraints>
                                                                 <constraint firstItem="lqr-3f-dVR" firstAttribute="leading" secondItem="iwH-6I-sNM" secondAttribute="trailing" constant="4" id="0r3-UD-Ctq"/>
                                                                 <constraint firstAttribute="bottom" secondItem="XpH-QS-xRS" secondAttribute="bottom" constant="1" id="3tJ-R0-ckh"/>
+                                                                <constraint firstItem="XZs-dn-9bv" firstAttribute="top" secondItem="pMa-8J-0vU" secondAttribute="top" id="76U-Dw-oCU"/>
                                                                 <constraint firstItem="XpH-QS-xRS" firstAttribute="leading" secondItem="pMa-8J-0vU" secondAttribute="leading" constant="3" id="JD3-SI-RwR"/>
                                                                 <constraint firstAttribute="height" constant="20" id="K3q-e4-rNk"/>
                                                                 <constraint firstItem="iwH-6I-sNM" firstAttribute="top" secondItem="pMa-8J-0vU" secondAttribute="top" constant="5" id="SaT-dO-LDa"/>
                                                                 <constraint firstItem="lqr-3f-dVR" firstAttribute="top" secondItem="pMa-8J-0vU" secondAttribute="top" constant="1" id="a5X-V6-CP9"/>
+                                                                <constraint firstItem="XZs-dn-9bv" firstAttribute="leading" secondItem="XpH-QS-xRS" secondAttribute="trailing" constant="4" id="coH-Jl-wEH"/>
+                                                                <constraint firstItem="lqr-3f-dVR" firstAttribute="leading" secondItem="XZs-dn-9bv" secondAttribute="trailing" constant="4" id="kFg-Iy-wDR"/>
                                                                 <constraint firstAttribute="bottom" secondItem="lqr-3f-dVR" secondAttribute="bottom" constant="1" id="o9R-aO-GCn"/>
                                                                 <constraint firstAttribute="trailing" secondItem="lqr-3f-dVR" secondAttribute="trailing" constant="3" id="oUp-gD-hMd"/>
                                                                 <constraint firstItem="XpH-QS-xRS" firstAttribute="top" secondItem="pMa-8J-0vU" secondAttribute="top" constant="1" id="pQe-Ae-xB0"/>
@@ -1034,7 +1174,7 @@
                                                     </constraints>
                                                 </view>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="iHe-px-wR1">
-                                                    <rect key="frame" x="5" y="134" width="310" height="400"/>
+                                                    <rect key="frame" x="5" y="133.5" width="310" height="400.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cU7-nx-IiK">
                                                         <size key="itemSize" width="250" height="400"/>
@@ -1063,13 +1203,13 @@
                                             <rect key="frame" x="0.0" y="1129" width="320" height="542"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16-20 Overs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jz1-om-EQl">
-                                                    <rect key="frame" x="0.0" y="8" width="320" height="18"/>
+                                                    <rect key="frame" x="0.0" y="8" width="320" height="17.5"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jyg-pw-pDU">
-                                                    <rect key="frame" x="0.0" y="34" width="320" height="92"/>
+                                                    <rect key="frame" x="0.0" y="33.5" width="320" height="92"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kry-Po-JPp">
                                                             <rect key="frame" x="159" y="1" width="2" height="90"/>
@@ -1095,7 +1235,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JZz-L3-bqO">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dFM-xV-oMH" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="Tij-kX-Cqz"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="JZz-L3-bqO">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.83913260698318481" green="0.83927398920059204" blue="0.83911389112472534" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.99551445245742798" green="0.85067731142044067" blue="0.40065163373947144" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1126,6 +1273,9 @@
                                                                 <constraint firstItem="6Nn-ad-j26" firstAttribute="top" secondItem="Ubf-EJ-Ylu" secondAttribute="top" constant="1" id="Pca-Gq-Bvr"/>
                                                                 <constraint firstItem="uT3-Ti-QSU" firstAttribute="leading" secondItem="JZz-L3-bqO" secondAttribute="trailing" constant="4" id="Q1P-eY-3QE"/>
                                                                 <constraint firstItem="JZz-L3-bqO" firstAttribute="top" secondItem="Ubf-EJ-Ylu" secondAttribute="top" constant="5" id="RwZ-Sn-lMX"/>
+                                                                <constraint firstItem="dFM-xV-oMH" firstAttribute="leading" secondItem="6Nn-ad-j26" secondAttribute="trailing" constant="4" id="Xlg-Tc-cwc"/>
+                                                                <constraint firstItem="uT3-Ti-QSU" firstAttribute="leading" secondItem="dFM-xV-oMH" secondAttribute="trailing" constant="4" id="d0o-i1-HQ0"/>
+                                                                <constraint firstItem="dFM-xV-oMH" firstAttribute="top" secondItem="Ubf-EJ-Ylu" secondAttribute="top" id="jad-dX-ltM"/>
                                                                 <constraint firstAttribute="bottom" secondItem="6Nn-ad-j26" secondAttribute="bottom" constant="1" id="kAm-IP-QYd"/>
                                                                 <constraint firstItem="JZz-L3-bqO" firstAttribute="leading" secondItem="6Nn-ad-j26" secondAttribute="trailing" constant="4" id="oJV-75-scl"/>
                                                                 <constraint firstAttribute="bottom" secondItem="uT3-Ti-QSU" secondAttribute="bottom" constant="1" id="skY-78-d8W"/>
@@ -1149,7 +1299,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AGy-fM-ir2">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VzA-pW-4OS" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="cL3-cl-wc3"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AGy-fM-ir2">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.83913260698318481" green="0.83927398920059204" blue="0.83911389112472534" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.99551445245742798" green="0.85067731142044067" blue="0.40065163373947144" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1174,11 +1331,14 @@
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
+                                                                <constraint firstItem="VzA-pW-4OS" firstAttribute="top" secondItem="v1S-LC-88e" secondAttribute="top" id="CpP-gk-VQa"/>
                                                                 <constraint firstAttribute="bottom" secondItem="El7-HK-idD" secondAttribute="bottom" constant="1" id="DGn-bX-xg8"/>
                                                                 <constraint firstItem="El7-HK-idD" firstAttribute="leading" secondItem="AGy-fM-ir2" secondAttribute="trailing" constant="4" id="EZM-Rg-O9N"/>
                                                                 <constraint firstItem="AGy-fM-ir2" firstAttribute="top" secondItem="v1S-LC-88e" secondAttribute="top" constant="5" id="I9b-rN-FRI"/>
                                                                 <constraint firstItem="El7-HK-idD" firstAttribute="top" secondItem="v1S-LC-88e" secondAttribute="top" constant="1" id="QFO-rR-6oC"/>
+                                                                <constraint firstItem="El7-HK-idD" firstAttribute="leading" secondItem="VzA-pW-4OS" secondAttribute="trailing" constant="4" id="Svm-oQ-elt"/>
                                                                 <constraint firstAttribute="trailing" secondItem="El7-HK-idD" secondAttribute="trailing" constant="3" id="Yy1-hx-LfK"/>
+                                                                <constraint firstItem="VzA-pW-4OS" firstAttribute="leading" secondItem="IzZ-lC-0LN" secondAttribute="trailing" constant="4" id="fQs-mN-Bgp"/>
                                                                 <constraint firstItem="AGy-fM-ir2" firstAttribute="leading" secondItem="IzZ-lC-0LN" secondAttribute="trailing" constant="4" id="kh8-a6-46a"/>
                                                                 <constraint firstItem="IzZ-lC-0LN" firstAttribute="top" secondItem="v1S-LC-88e" secondAttribute="top" constant="1" id="p7c-mi-dWp"/>
                                                                 <constraint firstAttribute="height" constant="20" id="qHs-SM-rb3"/>
@@ -1203,7 +1363,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="b4P-3h-Dkt">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lC4-B4-kHS" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="Xge-Da-Td2"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="b4P-3h-Dkt">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.83913260698318481" green="0.83927398920059204" blue="0.83911389112472534" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.99551445245742798" green="0.85067731142044067" blue="0.40065163373947144" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1229,9 +1396,12 @@
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="20" id="4Y0-AN-0yt"/>
+                                                                <constraint firstItem="d8j-72-Sy9" firstAttribute="leading" secondItem="lC4-B4-kHS" secondAttribute="trailing" constant="4" id="5Yi-w1-fHd"/>
                                                                 <constraint firstItem="D9S-Nq-A6b" firstAttribute="leading" secondItem="3vu-Ya-0U3" secondAttribute="leading" constant="3" id="7f4-NX-Scf"/>
                                                                 <constraint firstItem="D9S-Nq-A6b" firstAttribute="top" secondItem="3vu-Ya-0U3" secondAttribute="top" constant="1" id="Ert-rp-PUP"/>
+                                                                <constraint firstItem="lC4-B4-kHS" firstAttribute="leading" secondItem="D9S-Nq-A6b" secondAttribute="trailing" constant="4" id="LLX-7H-iks"/>
                                                                 <constraint firstAttribute="bottom" secondItem="d8j-72-Sy9" secondAttribute="bottom" constant="1" id="LOr-ln-mHB"/>
+                                                                <constraint firstItem="lC4-B4-kHS" firstAttribute="top" secondItem="3vu-Ya-0U3" secondAttribute="top" id="WeN-LD-C2J"/>
                                                                 <constraint firstAttribute="bottom" secondItem="D9S-Nq-A6b" secondAttribute="bottom" constant="1" id="WsR-sq-vzb"/>
                                                                 <constraint firstItem="b4P-3h-Dkt" firstAttribute="leading" secondItem="D9S-Nq-A6b" secondAttribute="trailing" constant="4" id="ZMU-Y6-THu"/>
                                                                 <constraint firstAttribute="trailing" secondItem="d8j-72-Sy9" secondAttribute="trailing" constant="3" id="cex-KV-6BV"/>
@@ -1257,7 +1427,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Rxn-bP-vVA">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HvP-c0-ChA" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="rtp-bb-g25"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Rxn-bP-vVA">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.83913260698318481" green="0.83927398920059204" blue="0.83911389112472534" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.99551445245742798" green="0.85067731142044067" blue="0.40065163373947144" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1283,14 +1460,17 @@
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstItem="Rxn-bP-vVA" firstAttribute="top" secondItem="LMR-dw-OUP" secondAttribute="top" constant="5" id="62f-qa-a3o"/>
+                                                                <constraint firstItem="O9u-xr-Dem" firstAttribute="leading" secondItem="HvP-c0-ChA" secondAttribute="trailing" constant="4" id="99g-ft-gQD"/>
                                                                 <constraint firstAttribute="height" constant="20" id="9Pt-M8-3eQ"/>
                                                                 <constraint firstAttribute="bottom" secondItem="xzb-ln-gnl" secondAttribute="bottom" constant="1" id="CfT-f1-Bmk"/>
                                                                 <constraint firstItem="xzb-ln-gnl" firstAttribute="leading" secondItem="LMR-dw-OUP" secondAttribute="leading" constant="3" id="GAB-ZD-iPc"/>
                                                                 <constraint firstAttribute="bottom" secondItem="O9u-xr-Dem" secondAttribute="bottom" constant="1" id="M7i-Gd-tcV"/>
                                                                 <constraint firstItem="O9u-xr-Dem" firstAttribute="leading" secondItem="Rxn-bP-vVA" secondAttribute="trailing" constant="4" id="Tfv-zJ-pXY"/>
+                                                                <constraint firstItem="HvP-c0-ChA" firstAttribute="leading" secondItem="xzb-ln-gnl" secondAttribute="trailing" constant="4" id="e2d-oq-SG9"/>
                                                                 <constraint firstItem="xzb-ln-gnl" firstAttribute="top" secondItem="LMR-dw-OUP" secondAttribute="top" constant="1" id="mX5-95-7ur"/>
                                                                 <constraint firstAttribute="trailing" secondItem="O9u-xr-Dem" secondAttribute="trailing" constant="3" id="nG3-Sj-q7A"/>
                                                                 <constraint firstItem="Rxn-bP-vVA" firstAttribute="leading" secondItem="xzb-ln-gnl" secondAttribute="trailing" constant="4" id="rU9-d6-U7J"/>
+                                                                <constraint firstItem="HvP-c0-ChA" firstAttribute="top" secondItem="LMR-dw-OUP" secondAttribute="top" id="sHA-0j-yJi"/>
                                                                 <constraint firstItem="O9u-xr-Dem" firstAttribute="top" secondItem="LMR-dw-OUP" secondAttribute="top" constant="1" id="whW-yM-Xgv"/>
                                                             </constraints>
                                                         </view>
@@ -1311,7 +1491,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gbB-vR-Ay4">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vqA-Lt-aNv" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="E07-1a-JG3"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gbB-vR-Ay4">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.83913260698318481" green="0.83927398920059204" blue="0.83911389112472534" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.99551445245742798" green="0.85067731142044067" blue="0.40065163373947144" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1336,15 +1523,18 @@
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <constraints>
+                                                                <constraint firstItem="8xa-Vq-d6P" firstAttribute="leading" secondItem="vqA-Lt-aNv" secondAttribute="trailing" constant="4" id="2EX-PI-BMb"/>
                                                                 <constraint firstAttribute="bottom" secondItem="8xa-Vq-d6P" secondAttribute="bottom" constant="1" id="C3i-G2-I9h"/>
                                                                 <constraint firstAttribute="height" constant="20" id="CIE-Dy-qgy"/>
                                                                 <constraint firstItem="8xa-Vq-d6P" firstAttribute="leading" secondItem="gbB-vR-Ay4" secondAttribute="trailing" constant="4" id="PT1-2d-YXE"/>
                                                                 <constraint firstItem="8xa-Vq-d6P" firstAttribute="top" secondItem="rOS-Xz-WRT" secondAttribute="top" constant="1" id="Q4A-PE-ATc"/>
                                                                 <constraint firstItem="gbB-vR-Ay4" firstAttribute="top" secondItem="rOS-Xz-WRT" secondAttribute="top" constant="5" id="RVO-lI-Elp"/>
                                                                 <constraint firstAttribute="trailing" secondItem="8xa-Vq-d6P" secondAttribute="trailing" constant="3" id="gcQ-QC-JYg"/>
+                                                                <constraint firstItem="vqA-Lt-aNv" firstAttribute="leading" secondItem="twz-Pc-Yv5" secondAttribute="trailing" constant="4" id="pRk-Kp-329"/>
                                                                 <constraint firstItem="twz-Pc-Yv5" firstAttribute="top" secondItem="rOS-Xz-WRT" secondAttribute="top" constant="1" id="pVg-KB-vo5"/>
                                                                 <constraint firstAttribute="bottom" secondItem="twz-Pc-Yv5" secondAttribute="bottom" constant="1" id="t7S-kI-XSD"/>
                                                                 <constraint firstItem="twz-Pc-Yv5" firstAttribute="leading" secondItem="rOS-Xz-WRT" secondAttribute="leading" constant="3" id="uaj-L7-0rx"/>
+                                                                <constraint firstItem="vqA-Lt-aNv" firstAttribute="top" secondItem="rOS-Xz-WRT" secondAttribute="top" id="xb8-2i-chA"/>
                                                                 <constraint firstItem="gbB-vR-Ay4" firstAttribute="leading" secondItem="twz-Pc-Yv5" secondAttribute="trailing" constant="4" id="yHS-Nu-Zid"/>
                                                             </constraints>
                                                         </view>
@@ -1365,7 +1555,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FKk-Me-lXI">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dhh-00-Egi" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="mN1-eT-ZvK"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="FKk-Me-lXI">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.83913260698318481" green="0.83927398920059204" blue="0.83911389112472534" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.99551445245742798" green="0.85067731142044067" blue="0.40065163373947144" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1393,7 +1590,10 @@
                                                                 <constraint firstAttribute="trailing" secondItem="Kwv-O6-Lz3" secondAttribute="trailing" constant="3" id="1Ef-l7-jH7"/>
                                                                 <constraint firstItem="FKk-Me-lXI" firstAttribute="leading" secondItem="gZN-0j-KiV" secondAttribute="trailing" constant="4" id="57J-SD-lHK"/>
                                                                 <constraint firstItem="FKk-Me-lXI" firstAttribute="top" secondItem="ced-3t-VTI" secondAttribute="top" constant="5" id="5ZN-Rd-fhd"/>
+                                                                <constraint firstItem="dhh-00-Egi" firstAttribute="leading" secondItem="gZN-0j-KiV" secondAttribute="trailing" constant="4" id="E7E-VI-bXB"/>
                                                                 <constraint firstItem="gZN-0j-KiV" firstAttribute="leading" secondItem="ced-3t-VTI" secondAttribute="leading" constant="3" id="FLf-FC-G3S"/>
+                                                                <constraint firstItem="dhh-00-Egi" firstAttribute="top" secondItem="ced-3t-VTI" secondAttribute="top" id="HYb-ST-A9n"/>
+                                                                <constraint firstItem="Kwv-O6-Lz3" firstAttribute="leading" secondItem="dhh-00-Egi" secondAttribute="trailing" constant="4" id="Rag-XL-mdp"/>
                                                                 <constraint firstAttribute="height" constant="20" id="ToN-ea-2WC"/>
                                                                 <constraint firstAttribute="bottom" secondItem="gZN-0j-KiV" secondAttribute="bottom" constant="1" id="cHm-8i-GSC"/>
                                                                 <constraint firstAttribute="bottom" secondItem="Kwv-O6-Lz3" secondAttribute="bottom" constant="1" id="elx-0i-vWT"/>
@@ -1419,7 +1619,14 @@
                                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                                     </variation>
                                                                 </label>
-                                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gpJ-7e-8dZ">
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vr8-c2-9Qz" customClass="LDProgressView">
+                                                                    <rect key="frame" x="44" y="0.0" width="76" height="18"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="18" id="FOL-Kj-dsQ"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="gpJ-7e-8dZ">
                                                                     <rect key="frame" x="44" y="5" width="76" height="9"/>
                                                                     <color key="backgroundColor" red="0.83913260698318481" green="0.83927398920059204" blue="0.83911389112472534" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <color key="tintColor" red="0.99551445245742798" green="0.85067731142044067" blue="0.40065163373947144" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1448,12 +1655,15 @@
                                                                 <constraint firstAttribute="trailing" secondItem="XFr-uI-IpJ" secondAttribute="trailing" constant="3" id="JR9-BO-e8R"/>
                                                                 <constraint firstItem="gpJ-7e-8dZ" firstAttribute="top" secondItem="9xb-t4-XuK" secondAttribute="top" constant="5" id="KFk-cE-foy"/>
                                                                 <constraint firstItem="gpJ-7e-8dZ" firstAttribute="leading" secondItem="ifI-bi-TrQ" secondAttribute="trailing" constant="4" id="Of1-9z-iZ7"/>
+                                                                <constraint firstItem="vr8-c2-9Qz" firstAttribute="leading" secondItem="ifI-bi-TrQ" secondAttribute="trailing" constant="4" id="Qch-Dj-zrG"/>
                                                                 <constraint firstAttribute="height" constant="20" id="SZO-Oe-etd"/>
                                                                 <constraint firstItem="ifI-bi-TrQ" firstAttribute="leading" secondItem="9xb-t4-XuK" secondAttribute="leading" constant="3" id="WQo-U0-31b"/>
+                                                                <constraint firstItem="vr8-c2-9Qz" firstAttribute="top" secondItem="9xb-t4-XuK" secondAttribute="top" id="WyQ-uT-yzx"/>
                                                                 <constraint firstItem="XFr-uI-IpJ" firstAttribute="leading" secondItem="gpJ-7e-8dZ" secondAttribute="trailing" constant="4" id="fDE-qQ-iLO"/>
                                                                 <constraint firstItem="XFr-uI-IpJ" firstAttribute="top" secondItem="9xb-t4-XuK" secondAttribute="top" constant="1" id="h0Y-iV-qL8"/>
                                                                 <constraint firstAttribute="bottom" secondItem="XFr-uI-IpJ" secondAttribute="bottom" constant="1" id="lxC-47-REx"/>
                                                                 <constraint firstAttribute="bottom" secondItem="ifI-bi-TrQ" secondAttribute="bottom" constant="1" id="ria-dp-kUf"/>
+                                                                <constraint firstItem="XFr-uI-IpJ" firstAttribute="leading" secondItem="vr8-c2-9Qz" secondAttribute="trailing" constant="4" id="uMz-Mg-j1V"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -1488,7 +1698,7 @@
                                                     </constraints>
                                                 </view>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Fbd-fu-Tdk">
-                                                    <rect key="frame" x="5" y="134" width="310" height="400"/>
+                                                    <rect key="frame" x="5" y="133.5" width="310" height="400.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GT2-64-gcF">
                                                         <size key="itemSize" width="250" height="400"/>
@@ -1577,25 +1787,25 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="PopTableView" destination="gBl-lC-y9W" id="L4l-os-Waf"/>
-                <outlet property="WktsPrgs1" destination="FAa-gU-MBT" id="fBU-Zu-PHJ"/>
-                <outlet property="WktsPrgs2" destination="lCk-q8-kfG" id="SDT-pP-KhP"/>
-                <outlet property="WktsPrgs3" destination="Rxn-bP-vVA" id="mas-MV-Jn0"/>
-                <outlet property="avgPrgs1" destination="EMq-H8-Xl9" id="v5r-DM-42f"/>
-                <outlet property="avgPrgs2" destination="9ja-3K-b1e" id="b0L-jc-LKt"/>
-                <outlet property="avgPrgs3" destination="FKk-Me-lXI" id="0he-vX-oo8"/>
+                <outlet property="WktsPrgs1" destination="mmH-cP-m9g" id="xGh-B3-3Cs"/>
+                <outlet property="WktsPrgs2" destination="JAb-6h-WHY" id="mbO-Tb-EON"/>
+                <outlet property="WktsPrgs3" destination="HvP-c0-ChA" id="uoV-uO-2zb"/>
+                <outlet property="avgPrgs1" destination="XOC-Ye-2FE" id="6mM-me-gW5"/>
+                <outlet property="avgPrgs2" destination="kbW-ku-Zey" id="nuX-jC-Hji"/>
+                <outlet property="avgPrgs3" destination="dhh-00-Egi" id="c6D-3Y-KdB"/>
                 <outlet property="avglbl1" destination="Z31-v5-oxa" id="Ajz-nB-unV"/>
                 <outlet property="avglbl2" destination="A7K-yn-vCw" id="29y-L4-KdX"/>
                 <outlet property="avglbl3" destination="Kwv-O6-Lz3" id="fAM-EU-SWE"/>
-                <outlet property="bdryPerPrgs1" destination="oe4-oK-Wqx" id="9H3-eh-NAw"/>
-                <outlet property="bdryPerPrgs2" destination="iwH-6I-sNM" id="ULh-1A-Atc"/>
-                <outlet property="bdryPerPrgs3" destination="gpJ-7e-8dZ" id="eik-HS-cNN"/>
+                <outlet property="bdryPerPrgs1" destination="eRu-j9-HTa" id="wJ0-f2-PDz"/>
+                <outlet property="bdryPerPrgs2" destination="XZs-dn-9bv" id="udu-rV-Jux"/>
+                <outlet property="bdryPerPrgs3" destination="vr8-c2-9Qz" id="bfb-VY-hRk"/>
                 <outlet property="bdryPerlbl1" destination="hpu-el-sui" id="Y9J-gq-hiD"/>
                 <outlet property="bdryPerlbl2" destination="lqr-3f-dVR" id="qIu-mn-VgO"/>
                 <outlet property="bdryPerlbl3" destination="XFr-uI-IpJ" id="5vZ-DN-tvG"/>
                 <outlet property="competView" destination="zcH-2d-tOw" id="14j-mH-Rpr"/>
-                <outlet property="dbPerPrgs1" destination="QEG-xJ-iNK" id="kS7-TE-F7a"/>
-                <outlet property="dbPerPrgs2" destination="1Rz-RK-FAe" id="mk1-5q-CeX"/>
-                <outlet property="dbPerPrgs3" destination="b4P-3h-Dkt" id="pTR-0X-LJP"/>
+                <outlet property="dbPerPrgs1" destination="Xmd-ce-11H" id="rcN-8K-vBg"/>
+                <outlet property="dbPerPrgs2" destination="TuB-5x-Ulu" id="geC-RV-41x"/>
+                <outlet property="dbPerPrgs3" destination="lC4-B4-kHS" id="tsk-o9-mjg"/>
                 <outlet property="dbPerlbl1" destination="iYK-vI-itA" id="7jN-05-aow"/>
                 <outlet property="dbPerlbl2" destination="uhT-Li-cVq" id="i64-CI-Wio"/>
                 <outlet property="dbPerlbl3" destination="d8j-72-Sy9" id="v9T-76-ghC"/>
@@ -1603,21 +1813,21 @@
                 <outlet property="pp1CollectionView" destination="9a1-Ws-n3n" id="rt7-pE-qVq"/>
                 <outlet property="pp2CollectionView" destination="iHe-px-wR1" id="4tI-XP-kg7"/>
                 <outlet property="pp3CollectionView" destination="Fbd-fu-Tdk" id="nAg-Be-cZr"/>
-                <outlet property="runratePrgs1" destination="IS3-2e-lKh" id="R0k-ez-SHe"/>
-                <outlet property="runratePrgs2" destination="Iel-jc-LZ8" id="W9V-gp-zDl"/>
-                <outlet property="runratePrgs3" destination="AGy-fM-ir2" id="QS7-bn-ycv"/>
+                <outlet property="runratePrgs1" destination="tcp-zG-NEL" id="7dI-GA-I4Y"/>
+                <outlet property="runratePrgs2" destination="RvW-zY-rgH" id="Evv-6H-wHo"/>
+                <outlet property="runratePrgs3" destination="VzA-pW-4OS" id="DGG-Pv-yNQ"/>
                 <outlet property="runratelbl1" destination="doa-Lr-UcR" id="sn0-VU-Utt"/>
                 <outlet property="runratelbl2" destination="xr2-Gk-gZg" id="YqQ-uf-qGL"/>
                 <outlet property="runratelbl3" destination="El7-HK-idD" id="Yn0-h5-UNA"/>
-                <outlet property="runsPrgs1" destination="6e9-wa-epq" id="DJS-6A-uZ1"/>
-                <outlet property="runsPrgs2" destination="0Qg-Sr-8iJ" id="SaF-LG-Bo3"/>
-                <outlet property="runsPrgs3" destination="JZz-L3-bqO" id="fWz-3d-bJs"/>
+                <outlet property="runsPrgs1" destination="luP-zA-f42" id="06X-Ej-8Nk"/>
+                <outlet property="runsPrgs2" destination="TgC-Ee-eFX" id="Ull-yo-Wyw"/>
+                <outlet property="runsPrgs3" destination="dFM-xV-oMH" id="DLK-0B-I4t"/>
                 <outlet property="runslbl1" destination="Iyu-af-7qe" id="Hfg-iY-1cM"/>
                 <outlet property="runslbl2" destination="LG6-I2-Wm8" id="rgc-WR-25d"/>
                 <outlet property="runslbl3" destination="uT3-Ti-QSU" id="ruU-1X-EYm"/>
-                <outlet property="srPrgs1" destination="WUr-Oj-4YB" id="yC0-2j-4ol"/>
-                <outlet property="srPrgs2" destination="xt7-En-1nh" id="pbU-Se-ixK"/>
-                <outlet property="srPrgs3" destination="gbB-vR-Ay4" id="0k4-qd-giP"/>
+                <outlet property="srPrgs1" destination="MXe-rz-nRN" id="nDD-IO-tuG"/>
+                <outlet property="srPrgs2" destination="KGn-sm-vcW" id="gPg-gL-clS"/>
+                <outlet property="srPrgs3" destination="vqA-Lt-aNv" id="1Vy-rb-gn5"/>
                 <outlet property="srlbl1" destination="cCR-Cb-qFr" id="wpb-9t-1s5"/>
                 <outlet property="srlbl2" destination="P6i-Jl-GgG" id="Gg3-kU-wk0"/>
                 <outlet property="srlbl3" destination="8xa-Vq-d6P" id="LyL-NT-6F9"/>

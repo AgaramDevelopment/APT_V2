@@ -14,5 +14,8 @@ target 'APT_V2' do
     pod 'drCharts', :git => 'https://github.com/Zomato/DR-charts.git'
     pod 'StepSlider'
     pod 'Firebase/Core'
+    pod 'YLProgressBar', '~> 3.10.2'
+    pod 'LDProgressView', '>= 1.1'
+ 
     
 end

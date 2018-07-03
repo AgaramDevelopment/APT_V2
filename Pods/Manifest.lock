@@ -53,7 +53,6 @@ PODS:
     - SDWebImage/Core (= 4.4.1)
   - SDWebImage/Core (4.4.1)
   - StepSlider (1.2.0)
-  - YLProgressBar (3.10.2)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5.4)
@@ -65,7 +64,6 @@ DEPENDENCIES:
   - RGSColorSlider
   - SDWebImage (~> 4.0)
   - StepSlider
-  - YLProgressBar (~> 3.10.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -82,7 +80,6 @@ SPEC REPOS:
     - RGSColorSlider
     - SDWebImage
     - StepSlider
-    - YLProgressBar
 
 EXTERNAL SOURCES:
   drCharts:
@@ -108,8 +105,7 @@ SPEC CHECKSUMS:
   RGSColorSlider: b045e5a4bd9f6fe568184e1ad35dee1f0cdf948f
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
   StepSlider: 32f47aefb730ca5ac9a18eade23cf9b1fc3254d9
-  YLProgressBar: 365b6c5e934be18b661f79413db33c993c8e8251
 
-PODFILE CHECKSUM: 308cd765ccdff35f30f5f55287d57b0e3fb209a5
+PODFILE CHECKSUM: 66aa295e7f2a6b973bdc4d46d385bdde5a4ebe32
 
 COCOAPODS: 1.5.3

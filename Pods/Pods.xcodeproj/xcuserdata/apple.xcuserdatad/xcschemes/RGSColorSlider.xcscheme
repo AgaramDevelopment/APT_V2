@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2C8D2EEFCB969C84432ECFA05C761F1A"
+               BlueprintIdentifier = "F2D7FBAE9CDE10B7392DBF8825D9B94E"
                BlueprintName = "RGSColorSlider"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "RGSColorSlider.framework">

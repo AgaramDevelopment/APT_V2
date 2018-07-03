@@ -151,7 +151,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/RGSColorSlider/RGSColorSlider.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/StepSlider/StepSlider.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/YLProgressBar/YLProgressBar.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/drCharts/drCharts.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
 fi
@@ -164,7 +163,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/RGSColorSlider/RGSColorSlider.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/StepSlider/StepSlider.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/YLProgressBar/YLProgressBar.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/drCharts/drCharts.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
 fi

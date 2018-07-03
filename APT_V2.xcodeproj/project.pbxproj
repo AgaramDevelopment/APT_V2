@@ -240,6 +240,8 @@
 		18AC345E203EE50C003EE0F0 /* CoachBowlingLoad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AC345C203EE50C003EE0F0 /* CoachBowlingLoad.xib */; };
 		18B6D0ED203BDD580003CBA3 /* TrainingLoadGraphVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B6D0EB203BDD570003CBA3 /* TrainingLoadGraphVC.m */; };
 		18B6D0EE203BDD580003CBA3 /* TrainingLoadGraphVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B6D0EC203BDD570003CBA3 /* TrainingLoadGraphVC.xib */; };
+		18BE578B20EB56F200FD818D /* NewTabbarAnimationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18BE578920EB56F200FD818D /* NewTabbarAnimationVC.m */; };
+		18BE578C20EB56F200FD818D /* NewTabbarAnimationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18BE578A20EB56F200FD818D /* NewTabbarAnimationVC.xib */; };
 		18C57797209076C3001CAE5D /* InjuryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C57794209076C3001CAE5D /* InjuryVC.xib */; };
 		18C57798209076C3001CAE5D /* InjuryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C57796209076C3001CAE5D /* InjuryVC.m */; };
 		18DF185C202B087200AB9DCF /* RGSPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DF185A202B087200AB9DCF /* RGSPreviewView.m */; };
@@ -766,6 +768,9 @@
 		18B6D0EA203BDD570003CBA3 /* TrainingLoadGraphVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrainingLoadGraphVC.h; sourceTree = "<group>"; };
 		18B6D0EB203BDD570003CBA3 /* TrainingLoadGraphVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrainingLoadGraphVC.m; sourceTree = "<group>"; };
 		18B6D0EC203BDD570003CBA3 /* TrainingLoadGraphVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrainingLoadGraphVC.xib; sourceTree = "<group>"; };
+		18BE578820EB56F200FD818D /* NewTabbarAnimationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewTabbarAnimationVC.h; sourceTree = "<group>"; };
+		18BE578920EB56F200FD818D /* NewTabbarAnimationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewTabbarAnimationVC.m; sourceTree = "<group>"; };
+		18BE578A20EB56F200FD818D /* NewTabbarAnimationVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewTabbarAnimationVC.xib; sourceTree = "<group>"; };
 		18C57794209076C3001CAE5D /* InjuryVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InjuryVC.xib; sourceTree = "<group>"; };
 		18C57795209076C3001CAE5D /* InjuryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InjuryVC.h; sourceTree = "<group>"; };
 		18C57796209076C3001CAE5D /* InjuryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InjuryVC.m; sourceTree = "<group>"; };
@@ -1617,6 +1622,7 @@
 		18A6ADAD20C2BD98000F342E /* NewDesignControllers */ = {
 			isa = PBXGroup;
 			children = (
+				18BE578720EB56DC00FD818D /* NewTabbarAnimationVC */,
 				042E22DB20CA455500D8349C /* NewVideoDocumentVC */,
 				CE6DD95D20C7AEA50026FE23 /* LandingScreen */,
 				CE6DD96520C7AEA50026FE23 /* TeamCollectionCell */,
@@ -1759,6 +1765,16 @@
 				04BC4AB32086167300CEB23E /* SchResStandVC.xib */,
 			);
 			path = SchResStandVC;
+			sourceTree = "<group>";
+		};
+		18BE578720EB56DC00FD818D /* NewTabbarAnimationVC */ = {
+			isa = PBXGroup;
+			children = (
+				18BE578820EB56F200FD818D /* NewTabbarAnimationVC.h */,
+				18BE578920EB56F200FD818D /* NewTabbarAnimationVC.m */,
+				18BE578A20EB56F200FD818D /* NewTabbarAnimationVC.xib */,
+			);
+			path = NewTabbarAnimationVC;
 			sourceTree = "<group>";
 		};
 		18C287D020355847006E6590 /* TeamComp */ = {
@@ -2803,6 +2819,7 @@
 				CEB2B98020257BBD00E7D5E4 /* Montserrat-SemiBold.otf in Resources */,
 				CE54E70B2099C74E0019A558 /* ChangePasswordVC.xib in Resources */,
 				04BC4B5F2086387B00CEB23E /* MyStatsBattingCell.xib in Resources */,
+				18BE578C20EB56F200FD818D /* NewTabbarAnimationVC.xib in Resources */,
 				CEB2B99220257BBD00E7D5E4 /* MontserratAlternates-SemiBold.otf in Resources */,
 				04BC49F82085FB7300CEB23E /* TeamHeadToHead.xib in Resources */,
 				CEB2B98720257BBD00E7D5E4 /* MontserratAlternates-BoldItalic.otf in Resources */,
@@ -2938,10 +2955,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-APT_V2/Pods-APT_V2-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/BATabBarController/BATabBarController.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/LDProgressView/LDProgressView.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/RGSColorSlider/RGSColorSlider.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/StepSlider/StepSlider.framework",
@@ -2951,10 +2970,12 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BATabBarController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LDProgressView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RGSColorSlider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StepSlider.framework",
@@ -3067,6 +3088,7 @@
 				04BC4AD520861A5100CEB23E /* MCOverViewResultCVC.m in Sources */,
 				04C1EC4F2084C9410030E358 /* LoginVC.m in Sources */,
 				CE6C162F204520D100672253 /* SessionDayCell.m in Sources */,
+				18BE578B20EB56F200FD818D /* NewTabbarAnimationVC.m in Sources */,
 				CE0A3CFB20CFE96F00B2E83A /* PopOverVCCell.m in Sources */,
 				18949A1020875C5F002ECEE0 /* FFWeekCell.m in Sources */,
 				18949A2720875C5F002ECEE0 /* FFEditEventPopoverController.m in Sources */,

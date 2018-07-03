@@ -20,6 +20,8 @@ PODS:
   - AFNetworking/UIKit (2.5.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - BATabBarController (0.1.5):
+    - Masonry
   - Charts (3.1.1):
     - Charts/Core (= 3.1.1)
   - Charts/Core (3.1.1)
@@ -42,6 +44,7 @@ PODS:
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
   - LDProgressView (1.2.1)
+  - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
@@ -56,10 +59,12 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5.4)
+  - BATabBarController
   - Charts
   - drCharts (from `https://github.com/Zomato/DR-charts.git`)
   - Firebase/Core
   - LDProgressView (>= 1.1)
+  - Masonry
   - MBProgressHUD (~> 1.1.0)
   - RGSColorSlider
   - SDWebImage (~> 4.0)
@@ -68,6 +73,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
+    - BATabBarController
     - Charts
     - Firebase
     - FirebaseAnalytics
@@ -75,6 +81,7 @@ SPEC REPOS:
     - FirebaseInstanceID
     - GoogleToolboxForMac
     - LDProgressView
+    - Masonry
     - MBProgressHUD
     - nanopb
     - RGSColorSlider
@@ -92,6 +99,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFNetworking: 05edc0ac4c4c8cf57bcf4b84be5b0744b6d8e71e
+  BATabBarController: 5613abe7e9e840e4d47deecef6f5082187b24ecf
   Charts: 90a4d61da0f6e06684c591e3bcab11940fe61736
   drCharts: fd568784a514819ea7af12aabdd67e00ac359370
   Firebase: d66f4f29c23f22d96808d9abc174d81d8eee968f
@@ -100,12 +108,13 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: f3f0657372592ecdfdfe2cac604a5a75758376a6
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   LDProgressView: f6afc7c30d2a9edf33001515f3189338567a32d2
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   RGSColorSlider: b045e5a4bd9f6fe568184e1ad35dee1f0cdf948f
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
   StepSlider: 32f47aefb730ca5ac9a18eade23cf9b1fc3254d9
 
-PODFILE CHECKSUM: 66aa295e7f2a6b973bdc4d46d385bdde5a4ebe32
+PODFILE CHECKSUM: 914ff51ed692171d47abebcf969307f35562bc0e
 
 COCOAPODS: 1.5.3

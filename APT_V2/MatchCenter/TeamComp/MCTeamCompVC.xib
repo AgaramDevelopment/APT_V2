@@ -45,7 +45,7 @@
                     </constraints>
                 </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qWM-De-msy">
-                    <rect key="frame" x="0.0" y="60" width="375" height="1790"/>
+                    <rect key="frame" x="0.0" y="60" width="375" height="1740"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tAi-EV-s7t">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="1700"/>
@@ -369,7 +369,7 @@
             <constraints>
                 <constraint firstItem="tAi-EV-s7t" firstAttribute="width" secondItem="wcD-8H-5nu" secondAttribute="width" id="5Gk-xY-Bjr"/>
                 <constraint firstItem="qWM-De-msy" firstAttribute="top" secondItem="wcD-8H-5nu" secondAttribute="bottom" id="EKj-Jq-BEy"/>
-                <constraint firstItem="qWM-De-msy" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" constant="100" id="F4q-eg-wii"/>
+                <constraint firstItem="qWM-De-msy" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" constant="50" id="F4q-eg-wii"/>
                 <constraint firstItem="wcD-8H-5nu" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Fcr-7Q-JsL"/>
                 <constraint firstItem="wcD-8H-5nu" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="Hv3-bY-5pj"/>
                 <constraint firstItem="qWM-De-msy" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="QBd-c5-goF"/>

@@ -15,5 +15,7 @@ target 'APT_V2' do
     pod 'StepSlider'
     pod 'Firebase/Core'
     pod 'LDProgressView', '>= 1.1'
+    pod 'BATabBarController'
+    pod 'Masonry'
     
 end

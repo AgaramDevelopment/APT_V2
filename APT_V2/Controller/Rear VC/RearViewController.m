@@ -25,6 +25,7 @@
 #import "TeamsReportsHistoryVC.h"
 #import "NewVideoDocumentVC.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "NewTabbarAnimationVC.h"
 
 @interface RearViewController ()<passwordChangedNotification>
 {
@@ -197,7 +198,7 @@
         }
         else if(indexPath.row == 3){
             
-            newFrontController= [MatchCenterTBC new];
+            newFrontController= [NewTabbarAnimationVC new];
         }
         else if(indexPath.row == 4){
             
@@ -247,7 +248,7 @@
         }
         else if(indexPath.row == 3){
             
-            newFrontController= [MatchCenterTBC new];
+            newFrontController= [NewTabbarAnimationVC new];
         }
         else if(indexPath.row == 4){
             

@@ -35,6 +35,7 @@
 #import "TeamsVC.h"
 #import "TeamMembersVC.h"
 #import "TeamsReportsHistoryVC.h"
+#import "ScheduleVC.h"
 
 typedef enum : NSUInteger {
     Events,
@@ -1401,6 +1402,11 @@ typedef enum : NSUInteger {
     FoodDiaryUpdateVC *objresult = [FoodDiaryUpdateVC new];
     objresult.foodDiaryType = @"Save";
     [self.navigationController pushViewController:objresult animated:YES];
+    
+    /*
+    ScheduleVC *scheduleObj = [ScheduleVC new];
+    [self.navigationController pushViewController:scheduleObj animated:YES];
+    */
 }
 
 #pragma mark- Webservice

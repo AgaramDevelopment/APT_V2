@@ -32,6 +32,8 @@
 		04534F9620383F0C00C22717 /* FoodDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04534F9420383F0C00C22717 /* FoodDescriptionCell.xib */; };
 		045B58CD209B547B00443C65 /* FoodDiaryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 045B58CB209B547B00443C65 /* FoodDiaryVC.m */; };
 		045B58CE209B547B00443C65 /* FoodDiaryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045B58CC209B547B00443C65 /* FoodDiaryVC.xib */; };
+		04944F4A20EF4168006B813F /* ScheduleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04944F4820EF4168006B813F /* ScheduleVC.m */; };
+		04944F4B20EF4168006B813F /* ScheduleVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04944F4920EF4168006B813F /* ScheduleVC.xib */; };
 		04B27F17202D784600ECB699 /* illnessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B27F15202D784600ECB699 /* illnessVC.m */; };
 		04B27F18202D784600ECB699 /* illnessVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B27F16202D784600ECB699 /* illnessVC.xib */; };
 		04B27F1C202D7DD100ECB699 /* illnessTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B27F1A202D7DD100ECB699 /* illnessTableViewCell.m */; };
@@ -420,6 +422,9 @@
 		045B58CA209B547A00443C65 /* FoodDiaryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoodDiaryVC.h; sourceTree = "<group>"; };
 		045B58CB209B547B00443C65 /* FoodDiaryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoodDiaryVC.m; sourceTree = "<group>"; };
 		045B58CC209B547B00443C65 /* FoodDiaryVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FoodDiaryVC.xib; sourceTree = "<group>"; };
+		04944F4720EF4168006B813F /* ScheduleVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScheduleVC.h; sourceTree = "<group>"; };
+		04944F4820EF4168006B813F /* ScheduleVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScheduleVC.m; sourceTree = "<group>"; };
+		04944F4920EF4168006B813F /* ScheduleVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduleVC.xib; sourceTree = "<group>"; };
 		04B27F14202D784600ECB699 /* illnessVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = illnessVC.h; sourceTree = "<group>"; };
 		04B27F15202D784600ECB699 /* illnessVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = illnessVC.m; sourceTree = "<group>"; };
 		04B27F16202D784600ECB699 /* illnessVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = illnessVC.xib; sourceTree = "<group>"; };
@@ -1138,6 +1143,16 @@
 			path = FoodDiaryVC;
 			sourceTree = "<group>";
 		};
+		04944F4620EF410F006B813F /* ScheduleVc */ = {
+			isa = PBXGroup;
+			children = (
+				04944F4720EF4168006B813F /* ScheduleVC.h */,
+				04944F4820EF4168006B813F /* ScheduleVC.m */,
+				04944F4920EF4168006B813F /* ScheduleVC.xib */,
+			);
+			path = ScheduleVc;
+			sourceTree = "<group>";
+		};
 		04B27F13202D781D00ECB699 /* illnessVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1622,6 +1637,7 @@
 		18A6ADAD20C2BD98000F342E /* NewDesignControllers */ = {
 			isa = PBXGroup;
 			children = (
+				04944F4620EF410F006B813F /* ScheduleVc */,
 				18BE578720EB56DC00FD818D /* NewTabbarAnimationVC */,
 				042E22DB20CA455500D8349C /* NewVideoDocumentVC */,
 				CE6DD95D20C7AEA50026FE23 /* LandingScreen */,
@@ -2905,6 +2921,7 @@
 				CE60F10520870C8200B74A2C /* VideoDocumentVC.xib in Resources */,
 				CE8DE377203FDEC70097BF66 /* InjurySelectionViewController.xib in Resources */,
 				04BC4A112085FCFF00CEB23E /* OverviewBowlingView.xib in Resources */,
+				04944F4B20EF4168006B813F /* ScheduleVC.xib in Resources */,
 				042699CE2043DB06001AB09F /* IllnessTracker.xib in Resources */,
 				CEB2B97F20257BBD00E7D5E4 /* Montserrat-Regular.otf in Resources */,
 				04BC4B682086398D00CEB23E /* DocumentViewController.xib in Resources */,
@@ -3063,6 +3080,7 @@
 				18949A1920875C5F002ECEE0 /* FFYearCollectionView.m in Sources */,
 				18949A0A20875C5F002ECEE0 /* FFMonthHeaderView.m in Sources */,
 				18949A2620875C5F002ECEE0 /* FFHourPopoverController.m in Sources */,
+				04944F4A20EF4168006B813F /* ScheduleVC.m in Sources */,
 				CE367C872046D72300A94B28 /* StepSlider.m in Sources */,
 				18949A1A20875C5F002ECEE0 /* FFYearCollectionViewFlowLayout.m in Sources */,
 				CE76ECE320416AE100E183EA /* UIImage+GetPoints.m in Sources */,

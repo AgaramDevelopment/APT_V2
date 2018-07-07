@@ -391,42 +391,53 @@
             [self.TeamImgView sd_setImageWithURL:[NSURL URLWithString:photourl] placeholderImage:[UIImage imageNamed:@"no-image"]];
             
             recentMatchesArray = [[NSMutableArray alloc]init];
-            recentMatchesArray = [responseObject valueForKey:@"OvBatRecentmatch"];
             
-            if(recentMatchesArray.count>0)
+            if(![[responseObject valueForKey:@"OvBatRecentmatch"] isEqual:[NSNull null]])
             {
-                self.moreBtn.hidden = NO;
+                recentMatchesArray = [responseObject valueForKey:@"OvBatRecentmatch"];
+                
+                if(recentMatchesArray.count>0)
+                {
+                    self.moreBtn.hidden = NO;
+                }
+                else
+                {
+                    self.moreBtn.hidden = YES;
+                }
             }
-            else
-            {
-                self.moreBtn.hidden = YES;
-            }
+            
             
             resultsArray = [[NSMutableArray alloc]init];
-            resultsArray = [responseObject valueForKey:@"OvATResults"];
-        
-            self.TotalMatcheslbl.text =  [self checkNull:[resultsArray valueForKey:@"ATMatches"]];
-            
-            self.winLosslbl.text = [self checkNull:[resultsArray valueForKey:@"ATWinper"]];
-            NSString *wincount = [NSString stringWithFormat:@"%@/%@",[resultsArray valueForKey:@"ATWon"],[resultsArray valueForKey:@"ATMatches"]];
-            self.winLossCountlbl.text =wincount;
-        
-            self.Forlbl.text = [self checkNull:[resultsArray valueForKey:@"For"]];
-            NSString *forcount = [NSString stringWithFormat:@"%@/%@",[resultsArray valueForKey:@"ATRuns"],[resultsArray valueForKey:@"ATOvers"]];
-            self.ForCountlbl.text =forcount;
-            
-        
-            self.Againstlbl.text = [self checkNull:[resultsArray valueForKey:@"Against"]];
-            NSString *Againstcount = [NSString stringWithFormat:@"%@/%@",[resultsArray valueForKey:@"BTRuns"],[resultsArray valueForKey:@"BTOvers"]];
-            self.AgainstCountlbl.text =Againstcount;
-        
-            self.nrrlbl.text = [self checkNull:[resultsArray valueForKey:@"NetRR"]];
-            
-            NSString *wkts = [NSString stringWithFormat:@"%@/%@",[resultsArray valueForKey:@"BTWcktsTkn"],[resultsArray valueForKey:@"ATWcktsGvn"]];
-            self.Wktslbl.text = wkts;
+            if(![[responseObject valueForKey:@"OvATResults"] isEqual:[NSNull null]])
+            {
+                resultsArray = [responseObject valueForKey:@"OvATResults"];
+                
+                self.TotalMatcheslbl.text =  [self checkNull:[resultsArray valueForKey:@"ATMatches"]];
+                
+                self.winLosslbl.text = [self checkNull:[resultsArray valueForKey:@"ATWinper"]];
+                NSString *wincount = [NSString stringWithFormat:@"%@/%@",[resultsArray valueForKey:@"ATWon"],[resultsArray valueForKey:@"ATMatches"]];
+                self.winLossCountlbl.text =wincount;
+                
+                self.Forlbl.text = [self checkNull:[resultsArray valueForKey:@"For"]];
+                NSString *forcount = [NSString stringWithFormat:@"%@/%@",[resultsArray valueForKey:@"ATRuns"],[resultsArray valueForKey:@"ATOvers"]];
+                self.ForCountlbl.text =forcount;
+                
+                
+                self.Againstlbl.text = [self checkNull:[resultsArray valueForKey:@"Against"]];
+                NSString *Againstcount = [NSString stringWithFormat:@"%@/%@",[resultsArray valueForKey:@"BTRuns"],[resultsArray valueForKey:@"BTOvers"]];
+                self.AgainstCountlbl.text =Againstcount;
+                
+                self.nrrlbl.text = [self checkNull:[resultsArray valueForKey:@"NetRR"]];
+                
+                NSString *wkts = [NSString stringWithFormat:@"%@/%@",[resultsArray valueForKey:@"BTWcktsTkn"],[resultsArray valueForKey:@"ATWcktsGvn"]];
+                self.Wktslbl.text = wkts;
+            }
             
             BatsmenArray = [[NSMutableArray alloc]init];
+            if(![[responseObject valueForKey:@"BatsmenOV"] isEqual:[NSNull null]])
+            {
             BatsmenArray = [responseObject valueForKey:@"BatsmenOV"];
+            
             
             BowlersArray = [[NSMutableArray alloc]init];
             BowlersArray = [responseObject valueForKey:@"BowlersOV"];
@@ -440,6 +451,7 @@
             self.nextBtn.hidden = NO;
             self.prevBtn.hidden = YES;
             [self.nextBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
+            }
            
         }
         else{

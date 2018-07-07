@@ -17,5 +17,6 @@ target 'APT_V2' do
     pod 'LDProgressView', '>= 1.1'
     pod 'BATabBarController'
     pod 'Masonry'
+    pod 'SCLAlertView-Objective-C'
     
 end

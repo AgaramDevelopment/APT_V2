@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8661B3A8A2950AA35129CCB8A577D8C7"
+               BlueprintIdentifier = "89860F6AE60A4C874FBFC70BAC18482C"
                BuildableName = "RGSColorSlider.bundle"
                BlueprintName = "RGSColorSlider-RGSColorSlider"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8661B3A8A2950AA35129CCB8A577D8C7"
+            BlueprintIdentifier = "89860F6AE60A4C874FBFC70BAC18482C"
             BuildableName = "RGSColorSlider.bundle"
             BlueprintName = "RGSColorSlider-RGSColorSlider"
             ReferencedContainer = "container:Pods.xcodeproj">

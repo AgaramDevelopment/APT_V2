@@ -14,6 +14,8 @@
 #import "SWRevealViewController.h"
 #import "SwipeView.h"
 #import "TabHomeVC.h"
+@import SCLAlertView_Objective_C;
+
 
 @interface AddWellnessRatingVC ()
 {
@@ -96,6 +98,8 @@ NSString *metaSubCode4;
     [self metacodeWebservice];
     [self DateWebservice];
     [self customnavigationmethod];
+    
+    
     
 //    if([self.isFromHome isEqualToString:@"NO"])
 //    {
@@ -536,9 +540,14 @@ NSString *metaSubCode4;
             if(Status == YES)
             {
                 NSLog(@"success");
-                [self ShowAlterMsg:@"Wellness Rating Inserted Successfully"];
+                //[self ShowAlterMsg:@"Wellness Rating Inserted Successfully"];
                 //objWell = [[WellnessTrainingBowlingVC alloc] init];
                 //objWell.topviewHeight.constant = 280;
+                
+                SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindowWidth:300];
+                
+                UIColor *color = [UIColor colorWithRed:65.0/255.0 green:64.0/255.0 blue:144.0/255.0 alpha:1.0];
+                [alert showCustom:self image:[UIImage imageNamed:@"Wellness"] color:color title:@"Wellness" subTitle:@"Wellness Rating Inserted Successfully" closeButtonTitle:@"OK" duration:10.0f];
             
                 if([self.isFromHome isEqualToString:@"NO"])
                 {
@@ -729,10 +738,16 @@ NSString *metaSubCode4;
             if(Status == YES)
             {
                 NSLog(@"success");
-                [self ShowAlterMsg:@"Wellness Rating Updated Successfully"];
+               // [self ShowAlterMsg:@"Wellness Rating Updated Successfully"];
                 //[self.view removeFromSuperview];
                 //[self.Delegate closeWellnessSource];
                 //[appDel.frontNavigationController popViewControllerAnimated:YES];
+                
+                SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindowWidth:300];
+                
+                UIColor *color = [UIColor colorWithRed:65.0/255.0 green:64.0/255.0 blue:144.0/255.0 alpha:1.0];
+                [alert showCustom:self image:[UIImage imageNamed:@"Wellness"] color:color title:@"Wellness" subTitle:@"Wellness Rating Updated Successfully" closeButtonTitle:@"OK" duration:10.0f];
+              
             
             if([self.isFromHome isEqualToString:@"NO"])
                 {

@@ -52,10 +52,11 @@ PODS:
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
   - RGSColorSlider (0.1.1)
+  - SCLAlertView-Objective-C (1.1.5)
   - SDWebImage (4.4.1):
     - SDWebImage/Core (= 4.4.1)
   - SDWebImage/Core (4.4.1)
-  - StepSlider (1.2.0)
+  - StepSlider (1.2.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5.4)
@@ -67,6 +68,7 @@ DEPENDENCIES:
   - Masonry
   - MBProgressHUD (~> 1.1.0)
   - RGSColorSlider
+  - SCLAlertView-Objective-C
   - SDWebImage (~> 4.0)
   - StepSlider
 
@@ -85,6 +87,7 @@ SPEC REPOS:
     - MBProgressHUD
     - nanopb
     - RGSColorSlider
+    - SCLAlertView-Objective-C
     - SDWebImage
     - StepSlider
 
@@ -112,9 +115,10 @@ SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   RGSColorSlider: b045e5a4bd9f6fe568184e1ad35dee1f0cdf948f
+  SCLAlertView-Objective-C: 69c8932c332ce61ee9e693379451e2c0b09fb307
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
-  StepSlider: 32f47aefb730ca5ac9a18eade23cf9b1fc3254d9
+  StepSlider: e1c9b8f3363cf87224e19c000abe9f5146f80dd1
 
-PODFILE CHECKSUM: 914ff51ed692171d47abebcf969307f35562bc0e
+PODFILE CHECKSUM: 61704f2faf0c8252c7e6cd1dc29d65259d9dfc62
 
 COCOAPODS: 1.5.3

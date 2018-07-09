@@ -168,6 +168,8 @@
     BarChartDataRenderer *barData1;
     barData1 = [self.barDataArray objectAtIndex:1];
     NSMutableArray *values1 = barData1.yAxisArray;
+    if(values1.count>0)
+    {
     NSNumber *ll = [values1 objectAtIndex:0];
     for (int i = 1; i < values1.count; i++) {
         ll = ([[values1 objectAtIndex:i]floatValue] > [ll floatValue] ? [values1 objectAtIndex:i]:ll);
@@ -178,6 +180,7 @@
     
     _minY = 0;
     _maxY = MAX(roundedUp, roundedUp1);
+    }
     
     
     for (BarChartDataRenderer *barData in self.barDataArray) {

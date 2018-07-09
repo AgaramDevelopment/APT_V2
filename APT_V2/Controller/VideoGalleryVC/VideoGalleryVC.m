@@ -1162,7 +1162,7 @@
      NSString *usercode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
    // NSString *usercode = @"USM0000107";
     NSString *clientcode =  [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
-    NSString *count =  @"0";
+    NSString *count =  @"10";
     
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];

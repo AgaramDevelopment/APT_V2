@@ -18,5 +18,6 @@ target 'APT_V2' do
     pod 'BATabBarController'
     pod 'Masonry'
     pod 'SCLAlertView-Objective-C'
+    pod 'UIView+AnimationExtensions'
     
 end

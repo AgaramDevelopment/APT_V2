@@ -26,6 +26,7 @@
 #import "NewVideoDocumentVC.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NewTabbarAnimationVC.h"
+#import "ExcersizeViewController.h"
 
 @interface RearViewController ()<passwordChangedNotification>
 {
@@ -75,6 +76,7 @@
                      @{@"name":@"Documents",@"img":@"Document"},
                      @{@"name":@"Sync",@"img":@"Sync"},
                      @{@"name":@"Change Password",@"img":@"Change Password"},
+                     @{@"name":@"Program",@"img":@"Change Password"},
                      @{@"name":@"Logout",@"img":@"Logout"}];
     }
     else
@@ -223,6 +225,10 @@
             newFrontController= [ChangePasswordVC new];
             ChangePasswordVC* vc = newFrontController;
             vc.passwordDelegate = self;
+        }
+        else if(indexPath.row == 8){
+            
+            newFrontController= [ExcersizeViewController new];
         }
 
         else if (indexPath.row == arrItems.count -1){

@@ -57,6 +57,7 @@ PODS:
     - SDWebImage/Core (= 4.4.1)
   - SDWebImage/Core (4.4.1)
   - StepSlider (1.2.1)
+  - "UIView+AnimationExtensions (1.0.0)"
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5.4)
@@ -71,6 +72,7 @@ DEPENDENCIES:
   - SCLAlertView-Objective-C
   - SDWebImage (~> 4.0)
   - StepSlider
+  - "UIView+AnimationExtensions"
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -90,6 +92,7 @@ SPEC REPOS:
     - SCLAlertView-Objective-C
     - SDWebImage
     - StepSlider
+    - "UIView+AnimationExtensions"
 
 EXTERNAL SOURCES:
   drCharts:
@@ -118,7 +121,8 @@ SPEC CHECKSUMS:
   SCLAlertView-Objective-C: 69c8932c332ce61ee9e693379451e2c0b09fb307
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
   StepSlider: e1c9b8f3363cf87224e19c000abe9f5146f80dd1
+  "UIView+AnimationExtensions": f9ae95fa3064be09cf2fcaac1fb1948ee22397ec
 
-PODFILE CHECKSUM: 61704f2faf0c8252c7e6cd1dc29d65259d9dfc62
+PODFILE CHECKSUM: 69d774278b32da71aa038893048b163a2f2b115d
 
 COCOAPODS: 1.5.3

@@ -13,6 +13,7 @@
 #import "Config.h"
 #import "WebService.h"
 #import "TeamMembersVC.h"
+@import UIView_AnimationExtensions;
 
 @interface TeamsVC ()
 {

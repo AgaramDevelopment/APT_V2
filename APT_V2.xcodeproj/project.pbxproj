@@ -137,6 +137,20 @@
 		04CC004420C2CDD8004C7696 /* FoodDiaryUpdateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CC004220C2CDD8004C7696 /* FoodDiaryUpdateVC.m */; };
 		04CC004520C2CDD8004C7696 /* FoodDiaryUpdateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CC004320C2CDD8004C7696 /* FoodDiaryUpdateVC.xib */; };
 		04D8EB4B20D24C6F00D46F23 /* PlannerAddEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D8EB4A20D24C6E00D46F23 /* PlannerAddEvent.m */; };
+		180A40FC20F488F40002090F /* ExcersizeDetailItemVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180A40F220F488F30002090F /* ExcersizeDetailItemVC.m */; };
+		180A40FD20F488F40002090F /* PageItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180A40F420F488F30002090F /* PageItemController.m */; };
+		180A40FE20F488F40002090F /* ExcersizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 180A40F620F488F30002090F /* ExcersizeViewController.m */; };
+		180A40FF20F488F40002090F /* ExcersizeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180A40F720F488F30002090F /* ExcersizeViewController.xib */; };
+		180A410020F488F40002090F /* ExcierseDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180A40FA20F488F30002090F /* ExcierseDetailVC.m */; };
+		180A410120F488F40002090F /* ExcierseDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180A40FB20F488F30002090F /* ExcierseDetailVC.xib */; };
+		180A410920F4897E0002090F /* ExcersizeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 180A410420F4897E0002090F /* ExcersizeCollectionViewCell.m */; };
+		180A410A20F4897E0002090F /* ExcersizeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180A410520F4897E0002090F /* ExcersizeCollectionViewCell.xib */; };
+		180A410B20F4897E0002090F /* HeaderCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 180A410720F4897E0002090F /* HeaderCollectionReusableView.m */; };
+		180A410C20F4897E0002090F /* HeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180A410820F4897E0002090F /* HeaderCollectionReusableView.xib */; };
+		180A411420F489F40002090F /* ExcerciseAttachmentCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180A410F20F489F30002090F /* ExcerciseAttachmentCVC.m */; };
+		180A411520F489F40002090F /* ExcerciseAttachmentCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180A411020F489F30002090F /* ExcerciseAttachmentCVC.xib */; };
+		180A411620F489F40002090F /* ExcerciseParameterTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 180A411220F489F30002090F /* ExcerciseParameterTVC.m */; };
+		180A411720F489F40002090F /* ExcerciseParameterTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180A411320F489F30002090F /* ExcerciseParameterTVC.xib */; };
 		182D854820342D1F005FFBF8 /* CategoryTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 182D854620342D1F005FFBF8 /* CategoryTableCell.m */; };
 		182D854920342D1F005FFBF8 /* CategoryTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182D854720342D1F005FFBF8 /* CategoryTableCell.xib */; };
 		188F3D0C20C5038A00199CBF /* HistoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 188F3D0A20C5038A00199CBF /* HistoryVC.m */; };
@@ -584,6 +598,28 @@
 		04CC004320C2CDD8004C7696 /* FoodDiaryUpdateVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodDiaryUpdateVC.xib; sourceTree = "<group>"; };
 		04D8EB4920D24C6E00D46F23 /* PlannerAddEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlannerAddEvent.h; sourceTree = "<group>"; };
 		04D8EB4A20D24C6E00D46F23 /* PlannerAddEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlannerAddEvent.m; sourceTree = "<group>"; };
+		180A40F120F488F30002090F /* ExcersizeDetailItemVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcersizeDetailItemVC.h; sourceTree = "<group>"; };
+		180A40F220F488F30002090F /* ExcersizeDetailItemVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcersizeDetailItemVC.m; sourceTree = "<group>"; };
+		180A40F320F488F30002090F /* PageItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageItemController.h; sourceTree = "<group>"; };
+		180A40F420F488F30002090F /* PageItemController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageItemController.m; sourceTree = "<group>"; };
+		180A40F520F488F30002090F /* ExcersizeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcersizeViewController.h; sourceTree = "<group>"; };
+		180A40F620F488F30002090F /* ExcersizeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcersizeViewController.m; sourceTree = "<group>"; };
+		180A40F720F488F30002090F /* ExcersizeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExcersizeViewController.xib; sourceTree = "<group>"; };
+		180A40F920F488F30002090F /* ExcierseDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcierseDetailVC.h; sourceTree = "<group>"; };
+		180A40FA20F488F30002090F /* ExcierseDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcierseDetailVC.m; sourceTree = "<group>"; };
+		180A40FB20F488F30002090F /* ExcierseDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExcierseDetailVC.xib; sourceTree = "<group>"; };
+		180A410320F4897E0002090F /* ExcersizeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcersizeCollectionViewCell.h; sourceTree = "<group>"; };
+		180A410420F4897E0002090F /* ExcersizeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcersizeCollectionViewCell.m; sourceTree = "<group>"; };
+		180A410520F4897E0002090F /* ExcersizeCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExcersizeCollectionViewCell.xib; sourceTree = "<group>"; };
+		180A410620F4897E0002090F /* HeaderCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderCollectionReusableView.h; sourceTree = "<group>"; };
+		180A410720F4897E0002090F /* HeaderCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderCollectionReusableView.m; sourceTree = "<group>"; };
+		180A410820F4897E0002090F /* HeaderCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderCollectionReusableView.xib; sourceTree = "<group>"; };
+		180A410E20F489F30002090F /* ExcerciseAttachmentCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcerciseAttachmentCVC.h; sourceTree = "<group>"; };
+		180A410F20F489F30002090F /* ExcerciseAttachmentCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcerciseAttachmentCVC.m; sourceTree = "<group>"; };
+		180A411020F489F30002090F /* ExcerciseAttachmentCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExcerciseAttachmentCVC.xib; sourceTree = "<group>"; };
+		180A411120F489F30002090F /* ExcerciseParameterTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExcerciseParameterTVC.h; sourceTree = "<group>"; };
+		180A411220F489F30002090F /* ExcerciseParameterTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExcerciseParameterTVC.m; sourceTree = "<group>"; };
+		180A411320F489F30002090F /* ExcerciseParameterTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExcerciseParameterTVC.xib; sourceTree = "<group>"; };
 		182D854520342D1F005FFBF8 /* CategoryTableCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CategoryTableCell.h; path = CategoryTableCell/CategoryTableCell.h; sourceTree = "<group>"; };
 		182D854620342D1F005FFBF8 /* CategoryTableCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CategoryTableCell.m; path = CategoryTableCell/CategoryTableCell.m; sourceTree = "<group>"; };
 		182D854720342D1F005FFBF8 /* CategoryTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CategoryTableCell.xib; path = CategoryTableCell/CategoryTableCell.xib; sourceTree = "<group>"; };
@@ -1196,6 +1232,67 @@
 			path = FoodDiaryUpdateVc;
 			sourceTree = "<group>";
 		};
+		180A40EF20F488F30002090F /* ExcersizeVC */ = {
+			isa = PBXGroup;
+			children = (
+				180A410D20F489F30002090F /* ExcirsizeDetails */,
+				180A410220F4897E0002090F /* ExcersizeCollectionCell */,
+				180A40F020F488F30002090F /* ExcersizeDetailItemVC */,
+				180A40F520F488F30002090F /* ExcersizeViewController.h */,
+				180A40F620F488F30002090F /* ExcersizeViewController.m */,
+				180A40F720F488F30002090F /* ExcersizeViewController.xib */,
+				180A40F820F488F30002090F /* ExcierseDetailVC */,
+			);
+			path = ExcersizeVC;
+			sourceTree = "<group>";
+		};
+		180A40F020F488F30002090F /* ExcersizeDetailItemVC */ = {
+			isa = PBXGroup;
+			children = (
+				180A40F120F488F30002090F /* ExcersizeDetailItemVC.h */,
+				180A40F220F488F30002090F /* ExcersizeDetailItemVC.m */,
+				180A40F320F488F30002090F /* PageItemController.h */,
+				180A40F420F488F30002090F /* PageItemController.m */,
+			);
+			path = ExcersizeDetailItemVC;
+			sourceTree = "<group>";
+		};
+		180A40F820F488F30002090F /* ExcierseDetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				180A40F920F488F30002090F /* ExcierseDetailVC.h */,
+				180A40FA20F488F30002090F /* ExcierseDetailVC.m */,
+				180A40FB20F488F30002090F /* ExcierseDetailVC.xib */,
+			);
+			path = ExcierseDetailVC;
+			sourceTree = "<group>";
+		};
+		180A410220F4897E0002090F /* ExcersizeCollectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				180A410320F4897E0002090F /* ExcersizeCollectionViewCell.h */,
+				180A410420F4897E0002090F /* ExcersizeCollectionViewCell.m */,
+				180A410520F4897E0002090F /* ExcersizeCollectionViewCell.xib */,
+				180A410620F4897E0002090F /* HeaderCollectionReusableView.h */,
+				180A410720F4897E0002090F /* HeaderCollectionReusableView.m */,
+				180A410820F4897E0002090F /* HeaderCollectionReusableView.xib */,
+			);
+			path = ExcersizeCollectionCell;
+			sourceTree = "<group>";
+		};
+		180A410D20F489F30002090F /* ExcirsizeDetails */ = {
+			isa = PBXGroup;
+			children = (
+				180A410E20F489F30002090F /* ExcerciseAttachmentCVC.h */,
+				180A410F20F489F30002090F /* ExcerciseAttachmentCVC.m */,
+				180A411020F489F30002090F /* ExcerciseAttachmentCVC.xib */,
+				180A411120F489F30002090F /* ExcerciseParameterTVC.h */,
+				180A411220F489F30002090F /* ExcerciseParameterTVC.m */,
+				180A411320F489F30002090F /* ExcerciseParameterTVC.xib */,
+			);
+			path = ExcirsizeDetails;
+			sourceTree = "<group>";
+		};
 		1850ECA32029E0D700B48BA1 /* TabHomeVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1637,6 +1734,7 @@
 		18A6ADAD20C2BD98000F342E /* NewDesignControllers */ = {
 			isa = PBXGroup;
 			children = (
+				180A40EF20F488F30002090F /* ExcersizeVC */,
 				04944F4620EF410F006B813F /* ScheduleVc */,
 				18BE578720EB56DC00FD818D /* NewTabbarAnimationVC */,
 				042E22DB20CA455500D8349C /* NewVideoDocumentVC */,
@@ -2826,6 +2924,7 @@
 				04BC4A802086068D00CEB23E /* CustomNavigation.xib in Resources */,
 				CEB2B97D20257BBD00E7D5E4 /* Montserrat-Medium.otf in Resources */,
 				18A68ABD20371A2C00EBA479 /* TrainingLoadUpdateCell.xib in Resources */,
+				180A410C20F4897E0002090F /* HeaderCollectionReusableView.xib in Resources */,
 				CEF38321203D419300FB5838 /* PlayerDetailViewController.xib in Resources */,
 				18E07116204702930020D8EE /* InjuryAndIllnessCell.xib in Resources */,
 				CEB2B99120257BBD00E7D5E4 /* MontserratAlternates-Regular.otf in Resources */,
@@ -2850,6 +2949,7 @@
 				18AA1B9F2092FD64009634A3 /* FieldSummaryTVC.xib in Resources */,
 				CEB2B98620257BBD00E7D5E4 /* MontserratAlternates-Bold.otf in Resources */,
 				CEB2B97720257BBD00E7D5E4 /* Montserrat-ExtraBoldItalic.otf in Resources */,
+				180A410A20F4897E0002090F /* ExcersizeCollectionViewCell.xib in Resources */,
 				CE6C164B2045211400672253 /* BowlingTableViewCell.xib in Resources */,
 				18949A3320875C5F002ECEE0 /* WeeklyCalendar.png in Resources */,
 				04BC4A202085FD9100CEB23E /* StandingVC.xib in Resources */,
@@ -2875,6 +2975,7 @@
 				04BC4ABE2086167400CEB23E /* ResultCell.xib in Resources */,
 				CEB2B98D20257BBD00E7D5E4 /* MontserratAlternates-Light.otf in Resources */,
 				04BC4A282085FDCF00CEB23E /* TeamOverviewCell.xib in Resources */,
+				180A410120F488F40002090F /* ExcierseDetailVC.xib in Resources */,
 				CEF38327203D6BC200FB5838 /* PlayerDetailTableViewCell.xib in Resources */,
 				CEB2B97B20257BBD00E7D5E4 /* Montserrat-Light.otf in Resources */,
 				CEB2B99320257BBD00E7D5E4 /* MontserratAlternates-SemiBoldItalic.otf in Resources */,
@@ -2907,11 +3008,13 @@
 				04BC4A022085FBC900CEB23E /* BowlingOverBlockView.xib in Resources */,
 				18A68ACD20371A7E00EBA479 /* AddWellnessRatingVC.xib in Resources */,
 				18B6D0EE203BDD580003CBA3 /* TrainingLoadGraphVC.xib in Resources */,
+				180A411520F489F40002090F /* ExcerciseAttachmentCVC.xib in Resources */,
 				04BC4ACA208618A200CEB23E /* TabHomeCell.xib in Resources */,
 				CEBD2A8D20289B8C000AFD1B /* ViewController.xib in Resources */,
 				04BC4AD820861A5100CEB23E /* MCOverViewResultCVC.xib in Resources */,
 				18A5CAB620383FAD00586896 /* TeamsVC.xib in Resources */,
 				CEC34C352046B2A10058ACC3 /* RecentFitnessGraph.xib in Resources */,
+				180A40FF20F488F40002090F /* ExcersizeViewController.xib in Resources */,
 				04BC4ABB2086167400CEB23E /* SchResStandVC.xib in Resources */,
 				04CC004520C2CDD8004C7696 /* FoodDiaryUpdateVC.xib in Resources */,
 				0425429C20289EE70088B87B /* AssessmentPopupVC.xib in Resources */,
@@ -2921,6 +3024,7 @@
 				CE60F10520870C8200B74A2C /* VideoDocumentVC.xib in Resources */,
 				CE8DE377203FDEC70097BF66 /* InjurySelectionViewController.xib in Resources */,
 				04BC4A112085FCFF00CEB23E /* OverviewBowlingView.xib in Resources */,
+				180A411720F489F40002090F /* ExcerciseParameterTVC.xib in Resources */,
 				04944F4B20EF4168006B813F /* ScheduleVC.xib in Resources */,
 				042699CE2043DB06001AB09F /* IllnessTracker.xib in Resources */,
 				CEB2B97F20257BBD00E7D5E4 /* Montserrat-Regular.otf in Resources */,
@@ -2982,6 +3086,7 @@
 				"${BUILT_PRODUCTS_DIR}/SCLAlertView-Objective-C/SCLAlertView_Objective_C.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/StepSlider/StepSlider.framework",
+				"${BUILT_PRODUCTS_DIR}/UIView+AnimationExtensions/UIView_AnimationExtensions.framework",
 				"${BUILT_PRODUCTS_DIR}/drCharts/drCharts.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -2998,6 +3103,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView_Objective_C.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StepSlider.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIView_AnimationExtensions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/drCharts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -3067,6 +3173,7 @@
 				18A68ACB20371A7E00EBA479 /* HorizontalXLblFormatter.m in Sources */,
 				04BC4A432085FF4200CEB23E /* MCBattingRootVC.m in Sources */,
 				042542B62028A1110088B87B /* HomeScreenStandingsVC.m in Sources */,
+				180A410B20F4897E0002090F /* HeaderCollectionReusableView.m in Sources */,
 				18C57798209076C3001CAE5D /* InjuryVC.m in Sources */,
 				04BC4B40208632E900CEB23E /* VideoGalleryCell.m in Sources */,
 				18A590682047C4C8002BBF64 /* LargeValueFormatter.swift in Sources */,
@@ -3081,6 +3188,7 @@
 				045B58CD209B547B00443C65 /* FoodDiaryVC.m in Sources */,
 				18949A1920875C5F002ECEE0 /* FFYearCollectionView.m in Sources */,
 				18949A0A20875C5F002ECEE0 /* FFMonthHeaderView.m in Sources */,
+				180A411620F489F40002090F /* ExcerciseParameterTVC.m in Sources */,
 				18949A2620875C5F002ECEE0 /* FFHourPopoverController.m in Sources */,
 				04944F4A20EF4168006B813F /* ScheduleVC.m in Sources */,
 				CE367C872046D72300A94B28 /* StepSlider.m in Sources */,
@@ -3102,6 +3210,7 @@
 				18949A2A20875C5F002ECEE0 /* FFGuestsTableViewCell.m in Sources */,
 				CE6C161E204520B300672253 /* PlayersCell.m in Sources */,
 				18949A2220875C5F002ECEE0 /* FFEvent.m in Sources */,
+				180A410020F488F40002090F /* ExcierseDetailVC.m in Sources */,
 				CEBD2A7320289999000AFD1B /* SKSTableViewCell.m in Sources */,
 				CE102812202DDB7500FA0B61 /* AssesmentTableViewCell.m in Sources */,
 				188F3D0C20C5038A00199CBF /* HistoryVC.m in Sources */,
@@ -3122,6 +3231,7 @@
 				04BC4A182085FD4400CEB23E /* BowlTypeCell.m in Sources */,
 				CEB2B9E02025E30600E7D5E4 /* LineTextField.m in Sources */,
 				18EF9D1420316C3000CDA268 /* PlayerListCollectionViewCell.m in Sources */,
+				180A40FD20F488F40002090F /* PageItemController.m in Sources */,
 				CE6DD96D20C7AEA50026FE23 /* TeamCollectionViewCell.m in Sources */,
 				182D854820342D1F005FFBF8 /* CategoryTableCell.m in Sources */,
 				18AC345D203EE50C003EE0F0 /* CoachBowlingLoad.m in Sources */,
@@ -3138,6 +3248,7 @@
 				18AA1BAB2092FDFC009634A3 /* ScoreCardVC.m in Sources */,
 				04BC4A102085FCFF00CEB23E /* OverviewBowlingView.m in Sources */,
 				042542B52028A1110088B87B /* HomeScreenStandingsCell.m in Sources */,
+				180A40FC20F488F40002090F /* ExcersizeDetailItemVC.m in Sources */,
 				18949A1E20875C5F002ECEE0 /* UIColor+FFMoreColors.m in Sources */,
 				CE6C16582045213C00672253 /* SACalendar.m in Sources */,
 				04B27F22202DA48E00ECB699 /* PlayerProfileChartsVC.m in Sources */,
@@ -3178,6 +3289,7 @@
 				CEC34C552046B8630058ACC3 /* CustomCollectionLayerBowling.swift in Sources */,
 				04BC4AB92086167400CEB23E /* SchResStandVC.m in Sources */,
 				CEB2B9C32025976300E7D5E4 /* CustomAnimationController.m in Sources */,
+				180A411420F489F40002090F /* ExcerciseAttachmentCVC.m in Sources */,
 				04BC4A1B2085FD4400CEB23E /* GroundVC.m in Sources */,
 				18AC3452203EC0D9003EE0F0 /* CoachTraingLoad.m in Sources */,
 				18949A2920875C5F002ECEE0 /* FFGuestsTableView.m in Sources */,
@@ -3195,7 +3307,9 @@
 				04BC4B672086398D00CEB23E /* DocumentViewController.m in Sources */,
 				18949A2D20875C5F002ECEE0 /* FFEventDetailView.m in Sources */,
 				04BC4ADA20861A5100CEB23E /* MatchCenterTBC.m in Sources */,
+				180A40FE20F488F40002090F /* ExcersizeViewController.m in Sources */,
 				18949A0120875C5F002ECEE0 /* FFDayCell.m in Sources */,
+				180A410920F4897E0002090F /* ExcersizeCollectionViewCell.m in Sources */,
 				189499FE20875C5F002ECEE0 /* FFDayHeaderButton.m in Sources */,
 				04BC4A292085FDCF00CEB23E /* TeamOverviewVC.m in Sources */,
 				18949A1620875C5F002ECEE0 /* FFMonthCellForYearCell.m in Sources */,

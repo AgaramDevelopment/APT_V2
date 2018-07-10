@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="First" id="gTV-IL-0wX" customClass="ExcersizeCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="195"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="150" height="195"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b4M-Lj-47f">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="195"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner" translatesAutoresizingMaskIntoConstraints="NO" id="cup-Ud-68Z">
+                                <rect key="frame" x="0.0" y="5" width="150" height="150"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fxd-Jp-WNA">
+                                <rect key="frame" x="5" y="155.5" width="145" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="MNq-09-iR8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="cup-Ud-68Z" secondAttribute="trailing" id="E2k-m3-tO9"/>
+                            <constraint firstItem="cup-Ud-68Z" firstAttribute="leading" secondItem="b4M-Lj-47f" secondAttribute="leading" id="MjA-Qd-wXx"/>
+                            <constraint firstAttribute="trailing" secondItem="fxd-Jp-WNA" secondAttribute="trailing" id="cAO-ol-7ry"/>
+                            <constraint firstItem="fxd-Jp-WNA" firstAttribute="top" secondItem="cup-Ud-68Z" secondAttribute="bottom" id="gRu-EH-YYi"/>
+                            <constraint firstItem="fxd-Jp-WNA" firstAttribute="leading" secondItem="b4M-Lj-47f" secondAttribute="leading" constant="5" id="hq8-NZ-8Re"/>
+                            <constraint firstAttribute="bottom" secondItem="fxd-Jp-WNA" secondAttribute="bottom" id="y3b-OZ-bvg"/>
+                            <constraint firstItem="cup-Ud-68Z" firstAttribute="top" secondItem="b4M-Lj-47f" secondAttribute="top" constant="5" id="zNm-jd-Acf"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <color key="backgroundColor" red="0.46202266219999999" green="0.83828371759999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="b4M-Lj-47f" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="7Aj-lx-1ls"/>
+                <constraint firstAttribute="bottom" secondItem="b4M-Lj-47f" secondAttribute="bottom" id="7pk-EZ-Ty0"/>
+                <constraint firstItem="b4M-Lj-47f" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="MEe-dK-nJR"/>
+                <constraint firstAttribute="trailing" secondItem="b4M-Lj-47f" secondAttribute="trailing" id="s9t-aX-g8D"/>
+            </constraints>
+            <size key="customSize" width="151" height="50"/>
+            <connections>
+                <outlet property="imgView" destination="cup-Ud-68Z" id="mAL-aW-Y3q"/>
+                <outlet property="lblExcersize" destination="fxd-Jp-WNA" id="ceh-KK-JAB"/>
+            </connections>
+            <point key="canvasLocation" x="-333" y="55"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="banner" width="320" height="168"/>
+    </resources>
+</document>

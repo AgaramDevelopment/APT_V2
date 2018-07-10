@@ -15,6 +15,7 @@
 #import "SwipeView.h"
 #import "TabHomeVC.h"
 @import SCLAlertView_Objective_C;
+@import UIView_AnimationExtensions;
 
 
 @interface AddWellnessRatingVC ()
@@ -139,6 +140,8 @@ NSString *metaSubCode4;
     UIView *paddingView6 = [[UIView alloc] initWithFrame:CGRectMake(0, 0,5,30)];
     self.restingBpMinTxt.leftView = paddingView6;
     self.restingBpMinTxt.leftViewMode = UITextFieldViewModeAlways;
+    
+   
    
 }
 
@@ -199,6 +202,8 @@ NSString *metaSubCode4;
     //[revealController.panGestureRecognizer setEnabled:NO];
    // [revealController.tapGestureRecognizer setEnabled:NO];
     [tab.swipeView setScrollEnabled:NO];
+    
+    
 }
 
 -(IBAction)sliderDidChange:(RGSColorSlider *)sender{
@@ -291,7 +296,7 @@ NSString *metaSubCode4;
     //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"dd-MM-yyyy"];
     
-    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,0,self.view_datepicker.frame.size.width,100)];
+    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,30,self.view_datepicker.frame.size.width,100)];
     
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     [datePicker setLocale:locale];
@@ -443,6 +448,7 @@ NSString *metaSubCode4;
 //    //[objWell reloaddataVC];
 //    objWell.topviewHeight.constant = 270;
 //    objWell.traingViewHeight.constant = 350;
+    
     [self.view removeFromSuperview];
     [self.Delegate closeWellnessSource];
 }
@@ -612,6 +618,11 @@ NSString *metaSubCode4;
                 {
                     self.isFetch = @"yes";
                     [self setFetch];
+                    
+                    [self.view flipWithDuration:0.3f
+                                      direction:UIViewAnimationFlipDirectionFromLeft
+                                    repeatCount:2
+                                    autoreverse:NO];
                 }
             }
             
@@ -648,6 +659,11 @@ NSString *metaSubCode4;
             self.SaveBtn.hidden = NO;
             self.UpdateBtn.hidden = YES;
             [self setborder];
+            
+            [self.view flipWithDuration:0.3f
+                              direction:UIViewAnimationFlipDirectionFromLeft
+                            repeatCount:1
+                            autoreverse:NO];
             
         }
         [AppCommon hideLoading];

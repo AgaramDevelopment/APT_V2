@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0570C6E0C84D3EAE872A23C7178F4521"
+               BlueprintIdentifier = "26C06E21094D8B0D6E379A1AF51C3F5F"
                BlueprintName = "StepSlider"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "StepSlider.framework">

@@ -15,6 +15,7 @@
 #import "TeamMemebersCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "MyStatsBattingVC.h"
+@import UIView_AnimationExtensions;
 
 @interface TeamMembersVC ()
 {
@@ -277,7 +278,13 @@
         cell.layer.masksToBounds = NO;
         cell.layer.shadowPath = [UIBezierPath bezierPathWithRoundedRect:cell.bounds cornerRadius:cell.contentView.layer.cornerRadius].CGPath;
     
+    [cell.contentView flipWithDuration:0.3f
+                           direction:UIViewAnimationFlipDirectionFromLeft
+                         repeatCount:1
+                         autoreverse:NO];
+    
         return cell;
+    
     }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -381,8 +388,9 @@
                 self.PlayerRoleArray = [[NSMutableArray alloc]init];
                 self.PlayerRoleArray = [responseObject valueForKey:@"lstPlayerRoles"];
             
-                [self.playesTable reloadData];
+                
                 [self.AllBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
+                //[self.playesTable reloadData];
             
             }
             
@@ -413,6 +421,7 @@
     
     [self.playesTable reloadData];
     
+    
 }
 
 - (IBAction)BatsmanBtnAction:(id)sender
@@ -430,8 +439,11 @@
     }
     
     [self.playesTable reloadData];
+   
+    
     
 }
+
 
 - (IBAction)WktKeeperBtnAction:(id)sender
 {

@@ -17,6 +17,7 @@
 #import "WellnessTrainingBowlingVC.h"
 #import "TrainingLoadVC.h"
 @import drCharts;
+@import UIView_AnimationExtensions;
 
 @interface TrainingLoadUpdateVC ()<PieChartViewDelegate,PieChartViewDataSource>
 {
@@ -935,7 +936,7 @@ if([_isToday isEqualToString:@"yes"])
     //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"dd-MM-yyyy"];
     
-    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,20,self.view_datepicker.frame.size.width,100)];
+    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(0,30,self.view_datepicker.frame.size.width,100)];
     
     NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
     [datePicker setLocale:locale];
@@ -1278,6 +1279,12 @@ if([_isToday isEqualToString:@"yes"])
                         self.FetchedUpdateBtn.hidden = NO;
                         _isToday = @"yes";
                         
+                        
+                        [self.view flipWithDuration:0.3f
+                                                 direction:UIViewAnimationFlipDirectionFromLeft
+                                               repeatCount:1
+                                               autoreverse:NO];
+                        
                     }
 
                 }
@@ -1294,6 +1301,10 @@ if([_isToday isEqualToString:@"yes"])
                     [self.markers removeAllObjects];
                     [circleChart removeFromSuperview];
                     [self TodayCircularChart];
+                    [self.view flipWithDuration:0.3f
+                                      direction:UIViewAnimationFlipDirectionFromLeft
+                                    repeatCount:1
+                                    autoreverse:NO];
                     
                 }
      
@@ -1308,6 +1319,10 @@ if([_isToday isEqualToString:@"yes"])
                 [self.markers removeAllObjects];
                 [circleChart removeFromSuperview];
                 [self TodayCircularChart];
+                [self.view flipWithDuration:0.3f
+                                  direction:UIViewAnimationFlipDirectionFromLeft
+                                repeatCount:1
+                                autoreverse:NO];
                 
             }
         }
@@ -1342,8 +1357,6 @@ if([_isToday isEqualToString:@"yes"])
     [label setAdjustsFontSizeToFitWidth:TRUE];
     [label setCenter:circleChart.center];
     [circleChart addSubview:label];
-    
-    
     
 
 }

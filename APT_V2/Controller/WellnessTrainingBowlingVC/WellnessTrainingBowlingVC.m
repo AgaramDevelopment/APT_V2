@@ -19,6 +19,8 @@
 #import "TrainingLoadUpdateVC.h"
 #import "TrainingPiechart.h"
 #import "TabHomeVC.h"
+@import UIView_AnimationExtensions;
+
 
 @interface WellnessTrainingBowlingVC ()<ChartViewDelegate,AddWelnessDelegate,AddTraingDelegate>
 {
@@ -291,12 +293,17 @@
     objWell.CancelBtn.hidden = NO;
     objWell.CancelImg.hidden = NO;
     objWell.Delegate = self;
+    
     [self.topView addSubview:objWell.view];
     self.topviewHeight.constant = 600;
     [self setTotalScroll];
     [self.view updateConstraintsIfNeeded];
     
+    
 }
+
+
+
 
 -(void)setTotalScroll
 {
@@ -1277,9 +1284,16 @@
     self.topviewHeight.constant = 270;
     isWellnessExpand = NO;
     [self FetchWebservice];
+    
+    [self.topView flipWithDuration:0.3f
+                         direction:UIViewAnimationFlipDirectionFromLeft
+                       repeatCount:1
+                       autoreverse:NO];
+    
     //[self FetchTrainingWebservice];
     [self setTotalScroll];
     [self.topView updateConstraintsIfNeeded];
+    
 }
 
 -(void)closeUpdateTrainingSource
@@ -1289,8 +1303,13 @@
     //[self viewDidLoad];
     //[self FetchWebservice];
     [self FetchTrainingWebservice];
+    [self.RootTrainingView flipWithDuration:0.3f
+                         direction:UIViewAnimationFlipDirectionFromLeft
+                       repeatCount:1
+                       autoreverse:NO];
     [self setTotalScroll];
     [self.RootTrainingView updateConstraintsIfNeeded];
+    
 }
 
 

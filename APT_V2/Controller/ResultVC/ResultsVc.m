@@ -150,7 +150,8 @@
 //            [teamArray addObject:[appDel.ArrayTeam objectAtIndex:i]];
 //        }
         
-        dropVC.array = [COMMON getCorrespondingTeamName:competitionLbl.text];
+       // dropVC.array = [COMMON getCorrespondingTeamName:competitionLbl.text];
+        dropVC.array = teamArray;
         dropVC.key = @"TeamName";
         [dropVC.tblDropDown setFrame:CGRectMake(CGRectGetMinX(self.v2.frame), CGRectGetMaxY(self.v2.frame)+self.v2.frame.size.height+20, CGRectGetWidth(self.v2.frame), 300)];
         
@@ -575,7 +576,8 @@
         
         competitionLbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
         NSString* Competetioncode = [[array objectAtIndex:Index.row] valueForKey:@"CompetitionCode"];
-        self.venueLbl.text = @"";
+        self.venueLbl.text = @"Select Venue";
+        self.teamLbl.text = @"All";
         
         [[NSUserDefaults standardUserDefaults] setValue:competitionLbl.text forKey:@"SelectedCompetitionName"];
         [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
@@ -587,7 +589,7 @@
     {
         
         self.teamLbl.text = [[array objectAtIndex:Index.row] valueForKey:key];
-        self.venueLbl.text = @"";
+        self.venueLbl.text =  @"Select Venue";
         Teamcode = [[array objectAtIndex:Index.row] valueForKey:@"TeamCode"];
         
         [[NSUserDefaults standardUserDefaults] setValue:self.teamLbl.text forKey:@"SelectedTeamName"];

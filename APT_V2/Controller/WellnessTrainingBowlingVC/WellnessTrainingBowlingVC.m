@@ -309,7 +309,7 @@
 {
     if(isWellnessExpand == YES && isTraingLoadExpand == YES)
     {
-        self.CommonViewHeight.constant = 1500;
+        self.CommonViewHeight.constant = 1600;
     }
     else if(isWellnessExpand == YES || isTraingLoadExpand == YES)
     {

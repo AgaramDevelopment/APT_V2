@@ -15,6 +15,7 @@
 #import "ResultsVc.h"
 #import "TabbarVC.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+@import UIView_AnimationExtensions;
 
 @interface MCOverViewVC ()
 {
@@ -84,6 +85,7 @@
 //    self.prevBtn.hidden = YES;
 //    [self.nextBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
     competitionlbl.text = @"";
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -405,12 +407,19 @@
                     self.moreBtn.hidden = YES;
                 }
             }
+            else
+            {
+                self.moreBtn.hidden = YES;
+            }
             
             
             resultsArray = [[NSMutableArray alloc]init];
             if(![[responseObject valueForKey:@"OvATResults"] isEqual:[NSNull null]])
             {
                 resultsArray = [responseObject valueForKey:@"OvATResults"];
+                
+                if(resultsArray.count>0)
+                {
                 
                 self.TotalMatcheslbl.text =  [self checkNull:[resultsArray valueForKey:@"ATMatches"]];
                 
@@ -431,27 +440,140 @@
                 
                 NSString *wkts = [NSString stringWithFormat:@"%@/%@",[resultsArray valueForKey:@"BTWcktsTkn"],[resultsArray valueForKey:@"ATWcktsGvn"]];
                 self.Wktslbl.text = wkts;
+                }
+                else
+                {
+                    self.TotalMatcheslbl.text = @"";
+                    
+                    self.winLosslbl.text = @"";
+                    
+                    self.winLossCountlbl.text = @"";
+                    
+                    self.Forlbl.text = @"";
+                    
+                    self.ForCountlbl.text =@"";
+                    
+                    
+                    self.Againstlbl.text = @"";
+                    
+                    self.AgainstCountlbl.text = @"";
+                    
+                    self.nrrlbl.text = @"";
+                    
+                    self.Wktslbl.text = @"";
+                }
+            }
+            else
+            {
+                self.TotalMatcheslbl.text = @"";
+                
+                self.winLosslbl.text = @"";
+                
+                self.winLossCountlbl.text = @"";
+                
+                self.Forlbl.text = @"";
+                
+                self.ForCountlbl.text =@"";
+                
+                
+                self.Againstlbl.text = @"";
+                
+                self.AgainstCountlbl.text = @"";
+                
+                self.nrrlbl.text = @"";
+                
+                self.Wktslbl.text = @"";
             }
             
             BatsmenArray = [[NSMutableArray alloc]init];
+            
             if(![[responseObject valueForKey:@"BatsmenOV"] isEqual:[NSNull null]])
             {
-            BatsmenArray = [responseObject valueForKey:@"BatsmenOV"];
-            
-            
-            BowlersArray = [[NSMutableArray alloc]init];
-            BowlersArray = [responseObject valueForKey:@"BowlersOV"];
-            
-            FieldersArray = [[NSMutableArray alloc]init];
-            FieldersArray = [responseObject valueForKey:@"FieldOV"];
-        
-            [self.resultCollectionView reloadData];
-        
-            [self.nextBtn setTag:0];
-            self.nextBtn.hidden = NO;
-            self.prevBtn.hidden = YES;
-            [self.nextBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
+                
+                BatsmenArray = [responseObject valueForKey:@"BatsmenOV"];
+                
+                if(BatsmenArray.count>0)
+                {
+                    
+                [self.Player1Img pulseToSize:1.1f
+                                    duration:0.3f
+                                      repeat:YES];
+                }
+                else
+                {
+                    [self.Player1Img pulseToSize:0.0f
+                                        duration:0.3f
+                                          repeat:YES];
+                }
+
+                
             }
+            else
+            {
+                [self.Player1Img pulseToSize:0.0f
+                                    duration:0.3f
+                                      repeat:YES];
+            }
+
+                
+                BowlersArray = [[NSMutableArray alloc]init];
+            if(![[responseObject valueForKey:@"BowlersOV"] isEqual:[NSNull null]])
+            {
+                BowlersArray = [responseObject valueForKey:@"BowlersOV"];
+                if(BowlersArray.count>0)
+                {
+                    
+                    [self.Player1Img pulseToSize:1.1f
+                                        duration:0.3f
+                                          repeat:YES];
+                }
+                else
+                {
+                    [self.Player1Img pulseToSize:0.0f
+                                        duration:0.3f
+                                          repeat:YES];
+                }
+            }
+            else
+            {
+                [self.Player1Img pulseToSize:0.0f
+                                    duration:0.3f
+                                      repeat:YES];
+            }
+                
+                FieldersArray = [[NSMutableArray alloc]init];
+            if(![[responseObject valueForKey:@"FieldOV"] isEqual:[NSNull null]])
+            {
+                FieldersArray = [responseObject valueForKey:@"FieldOV"];
+                
+                if(BowlersArray.count>0)
+                {
+                    
+                    [self.Player1Img pulseToSize:1.1f
+                                        duration:0.3f
+                                          repeat:YES];
+                }
+                else
+                {
+                    [self.Player1Img pulseToSize:0.0f
+                                        duration:0.3f
+                                          repeat:YES];
+                }
+            }
+            else
+            {
+                [self.Player1Img pulseToSize:0.0f
+                                    duration:0.3f
+                                      repeat:YES];
+            }
+                
+                [self.resultCollectionView reloadData];
+                
+                [self.nextBtn setTag:0];
+                self.nextBtn.hidden = NO;
+                self.prevBtn.hidden = YES;
+                [self.nextBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
+            
            
         }
         else{

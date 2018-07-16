@@ -546,7 +546,7 @@
             {
                 FieldersArray = [responseObject valueForKey:@"FieldOV"];
                 
-                if(BowlersArray.count>0)
+                if(FieldersArray.count>0)
                 {
                     
                     [self.Player1Img pulseToSize:1.1f
@@ -646,8 +646,8 @@
 //            self.prevBtn.hidden = YES;
 //            [self.nextBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
             
-            CommonArray = [[NSMutableArray alloc]init];
-            [self SetValuesOfTopPlayers:CommonArray];
+            //CommonArray = [[NSMutableArray alloc]init];
+            //[self SetValuesOfTopPlayers:CommonArray];
             
             
         }
@@ -925,6 +925,7 @@
 //                }
 //            }];
             [self.Player1Img sd_setImageWithURL:[NSURL URLWithString:photourl] placeholderImage:[UIImage imageNamed:@"no-image"]];
+          
             
             self.Player1Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:0];
             self.Player2Namelbl.text = [[ReqArray valueForKey:@"PlayerName"] objectAtIndex:1];

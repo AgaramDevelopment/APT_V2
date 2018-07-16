@@ -76,7 +76,6 @@
                      @{@"name":@"Documents",@"img":@"Document"},
                      @{@"name":@"Sync",@"img":@"Sync"},
                      @{@"name":@"Change Password",@"img":@"Change Password"},
-                     @{@"name":@"Program",@"img":@"Change Password"},
                      @{@"name":@"Logout",@"img":@"Logout"}];
     }
     else
@@ -89,6 +88,7 @@
                      @{@"name":@"Documents",@"img":@"Document"},
                     // @{@"name":@"Food Diary",@"img":@"APT_Food Dairy"},
                      @{@"name":@"Change Password",@"img":@"Change Password"},
+                     @{@"name":@"Program",@"img":@"Change Password"},
                      @{@"name":@"Logout",@"img":@"Logout"}];
     }
     
@@ -226,11 +226,7 @@
             ChangePasswordVC* vc = newFrontController;
             vc.passwordDelegate = self;
         }
-        else if(indexPath.row == 8){
-            
-            newFrontController= [ExcersizeViewController new];
-        }
-
+        
         else if (indexPath.row == arrItems.count -1){
             
             [self actionLogOut];
@@ -275,6 +271,11 @@
             ChangePasswordVC* vc = newFrontController;
             vc.passwordDelegate = self;
         }
+        else if(indexPath.row == 7){
+            
+            newFrontController= [ExcersizeViewController new];
+        }
+
         else if (indexPath.row == arrItems.count -1){
             
             [self actionLogOut];

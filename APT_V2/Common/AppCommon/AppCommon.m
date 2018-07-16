@@ -69,8 +69,8 @@ AppCommon *sharedCommon = nil;
             appDel.ArrayCompetition = [NSMutableArray new];
             appDel.ArrayCompetition = responseObject;
             
-            NSString* Competetioncode = [[appDel.ArrayCompetition firstObject] valueForKey:@"CompetitionCode"];
-            NSString* CompetetionName = [[appDel.ArrayCompetition firstObject] valueForKey:@"CompetitionName"];
+            NSString* Competetioncode = [[appDel.ArrayCompetition objectAtIndex:1] valueForKey:@"CompetitionCode"];
+            NSString* CompetetionName = [[appDel.ArrayCompetition objectAtIndex:1] valueForKey:@"CompetitionName"];
             NSLog(@"IPL COMPETETION %@ ",responseObject);
             [[NSUserDefaults standardUserDefaults] setValue:CompetetionName forKey:@"SelectedCompetitionName"];
             [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
@@ -130,6 +130,8 @@ AppCommon *sharedCommon = nil;
             NSLog(@"IPL COMPETETION %@ ",appDel.MainArray);
             NSString* Competetioncode = [[responseObject firstObject] valueForKey:@"CompetitionCode"];
             NSString* CompetetionName = [[responseObject firstObject] valueForKey:@"CompetitionName"];
+            
+           
 
             [[NSUserDefaults standardUserDefaults] setValue:CompetetionName forKey:@"SelectedCompetitionName"];
             [[NSUserDefaults standardUserDefaults] setValue:Competetioncode forKey:@"SelectedCompetitionCode"];
@@ -150,10 +152,24 @@ AppCommon *sharedCommon = nil;
                 }
                 
             }
+            
+            
+            
             NSString* lastYearTeams = [[appDel.ArrayCompetition firstObject] valueForKey:@"CompetitionName"];
             NSArray* temp = [COMMON getCorrespondingTeamName:lastYearTeams];
 //            appDel.ArrayCompetition = temp;
             NSLog(@"appDel.ArrayCompetition %@ ",appDel.ArrayCompetition);
+            
+            
+            
+            NSString* Competetioncod = [[appDel.ArrayCompetition objectAtIndex:1] valueForKey:@"CompetitionCode"];
+            NSString* CompetetionNam = [[appDel.ArrayCompetition objectAtIndex:1] valueForKey:@"CompetitionName"];
+            NSLog(@"IPL COMPETETION %@ ",responseObject);
+            [[NSUserDefaults standardUserDefaults] setValue:CompetetionNam forKey:@"SelectedCompetitionName"];
+            [[NSUserDefaults standardUserDefaults] setValue:Competetioncod forKey:@"SelectedCompetitionCode"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            
 
         }
 

@@ -45,9 +45,9 @@
     [self.docuCView registerNib:[UINib nibWithNibName:@"ExcerciseAttachmentCVC" bundle:nil] forCellWithReuseIdentifier:@"attachmentCVC"];
     [self.videoCView registerNib:[UINib nibWithNibName:@"ExcerciseAttachmentCVC" bundle:nil] forCellWithReuseIdentifier:@"attachmentCVC"];
 
-//    self.ExcerciseCode =@"EXE0000005";
-//    self.ProgramCode = @"PGM0000014";
-//    self.OrderNo = @"1";
+    //self.ExcerciseCode =@"EXE0000002";
+    //self.ProgramCode = @"PGM0000001";
+   // self.OrderNo = @"1";
 
     usercode = [[NSUserDefaults standardUserDefaults]stringForKey:@"UserCode"];
     cliendcode = [[NSUserDefaults standardUserDefaults]stringForKey:@"ClientCode"];
@@ -60,7 +60,7 @@
     self.paramTView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
     
-   // [self exerciseDetailWebservice];
+    [self exerciseDetailWebservice];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -236,6 +236,8 @@
         [dic    setObject:self.ExcerciseCode     forKey:@"ExcerciseCode"];
         [dic    setObject:self.ProgramCode     forKey:@"ProgramCode"];
         [dic    setObject:self.OrderNo     forKey:@"OrderNo"];
+        
+        
 
         NSLog(@"parameters : %@",dic);
         [manager POST:URLString parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -335,28 +337,42 @@
                 self.paramTblViewHeight.constant = (int)([parameterArray count] * 44);
                 
                 
+                
+                if(![excInst isEqualToString:@""]){
+                    //[_docuCView reloadData];
+                    _instructionLbl.hidden = NO;
+                    _instructionHeaderHeight.constant = 30;
+                    rootHeight = rootHeight + attachmentHeight;
+                    
+                    _instructionLbl.text = excInst;
+                    
+                    NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:excInst attributes:@{NSFontAttributeName:_instructionLbl.font}];
+                    CGRect rect = [attributedText boundingRectWithSize:(CGSize){_instructionLbl.frame.size.width, CGFLOAT_MAX}
+                                                               options:NSStringDrawingUsesLineFragmentOrigin
+                                                               context:nil];
+                    
+                    
+                    
+                    
+                    //  _instructionLbl.frame = rect;
+                    
+                    _instructionLblHeight.constant = rect.size.height ;
+                    
+                    //  self.imgViewContainerTop.constant = rect.size.height+15;
+                    
+                    //   CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, rect.height)
+                    
+                    rootHeight = rootHeight +  rect.size.height;
+                    
+                    self.rootViewHeight.constant = rootHeight;
+                    
+                }else{
+                    _instructionLbl.hidden = YES;
+                    _instructionLblHeight.constant = 0;
+                    _instructionHeaderHeight.constant = 0;
+                }
 
-                _instructionLbl.text = excInst;
-                
-                NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:excInst attributes:@{NSFontAttributeName:_instructionLbl.font}];
-                CGRect rect = [attributedText boundingRectWithSize:(CGSize){_instructionLbl.frame.size.width, CGFLOAT_MAX}
-                                                           options:NSStringDrawingUsesLineFragmentOrigin
-                                                           context:nil];
-                
-                
-                
-
-              //  _instructionLbl.frame = rect;
-                
-                _instructionLblHeight.constant = rect.size.height ;
-                
-              //  self.imgViewContainerTop.constant = rect.size.height+15;
-                
-             //   CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, rect.height)
-                
-                rootHeight = rootHeight +  rect.size.height;
-                
-                self.rootViewHeight.constant = rootHeight;
+               
 
                 
 //                 ceil(rect.size.height);

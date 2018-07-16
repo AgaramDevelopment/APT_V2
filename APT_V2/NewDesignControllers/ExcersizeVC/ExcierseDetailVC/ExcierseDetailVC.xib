@@ -20,6 +20,7 @@
                 <outlet property="imageCView" destination="opp-dR-gq0" id="OfQ-ba-PNN"/>
                 <outlet property="imageContainerView" destination="Jc9-4B-emE" id="982-Yh-SRf"/>
                 <outlet property="imgViewContainerTop" destination="Q7q-yv-pKy" id="SQl-1I-Cgq"/>
+                <outlet property="instructionHeaderHeight" destination="0cx-su-VW3" id="fB6-SM-ktO"/>
                 <outlet property="instructionLbl" destination="dWd-5A-dsc" id="mM5-Ec-K44"/>
                 <outlet property="instructionLblHeight" destination="G3T-yi-2U8" id="VvN-Vw-trt"/>
                 <outlet property="paramTView" destination="UZV-cm-KG6" id="Xmw-eH-YtV"/>
@@ -151,7 +152,7 @@
                                                 </view>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="opp-dR-gq0">
                                                     <rect key="frame" x="0.0" y="41" width="375" height="116"/>
-                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="116" id="urw-xL-kIb"/>
                                                     </constraints>

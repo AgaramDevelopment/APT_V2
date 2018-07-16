@@ -22,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet UIView *imageContainerView;
 @property (strong, nonatomic) IBOutlet UIView *videoContainerView;
 @property (strong, nonatomic) IBOutlet UIView *documentContainerView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *instructionHeaderHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *instructionLblHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *paramTblViewHeight;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *rootViewHeight;

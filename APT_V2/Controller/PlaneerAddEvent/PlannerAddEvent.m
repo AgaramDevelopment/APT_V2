@@ -191,7 +191,7 @@
         if([AppCommon isCoach])
         {
             self.startdateLbl.text =self.selectDateStr;
-            self.enddateLbl.text =self.selectDateStr;
+           // self.enddateLbl.text =self.selectDateStr;
         }
         else
             {
@@ -256,15 +256,15 @@
     if(textField == self.eventnameTxt)
     {
    
-        NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"];
-        for (int i = 0; i < [string length]; i++)
-        {
-            unichar c = [string characterAtIndex:i];
-            if (![myCharSet characterIsMember:c])
-            {
-                return NO;
-            }
-        }
+//        NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"];
+//        for (int i = 0; i < [string length]; i++)
+//        {
+//            unichar c = [string characterAtIndex:i];
+//            if (![myCharSet characterIsMember:c])
+//            {
+//                return NO;
+//            }
+//        }
         
     if(range.length + range.location > textField.text.length)
     {
@@ -280,15 +280,15 @@
     }
     else if(textField == self.commentTxt)
     {
-        NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"];
-        for (int i = 0; i < [string length]; i++)
-        {
-            unichar c = [string characterAtIndex:i];
-            if (![myCharSet characterIsMember:c])
-            {
-                return NO;
-            }
-        }
+//        NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"];
+//        for (int i = 0; i < [string length]; i++)
+//        {
+//            unichar c = [string characterAtIndex:i];
+//            if (![myCharSet characterIsMember:c])
+//            {
+//                return NO;
+//            }
+//        }
         if(range.length + range.location > textField.text.length)
         {
             return NO;
@@ -494,46 +494,136 @@
 {
     [self.view_datepicker setHidden:YES];
 }
+//
+//-(IBAction)showSelecteddate:(id)sender{
+//
+//    if(isDate==YES)
+//    {
+//    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+//    NSDate *matchdate = [NSDate date];
+//    [dateFormat setDateFormat:@"dd/MM/yyyy"];
+//    if(isStartDate==YES)
+//    {
+//        self.startdateLbl.text=[dateFormat stringFromDate:datePicker.date];
+//
+//        NSLog(@"%@", self.startdateLbl.text);
+//    }
+//    else
+//    {
+//        self.enddateLbl.text=[dateFormat stringFromDate:datePicker.date];
+//    }
+//    }
+//    else{
+//        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+//        NSDate *matchdate = [NSDate date];
+//        [dateFormat setDateFormat:@"hh:mm a"];
+//        // for minimum date
+//        [datePicker setMinimumDate:matchdate];
+//
+//        // for maximumDate
+//        int daysToAdd = 1;
+//        NSDate *newDate1 = [matchdate dateByAddingTimeInterval:60*60*24*daysToAdd];
+//
+//        [datePicker setMaximumDate:newDate1];
+//
+//        if(isStartTime==YES)
+//        {
+//            self.startTimeLbl.text=[dateFormat stringFromDate:datePicker.date];
+//        }
+//        else
+//        {
+//            self.endTimeLbl.text=[dateFormat stringFromDate:datePicker.date];
+//        }
+//
+//    }
+//    [self.view_datepicker setHidden:YES];
+//
+//}
+
+
 -(IBAction)showSelecteddate:(id)sender{
     
     if(isDate==YES)
     {
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    NSDate *matchdate = [NSDate date];
-    [dateFormat setDateFormat:@"dd/MM/yyyy"];
-    if(isStartDate==YES)
-    {
-        self.startdateLbl.text=[dateFormat stringFromDate:datePicker.date];
-        
-        NSLog(@"%@", self.startdateLbl.text);
-    }
-    else
-    {
-        self.enddateLbl.text=[dateFormat stringFromDate:datePicker.date];
-    }
-    }
-    else{
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         NSDate *matchdate = [NSDate date];
-        [dateFormat setDateFormat:@"hh:mm a"];
-        // for minimum date
-        [datePicker setMinimumDate:matchdate];
-        
-        // for maximumDate
-        int daysToAdd = 1;
-        NSDate *newDate1 = [matchdate dateByAddingTimeInterval:60*60*24*daysToAdd];
-        
-        [datePicker setMaximumDate:newDate1];
-        
-        if(isStartTime==YES)
+        [dateFormat setDateFormat:@"dd/MM/yyyy"];
+        if(isStartDate==YES)
         {
-            self.startTimeLbl.text=[dateFormat stringFromDate:datePicker.date];
+            self.startdateLbl.text=[dateFormat stringFromDate:datePicker.date];
+            
+            NSLog(@"%@", self.startdateLbl.text);
         }
         else
         {
-            self.endTimeLbl.text=[dateFormat stringFromDate:datePicker.date];
+            self.enddateLbl.text=[dateFormat stringFromDate:datePicker.date];
         }
-
+    }
+    else{
+        
+        
+        if(isStartTime==YES)
+        {
+            
+            NSDateFormatter *dateFormaterr = [[NSDateFormatter alloc] init];
+            [dateFormaterr setDateFormat:@"dd/MM/yyyy"];
+            
+            if( [self.startdateLbl.text isEqualToString:[dateFormaterr stringFromDate:datePicker.date]])
+            {
+                
+                
+                NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+                NSDate *matchdate = [NSDate date];
+                [dateFormat setDateFormat:@"hh:mm a"];
+                // for minimum date
+                [datePicker setMinimumDate:matchdate];
+                
+                // for maximumDate
+                int daysToAdd = 1;
+                NSDate *newDate1 = [matchdate dateByAddingTimeInterval:60*60*24*daysToAdd];
+                
+                [datePicker setMaximumDate:newDate1];
+                
+                self.startTimeLbl.text=[dateFormat stringFromDate:datePicker.date];
+            }
+            else
+            {
+                NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+                [dateFormat setDateFormat:@"hh:mm a"];
+                self.startTimeLbl.text=[dateFormat stringFromDate:datePicker.date];
+            }
+        }
+        else
+        {
+            NSDateFormatter *dateFormaterr = [[NSDateFormatter alloc] init];
+            [dateFormaterr setDateFormat:@"dd/MM/yyyy"];
+            
+            if( [self.enddateLbl.text isEqualToString:[dateFormaterr stringFromDate:datePicker.date]])
+            {
+                
+                
+                NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+                NSDate *matchdate = [NSDate date];
+                [dateFormat setDateFormat:@"hh:mm a"];
+                // for minimum date
+                [datePicker setMinimumDate:matchdate];
+                
+                // for maximumDate
+                int daysToAdd = 1;
+                NSDate *newDate1 = [matchdate dateByAddingTimeInterval:60*60*24*daysToAdd];
+                
+                [datePicker setMaximumDate:newDate1];
+                
+                self.endTimeLbl.text=[dateFormat stringFromDate:datePicker.date];
+            }
+            else
+            {
+                NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+                [dateFormat setDateFormat:@"hh:mm a"];
+                self.endTimeLbl.text=[dateFormat stringFromDate:datePicker.date];
+            }
+        }
+        
     }
     [self.view_datepicker setHidden:YES];
     
@@ -1406,7 +1496,7 @@
             [objArray addObject:dic];
         }
         
-        NSString *eventCode = [self.objSelectEditDic valueForKey:@"id"];
+        NSString *eventCode = [self.objSelectEditDic valueForKey:@"Eventid"];
         
         [rootObj setObject:cliendcode forKey:@"ClientCode"];
         [rootObj setObject:eventCode forKey:@"EventCode"];
@@ -1480,7 +1570,7 @@
         
             NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
             
-            if([self.objSelectEditDic valueForKey:@"id"])   [dic    setObject:[self.objSelectEditDic valueForKey:@"id"]     forKey:@"EventCode"];
+            if([self.objSelectEditDic valueForKey:@"Eventid"])   [dic    setObject:[self.objSelectEditDic valueForKey:@"Eventid"]     forKey:@"EventCode"];
             if(usercode) [dic setObject:usercode forKey:@"CreatedBy"];
         
         

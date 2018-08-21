@@ -200,7 +200,8 @@
         }
         else if(indexPath.row == 3){
             
-            newFrontController= [NewTabbarAnimationVC new];
+            //newFrontController= [NewTabbarAnimationVC new];
+            newFrontController= [MatchCenterTBC new];
         }
         else if(indexPath.row == 4){
             
@@ -250,7 +251,8 @@
         }
         else if(indexPath.row == 3){
             
-            newFrontController= [NewTabbarAnimationVC new];
+            //newFrontController= [NewTabbarAnimationVC new];
+             newFrontController= [MatchCenterTBC new];
         }
         else if(indexPath.row == 4){
             

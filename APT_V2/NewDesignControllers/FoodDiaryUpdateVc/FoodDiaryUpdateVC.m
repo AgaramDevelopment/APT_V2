@@ -1385,16 +1385,16 @@
     
     if (textField==self.foodItemTF){
         
-        NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"];
-        for (int i = 0; i < [string length]; i++)
-            {
-            unichar c = [string characterAtIndex:i];
-            if (![myCharSet characterIsMember:c])
-                {
-                [self alertStatus:@"Food Item allows only letters and numbers" :@"Food Diary Failed" :0];
-                return NO;
-                }
-            }
+//        NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "];
+//        for (int i = 0; i < [string length]; i++)
+//            {
+//            unichar c = [string characterAtIndex:i];
+//            if (![myCharSet characterIsMember:c])
+//                {
+//                [self alertStatus:@"Food Item allows only letters and numbers" :@"Food Diary Failed" :0];
+//                return NO;
+//                }
+//            }
         
         if (textField==self.foodItemTF){
             

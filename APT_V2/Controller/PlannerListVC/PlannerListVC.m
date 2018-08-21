@@ -390,12 +390,11 @@
 {
     PlannerAddEvent  * objaddEvent=[[PlannerAddEvent alloc]init];
     objaddEvent = (PlannerAddEvent *)[self.storyboard instantiateViewControllerWithIdentifier:@"AddEvent"];
-    //objaddEvent.selectDateStr =selectdate;
+    objaddEvent.selectDateStr =self.DateSelected;
     objaddEvent.isEdit =NO;
     objaddEvent.ListeventTypeArray = self.EventTypeArray;
     objaddEvent.ListeventStatusArray =self.EventStatusArray;
     objaddEvent.ListparticipantTypeArray =self.ParticipantsTypeArray;
-    
     [self.navigationController pushViewController:objaddEvent animated:YES];
     
 //    PlannerAddEvent *objaddEvent = [[PlannerAddEvent alloc] initWithNibName:@"PlannerAddEvent" bundle:nil];
